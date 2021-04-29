@@ -57,7 +57,7 @@ Now rowdata includes taxonomical information from biom file. The head() command
 shows just the beginning of the data table for an overview.
 
 ```{r}
-head(rowData(tse))
+knitr::kable(head(rowData(tse)))
 ```
 
 
@@ -109,7 +109,7 @@ colData(tse) <- sample_meta
 Now colData includes sample metadata. Use kable to print it more nicely.
 
 ```{r}
-knitr::kable(colData(tse))
+knitr::kable(head(colData(tse)))
 ```
 
 
