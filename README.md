@@ -7,10 +7,16 @@ All material is released under the open [MIT license](LICENSE).
 
 ## Example workflows
 
- * [Reading the data](import.md)
-
+ * [Install R packages](install.R)
+ * [Reading example data](import.md) (biom files)
 
 All files can be knitted at once by running [main.R](main.R)
+
+
+## Other material
+
+See [notebooks.md](notebooks.md) for information on Rmarkdown.
+
 
 ## References 
 

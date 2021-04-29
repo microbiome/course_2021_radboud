@@ -2,85 +2,115 @@
 title: "Import data"
 output: html_notebook
 ---
-This notebook imports biom data to TSE object. 
 
-General information about Notebook
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
 
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+This notebook imports _biom_ data to a _TreeSummarizedExperiment_ object. 
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+You are expected to have the necessary data files in a local subfolder
+"data".
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+# Initialization
+
+[Install](install.R) the necessary R packages if you have not already
+done it.
+
+Then load the R packages.
+
 
 ```{r}
-# Install BiocManager
-#BiocManager::install()
-# Install mia
-#BiocManager::install("microbiome/mia")
-# Load mia
 library("mia")
 ```
 
+Define source file paths.
+
 ```{r}
-# Paths for files
 biom_file_path <- "data/table-with-taxonomy.biom"
 sample_meta_file_path <- "data/WesternDietSert_extendedTimeComparisonsv4.txt"
 tree_file_path <- "data/tree.nwk"
+```
 
-# Creates TSE object from biom file
+
+Create TSE object from biom file and investigate it.
+
+```{r}
 tse <- loadFromBiom(biom_file_path)
-
-tse
-```
-```{r}
-# counts include the abundance table from biom file
-assays(tse)$counts
-```
-```{r}
-# rowdata includes tazonomical information from biom file
-rowData(tse)
 ```
 
-biom file did not contain sample meta data, so it includes empty data frame
-colData(tse)
+
+# Investigate the R data object
+
+We have now imported the data in R. Let us investigate its contents.
 
 ```{r}
-# Adds tree
+print(tse)
+```
 
-# Installs ape
-#BiocManager::install("ape")
 
+Counts include the abundance table from biom file. The head() command
+shows just the beginning of the data table for an overview.
+
+```{r}
+head(assays(tse)$counts)
+```
+
+rowdata includes taxonomical information from biom file
+
+```{r}
+head(rowData(tse))
+```
+
+
+We notice that the imported biom file did not contain sample meta data
+yet, so it includes empty data frame
+
+```{r}
+head(colData(tse))
+```
+
+
+
+Let us adds phylogenetic tree.
+
+```{r}
 # Read the tree 
 tree <- ape::read.tree(tree_file_path)
+
 # Adds tree to rowTree
 rowTree(tse) <- tree
-tse
-```
-```{r}
-# rowTree includes phylogenetic tree
-rowTree(tse)
-```
-```{r}
-# Adds sample meta data file
 
-# Checks what type of data is it
+# Check
+head(tse)
+```
+
+Now rowTree includes phylogenetic tree:
+
+```{r}
+head(rowTree(tse))
+```
+
+Add sample meta data file
+
+```{r}
+# We use this to check what type of data is it
 read.table(sample_meta_file_path)
-```
-```{r}
-# It is comma separated file and includes headers
-sample_meta <- read.table(sample_meta_file_path, sep = ",", header = TRUE)
-# sample_meta needs to be converted from data.frame to DataFrame
-sample_meta <- DataFrame(sample_meta)
-# It is added to colData
-colData(tse) <- sample_meta
 
-tse
+# It seems like a comma separated file and includes headers
+# Let us read it:
+sample_meta <- read.table(sample_meta_file_path, sep = ",", header = TRUE)
+
+# Convert it from data.frame to DataFrame
+# (required for our purposes)
+sample_meta <- DataFrame(sample_meta)
+
+# Then it can be added to colData
+colData(tse) <- sample_meta
 ```
+
+Now colData includes sample metadata	
+
 ```{r}
-#colData includes sample meta data
 colData(tse)
 ```
+
 
