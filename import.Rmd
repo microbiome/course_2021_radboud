@@ -10,7 +10,7 @@ You are expected to have the necessary data files in a local subfolder
 "data".
 
 
-# Initialization
+## Initialization
 
 [Install](install.R) the necessary R packages if you have not already
 done it.
@@ -38,7 +38,7 @@ tse <- loadFromBiom(biom_file_path)
 ```
 
 
-# Investigate the R data object
+## Investigate the R data object
 
 We have now imported the data in R. Let us investigate its contents.
 
@@ -47,14 +47,14 @@ print(tse)
 ```
 
 
-Counts include the abundance table from biom file. The head() command
-shows just the beginning of the data table for an overview.
+Counts include the abundance table from biom file. Let us just use first cols and rows.
 
 ```{r}
-head(assays(tse)$counts)
+assays(tse)$counts[1:3, 1:3]
 ```
 
-rowdata includes taxonomical information from biom file
+Now rowdata includes taxonomical information from biom file. The head() command
+shows just the beginning of the data table for an overview.
 
 ```{r}
 head(rowData(tse))
@@ -69,6 +69,7 @@ head(colData(tse))
 ```
 
 
+## Add side information
 
 Let us adds phylogenetic tree.
 
@@ -85,7 +86,7 @@ head(tse)
 
 Now rowTree includes phylogenetic tree:
 
-```{r}
+```{r, eval=FALSE}
 head(rowTree(tse))
 ```
 
