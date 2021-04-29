@@ -9,9 +9,15 @@ All material is released under the open [MIT license](LICENSE).
 
  * [Install R packages](install.R)
  * [Reading example data](import.md) (biom files)
-
+ 
 All files can be knitted at once by running [main.R](main.R)
 
+
+## Html pages
+
+Alternative html versions for the same pages..
+
+ * [Reading example data](https://microbiome.github.io/course_2021_radboud/import.nb.html) (biom files) 
 
 ## Other material
 
