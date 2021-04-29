@@ -7,7 +7,7 @@ All material is released under the open [MIT license](LICENSE).
 
 ## Example workflows
 
- * [Reading the data](import.Rmd)
+ * [Reading the data](import.md)
 
 
 ## References 
