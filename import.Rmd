@@ -22,8 +22,8 @@ The preview shows you a rendered HTML copy of the contents of the editor. Conseq
 #BiocManager::install("microbiome/mia")
 # Load mia
 library("mia")
-
 ```
+
 ```{r}
 # Paths for files
 biom_file_path <- "data/table-with-taxonomy.biom"
