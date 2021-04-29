@@ -1895,7 +1895,7 @@ b821f00f48e4651623a105fb77872e44 D_5__uncultured bact.. D_6__uncultured bact..
 </div>
 <div id="add-side-information" class="section level2">
 <h2>Add side information</h2>
-<p>Let us adds phylogenetic tree.</p>
+<p>Let us add a phylogenetic tree.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjpbIiMgUmVhZCB0aGUgdHJlZSAiLCJ0cmVlIDwtIGFwZTo6cmVhZC50cmVlKHRyZWVfZmlsZV9wYXRoKSIsIiIsIiMgQWRkcyB0cmVlIHRvIHJvd1RyZWUiLCJyb3dUcmVlKHRzZSkgPC0gdHJlZSIsIiIsIiMgQ2hlY2siLCJoZWFkKHRzZSkiXX0= -->
@@ -1940,96 +1940,1569 @@ colTree: NULL</code></pre>
 <p>Add sample meta data file</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbIiMgV2UgdXNlIHRoaXMgdG8gY2hlY2sgd2hhdCB0eXBlIG9mIGRhdGEgaXMgaXQiLCJyZWFkLnRhYmxlKHNhbXBsZV9tZXRhX2ZpbGVfcGF0aCkiXX0= -->
+<!-- rnb-source-begin eyJkYXRhIjpbIiMgV2UgdXNlIHRoaXMgdG8gY2hlY2sgd2hhdCB0eXBlIG9mIGRhdGEgaXMgaXQiLCIjIHJlYWQudGFibGUoc2FtcGxlX21ldGFfZmlsZV9wYXRoKSIsIiIsIiMgSXQgc2VlbXMgbGlrZSBhIGNvbW1hIHNlcGFyYXRlZCBmaWxlIGFuZCBpbmNsdWRlcyBoZWFkZXJzIiwiIyBMZXQgdXMgcmVhZCBpdCBhbmQgdGhlbiBjb252ZXJ0IGZyb20gZGF0YS5mcmFtZSB0byBEYXRhRnJhbWUiLCIjIChyZXF1aXJlZCBmb3Igb3VyIHB1cnBvc2VzKSIsInNhbXBsZV9tZXRhIDwtIFxuc2FtcGxlX21ldGEgPC0gRGF0YUZyYW1lKHJlYWQudGFibGUoc2FtcGxlX21ldGFfZmlsZV9wYXRoLCBzZXAgPSBcIixcIiwgaGVhZGVyID0gVFJVRSkpIiwiIiwiIyBUaGVuIGl0IGNhbiBiZSBhZGRlZCB0byBjb2xEYXRhIiwiY29sRGF0YSh0c2UpIDwtIHNhbXBsZV9tZXRhIl19 -->
 <pre class="r"><code># We use this to check what type of data is it
-read.table(sample_meta_file_path)</code></pre>
-<!-- rnb-source-end -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["V1"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"sample-id,MouseID_recoded,All,Genotype,Diet,Timepoint,Timepoint1vs2WTcontrol,Timepoint1vs2WTWestern,Timepoint1vs2HETcontrol,Timepoint1vs2HETWestern,Timepoint1vs2KOcontrol,Timepoint1vs2KOWestern,Timepoint1ControlWTvsHET,Timepoint1ControlWTvsKO,Timepoint1ControlHETvsKO"},{"1":"99,41_1,KO_t1_western,ko,Western,T1,NA,NA,NA,NA,NA,KO_t1_western,NA,NA,NA"},{"1":"100,42_1,KO_t1_western,ko,Western,T1,NA,NA,NA,NA,NA,KO_t1_western,NA,NA,NA"},{"1":"101,13_1,KO_t1_control,ko,Control,T1,NA,NA,NA,NA,KO_t1_control,NA,NA,KO_t1_control,KO_t1_control"},{"1":"102,14_1,KO_t1_control,ko,Control,T1,NA,NA,NA,NA,KO_t1_control,NA,NA,KO_t1_control,KO_t1_control"},{"1":"103,15_1,KO_t1_control,ko,Control,T1,NA,NA,NA,NA,KO_t1_control,NA,NA,KO_t1_control,KO_t1_control"},{"1":"104,16_1,KO_t1_control,ko,Control,T1,NA,NA,NA,NA,KO_t1_control,NA,NA,KO_t1_control,KO_t1_control"},{"1":"105,21_1,KO_t1_control,ko,Control,T1,NA,NA,NA,NA,KO_t1_control,NA,NA,KO_t1_control,KO_t1_control"},{"1":"106,22_1,KO_t1_control,ko,Control,T1,NA,NA,NA,NA,KO_t1_control,NA,NA,KO_t1_control,KO_t1_control"},{"1":"107,23_1,KO_t1_control,ko,Control,T1,NA,NA,NA,NA,KO_t1_control,NA,NA,KO_t1_control,KO_t1_control"},{"1":"108,24_1,KO_t1_control,ko,Control,T1,NA,NA,NA,NA,KO_t1_control,NA,NA,KO_t1_control,KO_t1_control"},{"1":"109,45_1,KO_t1_western,ko,Western,T1,NA,NA,NA,NA,NA,KO_t1_western,NA,NA,NA"},{"1":"110,31_1,KO_t1_western,ko,Western,T1,NA,NA,NA,NA,NA,KO_t1_western,NA,NA,NA"},{"1":"111,33_1,KO_t1_western,ko,Western,T1,NA,NA,NA,NA,NA,KO_t1_western,NA,NA,NA"},{"1":"112,34_1,KO_t1_western,ko,Western,T1,NA,NA,NA,NA,NA,KO_t1_western,NA,NA,NA"},{"1":"113,44_1,KO_t1_western,ko,Western,T1,NA,NA,NA,NA,NA,KO_t1_western,NA,NA,NA"},{"1":"114,35_1,KO_t1_western,ko,Western,T1,NA,NA,NA,NA,NA,KO_t1_western,NA,NA,NA"},{"1":"115,81_1,HET_t1_control,het,Control,T1,NA,NA,HET_t1_control,NA,NA,NA,HET_t1_control,NA,HET_t1_control"},{"1":"116,52_1,HET_t1_western,het,Western,T1,NA,NA,NA,HET_t1_western,NA,NA,NA,NA,NA"},{"1":"117,53_1,HET_t1_western,het,Western,T1,NA,NA,NA,HET_t1_western,NA,NA,NA,NA,NA"},{"1":"118,54_1,HET_t1_western,het,Western,T1,NA,NA,NA,HET_t1_western,NA,NA,NA,NA,NA"},{"1":"119,55_1,HET_t1_western,het,Western,T1,NA,NA,NA,HET_t1_western,NA,NA,NA,NA,NA"},{"1":"120,61_1,HET_t1_control,het,Control,T1,NA,NA,HET_t1_control,NA,NA,NA,HET_t1_control,NA,HET_t1_control"},{"1":"121,82_1,HET_t1_control,het,Control,T1,NA,NA,HET_t1_control,NA,NA,NA,HET_t1_control,NA,HET_t1_control"},{"1":"122,63_1,HET_t1_control,het,Control,T1,NA,NA,HET_t1_control,NA,NA,NA,HET_t1_control,NA,HET_t1_control"},{"1":"123,64_1,HET_t1_control,het,Control,T1,NA,NA,HET_t1_control,NA,NA,NA,HET_t1_control,NA,HET_t1_control"},{"1":"124,65_1,HET_t1_control,het,Control,T1,NA,NA,HET_t1_control,NA,NA,NA,HET_t1_control,NA,HET_t1_control"},{"1":"125,86_1,HET_t1_control,het,Control,T1,NA,NA,HET_t1_control,NA,NA,NA,HET_t1_control,NA,HET_t1_control"},{"1":"126,72_1,HET_t1_western,het,Western,T1,NA,NA,NA,HET_t1_western,NA,NA,NA,NA,NA"},{"1":"127,73_1,HET_t1_western,het,Western,T1,NA,NA,NA,HET_t1_western,NA,NA,NA,NA,NA"},{"1":"128,74_1,HET_t1_western,het,Western,T1,NA,NA,NA,HET_t1_western,NA,NA,NA,NA,NA"},{"1":"129,75_1,HET_t1_western,het,Western,T1,NA,NA,NA,HET_t1_western,NA,NA,NA,NA,NA"},{"1":"130,101_1,WT_t1_western,wt,Western,T1,NA,WT_t1_western,NA,NA,NA,NA,NA,NA,NA"},{"1":"131,112_1,WT_t1_control,wt,Control,T1,WT_t1_control,NA,NA,NA,NA,NA,WT_t1_control,WT_t1_control,NA"},{"1":"132,113_1,WT_t1_control,wt,Control,T1,WT_t1_control,NA,NA,NA,NA,NA,WT_t1_control,WT_t1_control,NA"},{"1":"133,104_1,WT_t1_western,wt,Western,T1,NA,WT_t1_western,NA,NA,NA,NA,NA,NA,NA"},{"1":"134,115_1,WT_t1_control,wt,Control,T1,WT_t1_control,NA,NA,NA,NA,NA,WT_t1_control,WT_t1_control,NA"},{"1":"135,121_1,WT_t1_western,wt,Western,T1,NA,WT_t1_western,NA,NA,NA,NA,NA,NA,NA"},{"1":"136,122_1,WT_t1_western,wt,Western,T1,NA,WT_t1_western,NA,NA,NA,NA,NA,NA,NA"},{"1":"137,103_1,WT_t1_western,wt,Western,T1,NA,WT_t1_western,NA,NA,NA,NA,NA,NA,NA"},{"1":"138,105_1,WT_t1_western,wt,Western,T1,NA,WT_t1_western,NA,NA,NA,NA,NA,NA,NA"},{"1":"139,125_1,WT_t1_western,wt,Western,T1,NA,WT_t1_western,NA,NA,NA,NA,NA,NA,NA"},{"1":"140,91_1,WT_t1_control,wt,Control,T1,WT_t1_control,NA,NA,NA,NA,NA,WT_t1_control,WT_t1_control,NA"},{"1":"141,92_1,WT_t1_control,wt,Control,T1,WT_t1_control,NA,NA,NA,NA,NA,WT_t1_control,WT_t1_control,NA"},{"1":"142,93_1,WT_t1_control,wt,Control,T1,WT_t1_control,NA,NA,NA,NA,NA,WT_t1_control,WT_t1_control,NA"},{"1":"155,41_2,KO_t2_western,ko,Western,T2,NA,NA,NA,NA,NA,KO_t2_western,NA,NA,NA"},{"1":"156,42_2,KO_t2_western,ko,Western,T2,NA,NA,NA,NA,NA,KO_t2_western,NA,NA,NA"},{"1":"143,13_2,KO_t2_control,ko,Control,T2,NA,NA,NA,NA,KO_t2_control,NA,NA,NA,NA"},{"1":"144,14_2,KO_t2_control,ko,Control,T2,NA,NA,NA,NA,KO_t2_control,NA,NA,NA,NA"},{"1":"145,15_2,KO_t2_control,ko,Control,T2,NA,NA,NA,NA,KO_t2_control,NA,NA,NA,NA"},{"1":"146,16_2,KO_t2_control,ko,Control,T2,NA,NA,NA,NA,KO_t2_control,NA,NA,NA,NA"},{"1":"147,21_2,KO_t2_control,ko,Control,T2,NA,NA,NA,NA,KO_t2_control,NA,NA,NA,NA"},{"1":"148,22_2,KO_t2_control,ko,Control,T2,NA,NA,NA,NA,KO_t2_control,NA,NA,NA,NA"},{"1":"149,23_2,KO_t2_control,ko,Control,T2,NA,NA,NA,NA,KO_t2_control,NA,NA,NA,NA"},{"1":"150,24_2,KO_t2_control,ko,Control,T2,NA,NA,NA,NA,KO_t2_control,NA,NA,NA,NA"},{"1":"158,45_2,KO_t2_western,ko,Western,T2,NA,NA,NA,NA,NA,KO_t2_western,NA,NA,NA"},{"1":"151,31_2,KO_t2_western,ko,Western,T2,NA,NA,NA,NA,NA,KO_t2_western,NA,NA,NA"},{"1":"152,33_2,KO_t2_western,ko,Western,T2,NA,NA,NA,NA,NA,KO_t2_western,NA,NA,NA"},{"1":"153,34_2,KO_t2_western,ko,Western,T2,NA,NA,NA,NA,NA,KO_t2_western,NA,NA,NA"},{"1":"157,44_2,KO_t2_western,ko,Western,T2,NA,NA,NA,NA,NA,KO_t2_western,NA,NA,NA"},{"1":"154,35_2,KO_t2_western,ko,Western,T2,NA,NA,NA,NA,NA,KO_t2_western,NA,NA,NA"},{"1":"171,81_2,HET_t2_control,het,Control,T2,NA,NA,HET_t2_control,NA,NA,NA,NA,NA,NA"},{"1":"159,52_2,HET_t2_western,het,Western,T2,NA,NA,NA,HET_t2_western,NA,NA,NA,NA,NA"},{"1":"160,53_2,HET_t2_western,het,Western,T2,NA,NA,NA,HET_t2_western,NA,NA,NA,NA,NA"},{"1":"161,54_2,HET_t2_western,het,Western,T2,NA,NA,NA,HET_t2_western,NA,NA,NA,NA,NA"},{"1":"162,55_2,HET_t2_western,het,Western,T2,NA,NA,NA,HET_t2_western,NA,NA,NA,NA,NA"},{"1":"163,61_2,HET_t2_control,het,Control,T2,NA,NA,HET_t2_control,NA,NA,NA,NA,NA,NA"},{"1":"172,82_2,HET_t2_control,het,Control,T2,NA,NA,HET_t2_control,NA,NA,NA,NA,NA,NA"},{"1":"164,63_2,HET_t2_control,het,Control,T2,NA,NA,HET_t2_control,NA,NA,NA,NA,NA,NA"},{"1":"165,64_2,HET_t2_control,het,Control,T2,NA,NA,HET_t2_control,NA,NA,NA,NA,NA,NA"},{"1":"166,65_2,HET_t2_control,het,Control,T2,NA,NA,HET_t2_control,NA,NA,NA,NA,NA,NA"},{"1":"173,86_2,HET_t2_control,het,Control,T2,NA,NA,HET_t2_control,NA,NA,NA,NA,NA,NA"},{"1":"167,72_2,HET_t2_western,het,Western,T2,NA,NA,NA,HET_t2_western,NA,NA,NA,NA,NA"},{"1":"168,73_2,HET_t2_western,het,Western,T2,NA,NA,NA,HET_t2_western,NA,NA,NA,NA,NA"},{"1":"169,74_2,HET_t2_western,het,Western,T2,NA,NA,NA,HET_t2_western,NA,NA,NA,NA,NA"},{"1":"170,75_2,HET_t2_western,het,Western,T2,NA,NA,NA,HET_t2_western,NA,NA,NA,NA,NA"},{"1":"177,101_2,WT_t2_western,wt,Western,T2,NA,WT_t2_western,NA,NA,NA,NA,NA,NA,NA"},{"1":"181,112_2,WT_t2_control,wt,Control,T2,WT_t2_control,NA,NA,NA,NA,NA,NA,NA,NA"},{"1":"182,113_2,WT_t2_control,wt,Control,T2,WT_t2_control,NA,NA,NA,NA,NA,NA,NA,NA"},{"1":"179,104_2,WT_t2_western,wt,Western,T2,NA,WT_t2_western,NA,NA,NA,NA,NA,NA,NA"},{"1":"183,115_2,WT_t2_control,wt,Control,T2,WT_t2_control,NA,NA,NA,NA,NA,NA,NA,NA"},{"1":"184,121_2,WT_t2_western,wt,Western,T2,NA,WT_t2_western,NA,NA,NA,NA,NA,NA,NA"},{"1":"185,122_2,WT_t2_western,wt,Western,T2,NA,WT_t2_western,NA,NA,NA,NA,NA,NA,NA"},{"1":"178,103_2,WT_t2_western,wt,Western,T2,NA,WT_t2_western,NA,NA,NA,NA,NA,NA,NA"},{"1":"180,105_2,WT_t2_western,wt,Western,T2,NA,WT_t2_western,NA,NA,NA,NA,NA,NA,NA"},{"1":"186,125_2,WT_t2_western,wt,Western,T2,NA,WT_t2_western,NA,NA,NA,NA,NA,NA,NA"},{"1":"174,91_2,WT_t2_control,wt,Control,T2,WT_t2_control,NA,NA,NA,NA,NA,NA,NA,NA"},{"1":"175,92_2,WT_t2_control,wt,Control,T2,WT_t2_control,NA,NA,NA,NA,NA,NA,NA,NA"},{"1":"176,93_2,WT_t2_control,wt,Control,T2,WT_t2_control,NA,NA,NA,NA,NA,NA,NA,NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-source-begin eyJkYXRhIjpbIiMgSXQgc2VlbXMgbGlrZSBhIGNvbW1hIHNlcGFyYXRlZCBmaWxlIGFuZCBpbmNsdWRlcyBoZWFkZXJzIiwiIyBMZXQgdXMgcmVhZCBpdDoiLCJzYW1wbGVfbWV0YSA8LSByZWFkLnRhYmxlKHNhbXBsZV9tZXRhX2ZpbGVfcGF0aCwgc2VwID0gXCIsXCIsIGhlYWRlciA9IFRSVUUpIiwiIiwiIyBDb252ZXJ0IGl0IGZyb20gZGF0YS5mcmFtZSB0byBEYXRhRnJhbWUiLCIjIChyZXF1aXJlZCBmb3Igb3VyIHB1cnBvc2VzKSIsInNhbXBsZV9tZXRhIDwtIERhdGFGcmFtZShzYW1wbGVfbWV0YSkiLCIiLCIjIFRoZW4gaXQgY2FuIGJlIGFkZGVkIHRvIGNvbERhdGEiLCJjb2xEYXRhKHRzZSkgPC0gc2FtcGxlX21ldGEiXX0= -->
-<pre class="r"><code># It seems like a comma separated file and includes headers
-# Let us read it:
-sample_meta &lt;- read.table(sample_meta_file_path, sep = &quot;,&quot;, header = TRUE)
+# read.table(sample_meta_file_path)
 
-# Convert it from data.frame to DataFrame
+# It seems like a comma separated file and includes headers
+# Let us read it and then convert from data.frame to DataFrame
 # (required for our purposes)
-sample_meta &lt;- DataFrame(sample_meta)
+sample_meta &lt;- 
+sample_meta &lt;- DataFrame(read.table(sample_meta_file_path, sep = &quot;,&quot;, header = TRUE))
 
 # Then it can be added to colData
 colData(tse) &lt;- sample_meta</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Now colData includes sample metadata</p>
+<p>Now colData includes sample metadata. Use kable to print it more nicely.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiY29sRGF0YSh0c2UpIn0= -->
-<pre class="r"><code>colData(tse)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoia25pdHI6OmthYmxlKGNvbERhdGEodHNlKSkifQ== -->
+<pre class="r"><code>knitr::kable(colData(tse))</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRGF0YUZyYW1lIHdpdGggODggcm93cyBhbmQgMTUgY29sdW1uc1xuICAgIHNhbXBsZS5pZCBNb3VzZUlEX3JlY29kZWQgICAgICAgICAgIEFsbCAgICBHZW5vdHlwZSAgICAgICAgRGlldCAgIFRpbWVwb2ludFxuICAgIDxpbnRlZ2VyPiAgICAgPGNoYXJhY3Rlcj4gICA8Y2hhcmFjdGVyPiA8Y2hhcmFjdGVyPiA8Y2hhcmFjdGVyPiA8Y2hhcmFjdGVyPlxuMSAgICAgICAgICA5OSAgICAgICAgICAgIDQxXzEgS09fdDFfd2VzdGVybiAgICAgICAgICBrbyAgICAgV2VzdGVybiAgICAgICAgICBUMVxuMiAgICAgICAgIDEwMCAgICAgICAgICAgIDQyXzEgS09fdDFfd2VzdGVybiAgICAgICAgICBrbyAgICAgV2VzdGVybiAgICAgICAgICBUMVxuMyAgICAgICAgIDEwMSAgICAgICAgICAgIDEzXzEgS09fdDFfY29udHJvbCAgICAgICAgICBrbyAgICAgQ29udHJvbCAgICAgICAgICBUMVxuNCAgICAgICAgIDEwMiAgICAgICAgICAgIDE0XzEgS09fdDFfY29udHJvbCAgICAgICAgICBrbyAgICAgQ29udHJvbCAgICAgICAgICBUMVxuNSAgICAgICAgIDEwMyAgICAgICAgICAgIDE1XzEgS09fdDFfY29udHJvbCAgICAgICAgICBrbyAgICAgQ29udHJvbCAgICAgICAgICBUMVxuLi4uICAgICAgIC4uLiAgICAgICAgICAgICAuLi4gICAgICAgICAgIC4uLiAgICAgICAgIC4uLiAgICAgICAgIC4uLiAgICAgICAgIC4uLlxuODQgICAgICAgIDE4MCAgICAgICAgICAgMTA1XzIgV1RfdDJfd2VzdGVybiAgICAgICAgICB3dCAgICAgV2VzdGVybiAgICAgICAgICBUMlxuODUgICAgICAgIDE4NiAgICAgICAgICAgMTI1XzIgV1RfdDJfd2VzdGVybiAgICAgICAgICB3dCAgICAgV2VzdGVybiAgICAgICAgICBUMlxuODYgICAgICAgIDE3NCAgICAgICAgICAgIDkxXzIgV1RfdDJfY29udHJvbCAgICAgICAgICB3dCAgICAgQ29udHJvbCAgICAgICAgICBUMlxuODcgICAgICAgIDE3NSAgICAgICAgICAgIDkyXzIgV1RfdDJfY29udHJvbCAgICAgICAgICB3dCAgICAgQ29udHJvbCAgICAgICAgICBUMlxuODggICAgICAgIDE3NiAgICAgICAgICAgIDkzXzIgV1RfdDJfY29udHJvbCAgICAgICAgICB3dCAgICAgQ29udHJvbCAgICAgICAgICBUMlxuICAgIFRpbWVwb2ludDF2czJXVGNvbnRyb2wgVGltZXBvaW50MXZzMldUV2VzdGVybiBUaW1lcG9pbnQxdnMySEVUY29udHJvbFxuICAgICAgICAgICAgICAgPGNoYXJhY3Rlcj4gICAgICAgICAgICA8Y2hhcmFjdGVyPiAgICAgICAgICAgICA8Y2hhcmFjdGVyPlxuMSAgICAgICAgICAgICAgICAgICAgICAgTkEgICAgICAgICAgICAgICAgICAgICBOQSAgICAgICAgICAgICAgICAgICAgICBOQVxuMiAgICAgICAgICAgICAgICAgICAgICAgTkEgICAgICAgICAgICAgICAgICAgICBOQSAgICAgICAgICAgICAgICAgICAgICBOQVxuMyAgICAgICAgICAgICAgICAgICAgICAgTkEgICAgICAgICAgICAgICAgICAgICBOQSAgICAgICAgICAgICAgICAgICAgICBOQVxuNCAgICAgICAgICAgICAgICAgICAgICAgTkEgICAgICAgICAgICAgICAgICAgICBOQSAgICAgICAgICAgICAgICAgICAgICBOQVxuNSAgICAgICAgICAgICAgICAgICAgICAgTkEgICAgICAgICAgICAgICAgICAgICBOQSAgICAgICAgICAgICAgICAgICAgICBOQVxuLi4uICAgICAgICAgICAgICAgICAgICAuLi4gICAgICAgICAgICAgICAgICAgIC4uLiAgICAgICAgICAgICAgICAgICAgIC4uLlxuODQgICAgICAgICAgICAgICAgICAgICAgTkEgICAgICAgICAgV1RfdDJfd2VzdGVybiAgICAgICAgICAgICAgICAgICAgICBOQVxuODUgICAgICAgICAgICAgICAgICAgICAgTkEgICAgICAgICAgV1RfdDJfd2VzdGVybiAgICAgICAgICAgICAgICAgICAgICBOQVxuODYgICAgICAgICAgIFdUX3QyX2NvbnRyb2wgICAgICAgICAgICAgICAgICAgICBOQSAgICAgICAgICAgICAgICAgICAgICBOQVxuODcgICAgICAgICAgIFdUX3QyX2NvbnRyb2wgICAgICAgICAgICAgICAgICAgICBOQSAgICAgICAgICAgICAgICAgICAgICBOQVxuODggICAgICAgICAgIFdUX3QyX2NvbnRyb2wgICAgICAgICAgICAgICAgICAgICBOQSAgICAgICAgICAgICAgICAgICAgICBOQVxuICAgIFRpbWVwb2ludDF2czJIRVRXZXN0ZXJuIFRpbWVwb2ludDF2czJLT2NvbnRyb2wgVGltZXBvaW50MXZzMktPV2VzdGVyblxuICAgICAgICAgICAgICAgIDxjaGFyYWN0ZXI+ICAgICAgICAgICAgPGNoYXJhY3Rlcj4gICAgICAgICAgICA8Y2hhcmFjdGVyPlxuMSAgICAgICAgICAgICAgICAgICAgICAgIE5BICAgICAgICAgICAgICAgICAgICAgTkEgICAgICAgICAgS09fdDFfd2VzdGVyblxuMiAgICAgICAgICAgICAgICAgICAgICAgIE5BICAgICAgICAgICAgICAgICAgICAgTkEgICAgICAgICAgS09fdDFfd2VzdGVyblxuMyAgICAgICAgICAgICAgICAgICAgICAgIE5BICAgICAgICAgIEtPX3QxX2NvbnRyb2wgICAgICAgICAgICAgICAgICAgICBOQVxuNCAgICAgICAgICAgICAgICAgICAgICAgIE5BICAgICAgICAgIEtPX3QxX2NvbnRyb2wgICAgICAgICAgICAgICAgICAgICBOQVxuNSAgICAgICAgICAgICAgICAgICAgICAgIE5BICAgICAgICAgIEtPX3QxX2NvbnRyb2wgICAgICAgICAgICAgICAgICAgICBOQVxuLi4uICAgICAgICAgICAgICAgICAgICAgLi4uICAgICAgICAgICAgICAgICAgICAuLi4gICAgICAgICAgICAgICAgICAgIC4uLlxuODQgICAgICAgICAgICAgICAgICAgICAgIE5BICAgICAgICAgICAgICAgICAgICAgTkEgICAgICAgICAgICAgICAgICAgICBOQVxuODUgICAgICAgICAgICAgICAgICAgICAgIE5BICAgICAgICAgICAgICAgICAgICAgTkEgICAgICAgICAgICAgICAgICAgICBOQVxuODYgICAgICAgICAgICAgICAgICAgICAgIE5BICAgICAgICAgICAgICAgICAgICAgTkEgICAgICAgICAgICAgICAgICAgICBOQVxuODcgICAgICAgICAgICAgICAgICAgICAgIE5BICAgICAgICAgICAgICAgICAgICAgTkEgICAgICAgICAgICAgICAgICAgICBOQVxuODggICAgICAgICAgICAgICAgICAgICAgIE5BICAgICAgICAgICAgICAgICAgICAgTkEgICAgICAgICAgICAgICAgICAgICBOQVxuICAgIFRpbWVwb2ludDFDb250cm9sV1R2c0hFVCBUaW1lcG9pbnQxQ29udHJvbFdUdnNLTyBUaW1lcG9pbnQxQ29udHJvbEhFVHZzS09cbiAgICAgICAgICAgICAgICAgPGNoYXJhY3Rlcj4gICAgICAgICAgICAgPGNoYXJhY3Rlcj4gICAgICAgICAgICAgIDxjaGFyYWN0ZXI+XG4xICAgICAgICAgICAgICAgICAgICAgICAgIE5BICAgICAgICAgICAgICAgICAgICAgIE5BICAgICAgICAgICAgICAgICAgICAgICBOQVxuMiAgICAgICAgICAgICAgICAgICAgICAgICBOQSAgICAgICAgICAgICAgICAgICAgICBOQSAgICAgICAgICAgICAgICAgICAgICAgTkFcbjMgICAgICAgICAgICAgICAgICAgICAgICAgTkEgICAgICAgICAgIEtPX3QxX2NvbnRyb2wgICAgICAgICAgICBLT190MV9jb250cm9sXG40ICAgICAgICAgICAgICAgICAgICAgICAgIE5BICAgICAgICAgICBLT190MV9jb250cm9sICAgICAgICAgICAgS09fdDFfY29udHJvbFxuNSAgICAgICAgICAgICAgICAgICAgICAgICBOQSAgICAgICAgICAgS09fdDFfY29udHJvbCAgICAgICAgICAgIEtPX3QxX2NvbnRyb2xcbi4uLiAgICAgICAgICAgICAgICAgICAgICAuLi4gICAgICAgICAgICAgICAgICAgICAuLi4gICAgICAgICAgICAgICAgICAgICAgLi4uXG44NCAgICAgICAgICAgICAgICAgICAgICAgIE5BICAgICAgICAgICAgICAgICAgICAgIE5BICAgICAgICAgICAgICAgICAgICAgICBOQVxuODUgICAgICAgICAgICAgICAgICAgICAgICBOQSAgICAgICAgICAgICAgICAgICAgICBOQSAgICAgICAgICAgICAgICAgICAgICAgTkFcbjg2ICAgICAgICAgICAgICAgICAgICAgICAgTkEgICAgICAgICAgICAgICAgICAgICAgTkEgICAgICAgICAgICAgICAgICAgICAgIE5BXG44NyAgICAgICAgICAgICAgICAgICAgICAgIE5BICAgICAgICAgICAgICAgICAgICAgIE5BICAgICAgICAgICAgICAgICAgICAgICBOQVxuODggICAgICAgICAgICAgICAgICAgICAgICBOQSAgICAgICAgICAgICAgICAgICAgICBOQSAgICAgICAgICAgICAgICAgICAgICAgTkFcbiJ9 -->
-<pre><code>DataFrame with 88 rows and 15 columns
-    sample.id MouseID_recoded           All    Genotype        Diet   Timepoint
-    &lt;integer&gt;     &lt;character&gt;   &lt;character&gt; &lt;character&gt; &lt;character&gt; &lt;character&gt;
-1          99            41_1 KO_t1_western          ko     Western          T1
-2         100            42_1 KO_t1_western          ko     Western          T1
-3         101            13_1 KO_t1_control          ko     Control          T1
-4         102            14_1 KO_t1_control          ko     Control          T1
-5         103            15_1 KO_t1_control          ko     Control          T1
-...       ...             ...           ...         ...         ...         ...
-84        180           105_2 WT_t2_western          wt     Western          T2
-85        186           125_2 WT_t2_western          wt     Western          T2
-86        174            91_2 WT_t2_control          wt     Control          T2
-87        175            92_2 WT_t2_control          wt     Control          T2
-88        176            93_2 WT_t2_control          wt     Control          T2
-    Timepoint1vs2WTcontrol Timepoint1vs2WTWestern Timepoint1vs2HETcontrol
-               &lt;character&gt;            &lt;character&gt;             &lt;character&gt;
-1                       NA                     NA                      NA
-2                       NA                     NA                      NA
-3                       NA                     NA                      NA
-4                       NA                     NA                      NA
-5                       NA                     NA                      NA
-...                    ...                    ...                     ...
-84                      NA          WT_t2_western                      NA
-85                      NA          WT_t2_western                      NA
-86           WT_t2_control                     NA                      NA
-87           WT_t2_control                     NA                      NA
-88           WT_t2_control                     NA                      NA
-    Timepoint1vs2HETWestern Timepoint1vs2KOcontrol Timepoint1vs2KOWestern
-                &lt;character&gt;            &lt;character&gt;            &lt;character&gt;
-1                        NA                     NA          KO_t1_western
-2                        NA                     NA          KO_t1_western
-3                        NA          KO_t1_control                     NA
-4                        NA          KO_t1_control                     NA
-5                        NA          KO_t1_control                     NA
-...                     ...                    ...                    ...
-84                       NA                     NA                     NA
-85                       NA                     NA                     NA
-86                       NA                     NA                     NA
-87                       NA                     NA                     NA
-88                       NA                     NA                     NA
-    Timepoint1ControlWTvsHET Timepoint1ControlWTvsKO Timepoint1ControlHETvsKO
-                 &lt;character&gt;             &lt;character&gt;              &lt;character&gt;
-1                         NA                      NA                       NA
-2                         NA                      NA                       NA
-3                         NA           KO_t1_control            KO_t1_control
-4                         NA           KO_t1_control            KO_t1_control
-5                         NA           KO_t1_control            KO_t1_control
-...                      ...                     ...                      ...
-84                        NA                      NA                       NA
-85                        NA                      NA                       NA
-86                        NA                      NA                       NA
-87                        NA                      NA                       NA
-88                        NA                      NA                       NA</code></pre>
-<!-- rnb-output-end -->
+<table style="width:100%;">
+<colgroup>
+<col width="3%"></col>
+<col width="5%"></col>
+<col width="5%"></col>
+<col width="3%"></col>
+<col width="2%"></col>
+<col width="3%"></col>
+<col width="8%"></col>
+<col width="8%"></col>
+<col width="8%"></col>
+<col width="8%"></col>
+<col width="8%"></col>
+<col width="8%"></col>
+<col width="8%"></col>
+<col width="8%"></col>
+<col width="8%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">sample.id</th>
+<th align="left">MouseID_recoded</th>
+<th align="left">All</th>
+<th align="left">Genotype</th>
+<th align="left">Diet</th>
+<th align="left">Timepoint</th>
+<th align="left">Timepoint1vs2WTcontrol</th>
+<th align="left">Timepoint1vs2WTWestern</th>
+<th align="left">Timepoint1vs2HETcontrol</th>
+<th align="left">Timepoint1vs2HETWestern</th>
+<th align="left">Timepoint1vs2KOcontrol</th>
+<th align="left">Timepoint1vs2KOWestern</th>
+<th align="left">Timepoint1ControlWTvsHET</th>
+<th align="left">Timepoint1ControlWTvsKO</th>
+<th align="left">Timepoint1ControlHETvsKO</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">99</td>
+<td align="left">41_1</td>
+<td align="left">KO_t1_western</td>
+<td align="left">ko</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">100</td>
+<td align="left">42_1</td>
+<td align="left">KO_t1_western</td>
+<td align="left">ko</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">101</td>
+<td align="left">13_1</td>
+<td align="left">KO_t1_control</td>
+<td align="left">ko</td>
+<td align="left">Control</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_control</td>
+<td align="left">KO_t1_control</td>
+</tr>
+<tr class="even">
+<td align="right">102</td>
+<td align="left">14_1</td>
+<td align="left">KO_t1_control</td>
+<td align="left">ko</td>
+<td align="left">Control</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_control</td>
+<td align="left">KO_t1_control</td>
+</tr>
+<tr class="odd">
+<td align="right">103</td>
+<td align="left">15_1</td>
+<td align="left">KO_t1_control</td>
+<td align="left">ko</td>
+<td align="left">Control</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_control</td>
+<td align="left">KO_t1_control</td>
+</tr>
+<tr class="even">
+<td align="right">104</td>
+<td align="left">16_1</td>
+<td align="left">KO_t1_control</td>
+<td align="left">ko</td>
+<td align="left">Control</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_control</td>
+<td align="left">KO_t1_control</td>
+</tr>
+<tr class="odd">
+<td align="right">105</td>
+<td align="left">21_1</td>
+<td align="left">KO_t1_control</td>
+<td align="left">ko</td>
+<td align="left">Control</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_control</td>
+<td align="left">KO_t1_control</td>
+</tr>
+<tr class="even">
+<td align="right">106</td>
+<td align="left">22_1</td>
+<td align="left">KO_t1_control</td>
+<td align="left">ko</td>
+<td align="left">Control</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_control</td>
+<td align="left">KO_t1_control</td>
+</tr>
+<tr class="odd">
+<td align="right">107</td>
+<td align="left">23_1</td>
+<td align="left">KO_t1_control</td>
+<td align="left">ko</td>
+<td align="left">Control</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_control</td>
+<td align="left">KO_t1_control</td>
+</tr>
+<tr class="even">
+<td align="right">108</td>
+<td align="left">24_1</td>
+<td align="left">KO_t1_control</td>
+<td align="left">ko</td>
+<td align="left">Control</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_control</td>
+<td align="left">KO_t1_control</td>
+</tr>
+<tr class="odd">
+<td align="right">109</td>
+<td align="left">45_1</td>
+<td align="left">KO_t1_western</td>
+<td align="left">ko</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">110</td>
+<td align="left">31_1</td>
+<td align="left">KO_t1_western</td>
+<td align="left">ko</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">111</td>
+<td align="left">33_1</td>
+<td align="left">KO_t1_western</td>
+<td align="left">ko</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">112</td>
+<td align="left">34_1</td>
+<td align="left">KO_t1_western</td>
+<td align="left">ko</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">113</td>
+<td align="left">44_1</td>
+<td align="left">KO_t1_western</td>
+<td align="left">ko</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">114</td>
+<td align="left">35_1</td>
+<td align="left">KO_t1_western</td>
+<td align="left">ko</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">115</td>
+<td align="left">81_1</td>
+<td align="left">HET_t1_control</td>
+<td align="left">het</td>
+<td align="left">Control</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_control</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_control</td>
+</tr>
+<tr class="even">
+<td align="right">116</td>
+<td align="left">52_1</td>
+<td align="left">HET_t1_western</td>
+<td align="left">het</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">117</td>
+<td align="left">53_1</td>
+<td align="left">HET_t1_western</td>
+<td align="left">het</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">118</td>
+<td align="left">54_1</td>
+<td align="left">HET_t1_western</td>
+<td align="left">het</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">119</td>
+<td align="left">55_1</td>
+<td align="left">HET_t1_western</td>
+<td align="left">het</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">120</td>
+<td align="left">61_1</td>
+<td align="left">HET_t1_control</td>
+<td align="left">het</td>
+<td align="left">Control</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_control</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_control</td>
+</tr>
+<tr class="odd">
+<td align="right">121</td>
+<td align="left">82_1</td>
+<td align="left">HET_t1_control</td>
+<td align="left">het</td>
+<td align="left">Control</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_control</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_control</td>
+</tr>
+<tr class="even">
+<td align="right">122</td>
+<td align="left">63_1</td>
+<td align="left">HET_t1_control</td>
+<td align="left">het</td>
+<td align="left">Control</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_control</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_control</td>
+</tr>
+<tr class="odd">
+<td align="right">123</td>
+<td align="left">64_1</td>
+<td align="left">HET_t1_control</td>
+<td align="left">het</td>
+<td align="left">Control</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_control</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_control</td>
+</tr>
+<tr class="even">
+<td align="right">124</td>
+<td align="left">65_1</td>
+<td align="left">HET_t1_control</td>
+<td align="left">het</td>
+<td align="left">Control</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_control</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_control</td>
+</tr>
+<tr class="odd">
+<td align="right">125</td>
+<td align="left">86_1</td>
+<td align="left">HET_t1_control</td>
+<td align="left">het</td>
+<td align="left">Control</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_control</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_control</td>
+</tr>
+<tr class="even">
+<td align="right">126</td>
+<td align="left">72_1</td>
+<td align="left">HET_t1_western</td>
+<td align="left">het</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">127</td>
+<td align="left">73_1</td>
+<td align="left">HET_t1_western</td>
+<td align="left">het</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">128</td>
+<td align="left">74_1</td>
+<td align="left">HET_t1_western</td>
+<td align="left">het</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">129</td>
+<td align="left">75_1</td>
+<td align="left">HET_t1_western</td>
+<td align="left">het</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">130</td>
+<td align="left">101_1</td>
+<td align="left">WT_t1_western</td>
+<td align="left">wt</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">WT_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">131</td>
+<td align="left">112_1</td>
+<td align="left">WT_t1_control</td>
+<td align="left">wt</td>
+<td align="left">Control</td>
+<td align="left">T1</td>
+<td align="left">WT_t1_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">WT_t1_control</td>
+<td align="left">WT_t1_control</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">132</td>
+<td align="left">113_1</td>
+<td align="left">WT_t1_control</td>
+<td align="left">wt</td>
+<td align="left">Control</td>
+<td align="left">T1</td>
+<td align="left">WT_t1_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">WT_t1_control</td>
+<td align="left">WT_t1_control</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">133</td>
+<td align="left">104_1</td>
+<td align="left">WT_t1_western</td>
+<td align="left">wt</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">WT_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">134</td>
+<td align="left">115_1</td>
+<td align="left">WT_t1_control</td>
+<td align="left">wt</td>
+<td align="left">Control</td>
+<td align="left">T1</td>
+<td align="left">WT_t1_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">WT_t1_control</td>
+<td align="left">WT_t1_control</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">135</td>
+<td align="left">121_1</td>
+<td align="left">WT_t1_western</td>
+<td align="left">wt</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">WT_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">136</td>
+<td align="left">122_1</td>
+<td align="left">WT_t1_western</td>
+<td align="left">wt</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">WT_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">137</td>
+<td align="left">103_1</td>
+<td align="left">WT_t1_western</td>
+<td align="left">wt</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">WT_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">138</td>
+<td align="left">105_1</td>
+<td align="left">WT_t1_western</td>
+<td align="left">wt</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">WT_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">139</td>
+<td align="left">125_1</td>
+<td align="left">WT_t1_western</td>
+<td align="left">wt</td>
+<td align="left">Western</td>
+<td align="left">T1</td>
+<td align="left">NA</td>
+<td align="left">WT_t1_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">140</td>
+<td align="left">91_1</td>
+<td align="left">WT_t1_control</td>
+<td align="left">wt</td>
+<td align="left">Control</td>
+<td align="left">T1</td>
+<td align="left">WT_t1_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">WT_t1_control</td>
+<td align="left">WT_t1_control</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">141</td>
+<td align="left">92_1</td>
+<td align="left">WT_t1_control</td>
+<td align="left">wt</td>
+<td align="left">Control</td>
+<td align="left">T1</td>
+<td align="left">WT_t1_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">WT_t1_control</td>
+<td align="left">WT_t1_control</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">142</td>
+<td align="left">93_1</td>
+<td align="left">WT_t1_control</td>
+<td align="left">wt</td>
+<td align="left">Control</td>
+<td align="left">T1</td>
+<td align="left">WT_t1_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">WT_t1_control</td>
+<td align="left">WT_t1_control</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">155</td>
+<td align="left">41_2</td>
+<td align="left">KO_t2_western</td>
+<td align="left">ko</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">156</td>
+<td align="left">42_2</td>
+<td align="left">KO_t2_western</td>
+<td align="left">ko</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">143</td>
+<td align="left">13_2</td>
+<td align="left">KO_t2_control</td>
+<td align="left">ko</td>
+<td align="left">Control</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t2_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">144</td>
+<td align="left">14_2</td>
+<td align="left">KO_t2_control</td>
+<td align="left">ko</td>
+<td align="left">Control</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t2_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">145</td>
+<td align="left">15_2</td>
+<td align="left">KO_t2_control</td>
+<td align="left">ko</td>
+<td align="left">Control</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t2_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">146</td>
+<td align="left">16_2</td>
+<td align="left">KO_t2_control</td>
+<td align="left">ko</td>
+<td align="left">Control</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t2_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">147</td>
+<td align="left">21_2</td>
+<td align="left">KO_t2_control</td>
+<td align="left">ko</td>
+<td align="left">Control</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t2_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">148</td>
+<td align="left">22_2</td>
+<td align="left">KO_t2_control</td>
+<td align="left">ko</td>
+<td align="left">Control</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t2_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">149</td>
+<td align="left">23_2</td>
+<td align="left">KO_t2_control</td>
+<td align="left">ko</td>
+<td align="left">Control</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t2_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">150</td>
+<td align="left">24_2</td>
+<td align="left">KO_t2_control</td>
+<td align="left">ko</td>
+<td align="left">Control</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t2_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">158</td>
+<td align="left">45_2</td>
+<td align="left">KO_t2_western</td>
+<td align="left">ko</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">151</td>
+<td align="left">31_2</td>
+<td align="left">KO_t2_western</td>
+<td align="left">ko</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">152</td>
+<td align="left">33_2</td>
+<td align="left">KO_t2_western</td>
+<td align="left">ko</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">153</td>
+<td align="left">34_2</td>
+<td align="left">KO_t2_western</td>
+<td align="left">ko</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">157</td>
+<td align="left">44_2</td>
+<td align="left">KO_t2_western</td>
+<td align="left">ko</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">154</td>
+<td align="left">35_2</td>
+<td align="left">KO_t2_western</td>
+<td align="left">ko</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">KO_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">171</td>
+<td align="left">81_2</td>
+<td align="left">HET_t2_control</td>
+<td align="left">het</td>
+<td align="left">Control</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t2_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">159</td>
+<td align="left">52_2</td>
+<td align="left">HET_t2_western</td>
+<td align="left">het</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">160</td>
+<td align="left">53_2</td>
+<td align="left">HET_t2_western</td>
+<td align="left">het</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">161</td>
+<td align="left">54_2</td>
+<td align="left">HET_t2_western</td>
+<td align="left">het</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">162</td>
+<td align="left">55_2</td>
+<td align="left">HET_t2_western</td>
+<td align="left">het</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">163</td>
+<td align="left">61_2</td>
+<td align="left">HET_t2_control</td>
+<td align="left">het</td>
+<td align="left">Control</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t2_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">172</td>
+<td align="left">82_2</td>
+<td align="left">HET_t2_control</td>
+<td align="left">het</td>
+<td align="left">Control</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t2_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">164</td>
+<td align="left">63_2</td>
+<td align="left">HET_t2_control</td>
+<td align="left">het</td>
+<td align="left">Control</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t2_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">165</td>
+<td align="left">64_2</td>
+<td align="left">HET_t2_control</td>
+<td align="left">het</td>
+<td align="left">Control</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t2_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">166</td>
+<td align="left">65_2</td>
+<td align="left">HET_t2_control</td>
+<td align="left">het</td>
+<td align="left">Control</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t2_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">173</td>
+<td align="left">86_2</td>
+<td align="left">HET_t2_control</td>
+<td align="left">het</td>
+<td align="left">Control</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t2_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">167</td>
+<td align="left">72_2</td>
+<td align="left">HET_t2_western</td>
+<td align="left">het</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">168</td>
+<td align="left">73_2</td>
+<td align="left">HET_t2_western</td>
+<td align="left">het</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">169</td>
+<td align="left">74_2</td>
+<td align="left">HET_t2_western</td>
+<td align="left">het</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">170</td>
+<td align="left">75_2</td>
+<td align="left">HET_t2_western</td>
+<td align="left">het</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">HET_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">177</td>
+<td align="left">101_2</td>
+<td align="left">WT_t2_western</td>
+<td align="left">wt</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">WT_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">181</td>
+<td align="left">112_2</td>
+<td align="left">WT_t2_control</td>
+<td align="left">wt</td>
+<td align="left">Control</td>
+<td align="left">T2</td>
+<td align="left">WT_t2_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">182</td>
+<td align="left">113_2</td>
+<td align="left">WT_t2_control</td>
+<td align="left">wt</td>
+<td align="left">Control</td>
+<td align="left">T2</td>
+<td align="left">WT_t2_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">179</td>
+<td align="left">104_2</td>
+<td align="left">WT_t2_western</td>
+<td align="left">wt</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">WT_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">183</td>
+<td align="left">115_2</td>
+<td align="left">WT_t2_control</td>
+<td align="left">wt</td>
+<td align="left">Control</td>
+<td align="left">T2</td>
+<td align="left">WT_t2_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">184</td>
+<td align="left">121_2</td>
+<td align="left">WT_t2_western</td>
+<td align="left">wt</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">WT_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">185</td>
+<td align="left">122_2</td>
+<td align="left">WT_t2_western</td>
+<td align="left">wt</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">WT_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">178</td>
+<td align="left">103_2</td>
+<td align="left">WT_t2_western</td>
+<td align="left">wt</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">WT_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">180</td>
+<td align="left">105_2</td>
+<td align="left">WT_t2_western</td>
+<td align="left">wt</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">WT_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">186</td>
+<td align="left">125_2</td>
+<td align="left">WT_t2_western</td>
+<td align="left">wt</td>
+<td align="left">Western</td>
+<td align="left">T2</td>
+<td align="left">NA</td>
+<td align="left">WT_t2_western</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">174</td>
+<td align="left">91_2</td>
+<td align="left">WT_t2_control</td>
+<td align="left">wt</td>
+<td align="left">Control</td>
+<td align="left">T2</td>
+<td align="left">WT_t2_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">175</td>
+<td align="left">92_2</td>
+<td align="left">WT_t2_control</td>
+<td align="left">wt</td>
+<td align="left">Control</td>
+<td align="left">T2</td>
+<td align="left">WT_t2_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">176</td>
+<td align="left">93_2</td>
+<td align="left">WT_t2_control</td>
+<td align="left">wt</td>
+<td align="left">Control</td>
+<td align="left">T2</td>
+<td align="left">WT_t2_control</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiSW1wb3J0IGRhdGEiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCgpUaGlzIG5vdGVib29rIGltcG9ydHMgX2Jpb21fIGRhdGEgdG8gYSBfVHJlZVN1bW1hcml6ZWRFeHBlcmltZW50XyBvYmplY3QuIAoKWW91IGFyZSBleHBlY3RlZCB0byBoYXZlIHRoZSBuZWNlc3NhcnkgZGF0YSBmaWxlcyBpbiBhIGxvY2FsIHN1YmZvbGRlcgoiZGF0YSIuCgoKIyMgSW5pdGlhbGl6YXRpb24KCltJbnN0YWxsXShpbnN0YWxsLlIpIHRoZSBuZWNlc3NhcnkgUiBwYWNrYWdlcyBpZiB5b3UgaGF2ZSBub3QgYWxyZWFkeQpkb25lIGl0LgoKVGhlbiBsb2FkIHRoZSBSIHBhY2thZ2VzLgoKCmBgYHtyfQpsaWJyYXJ5KCJtaWEiKQpgYGAKCkRlZmluZSBzb3VyY2UgZmlsZSBwYXRocy4KCmBgYHtyfQpiaW9tX2ZpbGVfcGF0aCA8LSAiZGF0YS90YWJsZS13aXRoLXRheG9ub215LmJpb20iCnNhbXBsZV9tZXRhX2ZpbGVfcGF0aCA8LSAiZGF0YS9XZXN0ZXJuRGlldFNlcnRfZXh0ZW5kZWRUaW1lQ29tcGFyaXNvbnN2NC50eHQiCnRyZWVfZmlsZV9wYXRoIDwtICJkYXRhL3RyZWUubndrIgpgYGAKCgpDcmVhdGUgVFNFIG9iamVjdCBmcm9tIGJpb20gZmlsZSBhbmQgaW52ZXN0aWdhdGUgaXQuCgpgYGB7cn0KdHNlIDwtIGxvYWRGcm9tQmlvbShiaW9tX2ZpbGVfcGF0aCkKYGBgCgoKIyMgSW52ZXN0aWdhdGUgdGhlIFIgZGF0YSBvYmplY3QKCldlIGhhdmUgbm93IGltcG9ydGVkIHRoZSBkYXRhIGluIFIuIExldCB1cyBpbnZlc3RpZ2F0ZSBpdHMgY29udGVudHMuCgpgYGB7cn0KcHJpbnQodHNlKQpgYGAKCgpDb3VudHMgaW5jbHVkZSB0aGUgYWJ1bmRhbmNlIHRhYmxlIGZyb20gYmlvbSBmaWxlLiBMZXQgdXMganVzdCB1c2UgZmlyc3QgY29scyBhbmQgcm93cy4KCmBgYHtyfQphc3NheXModHNlKSRjb3VudHNbMTozLCAxOjNdCmBgYAoKTm93IHJvd2RhdGEgaW5jbHVkZXMgdGF4b25vbWljYWwgaW5mb3JtYXRpb24gZnJvbSBiaW9tIGZpbGUuIFRoZSBoZWFkKCkgY29tbWFuZApzaG93cyBqdXN0IHRoZSBiZWdpbm5pbmcgb2YgdGhlIGRhdGEgdGFibGUgZm9yIGFuIG92ZXJ2aWV3LgoKYGBge3J9CmhlYWQocm93RGF0YSh0c2UpKQpgYGAKCgpXZSBub3RpY2UgdGhhdCB0aGUgaW1wb3J0ZWQgYmlvbSBmaWxlIGRpZCBub3QgY29udGFpbiBzYW1wbGUgbWV0YSBkYXRhCnlldCwgc28gaXQgaW5jbHVkZXMgZW1wdHkgZGF0YSBmcmFtZQoKYGBge3J9CmhlYWQoY29sRGF0YSh0c2UpKQpgYGAKCgojIyBBZGQgc2lkZSBpbmZvcm1hdGlvbgoKTGV0IHVzIGFkZHMgcGh5bG9nZW5ldGljIHRyZWUuCgpgYGB7cn0KIyBSZWFkIHRoZSB0cmVlIAp0cmVlIDwtIGFwZTo6cmVhZC50cmVlKHRyZWVfZmlsZV9wYXRoKQoKIyBBZGRzIHRyZWUgdG8gcm93VHJlZQpyb3dUcmVlKHRzZSkgPC0gdHJlZQoKIyBDaGVjawpoZWFkKHRzZSkKYGBgCgpOb3cgcm93VHJlZSBpbmNsdWRlcyBwaHlsb2dlbmV0aWMgdHJlZToKCmBgYHtyLCBldmFsPUZBTFNFfQpoZWFkKHJvd1RyZWUodHNlKSkKYGBgCgpBZGQgc2FtcGxlIG1ldGEgZGF0YSBmaWxlCgpgYGB7cn0KIyBXZSB1c2UgdGhpcyB0byBjaGVjayB3aGF0IHR5cGUgb2YgZGF0YSBpcyBpdApyZWFkLnRhYmxlKHNhbXBsZV9tZXRhX2ZpbGVfcGF0aCkKCiMgSXQgc2VlbXMgbGlrZSBhIGNvbW1hIHNlcGFyYXRlZCBmaWxlIGFuZCBpbmNsdWRlcyBoZWFkZXJzCiMgTGV0IHVzIHJlYWQgaXQ6CnNhbXBsZV9tZXRhIDwtIHJlYWQudGFibGUoc2FtcGxlX21ldGFfZmlsZV9wYXRoLCBzZXAgPSAiLCIsIGhlYWRlciA9IFRSVUUpCgojIENvbnZlcnQgaXQgZnJvbSBkYXRhLmZyYW1lIHRvIERhdGFGcmFtZQojIChyZXF1aXJlZCBmb3Igb3VyIHB1cnBvc2VzKQpzYW1wbGVfbWV0YSA8LSBEYXRhRnJhbWUoc2FtcGxlX21ldGEpCgojIFRoZW4gaXQgY2FuIGJlIGFkZGVkIHRvIGNvbERhdGEKY29sRGF0YSh0c2UpIDwtIHNhbXBsZV9tZXRhCmBgYAoKTm93IGNvbERhdGEgaW5jbHVkZXMgc2FtcGxlIG1ldGFkYXRhCQoKYGBge3J9CmNvbERhdGEodHNlKQpgYGAKCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiSW1wb3J0IGRhdGEiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCgpUaGlzIG5vdGVib29rIGltcG9ydHMgX2Jpb21fIGRhdGEgdG8gYSBfVHJlZVN1bW1hcml6ZWRFeHBlcmltZW50XyBvYmplY3QuIAoKWW91IGFyZSBleHBlY3RlZCB0byBoYXZlIHRoZSBuZWNlc3NhcnkgZGF0YSBmaWxlcyBpbiBhIGxvY2FsIHN1YmZvbGRlcgoiZGF0YSIuCgoKIyMgSW5pdGlhbGl6YXRpb24KCltJbnN0YWxsXShpbnN0YWxsLlIpIHRoZSBuZWNlc3NhcnkgUiBwYWNrYWdlcyBpZiB5b3UgaGF2ZSBub3QgYWxyZWFkeQpkb25lIGl0LgoKVGhlbiBsb2FkIHRoZSBSIHBhY2thZ2VzLgoKCmBgYHtyfQpsaWJyYXJ5KCJtaWEiKQpgYGAKCkRlZmluZSBzb3VyY2UgZmlsZSBwYXRocy4KCmBgYHtyfQpiaW9tX2ZpbGVfcGF0aCA8LSAiZGF0YS90YWJsZS13aXRoLXRheG9ub215LmJpb20iCnNhbXBsZV9tZXRhX2ZpbGVfcGF0aCA8LSAiZGF0YS9XZXN0ZXJuRGlldFNlcnRfZXh0ZW5kZWRUaW1lQ29tcGFyaXNvbnN2NC50eHQiCnRyZWVfZmlsZV9wYXRoIDwtICJkYXRhL3RyZWUubndrIgpgYGAKCgpDcmVhdGUgVFNFIG9iamVjdCBmcm9tIGJpb20gZmlsZSBhbmQgaW52ZXN0aWdhdGUgaXQuCgpgYGB7cn0KdHNlIDwtIGxvYWRGcm9tQmlvbShiaW9tX2ZpbGVfcGF0aCkKYGBgCgoKIyMgSW52ZXN0aWdhdGUgdGhlIFIgZGF0YSBvYmplY3QKCldlIGhhdmUgbm93IGltcG9ydGVkIHRoZSBkYXRhIGluIFIuIExldCB1cyBpbnZlc3RpZ2F0ZSBpdHMgY29udGVudHMuCgpgYGB7cn0KcHJpbnQodHNlKQpgYGAKCgpDb3VudHMgaW5jbHVkZSB0aGUgYWJ1bmRhbmNlIHRhYmxlIGZyb20gYmlvbSBmaWxlLiBMZXQgdXMganVzdCB1c2UgZmlyc3QgY29scyBhbmQgcm93cy4KCmBgYHtyfQphc3NheXModHNlKSRjb3VudHNbMTozLCAxOjNdCmBgYAoKTm93IHJvd2RhdGEgaW5jbHVkZXMgdGF4b25vbWljYWwgaW5mb3JtYXRpb24gZnJvbSBiaW9tIGZpbGUuIFRoZSBoZWFkKCkgY29tbWFuZApzaG93cyBqdXN0IHRoZSBiZWdpbm5pbmcgb2YgdGhlIGRhdGEgdGFibGUgZm9yIGFuIG92ZXJ2aWV3LgoKYGBge3J9CmhlYWQocm93RGF0YSh0c2UpKQpgYGAKCgpXZSBub3RpY2UgdGhhdCB0aGUgaW1wb3J0ZWQgYmlvbSBmaWxlIGRpZCBub3QgY29udGFpbiBzYW1wbGUgbWV0YSBkYXRhCnlldCwgc28gaXQgaW5jbHVkZXMgZW1wdHkgZGF0YSBmcmFtZQoKYGBge3J9CmhlYWQoY29sRGF0YSh0c2UpKQpgYGAKCgojIyBBZGQgc2lkZSBpbmZvcm1hdGlvbgoKTGV0IHVzIGFkZCBhIHBoeWxvZ2VuZXRpYyB0cmVlLgoKYGBge3J9CiMgUmVhZCB0aGUgdHJlZSAKdHJlZSA8LSBhcGU6OnJlYWQudHJlZSh0cmVlX2ZpbGVfcGF0aCkKCiMgQWRkcyB0cmVlIHRvIHJvd1RyZWUKcm93VHJlZSh0c2UpIDwtIHRyZWUKCiMgQ2hlY2sKaGVhZCh0c2UpCmBgYAoKTm93IHJvd1RyZWUgaW5jbHVkZXMgcGh5bG9nZW5ldGljIHRyZWU6CgpgYGB7ciwgZXZhbD1GQUxTRX0KaGVhZChyb3dUcmVlKHRzZSkpCmBgYAoKQWRkIHNhbXBsZSBtZXRhIGRhdGEgZmlsZQoKYGBge3J9CiMgV2UgdXNlIHRoaXMgdG8gY2hlY2sgd2hhdCB0eXBlIG9mIGRhdGEgaXMgaXQKIyByZWFkLnRhYmxlKHNhbXBsZV9tZXRhX2ZpbGVfcGF0aCkKCiMgSXQgc2VlbXMgbGlrZSBhIGNvbW1hIHNlcGFyYXRlZCBmaWxlIGFuZCBpbmNsdWRlcyBoZWFkZXJzCiMgTGV0IHVzIHJlYWQgaXQgYW5kIHRoZW4gY29udmVydCBmcm9tIGRhdGEuZnJhbWUgdG8gRGF0YUZyYW1lCiMgKHJlcXVpcmVkIGZvciBvdXIgcHVycG9zZXMpCnNhbXBsZV9tZXRhIDwtIApzYW1wbGVfbWV0YSA8LSBEYXRhRnJhbWUocmVhZC50YWJsZShzYW1wbGVfbWV0YV9maWxlX3BhdGgsIHNlcCA9ICIsIiwgaGVhZGVyID0gVFJVRSkpCgojIFRoZW4gaXQgY2FuIGJlIGFkZGVkIHRvIGNvbERhdGEKY29sRGF0YSh0c2UpIDwtIHNhbXBsZV9tZXRhCmBgYAoKTm93IGNvbERhdGEgaW5jbHVkZXMgc2FtcGxlIG1ldGFkYXRhLiBVc2Uga2FibGUgdG8gcHJpbnQgaXQgbW9yZSBuaWNlbHkuCgpgYGB7cn0Ka25pdHI6OmthYmxlKGNvbERhdGEodHNlKSkKYGBgCgoK</div>
 
 
 

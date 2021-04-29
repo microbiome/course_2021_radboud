@@ -71,7 +71,7 @@ head(colData(tse))
 
 ## Add side information
 
-Let us adds phylogenetic tree.
+Let us add a phylogenetic tree.
 
 ```{r}
 # Read the tree 
@@ -94,24 +94,22 @@ Add sample meta data file
 
 ```{r}
 # We use this to check what type of data is it
-read.table(sample_meta_file_path)
+# read.table(sample_meta_file_path)
 
 # It seems like a comma separated file and includes headers
-# Let us read it:
-sample_meta <- read.table(sample_meta_file_path, sep = ",", header = TRUE)
-
-# Convert it from data.frame to DataFrame
+# Let us read it and then convert from data.frame to DataFrame
 # (required for our purposes)
-sample_meta <- DataFrame(sample_meta)
+sample_meta <- 
+sample_meta <- DataFrame(read.table(sample_meta_file_path, sep = ",", header = TRUE))
 
 # Then it can be added to colData
 colData(tse) <- sample_meta
 ```
 
-Now colData includes sample metadata	
+Now colData includes sample metadata. Use kable to print it more nicely.
 
 ```{r}
-colData(tse)
+knitr::kable(colData(tse))
 ```
 
 
