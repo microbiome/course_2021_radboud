@@ -1,0 +1,86 @@
+---
+title: "Import data"
+output: html_notebook
+---
+This notebook imports biom data to TSE object. 
+
+General information about Notebook
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
+```{r}
+# Install BiocManager
+#BiocManager::install()
+# Install mia
+#BiocManager::install("microbiome/mia")
+# Load mia
+library("mia")
+
+```
+```{r}
+# Paths for files
+biom_file_path <- "data/table-with-taxonomy.biom"
+sample_meta_file_path <- "data/WesternDietSert_extendedTimeComparisonsv4.txt"
+tree_file_path <- "data/tree.nwk"
+
+# Creates TSE object from biom file
+tse <- loadFromBiom(biom_file_path)
+
+tse
+```
+```{r}
+# counts include the abundance table from biom file
+assays(tse)$counts
+```
+```{r}
+# rowdata includes tazonomical information from biom file
+rowData(tse)
+```
+
+biom file did not contain sample meta data, so it includes empty data frame
+colData(tse)
+
+```{r}
+# Adds tree
+
+# Installs ape
+#BiocManager::install("ape")
+
+# Read the tree 
+tree <- ape::read.tree(tree_file_path)
+# Adds tree to rowTree
+rowTree(tse) <- tree
+tse
+```
+```{r}
+# rowTree includes phylogenetic tree
+rowTree(tse)
+```
+```{r}
+# Adds sample meta data file
+
+# Checks what type of data is it
+read.table(sample_meta_file_path)
+```
+```{r}
+# It is comma separated file and includes headers
+sample_meta <- read.table(sample_meta_file_path, sep = ",", header = TRUE)
+# sample_meta needs to be converted from data.frame to DataFrame
+sample_meta <- DataFrame(sample_meta)
+# It is added to colData
+colData(tse) <- sample_meta
+
+tse
+```
+```{r}
+#colData includes sample meta data
+colData(tse)
+```
+
