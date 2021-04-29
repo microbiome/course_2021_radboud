@@ -10,6 +10,8 @@ All material is released under the open [MIT license](LICENSE).
  * [Reading the data](import.md)
 
 
+All files can be knitted at once by running [main.R](main.R)
+
 ## References 
 
 The material can be attributed to the following sources (kindly cite):
