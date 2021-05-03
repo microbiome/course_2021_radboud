@@ -4,6 +4,8 @@
 
 All files can be rendered at one go by running [main.R](main.R)
 
+[TODO list](TODO.md)
+
  * [Install R packages](install.R)
  
  * July 12: [Importing data (biom files)](import.nb.html)
@@ -13,6 +15,7 @@ All files can be rendered at one go by running [main.R](main.R)
  * July 14: [Beta diversity](beta.nb.html)
 
  * July 15: [Differential abundance](abundance.nb.html)
+
 
 
 
