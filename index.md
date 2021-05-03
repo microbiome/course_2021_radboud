@@ -1,14 +1,8 @@
 ## Welcome to Raboud Summer School 2021 - Microbiome Analysis (mia)
 
-### HTML version
+## Workflow
 
 [Import data](import.nb.html)
-
-
-### Markdown version
-
-[Import data](import.html)
-
 
 
 ## Further resources

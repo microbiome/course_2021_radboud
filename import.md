@@ -33,11 +33,11 @@ tree_file_path <- "data/tree.nwk"
 ```
 
 
-Create SE object from biom file and investigate it.
+Create TSE object from biom file and investigate it.
 
 
 ```r
-se <- loadFromBiom(biom_file_path)
+tse <- loadFromBiom(biom_file_path)
 ```
 
 
@@ -47,19 +47,27 @@ We have now imported the data in R. Let us investigate its contents.
 
 
 ```r
-print(se)
+print(tse)
 ```
 
 ```
-## class: SummarizedExperiment 
+## class: TreeSummarizedExperiment 
 ## dim: 2805 88 
 ## metadata(0):
 ## assays(1): counts
-## rownames(2805): 429528823edb55fa5e24e1f20b322a57 b821f00f48e4651623a105fb77872e44 ... 907b143b8c858095025a8c264731d477
+## rownames(2805): 429528823edb55fa5e24e1f20b322a57
+##   b821f00f48e4651623a105fb77872e44 ... 907b143b8c858095025a8c264731d477
 ##   743aa3d9860dd464ef41b9ebd1b1e3c1
 ## rowData names(8): confidence taxonomy1 ... taxonomy6 taxonomy7
 ## colnames(88): 100 101 ... 186 99
 ## colData names(0):
+## reducedDimNames(0):
+## mainExpName: NULL
+## altExpNames(0):
+## rowLinks: NULL
+## rowTree: NULL
+## colLinks: NULL
+## colTree: NULL
 ```
 
 
@@ -67,7 +75,7 @@ Counts include the abundance table from biom file. Let us just use first cols an
 
 
 ```r
-assays(se)$counts[1:3, 1:3]
+assays(tse)$counts[1:3, 1:3]
 ```
 
 ```
@@ -82,7 +90,7 @@ shows just the beginning of the data table for an overview.
 
 
 ```r
-knitr::kable(head(rowData(se)))
+knitr::kable(head(rowData(tse)))
 ```
 
 
@@ -102,7 +110,7 @@ yet, so it includes empty data frame
 
 
 ```r
-head(colData(se))
+head(colData(tse))
 ```
 
 ```
@@ -112,72 +120,7 @@ head(colData(se))
 
 ## Add side information
 
-Let us add sample meta data file
-
-
-```r
-# We use this to check what type of data is it
-# read.table(sample_meta_file_path)
-
-# It seems like a comma separated file and includes headers
-# Let us read it and then convert from data.frame to DataFrame
-# (required for our purposes)
-sample_meta <- 
-sample_meta <- DataFrame(read.table(sample_meta_file_path, sep = ",", header = TRUE))
-
-# Then it can be added to colData
-colData(se) <- sample_meta
-```
-
-Now colData includes sample metadata. Use kable to print it more nicely.
-
-
-```r
-knitr::kable(head(colData(se)))
-```
-
-
-
-| sample.id|MouseID_recoded |All           |Genotype |Diet    |Timepoint |Timepoint1vs2WTcontrol |Timepoint1vs2WTWestern |Timepoint1vs2HETcontrol |Timepoint1vs2HETWestern |Timepoint1vs2KOcontrol |Timepoint1vs2KOWestern |Timepoint1ControlWTvsHET |Timepoint1ControlWTvsKO |Timepoint1ControlHETvsKO |
-|---------:|:---------------|:-------------|:--------|:-------|:---------|:----------------------|:----------------------|:-----------------------|:-----------------------|:----------------------|:----------------------|:------------------------|:-----------------------|:------------------------|
-|        99|41_1            |KO_t1_western |ko       |Western |T1        |NA                     |NA                     |NA                      |NA                      |NA                     |KO_t1_western          |NA                       |NA                      |NA                       |
-|       100|42_1            |KO_t1_western |ko       |Western |T1        |NA                     |NA                     |NA                      |NA                      |NA                     |KO_t1_western          |NA                       |NA                      |NA                       |
-|       101|13_1            |KO_t1_control |ko       |Control |T1        |NA                     |NA                     |NA                      |NA                      |KO_t1_control          |NA                     |NA                       |KO_t1_control           |KO_t1_control            |
-|       102|14_1            |KO_t1_control |ko       |Control |T1        |NA                     |NA                     |NA                      |NA                      |KO_t1_control          |NA                     |NA                       |KO_t1_control           |KO_t1_control            |
-|       103|15_1            |KO_t1_control |ko       |Control |T1        |NA                     |NA                     |NA                      |NA                      |KO_t1_control          |NA                     |NA                       |KO_t1_control           |KO_t1_control            |
-|       104|16_1            |KO_t1_control |ko       |Control |T1        |NA                     |NA                     |NA                      |NA                      |KO_t1_control          |NA                     |NA                       |KO_t1_control           |KO_t1_control            |
-
-Now, let's add a phylogenetic tree.
-
-
-```r
-# Current object, se, is a SummarizedExperiment object, thus, it does not include
-# slot for phylogenetic tree. However, we can convert SE object to 
-# TreeSummarizedExperiment which includes rowTree slot.
-tse <- as(se, "TreeSummarizedExperiment")
-
-# tse includes same data as se
-print(tse)
-```
-
-```
-## class: TreeSummarizedExperiment 
-## dim: 2805 88 
-## metadata(0):
-## assays(1): counts
-## rownames(2805): 429528823edb55fa5e24e1f20b322a57 b821f00f48e4651623a105fb77872e44 ... 907b143b8c858095025a8c264731d477
-##   743aa3d9860dd464ef41b9ebd1b1e3c1
-## rowData names(8): confidence taxonomy1 ... taxonomy6 taxonomy7
-## colnames: NULL
-## colData names(15): sample.id MouseID_recoded ... Timepoint1ControlWTvsKO Timepoint1ControlHETvsKO
-## reducedDimNames(0):
-## mainExpName: NULL
-## altExpNames(0):
-## rowLinks: NULL
-## rowTree: NULL
-## colLinks: NULL
-## colTree: NULL
-```
+Let us add a phylogenetic tree.
 
 
 ```r
@@ -196,11 +139,12 @@ head(tse)
 ## dim: 6 88 
 ## metadata(0):
 ## assays(1): counts
-## rownames(6): 429528823edb55fa5e24e1f20b322a57 b821f00f48e4651623a105fb77872e44 ... 9d91175efc096377a71b6ea55cc7679e
+## rownames(6): 429528823edb55fa5e24e1f20b322a57
+##   b821f00f48e4651623a105fb77872e44 ... 9d91175efc096377a71b6ea55cc7679e
 ##   388b5f3e63fdec5ad3d574070b253ca0
 ## rowData names(8): confidence taxonomy1 ... taxonomy6 taxonomy7
-## colnames: NULL
-## colData names(15): sample.id MouseID_recoded ... Timepoint1ControlWTvsKO Timepoint1ControlHETvsKO
+## colnames(88): 100 101 ... 186 99
+## colData names(0):
 ## reducedDimNames(0):
 ## mainExpName: NULL
 ## altExpNames(0):
@@ -216,4 +160,40 @@ Now rowTree includes phylogenetic tree:
 ```r
 head(rowTree(tse))
 ```
+
+Add sample meta data file
+
+
+```r
+# We use this to check what type of data is it
+# read.table(sample_meta_file_path)
+
+# It seems like a comma separated file and includes headers
+# Let us read it and then convert from data.frame to DataFrame
+# (required for our purposes)
+sample_meta <- 
+sample_meta <- DataFrame(read.table(sample_meta_file_path, sep = ",", header = TRUE))
+
+# Then it can be added to colData
+colData(tse) <- sample_meta
+```
+
+Now colData includes sample metadata. Use kable to print it more nicely.
+
+
+```r
+knitr::kable(head(colData(tse)))
+```
+
+
+
+| sample.id|MouseID_recoded |All           |Genotype |Diet    |Timepoint |Timepoint1vs2WTcontrol |Timepoint1vs2WTWestern |Timepoint1vs2HETcontrol |Timepoint1vs2HETWestern |Timepoint1vs2KOcontrol |Timepoint1vs2KOWestern |Timepoint1ControlWTvsHET |Timepoint1ControlWTvsKO |Timepoint1ControlHETvsKO |
+|---------:|:---------------|:-------------|:--------|:-------|:---------|:----------------------|:----------------------|:-----------------------|:-----------------------|:----------------------|:----------------------|:------------------------|:-----------------------|:------------------------|
+|        99|41_1            |KO_t1_western |ko       |Western |T1        |NA                     |NA                     |NA                      |NA                      |NA                     |KO_t1_western          |NA                       |NA                      |NA                       |
+|       100|42_1            |KO_t1_western |ko       |Western |T1        |NA                     |NA                     |NA                      |NA                      |NA                     |KO_t1_western          |NA                       |NA                      |NA                       |
+|       101|13_1            |KO_t1_control |ko       |Control |T1        |NA                     |NA                     |NA                      |NA                      |KO_t1_control          |NA                     |NA                       |KO_t1_control           |KO_t1_control            |
+|       102|14_1            |KO_t1_control |ko       |Control |T1        |NA                     |NA                     |NA                      |NA                      |KO_t1_control          |NA                     |NA                       |KO_t1_control           |KO_t1_control            |
+|       103|15_1            |KO_t1_control |ko       |Control |T1        |NA                     |NA                     |NA                      |NA                      |KO_t1_control          |NA                     |NA                       |KO_t1_control           |KO_t1_control            |
+|       104|16_1            |KO_t1_control |ko       |Control |T1        |NA                     |NA                     |NA                      |NA                      |KO_t1_control          |NA                     |NA                       |KO_t1_control           |KO_t1_control            |
+
 
