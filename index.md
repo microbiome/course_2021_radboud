@@ -10,7 +10,9 @@ All files can be rendered at one go by running [main.R](main.R)
 
  * [Install R packages](install.R)
  
- * July 12: [Importing data (biom files)](import.nb.html)
+ * July 12: Data import and exploration
+     - [Importing data (biom files)](import.nb.html)
+     - [Exploring data](explore.nb.html)
 
  * July 13: [Alpha diversity](alpha.nb.html)
 
