@@ -122,3 +122,11 @@ Now rowTree includes phylogenetic tree:
 head(rowTree(tse))
 ```
 
+
+### TODO
+
+The rowData columns are not real taxonomic ranks (Phylum, Genus..);
+replace the column names with the real rank names for D0, D1 etc. Do
+we already have a function for this (D0, D1 etc are standard and
+should have a direct conversion).
+
