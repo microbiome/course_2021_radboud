@@ -1,3 +1,5 @@
+# Course
+
 ## Welcome to Raboud Summer School 2021 - Microbiome Analysis (mia)
 
 ## Example workflow

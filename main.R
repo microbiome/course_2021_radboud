@@ -7,3 +7,4 @@
 # https://microbiome.github.io/course_2021_radboud/
 
 rmarkdown::render("import.Rmd")
+rmarkdown::render("explore.Rmd")
