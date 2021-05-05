@@ -2,43 +2,46 @@
 title: "Data exploration"
 output: html_notebook
 ---
-
-Add here the tasks listed in [TODO](TODO.md). DELETE ##########################
-
-In the same way as in [Import.md]! DELETE ##########################
-
 ## Investigate contents of the data object
 [Import](import.Rmd) the data to TSE object, if you have not already done so.
 
-Dimensionality tells us, how many taxa and samples data contains. As we can see
-seen, there are 2805 taxa and 88 samples.
+Dimensionality tells us, how many taxa and samples data contains. As we can see, 
+there are 2805 taxa and 88 samples.
 
 ```{r}
 dim(tse)
 ```
+
 rowData slot contains taxonomic table. It includes taxonomic information
 for each 2805 entries. With the head() command, it is possible to print only 
 the beginning of the table. rowData seems to contain confidence information and
-7 different taxonomy classes. 
+7 different taxonomy classes.
 
 knitr::kable() is for printing the information more nicely.
+
 ```{r}
 knitr::kable(head(rowData(tse)))
 ```
-Let's convert those taxonomic classes with official rank names. 
+
+Let's replace those taxonomic classes with official rank names. 
+
 (Is there easier way to do this? AgglomerateByRank needs official rank names, 
-should unofficial names be allowed...)########################################
+should unofficial names be allowed...)############################################## NOTE
+
 ```{r}
 names(rowData(tse)) <- c("Confidence", "Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
 knitr::kable(head(rowData(tse)))
 ```
+
 colData slot contains sample metadata. It contains information for all 88 samples.
 However, here only 6 first sample is shown, because head() command is used. There
-are 15 columns, that contain information, e.g., about mouse's genotype and diet 
-and timepoint when sample was drawn.
+are 15 columns, that contain information, e.g., about mice's genotype and diet 
+and also timepoint when sample was drawn.
+
 ```{r}
 knitr::kable(head(colData(tse)))
 ```
+
 From here, we can observe, e.g., what is the genotype distribution of mice.
 colData(tse)$Genotype fetches the data from the column, table() creates a table
 that shows how many times each class is present, and sort() sorts the table to 
@@ -46,37 +49,40 @@ ascending order.
 
 There are 26 wild type, 30 het, and 32 knockout mice. 
 
-Wild type means that the phenotype is similar to natural populations. 
+Wild type means that the phenotype of mouse is similar to natural populations. 
 
 Het means that mice has head tilt (het) mutation, which causes vestibular 
 dysfunction. Het mice have difficulties to sense position and keep balance, 
-which is why their motion is abnormal. They can be used to follow heritage. 
-When mouse inherits this mutation from both of its parents, it gets vestibular 
-dysfunction which can be easily seen. We can compare the heritage to knockout mice
-and investigate, e.g., if the gene of interest is dominant or recessive. 
+which is why they move abnormally. 
 
 Knockout means that the gene of interest is inactivated.
 
-(Extra information might need references, or they can be deleted also)#########################
 ```{r}
 sort(table(colData(tse)$Genotype))
 ```
+
 ## Manipulate the data
 We might want to know, which taxonomic rank is, e.g., the most abundant. We can 
-easily agglomerate the abundances. Here, we agglomerate them at Phylum level. 
+easily agglomerate the data based on taxonomic ranks. Here, we agglomerate 
+the data at Phylum level. 
+
 ```{r}
-tse <- agglomerateByRank(tse, rank = "Phylum")
+tse_phylum <- agglomerateByRank(tse, rank = "Phylum")
 
 # Show dimensionality
-dim(tse)
+dim(tse_phylum)
 ```
+
 Now there are 21 taxa and 88 samples. It means that there are 21 different Phylum
-rank entries. From rowData we might see little bit easier, how ranks are agglomerated. 
+level taxa. From rowData we might see little bit easier, how ranks are agglomerated. 
 For example, all Firmicutes are combined together. That is why all lower rank 
-information is lost. 
+information is lost. From assay we could see, that all abundances of taxa that 
+belongs to Firmicutes are summed up.
+
 ```{r}
-knitr::kable(head(rowData(tse)))
+knitr::kable(head(rowData(tse_phylum)))
 ```
+
 ## Visualize data
 For plotting, we use miaViz package, so we have to load it.
 
@@ -85,12 +91,40 @@ library("miaViz")
 ```
 
 Next, we can plot the Phylum level abundances. 
-```{r}
-# These does the same, but it is always wise to specify each parameter.
-# By default, abundance table  is "counts", and rank is the lowest available rank. 
-plot <- plotAbundance(tse, abund_values="counts", rank = "Phylum")
 
-plot
+```{r}
+# Here we specify "counts" to be abundance table that we use for plotting.
+# Note that we can use agglomerated or non-agglomerated tse as an input, because
+# the function agglomeration is built-in option. 
+
+# Legend does not fit into picture, so its height is reduced.
+plot_abundance <- plotAbundance(tse, abund_values="counts", rank = "Phylum") +
+  theme(legend.key.height = unit(0.5, "cm")) 
+
+plot_abundance 
 ```
 
+From density plot, we could see, e.g., what is the most common abundance.
+Here we plot distribution of Firmicutes abundance in different samples. 
+Density plot can be seen as smoothened histogram.
 
+From the plot, we can see that there are peak when abundance is around
+290,000 counts.
+
+```{r}
+# Subset data by taking only Firmicutes
+tse_firmicutes <- tse_phylum["Phylum:D_1__Firmicutes"]
+
+# Gets the abundance table
+abundance_firmicutes <- assay(tse_firmicutes, "counts")
+
+# Calculates the density. Bandwidth can be adjusted; here, it is 20,000.
+# density() is from stats package
+density_firmicutes <- density(abundance_firmicutes, bw = 20000)
+
+# Plots the density
+plot(density_firmicutes, 
+     xlab="Counts",
+     ylab="Density",
+     main=paste0("Firmicutes (",density_firmicutes$n, " obs, ", density_firmicutes$bw, " bw)"))
+```

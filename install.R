@@ -7,6 +7,9 @@ BiocManager::install()
 # Install mia
 BiocManager::install("microbiome/mia")
 
+# Install miaViz
+BiocManager::install("microbiome/miaViz")
+
 # Install ape
 BiocManager::install("ape")
 
