@@ -1,0 +1,125 @@
+---
+title: "Alpha diversity"
+output: html_notebook
+---
+
+Alpha diversity is a meter that measures diversity of taxa in one sample. 
+If there are large amount of different taxa in sample, alpha diversity is larger. 
+
+Alpha diversity is important meter in microbiome research. mia includes wide 
+variety of alpha diversity indices. As an example, we calculate Shannon and 
+Faith diversity indices.
+
+Shannon index measures the proportion of abundances of taxa. Faith diversity index
+measures total phylogenetic distance between taxa. In both indices, higher value
+represents higher diversity. 
+
+```{r}
+# Indices to be calculated. If we don't specify indices, by default, every index
+# is calculated.
+indices <- c("shannon", "faith")
+
+# Indices are stored in colData (i.e., sample metadata). We can specify the name
+# of column, or we can use the default name which is the name of index 
+# (i.e., "shannon" and "faith"). 
+names <- c("Shannon_index", "Faith_diversity_index")
+
+############################################################ Delete when mia is updated
+colnames(tse) <- colData(tse)$sample.id
+####################################
+
+# Calculates indices
+tse <- estimateDiversity(tse, index = indices, name = names)
+
+# Shows the calculated indices
+knitr::kable(head(colData(tse)[names]))
+```
+
+Next we can visualize Shannon index with histogram.
+
+```{r}
+# # Same thing but done differently
+# # Creates histogram. With "break", number of bins can be specified. However, the
+# # value is taken as a suggestion, because hist() uses pretty() to calculate breakpoints.
+# hist(colData(tse)$Shannon_index, col = "green", breaks = 20,
+# xlab = "Shannon index", 
+# ylab = "Sample frequency", 
+# main = "Histogram of Shannon index")
+
+# ggplot needs data.frame as input. Because colData is DataFrame, it needs to be 
+# converted. 
+shannon_hist <- ggplot2::ggplot(as.data.frame(colData(tse)), 
+                                aes(x = Shannon_index)) + 
+  geom_histogram(bins = 20, fill = "blue") +
+  xlab("Shannon index") + # x axis title
+  ylab("Sample frequency") + # y axis title
+  ggtitle("ggplot()") # main title
+
+shannon_hist
+
+```
+
+To see, if there is dependency between Shannon and Faith, we can do cross-plot i.e., 
+scatter plot, where other index is in x-axis and another in y-axis.
+
+It seems that, there are positive correlation between these to indices. 
+
+```{r}
+# # Does the same thing but differently
+# plot(colData(tse)$Shannon_index, colData(tse)$Faith_diversity_index,
+#      xlab = "Shannon index",
+#      ylab = "Faith diveristy index",
+#      main = "plot()") +
+#   # Adds regression line
+#   abline(lm(colData(tse)$Faith_diversity_index ~ colData(tse)$Shannon_index)) 
+
+cross_plot <- ggplot2::ggplot(as.data.frame(colData(tse)), 
+                                     aes(x = Shannon_index, y = Faith_diversity_index)) + 
+  geom_point() + # Adds points
+  geom_smooth(method=lm) + # Adds regression line
+  xlab("Shannon index") + # x axis title
+  ylab("Faith diveristy index") + # y axis title
+  ggtitle("ggplot()") # main title
+
+cross_plot
+
+```
+
+Next let's compare indices between different genotypes and diets. Boxplot is 
+suitable for that purpose. 
+
+```{r}
+# Creates Shannon boxplot 
+shannon_box <- ggplot(as.data.frame(colData(tse)), aes(x = Genotype, 
+                                                       y = Shannon_index, fill = Diet)) + 
+  geom_boxplot()
+
+# Creates Faith boxplot 
+faith_box <- ggplot(as.data.frame(colData(tse)), aes(x = Genotype, 
+                                                     y = Faith_diversity_index, 
+                                                     fill = Diet)) + 
+  geom_boxplot()
+
+# Puts them into same picture
+gridExtra::grid.arrange(shannon_box, faith_box, nrow = 2)
+
+```
+
+To further investigate if diet explains the variation of Shannon index, let's 
+do Wilcoxon test. 
+
+Wilcoxon test is similar to Student's t-test. Student's t-test is parametric.
+It means that the data must be normally distributed. Wilcoxon test is non-parametric
+so, it doesn't make any assumptions about the distribution. 
+
+Wilcoxon test tests if there are statistical difference between two groups. 
+Here it tests, if western diet and control groups have different Shannon index values.
+As we can see, there is no difference between groups, because p-value is over 0.05, 
+which is often used as a standard cutoff point.
+
+```{r}
+# Wilcoxon test, where Shannon index is the variable that we are comparing. 
+# Diet - western or control - is the factor that we use for grouping. 
+wilcox.test(Shannon_index ~ Diet, data = colData(tse))
+
+```
