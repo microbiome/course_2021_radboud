@@ -2,6 +2,9 @@
 title: "Data exploration"
 output: html_notebook
 ---
+
+This notebook introduces basic operations to briefly explore the data. 
+
 ## Investigate contents of the data object
 [Import](import.Rmd) the data to TSE object, if you have not already done so.
 
@@ -20,16 +23,6 @@ the beginning of the table. rowData seems to contain confidence information and
 knitr::kable() is for printing the information more nicely.
 
 ```{r}
-knitr::kable(head(rowData(tse)))
-```
-
-Let's replace those taxonomic classes with official rank names. 
-
-(Is there easier way to do this? AgglomerateByRank needs official rank names, 
-should unofficial names be allowed...)############################################## NOTE
-
-```{r}
-names(rowData(tse)) <- c("Confidence", "Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
 knitr::kable(head(rowData(tse)))
 ```
 
@@ -118,13 +111,30 @@ tse_firmicutes <- tse_phylum["Phylum:D_1__Firmicutes"]
 # Gets the abundance table
 abundance_firmicutes <- assay(tse_firmicutes, "counts")
 
-# Calculates the density. Bandwidth can be adjusted; here, it is 20,000.
-# density() is from stats package
-density_firmicutes <- density(abundance_firmicutes, bw = 20000)
+# # Does the same thing but differently
+# # Calculates the density. Bandwidth can be adjusted; here, it is 30,000.
+# # density() is from stats package
+# density_firmicutes <- density(abundance_firmicutes, bw = 30000)
+# 
+# # Plots the density
+# plot(density_firmicutes, 
+#      xlab="Counts",
+#      ylab="Density",
+#      main=paste0("Firmicutes (",density_firmicutes$n, " obs, ", density_firmicutes$bw, " bw)"))
 
-# Plots the density
-plot(density_firmicutes, 
-     xlab="Counts",
-     ylab="Density",
-     main=paste0("Firmicutes (",density_firmicutes$n, " obs, ", density_firmicutes$bw, " bw)"))
+# Creates a data frame object, where first column includes abundances
+firmicutes_abund_df <- as.data.frame(t(abundance_firmicutes))
+# Rename the first and only column
+colnames(firmicutes_abund_df) <- "abund"
+
+# Creates a plot. Parameters inside feom_density are optional. With bw, it is 
+# possible to adjust bandwidth.
+firmicutes_abund_plot <- ggplot(firmicutes_abund_df, aes(x = abund)) + 
+  geom_density(color="darkred", fill="lightblue", bw = 30000) +
+  xlab("Abundance") + # x axis title
+  ggtitle("Firmicutes") + # main title
+  theme_classic() # Changes the background
+
+firmicutes_abund_plot
+
 ```

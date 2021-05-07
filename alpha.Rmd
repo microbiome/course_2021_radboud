@@ -3,6 +3,8 @@ title: "Alpha diversity"
 output: html_notebook
 ---
 
+This notebook calculates alpha diversity indices. 
+
 Alpha diversity is a meter that measures diversity of taxa in one sample. 
 If there are large amount of different taxa in sample, alpha diversity is larger. 
 
@@ -24,10 +26,6 @@ indices <- c("shannon", "faith")
 # (i.e., "shannon" and "faith"). 
 names <- c("Shannon_index", "Faith_diversity_index")
 
-############################################################ Delete when mia is updated
-colnames(tse) <- colData(tse)$sample.id
-####################################
-
 # Calculates indices
 tse <- estimateDiversity(tse, index = indices, name = names)
 
@@ -48,9 +46,9 @@ Next we can visualize Shannon index with histogram.
 
 # ggplot needs data.frame as input. Because colData is DataFrame, it needs to be 
 # converted. 
-shannon_hist <- ggplot2::ggplot(as.data.frame(colData(tse)), 
-                                aes(x = Shannon_index)) + 
-  geom_histogram(bins = 20, fill = "blue") +
+shannon_hist <- ggplot(as.data.frame(colData(tse)), 
+                       aes(x = Shannon_index)) + 
+  geom_histogram(bins = 20, fill = "gray", color = "black") +
   xlab("Shannon index") + # x axis title
   ylab("Sample frequency") + # y axis title
   ggtitle("ggplot()") # main title
@@ -108,9 +106,9 @@ gridExtra::grid.arrange(shannon_box, faith_box, nrow = 2)
 To further investigate if diet explains the variation of Shannon index, let's 
 do Wilcoxon test. 
 
-Wilcoxon test is similar to Student's t-test. Student's t-test is parametric.
+Wilcoxon test is similar to Student's t-test, however, Student's t-test is parametric.
 It means that the data must be normally distributed. Wilcoxon test is non-parametric
-so, it doesn't make any assumptions about the distribution. 
+so it doesn't make any assumptions about the distribution. 
 
 Wilcoxon test tests if there are statistical difference between two groups. 
 Here it tests, if western diet and control groups have different Shannon index values.
@@ -120,6 +118,8 @@ which is often used as a standard cutoff point.
 ```{r}
 # Wilcoxon test, where Shannon index is the variable that we are comparing. 
 # Diet - western or control - is the factor that we use for grouping. 
-wilcox.test(Shannon_index ~ Diet, data = colData(tse))
+wilcoxon_shannon <- wilcox.test(Shannon_index ~ Diet, data = colData(tse))
+
+wilcoxon_shannon
 
 ```

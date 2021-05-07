@@ -3,12 +3,13 @@ title: "Import data"
 output: html_notebook
 ---
 
-
 This notebook imports _biom_ data to a _TreeSummarizedExperiment_ object. 
 
-You are expected to have the necessary data files in a local subfolder
-"data".
+Data is located in a "data" subfolder. Data consists of 3 files: 
 
+- biom file that contains abundance table and taxonomy information
+- txt file that contains sample metadata
+- nwk file that contains a phylogenetic tree.
 
 ## Initialization
 
@@ -16,7 +17,6 @@ You are expected to have the necessary data files in a local subfolder
 done it.
 
 Then load the R packages.
-
 
 ```{r}
 library("mia")
@@ -60,6 +60,13 @@ shows just the beginning of the data table for an overview.
 knitr::kable(head(rowData(se)))
 ```
 
+Taxonomic ranks are not real rank names. Let's replace those taxonomic classes 
+with rank rank names. 
+
+```{r}
+names(rowData(se)) <- c("Confidence", "Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
+knitr::kable(head(rowData(se)))
+```
 
 We notice that the imported biom file did not contain sample meta data
 yet, so it includes empty data frame
@@ -67,7 +74,6 @@ yet, so it includes empty data frame
 ```{r}
 head(colData(se))
 ```
-
 
 ## Add side information
 
@@ -106,7 +112,7 @@ print(tse)
 ```
 
 ```{r}
-# Read the tree 
+# Reads the tree 
 tree <- ape::read.tree(tree_file_path)
 
 # Adds tree to rowTree
@@ -122,13 +128,14 @@ Now rowTree includes phylogenetic tree:
 head(rowTree(tse))
 ```
 
-
 ### TODO
 
 The rowData columns are not real taxonomic ranks (Phylum, Genus..);
 replace the column names with the real rank names for D0, D1 etc. Do
 we already have a function for this (D0, D1 etc are standard and
 should have a direct conversion).
+
+- Yes, it causes an error in next steps, if they are not real ranks. I try to find better way. 
 
 (Link to data exploration / to next step?)
 

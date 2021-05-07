@@ -216,14 +216,19 @@ pre code {
 
 <!-- rnb-text-begin -->
 <p>This notebook imports <em>biom</em> data to a <em>TreeSummarizedExperiment</em> object.</p>
-<p>You are expected to have the necessary data files in a local subfolder “data”.</p>
+<p>Data is located in a “data” subfolder. Data consists of 3 files:</p>
+<ul>
+<li>biom file that contains abundance table and taxonomy information</li>
+<li>txt file that contains sample metadata</li>
+<li>nwk file that contains a phylogenetic tree.</li>
+</ul>
 <div id="initialization" class="section level2">
 <h2>Initialization</h2>
 <p><a href="install.R">Install</a> the necessary R packages if you have not already done it.</p>
 <p>Then load the R packages.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoibGlicmFyeShcIm1pYVwiKSJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShcIm1pYVwiKVxuYGBgIn0= -->
 <pre class="r"><code>library(&quot;mia&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
@@ -231,7 +236,7 @@ pre code {
 <p>Define source file paths.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbImJpb21fZmlsZV9wYXRoIDwtIFwiZGF0YS90YWJsZS13aXRoLXRheG9ub215LmJpb21cIiIsInNhbXBsZV9tZXRhX2ZpbGVfcGF0aCA8LSBcImRhdGEvV2VzdGVybkRpZXRTZXJ0X2V4dGVuZGVkVGltZUNvbXBhcmlzb25zdjQudHh0XCIiLCJ0cmVlX2ZpbGVfcGF0aCA8LSBcImRhdGEvdHJlZS5ud2tcIiJdfQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmlvbV9maWxlX3BhdGggPC0gXCJkYXRhL3RhYmxlLXdpdGgtdGF4b25vbXkuYmlvbVwiXG5zYW1wbGVfbWV0YV9maWxlX3BhdGggPC0gXCJkYXRhL1dlc3Rlcm5EaWV0U2VydF9leHRlbmRlZFRpbWVDb21wYXJpc29uc3Y0LnR4dFwiXG50cmVlX2ZpbGVfcGF0aCA8LSBcImRhdGEvdHJlZS5ud2tcIlxuYGBgIn0= -->
 <pre class="r"><code>biom_file_path &lt;- &quot;data/table-with-taxonomy.biom&quot;
 sample_meta_file_path &lt;- &quot;data/WesternDietSert_extendedTimeComparisonsv4.txt&quot;
 tree_file_path &lt;- &quot;data/tree.nwk&quot;</code></pre>
@@ -241,7 +246,7 @@ tree_file_path &lt;- &quot;data/tree.nwk&quot;</code></pre>
 <p>Create SE object from biom file and investigate it.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoic2UgPC0gbG9hZEZyb21CaW9tKGJpb21fZmlsZV9wYXRoKSJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2UgPC0gbG9hZEZyb21CaW9tKGJpb21fZmlsZV9wYXRoKVxuYGBgIn0= -->
 <pre class="r"><code>se &lt;- loadFromBiom(biom_file_path)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
@@ -252,16 +257,16 @@ tree_file_path &lt;- &quot;data/tree.nwk&quot;</code></pre>
 <p>We have now imported the data in R. Let us investigate its contents.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoicHJpbnQoc2UpIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoc2UpXG5gYGAifQ== -->
 <pre class="r"><code>print(se)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiY2xhc3M6IFN1bW1hcml6ZWRFeHBlcmltZW50IFxuZGltOiAyODA1IDg4IFxubWV0YWRhdGEoMCk6XG5hc3NheXMoMSk6IGNvdW50c1xucm93bmFtZXMoMjgwNSk6IDQyOTUyODgyM2VkYjU1ZmE1ZTI0ZTFmMjBiMzIyYTU3IGI4MjFmMDBmNDhlNDY1MTYyM2ExMDVmYjc3ODcyZTQ0IC4uLiA5MDdiMTQzYjhjODU4MDk1MDI1YThjMjY0NzMxZDQ3N1xuICA3NDNhYTNkOTg2MGRkNDY0ZWY0MWI5ZWJkMWIxZTNjMVxucm93RGF0YSBuYW1lcyg4KTogY29uZmlkZW5jZSB0YXhvbm9teTEgLi4uIHRheG9ub215NiB0YXhvbm9teTdcbmNvbG5hbWVzKDg4KTogMTAwIDEwMSAuLi4gMTg2IDk5XG5jb2xEYXRhIG5hbWVzKDApOlxuIn0= -->
+<!-- rnb-output-begin eyJkYXRhIjoiY2xhc3M6IFN1bW1hcml6ZWRFeHBlcmltZW50IFxuZGltOiAyODA1IDg4IFxubWV0YWRhdGEoMCk6XG5hc3NheXMoMSk6IGNvdW50c1xucm93bmFtZXMoMjgwNSk6IDQyOTUyODgyM2VkYjU1ZmE1ZTI0ZTFmMjBiMzIyYTU3IGI4MjFmMDBmNDhlNDY1MTYyM2ExMDVmYjc3ODcyZTQ0IC4uLlxuICA5MDdiMTQzYjhjODU4MDk1MDI1YThjMjY0NzMxZDQ3NyA3NDNhYTNkOTg2MGRkNDY0ZWY0MWI5ZWJkMWIxZTNjMVxucm93RGF0YSBuYW1lcyg4KTogY29uZmlkZW5jZSB0YXhvbm9teTEgLi4uIHRheG9ub215NiB0YXhvbm9teTdcbmNvbG5hbWVzKDg4KTogMTAwIDEwMSAuLi4gMTg2IDk5XG5jb2xEYXRhIG5hbWVzKDApOlxuIn0= -->
 <pre><code>class: SummarizedExperiment 
 dim: 2805 88 
 metadata(0):
 assays(1): counts
-rownames(2805): 429528823edb55fa5e24e1f20b322a57 b821f00f48e4651623a105fb77872e44 ... 907b143b8c858095025a8c264731d477
-  743aa3d9860dd464ef41b9ebd1b1e3c1
+rownames(2805): 429528823edb55fa5e24e1f20b322a57 b821f00f48e4651623a105fb77872e44 ...
+  907b143b8c858095025a8c264731d477 743aa3d9860dd464ef41b9ebd1b1e3c1
 rowData names(8): confidence taxonomy1 ... taxonomy6 taxonomy7
 colnames(88): 100 101 ... 186 99
 colData names(0):</code></pre>
@@ -271,7 +276,7 @@ colData names(0):</code></pre>
 <p>Counts include the abundance table from biom file. Let us just use first cols and rows.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYXNzYXlzKHNlKSRjb3VudHNbMTozLCAxOjNdIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYXNzYXlzKHNlKSRjb3VudHNbMTozLCAxOjNdXG5gYGAifQ== -->
 <pre class="r"><code>assays(se)$counts[1:3, 1:3]</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAxMDAgICAgMTAxICAgIDEwMlxuNDI5NTI4ODIzZWRiNTVmYTVlMjRlMWYyMGIzMjJhNTcgICAgIDAgICAgICAwICAgICAgMFxuYjgyMWYwMGY0OGU0NjUxNjIzYTEwNWZiNzc4NzJlNDQgNTUwMjYgMTA5NDM1IDExODA3MlxuMGRjZWZkNjU1NzE4NDlkZDQxMzk1ZTFkODg3NDhjZWUgODgwMTYgIDIwMjE4ICAgMjIwMlxuIn0= -->
@@ -285,9 +290,12 @@ b821f00f48e4651623a105fb77872e44 55026 109435 118072
 <p>Now rowdata includes taxonomical information from biom file. The head() command shows just the beginning of the data table for an overview.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoia25pdHI6OmthYmxlKGhlYWQocm93RGF0YShzZSkpKSJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxua25pdHI6OmthYmxlKGhlYWQocm93RGF0YShzZSkpKVxuYGBgIn0= -->
 <pre class="r"><code>knitr::kable(head(rowData(se)))</code></pre>
 <!-- rnb-source-end -->
+
+<!-- rnb-html-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImtuaXRfYXNpcyJdLCJzaXppbmdQb2xpY3kiOltdfX0= -->
+
 <table>
 <colgroup>
 <col width="15%" />
@@ -382,12 +390,126 @@ b821f00f48e4651623a105fb77872e44 55026 109435 118072
 </tr>
 </tbody>
 </table>
+
+
+<!-- rnb-html-end -->
+
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Taxonomic ranks are not real rank names. Let’s replace those taxonomic classes with rank rank names.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubmFtZXMocm93RGF0YShzZSkpIDwtIGMoXCJDb25maWRlbmNlXCIsIFwiS2luZ2RvbVwiLCBcIlBoeWx1bVwiLCBcIkNsYXNzXCIsIFwiT3JkZXJcIiwgXCJGYW1pbHlcIiwgXCJHZW51c1wiLCBcIlNwZWNpZXNcIilcbmtuaXRyOjprYWJsZShoZWFkKHJvd0RhdGEoc2UpKSlcbmBgYCJ9 -->
+<pre class="r"><code>names(rowData(se)) &lt;- c(&quot;Confidence&quot;, &quot;Kingdom&quot;, &quot;Phylum&quot;, &quot;Class&quot;, &quot;Order&quot;, &quot;Family&quot;, &quot;Genus&quot;, &quot;Species&quot;)
+knitr::kable(head(rowData(se)))</code></pre>
+<!-- rnb-source-end -->
+
+<!-- rnb-html-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImtuaXRfYXNpcyJdLCJzaXppbmdQb2xpY3kiOltdfX0= -->
+
+<table>
+<colgroup>
+<col width="15%" />
+<col width="9%" />
+<col width="6%" />
+<col width="10%" />
+<col width="10%" />
+<col width="11%" />
+<col width="11%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Confidence</th>
+<th align="left">Kingdom</th>
+<th align="left">Phylum</th>
+<th align="left">Class</th>
+<th align="left">Order</th>
+<th align="left">Family</th>
+<th align="left">Genus</th>
+<th align="left">Species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">429528823edb55fa5e24e1f20b322a57</td>
+<td align="left">0.9999999629215087</td>
+<td align="left">D_0__Bacteria</td>
+<td align="left">D_1__Firmicutes</td>
+<td align="left">D_2__Bacilli</td>
+<td align="left">D_3__Lactobacillales</td>
+<td align="left">D_4__Streptococcaceae</td>
+<td align="left">D_5__Lactococcus</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">b821f00f48e4651623a105fb77872e44</td>
+<td align="left">0.9162987510638083</td>
+<td align="left">D_0__Bacteria</td>
+<td align="left">D_1__Bacteroidetes</td>
+<td align="left">D_2__Bacteroidia</td>
+<td align="left">D_3__Bacteroidales</td>
+<td align="left">D_4__Muribaculaceae</td>
+<td align="left">D_5__uncultured bacterium</td>
+<td align="left">D_6__uncultured bacterium</td>
+</tr>
+<tr class="odd">
+<td align="left">0dcefd65571849dd41395e1d88748cee</td>
+<td align="left">0.9101147578136789</td>
+<td align="left">D_0__Bacteria</td>
+<td align="left">D_1__Verrucomicrobia</td>
+<td align="left">D_2__Verrucomicrobiae</td>
+<td align="left">D_3__Verrucomicrobiales</td>
+<td align="left">D_4__Akkermansiaceae</td>
+<td align="left">D_5__Akkermansia</td>
+<td align="left">D_6__uncultured bacterium</td>
+</tr>
+<tr class="even">
+<td align="left">6fe357d6683c05da84a54a5c2a6fbe9e</td>
+<td align="left">0.9974611252130304</td>
+<td align="left">D_0__Bacteria</td>
+<td align="left">D_1__Bacteroidetes</td>
+<td align="left">D_2__Bacteroidia</td>
+<td align="left">D_3__Bacteroidales</td>
+<td align="left">D_4__Muribaculaceae</td>
+<td align="left">D_5__uncultured bacterium</td>
+<td align="left">D_6__uncultured bacterium</td>
+</tr>
+<tr class="odd">
+<td align="left">9d91175efc096377a71b6ea55cc7679e</td>
+<td align="left">0.9942398133795611</td>
+<td align="left">D_0__Bacteria</td>
+<td align="left">D_1__Firmicutes</td>
+<td align="left">D_2__Erysipelotrichia</td>
+<td align="left">D_3__Erysipelotrichales</td>
+<td align="left">D_4__Erysipelotrichaceae</td>
+<td align="left">D_5__Faecalibaculum</td>
+<td align="left">D_6__uncultured bacterium</td>
+</tr>
+<tr class="even">
+<td align="left">388b5f3e63fdec5ad3d574070b253ca0</td>
+<td align="left">0.9865806875655985</td>
+<td align="left">D_0__Bacteria</td>
+<td align="left">D_1__Bacteroidetes</td>
+<td align="left">D_2__Bacteroidia</td>
+<td align="left">D_3__Bacteroidales</td>
+<td align="left">D_4__Muribaculaceae</td>
+<td align="left">D_5__uncultured bacterium</td>
+<td align="left">D_6__uncultured bacterium</td>
+</tr>
+</tbody>
+</table>
+
+
+<!-- rnb-html-end -->
+
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>We notice that the imported biom file did not contain sample meta data yet, so it includes empty data frame</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiaGVhZChjb2xEYXRhKHNlKSkifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZChjb2xEYXRhKHNlKSlcbmBgYCJ9 -->
 <pre class="r"><code>head(colData(se))</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiRGF0YUZyYW1lIHdpdGggNiByb3dzIGFuZCAwIGNvbHVtbnNcbiJ9 -->
@@ -401,7 +523,7 @@ b821f00f48e4651623a105fb77872e44 55026 109435 118072
 <p>Let us add sample meta data file</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbIiMgV2UgdXNlIHRoaXMgdG8gY2hlY2sgd2hhdCB0eXBlIG9mIGRhdGEgaXMgaXQiLCIjIHJlYWQudGFibGUoc2FtcGxlX21ldGFfZmlsZV9wYXRoKSIsIiIsIiMgSXQgc2VlbXMgbGlrZSBhIGNvbW1hIHNlcGFyYXRlZCBmaWxlIGFuZCBpbmNsdWRlcyBoZWFkZXJzIiwiIyBMZXQgdXMgcmVhZCBpdCBhbmQgdGhlbiBjb252ZXJ0IGZyb20gZGF0YS5mcmFtZSB0byBEYXRhRnJhbWUiLCIjIChyZXF1aXJlZCBmb3Igb3VyIHB1cnBvc2VzKSIsInNhbXBsZV9tZXRhIDwtIFxuc2FtcGxlX21ldGEgPC0gRGF0YUZyYW1lKHJlYWQudGFibGUoc2FtcGxlX21ldGFfZmlsZV9wYXRoLCBzZXAgPSBcIixcIiwgaGVhZGVyID0gVFJVRSkpIiwiIiwiIyBUaGVuIGl0IGNhbiBiZSBhZGRlZCB0byBjb2xEYXRhIiwiY29sRGF0YShzZSkgPC0gc2FtcGxlX21ldGEiXX0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBXZSB1c2UgdGhpcyB0byBjaGVjayB3aGF0IHR5cGUgb2YgZGF0YSBpcyBpdFxuIyByZWFkLnRhYmxlKHNhbXBsZV9tZXRhX2ZpbGVfcGF0aClcblxuIyBJdCBzZWVtcyBsaWtlIGEgY29tbWEgc2VwYXJhdGVkIGZpbGUgYW5kIGluY2x1ZGVzIGhlYWRlcnNcbiMgTGV0IHVzIHJlYWQgaXQgYW5kIHRoZW4gY29udmVydCBmcm9tIGRhdGEuZnJhbWUgdG8gRGF0YUZyYW1lXG4jIChyZXF1aXJlZCBmb3Igb3VyIHB1cnBvc2VzKVxuc2FtcGxlX21ldGEgPC0gXG5zYW1wbGVfbWV0YSA8LSBEYXRhRnJhbWUocmVhZC50YWJsZShzYW1wbGVfbWV0YV9maWxlX3BhdGgsIHNlcCA9IFwiLFwiLCBoZWFkZXIgPSBUUlVFKSlcblxuIyBUaGVuIGl0IGNhbiBiZSBhZGRlZCB0byBjb2xEYXRhXG5jb2xEYXRhKHNlKSA8LSBzYW1wbGVfbWV0YVxuYGBgIn0= -->
 <pre class="r"><code># We use this to check what type of data is it
 # read.table(sample_meta_file_path)
 
@@ -419,9 +541,12 @@ colData(se) &lt;- sample_meta</code></pre>
 <p>Now colData includes sample metadata. Use kable to print it more nicely.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoia25pdHI6OmthYmxlKGhlYWQoY29sRGF0YShzZSkpKSJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxua25pdHI6OmthYmxlKGhlYWQoY29sRGF0YShzZSkpKVxuYGBgIn0= -->
 <pre class="r"><code>knitr::kable(head(colData(se)))</code></pre>
 <!-- rnb-source-end -->
+
+<!-- rnb-html-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImtuaXRfYXNpcyJdLCJzaXppbmdQb2xpY3kiOltdfX0= -->
+
 <table>
 <colgroup>
 <col width="3%" />
@@ -564,12 +689,16 @@ colData(se) &lt;- sample_meta</code></pre>
 </tr>
 </tbody>
 </table>
+
+
+<!-- rnb-html-end -->
+
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Now, let’s add a phylogenetic tree.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbIiMgQ3VycmVudCBvYmplY3QsIHNlLCBpcyBhIFN1bW1hcml6ZWRFeHBlcmltZW50IG9iamVjdCwgdGh1cywgaXQgZG9lcyBub3QgaW5jbHVkZSIsIiMgc2xvdCBmb3IgcGh5bG9nZW5ldGljIHRyZWUuIEhvd2V2ZXIsIHdlIGNhbiBjb252ZXJ0IFNFIG9iamVjdCB0byAiLCIjIFRyZWVTdW1tYXJpemVkRXhwZXJpbWVudCB3aGljaCBpbmNsdWRlcyByb3dUcmVlIHNsb3QuIiwidHNlIDwtIGFzKHNlLCBcIlRyZWVTdW1tYXJpemVkRXhwZXJpbWVudFwiKSIsIiIsIiMgdHNlIGluY2x1ZGVzIHNhbWUgZGF0YSBhcyBzZSIsInByaW50KHRzZSkiXX0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDdXJyZW50IG9iamVjdCwgc2UsIGlzIGEgU3VtbWFyaXplZEV4cGVyaW1lbnQgb2JqZWN0LCB0aHVzLCBpdCBkb2VzIG5vdCBpbmNsdWRlXG4jIHNsb3QgZm9yIHBoeWxvZ2VuZXRpYyB0cmVlLiBIb3dldmVyLCB3ZSBjYW4gY29udmVydCBTRSBvYmplY3QgdG8gXG4jIFRyZWVTdW1tYXJpemVkRXhwZXJpbWVudCB3aGljaCBpbmNsdWRlcyByb3dUcmVlIHNsb3QuXG50c2UgPC0gYXMoc2UsIFwiVHJlZVN1bW1hcml6ZWRFeHBlcmltZW50XCIpXG5cbiMgdHNlIGluY2x1ZGVzIHNhbWUgZGF0YSBhcyBzZVxucHJpbnQodHNlKVxuYGBgIn0= -->
 <pre class="r"><code># Current object, se, is a SummarizedExperiment object, thus, it does not include
 # slot for phylogenetic tree. However, we can convert SE object to 
 # TreeSummarizedExperiment which includes rowTree slot.
@@ -578,14 +707,14 @@ tse &lt;- as(se, &quot;TreeSummarizedExperiment&quot;)
 # tse includes same data as se
 print(tse)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiY2xhc3M6IFRyZWVTdW1tYXJpemVkRXhwZXJpbWVudCBcbmRpbTogMjgwNSA4OCBcbm1ldGFkYXRhKDApOlxuYXNzYXlzKDEpOiBjb3VudHNcbnJvd25hbWVzKDI4MDUpOiA0Mjk1Mjg4MjNlZGI1NWZhNWUyNGUxZjIwYjMyMmE1NyBiODIxZjAwZjQ4ZTQ2NTE2MjNhMTA1ZmI3Nzg3MmU0NCAuLi4gOTA3YjE0M2I4Yzg1ODA5NTAyNWE4YzI2NDczMWQ0NzdcbiAgNzQzYWEzZDk4NjBkZDQ2NGVmNDFiOWViZDFiMWUzYzFcbnJvd0RhdGEgbmFtZXMoOCk6IGNvbmZpZGVuY2UgdGF4b25vbXkxIC4uLiB0YXhvbm9teTYgdGF4b25vbXk3XG5jb2xuYW1lczogTlVMTFxuY29sRGF0YSBuYW1lcygxNSk6IHNhbXBsZS5pZCBNb3VzZUlEX3JlY29kZWQgLi4uIFRpbWVwb2ludDFDb250cm9sV1R2c0tPIFRpbWVwb2ludDFDb250cm9sSEVUdnNLT1xucmVkdWNlZERpbU5hbWVzKDApOlxubWFpbkV4cE5hbWU6IE5VTExcbmFsdEV4cE5hbWVzKDApOlxucm93TGlua3M6IE5VTExcbnJvd1RyZWU6IE5VTExcbmNvbExpbmtzOiBOVUxMXG5jb2xUcmVlOiBOVUxMXG4ifQ== -->
+<!-- rnb-output-begin eyJkYXRhIjoiY2xhc3M6IFRyZWVTdW1tYXJpemVkRXhwZXJpbWVudCBcbmRpbTogMjgwNSA4OCBcbm1ldGFkYXRhKDApOlxuYXNzYXlzKDEpOiBjb3VudHNcbnJvd25hbWVzKDI4MDUpOiA0Mjk1Mjg4MjNlZGI1NWZhNWUyNGUxZjIwYjMyMmE1NyBiODIxZjAwZjQ4ZTQ2NTE2MjNhMTA1ZmI3Nzg3MmU0NCAuLi5cbiAgOTA3YjE0M2I4Yzg1ODA5NTAyNWE4YzI2NDczMWQ0NzcgNzQzYWEzZDk4NjBkZDQ2NGVmNDFiOWViZDFiMWUzYzFcbnJvd0RhdGEgbmFtZXMoOCk6IENvbmZpZGVuY2UgS2luZ2RvbSAuLi4gR2VudXMgU3BlY2llc1xuY29sbmFtZXM6IE5VTExcbmNvbERhdGEgbmFtZXMoMTUpOiBzYW1wbGUuaWQgTW91c2VJRF9yZWNvZGVkIC4uLiBUaW1lcG9pbnQxQ29udHJvbFdUdnNLTyBUaW1lcG9pbnQxQ29udHJvbEhFVHZzS09cbnJlZHVjZWREaW1OYW1lcygwKTpcbm1haW5FeHBOYW1lOiBOVUxMXG5hbHRFeHBOYW1lcygwKTpcbnJvd0xpbmtzOiBOVUxMXG5yb3dUcmVlOiBOVUxMXG5jb2xMaW5rczogTlVMTFxuY29sVHJlZTogTlVMTFxuIn0= -->
 <pre><code>class: TreeSummarizedExperiment 
 dim: 2805 88 
 metadata(0):
 assays(1): counts
-rownames(2805): 429528823edb55fa5e24e1f20b322a57 b821f00f48e4651623a105fb77872e44 ... 907b143b8c858095025a8c264731d477
-  743aa3d9860dd464ef41b9ebd1b1e3c1
-rowData names(8): confidence taxonomy1 ... taxonomy6 taxonomy7
+rownames(2805): 429528823edb55fa5e24e1f20b322a57 b821f00f48e4651623a105fb77872e44 ...
+  907b143b8c858095025a8c264731d477 743aa3d9860dd464ef41b9ebd1b1e3c1
+rowData names(8): Confidence Kingdom ... Genus Species
 colnames: NULL
 colData names(15): sample.id MouseID_recoded ... Timepoint1ControlWTvsKO Timepoint1ControlHETvsKO
 reducedDimNames(0):
@@ -600,8 +729,8 @@ colTree: NULL</code></pre>
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjpbIiMgUmVhZCB0aGUgdHJlZSAiLCJ0cmVlIDwtIGFwZTo6cmVhZC50cmVlKHRyZWVfZmlsZV9wYXRoKSIsIiIsIiMgQWRkcyB0cmVlIHRvIHJvd1RyZWUiLCJyb3dUcmVlKHRzZSkgPC0gdHJlZSIsIiIsIiMgQ2hlY2siLCJoZWFkKHRzZSkiXX0= -->
-<pre class="r"><code># Read the tree 
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBSZWFkcyB0aGUgdHJlZSBcbnRyZWUgPC0gYXBlOjpyZWFkLnRyZWUodHJlZV9maWxlX3BhdGgpXG5cbiMgQWRkcyB0cmVlIHRvIHJvd1RyZWVcbnJvd1RyZWUodHNlKSA8LSB0cmVlXG5cbiMgQ2hlY2tcbmhlYWQodHNlKVxuYGBgIn0= -->
+<pre class="r"><code># Reads the tree 
 tree &lt;- ape::read.tree(tree_file_path)
 
 # Adds tree to rowTree
@@ -610,14 +739,14 @@ rowTree(tse) &lt;- tree
 # Check
 head(tse)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiY2xhc3M6IFRyZWVTdW1tYXJpemVkRXhwZXJpbWVudCBcbmRpbTogNiA4OCBcbm1ldGFkYXRhKDApOlxuYXNzYXlzKDEpOiBjb3VudHNcbnJvd25hbWVzKDYpOiA0Mjk1Mjg4MjNlZGI1NWZhNWUyNGUxZjIwYjMyMmE1NyBiODIxZjAwZjQ4ZTQ2NTE2MjNhMTA1ZmI3Nzg3MmU0NCAuLi4gOWQ5MTE3NWVmYzA5NjM3N2E3MWI2ZWE1NWNjNzY3OWVcbiAgMzg4YjVmM2U2M2ZkZWM1YWQzZDU3NDA3MGIyNTNjYTBcbnJvd0RhdGEgbmFtZXMoOCk6IGNvbmZpZGVuY2UgdGF4b25vbXkxIC4uLiB0YXhvbm9teTYgdGF4b25vbXk3XG5jb2xuYW1lczogTlVMTFxuY29sRGF0YSBuYW1lcygxNSk6IHNhbXBsZS5pZCBNb3VzZUlEX3JlY29kZWQgLi4uIFRpbWVwb2ludDFDb250cm9sV1R2c0tPIFRpbWVwb2ludDFDb250cm9sSEVUdnNLT1xucmVkdWNlZERpbU5hbWVzKDApOlxubWFpbkV4cE5hbWU6IE5VTExcbmFsdEV4cE5hbWVzKDApOlxucm93TGlua3M6IGEgTGlua0RhdGFGcmFtZSAoNiByb3dzKVxucm93VHJlZTogMSBwaHlsbyB0cmVlKHMpICgyODA1IGxlYXZlcylcbmNvbExpbmtzOiBOVUxMXG5jb2xUcmVlOiBOVUxMXG4ifQ== -->
+<!-- rnb-output-begin eyJkYXRhIjoiY2xhc3M6IFRyZWVTdW1tYXJpemVkRXhwZXJpbWVudCBcbmRpbTogNiA4OCBcbm1ldGFkYXRhKDApOlxuYXNzYXlzKDEpOiBjb3VudHNcbnJvd25hbWVzKDYpOiA0Mjk1Mjg4MjNlZGI1NWZhNWUyNGUxZjIwYjMyMmE1NyBiODIxZjAwZjQ4ZTQ2NTE2MjNhMTA1ZmI3Nzg3MmU0NCAuLi4gOWQ5MTE3NWVmYzA5NjM3N2E3MWI2ZWE1NWNjNzY3OWVcbiAgMzg4YjVmM2U2M2ZkZWM1YWQzZDU3NDA3MGIyNTNjYTBcbnJvd0RhdGEgbmFtZXMoOCk6IENvbmZpZGVuY2UgS2luZ2RvbSAuLi4gR2VudXMgU3BlY2llc1xuY29sbmFtZXM6IE5VTExcbmNvbERhdGEgbmFtZXMoMTUpOiBzYW1wbGUuaWQgTW91c2VJRF9yZWNvZGVkIC4uLiBUaW1lcG9pbnQxQ29udHJvbFdUdnNLTyBUaW1lcG9pbnQxQ29udHJvbEhFVHZzS09cbnJlZHVjZWREaW1OYW1lcygwKTpcbm1haW5FeHBOYW1lOiBOVUxMXG5hbHRFeHBOYW1lcygwKTpcbnJvd0xpbmtzOiBhIExpbmtEYXRhRnJhbWUgKDYgcm93cylcbnJvd1RyZWU6IDEgcGh5bG8gdHJlZShzKSAoMjgwNSBsZWF2ZXMpXG5jb2xMaW5rczogTlVMTFxuY29sVHJlZTogTlVMTFxuIn0= -->
 <pre><code>class: TreeSummarizedExperiment 
 dim: 6 88 
 metadata(0):
 assays(1): counts
 rownames(6): 429528823edb55fa5e24e1f20b322a57 b821f00f48e4651623a105fb77872e44 ... 9d91175efc096377a71b6ea55cc7679e
   388b5f3e63fdec5ad3d574070b253ca0
-rowData names(8): confidence taxonomy1 ... taxonomy6 taxonomy7
+rowData names(8): Confidence Kingdom ... Genus Species
 colnames: NULL
 colData names(15): sample.id MouseID_recoded ... Timepoint1ControlWTvsKO Timepoint1ControlHETvsKO
 reducedDimNames(0):
@@ -641,12 +770,15 @@ colTree: NULL</code></pre>
 <div id="todo" class="section level3">
 <h3>TODO</h3>
 <p>The rowData columns are not real taxonomic ranks (Phylum, Genus..); replace the column names with the real rank names for D0, D1 etc. Do we already have a function for this (D0, D1 etc are standard and should have a direct conversion).</p>
+<ul>
+<li>Yes, it causes an error in next steps, if they are not real ranks. I try to find better way.</li>
+</ul>
 <p>(Link to data exploration / to next step?)</p>
 <!-- rnb-text-end -->
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiSW1wb3J0IGRhdGEiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCgpUaGlzIG5vdGVib29rIGltcG9ydHMgX2Jpb21fIGRhdGEgdG8gYSBfVHJlZVN1bW1hcml6ZWRFeHBlcmltZW50XyBvYmplY3QuIAoKWW91IGFyZSBleHBlY3RlZCB0byBoYXZlIHRoZSBuZWNlc3NhcnkgZGF0YSBmaWxlcyBpbiBhIGxvY2FsIHN1YmZvbGRlcgoiZGF0YSIuCgoKIyMgSW5pdGlhbGl6YXRpb24KCltJbnN0YWxsXShpbnN0YWxsLlIpIHRoZSBuZWNlc3NhcnkgUiBwYWNrYWdlcyBpZiB5b3UgaGF2ZSBub3QgYWxyZWFkeQpkb25lIGl0LgoKVGhlbiBsb2FkIHRoZSBSIHBhY2thZ2VzLgoKCmBgYHtyfQpsaWJyYXJ5KCJtaWEiKQpgYGAKCkRlZmluZSBzb3VyY2UgZmlsZSBwYXRocy4KCmBgYHtyfQpiaW9tX2ZpbGVfcGF0aCA8LSAiZGF0YS90YWJsZS13aXRoLXRheG9ub215LmJpb20iCnNhbXBsZV9tZXRhX2ZpbGVfcGF0aCA8LSAiZGF0YS9XZXN0ZXJuRGlldFNlcnRfZXh0ZW5kZWRUaW1lQ29tcGFyaXNvbnN2NC50eHQiCnRyZWVfZmlsZV9wYXRoIDwtICJkYXRhL3RyZWUubndrIgpgYGAKCgpDcmVhdGUgU0Ugb2JqZWN0IGZyb20gYmlvbSBmaWxlIGFuZCBpbnZlc3RpZ2F0ZSBpdC4KCmBgYHtyfQpzZSA8LSBsb2FkRnJvbUJpb20oYmlvbV9maWxlX3BhdGgpCmBgYAoKCiMjIEludmVzdGlnYXRlIHRoZSBSIGRhdGEgb2JqZWN0CgpXZSBoYXZlIG5vdyBpbXBvcnRlZCB0aGUgZGF0YSBpbiBSLiBMZXQgdXMgaW52ZXN0aWdhdGUgaXRzIGNvbnRlbnRzLgoKYGBge3J9CnByaW50KHNlKQpgYGAKCgpDb3VudHMgaW5jbHVkZSB0aGUgYWJ1bmRhbmNlIHRhYmxlIGZyb20gYmlvbSBmaWxlLiBMZXQgdXMganVzdCB1c2UgZmlyc3QgY29scyBhbmQgcm93cy4KCmBgYHtyfQphc3NheXMoc2UpJGNvdW50c1sxOjMsIDE6M10KYGBgCgpOb3cgcm93ZGF0YSBpbmNsdWRlcyB0YXhvbm9taWNhbCBpbmZvcm1hdGlvbiBmcm9tIGJpb20gZmlsZS4gVGhlIGhlYWQoKSBjb21tYW5kCnNob3dzIGp1c3QgdGhlIGJlZ2lubmluZyBvZiB0aGUgZGF0YSB0YWJsZSBmb3IgYW4gb3ZlcnZpZXcuCgpgYGB7cn0Ka25pdHI6OmthYmxlKGhlYWQocm93RGF0YShzZSkpKQpgYGAKCgpXZSBub3RpY2UgdGhhdCB0aGUgaW1wb3J0ZWQgYmlvbSBmaWxlIGRpZCBub3QgY29udGFpbiBzYW1wbGUgbWV0YSBkYXRhCnlldCwgc28gaXQgaW5jbHVkZXMgZW1wdHkgZGF0YSBmcmFtZQoKYGBge3J9CmhlYWQoY29sRGF0YShzZSkpCmBgYAoKCiMjIEFkZCBzaWRlIGluZm9ybWF0aW9uCgpMZXQgdXMgYWRkIHNhbXBsZSBtZXRhIGRhdGEgZmlsZQoKYGBge3J9CiMgV2UgdXNlIHRoaXMgdG8gY2hlY2sgd2hhdCB0eXBlIG9mIGRhdGEgaXMgaXQKIyByZWFkLnRhYmxlKHNhbXBsZV9tZXRhX2ZpbGVfcGF0aCkKCiMgSXQgc2VlbXMgbGlrZSBhIGNvbW1hIHNlcGFyYXRlZCBmaWxlIGFuZCBpbmNsdWRlcyBoZWFkZXJzCiMgTGV0IHVzIHJlYWQgaXQgYW5kIHRoZW4gY29udmVydCBmcm9tIGRhdGEuZnJhbWUgdG8gRGF0YUZyYW1lCiMgKHJlcXVpcmVkIGZvciBvdXIgcHVycG9zZXMpCnNhbXBsZV9tZXRhIDwtIApzYW1wbGVfbWV0YSA8LSBEYXRhRnJhbWUocmVhZC50YWJsZShzYW1wbGVfbWV0YV9maWxlX3BhdGgsIHNlcCA9ICIsIiwgaGVhZGVyID0gVFJVRSkpCgojIFRoZW4gaXQgY2FuIGJlIGFkZGVkIHRvIGNvbERhdGEKY29sRGF0YShzZSkgPC0gc2FtcGxlX21ldGEKYGBgCgpOb3cgY29sRGF0YSBpbmNsdWRlcyBzYW1wbGUgbWV0YWRhdGEuIFVzZSBrYWJsZSB0byBwcmludCBpdCBtb3JlIG5pY2VseS4KCmBgYHtyfQprbml0cjo6a2FibGUoaGVhZChjb2xEYXRhKHNlKSkpCmBgYAoKTm93LCBsZXQncyBhZGQgYSBwaHlsb2dlbmV0aWMgdHJlZS4KCmBgYHtyfQojIEN1cnJlbnQgb2JqZWN0LCBzZSwgaXMgYSBTdW1tYXJpemVkRXhwZXJpbWVudCBvYmplY3QsIHRodXMsIGl0IGRvZXMgbm90IGluY2x1ZGUKIyBzbG90IGZvciBwaHlsb2dlbmV0aWMgdHJlZS4gSG93ZXZlciwgd2UgY2FuIGNvbnZlcnQgU0Ugb2JqZWN0IHRvIAojIFRyZWVTdW1tYXJpemVkRXhwZXJpbWVudCB3aGljaCBpbmNsdWRlcyByb3dUcmVlIHNsb3QuCnRzZSA8LSBhcyhzZSwgIlRyZWVTdW1tYXJpemVkRXhwZXJpbWVudCIpCgojIHRzZSBpbmNsdWRlcyBzYW1lIGRhdGEgYXMgc2UKcHJpbnQodHNlKQpgYGAKCmBgYHtyfQojIFJlYWQgdGhlIHRyZWUgCnRyZWUgPC0gYXBlOjpyZWFkLnRyZWUodHJlZV9maWxlX3BhdGgpCgojIEFkZHMgdHJlZSB0byByb3dUcmVlCnJvd1RyZWUodHNlKSA8LSB0cmVlCgojIENoZWNrCmhlYWQodHNlKQpgYGAKCk5vdyByb3dUcmVlIGluY2x1ZGVzIHBoeWxvZ2VuZXRpYyB0cmVlOgoKYGBge3IsIGV2YWw9RkFMU0V9CmhlYWQocm93VHJlZSh0c2UpKQpgYGAKCgojIyMgVE9ETwoKVGhlIHJvd0RhdGEgY29sdW1ucyBhcmUgbm90IHJlYWwgdGF4b25vbWljIHJhbmtzIChQaHlsdW0sIEdlbnVzLi4pOwpyZXBsYWNlIHRoZSBjb2x1bW4gbmFtZXMgd2l0aCB0aGUgcmVhbCByYW5rIG5hbWVzIGZvciBEMCwgRDEgZXRjLiBEbwp3ZSBhbHJlYWR5IGhhdmUgYSBmdW5jdGlvbiBmb3IgdGhpcyAoRDAsIEQxIGV0YyBhcmUgc3RhbmRhcmQgYW5kCnNob3VsZCBoYXZlIGEgZGlyZWN0IGNvbnZlcnNpb24pLgoKKExpbmsgdG8gZGF0YSBleHBsb3JhdGlvbiAvIHRvIG5leHQgc3RlcD8pCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiSW1wb3J0IGRhdGEiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KClRoaXMgbm90ZWJvb2sgaW1wb3J0cyBfYmlvbV8gZGF0YSB0byBhIF9UcmVlU3VtbWFyaXplZEV4cGVyaW1lbnRfIG9iamVjdC4gCgpEYXRhIGlzIGxvY2F0ZWQgaW4gYSAiZGF0YSIgc3ViZm9sZGVyLiBEYXRhIGNvbnNpc3RzIG9mIDMgZmlsZXM6IAoKLSBiaW9tIGZpbGUgdGhhdCBjb250YWlucyBhYnVuZGFuY2UgdGFibGUgYW5kIHRheG9ub215IGluZm9ybWF0aW9uCi0gdHh0IGZpbGUgdGhhdCBjb250YWlucyBzYW1wbGUgbWV0YWRhdGEKLSBud2sgZmlsZSB0aGF0IGNvbnRhaW5zIGEgcGh5bG9nZW5ldGljIHRyZWUuCgojIyBJbml0aWFsaXphdGlvbgoKW0luc3RhbGxdKGluc3RhbGwuUikgdGhlIG5lY2Vzc2FyeSBSIHBhY2thZ2VzIGlmIHlvdSBoYXZlIG5vdCBhbHJlYWR5CmRvbmUgaXQuCgpUaGVuIGxvYWQgdGhlIFIgcGFja2FnZXMuCgpgYGB7cn0KbGlicmFyeSgibWlhIikKYGBgCgpEZWZpbmUgc291cmNlIGZpbGUgcGF0aHMuCgpgYGB7cn0KYmlvbV9maWxlX3BhdGggPC0gImRhdGEvdGFibGUtd2l0aC10YXhvbm9teS5iaW9tIgpzYW1wbGVfbWV0YV9maWxlX3BhdGggPC0gImRhdGEvV2VzdGVybkRpZXRTZXJ0X2V4dGVuZGVkVGltZUNvbXBhcmlzb25zdjQudHh0Igp0cmVlX2ZpbGVfcGF0aCA8LSAiZGF0YS90cmVlLm53ayIKYGBgCgoKQ3JlYXRlIFNFIG9iamVjdCBmcm9tIGJpb20gZmlsZSBhbmQgaW52ZXN0aWdhdGUgaXQuCgpgYGB7cn0Kc2UgPC0gbG9hZEZyb21CaW9tKGJpb21fZmlsZV9wYXRoKQpgYGAKCgojIyBJbnZlc3RpZ2F0ZSB0aGUgUiBkYXRhIG9iamVjdAoKV2UgaGF2ZSBub3cgaW1wb3J0ZWQgdGhlIGRhdGEgaW4gUi4gTGV0IHVzIGludmVzdGlnYXRlIGl0cyBjb250ZW50cy4KCmBgYHtyfQpwcmludChzZSkKYGBgCgoKQ291bnRzIGluY2x1ZGUgdGhlIGFidW5kYW5jZSB0YWJsZSBmcm9tIGJpb20gZmlsZS4gTGV0IHVzIGp1c3QgdXNlIGZpcnN0IGNvbHMgYW5kIHJvd3MuCgpgYGB7cn0KYXNzYXlzKHNlKSRjb3VudHNbMTozLCAxOjNdCmBgYAoKTm93IHJvd2RhdGEgaW5jbHVkZXMgdGF4b25vbWljYWwgaW5mb3JtYXRpb24gZnJvbSBiaW9tIGZpbGUuIFRoZSBoZWFkKCkgY29tbWFuZApzaG93cyBqdXN0IHRoZSBiZWdpbm5pbmcgb2YgdGhlIGRhdGEgdGFibGUgZm9yIGFuIG92ZXJ2aWV3LgoKYGBge3J9CmtuaXRyOjprYWJsZShoZWFkKHJvd0RhdGEoc2UpKSkKYGBgCgpUYXhvbm9taWMgcmFua3MgYXJlIG5vdCByZWFsIHJhbmsgbmFtZXMuIExldCdzIHJlcGxhY2UgdGhvc2UgdGF4b25vbWljIGNsYXNzZXMgCndpdGggcmFuayByYW5rIG5hbWVzLiAKCmBgYHtyfQpuYW1lcyhyb3dEYXRhKHNlKSkgPC0gYygiQ29uZmlkZW5jZSIsICJLaW5nZG9tIiwgIlBoeWx1bSIsICJDbGFzcyIsICJPcmRlciIsICJGYW1pbHkiLCAiR2VudXMiLCAiU3BlY2llcyIpCmtuaXRyOjprYWJsZShoZWFkKHJvd0RhdGEoc2UpKSkKYGBgCgpXZSBub3RpY2UgdGhhdCB0aGUgaW1wb3J0ZWQgYmlvbSBmaWxlIGRpZCBub3QgY29udGFpbiBzYW1wbGUgbWV0YSBkYXRhCnlldCwgc28gaXQgaW5jbHVkZXMgZW1wdHkgZGF0YSBmcmFtZQoKYGBge3J9CmhlYWQoY29sRGF0YShzZSkpCmBgYAoKIyMgQWRkIHNpZGUgaW5mb3JtYXRpb24KCkxldCB1cyBhZGQgc2FtcGxlIG1ldGEgZGF0YSBmaWxlCgpgYGB7cn0KIyBXZSB1c2UgdGhpcyB0byBjaGVjayB3aGF0IHR5cGUgb2YgZGF0YSBpcyBpdAojIHJlYWQudGFibGUoc2FtcGxlX21ldGFfZmlsZV9wYXRoKQoKIyBJdCBzZWVtcyBsaWtlIGEgY29tbWEgc2VwYXJhdGVkIGZpbGUgYW5kIGluY2x1ZGVzIGhlYWRlcnMKIyBMZXQgdXMgcmVhZCBpdCBhbmQgdGhlbiBjb252ZXJ0IGZyb20gZGF0YS5mcmFtZSB0byBEYXRhRnJhbWUKIyAocmVxdWlyZWQgZm9yIG91ciBwdXJwb3NlcykKc2FtcGxlX21ldGEgPC0gCnNhbXBsZV9tZXRhIDwtIERhdGFGcmFtZShyZWFkLnRhYmxlKHNhbXBsZV9tZXRhX2ZpbGVfcGF0aCwgc2VwID0gIiwiLCBoZWFkZXIgPSBUUlVFKSkKCiMgVGhlbiBpdCBjYW4gYmUgYWRkZWQgdG8gY29sRGF0YQpjb2xEYXRhKHNlKSA8LSBzYW1wbGVfbWV0YQpgYGAKCk5vdyBjb2xEYXRhIGluY2x1ZGVzIHNhbXBsZSBtZXRhZGF0YS4gVXNlIGthYmxlIHRvIHByaW50IGl0IG1vcmUgbmljZWx5LgoKYGBge3J9CmtuaXRyOjprYWJsZShoZWFkKGNvbERhdGEoc2UpKSkKYGBgCgpOb3csIGxldCdzIGFkZCBhIHBoeWxvZ2VuZXRpYyB0cmVlLgoKYGBge3J9CiMgQ3VycmVudCBvYmplY3QsIHNlLCBpcyBhIFN1bW1hcml6ZWRFeHBlcmltZW50IG9iamVjdCwgdGh1cywgaXQgZG9lcyBub3QgaW5jbHVkZQojIHNsb3QgZm9yIHBoeWxvZ2VuZXRpYyB0cmVlLiBIb3dldmVyLCB3ZSBjYW4gY29udmVydCBTRSBvYmplY3QgdG8gCiMgVHJlZVN1bW1hcml6ZWRFeHBlcmltZW50IHdoaWNoIGluY2x1ZGVzIHJvd1RyZWUgc2xvdC4KdHNlIDwtIGFzKHNlLCAiVHJlZVN1bW1hcml6ZWRFeHBlcmltZW50IikKCiMgdHNlIGluY2x1ZGVzIHNhbWUgZGF0YSBhcyBzZQpwcmludCh0c2UpCmBgYAoKYGBge3J9CiMgUmVhZHMgdGhlIHRyZWUgCnRyZWUgPC0gYXBlOjpyZWFkLnRyZWUodHJlZV9maWxlX3BhdGgpCgojIEFkZHMgdHJlZSB0byByb3dUcmVlCnJvd1RyZWUodHNlKSA8LSB0cmVlCgojIENoZWNrCmhlYWQodHNlKQpgYGAKCk5vdyByb3dUcmVlIGluY2x1ZGVzIHBoeWxvZ2VuZXRpYyB0cmVlOgoKYGBge3IsIGV2YWw9RkFMU0V9CmhlYWQocm93VHJlZSh0c2UpKQpgYGAKCiMjIyBUT0RPCgpUaGUgcm93RGF0YSBjb2x1bW5zIGFyZSBub3QgcmVhbCB0YXhvbm9taWMgcmFua3MgKFBoeWx1bSwgR2VudXMuLik7CnJlcGxhY2UgdGhlIGNvbHVtbiBuYW1lcyB3aXRoIHRoZSByZWFsIHJhbmsgbmFtZXMgZm9yIEQwLCBEMSBldGMuIERvCndlIGFscmVhZHkgaGF2ZSBhIGZ1bmN0aW9uIGZvciB0aGlzIChEMCwgRDEgZXRjIGFyZSBzdGFuZGFyZCBhbmQKc2hvdWxkIGhhdmUgYSBkaXJlY3QgY29udmVyc2lvbikuCgotIFllcywgaXQgY2F1c2VzIGFuIGVycm9yIGluIG5leHQgc3RlcHMsIGlmIHRoZXkgYXJlIG5vdCByZWFsIHJhbmtzLiBJIHRyeSB0byBmaW5kIGJldHRlciB3YXkuIAoKKExpbmsgdG8gZGF0YSBleHBsb3JhdGlvbiAvIHRvIG5leHQgc3RlcD8pCgo=</div>
 
 
 
