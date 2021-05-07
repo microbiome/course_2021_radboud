@@ -59,7 +59,7 @@ colors
 
 ## Example of associations
 
-PERMANOVA example (Henrik could add - leave out for now)
+PERMANOVA example (see section 6.3.1-6.3.2 in [OMA](https://microbiome.github.io/OMA/microbiome-diversity.html#beta-diversity))
 
 
 
