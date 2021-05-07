@@ -8,3 +8,4 @@
 
 rmarkdown::render("import.Rmd")
 rmarkdown::render("explore.Rmd")
+rmarkdown::render("alpha.Rmd")

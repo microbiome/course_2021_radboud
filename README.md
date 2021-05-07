@@ -4,5 +4,5 @@ All material is released under the open [MIT license](LICENSE).
 
 Contact: [Leo Lahti](datascience.utu.fi)
 
-See [index.md] for more info.
+See [index.html] for more info.
 

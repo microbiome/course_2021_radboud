@@ -27,3 +27,41 @@ Boxplot comparing diversity between different Genotypes; and between different D
 
 Use Wilcoxon test to calculate p-value for the difference in Shannon between Diets (Control vs. Western)
 
+
+# Beta diversity (beta.Rmd)
+
+
+## Examples of PCoA with different settings
+
+PCoA for ASV-level data with Bray-Curtis
+
+PCoA for ASV-level data with CLR transformation + Euclidean distance
+
+PCoA aggregated to Phylum level with CLR transformation + Euclidean distance
+
+
+## Examples on showing external variables on PCoA plot
+
+PCoA with some discrete sample grouping variable shown with colors
+
+PCoA with some continuous sample grouping variable shown with colors
+
+
+## Example on clustering
+
+Dirichlet-Multinomial Mixture clustering (ask Chandler for example; he
+has Rmd file that does this for another data set). Just show how to
+run DMM clustering and decide the number of clusters.
+
+PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with
+colors
+
+
+## Example of associations
+
+PERMANOVA example (Henrik could add - leave out for now)
+
+
+
+
+
