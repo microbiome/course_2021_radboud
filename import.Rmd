@@ -61,11 +61,29 @@ knitr::kable(head(rowData(se)))
 ```
 
 Taxonomic ranks are not real rank names. Let's replace those taxonomic classes 
-with rank rank names. 
+with real rank names. 
+
+In addition to that, taxa names include, e.g., "D_0__" before the name, so let's
+make them cleaner by removing them. 
 
 ```{r}
-names(rowData(se)) <- c("Confidence", "Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
+names(rowData(se)) <- c("Confidence", "Kingdom", "Phylum", "Class", "Order", 
+                        "Family", "Genus", "Species")
+
+# Goes through whole DataFrame. Removes "D_[0-9]__" from strings, where [0-9]] 
+# is any number between 0 and 9. 
+rowdata_modified <- BiocParallel::bplapply(rowData(se), 
+                                           FUN = stringr::str_remove, 
+                                           pattern = "D_[0-9]__")
+
+# rowdata_modified is list, so it is converted back to DataFrame. 
+rowdata_modified <- DataFrame(rowdata_modified)
+
+# And then assigned back to the SE object
+rowData(se) <- rowdata_modified
+
 knitr::kable(head(rowData(se)))
+
 ```
 
 We notice that the imported biom file did not contain sample meta data

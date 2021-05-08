@@ -79,7 +79,7 @@ knitr::kable(head(rowData(tse_phylum)))
 ## Visualize data
 For plotting, we use miaViz package, so we have to load it.
 
-```{r}
+```{r, results='hide'}
 library("miaViz")
 ```
 
@@ -106,7 +106,7 @@ From the plot, we can see that there are peak when abundance is around
 
 ```{r}
 # Subset data by taking only Firmicutes
-tse_firmicutes <- tse_phylum["Phylum:D_1__Firmicutes"]
+tse_firmicutes <- tse_phylum["Phylum:Firmicutes"]
 
 # Gets the abundance table
 abundance_firmicutes <- assay(tse_firmicutes, "counts")
