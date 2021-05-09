@@ -55,6 +55,18 @@ sort(table(colData(tse)$Genotype))
 ```
 
 ## Manipulate the data
+
+Abundances are always relative even though counts are calculated. That is because 
+abundances always depends, for example, on settings of instruments, and also
+how well sample was drawn. That is why relative abundances are usually more informative
+than plain counts.
+```{r}
+
+# Calculates relative abundances, and stores the table to assays
+tse <- transformCounts(tse, method = "relabundance")
+
+```
+
 We might want to know, which taxonomic rank is, e.g., the most abundant. We can 
 easily agglomerate the data based on taxonomic ranks. Here, we agglomerate 
 the data at Phylum level. 
@@ -86,30 +98,31 @@ library("miaViz")
 Next, we can plot the Phylum level abundances. 
 
 ```{r}
-# Here we specify "counts" to be abundance table that we use for plotting.
+# Here we specify "relabundance" to be abundance table that we use for plotting.
 # Note that we can use agglomerated or non-agglomerated tse as an input, because
 # the function agglomeration is built-in option. 
 
 # Legend does not fit into picture, so its height is reduced.
-plot_abundance <- plotAbundance(tse, abund_values="counts", rank = "Phylum") +
-  theme(legend.key.height = unit(0.5, "cm")) 
+plot_abundance <- plotAbundance(tse, abund_values="relabundance", rank = "Phylum") +
+  theme(legend.key.height = unit(0.5, "cm")) +
+  scale_y_continuous(label = scales::percent)
 
 plot_abundance 
 ```
 
 From density plot, we could see, e.g., what is the most common abundance.
-Here we plot distribution of Firmicutes abundance in different samples. 
+Here we plot distribution of Firmicutes relative abundances in different samples. 
 Density plot can be seen as smoothened histogram.
 
-From the plot, we can see that there are peak when abundance is around
-290,000 counts.
+From the plot, we can see that there are peak when abundance is around 40 %.
 
 ```{r}
+
 # Subset data by taking only Firmicutes
 tse_firmicutes <- tse_phylum["Phylum:Firmicutes"]
 
 # Gets the abundance table
-abundance_firmicutes <- assay(tse_firmicutes, "counts")
+abundance_firmicutes <- assay(tse_firmicutes, "relabundance")
 
 # # Does the same thing but differently
 # # Calculates the density. Bandwidth can be adjusted; here, it is 30,000.
@@ -118,7 +131,7 @@ abundance_firmicutes <- assay(tse_firmicutes, "counts")
 # 
 # # Plots the density
 # plot(density_firmicutes, 
-#      xlab="Counts",
+#      xlab="Relative abundance",
 #      ylab="Density",
 #      main=paste0("Firmicutes (",density_firmicutes$n, " obs, ", density_firmicutes$bw, " bw)"))
 
@@ -127,13 +140,14 @@ firmicutes_abund_df <- as.data.frame(t(abundance_firmicutes))
 # Rename the first and only column
 colnames(firmicutes_abund_df) <- "abund"
 
-# Creates a plot. Parameters inside feom_density are optional. With bw, it is 
-# possible to adjust bandwidth.
+# Creates a plot. Parameters inside feom_density are optional. With 
+# geom_density(bw=1000), it is possible to adjust bandwidth.
 firmicutes_abund_plot <- ggplot(firmicutes_abund_df, aes(x = abund)) + 
-  geom_density(color="darkred", fill="lightblue", bw = 30000) +
-  xlab("Abundance") + # x axis title
+  geom_density(color="darkred", fill="lightblue") + 
+  xlab("Relative abundance") + # x axis title
   ggtitle("Firmicutes") + # main title
-  theme_classic() # Changes the background
+  theme_classic() + # Changes the background
+  scale_x_continuous(label = scales::percent)
 
 firmicutes_abund_plot
 
