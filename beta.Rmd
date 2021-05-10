@@ -1,0 +1,187 @@
+---
+title: "Beta diversity"
+output: html_document
+---
+
+This notebook calculates beta diveristy.
+
+Beta diversity measures diversity between different samples. If there are many
+different samples, beta diversity is larger. IF samples are similar to each other,
+beta diversity is smaller. 
+
+## Examples of PCoA with different settings
+### PCoA for ASV-level data with Bray-Curtis
+
+```{r}
+# Relative abundance table
+rel_abund_assay <- assays(tse)$relabundance
+
+# Transposes it to get taxa to columns
+rel_abund_assay <- t(rel_abund_assay)
+
+# Calculates Bray-Curtis distances between samples. Taxa is used to compare different
+# samples.
+bray_curtis_dist <- vegdist(rel_abund_assay, method = "bray")
+
+# Does principal coordinate analysis
+bray_curtis_pcoa <- ecodist::pco(bray_curtis_dist)
+
+# Creates a data frame from principal coordinates
+bray_curtis_pcoa_df <- data.frame(pcoa1 = bray_curtis_pcoa$vectors[,1], pcoa2 = bray_curtis_pcoa$vectors[,2])
+
+# Creates a plot
+bray_curtis_plot <- ggplot(data = bray_curtis_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
+  geom_point()
+
+bray_curtis_plot
+
+```
+### PCoA for ASV-level data with CLR transformation + Euclidean distance
+
+```{r}
+# Does clr transformation. Psuedocount is added, because data contains zeros. 
+tse <- transformCounts(tse, method = "clr", pseudocount = 1)
+
+# Gets clr table
+clr_assay <- assays(tse)$clr
+
+# Transposes it to get taxa to columns
+clr_assay <- t(clr_assay)
+
+# Calculates Euclidean distances between samples. Taxa is used to compare different
+# samples.
+euclidean_dist <- vegdist(clr_assay, method = "euclidean")
+
+# Does principal coordinate analysis
+euclidean_pcoa <- ecodist::pco(euclidean_dist)
+
+# Creates a data frame from principal coordinates
+euclidean_pcoa_df <- data.frame(pcoa1 = euclidean_pcoa$vectors[,1], pcoa2 = euclidean_pcoa$vectors[,2])
+
+# Creates a plot
+euclidean_plot <- ggplot(data = euclidean_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
+  geom_point()
+
+euclidean_plot
+
+```
+
+### PCoA aggregated to Phylum level with CLR transformation + Euclidean distance
+
+```{r}
+# Does clr transformation. Psuedocount is added, because data contains zeros. 
+tse_phylum <- transformCounts(tse_phylum, method = "clr", pseudocount = 1)
+
+# Gets clr table
+clr_phylum_assay <- assays(tse_phylum)$clr
+
+# Transposes it to get taxa to columns
+clr_phylum_assay <- t(clr_phylum_assay)
+
+# Calculates Euclidean distances between samples. Taxa is used to compare different
+# samples.
+euclidean_phylum_dist <- vegdist(clr_assay, method = "euclidean")
+
+# Does principal coordinate analysis
+euclidean_phylum_pcoa <- ecodist::pco(euclidean_phylum_dist)
+
+# Creates a data frame from principal coordinates
+euclidean_phylum_pcoa_df <- data.frame(pcoa1 = euclidean_phylum_pcoa$vectors[,1], 
+                                       pcoa2 = euclidean_phylum_pcoa$vectors[,2])
+
+# Creates a plot
+euclidean_phylum_plot <- ggplot(data = euclidean_phylum_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
+  geom_point()
+
+euclidean_phylum_plot
+
+```
+
+```{r}
+# Relative abundance table
+rel_abund_assay <- assays(tse)$relabundance
+
+# Transposes it to get taxa to columns
+rel_abund_assay <- t(rel_abund_assay)
+
+# Calculates Bray-Curtis distances between samples. Taxa is used to compare different
+# samples.
+bray_curtis_dist <- vegdist(rel_abund_assay, method = "bray")
+
+# Does principal coordinate analysis
+bray_curtis_pcoa <- ecodist::pco(bray_curtis_dist)
+
+# Creates a data frame from principal coordinates
+bray_curtis_pcoa_df <- data.frame(pcoa1 = bray_curtis_pcoa$vectors[,1], 
+                                  pcoa2 = bray_curtis_pcoa$vectors[,2],
+                                  genotype = colData(tse)$Genotype)
+
+# Creates a plot
+bray_curtis_plot <- ggplot(data = bray_curtis_pcoa_df, aes(x=pcoa1, y=pcoa2,
+                                                           color = genotype)) +
+  geom_point()
+
+bray_curtis_plot
+
+```
+
+```{r}
+# Relative abundance table
+rel_abund_assay <- assays(tse)$relabundance
+
+# Transposes it to get taxa to columns
+rel_abund_assay <- t(rel_abund_assay)
+
+# Calculates Bray-Curtis distances between samples. Taxa is used to compare different
+# samples.
+bray_curtis_dist <- vegdist(rel_abund_assay, method = "bray")
+
+# Does principal coordinate analysis
+bray_curtis_pcoa <- ecodist::pco(bray_curtis_dist)
+
+# Creates a data frame from principal coordinates
+bray_curtis_pcoa_df <- data.frame(pcoa1 = bray_curtis_pcoa$vectors[,1], 
+                                  pcoa2 = bray_curtis_pcoa$vectors[,2],
+                                  shannon = colData(tse)$Shannon_index)
+
+# Creates a plot
+bray_curtis_plot <- ggplot(data = bray_curtis_pcoa_df, aes(x=pcoa1, y=pcoa2,
+                                                           color = shannon)) +
+  geom_point()
+
+bray_curtis_plot
+
+```
+
+### Example of associations
+```{r}
+# Relative abundance table
+rel_abund_assay <- assays(tse)$relabundance
+
+# Transposes it to get taxa to columns
+rel_abund_assay <- t(rel_abund_assay)
+
+permanova <- vegan::adonis(rel_abund_assay ~ Genotype,
+                           data = colData(tse),
+                           permutations = 9999)
+
+# P-value
+print(as.data.frame(permanova$aov.tab)["Genotype", "Pr(>F)"])
+
+```
+
+```{r}
+coef <- coefficients(permanova)["Genotype1",]
+top.coef <- sort(head(coef[rev(order(abs(coef)))],20))
+
+ggplot(data.frame(x = top.coef,
+                  y = factor(names(top.coef),
+                                      unique(names(top.coef)))),
+        aes(x = x, y = y)) +
+    geom_bar(stat="identity") +
+    labs(x="",y="",title="Top Taxa") +
+    theme_bw()
+```
+
+
+
