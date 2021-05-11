@@ -3,11 +3,22 @@ title: "Beta diversity"
 output: html_document
 ---
 
-This notebook calculates beta diveristy.
+This notebook calculates beta diversity.
 
 Beta diversity measures diversity between different samples. If there are many
-different samples, beta diversity is larger. IF samples are similar to each other,
+different samples, beta diversity is larger. If samples are similar to each other,
 beta diversity is smaller. 
+
+We use Principal Coordinate Analysis (PCoA) and Dirichlet-Multinomial Mixture Clustering
+(DMM) to find patterns from our data. 
+
+PCoA uses distance matrix as input. The output is usually 2 or 3-dimensional 
+euclidean space. The idea is to rotate data that way that the distances between 
+different samples are maximized. 
+
+DMM is used to cluster taxa into different groups by their variance. In DMM, probabilities
+or frequencies are calculated. They represent how likely it is that each taxa is present
+in each sample.
 
 ## Examples of PCoA with different settings
 ### PCoA for ASV-level data with Bray-Curtis
@@ -19,19 +30,23 @@ rel_abund_assay <- assays(tse)$relabundance
 # Transposes it to get taxa to columns
 rel_abund_assay <- t(rel_abund_assay)
 
-# Calculates Bray-Curtis distances between samples. Taxa is used to compare different
-# samples.
-bray_curtis_dist <- vegdist(rel_abund_assay, method = "bray")
+# Calculates Bray-Curtis distances between samples. Because taxa is in columns,
+# it is used to compare different samples.
+bray_curtis_dist <- vegan::vegdist(rel_abund_assay, method = "bray")
 
 # Does principal coordinate analysis
 bray_curtis_pcoa <- ecodist::pco(bray_curtis_dist)
 
 # Creates a data frame from principal coordinates
-bray_curtis_pcoa_df <- data.frame(pcoa1 = bray_curtis_pcoa$vectors[,1], pcoa2 = bray_curtis_pcoa$vectors[,2])
+bray_curtis_pcoa_df <- data.frame(pcoa1 = bray_curtis_pcoa$vectors[,1], 
+                                  pcoa2 = bray_curtis_pcoa$vectors[,2])
 
 # Creates a plot
 bray_curtis_plot <- ggplot(data = bray_curtis_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
-  geom_point()
+  geom_point() +
+  xlab("Coordinate 1") + # x axis title
+  ylab("Coordinate 2") + # y axis title
+  ggtitle("Bray-Curtis PCoA with relative abundances") # main title
 
 bray_curtis_plot
 
@@ -48,19 +63,23 @@ clr_assay <- assays(tse)$clr
 # Transposes it to get taxa to columns
 clr_assay <- t(clr_assay)
 
-# Calculates Euclidean distances between samples. Taxa is used to compare different
-# samples.
-euclidean_dist <- vegdist(clr_assay, method = "euclidean")
+# Calculates Euclidean distances between samples. Because taxa is in columns,
+# it is used to compare different samples.
+euclidean_dist <- vegan::vegdist(clr_assay, method = "euclidean")
 
 # Does principal coordinate analysis
 euclidean_pcoa <- ecodist::pco(euclidean_dist)
 
 # Creates a data frame from principal coordinates
-euclidean_pcoa_df <- data.frame(pcoa1 = euclidean_pcoa$vectors[,1], pcoa2 = euclidean_pcoa$vectors[,2])
+euclidean_pcoa_df <- data.frame(pcoa1 = euclidean_pcoa$vectors[,1], 
+                                pcoa2 = euclidean_pcoa$vectors[,2])
 
 # Creates a plot
 euclidean_plot <- ggplot(data = euclidean_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
-  geom_point()
+  geom_point() +
+  xlab("Coordinate 1") + # x axis title
+  ylab("Coordinate 2") + # y axis title
+  ggtitle("Euclidean PCoA with CLR transformation") # main title
 
 euclidean_plot
 
@@ -78,9 +97,9 @@ clr_phylum_assay <- assays(tse_phylum)$clr
 # Transposes it to get taxa to columns
 clr_phylum_assay <- t(clr_phylum_assay)
 
-# Calculates Euclidean distances between samples. Taxa is used to compare different
-# samples.
-euclidean_phylum_dist <- vegdist(clr_assay, method = "euclidean")
+# Calculates Euclidean distances between samples. Because taxa is in columns,
+# it is used to compare different samples.
+euclidean_phylum_dist <- vegan::vegdist(clr_assay, method = "euclidean")
 
 # Does principal coordinate analysis
 euclidean_phylum_pcoa <- ecodist::pco(euclidean_phylum_dist)
@@ -91,69 +110,59 @@ euclidean_phylum_pcoa_df <- data.frame(pcoa1 = euclidean_phylum_pcoa$vectors[,1]
 
 # Creates a plot
 euclidean_phylum_plot <- ggplot(data = euclidean_phylum_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
-  geom_point()
+  geom_point() +
+  xlab("Coordinate 1") + # x axis title
+  ylab("Coordinate 2") + # y axis title
+  ggtitle("Euclidean PCoA with Phylum level CLR transformation") # main title
 
 euclidean_phylum_plot
 
 ```
+## Examples on showing external variables on PCoA plot
+### PCoA with some discrete sample grouping variable shown with colors
 
 ```{r}
-# Relative abundance table
-rel_abund_assay <- assays(tse)$relabundance
-
-# Transposes it to get taxa to columns
-rel_abund_assay <- t(rel_abund_assay)
-
-# Calculates Bray-Curtis distances between samples. Taxa is used to compare different
-# samples.
-bray_curtis_dist <- vegdist(rel_abund_assay, method = "bray")
-
-# Does principal coordinate analysis
-bray_curtis_pcoa <- ecodist::pco(bray_curtis_dist)
-
-# Creates a data frame from principal coordinates
-bray_curtis_pcoa_df <- data.frame(pcoa1 = bray_curtis_pcoa$vectors[,1], 
-                                  pcoa2 = bray_curtis_pcoa$vectors[,2],
-                                  genotype = colData(tse)$Genotype)
+# We van add grouping variable to existing plots. Let's add coloring to the first
+# PCoA that we made.
+bray_curtis_genotype_pcoa_df <- cbind(bray_curtis_pcoa_df,
+                             genotype = colData(tse)$Genotype)
 
 # Creates a plot
-bray_curtis_plot <- ggplot(data = bray_curtis_pcoa_df, aes(x=pcoa1, y=pcoa2,
-                                                           color = genotype)) +
-  geom_point()
+bray_curtis_genotype_plot <- ggplot(data = bray_curtis_genotype_pcoa_df, 
+                                    aes(x=pcoa1, y=pcoa2,
+                                        color = genotype)) +
+  geom_point() +
+  xlab("Coordinate 1") + # x axis title
+  ylab("Coordinate 2") + # y axis title
+  ggtitle("Bray-Curtis PCoA with relative abundances") # main title
 
-bray_curtis_plot
+bray_curtis_genotype_plot
 
 ```
-
+### PCoA with some continuous sample grouping variable shown with colors
 ```{r}
-# Relative abundance table
-rel_abund_assay <- assays(tse)$relabundance
-
-# Transposes it to get taxa to columns
-rel_abund_assay <- t(rel_abund_assay)
-
-# Calculates Bray-Curtis distances between samples. Taxa is used to compare different
-# samples.
-bray_curtis_dist <- vegdist(rel_abund_assay, method = "bray")
-
-# Does principal coordinate analysis
-bray_curtis_pcoa <- ecodist::pco(bray_curtis_dist)
-
-# Creates a data frame from principal coordinates
-bray_curtis_pcoa_df <- data.frame(pcoa1 = bray_curtis_pcoa$vectors[,1], 
-                                  pcoa2 = bray_curtis_pcoa$vectors[,2],
-                                  shannon = colData(tse)$Shannon_index)
+# We can also use continues values to group variables. Let's use Shannon diversity
+# index that we calculated in "Alpha diversity" notebook.
+bray_curtis_shannon_pcoa_df <- cbind(bray_curtis_pcoa_df,
+                             shannon = colData(tse)$Shannon_index)
 
 # Creates a plot
-bray_curtis_plot <- ggplot(data = bray_curtis_pcoa_df, aes(x=pcoa1, y=pcoa2,
-                                                           color = shannon)) +
-  geom_point()
+bray_curtis_shannon_plot <- ggplot(data = bray_curtis_shannon_pcoa_df, 
+                                   aes(x=pcoa1, y=pcoa2,
+                                       color = shannon)) +
+  geom_point() +
+  xlab("Coordinate 1") + # x axis title
+  ylab("Coordinate 2") + # y axis title
+  ggtitle("Bray-Curtis PCoA with relative abundances") # main title
 
-bray_curtis_plot
+bray_curtis_shannon_plot
 
 ```
 
 ### Example of associations
+Next we can do permutation analysis of variance (permanova) test. Here, we test if
+genotypes explains the variance of abundance between samples. 
+
 ```{r}
 # Relative abundance table
 rel_abund_assay <- assays(tse)$relabundance
@@ -161,27 +170,39 @@ rel_abund_assay <- assays(tse)$relabundance
 # Transposes it to get taxa to columns
 rel_abund_assay <- t(rel_abund_assay)
 
-permanova <- vegan::adonis(rel_abund_assay ~ Genotype,
-                           data = colData(tse),
-                           permutations = 9999)
+permanova_genotype <- vegan::adonis(rel_abund_assay ~ Genotype,
+                                    data = colData(tse),
+                                    permutations = 9999)
 
 # P-value
-print(as.data.frame(permanova$aov.tab)["Genotype", "Pr(>F)"])
+print(paste0("Different genotypes and variance of abundance between samples, p-value: ", 
+             as.data.frame(permanova_genotype$aov.tab)["Genotype", "Pr(>F)"]))
 
 ```
+As we can see, genotypes do not explain the variance, because p-value is over 0.05. 
+The abundances are not significantly different between genotypes.
+
+We can visualize those taxa whose abundance are the most different between genotypes. 
+This gives us information which taxa's abundances tend to differ between different 
+samples. 
+
+In order to do that, we need coefficients of taxa.
 
 ```{r}
-coef <- coefficients(permanova)["Genotype1",]
+# Gets the coefficients
+coef <- coefficients(permanova_genotype)["Genotype1",]
+# Gets the highest coefficients
 top.coef <- sort(head(coef[rev(order(abs(coef)))],20))
 
-ggplot(data.frame(x = top.coef,
-                  y = factor(names(top.coef),
-                                      unique(names(top.coef)))),
-        aes(x = x, y = y)) +
-    geom_bar(stat="identity") +
-    labs(x="",y="",title="Top Taxa") +
-    theme_bw()
+# Plots the coefficients
+top_taxa_coeffient_plot <- ggplot(data.frame(x = top.coef,
+                                             y = factor(names(top.coef),
+                                                        unique(names(top.coef)))),
+                                  aes(x = x, y = y)) +
+  geom_bar(stat="identity") +
+  labs(x="",y="",title="Top Taxa") +
+  theme_bw()
+
+top_taxa_coeffient_plot
+
 ```
-
-
-
