@@ -18,7 +18,7 @@ different samples are maximized.
 
 DMM is used to cluster taxa into different groups by their variance. In DMM, probabilities
 or frequencies are calculated. They represent how likely it is that each taxa is present
-in each sample.
+in each sample. 
 
 ## Examples of PCoA with different settings
 ### PCoA for ASV-level data with Bray-Curtis
@@ -158,8 +158,99 @@ bray_curtis_shannon_plot <- ggplot(data = bray_curtis_shannon_pcoa_df,
 bray_curtis_shannon_plot
 
 ```
+## Example on clustering
+### Dirichlet-Multinomial Mixture clustering 
 
-### Example of associations
+```{r}
+# Runs model and calculates the most likely number of clusters from 1 to 7. 
+# Returns SE object
+# (Demand lots of resources. Can take tens of minutes, for me it took over hour.) 
+# Might be best to save it in data, so this step can be skipped? ################
+#se_dmn <- runDMN(tse, name = "DMN", k = 1:7) 
+data(se_dmn)
+
+```
+
+```{r}
+# It is stored in metadata
+se_dmn
+```
+
+```{r}
+# Returns information what metadata the object contains
+names(metadata(se_dmn))
+```
+
+```{r}
+# Returns a list of DMN objects
+getDMN(se_dmn)
+```
+
+```{r}
+# Returns the model, which fits best
+getBestDMNFit(se_dmn, type = "laplace")
+```
+
+```{r}
+# Plots the DMN
+plot_dmn_fit <- plotDMNFit(se_dmn, type = "laplace")
+
+plot_dmn_fit
+```
+### PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors
+
+```{r}
+# Does the grouping. Returns DMNGroup object. Genotype is used for 
+# grouping. 
+#dmn_group <- calculateDMNgroup(se_dmn, variable = "Genotype", 
+#                             exprs_values = "counts", k = 2)
+
+```
+
+```{r}
+# Weights
+DirichletMultinomial::mixturewt(getBestDMNFit(se_dmn))
+```
+
+```{r}
+# Samples' probabilities that tells the likelihood to belong to component
+head(DirichletMultinomial::mixture(getBestDMNFit(se_dmn)))
+```
+
+```{r}
+# Contribution of samples to each component
+head(DirichletMultinomial::fitted(getBestDMNFit(se_dmn)))
+```
+
+```{r}
+prob <- DirichletMultinomial::mixture(getBestDMNFit(se_dmn))
+
+vec <- rep(0, length(prob))
+vec[prob[,1] > prob[,2]] <- "comp1"
+vec[prob[,2] > prob[,1]] <- "comp2"
+
+
+bray_curtis_dmm_pcoa_df <- cbind(bray_curtis_pcoa_df,
+                             dmm_component = vec)
+
+# Creates a plot
+bray_curtis_dmm_plot <- ggplot(data = bray_curtis_dmm_pcoa_df, 
+                                   aes(x=pcoa1, y=pcoa2,
+                                       color = dmm_component)) +
+  geom_point() +
+  xlab("Coordinate 1") + # x axis title
+  ylab("Coordinate 2") + # y axis title
+  ggtitle("Bray-Curtis PCoA with DMM clustering") # main title
+
+bray_curtis_dmm_plot
+
+```
+
+
+
+
+
+## Example of associations
 Next we can do permutation analysis of variance (permanova) test. Here, we test if
 genotypes explains the variance of abundance between samples. 
 
