@@ -17,8 +17,8 @@ euclidean space. The idea is to rotate data that way that the distances between
 different samples are maximized. 
 
 DMM is used to cluster taxa into different groups by their variance. In DMM, probabilities
-or frequencies are calculated. They represent how likely it is that each taxa is present
-in each sample. 
+or frequencies are calculated. They represent how likely it is that each sample is present
+in each cluster. 
 
 ## Examples of PCoA with different settings
 ### PCoA for ASV-level data with Bray-Curtis
@@ -205,6 +205,8 @@ plot_dmn_fit
 #dmn_group <- calculateDMNgroup(se_dmn, variable = "Genotype", 
 #                             exprs_values = "counts", k = 2)
 
+# Does not do anything, can be deleted
+
 ```
 
 ```{r}
@@ -223,13 +225,16 @@ head(DirichletMultinomial::fitted(getBestDMNFit(se_dmn)))
 ```
 
 ```{r}
+# Gets the probabilities
 prob <- DirichletMultinomial::mixture(getBestDMNFit(se_dmn))
 
+# Creates a vector that contains information whether it is more probable that
+# sample belongs to component 1 or 2.
 vec <- rep(0, length(prob))
 vec[prob[,1] > prob[,2]] <- "comp1"
 vec[prob[,2] > prob[,1]] <- "comp2"
 
-
+# Creates a data frame that contains principal coordinates and DMM information
 bray_curtis_dmm_pcoa_df <- cbind(bray_curtis_pcoa_df,
                              dmm_component = vec)
 
@@ -245,10 +250,6 @@ bray_curtis_dmm_plot <- ggplot(data = bray_curtis_dmm_pcoa_df,
 bray_curtis_dmm_plot
 
 ```
-
-
-
-
 
 ## Example of associations
 Next we can do permutation analysis of variance (permanova) test. Here, we test if

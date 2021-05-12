@@ -172,7 +172,7 @@ pre code {
 <p>Beta diversity measures diversity between different samples. If there are many different samples, beta diversity is larger. If samples are similar to each other, beta diversity is smaller.</p>
 <p>We use Principal Coordinate Analysis (PCoA) and Dirichlet-Multinomial Mixture Clustering (DMM) to find patterns from our data.</p>
 <p>PCoA uses distance matrix as input. The output is usually 2 or 3-dimensional euclidean space. The idea is to rotate data that way that the distances between different samples are maximized.</p>
-<p>DMM is used to cluster taxa into different groups by their variance. In DMM, probabilities or frequencies are calculated. They represent how likely it is that each taxa is present in each sample.</p>
+<p>DMM is used to cluster taxa into different groups by their variance. In DMM, probabilities or frequencies are calculated. They represent how likely it is that each sample is present in each cluster.</p>
 <div id="examples-of-pcoa-with-different-settings" class="section level2">
 <h2>Examples of PCoA with different settings</h2>
 <div id="pcoa-for-asv-level-data-with-bray-curtis" class="section level3">
@@ -373,7 +373,9 @@ plot_dmn_fit</code></pre>
 <pre class="r"><code># Does the grouping. Returns DMNGroup object. Genotype is used for 
 # grouping. 
 #dmn_group &lt;- calculateDMNgroup(se_dmn, variable = &quot;Genotype&quot;, 
-#                             exprs_values = &quot;counts&quot;, k = 2)</code></pre>
+#                             exprs_values = &quot;counts&quot;, k = 2)
+
+# Does not do anything, can be deleted</code></pre>
 <pre class="r"><code># Weights
 DirichletMultinomial::mixturewt(getBestDMNFit(se_dmn))</code></pre>
 <pre><code>##    pi     theta
@@ -397,13 +399,16 @@ head(DirichletMultinomial::fitted(getBestDMNFit(se_dmn)))</code></pre>
 ## 6fe357d6683c05da84a54a5c2a6fbe9e  2.57454871  0.20586199
 ## 9d91175efc096377a71b6ea55cc7679e  0.96330482  0.44820343
 ## 388b5f3e63fdec5ad3d574070b253ca0  0.02242838  9.47563421</code></pre>
-<pre class="r"><code>prob &lt;- DirichletMultinomial::mixture(getBestDMNFit(se_dmn))
+<pre class="r"><code># Gets the probabilities
+prob &lt;- DirichletMultinomial::mixture(getBestDMNFit(se_dmn))
 
+# Creates a vector that contains information whether it is more probable that
+# sample belongs to component 1 or 2.
 vec &lt;- rep(0, length(prob))
 vec[prob[,1] &gt; prob[,2]] &lt;- &quot;comp1&quot;
 vec[prob[,2] &gt; prob[,1]] &lt;- &quot;comp2&quot;
 
-
+# Creates a data frame that contains principal coordinates and DMM information
 bray_curtis_dmm_pcoa_df &lt;- cbind(bray_curtis_pcoa_df,
                              dmm_component = vec)
 
@@ -436,7 +441,7 @@ permanova_genotype &lt;- vegan::adonis(rel_abund_assay ~ Genotype,
 # P-value
 print(paste0(&quot;Different genotypes and variance of abundance between samples, p-value: &quot;, 
              as.data.frame(permanova_genotype$aov.tab)[&quot;Genotype&quot;, &quot;Pr(&gt;F)&quot;]))</code></pre>
-<pre><code>## [1] &quot;Different genotypes and variance of abundance between samples, p-value: 0.2548&quot;</code></pre>
+<pre><code>## [1] &quot;Different genotypes and variance of abundance between samples, p-value: 0.2494&quot;</code></pre>
 <p>As we can see, genotypes do not explain the variance, because p-value is over 0.05. The abundances are not significantly different between genotypes.</p>
 <p>We can visualize those taxa whose abundance are the most different between genotypes. This gives us information which taxa’s abundances tend to differ between different samples.</p>
 <p>In order to do that, we need coefficients of taxa.</p>
