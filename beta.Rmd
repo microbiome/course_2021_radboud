@@ -163,37 +163,36 @@ bray_curtis_shannon_plot
 
 ```{r}
 # Runs model and calculates the most likely number of clusters from 1 to 7. 
-# Returns SE object
 # (Demand lots of resources. Can take tens of minutes, for me it took over hour.) 
 # Might be best to save it in data, so this step can be skipped? ################
-#se_dmn <- runDMN(tse, name = "DMN", k = 1:7) 
-data(se_dmn)
+#tse_dmn <- runDMN(tse, name = "DMN", k = 1:7) 
+tse_dmn <- readRDS("data/tse_dmn")
 
 ```
 
 ```{r}
 # It is stored in metadata
-se_dmn
+tse_dmn
 ```
 
 ```{r}
 # Returns information what metadata the object contains
-names(metadata(se_dmn))
+names(metadata(tse_dmn))
 ```
 
 ```{r}
 # Returns a list of DMN objects
-getDMN(se_dmn)
+getDMN(tse_dmn)
 ```
 
 ```{r}
 # Returns the model, which fits best
-getBestDMNFit(se_dmn, type = "laplace")
+getBestDMNFit(tse_dmn, type = "laplace")
 ```
 
 ```{r}
 # Plots the DMN
-plot_dmn_fit <- plotDMNFit(se_dmn, type = "laplace")
+plot_dmn_fit <- plotDMNFit(tse_dmn, type = "laplace")
 
 plot_dmn_fit
 ```
@@ -202,7 +201,7 @@ plot_dmn_fit
 ```{r}
 # Does the grouping. Returns DMNGroup object. Genotype is used for 
 # grouping. 
-#dmn_group <- calculateDMNgroup(se_dmn, variable = "Genotype", 
+#dmn_group <- calculateDMNgroup(tse_dmn, variable = "Genotype", 
 #                             exprs_values = "counts", k = 2)
 
 # Does not do anything, can be deleted
@@ -211,22 +210,22 @@ plot_dmn_fit
 
 ```{r}
 # Weights
-DirichletMultinomial::mixturewt(getBestDMNFit(se_dmn))
+DirichletMultinomial::mixturewt(getBestDMNFit(tse_dmn))
 ```
 
 ```{r}
 # Samples' probabilities that tells the likelihood to belong to component
-head(DirichletMultinomial::mixture(getBestDMNFit(se_dmn)))
+head(DirichletMultinomial::mixture(getBestDMNFit(tse_dmn)))
 ```
 
 ```{r}
 # Contribution of samples to each component
-head(DirichletMultinomial::fitted(getBestDMNFit(se_dmn)))
+head(DirichletMultinomial::fitted(getBestDMNFit(tse_dmn)))
 ```
 
 ```{r}
 # Gets the probabilities
-prob <- DirichletMultinomial::mixture(getBestDMNFit(se_dmn))
+prob <- DirichletMultinomial::mixture(getBestDMNFit(tse_dmn))
 
 # Creates a vector that contains information whether it is more probable that
 # sample belongs to component 1 or 2.
