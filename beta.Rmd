@@ -165,8 +165,8 @@ bray_curtis_shannon_plot
 # Runs model and calculates the most likely number of clusters from 1 to 7. 
 # (Demand lots of resources. Can take tens of minutes, for me it took over hour.) 
 # Might be best to save it in data, so this step can be skipped? ################
-#tse_dmn <- runDMN(tse, name = "DMN", k = 1:7) 
-tse_dmn <- readRDS("data/tse_dmn")
+#tse_dmn <- runDMN(tse, name = "DMN", k = 1:7); saveRDS(tse_dmn, file = "tse_dmn.Rds")
+tse_dmn <- readRDS("data/tse_dmn.Rds")
 
 ```
 

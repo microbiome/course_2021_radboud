@@ -7,6 +7,7 @@
 # https://microbiome.github.io/course_2021_radboud/
 
 # Sets the theme
+library(ggplot2)
 theme_set(theme_bw(20)) 
 
 # Renders notebooks

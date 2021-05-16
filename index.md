@@ -2,6 +2,9 @@
 
 ## Welcome to Raboud Summer School 2021 - Microbiome Analysis (mia)
 
+This site contains material for [Radboud Summer Course 7/2021](https://www.ru.nl/radboudsummerschool/courses/2021/brain-bacteria-behaviour/).
+
+
 ## Example workflow
 
 All files can be rendered at one go by running [main.R](main.R)
@@ -38,9 +41,12 @@ All files can be rendered at one go by running [main.R](main.R)
 The material can be attributed to the following sources (kindly cite):
 
  * Leo Lahti, Tuomas Borman, Henrik Eckermann
+ * Contact: [Leo Lahti](datascience.utu.fi), University of TUrku 
  * [Mia Collective](microbiome.github.io)
- * [University of Turku](datascience.utu.fi)
 
 
+## License
+
+All material is released under the open [MIT license](LICENSE).
 
 
