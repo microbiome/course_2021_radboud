@@ -1,0 +1,16 @@
+---
+title: "Differential abundance analysis"
+output: html_notebook
+---
+
+
+
+- Make CLR transformation for the data, then run t-test for every ASV (in a for loop for instance; see t.test() ) between two groups (pick any grouping variable in the metadata, just for demonstration; we can change that later easily if needed) and pick p values t.test(...)$p.value; then do multiple testing correction with p.adjust(), then plot histogram of p-values and adjusted p-values; you can check [this code](https://github.com/microbiome/microbiome/blob/master/inst/extdata/check_wilcoxon.R) for some ideas
+
+- Then add, for the same data, [DESeq2](https://github.com/microbiome/tutorials/blob/master/deseq2.Rmd) example with our present data (exclude ANOVA from that example code)
+
+
+- Add scatterplot that compares the p-values from both methods
+
+
+
