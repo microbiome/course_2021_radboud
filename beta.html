@@ -639,7 +639,7 @@ permanova_genotype &lt;- vegan::adonis(rel_abund_assay ~ Genotype,
 # P-value
 print(paste0(&quot;Different genotypes and variance of abundance between samples, p-value: &quot;, 
              as.data.frame(permanova_genotype$aov.tab)[&quot;Genotype&quot;, &quot;Pr(&gt;F)&quot;]))</code></pre>
-<pre><code>## [1] &quot;Different genotypes and variance of abundance between samples, p-value: 0.2491&quot;</code></pre>
+<pre><code>## [1] &quot;Different genotypes and variance of abundance between samples, p-value: 0.2544&quot;</code></pre>
 <p>As we can see, genotypes do not explain the variance, because p-value is over 0.05. The abundances are not significantly different between genotypes.</p>
 <p>We can visualize those taxa whose abundance are the most different between genotypes. This gives us information which taxa’s abundances tend to differ between different samples.</p>
 <p>In order to do that, we need coefficients of taxa.</p>
