@@ -3,14 +3,118 @@ title: "Differential abundance analysis"
 output: html_notebook
 ---
 
+In this notebook, we analyse abundances with two different methods: t-test, and ANOVA
+(Analysis of variance).
 
+Both of these tests test, if there are statistical significant difference between 
+groups. However, in t-test, two groups are tested, and in ANOVA all groups are tested
+at the same time. 
+
+Both of these methods are parametric, so they require normally distributed data. 
+It is always wise to check if the data is normally distributed. If it is not then
+non-parametric equivalents (t-test = Mann–Whitney U test and ANOVA = Kruskal-Wallis 
+H test) should be used.
 
 - Make CLR transformation for the data, then run t-test for every ASV (in a for loop for instance; see t.test() ) between two groups (pick any grouping variable in the metadata, just for demonstration; we can change that later easily if needed) and pick p values t.test(...)$p.value; then do multiple testing correction with p.adjust(), then plot histogram of p-values and adjusted p-values; you can check [this code](https://github.com/microbiome/microbiome/blob/master/inst/extdata/check_wilcoxon.R) for some ideas
 
+Let's first collect the data that we are going to use in analysis.
+```{r}
+# Does clr transformation. Pseudocount is added, because data contains zeros, and
+# clr transformation includes log transformation.
+tse <- transformCounts(tse, method = "clr", pseudocount = 1)
+
+# Does transpose, so samples are in rows, then creates a data frame.
+abundance_analysis_data <- data.frame(t(assay(tse, "clr")))
+
+# Then we need variable for grouping samples. "Diet" column includes diet information.
+# There two groups "western" and "control". Let's include that to the data frame.
+abundance_analysis_data <- cbind(abundance_analysis_data, Groups = colData(tse)$Diet)
+
+```
+
+Next, let's check the normality of data. It can be done with Shapiro-Wilk test.
+As we can see, data is not normally distributed.
+
+I don't know if normality test is necessary.
+
+```{r}
+# Does Shapiro-Wilk test. Does it only for columns that contain abundances, not for
+# column that contain Groups.
+
+normality_test_p <- c()
+
+for (column in 
+     abundance_analysis_data[, !names(abundance_analysis_data) %in% "Groups"]){
+  # Does Shapiro-Wilk test
+  result <- shapiro.test(column)
+  
+  # Stores p-value to vector
+  normality_test_p <- c(normality_test_p, result$p.value)
+}
+
+print(paste0("P-values over 0.05: ", sum(normality_test_p>0.05), "/", sum(normality_test_p<=0.05)))
+```
+Now we can do Student's t-test.
+```{r}
+# Does t-test. Does it only for columns that contain abundances, not for
+# column that contain Groups.
+
+t_test_p <- c()
+
+# abundance_analysis_data_sub <- abundance_analysis_data[abundance_analysis_data$Groups == "KO_t1_western" |
+#                                                          abundance_analysis_data$Groups == "WT_t2_western",]
+
+for (column in 
+     names(abundance_analysis_data[, !names(abundance_analysis_data) %in% "Groups"])){
+  #print(column)
+  result <- t.test(abundance_analysis_data[,column] ~ Groups, data = abundance_analysis_data)
+   
+   # Stores p-value to vector
+   t_test_p  <- c(t_test_p , result$p.value)
+}
+
+t_test_p <- data.frame(taxa = 
+                         names(abundance_analysis_data[, !names(abundance_analysis_data) 
+                                                       %in% "Groups"]),
+                       p_raw = t_test_p)
+
+```
+
+Because of multiple tests were mad, we need to adjust p-values. That is because, 
+when more tests are done it is more probable that inference occur and significance
+levels are higher than they actually are. By adjustment, the significance levels of
+individual tests are stricter. Here we use Holm method.
+
+```{r}
+# Does the adjustment
+t_test_p$p_holm <- p.adjust(t_test_p$p_raw, method = "holm")
+```
+
+```{r}
+
+df = data.frame(x = c(t_test_p$p_raw, t_test_p$p_holm), 
+               type=rep(c("raw", "holm"), c(length(t_test_p$p_raw), length(t_test_p$p_holm))))
+
+t_test_plot <- ggplot(d) + geom_histogram(aes(x=x, colour=type)) +
+  xlab("p-value")
+
+t_test_plot
+```
+
+
+
 - Then add, for the same data, [DESeq2](https://github.com/microbiome/tutorials/blob/master/deseq2.Rmd) example with our present data (exclude ANOVA from that example code)
+
+```{r}
+
+
+
+```
 
 
 - Add scatterplot that compares the p-values from both methods
+
+
 
 
 
