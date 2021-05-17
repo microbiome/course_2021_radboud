@@ -13,3 +13,5 @@ BiocManager::install("microbiome/miaViz")
 # Install ape
 BiocManager::install("ape")
 
+# Install DESeq2
+BiocManager::install("DESeq2")
