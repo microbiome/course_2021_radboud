@@ -3,13 +3,7 @@ title: "Differential abundance analysis"
 output: html_notebook
 ---
 
-## TODO
-- Polish code
-- Polish text
-
-#################################################
-
-In this notebook, we analyse abundances with two different methods: *-test, and DESeq2.
+In this notebook, we analyse abundances with two different methods: **t-test**, and **DESeq2**.
 Both of these tests test, if there are statistical significant difference between 
 groups.
 
@@ -17,11 +11,10 @@ groups.
 T-test is  parametric, so it requires normally distributed data. 
 It is always wise to check if the data is normally distributed. If it is not then
 the data should be normalized. If that is not possible then non-parametric equivalents 
-(t-test = Mann–Whitney U test should be used.
-
-- Make CLR transformation for the data, then run t-test for every ASV (in a for loop for instance; see t.test() ) between two groups (pick any grouping variable in the metadata, just for demonstration; we can change that later easily if needed) and pick p values t.test(...)$p.value; then do multiple testing correction with p.adjust(), then plot histogram of p-values and adjusted p-values; you can check [this code](https://github.com/microbiome/microbiome/blob/master/inst/extdata/check_wilcoxon.R) for some ideas
+(t-test = Mann–Whitney U) test should be used.
 
 Let's first collect the data that we are going to use in t-test.
+
 ```{r}
 # Does clr transformation. Pseudocount is added, because data contains zeros, and
 # clr transformation includes log transformation.
@@ -43,7 +36,7 @@ abundance_analysis_data <- cbind(abundance_analysis_data, Groups = colData(tse)$
 Next, let's check the normality of data. It can be done with Shapiro-Wilk test.
 As we can see, data is not normally distributed.
 
-I don't know if normality test is necessary.##################################
+I don't know if normality test is necessary.###################################
 
 ```{r}
 # Does Shapiro-Wilk test. Does it only for columns that contain abundances, not for
@@ -108,14 +101,12 @@ t_test_p$p_holm <- p.adjust(t_test_p$p_raw, method = "holm")
 df = data.frame(x = c(t_test_p$p_raw, t_test_p$p_holm), 
                type=rep(c("raw", "holm"), c(length(t_test_p$p_raw), length(t_test_p$p_holm))))
 
-t_test_plot <- ggplot(d) + geom_histogram(aes(x=x, fill=type)) +
+t_test_plot <- ggplot(df) + geom_histogram(aes(x=x, fill=type)) +
   xlab("p-value") + 
   ylab("Frequency")
 
 t_test_plot
 ```
-
-- Then add, for the same data, [DESeq2](https://github.com/microbiome/tutorials/blob/master/deseq2.Rmd) example with our present data (exclude ANOVA from that example code)
 
 ### DESeq2
 Our second analysis method is DESeq2. It does automatically normalization, and the
@@ -139,10 +130,12 @@ false positives.
 5. Variance estimates are used to compare different groups, and we got the result
 if variance is explained by groups.
 
-```{r, echo=FALSE}
+```{r}
 library(DESeq2)
+library(dplyr)
 
 # Running the DESeq2 analysis
+
 # Creates DESeq2 object from the data. Uses "Diet" to create groups. 
 ds2 <- DESeqDataSet(tse, ~Diet)
 # Does the analysis
@@ -151,11 +144,11 @@ dds <- DESeq(ds2)
 res <- results(dds)
 # Creates a data frame from results
 df <- as.data.frame(res)
-# Adds taxon colmun that includes names of taxa
+# Adds taxon column that includes names of taxa
 df$taxon <- rownames(df)
 # Orders the rows of data frame in increasing order firstly based on column "log2FoldChange" 
 # and secondly based on "padj" column
-df <- df %>% dplyr::arrange(log2FoldChange, padj)
+df <- df %>% arrange(log2FoldChange, padj)
 
 print(head(knitr::kable((df))))
 
@@ -175,4 +168,3 @@ p <- ggplot(mf, aes(x = df$padj, y = t_test_p$p_holm)) +
 
 print(p)
 ```
-

@@ -166,7 +166,7 @@ bray_curtis_shannon_plot
 # (Demand lots of resources. Can take tens of minutes, for me it took over hour.) 
 # Might be best to save it in data, so this step can be skipped? ################
 #tse_dmn <- runDMN(tse, name = "DMN", k = 1:7); saveRDS(tse_dmn, file = "tse_dmn.Rds")
-tse_dmn <- readRDS("data/tse_dmn.Rds")
+tse_dmn <- readRDS("data/tse_dmn")
 
 ```
 
