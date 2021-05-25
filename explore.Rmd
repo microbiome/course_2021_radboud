@@ -6,19 +6,18 @@ output: html_notebook
 This notebook introduces basic operations to briefly explore the data. 
 
 ## Investigate contents of the data object
-[Import](import.Rmd) the data to TSE object, if you have not already done so.
 
 Dimensionality tells us, how many taxa and samples data contains. As we can see, 
-there are 2805 taxa and 88 samples.
+there are 151 taxa and 27 samples.
 
 ```{r}
 dim(tse)
 ```
 
 rowData slot contains taxonomic table. It includes taxonomic information
-for each 2805 entries. With the head() command, it is possible to print only 
-the beginning of the table. rowData seems to contain confidence information and
-7 different taxonomy classes.
+for each 151 entries. With the head() command, it is possible to print only 
+the beginning of the table. rowData seems to contain information from 6 different 
+taxonomy classes.
 
 knitr::kable() is for printing the information more nicely.
 
@@ -26,32 +25,23 @@ knitr::kable() is for printing the information more nicely.
 knitr::kable(head(rowData(tse)))
 ```
 
-colData slot contains sample metadata. It contains information for all 88 samples.
+colData slot contains sample metadata. It contains information for all 27 samples.
 However, here only 6 first sample is shown, because head() command is used. There
-are 15 columns, that contain information, e.g., about mice's genotype and diet 
-and also timepoint when sample was drawn.
+are 4 columns, that contain information, e.g., about patients' status, and cohort.
 
 ```{r}
 knitr::kable(head(colData(tse)))
 ```
 
-From here, we can observe, e.g., what is the genotype distribution of mice.
-colData(tse)$Genotype fetches the data from the column, table() creates a table
+From here, we can observe, e.g., what is the patient status distribution.
+colData(tse)$patient_status fetches the data from the column, table() creates a table
 that shows how many times each class is present, and sort() sorts the table to 
 ascending order.
 
-There are 26 wild type, 30 het, and 32 knockout mice. 
-
-Wild type means that the phenotype of mouse is similar to natural populations. 
-
-Het means that mice has head tilt (het) mutation, which causes vestibular 
-dysfunction. Het mice have difficulties to sense position and keep balance, 
-which is why they move abnormally. 
-
-Knockout means that the gene of interest is inactivated.
+There are 13 samples from patients having ADHD, and 14 control samples.
 
 ```{r}
-sort(table(colData(tse)$Genotype))
+sort(table(colData(tse)$patient_status))
 ```
 
 ## Manipulate the data
@@ -60,11 +50,10 @@ Abundances are always relative even though counts are calculated. That is becaus
 abundances always depends, for example, on settings of instruments, and also
 how well sample was drawn. That is why relative abundances are usually more informative
 than plain counts.
-```{r}
 
+```{r}
 # Calculates relative abundances, and stores the table to assays
 tse <- transformCounts(tse, method = "relabundance")
-
 ```
 
 We might want to know, which taxonomic rank is, e.g., the most abundant. We can 
@@ -78,7 +67,7 @@ tse_phylum <- agglomerateByRank(tse, rank = "Phylum")
 dim(tse_phylum)
 ```
 
-Now there are 21 taxa and 88 samples. It means that there are 21 different Phylum
+Now there are 5 taxa and 27 samples. It means that there are 5 different Phylum
 level taxa. From rowData we might see little bit easier, how ranks are agglomerated. 
 For example, all Firmicutes are combined together. That is why all lower rank 
 information is lost. From assay we could see, that all abundances of taxa that 
@@ -114,12 +103,11 @@ From density plot, we could see, e.g., what is the most common abundance.
 Here we plot distribution of Firmicutes relative abundances in different samples. 
 Density plot can be seen as smoothened histogram.
 
-From the plot, we can see that there are peak when abundance is around 40 %.
+From the plot, we can see that there are peak when abundance is little bit under 30 %.
 
 ```{r}
-
 # Subset data by taking only Firmicutes
-tse_firmicutes <- tse_phylum["Phylum:Firmicutes"]
+tse_firmicutes <- tse_phylum["Firmicutes"]
 
 # Gets the abundance table
 abundance_firmicutes <- assay(tse_firmicutes, "relabundance")
@@ -150,5 +138,7 @@ firmicutes_abund_plot <- ggplot(firmicutes_abund_df, aes(x = abund)) +
   scale_x_continuous(label = scales::percent)
 
 firmicutes_abund_plot
-
 ```
+
+## TODO
+- Delete extra plot functions?
