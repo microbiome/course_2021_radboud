@@ -8,10 +8,10 @@ Both of these tests test, if there are statistical significant difference betwee
 groups.
 
 ### T-test
-T-test is  parametric, so it requires normally distributed data. 
-It is always wise to check if the data is normally distributed. If it is not then
-the data should be normalized. If that is not possible then non-parametric equivalents 
-(t-test = Mann–Whitney U) test should be used.
+T-test tests if there is difference between twp groups. It is  parametric, so it 
+requires normally distributed data. It is always wise to check if the data is normally 
+distributed. If it is not then the data should be normalized. If that is not possible 
+then non-parametric equivalents (t-test = Mann–Whitney U) test should be used.
 
 Let's first collect the data that we are going to use in t-test.
 
@@ -23,14 +23,14 @@ tse <- transformCounts(tse, method = "clr", pseudocount = 1)
 # Does transpose, so samples are in rows, then creates a data frame.
 abundance_analysis_data <- data.frame(t(assay(tse, "clr")))
 
-# Then we need variable for grouping samples. "Diet" column includes diet information.
-# There two groups "western" and "control". Let's include that to the data frame.
-abundance_analysis_data <- cbind(abundance_analysis_data, Groups = colData(tse)$Diet)
+# Then we need variable for grouping samples. "patient_status" column includes information
+# about patients' status. There two groups "ADHD" and "control". Let's include that to the data frame.
+abundance_analysis_data <- cbind(abundance_analysis_data, patient_status = colData(tse)$patient_status)
 
 # Subsets data if, more than 2 different groups
-# abundance_analysis_data_sub <- abundance_analysis_data[abundance_analysis_data$Groups == "KO_t1_western" |
-#                                                          abundance_analysis_data$Groups == "WT_t2_western",]
-
+# abundance_analysis_data_sub <- abundance_analysis_data[
+#abundance_analysis_data$patient_status_vs_cohort == "ADHD_Cohort_1" |
+#abundance_analysis_data$patient_status_vs_cohort == "Control_Cohort_3",]
 ```
 
 Next, let's check the normality of data. It can be done with Shapiro-Wilk test.
@@ -45,7 +45,7 @@ I don't know if normality test is necessary.###################################
 normality_test_p <- c()
 
 for (column in 
-     abundance_analysis_data[, !names(abundance_analysis_data) %in% "Groups"]){
+     abundance_analysis_data[, !names(abundance_analysis_data) %in% "patient_status"]){
   # Does Shapiro-Wilk test
   result <- shapiro.test(column)
   
@@ -53,7 +53,7 @@ for (column in
   normality_test_p <- c(normality_test_p, result$p.value)
 }
 
-print(paste0("P-values over 0.05: ", sum(normality_test_p>0.05), "/", sum(normality_test_p<=0.05)))
+print(paste0("P-values over 0.05: ", sum(normality_test_p>0.05), "/", length(normality_test_p)))
 ```
 
 Now we can do the Student's t-test. We test all the taxa by looping through columns,
@@ -62,14 +62,14 @@ data.
 
 ```{r}
 # Does t-test. Does it only for columns that contain abundances, not for
-# column that contain Groups.
+# column that contain patient status.
 
 t_test_p <- c()
 
 for (column in 
-     names(abundance_analysis_data[, !names(abundance_analysis_data) %in% "Groups"])){
+     names(abundance_analysis_data[, !names(abundance_analysis_data) %in% "patient_status"])){
   #print(column)
-  result <- t.test(abundance_analysis_data[,column] ~ Groups, data = abundance_analysis_data)
+  result <- t.test(abundance_analysis_data[,column] ~ patient_status, data = abundance_analysis_data)
    
    # Stores p-value to a vector
    t_test_p  <- c(t_test_p , result$p.value)
@@ -77,9 +77,8 @@ for (column in
 
 t_test_p <- data.frame(taxa = 
                          names(abundance_analysis_data[, !names(abundance_analysis_data) 
-                                                       %in% "Groups"]),
+                                                       %in% "patient_status"]),
                        p_raw = t_test_p)
-
 ```
 
 Because of multiple tests were made, we need to adjust p-values. That is because, 
@@ -139,8 +138,8 @@ library(dplyr)
 
 # Running the DESeq2 analysis
 
-# Creates DESeq2 object from the data. Uses "Diet" to create groups. 
-ds2 <- DESeqDataSet(tse, ~Diet)
+# Creates DESeq2 object from the data. Uses "patient_status" to create groups. 
+ds2 <- DESeqDataSet(tse, ~patient_status)
 # Does the analysis
 dds <- DESeq(ds2)
 # Gets the results from the object
@@ -159,8 +158,7 @@ print(head(knitr::kable((df))))
 
 ### Comparison of t-test and DESeq2
 Let's compare results that we got from the t-test and DESeq2.
-As we can see from the scatter plot, most of the values are the same. 
-- Add scatterplot that compares the p-values from both methods
+As we can see from the scatter plot, DESeq2 gives lower p-values than t-test. 
 
 ```{r}
 mf <- data.frame(df$padj, t_test_p$p_holm)
@@ -171,3 +169,10 @@ p <- ggplot(mf, aes(x = df$padj, y = t_test_p$p_holm)) +
 
 print(p)
 ```
+
+```{r}
+# Prints number of p-values under 0.05
+print(paste0("DeSeq2 p-values under 0.05: ", sum(df$padj<0.05, na.rm = TRUE), "/", length(df$padj)))
+print(paste0("T-test p-values under 0.05: ", sum(t_test_p$p_holm<0.05, na.rm = TRUE), "/", length(t_test_p$p_holm)))
+```
+
