@@ -46,7 +46,8 @@ bray_curtis_plot <- ggplot(data = bray_curtis_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
   geom_point() +
   xlab("Coordinate 1") + # x axis title
   ylab("Coordinate 2") + # y axis title
-  ggtitle("Bray-Curtis PCoA with relative abundances") # main title
+  ggtitle("Bray-Curtis PCoA with relative abundances") + # main title
+  theme(title = element_text(size = 12)) # makes titles smaller
 
 bray_curtis_plot
 
@@ -54,7 +55,7 @@ bray_curtis_plot
 ### PCoA for ASV-level data with CLR transformation + Euclidean distance
 
 ```{r}
-# Does clr transformation. Psuedocount is added, because data contains zeros. 
+# Does clr transformation. Pseudocount is added, because data contains zeros. 
 tse <- transformCounts(tse, method = "clr", pseudocount = 1)
 
 # Gets clr table
@@ -79,7 +80,8 @@ euclidean_plot <- ggplot(data = euclidean_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
   geom_point() +
   xlab("Coordinate 1") + # x axis title
   ylab("Coordinate 2") + # y axis title
-  ggtitle("Euclidean PCoA with CLR transformation") # main title
+  ggtitle("Euclidean PCoA with CLR transformation") + # main title
+  theme(title = element_text(size = 12)) # makes titles smaller
 
 euclidean_plot
 
@@ -113,61 +115,67 @@ euclidean_phylum_plot <- ggplot(data = euclidean_phylum_pcoa_df, aes(x=pcoa1, y=
   geom_point() +
   xlab("Coordinate 1") + # x axis title
   ylab("Coordinate 2") + # y axis title
-  ggtitle("Euclidean PCoA with Phylum level CLR transformation") # main title
+  ggtitle("Euclidean PCoA with Phylum level CLR transformation") + # main title
+  theme(title = element_text(size = 12)) # makes titles smaller
 
 euclidean_phylum_plot
 
 ```
 ## Examples on showing external variables on PCoA plot
-### PCoA with some discrete sample grouping variable shown with colors
+### PCoA with discrete sample grouping variable shown with colors
+
+We can add grouping variable to existing plots. Let's add coloring to the CLR transformed,
+Genus level PCoA
 
 ```{r}
-# We van add grouping variable to existing plots. Let's add coloring to the first
-# PCoA that we made.
-bray_curtis_genotype_pcoa_df <- cbind(bray_curtis_pcoa_df,
-                             genotype = colData(tse)$Genotype)
+# Adds coloring information to the data frame, creates new column
+euclidean_patient_status_pcoa_df <- cbind(euclidean_pcoa_df,
+                             patient_status = colData(tse)$patient_status)
 
 # Creates a plot
-bray_curtis_genotype_plot <- ggplot(data = bray_curtis_genotype_pcoa_df, 
-                                    aes(x=pcoa1, y=pcoa2,
-                                        color = genotype)) +
+euclidean_patient_status_plot <- ggplot(data = euclidean_patient_status_pcoa_df, 
+                                        aes(x=pcoa1, y=pcoa2,
+                                            color = patient_status)) +
   geom_point() +
   xlab("Coordinate 1") + # x axis title
   ylab("Coordinate 2") + # y axis title
-  ggtitle("Bray-Curtis PCoA with relative abundances") # main title
+  ggtitle("Euclidean PCoA with CLR transformation") + # main title
+  theme(title = element_text(size = 12)) # makes titles smaller
 
-bray_curtis_genotype_plot
-
+euclidean_patient_status_plot
 ```
-### PCoA with some continuous sample grouping variable shown with colors
+### PCoA with continuous sample grouping variable shown with colors
+
+We can also use continues values to group variables. Let's use Shannon diversity
+index that we calculated in "Alpha diversity" notebook.
+
 ```{r}
-# We can also use continues values to group variables. Let's use Shannon diversity
-# index that we calculated in "Alpha diversity" notebook.
-bray_curtis_shannon_pcoa_df <- cbind(bray_curtis_pcoa_df,
+# Adds coloring information to the data frame, creates new column
+euclidean_shannon_pcoa_df <- cbind(euclidean_pcoa_df,
                              shannon = colData(tse)$Shannon_index)
 
 # Creates a plot
-bray_curtis_shannon_plot <- ggplot(data = bray_curtis_shannon_pcoa_df, 
-                                   aes(x=pcoa1, y=pcoa2,
-                                       color = shannon)) +
+euclidean_shannon_plot <- ggplot(data = euclidean_shannon_pcoa_df, 
+                                 aes(x=pcoa1, y=pcoa2,
+                                     color = shannon)) + 
   geom_point() +
   xlab("Coordinate 1") + # x axis title
   ylab("Coordinate 2") + # y axis title
-  ggtitle("Bray-Curtis PCoA with relative abundances") # main title
+  ggtitle("Euclidean PCoA with CLR transformation") + # main title
+  theme(title = element_text(size = 12)) # makes titles smaller
 
-bray_curtis_shannon_plot
-
+euclidean_shannon_plot
 ```
 ## Example on clustering
 ### Dirichlet-Multinomial Mixture clustering 
 
+Next,  let's cluster the data with DMM clusteting. 
+
 ```{r}
 # Runs model and calculates the most likely number of clusters from 1 to 7. 
-# (Demand lots of resources. Can take tens of minutes, for me it took over hour.) 
-# Might be best to save it in data, so this step can be skipped? ################
-#tse_dmn <- runDMN(tse, name = "DMN", k = 1:7); saveRDS(tse_dmn, file = "tse_dmn.Rds")
-tse_dmn <- readRDS("data/tse_dmn")
-
+# For this small data, takes about 10 seconds. For larger data, can take much longer
+# because this demands lots of resources. 
+tse_dmn <- runDMN(tse, name = "DMN", k = 1:7)
 ```
 
 ```{r}
@@ -199,13 +207,12 @@ plot_dmn_fit
 ### PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors
 
 ```{r}
-# Does the grouping. Returns DMNGroup object. Genotype is used for 
-# grouping. 
-#dmn_group <- calculateDMNgroup(tse_dmn, variable = "Genotype", 
-#                             exprs_values = "counts", k = 2)
+# Does the grouping. Returns DMNGroup object that contains a summary. 
+# Patient status is used for grouping. 
+dmn_group <- calculateDMNgroup(tse_dmn, variable = "patient_status", 
+                             exprs_values = "counts", k = 3)
 
-# Does not do anything, can be deleted
-
+dmn_group
 ```
 
 ```{r}
@@ -226,33 +233,33 @@ head(DirichletMultinomial::fitted(getBestDMNFit(tse_dmn)))
 ```{r}
 # Gets the probabilities
 prob <- DirichletMultinomial::mixture(getBestDMNFit(tse_dmn))
+# Add column names
+colnames(prob) <- c("comp1", "comp2", "comp3")
 
-# Creates a vector that contains information whether it is more probable that
-# sample belongs to component 1 or 2.
-vec <- rep(0, length(prob))
-vec[prob[,1] > prob[,2]] <- "comp1"
-vec[prob[,2] > prob[,1]] <- "comp2"
+# For each row, finds column that has the highest value. Then extract the column 
+# names of highest values.
+vec <- colnames(prob)[max.col(prob,ties.method = "first")]
 
 # Creates a data frame that contains principal coordinates and DMM information
-bray_curtis_dmm_pcoa_df <- cbind(bray_curtis_pcoa_df,
-                             dmm_component = vec)
+euclidean_dmm_pcoa_df <- cbind(euclidean_pcoa_df,
+                               dmm_component = vec)
 
 # Creates a plot
-bray_curtis_dmm_plot <- ggplot(data = bray_curtis_dmm_pcoa_df, 
-                                   aes(x=pcoa1, y=pcoa2,
-                                       color = dmm_component)) +
+euclidean_dmm_plot <- ggplot(data = euclidean_dmm_pcoa_df, 
+                             aes(x=pcoa1, y=pcoa2,
+                                 color = dmm_component)) +
   geom_point() +
   xlab("Coordinate 1") + # x axis title
   ylab("Coordinate 2") + # y axis title
-  ggtitle("Bray-Curtis PCoA with DMM clustering") # main title
+  ggtitle("Euclidean PCoA with CLR transformation") + # main title
+  theme(title = element_text(size = 12)) # makes titles smaller
 
-bray_curtis_dmm_plot
-
+euclidean_dmm_plot
 ```
 
 ## Example of associations
 Next we can do permutation analysis of variance (permanova) test. Here, we test if
-genotypes explains the variance of abundance between samples. 
+different cohorts explain the variance of abundance between samples. 
 
 ```{r}
 # Relative abundance table
@@ -261,19 +268,18 @@ rel_abund_assay <- assays(tse)$relabundance
 # Transposes it to get taxa to columns
 rel_abund_assay <- t(rel_abund_assay)
 
-permanova_genotype <- vegan::adonis(rel_abund_assay ~ Genotype,
+permanova_genotype <- vegan::adonis(rel_abund_assay ~ cohort,
                                     data = colData(tse),
                                     permutations = 9999)
 
 # P-value
-print(paste0("Different genotypes and variance of abundance between samples, p-value: ", 
-             as.data.frame(permanova_genotype$aov.tab)["Genotype", "Pr(>F)"]))
-
+print(paste0("Different different cohorts and variance of abundance between samples, p-value: ", 
+             as.data.frame(permanova_genotype$aov.tab)["cohort", "Pr(>F)"]))
 ```
-As we can see, genotypes do not explain the variance, because p-value is over 0.05. 
-The abundances are not significantly different between genotypes.
+As we can see, cohorts do not explain the variance, because p-value is over 0.05. 
+The abundances are not significantly different between cohorts.
 
-We can visualize those taxa whose abundance are the most different between genotypes. 
+We can visualize those taxa whose abundance are the most different between cohorts. 
 This gives us information which taxa's abundances tend to differ between different 
 samples. 
 
@@ -281,7 +287,7 @@ In order to do that, we need coefficients of taxa.
 
 ```{r}
 # Gets the coefficients
-coef <- coefficients(permanova_genotype)["Genotype1",]
+coef <- coefficients(permanova_genotype)["cohort1",]
 # Gets the highest coefficients
 top.coef <- sort(head(coef[rev(order(abs(coef)))],20))
 
@@ -295,5 +301,4 @@ top_taxa_coeffient_plot <- ggplot(data.frame(x = top.coef,
   theme_bw()
 
 top_taxa_coeffient_plot
-
 ```
