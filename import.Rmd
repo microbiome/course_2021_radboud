@@ -33,14 +33,14 @@ Define source file paths.
 biom_file_path <- "data/Aggregated_humanization2.biom"
 sample_meta_file_path <- "data/Mapping_file_ADHD_aggregated.csv"
 tree_file_path <- "data/Data_humanization_phylo_aggregation.tre"
-```
+```  
 
 
 Create SE object from biom file and investigate it.
 
 ```{r}
 se <- loadFromBiom(biom_file_path)
-```
+```  
 
 
 ## Investigate the R data object

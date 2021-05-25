@@ -9,5 +9,7 @@ Microbiome 8:44.
 
 Contact: [Leo Lahti](datascience.utu.fi)
 
-See [index.html] for more info.
+Authors: Leo Lahti, Tuomas Borman, Henrik Eckermann
+
+See [index.html](index.html) for more info.
 

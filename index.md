@@ -21,7 +21,7 @@ All files can be rendered at one go by running [main.R](main.R)
 
  * July 14: [Beta diversity](beta.html)
 
- * July 15: [Differential abundance](abundance.html)
+ * July 15: [Differential abundance](abundance.nb.html)
 
 
 
