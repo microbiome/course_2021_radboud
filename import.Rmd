@@ -5,11 +5,16 @@ output: html_notebook
 
 This notebook imports _biom_ data to a _TreeSummarizedExperiment_ object. 
 
+Data is from article Tengeler AC, Dam SA, Wiesmann M, Naaijen J, van Bodegom M, 
+Belzer C, Dederen PJ, Verweij V, Franke B, Kozicz T, Vasquez AA & Kiliaan AJ (2020)
+[**Gut microbiota from persons with attention-deficit/hyperactivity disorder affects the brain in mice**](https://doi.org/10.1186/s40168-020-00816-x)
+Microbiome 8:44. 
+
 Data is located in a "data" subfolder. Data consists of 3 files: 
 
 - biom file that contains abundance table and taxonomy information
-- txt file that contains sample metadata
-- nwk file that contains a phylogenetic tree.
+- csv file that contains sample metadata
+- tre file that contains a phylogenetic tree.
 
 ## Initialization
 
@@ -25,9 +30,9 @@ library("mia")
 Define source file paths.
 
 ```{r}
-biom_file_path <- "data/table-with-taxonomy.biom"
-sample_meta_file_path <- "data/WesternDietSert_extendedTimeComparisonsv4.txt"
-tree_file_path <- "data/tree.nwk"
+biom_file_path <- "data/Aggregated_humanization2.biom"
+sample_meta_file_path <- "data/Mapping_file_ADHD_aggregated.csv"
+tree_file_path <- "data/Data_humanization_phylo_aggregation.tre"
 ```
 
 
@@ -63,18 +68,18 @@ knitr::kable(head(rowData(se)))
 Taxonomic ranks are not real rank names. Let's replace those taxonomic classes 
 with real rank names. 
 
-In addition to that, taxa names include, e.g., "D_0__" before the name, so let's
+In addition to that, taxa names include, e.g., "k__" before the name, so let's
 make them cleaner by removing them. 
 
 ```{r}
-names(rowData(se)) <- c("Confidence", "Kingdom", "Phylum", "Class", "Order", 
-                        "Family", "Genus", "Species")
+names(rowData(se)) <- c("Kingdom", "Phylum", "Class", "Order", 
+                        "Family", "Genus")
 
-# Goes through whole DataFrame. Removes "D_[0-9]__" from strings, where [0-9]] 
-# is any number between 0 and 9. 
+# Goes through whole DataFrame. Removes "[kpcofg]__" from strings, where [kpcofg] 
+# is any character from listed ones. 
 rowdata_modified <- BiocParallel::bplapply(rowData(se), 
                                            FUN = stringr::str_remove, 
-                                           pattern = "D_[0-9]__")
+                                           pattern = "[kpcofg]__")
 
 # rowdata_modified is list, so it is converted back to DataFrame. 
 rowdata_modified <- DataFrame(rowdata_modified)
@@ -105,10 +110,18 @@ Let us add sample meta data file
 # Let us read it and then convert from data.frame to DataFrame
 # (required for our purposes)
 sample_meta <- 
-sample_meta <- DataFrame(read.table(sample_meta_file_path, sep = ",", header = TRUE))
+sample_meta <- DataFrame(read.table(sample_meta_file_path, sep = ",", header = FALSE))
+# Add sample names to rownames
+rownames(sample_meta) <- sample_meta[,1]
+# Delete column that included sample names
+sample_meta[,1] <- NULL
+
+# We can add titles 
+colnames(sample_meta) <- c("patient_status", "cohort", "patient_status_vs_cohort", "sample_name")
 
 # Then it can be added to colData
 colData(se) <- sample_meta
+
 ```
 
 Now colData includes sample metadata. Use kable to print it more nicely.
@@ -145,15 +158,3 @@ Now rowTree includes phylogenetic tree:
 ```{r, eval=FALSE}
 head(rowTree(tse))
 ```
-
-### TODO
-
-The rowData columns are not real taxonomic ranks (Phylum, Genus..);
-replace the column names with the real rank names for D0, D1 etc. Do
-we already have a function for this (D0, D1 etc are standard and
-should have a direct conversion).
-
-- Yes, it causes an error in next steps, if they are not real ranks. I try to find better way. 
-
-(Link to data exploration / to next step?)
-
