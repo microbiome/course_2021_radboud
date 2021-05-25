@@ -88,14 +88,14 @@ suitable for that purpose.
 
 ```{r}
 # Creates Shannon boxplot 
-shannon_box <- ggplot(as.data.frame(colData(tse)), aes(x = Genotype, 
-                                                       y = Shannon_index, fill = Diet)) + 
+shannon_box <- ggplot(as.data.frame(colData(tse)), aes(x = patient_status, 
+                                                       y = Shannon_index, fill = cohort)) + 
   geom_boxplot()
 
 # Creates Faith boxplot 
-faith_box <- ggplot(as.data.frame(colData(tse)), aes(x = Genotype, 
+faith_box <- ggplot(as.data.frame(colData(tse)), aes(x = patient_status, 
                                                      y = Faith_diversity_index, 
-                                                     fill = Diet)) + 
+                                                     fill = cohort)) + 
   geom_boxplot()
 
 # Puts them into same picture
@@ -118,7 +118,7 @@ which is often used as a standard cutoff point.
 ```{r}
 # Wilcoxon test, where Shannon index is the variable that we are comparing. 
 # Diet - western or control - is the factor that we use for grouping. 
-wilcoxon_shannon <- wilcox.test(Shannon_index ~ Diet, data = colData(tse))
+wilcoxon_shannon <- wilcox.test(Shannon_index ~ patient_status, data = colData(tse))
 
 wilcoxon_shannon
 
