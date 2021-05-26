@@ -23,7 +23,7 @@ done it.
 
 Then load the R packages.
 
-```{r}
+```{r, results='hide'}
 library("mia")
 ```
 
@@ -68,18 +68,18 @@ knitr::kable(head(rowData(se)))
 Taxonomic ranks are not real rank names. Let's replace those taxonomic classes 
 with real rank names. 
 
-In addition to that, taxa names include, e.g., "k__" before the name, so let's
+In addition to that, taxa names include, e.g., '"k__' before the name, so let's
 make them cleaner by removing them. 
 
 ```{r}
 names(rowData(se)) <- c("Kingdom", "Phylum", "Class", "Order", 
                         "Family", "Genus")
 
-# Goes through whole DataFrame. Removes "[kpcofg]__" from strings, where [kpcofg] 
-# is any character from listed ones. 
+# Goes through whole DataFrame. Removes '.*[kpcofg]__' from strings, where [kpcofg] 
+# is any character from listed ones, and .* any character.
 rowdata_modified <- BiocParallel::bplapply(rowData(se), 
                                            FUN = stringr::str_remove, 
-                                           pattern = "[kpcofg]__")
+                                           pattern = '.*[kpcofg]__')
 
 # rowdata_modified is list, so it is converted back to DataFrame. 
 rowdata_modified <- DataFrame(rowdata_modified)

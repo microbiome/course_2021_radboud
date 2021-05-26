@@ -132,10 +132,13 @@ if variance is explained by groups.
 More information you can find, e.g., from Harvard Chan Bioinformatic Core's tutorial
 [Introduction to DGE - ARCHIVED](https://hbctraining.github.io/DGE_workshop/lessons/04_DGE_DESeq2_analysis.html)
 
-```{r}
+```{r, results='hide'}
 library(DESeq2)
 library(dplyr)
+```
 
+
+```{r}
 # Running the DESeq2 analysis
 
 # Creates DESeq2 object from the data. Uses "patient_status" to create groups. 
