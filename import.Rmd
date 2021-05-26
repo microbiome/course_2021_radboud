@@ -81,6 +81,11 @@ rowdata_modified <- BiocParallel::bplapply(rowData(se),
                                            FUN = stringr::str_remove, 
                                            pattern = '.*[kpcofg]__')
 
+# Genus level has additional '\"', so let's delete that also
+rowdata_modified <- BiocParallel::bplapply(rowdata_modified, 
+                                           FUN = stringr::str_remove, 
+                                           pattern = '\"')
+
 # rowdata_modified is list, so it is converted back to DataFrame. 
 rowdata_modified <- DataFrame(rowdata_modified)
 
