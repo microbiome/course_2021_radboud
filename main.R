@@ -11,6 +11,7 @@ library(ggplot2)
 theme_set(theme_bw(20)) 
 
 # Renders notebooks
+rmarkdown::render("install.Rmd")
 rmarkdown::render("import.Rmd")
 rmarkdown::render("explore.Rmd")
 rmarkdown::render("alpha.Rmd")
