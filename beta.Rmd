@@ -268,13 +268,13 @@ rel_abund_assay <- assays(tse)$relabundance
 # Transposes it to get taxa to columns
 rel_abund_assay <- t(rel_abund_assay)
 
-permanova_genotype <- vegan::adonis(rel_abund_assay ~ cohort,
-                                    data = colData(tse),
-                                    permutations = 9999)
+permanova_cohort <- vegan::adonis(rel_abund_assay ~ cohort,
+                                  data = colData(tse),
+                                  permutations = 9999)
 
 # P-value
 print(paste0("Different different cohorts and variance of abundance between samples, p-value: ", 
-             as.data.frame(permanova_genotype$aov.tab)["cohort", "Pr(>F)"]))
+             as.data.frame(permanova_cohort$aov.tab)["cohort", "Pr(>F)"]))
 ```
 As we can see, cohorts do not explain the variance, because p-value is over 0.05. 
 The abundances are not significantly different between cohorts.
@@ -287,7 +287,7 @@ In order to do that, we need coefficients of taxa.
 
 ```{r}
 # Gets the coefficients
-coef <- coefficients(permanova_genotype)["cohort1",]
+coef <- coefficients(permanova_cohort)["cohort1",]
 # Gets the highest coefficients
 top.coef <- sort(head(coef[rev(order(abs(coef)))],20))
 
@@ -304,20 +304,41 @@ top_taxa_coeffient_plot
 ```
 
 This plot above showed taxa as code names. From the plot, it is hard to tell which taxa 
-they reppresent. However, it is easy to add real names to plot.
+they represent. However, it is easy to add real names to plot. The lowest available 
+taxonomic level is Genus, so let's first agglomerate taxa to Genus level.
 
 ```{r}
-# Let's fetch names from rowData, and assign those to names
-names(top.coef) <- rowData(tse)[names(top.coef),]$Genus
+# Agglomerates data to Genus level
+tse_genus <- agglomerateByRank(tse, rank = "Genus")
+# Relative abundance table
+rel_abund_assay_genus <- assays(tse_genus)$relabundance
 
-# And do the same plotting
-top_taxa_names_coeffient_plot <- ggplot(data.frame(x = top.coef,
-                                             y = factor(names(top.coef),
-                                                        unique(names(top.coef)))),
-                                  aes(x = x, y = y)) +
+# Transposes it to get taxa to columns
+rel_abund_assay_genus <- t(rel_abund_assay_genus)
+
+permanova_cohort_genus <- vegan::adonis(rel_abund_assay_genus ~ cohort,
+                                        data = colData(tse_genus),
+                                        permutations = 9999)
+
+# P-value
+print(paste0("Different different cohorts and variance of abundance between samples, p-value: ", 
+             as.data.frame(permanova_cohort_genus$aov.tab)["cohort", "Pr(>F)"]))
+```
+
+```{r}
+# Gets the coefficients
+coef <- coefficients(permanova_cohort_genus)["cohort1",]
+# Gets the highest coefficients
+top.coef <- sort(head(coef[rev(order(abs(coef)))],20))
+
+# Plots the coefficients
+top_taxa_coeffient_genus_plot <- ggplot(data.frame(x = top.coef,
+                                                   y = factor(names(top.coef),
+                                                              unique(names(top.coef)))),
+                                        aes(x = x, y = y)) +
   geom_bar(stat="identity") +
   labs(x="",y="",title="Top Taxa") +
   theme_bw()
 
-top_taxa_names_coeffient_plot
+top_taxa_coeffient_genus_plot
 ```

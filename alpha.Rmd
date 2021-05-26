@@ -90,13 +90,15 @@ suitable for that purpose.
 # Creates Shannon boxplot 
 shannon_box <- ggplot(as.data.frame(colData(tse)), aes(x = patient_status, 
                                                        y = Shannon_index, fill = cohort)) + 
-  geom_boxplot()
+  geom_boxplot() +
+  theme(title = element_text(size = 12)) # makes titles smaller
 
 # Creates Faith boxplot 
 faith_box <- ggplot(as.data.frame(colData(tse)), aes(x = patient_status, 
                                                      y = Faith_diversity_index, 
                                                      fill = cohort)) + 
-  geom_boxplot()
+  geom_boxplot() +
+  theme(title = element_text(size = 12)) # makes titles smaller
 
 # Puts them into same picture
 gridExtra::grid.arrange(shannon_box, faith_box, nrow = 2)

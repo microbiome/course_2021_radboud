@@ -175,7 +175,99 @@ print(p)
 
 ```{r}
 # Prints number of p-values under 0.05
-print(paste0("DeSeq2 p-values under 0.05: ", sum(df$padj<0.05, na.rm = TRUE), "/", length(df$padj)))
+print(paste0("DESeq2 p-values under 0.05: ", sum(df$padj<0.05, na.rm = TRUE), "/", length(df$padj)))
 print(paste0("T-test p-values under 0.05: ", sum(t_test_p$p_holm<0.05, na.rm = TRUE), "/", length(t_test_p$p_holm)))
 ```
 
+### Comparison of abundance
+
+In previous steps, we got information which taxa varies between ADHD and control groups.
+Let's plot those taxa in the boxplot, and compare visually if abundances of those taxa
+differ in ADHD and control samples. For comparison, let's plot also taxa that do not
+differ between ADHD and control groups. 
+
+```{r}
+# Sorts p-values in increasing order. Takes 3rd first ones. Takes those rows that match
+# with p-values. Takes taxa. 
+highest3 <- df[df$padj %in% sort(df$padj, decreasing = FALSE)[1:3], ]$taxon
+# From clr transformed table, takes only those taxa that had highest p-values
+highest3 <-assay(tse, "clr")[highest3, ]
+# Transposes the table
+highest3 <- t(highest3)
+# Adds colData that includes patient status infomation
+highest3 <- data.frame(highest3, as.data.frame(colData(tse)))
+
+# Sorts p-values in decreasing order. Takes 3rd first ones. Takes those rows that match
+# with p-values. Takes taxa. 
+lowest3 <- df[df$padj %in% sort(df$padj, decreasing = TRUE)[1:3], ]$taxon
+# From clr transformed table, takes only those taxa that had lowest p-values
+lowest3 <-assay(tse, "clr")[lowest3, ]
+# Transposes the table
+lowest3 <- t(lowest3)
+# Adds colData that includes patient status infomation
+lowest3 <- data.frame(lowest3, as.data.frame(colData(tse)))
+```
+
+```{r}
+# Puts plots in the same picture
+gridExtra::grid.arrange(
+  
+  # Plot 1
+  ggplot(highest3, aes(x = patient_status, y = highest3[,1])) + 
+    geom_boxplot() + 
+    ylab("CLR abundances") + # y axis title
+    ggtitle(names(highest3)[1]) + # main title
+    theme(title = element_text(size = 10),
+          axis.text = element_text(size = 12),
+          axis.title.x=element_blank()), # makes titles smaller, removes x axis title
+  
+  # Plot 2
+  ggplot(highest3, aes(x = patient_status, y = highest3[,2])) + 
+    geom_boxplot() + 
+    ylab("CLR abundances") + # y axis title
+    ggtitle(names(highest3)[2]) + # main title
+    theme(title = element_text(size = 10),
+          axis.text = element_text(size = 12),
+          axis.title.x=element_blank()), # makes titles smaller, removes x axis title
+  
+  # Plot 3
+  ggplot(highest3, aes(x = patient_status, y = highest3[,3])) + 
+    geom_boxplot() + 
+    ylab("CLR abundances") + # y axis title
+    ggtitle(names(highest3)[3]) + # main title
+    theme(title = element_text(size = 10),
+          axis.text = element_text(size = 12),
+          axis.title.x=element_blank()), # makes titles smaller, removes x axis title
+  
+  # Plot 4
+  ggplot(lowest3, aes(x = patient_status, y = lowest3[,1])) + 
+    geom_boxplot() + 
+    ylab("CLR abundances") + # y axis title
+    ggtitle(names(lowest3)[1]) + # main title
+    theme(title = element_text(size = 10),
+          axis.text = element_text(size = 12),
+          axis.title.x=element_blank()), # makes titles smaller, removes x axis title
+  
+  # Plot 5
+  ggplot(lowest3, aes(x = patient_status, y = lowest3[,2])) + 
+    geom_boxplot() + 
+    ylab("CLR abundances") + # y axis title
+    ggtitle(names(lowest3)[2]) + # main title
+    theme(title = element_text(size = 10),
+          axis.text = element_text(size = 12),
+          axis.title.x=element_blank()), # makes titles smaller, removes x axis title
+  
+  # Plot 6
+  ggplot(lowest3, aes(x = patient_status, y = lowest3[,3])) + 
+    geom_boxplot() + 
+    ylab("CLR abundances") + # y axis title
+    ggtitle(names(lowest3)[3]) + # main title
+    theme(title = element_text(size = 10),
+          axis.text = element_text(size = 12),
+          axis.title.x=element_blank()), # makes titles smaller, removes x axis title
+  
+  # 3 columns and 2 rows
+  ncol = 3, 
+  nrow = 2
+)
+```
