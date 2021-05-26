@@ -168,7 +168,7 @@ pre code {
 </div>
 
 
-<p>In this notebook, required packages are installed. This step needs to be done just once.</p>
+<p>In this notebook, required packages are installed.</p>
 <pre class="r"><code># Lists packages that we need from cran and bioc. 
 # Some of these packages are installed automatically when mia and miaViz are installed. 
 cran_pkg &lt;- c(&quot;BiocManager&quot;, &quot;dplyr&quot;, &quot;ecodist&quot;, &quot;ggplot2&quot;, &quot;gridExtra&quot;, &quot;knitr&quot;, &quot;vegan&quot;)
@@ -189,6 +189,12 @@ if( length(cran_pkg_to_be_installed) ) {
 if( length(bioc_pkg_to_be_installed) ) {
    BiocManager::install(cran_pkg_to_be_installed, ask = F)
 }</code></pre>
+<pre class="r"><code># Load packages into session
+sapply(c(cran_pkg , bioc_pkg), require, character.only = TRUE)</code></pre>
+<pre><code>##          BiocManager                dplyr              ecodist              ggplot2            gridExtra                knitr 
+##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
+##                vegan                  ape               DESeq2 DirichletMultinomial                  mia               miaViz 
+##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE</code></pre>
 
 
 

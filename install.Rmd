@@ -3,7 +3,7 @@ title: "Installation of the necessary R packages"
 output: html_document
 ---
 
-In this notebook, required packages are installed. This step needs to be done just once. 
+In this notebook, required packages are installed.
 
 ```{r}
 # Lists packages that we need from cran and bioc. 
@@ -33,3 +33,9 @@ if( length(bioc_pkg_to_be_installed) ) {
    BiocManager::install(cran_pkg_to_be_installed, ask = F)
 }
 ```
+
+```{r}
+# Load packages into session
+sapply(c(cran_pkg , bioc_pkg), require, character.only = TRUE)
+```
+
