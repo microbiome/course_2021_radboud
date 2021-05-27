@@ -8,7 +8,7 @@ Both of these tests test, if there are statistical significant difference betwee
 groups.
 
 ### T-test
-T-test tests if there is difference between twp groups. It is  parametric, so it 
+T-test tests if there is difference between two groups. It is parametric, so it 
 requires normally distributed data. It is always wise to check if the data is normally 
 distributed. If it is not then the data should be normalized. If that is not possible 
 then non-parametric equivalents (t-test = Mann–Whitney U) test should be used.
@@ -81,14 +81,7 @@ t_test_p <- data.frame(taxa =
                        p_raw = t_test_p)
 ```
 
-Because of multiple tests were made, we need to adjust p-values. That is because, 
-these individual tests are not independent. Because of that, if enough tests are made
-statistically we will get positive result, even though positive result is extremely 
-rare, lets say, e.g., 1 %. 
-
-To avoid false positive results, we must adjust p-values, when multiply tests are made
-from same data. With adjustment, the significance levels of individual tests are stricter. 
-Here we use Holm method, but there are several other methods also.
+As multiple tests were performed and these tests are not independent, we need to adjust p-values. Otherwise, we would increase the chance of a type I error drastically depending on our p-value threshold. By applying p-value adjustment, we can keep the false positive rate at a level that is acceptable. What is acceptable depends on our research goals. Here we use the Holm method, but there are several other methods as well.
 
 ```{r}
 # Does the adjustment
@@ -108,28 +101,26 @@ t_test_plot
 ```
 
 ### DESeq2
-Our second analysis method is DESeq2. It does automatically normalization, and the
-analysis. It also takes care the p-value adjustment, so we don't have to worry 
+Our second analysis method is DESeq2. It performs the data normalization  automatically. It also takes care of the p-value adjustment, so we don't have to worry 
 about that.
 
 DESeq2 is a package for gene expression analysis. It offers automatic analysis of variation.
-It uses binomial distribution to detect expression differences between groups. 
+It uses the binomial distribution to detect differences in gene expression between groups. 
 Because it uses normalization, it takes care the difference between library sizes, 
 and differences between library composition. In addition to gene analysis, 
-DESeq2 can also be used to other purposes.
+DESeq2 can also be used for other purposes. DESeq2 analysis includes multiple steps, but they are done automatically:  
 
-DESeq2 analysis includes multiple steps, but they are done automatically
-1. Raw counts are normalized by log-based scaling.
-2. Taxa-wise variance is estimated. Values tell how much each taxa varies between samples.
-3. Curve is fitted over all those taxa-wise variance estimates that we got in the last step.
-This model tells how big is the variance in specific abundance level. 
+1. Raw counts are normalized by log-based scaling.  
+2. Taxa-wise variance is estimated. These values tell how much each taxa varies between samples.  
+3. A curve is fitted over all those taxa-wise variance estimates that we got in the last step.  
+This model tells how big the variance is in a specific abundance level. 
 4. The model is used to shrink those individual variance estimates to avoid the effect of, 
-e.g., small sample size and higher variance. This reduce the likelihood to get 
-false positives.
-5. Variance estimates are used to compare different groups, and we got the result
-if variance is explained by groups.
+e.g., small sample size and higher variance. This reduces the likelihood to get 
+false positives.  
+5. Variance estimates are used to compare different groups. We receive a result that shows whether the variance is explained by groups.  
 
-More information you can find, e.g., from Harvard Chan Bioinformatic Core's tutorial
+
+More information can be found, e.g., from Harvard Chan Bioinformatic Core's tutorial
 [Introduction to DGE - ARCHIVED](https://hbctraining.github.io/DGE_workshop/lessons/04_DGE_DESeq2_analysis.html)
 
 ```{r, results='hide'}
@@ -181,7 +172,7 @@ print(paste0("T-test p-values under 0.05: ", sum(t_test_p$p_holm<0.05, na.rm = T
 
 ### Comparison of abundance
 
-In previous steps, we got information which taxa varies between ADHD and control groups.
+In previous steps, we got information which taxa vary between ADHD and control groups.
 Let's plot those taxa in the boxplot, and compare visually if abundances of those taxa
 differ in ADHD and control samples. For comparison, let's plot also taxa that do not
 differ between ADHD and control groups. 

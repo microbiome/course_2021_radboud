@@ -18,7 +18,7 @@ Data is located in a "data" subfolder. Data consists of 3 files:
 
 ## Initialization
 
-[Install](install.R) the necessary R packages if you have not already
+[Install](install.Rmd) the necessary R packages if you have not already
 done it.
 
 Then load the R packages.
@@ -114,7 +114,6 @@ Let us add sample meta data file
 # It seems like a comma separated file and includes headers
 # Let us read it and then convert from data.frame to DataFrame
 # (required for our purposes)
-sample_meta <- 
 sample_meta <- DataFrame(read.table(sample_meta_file_path, sep = ",", header = FALSE))
 # Add sample names to rownames
 rownames(sample_meta) <- sample_meta[,1]
@@ -138,7 +137,8 @@ knitr::kable(head(colData(se)))
 Now, let's add a phylogenetic tree.
 
 ```{r}
-# Current object, se, is a SummarizedExperiment object, thus, it does not include
+# Current object, se, is a SummarizedExperiment object,
+# thus, it does not include
 # slot for phylogenetic tree. However, we can convert SE object to 
 # TreeSummarizedExperiment which includes rowTree slot.
 tse <- as(se, "TreeSummarizedExperiment")

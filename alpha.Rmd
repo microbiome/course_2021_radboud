@@ -8,12 +8,12 @@ This notebook calculates alpha diversity indices.
 Alpha diversity is a meter that measures diversity of taxa in one sample. 
 If there are large amount of different taxa in sample, alpha diversity is larger. 
 
-Alpha diversity is important meter in microbiome research. mia includes wide 
+Alpha diversity is an important meter in microbiome research. mia includes a wide 
 variety of alpha diversity indices. As an example, we calculate Shannon and 
 Faith diversity indices.
 
-Shannon index measures the proportion of abundances of taxa. Faith diversity index
-measures total phylogenetic distance between taxa. In both indices, higher value
+Shannon index reflects how many different taxa there are and how evenly they are distributed within a sample. Faith diversity index
+measures the total phylogenetic distance between taxa. In both indices, higher value
 represents higher diversity. 
 
 ```{r}
@@ -50,17 +50,16 @@ shannon_hist <- ggplot(as.data.frame(colData(tse)),
                        aes(x = Shannon_index)) + 
   geom_histogram(bins = 20, fill = "gray", color = "black") +
   xlab("Shannon index") + # x axis title
-  ylab("Sample frequency") + # y axis title
-  ggtitle("ggplot()") # main title
+  ylab("Sample frequency")  # y axis title
 
 shannon_hist
 
 ```
 
 To see, if there is dependency between Shannon and Faith, we can do cross-plot i.e., 
-scatter plot, where other index is in x-axis and another in y-axis.
+scatter plot, where one index is on the x-axis and another on the y-axis.
 
-It seems that, there are positive correlation between these to indices. 
+It seems that, there is a positive correlation between these two indices. 
 
 ```{r}
 # # Does the same thing but differently
@@ -76,8 +75,7 @@ cross_plot <- ggplot2::ggplot(as.data.frame(colData(tse)),
   geom_point() + # Adds points
   geom_smooth(method=lm) + # Adds regression line
   xlab("Shannon index") + # x axis title
-  ylab("Faith diveristy index") + # y axis title
-  ggtitle("ggplot()") # main title
+  ylab("Faith diveristy index")  # y axis title
 
 cross_plot
 
@@ -112,7 +110,7 @@ Wilcoxon test is similar to Student's t-test, however, Student's t-test is param
 It means that the data must be normally distributed. Wilcoxon test is non-parametric
 so it doesn't make any assumptions about the distribution. 
 
-Wilcoxon test tests if there are statistical difference between two groups. 
+Wilcoxon test tests if there are statistical differences between two groups. 
 Here it tests, if western diet and control groups have different Shannon index values.
 As we can see, there is no difference between groups, because p-value is over 0.05, 
 which is often used as a standard cutoff point.
@@ -123,5 +121,6 @@ which is often used as a standard cutoff point.
 wilcoxon_shannon <- wilcox.test(Shannon_index ~ patient_status, data = colData(tse))
 
 wilcoxon_shannon
-
 ```
+
+
