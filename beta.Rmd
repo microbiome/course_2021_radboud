@@ -166,7 +166,7 @@ euclidean_shannon_plot
 
 Another technique that allows to search for groups of samples that are similar to each other is a [Dirichlet-Multinomial Mixture Model](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0030126). In DMM, we first determine the number of clusters (k) that best fit the data (model evidence) using Laplace approximation. After fitting the model with k clusters, we obtain for each sample k probabilities that reflect the probability that a sample belongs to the given cluster.
 
-Let's cluster the data with DMM clusteting. 
+Let's cluster the data with DMM clustering. 
 
 ```{r}
 # Runs model and calculates the most likely number of clusters from 1 to 7. 
