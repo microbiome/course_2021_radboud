@@ -191,10 +191,14 @@ if( length(bioc_pkg_to_be_installed) ) {
 }</code></pre>
 <pre class="r"><code># Load packages into session
 sapply(c(cran_pkg , bioc_pkg), require, character.only = TRUE)</code></pre>
-<pre><code>##          BiocManager                dplyr              ecodist              ggplot2            gridExtra                knitr 
-##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
-##                vegan                  ape               DESeq2 DirichletMultinomial                  mia               miaViz 
-##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE</code></pre>
+<pre><code>##          BiocManager                dplyr              ecodist 
+##                 TRUE                 TRUE                 TRUE 
+##              ggplot2            gridExtra                knitr 
+##                 TRUE                 TRUE                 TRUE 
+##                vegan                  ape               DESeq2 
+##                 TRUE                 TRUE                 TRUE 
+## DirichletMultinomial                  mia               miaViz 
+##                 TRUE                 TRUE                 TRUE</code></pre>
 
 
 

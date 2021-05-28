@@ -5,20 +5,14 @@ output: html_document
 
 This notebook calculates beta diversity.
 
-Beta diversity measures diversity between different samples. If there are many
-different samples, beta diversity is larger. If samples are similar to each other,
-beta diversity is smaller. 
+Beta diversity reflects the difference in microbial composition between two samples. If two samples are similar to each other,
+beta diversity is smaller. Several different distance metrics can be calculated (e.g. Bray Curtis, UniFrac, Jaccard etc.). Each metric emphasizes the differences between samples differently. After calculating a distance metric, we can vizualize the similarity/dissimilarity between samples by using dimension reduction techniques such as Principal Coordinate Analysis (PCoA).
 
-We use Principal Coordinate Analysis (PCoA) and Dirichlet-Multinomial Mixture Clustering
-(DMM) to find patterns from our data. 
-
-PCoA uses distance matrix as input. The output is usually 2 or 3-dimensional 
+PCoA uses a distance matrix as input. The output is usually a 2 or 3-dimensional 
 euclidean space. The idea is to rotate data that way that the distances between 
 different samples are maximized. 
 
-DMM is used to cluster taxa into different groups by their variance. In DMM, probabilities
-or frequencies are calculated. They represent how likely it is that each sample is present
-in each cluster. 
+
 
 ## Examples of PCoA with different settings
 ### PCoA for ASV-level data with Bray-Curtis
@@ -52,7 +46,7 @@ bray_curtis_plot <- ggplot(data = bray_curtis_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
 bray_curtis_plot
 
 ```
-### PCoA for ASV-level data with CLR transformation + Euclidean distance
+### PCoA for ASV-level data with CLR transformation + Euclidean distance (Aitchison distance)
 
 ```{r}
 # Does clr transformation. Pseudocount is added, because data contains zeros. 
@@ -67,6 +61,7 @@ clr_assay <- t(clr_assay)
 # Calculates Euclidean distances between samples. Because taxa is in columns,
 # it is used to compare different samples.
 euclidean_dist <- vegan::vegdist(clr_assay, method = "euclidean")
+
 
 # Does principal coordinate analysis
 euclidean_pcoa <- ecodist::pco(euclidean_dist)
@@ -169,7 +164,9 @@ euclidean_shannon_plot
 ## Example on clustering
 ### Dirichlet-Multinomial Mixture clustering 
 
-Next,  let's cluster the data with DMM clusteting. 
+Another technique that allows to search for groups of samples that are similar to each other is a [Dirichlet-Multinomial Mixture Model](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0030126). In DMM, we first determine the number of clusters (k) that best fit the data (model evidence) using Laplace approximation. After fitting the model with k clusters, we obtain for each sample k probabilities that reflect the probability that a sample belongs to the given cluster.
+
+Let's cluster the data with DMM clusteting. 
 
 ```{r}
 # Runs model and calculates the most likely number of clusters from 1 to 7. 
@@ -193,17 +190,18 @@ names(metadata(tse_dmn))
 getDMN(tse_dmn)
 ```
 
+
+```{r}
+# Laplace approximation (model evidence) for each model of the k models
+plot_dmn_fit <- plotDMNFit(tse_dmn, type = "laplace")
+```
+
 ```{r}
 # Returns the model, which fits best
 getBestDMNFit(tse_dmn, type = "laplace")
 ```
 
-```{r}
-# Plots the DMN
-plot_dmn_fit <- plotDMNFit(tse_dmn, type = "laplace")
 
-plot_dmn_fit
-```
 ### PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors
 
 ```{r}
@@ -258,7 +256,7 @@ euclidean_dmm_plot
 ```
 
 ## Example of associations
-Next we can do permutation analysis of variance (permanova) test. Here, we test if
+Next we can perform a permutational multivariate analysis of variance (permanova) test. Here, we test if
 different cohorts explain the variance of abundance between samples. 
 
 ```{r}
@@ -276,12 +274,12 @@ permanova_cohort <- vegan::adonis(rel_abund_assay ~ cohort,
 print(paste0("Different different cohorts and variance of abundance between samples, p-value: ", 
              as.data.frame(permanova_cohort$aov.tab)["cohort", "Pr(>F)"]))
 ```
-As we can see, cohorts do not explain the variance, because p-value is over 0.05. 
-The abundances are not significantly different between cohorts.
+As we can see, the cohorts variable is not significantly associated with microbiota composition as the p-value is over 0.05. 
+
 
 We can visualize those taxa whose abundance are the most different between cohorts. 
 This gives us information which taxa's abundances tend to differ between different 
-samples. 
+cohorts. 
 
 In order to do that, we need coefficients of taxa.
 
