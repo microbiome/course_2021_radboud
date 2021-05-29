@@ -33,7 +33,7 @@ Let us next show how to visualize sample similarities using the PCoA
 method and a selected dissimilarity measure. We use the same tse data
 object defined in the earlier notebooks.
 
-```{r}
+```{r pcoa_asv_bc}
 # Relative abundance table
 rel_abund_assay <- assays(tse)$relabundance
 
@@ -68,7 +68,7 @@ bray_curtis_plot
 Aitchison distance corresponds to Euclidean distances between CLR
 transformed sample abundance vectors.
 
-```{r}
+```{r pcoa_asv_aitchison}
 # Does clr transformation. Pseudocount is added, because data contains zeros. 
 tse <- transformCounts(tse, method = "clr", pseudocount = 1)
 
@@ -106,7 +106,7 @@ euclidean_plot
 
 We use again the Aitchison distances in this example.
 
-```{r}
+```{r pcoa_phylum_aitchison}
 # Does clr transformation. Psuedocount is added, because data contains zeros. 
 tse_phylum <- transformCounts(tse_phylum, method = "clr", pseudocount = 1)
 
@@ -145,7 +145,7 @@ euclidean_phylum_plot
 We can add grouping variable to existing plots. Let's add coloring to the CLR transformed,
 Genus level PCoA.
 
-```{r}
+```{r pcoa_genus}
 # Adds coloring information to the data frame, creates new column
 euclidean_patient_status_pcoa_df <- cbind(euclidean_pcoa_df,
                              patient_status = colData(tse)$patient_status)
@@ -170,7 +170,7 @@ We can also use continues values to group variables. Let's use Shannon diversity
 index that we calculated in "Alpha diversity" notebook.
 
 
-```{r}
+```{r pcoa_coloring}
 # Adds coloring information to the data frame, creates new column
 euclidean_shannon_pcoa_df <- cbind(euclidean_pcoa_df,
                              shannon = colData(tse)$Shannon_index)
@@ -197,7 +197,7 @@ Another technique that allows to search for groups of samples that are similar t
 
 Let's cluster the data with DMM clustering. 
 
-```{r}
+```{r dmm}
 # Runs model and calculates the most likely number of clusters from 1 to 7. 
 # For this small data, takes about 10 seconds. For larger data, can take much longer
 # because this demands lots of resources. 

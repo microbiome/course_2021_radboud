@@ -575,13 +575,13 @@ getDMN(tse_dmn)</code></pre>
 ## class: DMN 
 ## k: 2 
 ## samples x taxa: 27 x 151 
-## Laplace: 11440.98 BIC: 12161.29 AIC: 11964.97 
+## Laplace: 11441 BIC: 12161.29 AIC: 11964.97 
 ## 
 ## [[3]]
 ## class: DMN 
 ## k: 3 
 ## samples x taxa: 27 x 151 
-## Laplace: 11059.78 BIC: 12266.31 AIC: 11971.51 
+## Laplace: 11059.77 BIC: 12266.31 AIC: 11971.51 
 ## 
 ## [[4]]
 ## class: DMN 
@@ -593,19 +593,19 @@ getDMN(tse_dmn)</code></pre>
 ## class: DMN 
 ## k: 5 
 ## samples x taxa: 27 x 151 
-## Laplace: 11324.76 BIC: 13255.59 AIC: 12763.82 
+## Laplace: NaN BIC: NaN AIC: NaN 
 ## 
 ## [[6]]
 ## class: DMN 
 ## k: 6 
 ## samples x taxa: 27 x 151 
-## Laplace: 11202.19 BIC: 13718.9 AIC: 13128.65 
+## Laplace: 11201.94 BIC: 13718.9 AIC: 13128.65 
 ## 
 ## [[7]]
 ## class: DMN 
 ## k: 7 
 ## samples x taxa: 27 x 151 
-## Laplace: 11529.62 BIC: 14333.29 AIC: 13644.55</code></pre>
+## Laplace: 11310.72 BIC: 14200.57 AIC: 13511.84</code></pre>
 <pre class="r"><code># Laplace approximation (model evidence) for each model of the k models
 plot_dmn_fit &lt;- plotDMNFit(tse_dmn, type = &quot;laplace&quot;)</code></pre>
 <pre class="r"><code># Returns the model, which fits best
@@ -613,7 +613,7 @@ getBestDMNFit(tse_dmn, type = &quot;laplace&quot;)</code></pre>
 <pre><code>## class: DMN 
 ## k: 3 
 ## samples x taxa: 27 x 151 
-## Laplace: 11059.78 BIC: 12266.31 AIC: 11971.51</code></pre>
+## Laplace: 11059.77 BIC: 12266.31 AIC: 11971.51</code></pre>
 </div>
 <div id="pcoa-for-asv-level-data-with-bray-curtis-with-dmm-clusters-shown-with-colors" class="section level3">
 <h3>PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors</h3>
@@ -625,33 +625,33 @@ dmn_group &lt;- calculateDMNgroup(tse_dmn, variable = &quot;patient_status&quot;
 dmn_group</code></pre>
 <pre><code>## class: DMNGroup 
 ## summary:
-##         k samples taxa      NLE    LogDet  Laplace      BIC      AIC
-## ADHD    3      13  151 6018.131 -344.7865 5427.621 6601.657 6473.131
-## Control 3      14  151 6647.269 -148.3677 6154.968 7247.655 7102.269</code></pre>
+##         k samples taxa      NLE     LogDet  Laplace      BIC      AIC
+## ADHD    3      13  151 6330.860  -50.38043 5887.553 6914.386 6785.860
+## Control 3      14  151 6647.269 -147.52631 6155.389 7247.655 7102.269</code></pre>
 <pre class="r"><code># Weights
 DirichletMultinomial::mixturewt(getBestDMNFit(tse_dmn))</code></pre>
 <pre><code>##          pi    theta
-## 1 0.4814815 31.27746
-## 2 0.2962963 47.34269
-## 3 0.2222222 92.27369</code></pre>
+## 1 0.4814815 31.27787
+## 2 0.2962963 47.34407
+## 3 0.2222222 92.27412</code></pre>
 <pre class="r"><code># Samples&#39; probabilities that tells the likelihood to belong to component
 head(DirichletMultinomial::mixture(getBestDMNFit(tse_dmn)))</code></pre>
 <pre><code>##               [,1]          [,2]          [,3]
-## A110  1.000000e+00 1.304263e-144 7.565920e-205
-## A12  9.832189e-117  6.241782e-93  1.000000e+00
-## A15   1.000000e+00 9.958902e-119 3.399195e-234
-## A19  5.370489e-112 1.866958e-107  1.000000e+00
-## A21   2.143923e-93  4.849997e-96  1.000000e+00
-## A23   1.000000e+00 9.134394e-111 1.935709e-161</code></pre>
+## A110  1.000000e+00 1.248250e-144 7.562498e-205
+## A12  9.985139e-117  6.121201e-93  1.000000e+00
+## A15   1.000000e+00 9.511141e-119 3.389291e-234
+## A19  5.472418e-112 1.818200e-107  1.000000e+00
+## A21   2.181940e-93  4.725474e-96  1.000000e+00
+## A23   1.000000e+00 8.813358e-111 1.936450e-161</code></pre>
 <pre class="r"><code># Contribution of samples to each component
 head(DirichletMultinomial::fitted(getBestDMNFit(tse_dmn)))</code></pre>
-<pre><code>##                 [,1]        [,2]       [,3]
-## 1726470  6.352162049 2.898598416 20.1892353
-## 1726471  5.287779180 0.002049451  0.1532197
-## 17264731 0.001248767 9.143271435  2.0112045
-## 17264726 0.140477752 1.363468547  7.5894397
-## 1726472  2.104200578 3.523472784  2.6656644
-## 17264724 0.072368052 0.002049451  9.8545376</code></pre>
+<pre><code>##                 [,1]       [,2]       [,3]
+## 1726470  6.352166447 2.89873585 20.1892821
+## 1726471  5.288123342 0.00204747  0.1532226
+## 17264731 0.001249763 9.14456094  2.0112001
+## 17264726 0.140480806 1.36349214  7.5893252
+## 1726472  2.104185177 3.52342444  2.6657229
+## 17264724 0.072362218 0.00204747  9.8547044</code></pre>
 <pre class="r"><code># Gets the probabilities
 prob &lt;- DirichletMultinomial::mixture(getBestDMNFit(tse_dmn))
 # Add column names
@@ -695,7 +695,7 @@ permanova_cohort &lt;- vegan::adonis(rel_abund_assay ~ cohort,
 # P-value
 print(paste0(&quot;Different different cohorts and variance of abundance between samples, p-value: &quot;, 
              as.data.frame(permanova_cohort$aov.tab)[&quot;cohort&quot;, &quot;Pr(&gt;F)&quot;]))</code></pre>
-<pre><code>## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7459&quot;</code></pre>
+<pre><code>## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7453&quot;</code></pre>
 <p>As we can see, the cohorts variable is not significantly associated with microbiota composition as the p-value is over 0.05.</p>
 <p>We can visualize those taxa whose abundance are the most different between cohorts. This gives us information which taxa’s abundances tend to differ between different cohorts.</p>
 <p>In order to do that, we need coefficients of taxa.</p>
@@ -731,7 +731,7 @@ permanova_cohort_genus &lt;- vegan::adonis(rel_abund_assay_genus ~ cohort,
 # P-value
 print(paste0(&quot;Different different cohorts and variance of abundance between samples, p-value: &quot;, 
              as.data.frame(permanova_cohort_genus$aov.tab)[&quot;cohort&quot;, &quot;Pr(&gt;F)&quot;]))</code></pre>
-<pre><code>## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7834&quot;</code></pre>
+<pre><code>## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7845&quot;</code></pre>
 <pre class="r"><code># Gets the coefficients
 coef &lt;- coefficients(permanova_cohort_genus)[&quot;cohort1&quot;,]
 # Gets the highest coefficients
