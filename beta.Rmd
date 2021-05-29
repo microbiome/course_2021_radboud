@@ -20,7 +20,7 @@ After estimating beta diversity we can vizualize sample similarity
 with dimension reduction techniques such as Principal Coordinate
 Analysis (PCoA).
 
-PCoA uses a dissimilarity matrix as input. The output is usually a 2
+PCoA takes a dissimilarity matrix as input. The output is usually a 2
 or 3-dimensional euclidean space. The idea is to project the data so
 that the distances between different samples are maximized. The
 projection is often non-linear and designed to reveal local or global
@@ -33,7 +33,7 @@ Let us next show how to visualize sample similarities using the PCoA
 method and a selected dissimilarity measure. We use the same tse data
 object defined in the earlier notebooks.
 
-```{r pcoa_asv_bc}
+```{r pcoa_asv_bc, message=FALSE}
 # Relative abundance table
 rel_abund_assay <- assays(tse)$relabundance
 
@@ -57,7 +57,7 @@ bray_curtis_plot <- ggplot(data = bray_curtis_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
   labs(x = "Coordinate 1",
        y = "Coordinate 2", 
        title = "Bray-Curtis PCoA with relative abundances") 
-  theme(title = element_text(size = 12)) # makes titles smaller
+  theme(title = element_text(size = 10)) # makes titles smaller
 
 bray_curtis_plot
 ```  
@@ -104,7 +104,9 @@ euclidean_plot
 
 ### PCoA aggregated to Phylum level
 
-We use again the Aitchison distances in this example.
+We use again the Aitchison distances in this example but this time we
+use data that was aggregated to the phylum level in the earlier
+examples.
 
 ```{r pcoa_phylum_aitchison}
 # Does clr transformation. Psuedocount is added, because data contains zeros. 
@@ -130,15 +132,15 @@ euclidean_phylum_pcoa_df <- data.frame(pcoa1 = euclidean_phylum_pcoa$vectors[,1]
 # Creates a plot
 euclidean_phylum_plot <- ggplot(data = euclidean_phylum_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
   geom_point() +
-  xlab("Coordinate 1") + # x axis title
-  ylab("Coordinate 2") + # y axis title
-  ggtitle("Euclidean PCoA with Phylum level CLR transformation") + # main title
+  labs(x = "Coordinate 1",
+       y = "Coordinate 2",
+       title = "Aitchison distances at Phylum level") +  
   theme(title = element_text(size = 12)) # makes titles smaller
 
 euclidean_phylum_plot
 ```  
 
-## Examples on showing external variables on PCoA plot
+## Highlighting external variables on PCoA plot
 
 ### PCoA with discrete sample grouping variable shown with colors
 
@@ -155,9 +157,9 @@ euclidean_patient_status_plot <- ggplot(data = euclidean_patient_status_pcoa_df,
                                         aes(x=pcoa1, y=pcoa2,
                                             color = patient_status)) +
   geom_point() +
-  xlab("Coordinate 1") + # x axis title
-  ylab("Coordinate 2") + # y axis title
-  ggtitle("Euclidean PCoA with CLR transformation") + # main title
+  labs(x = "Coordinate 1",
+       y = "Coordinate 2",
+       title = "PCoA with Aitchison distances") +
   theme(title = element_text(size = 12)) # makes titles smaller
 
 euclidean_patient_status_plot
@@ -180,20 +182,26 @@ euclidean_shannon_plot <- ggplot(data = euclidean_shannon_pcoa_df,
                                  aes(x=pcoa1, y=pcoa2,
                                      color = shannon)) + 
   geom_point() +
-  xlab("Coordinate 1") + # x axis title
-  ylab("Coordinate 2") + # y axis title
-  ggtitle("Euclidean PCoA with CLR transformation") + # main title
+  labs(x = "Coordinate 1",
+       y = "Coordinate 2",
+       title = "PCoA with Aitchison distances") +
   theme(title = element_text(size = 12)) # makes titles smaller
 
 euclidean_shannon_plot
 ```
 
 
-## Example on clustering
+## Clustering example
 
-### Dirichlet-Multinomial Mixture clustering 
+### Dirichlet-Multinomial Mixtures
 
-Another technique that allows to search for groups of samples that are similar to each other is a [Dirichlet-Multinomial Mixture Model](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0030126). In DMM, we first determine the number of clusters (k) that best fit the data (model evidence) using Laplace approximation. After fitting the model with k clusters, we obtain for each sample k probabilities that reflect the probability that a sample belongs to the given cluster.
+One technique that allows to search for groups of samples that are
+similar to each other is the [Dirichlet-Multinomial Mixture
+Model](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0030126). In
+DMM, we first determine the number of clusters (k) that best fit the
+data (model evidence) using Laplace approximation. After fitting the
+model with k clusters, we obtain for each sample k probabilities that
+reflect the probability that a sample belongs to the given cluster.
 
 Let's cluster the data with DMM clustering. 
 
@@ -209,56 +217,68 @@ tse_dmn <- runDMN(tse, name = "DMN", k = 1:7)
 tse_dmn
 ```
 
+Return information on metadata that the object contains.
+
 ```{r}
-# Returns information what metadata the object contains
 names(metadata(tse_dmn))
 ```
 
-```{r}
-# Returns a list of DMN objects
+This returns a list of DMN objects for a closer investigation.
+
+```{r, echo=FALSE}
 getDMN(tse_dmn)
 ```
 
 
-```{r}
-# Laplace approximation (model evidence) for each model of the k models
-plot_dmn_fit <- plotDMNFit(tse_dmn, type = "laplace")
-```
+Show Laplace approximation (model evidence) for each model of the k models.
 
 ```{r}
-# Returns the model, which fits best
+plotDMNFit(tse_dmn, type = "laplace")
+```
+
+Return the model that has the best fit.
+
+```{r}
 getBestDMNFit(tse_dmn, type = "laplace")
 ```
 
 
 ### PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors
 
+Group samples and return DMNGroup object that contains a summary.
+Patient status is used for grouping.
+
 ```{r}
-# Does the grouping. Returns DMNGroup object that contains a summary. 
-# Patient status is used for grouping. 
 dmn_group <- calculateDMNgroup(tse_dmn, variable = "patient_status", 
                              exprs_values = "counts", k = 3)
 
 dmn_group
 ```
 
+Mixture weights  (rough measure of the cluster size).
+
+
 ```{r}
-# Weights
 DirichletMultinomial::mixturewt(getBestDMNFit(tse_dmn))
 ```
 
+
+Samples-cluster assignment probabilities.
+
 ```{r}
-# Samples' probabilities that tells the likelihood to belong to component
 head(DirichletMultinomial::mixture(getBestDMNFit(tse_dmn)))
 ```
 
+Contribution of samples to each component.
+
 ```{r}
-# Contribution of samples to each component
 head(DirichletMultinomial::fitted(getBestDMNFit(tse_dmn)))
 ```
 
+Get the assignment probabilities
+
+
 ```{r}
-# Gets the probabilities
 prob <- DirichletMultinomial::mixture(getBestDMNFit(tse_dmn))
 # Add column names
 colnames(prob) <- c("comp1", "comp2", "comp3")
@@ -276,18 +296,23 @@ euclidean_dmm_plot <- ggplot(data = euclidean_dmm_pcoa_df,
                              aes(x=pcoa1, y=pcoa2,
                                  color = dmm_component)) +
   geom_point() +
-  xlab("Coordinate 1") + # x axis title
-  ylab("Coordinate 2") + # y axis title
-  ggtitle("Euclidean PCoA with CLR transformation") + # main title
+  labs(x = "Coordinate 1",
+       y = "Coordinate 2",
+       title = "PCoA with Aitchison distances") +  
   theme(title = element_text(size = 12)) # makes titles smaller
 
 euclidean_dmm_plot
 ```
 
-## Example of associations
 
-Next we can perform a permutational multivariate analysis of variance (permanova) test. Here, we test if
-different cohorts explain the variance of abundance between samples. 
+## Estimating associations with an external variable
+
+Next we show how the quantify the strength of association between the
+variation in community composition (beta diversity) and external
+factors.
+
+The standard way to do this is to perform a so-called permutational
+multivariate analysis of variance (PERMANOVA) test.
 
 ```{r}
 # Relative abundance table
@@ -305,17 +330,19 @@ print(paste0("Different different cohorts and variance of abundance between samp
              as.data.frame(permanova_cohort$aov.tab)["cohort", "Pr(>F)"]))
 ```  
 
-As we can see, the cohorts variable is not significantly associated with microbiota composition as the p-value is over 0.05. 
+As we see, the cohort variable is not significantly associated with
+microbiota composition (p-value is over 0.05).
 
-We can visualize those taxa whose abundance are the most different between cohorts. 
-This gives us information which taxa's abundances tend to differ between different 
-cohorts. 
+We can, however, visualize those taxa whose abundance are the most
+different between cohorts. This gives us information which taxa's
+abundances tend to differ between different cohorts.
 
 In order to do that, we need coefficients of taxa.
 
 ```{r}
 # Gets the coefficients
 coef <- coefficients(permanova_cohort)["cohort1",]
+
 # Gets the highest coefficients
 top.coef <- sort(head(coef[rev(order(abs(coef)))],20))
 
@@ -325,19 +352,22 @@ top_taxa_coeffient_plot <- ggplot(data.frame(x = top.coef,
                                                         unique(names(top.coef)))),
                                   aes(x = x, y = y)) +
   geom_bar(stat="identity") +
-  labs(x="",y="",title="Top Taxa") +
+  labs(x="", y="", title="Top Taxa") +
   theme_bw()
 
 top_taxa_coeffient_plot
 ```
 
-This plot above showed taxa as code names. From the plot, it is hard to tell which taxa 
-they represent. However, it is easy to add real names to plot. The lowest available 
-taxonomic level is Genus, so let's first agglomerate taxa to Genus level.
+The above plot shows taxa as code names, and it is hard to tell which
+bacterial groups they represent. It is easy to add human readable
+names. The lowest available taxonomic level is Genus, so let's first
+agglomerate taxa to Genus level.
+
 
 ```{r}
 # Agglomerates data to Genus level
 tse_genus <- agglomerateByRank(tse, rank = "Genus")
+
 # Relative abundance table
 rel_abund_assay_genus <- assays(tse_genus)$relabundance
 
@@ -356,6 +386,7 @@ print(paste0("Different different cohorts and variance of abundance between samp
 ```{r}
 # Gets the coefficients
 coef <- coefficients(permanova_cohort_genus)["cohort1",]
+
 # Gets the highest coefficients
 top.coef <- sort(head(coef[rev(order(abs(coef)))],20))
 
@@ -365,7 +396,7 @@ top_taxa_coeffient_genus_plot <- ggplot(data.frame(x = top.coef,
                                                               unique(names(top.coef)))),
                                         aes(x = x, y = y)) +
   geom_bar(stat="identity") +
-  labs(x="",y="",title="Top Taxa") +
+  labs(x="", y="", title="Top Taxa") +
   theme_bw()
 
 top_taxa_coeffient_genus_plot
