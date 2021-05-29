@@ -8,20 +8,17 @@ This site contains material for [Radboud Summer Course 7/2021](https://www.ru.nl
 ## Example workflow
 
 All files can be rendered at one go by running [main.R](main.R)
-
-[TODO list](TODO.md)
-
- * [Install R packages](install.R)
  
- * July 12: Data import and exploration
+ * Data import and exploration
+     - [Install the required R packages](install.html) 
      - [Importing data (biom files)](import.nb.html)
      - [Exploring data](explore.nb.html)
 
- * July 13: [Alpha diversity](alpha.nb.html)
+ * [Alpha diversity](alpha.nb.html)
 
- * July 14: [Beta diversity](beta.html)
+ * [Beta diversity](beta.html)
 
- * July 15: [Differential abundance](abundance.nb.html)
+ * [Differential abundance](abundance.nb.html)
 
 
 

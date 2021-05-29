@@ -3,7 +3,9 @@ title: "Installation of the necessary R packages"
 output: html_document
 ---
 
-In this notebook, required packages are installed.
+This notebook shows how to install all required packages. The
+installation needs to be done just once.
+
 
 ```{r warning = FALSE, message = FALSE}
 # Lists packages that we need from cran and bioc. 
@@ -34,8 +36,8 @@ if( length(bioc_pkg_to_be_installed) ) {
 }
 ```
 
-```{r}
-# Load packages into session
+```{r warning = FALSE, message = FALSE}
+# Loading all packages into session
 sapply(c(cran_pkg , bioc_pkg), require, character.only = TRUE)
 ```
 

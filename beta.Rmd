@@ -3,19 +3,35 @@ title: "Beta diversity"
 output: html_document
 ---
 
-This notebook calculates beta diversity.
+This notebook shows how to analyse and visualize beta diversity.
 
-Beta diversity reflects the difference in microbial composition between two samples. If two samples are similar to each other,
-beta diversity is smaller. Several different distance metrics can be calculated (e.g. Bray Curtis, UniFrac, Jaccard etc.). Each metric emphasizes the differences between samples differently. After calculating a distance metric, we can vizualize the similarity/dissimilarity between samples by using dimension reduction techniques such as Principal Coordinate Analysis (PCoA).
+Beta diversity reflects the difference in microbial composition
+between two samples. Similar samples have a low beta diversity.
 
-PCoA uses a distance matrix as input. The output is usually a 2 or 3-dimensional 
-euclidean space. The idea is to rotate data that way that the distances between 
-different samples are maximized. 
-
+Several different distance metrics are available. Some of the common
+choices include Bray-Curtis, Unifrac, Jaccard, and Aitchison
+index. Each of these dissimilarity measures emphasize different
+aspects of similarity.
 
 
 ## Examples of PCoA with different settings
+
+After estimating beta diversity we can vizualize sample similarity
+with dimension reduction techniques such as Principal Coordinate
+Analysis (PCoA).
+
+PCoA uses a dissimilarity matrix as input. The output is usually a 2
+or 3-dimensional euclidean space. The idea is to project the data so
+that the distances between different samples are maximized. The
+projection is often non-linear and designed to reveal local or global
+structures in the data distribution.
+
+
 ### PCoA for ASV-level data with Bray-Curtis
+
+Let us next show how to visualize sample similarities using the PCoA
+method and a selected dissimilarity measure. We use the same tse data
+object defined in the earlier notebooks.
 
 ```{r}
 # Relative abundance table
@@ -38,15 +54,19 @@ bray_curtis_pcoa_df <- data.frame(pcoa1 = bray_curtis_pcoa$vectors[,1],
 # Creates a plot
 bray_curtis_plot <- ggplot(data = bray_curtis_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
   geom_point() +
-  xlab("Coordinate 1") + # x axis title
-  ylab("Coordinate 2") + # y axis title
-  ggtitle("Bray-Curtis PCoA with relative abundances") + # main title
+  labs(x = "Coordinate 1",
+       y = "Coordinate 2", 
+       title = "Bray-Curtis PCoA with relative abundances") 
   theme(title = element_text(size = 12)) # makes titles smaller
 
 bray_curtis_plot
+```  
 
-```
-### PCoA for ASV-level data with CLR transformation + Euclidean distance (Aitchison distance)
+
+### PCoA for ASV-level data with Aitchison distance
+
+Aitchison distance corresponds to Euclidean distances between CLR
+transformed sample abundance vectors.
 
 ```{r}
 # Does clr transformation. Pseudocount is added, because data contains zeros. 
@@ -73,16 +93,18 @@ euclidean_pcoa_df <- data.frame(pcoa1 = euclidean_pcoa$vectors[,1],
 # Creates a plot
 euclidean_plot <- ggplot(data = euclidean_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
   geom_point() +
-  xlab("Coordinate 1") + # x axis title
-  ylab("Coordinate 2") + # y axis title
-  ggtitle("Euclidean PCoA with CLR transformation") + # main title
+  labs(x = "Coordinate 1",
+       y = "Coordinate 2",
+       title = "Euclidean PCoA with CLR transformation") +
   theme(title = element_text(size = 12)) # makes titles smaller
 
 euclidean_plot
+```  
 
-```
 
-### PCoA aggregated to Phylum level with CLR transformation + Euclidean distance
+### PCoA aggregated to Phylum level
+
+We use again the Aitchison distances in this example.
 
 ```{r}
 # Does clr transformation. Psuedocount is added, because data contains zeros. 
@@ -114,13 +136,14 @@ euclidean_phylum_plot <- ggplot(data = euclidean_phylum_pcoa_df, aes(x=pcoa1, y=
   theme(title = element_text(size = 12)) # makes titles smaller
 
 euclidean_phylum_plot
+```  
 
-```
 ## Examples on showing external variables on PCoA plot
+
 ### PCoA with discrete sample grouping variable shown with colors
 
 We can add grouping variable to existing plots. Let's add coloring to the CLR transformed,
-Genus level PCoA
+Genus level PCoA.
 
 ```{r}
 # Adds coloring information to the data frame, creates new column
@@ -138,11 +161,14 @@ euclidean_patient_status_plot <- ggplot(data = euclidean_patient_status_pcoa_df,
   theme(title = element_text(size = 12)) # makes titles smaller
 
 euclidean_patient_status_plot
-```
+```  
+
+
 ### PCoA with continuous sample grouping variable shown with colors
 
 We can also use continues values to group variables. Let's use Shannon diversity
 index that we calculated in "Alpha diversity" notebook.
+
 
 ```{r}
 # Adds coloring information to the data frame, creates new column
@@ -161,7 +187,10 @@ euclidean_shannon_plot <- ggplot(data = euclidean_shannon_pcoa_df,
 
 euclidean_shannon_plot
 ```
+
+
 ## Example on clustering
+
 ### Dirichlet-Multinomial Mixture clustering 
 
 Another technique that allows to search for groups of samples that are similar to each other is a [Dirichlet-Multinomial Mixture Model](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0030126). In DMM, we first determine the number of clusters (k) that best fit the data (model evidence) using Laplace approximation. After fitting the model with k clusters, we obtain for each sample k probabilities that reflect the probability that a sample belongs to the given cluster.
@@ -256,6 +285,7 @@ euclidean_dmm_plot
 ```
 
 ## Example of associations
+
 Next we can perform a permutational multivariate analysis of variance (permanova) test. Here, we test if
 different cohorts explain the variance of abundance between samples. 
 
@@ -273,9 +303,9 @@ permanova_cohort <- vegan::adonis(rel_abund_assay ~ cohort,
 # P-value
 print(paste0("Different different cohorts and variance of abundance between samples, p-value: ", 
              as.data.frame(permanova_cohort$aov.tab)["cohort", "Pr(>F)"]))
-```
-As we can see, the cohorts variable is not significantly associated with microbiota composition as the p-value is over 0.05. 
+```  
 
+As we can see, the cohorts variable is not significantly associated with microbiota composition as the p-value is over 0.05. 
 
 We can visualize those taxa whose abundance are the most different between cohorts. 
 This gives us information which taxa's abundances tend to differ between different 
@@ -340,3 +370,10 @@ top_taxa_coeffient_genus_plot <- ggplot(data.frame(x = top.coef,
 
 top_taxa_coeffient_genus_plot
 ```
+
+
+## Further resources
+
+For more examples, see a dedicated section on beta diversity in the
+[online book](https://microbiome.github.io/OMA/).
+

@@ -3,18 +3,24 @@ title: "Alpha diversity"
 output: html_notebook
 ---
 
+
 This notebook calculates alpha diversity indices. 
 
-Alpha diversity is a meter that measures diversity of taxa in one sample. 
-If there are large amount of different taxa in sample, alpha diversity is larger. 
+Alpha diversity is a quantity that measures diversity of taxa in one
+sample.  Higher numbers of unique taxa, and more even abundance
+distributions within a sample yield larger values for alpha diversity.
 
-Alpha diversity is an important meter in microbiome research. mia includes a wide 
-variety of alpha diversity indices. As an example, we calculate Shannon and 
-Faith diversity indices.
+Alpha diversity is an important quantity in microbiome research. The
+mia package provides access to a wide variety of alpha diversity
+indices. As an example, we show how to calculate Shannon and Faith
+diversity indices.
 
-Shannon index reflects how many different taxa there are and how evenly they are distributed within a sample. Faith diversity index
-measures the total phylogenetic distance between taxa. In both indices, higher value
-represents higher diversity. 
+Shannon index reflects how many different taxa there are and how
+evenly they are distributed within a sample. Faith index additionally
+takes into account the phylogenetic relations between the taxa when
+quantifying the overall community diversity. In both indices, higher
+values represent higher diversity.
+
 
 ```{r}
 # Indices to be calculated. If we don't specify indices, by default, every index
@@ -49,11 +55,9 @@ Next we can visualize Shannon index with histogram.
 shannon_hist <- ggplot(as.data.frame(colData(tse)), 
                        aes(x = Shannon_index)) + 
   geom_histogram(bins = 20, fill = "gray", color = "black") +
-  xlab("Shannon index") + # x axis title
-  ylab("Sample frequency")  # y axis title
+  labs(x = "Shannon index", y = "Sample frequency")
 
 shannon_hist
-
 ```
 
 To see, if there is dependency between Shannon and Faith, we can do cross-plot i.e., 
@@ -65,7 +69,7 @@ It seems that, there is a positive correlation between these two indices.
 # # Does the same thing but differently
 # plot(colData(tse)$Shannon_index, colData(tse)$Faith_diversity_index,
 #      xlab = "Shannon index",
-#      ylab = "Faith diveristy index",
+#      ylab = "Faith diversity index",
 #      main = "plot()") +
 #   # Adds regression line
 #   abline(lm(colData(tse)$Faith_diversity_index ~ colData(tse)$Shannon_index)) 
@@ -75,11 +79,13 @@ cross_plot <- ggplot2::ggplot(as.data.frame(colData(tse)),
   geom_point() + # Adds points
   geom_smooth(method=lm) + # Adds regression line
   xlab("Shannon index") + # x axis title
-  ylab("Faith diveristy index")  # y axis title
+  ylab("Faith diversity index")  # y axis title
 
 cross_plot
-
 ```
+
+
+## Visualization
 
 Next let's compare indices between different genotypes and diets. Boxplot is 
 suitable for that purpose. 
@@ -103,6 +109,9 @@ gridExtra::grid.arrange(shannon_box, faith_box, nrow = 2)
 
 ```
 
+
+## Statistical testing and comparisons
+
 To further investigate if diet explains the variation of Shannon index, let's 
 do Wilcoxon test. 
 
@@ -124,3 +133,7 @@ wilcoxon_shannon
 ```
 
 
+## Further resources
+
+For more examples, see a dedicated section on alpha diversity in the
+[online book](https://microbiome.github.io/OMA/).
