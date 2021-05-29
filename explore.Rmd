@@ -142,18 +142,19 @@ firmicutes_abund_plot <- ggplot(firmicutes_abund_df, aes(x = abund)) +
 
 firmicutes_abund_plot
 
-# TODO: is it possible to place this one under "Hide" tab? in the html?
+```
+
+```{r}
 # # Does the same thing but differently
-# # Calculates the density. Bandwidth can be adjusted; here, it is 30,000.
+# # Calculates the density. Bandwidth can be adjusted; here, it is 0.065.
 # # density() is from stats package
-# density_firmicutes <- density(abundance_firmicutes, bw = 30000)
+# density_firmicutes <- density(abundance_firmicutes, bw = 0.065)
 # 
 # # Plots the density
-# plot(density_firmicutes, 
+# plot(density_firmicutes,
 #      xlab="Relative abundance",
 #      ylab="Density",
 #      main=paste0("Firmicutes (",density_firmicutes$n, " obs, ", density_firmicutes$bw, " bw)"))
 ```
-
 
 For more visualization options and examples, see the [miaViz vignette](https://microbiome.github.io/miaViz/articles/miaViz.html).

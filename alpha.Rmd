@@ -42,14 +42,6 @@ knitr::kable(head(colData(tse)[names]))
 Next we can visualize Shannon index with histogram.
 
 ```{r}
-# # Same thing but done differently
-# # Creates histogram. With "break", number of bins can be specified. However, the
-# # value is taken as a suggestion, because hist() uses pretty() to calculate breakpoints.
-# hist(colData(tse)$Shannon_index, col = "green", breaks = 20,
-# xlab = "Shannon index", 
-# ylab = "Sample frequency", 
-# main = "Histogram of Shannon index")
-
 # ggplot needs data.frame as input. Because colData is DataFrame, it needs to be 
 # converted. 
 shannon_hist <- ggplot(as.data.frame(colData(tse)), 
@@ -58,6 +50,17 @@ shannon_hist <- ggplot(as.data.frame(colData(tse)),
   labs(x = "Shannon index", y = "Sample frequency")
 
 shannon_hist
+```
+
+```{r}
+# # Same thing but done differently
+# # Creates histogram. With "break", number of bins can be specified. However, the
+# # value is taken as a suggestion, because hist() uses pretty() to calculate breakpoints.
+# hist(colData(tse)$Shannon_index, col = "green", breaks = 20,
+# xlab = "Shannon index",
+# ylab = "Sample frequency",
+# main = "Histogram of Shannon index")
+
 ```
 
 To see, if there is dependency between Shannon and Faith, we can do cross-plot i.e., 
