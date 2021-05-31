@@ -11,7 +11,7 @@ installation needs to be done just once.
 # Lists packages that we need from cran and bioc. 
 # Some of these packages are installed automatically when mia and miaViz are installed. 
 cran_pkg <- c("BiocManager", "dplyr", "ecodist", "ggplot2", "gridExtra", "knitr", "vegan")
-bioc_pkg <- c("ape", "DESeq2",  "DirichletMultinomial", "mia", "miaViz")
+bioc_pkg <- c("ape", "DESeq2",  "DirichletMultinomial", "mia", "miaViz", "ANCOMBC")
 
 # Gets those packages that are already installed
 cran_pkg_already_installed <- cran_pkg[ cran_pkg %in% installed.packages() ]

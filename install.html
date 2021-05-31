@@ -172,7 +172,7 @@ pre code {
 <pre class="r"><code># Lists packages that we need from cran and bioc. 
 # Some of these packages are installed automatically when mia and miaViz are installed. 
 cran_pkg &lt;- c(&quot;BiocManager&quot;, &quot;dplyr&quot;, &quot;ecodist&quot;, &quot;ggplot2&quot;, &quot;gridExtra&quot;, &quot;knitr&quot;, &quot;vegan&quot;)
-bioc_pkg &lt;- c(&quot;ape&quot;, &quot;DESeq2&quot;,  &quot;DirichletMultinomial&quot;, &quot;mia&quot;, &quot;miaViz&quot;)
+bioc_pkg &lt;- c(&quot;ape&quot;, &quot;DESeq2&quot;,  &quot;DirichletMultinomial&quot;, &quot;mia&quot;, &quot;miaViz&quot;, &quot;ANCOMBC&quot;)
 
 # Gets those packages that are already installed
 cran_pkg_already_installed &lt;- cran_pkg[ cran_pkg %in% installed.packages() ]
@@ -191,10 +191,16 @@ if( length(bioc_pkg_to_be_installed) ) {
 }</code></pre>
 <pre class="r"><code># Loading all packages into session
 sapply(c(cran_pkg , bioc_pkg), require, character.only = TRUE)</code></pre>
-<pre><code>##          BiocManager                dplyr              ecodist              ggplot2            gridExtra                knitr 
-##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
-##                vegan                  ape               DESeq2 DirichletMultinomial                  mia               miaViz 
-##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE</code></pre>
+<pre><code>##          BiocManager                dplyr              ecodist 
+##                 TRUE                 TRUE                 TRUE 
+##              ggplot2            gridExtra                knitr 
+##                 TRUE                 TRUE                 TRUE 
+##                vegan                  ape               DESeq2 
+##                 TRUE                 TRUE                 TRUE 
+## DirichletMultinomial                  mia               miaViz 
+##                 TRUE                 TRUE                 TRUE 
+##              ANCOMBC 
+##                 TRUE</code></pre>
 
 
 
