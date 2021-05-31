@@ -16,7 +16,8 @@ does not require normally distributed data.
 
 Let's first collect the data for the testing purpose.
 
-```{r}
+
+```r
 # Does clr transformation. Pseudocount is added, because data contains zeros, and
 # clr transformation includes log transformation.
 tse <- transformCounts(tse, method = "clr", pseudocount = 1)
@@ -43,7 +44,8 @@ data.
 
 Do Wilcoxon test only for columns that contain abundances, not for column that contain patient status.
 
-```{r}
+
+```r
 colnames <- names(abundance_analysis_data[, !names(abundance_analysis_data) %in% "patient_status"])
 
 wilcoxon_p <- c() # Initialize empty vector for p-values
@@ -71,12 +73,13 @@ positive rate at a level that is acceptable. What is acceptable
 depends on our research goals. Here we use the fdr method, but there
 are several other methods as well.
 
-```{r}
+
+```r
 wilcoxon_p$p_adjusted <- p.adjust(wilcoxon_p$p_raw, method = "fdr")
 ```
 
-```{r}
 
+```r
 df <- data.frame(x = c(wilcoxon_p$p_raw, wilcoxon_p$p_adjusted), 
                 type=rep(c("raw", "holm"),
 		c(length(wilcoxon_p$p_raw),
@@ -88,6 +91,12 @@ wilcoxon_plot <- ggplot(df) +
 
 wilcoxon_plot
 ```
+
+```
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
+
+![](abundance_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
 ### DESeq2
 
@@ -106,20 +115,72 @@ ARCHIVED](https://hbctraining.github.io/DGE_workshop/lessons/04_DGE_DESeq2_analy
 
 Now let us show how to do this. Start by loading the libraries.
 
-```{r, results='hide'}
+
+```r
 library(DESeq2)
 library(dplyr)
 ```
 
 Run the DESeq2 analysis
 
-```{r}
+
+```r
 # Creates DESeq2 object from the data. Uses "patient_status" to create groups. 
 ds2 <- DESeqDataSet(tse, ~patient_status)
+```
 
+```
+## converting counts to integer mode
+```
+
+```
+## Warning in DESeqDataSet(tse, ~patient_status): some variables in design formula are characters, converting to factors
+```
+
+```r
 # Does the analysis
 dds <- DESeq(ds2)
+```
 
+```
+## estimating size factors
+```
+
+```
+## estimating dispersions
+```
+
+```
+## gene-wise dispersion estimates
+```
+
+```
+## mean-dispersion relationship
+```
+
+```
+## final dispersion estimates
+```
+
+```
+## fitting model and testing
+```
+
+```
+## -- replacing outliers and refitting for 37 genes
+## -- DESeq argument 'minReplicatesForReplace' = 7 
+## -- original counts are preserved in counts(dds)
+```
+
+```
+## estimating dispersions
+```
+
+```
+## fitting model and testing
+```
+
+```r
 # Gets the results from the object
 res <- results(dds)
 
@@ -134,14 +195,24 @@ df$taxon <- rownames(df)
 df <- df %>% arrange(log2FoldChange, padj)
 
 print(head(knitr::kable((df))))
-```  
+```
+
+```
+## [1] "|          |     baseMean| log2FoldChange|     lfcSE|        stat|    pvalue|      padj|taxon     |"
+## [2] "|:---------|------------:|--------------:|---------:|-----------:|---------:|---------:|:---------|"
+## [3] "|172647132 |  314.5908947|    -28.5039241| 2.9385343|  -9.7000480| 0.0000000| 0.0000000|172647132 |"
+## [4] "|17264734  |  256.7705318|    -28.2271404| 2.6184022| -10.7802922| 0.0000000| 0.0000000|17264734  |"
+## [5] "|17264728  |  179.4126934|    -27.7393863| 2.3292853| -11.9089691| 0.0000000| 0.0000000|17264728  |"
+## [6] "|17264733  |  140.2097080|    -27.3955424| 2.3215709| -11.8004333| 0.0000000| 0.0000000|17264733  |"
+```
 
 ### Comparison of Wilcoxon test and DESeq2
 
 Let's compare results that we got from the Wilcoxon test and DESeq2.
 As we can see from the scatter plot, DESeq2 gives lower p-values than Wilcoxon test. 
 
-```{r}
+
+```r
 mf <- data.frame(df$padj, wilcoxon_p$p_adjusted)
 p <- ggplot(mf, aes(x = df$padj, y = wilcoxon_p$p_adjusted)) +
        labs(x = "DESeq2 adjusted p-value", y = "t-test adjusted p-value") +
@@ -151,11 +222,29 @@ p <- ggplot(mf, aes(x = df$padj, y = wilcoxon_p$p_adjusted)) +
 print(p)
 ```
 
+```
+## Warning: Removed 18 rows containing non-finite values (stat_sum).
+```
+
+![](abundance_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+
 Prints number of p-values under 0.05
 
-```{r}
+
+```r
 print(paste0("DESeq2 p-values under 0.05: ", sum(df$padj<0.05, na.rm = TRUE), "/", length(df$padj)))
+```
+
+```
+## [1] "DESeq2 p-values under 0.05: 27/151"
+```
+
+```r
 print(paste0("Wilcoxon test p-values under 0.05: ", sum(wilcoxon_p$p_adjusted<0.05, na.rm = TRUE), "/", length(wilcoxon_p$p_adjusted)))
+```
+
+```
+## [1] "Wilcoxon test p-values under 0.05: 2/151"
 ```
 
 ### Comparison of abundance
@@ -165,7 +254,8 @@ Let's plot those taxa in the boxplot, and compare visually if abundances of thos
 differ in ADHD and control samples. For comparison, let's plot also taxa that do not
 differ between ADHD and control groups. 
 
-```{r}
+
+```r
 # Sorts p-values in increasing order. Takes 3rd first ones. Takes those rows that match
 # with p-values. Takes taxa. 
 highest3 <- df[df$padj %in% sort(df$padj, decreasing = FALSE)[1:3], ]$taxon
@@ -197,7 +287,8 @@ lowest3 <- data.frame(lowest3, as.data.frame(colData(tse)))
 
 It would give more information, however DESeq analysis needs to be done again with Genus level
 
-```{r}
+
+```r
 # Puts plots in the same picture
 gridExtra::grid.arrange(
   
@@ -260,3 +351,5 @@ gridExtra::grid.arrange(
   nrow = 2
 )
 ```
+
+![](abundance_files/figure-html/unnamed-chunk-10-1.png)<!-- -->

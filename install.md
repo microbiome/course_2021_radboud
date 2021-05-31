@@ -9,7 +9,8 @@ This notebook shows how to install all required packages. The
 installation needs to be done just once.
 
 
-```{r warning = FALSE, message = FALSE}
+
+```r
 # Lists packages that we need from cran and bioc. 
 # Some of these packages are installed automatically when mia and miaViz are installed. 
 cran_pkg <- c("BiocManager", "dplyr", "ecodist", "ggplot2", "gridExtra", "knitr", "vegan")
@@ -24,22 +25,32 @@ cran_pkg_to_be_installed <- setdiff(cran_pkg, cran_pkg_already_installed)
 bioc_pkg_to_be_installed <- setdiff(bioc_pkg, bioc_pkg_already_installed)
 ```
 
-```{r warning = FALSE, message = FALSE}
+
+```r
 # If there are packages that need to be installed, installs them
 if( length(cran_pkg_to_be_installed) ) {
    install.packages(cran_pkg_to_be_installed)
 }
 ```
 
-```{r warning = FALSE, message = FALSE}
+
+```r
 # If there are packages that need to be installed, installs them
 if( length(bioc_pkg_to_be_installed) ) {
    BiocManager::install(cran_pkg_to_be_installed, ask = F)
 }
 ```
 
-```{r warning = FALSE, message = FALSE}
+
+```r
 # Loading all packages into session
 sapply(c(cran_pkg , bioc_pkg), require, character.only = TRUE)
+```
+
+```
+##          BiocManager                dplyr              ecodist              ggplot2            gridExtra                knitr 
+##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
+##                vegan                  ape               DESeq2 DirichletMultinomial                  mia               miaViz 
+##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE
 ```
 

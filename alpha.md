@@ -24,7 +24,8 @@ quantifying the overall community diversity. In both indices, higher
 values represent higher diversity.
 
 
-```{r}
+
+```r
 # Indices to be calculated. If we don't specify indices, by default, every index
 # is calculated.
 indices <- c("shannon", "faith")
@@ -41,9 +42,21 @@ tse <- estimateDiversity(tse, index = indices, name = names)
 knitr::kable(head(colData(tse)[names]))
 ```
 
+
+
+|     | Shannon_index| Faith_diversity_index|
+|:----|-------------:|---------------------:|
+|A110 |      1.765407|               7.39224|
+|A12  |      2.716438|               6.29378|
+|A15  |      3.178103|               6.60608|
+|A19  |      2.891987|               6.79708|
+|A21  |      2.841979|               6.65110|
+|A23  |      2.797942|               5.96246|
+
 Next we can visualize Shannon index with histogram.
 
-```{r}
+
+```r
 # ggplot needs data.frame as input. Because colData is DataFrame, it needs to be 
 # converted. 
 shannon_hist <- ggplot(as.data.frame(colData(tse)), 
@@ -54,7 +67,10 @@ shannon_hist <- ggplot(as.data.frame(colData(tse)),
 shannon_hist
 ```
 
-```{r}
+![](alpha_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
+
+
+```r
 # # Same thing but done differently
 # # Creates histogram. With "break", number of bins can be specified. However, the
 # # value is taken as a suggestion, because hist() uses pretty() to calculate breakpoints.
@@ -62,7 +78,6 @@ shannon_hist
 # xlab = "Shannon index",
 # ylab = "Sample frequency",
 # main = "Histogram of Shannon index")
-
 ```
 
 To see, if there is dependency between Shannon and Faith, we can do cross-plot i.e., 
@@ -70,7 +85,8 @@ scatter plot, where one index is on the x-axis and another on the y-axis.
 
 It seems that, there is a positive correlation between these two indices. 
 
-```{r}
+
+```r
 # # Does the same thing but differently
 # plot(colData(tse)$Shannon_index, colData(tse)$Faith_diversity_index,
 #      xlab = "Shannon index",
@@ -89,13 +105,20 @@ cross_plot <- ggplot2::ggplot(as.data.frame(colData(tse)),
 cross_plot
 ```
 
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+![](alpha_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+
 
 ## Visualization
 
 Next let's compare indices between different genotypes and diets. Boxplot is 
 suitable for that purpose. 
 
-```{r}
+
+```r
 # Creates Shannon boxplot 
 shannon_box <- ggplot(as.data.frame(colData(tse)), aes(x = patient_status, 
                                                        y = Shannon_index, fill = cohort)) + 
@@ -111,8 +134,9 @@ faith_box <- ggplot(as.data.frame(colData(tse)), aes(x = patient_status,
 
 # Puts them into same picture
 gridExtra::grid.arrange(shannon_box, faith_box, nrow = 2)
-
 ```
+
+![](alpha_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
 
 ## Statistical testing and comparisons
@@ -129,12 +153,22 @@ Here it tests, if western diet and control groups have different Shannon index v
 As we can see, there is no difference between groups, because p-value is over 0.05, 
 which is often used as a standard cutoff point.
 
-```{r}
+
+```r
 # Wilcoxon test, where Shannon index is the variable that we are comparing. 
 # Diet - western or control - is the factor that we use for grouping. 
 wilcoxon_shannon <- wilcox.test(Shannon_index ~ patient_status, data = colData(tse))
 
 wilcoxon_shannon
+```
+
+```
+## 
+## 	Wilcoxon rank sum exact test
+## 
+## data:  Shannon_index by patient_status
+## W = 76, p-value = 0.4879
+## alternative hypothesis: true location shift is not equal to 0
 ```
 
 

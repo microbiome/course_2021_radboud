@@ -1,0 +1,606 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Explore data · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="alpha.html" />
+    
+    
+    <link rel="prev" href="import.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="install.html">
+            
+                <a href="install.html">
+            
+                    
+                    Install necessary packages
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="import.html">
+            
+                <a href="import.html">
+            
+                    
+                    Import data
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4" data-path="explore.html">
+            
+                <a href="explore.html">
+            
+                    
+                    Explore data
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="alpha.html">
+            
+                <a href="alpha.html">
+            
+                    
+                    Calculate alpha diversity
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="beta.html">
+            
+                <a href="beta.html">
+            
+                    
+                    Calculate beta diversity
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="abundance.html">
+            
+                <a href="abundance.html">
+            
+                    
+                    Differential abundance analysis
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Explore data</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p>Now we have loaded the data set in R, and investigated that it has all
+the necessary components.</p>
+<p>This notebook introduces now basic operations to briefly explore the data. </p>
+<h2 id="investigate-the-contents-of-a-microbiome-data-object">Investigate the contents of a microbiome data object</h2>
+<p>Dimensionality tells us, how many taxa and samples the data contains. As we can see, 
+there are 151 taxa and 27 samples.</p>
+<pre><code class="lang-r">dim(tse)
+</code></pre>
+<pre><code>## [1] 151  27
+</code></pre><p>The rowData slot contains a taxonomic table. It includes taxonomic information
+for each 151 entries. With the <code>head()</code> command, it is possible to print only 
+the beginning of the table. The rowData seems to contain information from 6 different 
+taxonomy classes.</p>
+<p><code>knitr::kable()</code> is for printing the information more nicely.</p>
+<pre><code class="lang-r">knitr::kable(head(rowData(tse)))
+</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left">Kingdom</th>
+<th style="text-align:left">Phylum</th>
+<th style="text-align:left">Class</th>
+<th style="text-align:left">Order</th>
+<th style="text-align:left">Family</th>
+<th style="text-align:left">Genus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1726470</td>
+<td style="text-align:left">Bacteria</td>
+<td style="text-align:left">Bacteroidetes</td>
+<td style="text-align:left">Bacteroidia</td>
+<td style="text-align:left">Bacteroidales</td>
+<td style="text-align:left">Bacteroidaceae</td>
+<td style="text-align:left">Bacteroides</td>
+</tr>
+<tr>
+<td style="text-align:left">1726471</td>
+<td style="text-align:left">Bacteria</td>
+<td style="text-align:left">Bacteroidetes</td>
+<td style="text-align:left">Bacteroidia</td>
+<td style="text-align:left">Bacteroidales</td>
+<td style="text-align:left">Bacteroidaceae</td>
+<td style="text-align:left">Bacteroides</td>
+</tr>
+<tr>
+<td style="text-align:left">17264731</td>
+<td style="text-align:left">Bacteria</td>
+<td style="text-align:left">Bacteroidetes</td>
+<td style="text-align:left">Bacteroidia</td>
+<td style="text-align:left">Bacteroidales</td>
+<td style="text-align:left">Porphyromonadaceae</td>
+<td style="text-align:left">Parabacteroides</td>
+</tr>
+<tr>
+<td style="text-align:left">17264726</td>
+<td style="text-align:left">Bacteria</td>
+<td style="text-align:left">Bacteroidetes</td>
+<td style="text-align:left">Bacteroidia</td>
+<td style="text-align:left">Bacteroidales</td>
+<td style="text-align:left">Bacteroidaceae</td>
+<td style="text-align:left">Bacteroides</td>
+</tr>
+<tr>
+<td style="text-align:left">1726472</td>
+<td style="text-align:left">Bacteria</td>
+<td style="text-align:left">Verrucomicrobia</td>
+<td style="text-align:left">Verrucomicrobiae</td>
+<td style="text-align:left">Verrucomicrobiales</td>
+<td style="text-align:left">Verrucomicrobiaceae</td>
+<td style="text-align:left">Akkermansia</td>
+</tr>
+<tr>
+<td style="text-align:left">17264724</td>
+<td style="text-align:left">Bacteria</td>
+<td style="text-align:left">Bacteroidetes</td>
+<td style="text-align:left">Bacteroidia</td>
+<td style="text-align:left">Bacteroidales</td>
+<td style="text-align:left">Bacteroidaceae</td>
+<td style="text-align:left">Bacteroides</td>
+</tr>
+</tbody>
+</table>
+<p>The colData slot contains sample metadata. It contains information for all 27 samples.
+However, here only the 6 first samples are shown as we use the <code>head()</code> command. There
+are 4 columns, that contain information, e.g., about patients&apos; status, and cohort.</p>
+<pre><code class="lang-r">knitr::kable(head(colData(tse)))
+</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left">patient_status</th>
+<th style="text-align:left">cohort</th>
+<th style="text-align:left">patient_status_vs_cohort</th>
+<th style="text-align:left">sample_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">A110</td>
+<td style="text-align:left">ADHD</td>
+<td style="text-align:left">Cohort_1</td>
+<td style="text-align:left">ADHD_Cohort_1</td>
+<td style="text-align:left">A110</td>
+</tr>
+<tr>
+<td style="text-align:left">A12</td>
+<td style="text-align:left">ADHD</td>
+<td style="text-align:left">Cohort_1</td>
+<td style="text-align:left">ADHD_Cohort_1</td>
+<td style="text-align:left">A12</td>
+</tr>
+<tr>
+<td style="text-align:left">A15</td>
+<td style="text-align:left">ADHD</td>
+<td style="text-align:left">Cohort_1</td>
+<td style="text-align:left">ADHD_Cohort_1</td>
+<td style="text-align:left">A15</td>
+</tr>
+<tr>
+<td style="text-align:left">A19</td>
+<td style="text-align:left">ADHD</td>
+<td style="text-align:left">Cohort_1</td>
+<td style="text-align:left">ADHD_Cohort_1</td>
+<td style="text-align:left">A19</td>
+</tr>
+<tr>
+<td style="text-align:left">A21</td>
+<td style="text-align:left">ADHD</td>
+<td style="text-align:left">Cohort_2</td>
+<td style="text-align:left">ADHD_Cohort_2</td>
+<td style="text-align:left">A21</td>
+</tr>
+<tr>
+<td style="text-align:left">A23</td>
+<td style="text-align:left">ADHD</td>
+<td style="text-align:left">Cohort_2</td>
+<td style="text-align:left">ADHD_Cohort_2</td>
+<td style="text-align:left">A23</td>
+</tr>
+</tbody>
+</table>
+<p>From here, we can observe, e.g., what is the patient status distribution.
+<code>colData(tse)$patient_status</code> fetches the data from the column, <code>table()</code> creates a table
+that shows how many times each class is present, and <code>sort()</code> sorts the table to 
+ascending order.</p>
+<p>There are 13 samples from patients having ADHD, and 14 control samples.</p>
+<pre><code class="lang-r">sort(table(colData(tse)$patient_status))
+</code></pre>
+<pre><code>## 
+##    ADHD Control 
+##      13      14
+</code></pre><h2 id="manipulate-the-data">Manipulate the data</h2>
+<h3 id="transformations">Transformations</h3>
+<p>Abundances are always relative even though counts are calculated. That is due to technical aspects of the data generation process (see e.g. <a href="https://www.frontiersin.org/articles/10.3389/fmicb.2017.02224/full" target="_blank">Gloor et al., 2017</a>). Below, we calculate relative abundances as these are usually easier to interpret
+than plain counts. For some statistical models we need to transform the data into other formats as explained in above link (and as we will see later).</p>
+<pre><code class="lang-r"><span class="hljs-comment"># Calculates relative abundances, and stores the table to assays</span>
+tse &lt;- transformCounts(tse, method = <span class="hljs-string">&quot;relabundance&quot;</span>)
+</code></pre>
+<h3 id="aggregation">Aggregation</h3>
+<p>We might want to know, which taxonomic rank is, e.g., the most abundant. We can 
+easily agglomerate the data based on taxonomic ranks. Here, we agglomerate 
+the data at Phylum level. </p>
+<pre><code class="lang-r">tse_phylum &lt;- agglomerateByRank(tse, rank = <span class="hljs-string">&quot;Phylum&quot;</span>)
+
+<span class="hljs-comment"># Show dimensionality</span>
+dim(tse_phylum)
+</code></pre>
+<pre><code>## [1]  5 27
+</code></pre><p>Now there are 5 taxa and 27 samples. It means that there are 5 different Phylum
+level taxa. From rowData we might see little bit easier, how ranks are agglomerated. 
+For example, all Firmicutes are combined together. That is why all lower rank 
+information is lost. From assay we could see, that all abundances of taxa that 
+belongs to Firmicutes are summed up.</p>
+<pre><code class="lang-r">knitr::kable(head(rowData(tse_phylum)))
+</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left">Kingdom</th>
+<th style="text-align:left">Phylum</th>
+<th style="text-align:left">Class</th>
+<th style="text-align:left">Order</th>
+<th style="text-align:left">Family</th>
+<th style="text-align:left">Genus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Bacteroidetes</td>
+<td style="text-align:left">Bacteria</td>
+<td style="text-align:left">Bacteroidetes</td>
+<td style="text-align:left">NA</td>
+<td style="text-align:left">NA</td>
+<td style="text-align:left">NA</td>
+<td style="text-align:left">NA</td>
+</tr>
+<tr>
+<td style="text-align:left">Verrucomicrobia</td>
+<td style="text-align:left">Bacteria</td>
+<td style="text-align:left">Verrucomicrobia</td>
+<td style="text-align:left">NA</td>
+<td style="text-align:left">NA</td>
+<td style="text-align:left">NA</td>
+<td style="text-align:left">NA</td>
+</tr>
+<tr>
+<td style="text-align:left">Proteobacteria</td>
+<td style="text-align:left">Bacteria</td>
+<td style="text-align:left">Proteobacteria</td>
+<td style="text-align:left">NA</td>
+<td style="text-align:left">NA</td>
+<td style="text-align:left">NA</td>
+<td style="text-align:left">NA</td>
+</tr>
+<tr>
+<td style="text-align:left">Firmicutes</td>
+<td style="text-align:left">Bacteria</td>
+<td style="text-align:left">Firmicutes</td>
+<td style="text-align:left">NA</td>
+<td style="text-align:left">NA</td>
+<td style="text-align:left">NA</td>
+<td style="text-align:left">NA</td>
+</tr>
+<tr>
+<td style="text-align:left">Cyanobacteria</td>
+<td style="text-align:left">Bacteria</td>
+<td style="text-align:left">Cyanobacteria</td>
+<td style="text-align:left">NA</td>
+<td style="text-align:left">NA</td>
+<td style="text-align:left">NA</td>
+<td style="text-align:left">NA</td>
+</tr>
+</tbody>
+</table>
+<h2 id="visualization">Visualization</h2>
+<p>For plotting, we use miaViz package, so we have to load it.</p>
+<pre><code class="lang-r"><span class="hljs-keyword">library</span>(<span class="hljs-string">&quot;miaViz&quot;</span>)
+</code></pre>
+<p>Next, we can plot the Phylum level abundances. </p>
+<pre><code class="lang-r"><span class="hljs-comment"># Here we specify &quot;relabundance&quot; to be abundance table that we use for plotting.</span>
+<span class="hljs-comment"># Note that we can use agglomerated or non-agglomerated tse as an input, because</span>
+<span class="hljs-comment"># the function agglomeration is built-in option. </span>
+
+<span class="hljs-comment"># Legend does not fit into picture, so its height is reduced.</span>
+plot_abundance &lt;- plotAbundance(tse, abund_values=<span class="hljs-string">&quot;relabundance&quot;</span>, rank = <span class="hljs-string">&quot;Phylum&quot;</span>) +
+  theme(legend.key.height = unit(<span class="hljs-number">0.5</span>, <span class="hljs-string">&quot;cm&quot;</span>)) +
+  scale_y_continuous(label = scales::percent)
+</code></pre>
+<pre><code>## Scale for &apos;y&apos; is already present. Adding another scale for &apos;y&apos;, which will replace the existing scale.
+</code></pre><pre><code class="lang-r">plot_abundance
+</code></pre>
+<p><img src="explore_files/figure-html/unnamed-chunk-9-1.png" alt=""><!-- --></p>
+<p>From density plot, we could see, e.g., what is the most common abundance.
+Here we plot distribution of Firmicutes relative abundances in different samples. 
+Density plot can be seen as smoothened histogram.</p>
+<p>From the plot, we can see that there are peak when abundance is little bit under 30 %.</p>
+<pre><code class="lang-r"><span class="hljs-comment"># Subset data by taking only Firmicutes</span>
+tse_firmicutes &lt;- tse_phylum[<span class="hljs-string">&quot;Firmicutes&quot;</span>]
+
+<span class="hljs-comment"># Gets the abundance table</span>
+abundance_firmicutes &lt;- assay(tse_firmicutes, <span class="hljs-string">&quot;relabundance&quot;</span>)
+
+<span class="hljs-comment"># Creates a data frame object, where first column includes abundances</span>
+firmicutes_abund_df &lt;- as.data.frame(t(abundance_firmicutes))
+<span class="hljs-comment"># Rename the first and only column</span>
+colnames(firmicutes_abund_df) &lt;- <span class="hljs-string">&quot;abund&quot;</span>
+
+<span class="hljs-comment"># Creates a plot. Parameters inside feom_density are optional. With </span>
+<span class="hljs-comment"># geom_density(bw=1000), it is possible to adjust bandwidth.</span>
+firmicutes_abund_plot &lt;- ggplot(firmicutes_abund_df, aes(x = abund)) + 
+  geom_density(color=<span class="hljs-string">&quot;darkred&quot;</span>, fill=<span class="hljs-string">&quot;lightblue&quot;</span>) + 
+  labs(x = <span class="hljs-string">&quot;Relative abundance&quot;</span>, title = <span class="hljs-string">&quot;Firmicutes&quot;</span>) +
+  theme_classic() + <span class="hljs-comment"># Changes the background</span>
+  scale_x_continuous(label = scales::percent)
+
+firmicutes_abund_plot
+</code></pre>
+<p><img src="explore_files/figure-html/unnamed-chunk-10-1.png" alt=""><!-- --></p>
+<pre><code class="lang-r"><span class="hljs-comment"># # Does the same thing but differently</span>
+<span class="hljs-comment"># # Calculates the density. Bandwidth can be adjusted; here, it is 0.065.</span>
+<span class="hljs-comment"># # density() is from stats package</span>
+<span class="hljs-comment"># density_firmicutes &lt;- density(abundance_firmicutes, bw = 0.065)</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># # Plots the density</span>
+<span class="hljs-comment"># plot(density_firmicutes,</span>
+<span class="hljs-comment">#      xlab=&quot;Relative abundance&quot;,</span>
+<span class="hljs-comment">#      ylab=&quot;Density&quot;,</span>
+<span class="hljs-comment">#      main=paste0(&quot;Firmicutes (&quot;,density_firmicutes$n, &quot; obs, &quot;, density_firmicutes$bw, &quot; bw)&quot;))</span>
+</code></pre>
+<p>For more visualization options and examples, see the <a href="https://microbiome.github.io/miaViz/articles/miaViz.html" target="_blank">miaViz vignette</a>.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="import.html" class="navigation navigation-prev " aria-label="Previous page: Import data">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="alpha.html" class="navigation navigation-next " aria-label="Next page: Calculate alpha diversity">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Explore data","output":{"html_document":{"keep_md":true}},"level":"1.4","depth":1,"next":{"title":"Calculate alpha diversity","level":"1.5","depth":1,"path":"alpha.md","ref":"alpha.md","articles":[]},"previous":{"title":"Import data","level":"1.3","depth":1,"path":"import.md","ref":"import.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"explore.md","mtime":"2021-05-31T08:00:40.763Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-31T08:03:02.773Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
