@@ -255,37 +255,37 @@ This returns a list of DMN objects for a closer investigation.
     ## class: DMN 
     ## k: 2 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11440.98 BIC: 12161.29 AIC: 11964.97 
+    ## Laplace: 11704.39 BIC: 12399.15 AIC: 12202.83 
     ## 
     ## [[3]]
     ## class: DMN 
     ## k: 3 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11059.63 BIC: 12266.31 AIC: 11971.51 
+    ## Laplace: 11059.97 BIC: 12266.31 AIC: 11971.51 
     ## 
     ## [[4]]
     ## class: DMN 
     ## k: 4 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11417.58 BIC: 13047.39 AIC: 12654.11 
+    ## Laplace: 11417.52 BIC: 13047.39 AIC: 12654.11 
     ## 
     ## [[5]]
     ## class: DMN 
     ## k: 5 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11325.67 BIC: 13255.59 AIC: 12763.82 
+    ## Laplace: 11217.49 BIC: 13305.58 AIC: 12813.8 
     ## 
     ## [[6]]
     ## class: DMN 
     ## k: 6 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11202.28 BIC: 13718.9 AIC: 13128.65 
+    ## Laplace: 11202.19 BIC: 13718.9 AIC: 13128.65 
     ## 
     ## [[7]]
     ## class: DMN 
     ## k: 7 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11311.06 BIC: 14200.57 AIC: 13511.84
+    ## Laplace: 11310.98 BIC: 14200.57 AIC: 13511.84
 
 Show Laplace approximation (model evidence) for each model of the k
 models.
@@ -301,7 +301,7 @@ Return the model that has the best fit.
     ## class: DMN 
     ## k: 3 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11059.63 BIC: 12266.31 AIC: 11971.51
+    ## Laplace: 11059.97 BIC: 12266.31 AIC: 11971.51
 
 ### PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors
 
@@ -315,42 +315,42 @@ Patient status is used for grouping.
 
     ## class: DMNGroup 
     ## summary:
-    ##         k samples taxa      NLE    LogDet  Laplace      BIC      AIC
-    ## ADHD    3      13  151 6018.131 -344.3973 5427.816 6601.657 6473.131
-    ## Control 3      14  151 6647.269 -147.5136 6155.395 7247.655 7102.269
+    ##         k samples taxa      NLE     LogDet  Laplace      BIC      AIC
+    ## ADHD    3      13  151 6330.860  -51.46608 5887.010 6914.386 6785.860
+    ## Control 3      14  151 6647.269 -148.08550 6155.109 7247.655 7102.269
 
 Mixture weights (rough measure of the cluster size).
 
     DirichletMultinomial::mixturewt(getBestDMNFit(tse_dmn))
 
     ##          pi    theta
-    ## 1 0.4814815 31.27764
-    ## 2 0.2962963 47.34478
-    ## 3 0.2222222 92.27382
+    ## 1 0.4814815 31.27755
+    ## 2 0.2962963 47.34312
+    ## 3 0.2222222 92.27366
 
 Samples-cluster assignment probabilities.
 
     head(DirichletMultinomial::mixture(getBestDMNFit(tse_dmn)))
 
     ##               [,1]          [,2]          [,3]
-    ## A110  1.000000e+00 1.263720e-144 7.529826e-205
-    ## A12  9.901630e-117  6.162596e-93  1.000000e+00
-    ## A15   1.000000e+00 9.639041e-119 3.343372e-234
-    ## A19  5.418072e-112 1.834471e-107  1.000000e+00
-    ## A21   2.161480e-93  4.769801e-96  1.000000e+00
-    ## A23   1.000000e+00 8.909295e-111 1.926440e-161
+    ## A110  1.000000e+00 1.243432e-144 7.573760e-205
+    ## A12  9.569322e-117  6.111961e-93  1.000000e+00
+    ## A15   1.000000e+00 9.474051e-119 3.371519e-234
+    ## A19  5.206545e-112 1.810940e-107  1.000000e+00
+    ## A21   2.083447e-93  4.705519e-96  1.000000e+00
+    ## A23   1.000000e+00 8.772512e-111 1.937593e-161
 
 Contribution of samples to each component.
 
     head(DirichletMultinomial::fitted(getBestDMNFit(tse_dmn)))
 
-    ##                [,1]        [,2]       [,3]
-    ## 1726470  6.35219270 2.898805224 20.1893854
-    ## 1726471  5.28793777 0.002048358  0.1532217
-    ## 17264731 0.00124924 9.144887207  2.0112168
-    ## 17264726 0.14047999 1.363494430  7.5891813
-    ## 1726472  2.10414759 3.523533846  2.6656536
-    ## 17264724 0.07236409 0.002048358  9.8545722
+    ##                 [,1]        [,2]       [,3]
+    ## 1726470  6.352047761 2.898600490 20.1891979
+    ## 1726471  5.287910938 0.002046998  0.1532228
+    ## 17264731 0.001247258 9.144472672  2.0112071
+    ## 17264726 0.140480681 1.363474915  7.5892910
+    ## 1726472  2.104229498 3.523540081  2.6656606
+    ## 17264724 0.072365168 0.002046998  9.8545713
 
 Get the assignment probabilities
 
@@ -403,7 +403,7 @@ multivariate analysis of variance (PERMANOVA) test.
     print(paste0("Different different cohorts and variance of abundance between samples, p-value: ", 
                  as.data.frame(permanova_cohort$aov.tab)["cohort", "Pr(>F)"]))
 
-    ## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7439"
+    ## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7405"
 
 As we see, the cohort variable is not significantly associated with
 microbiota composition (p-value is over 0.05).
@@ -434,47 +434,20 @@ In order to do that, we need coefficients of taxa.
 ![](beta_files/figure-markdown_strict/unnamed-chunk-12-1.png)
 
 The above plot shows taxa as code names, and it is hard to tell which
-bacterial groups they represent. It is easy to add human readable names.
-The lowest available taxonomic level is Genus, so let’s first
-agglomerate taxa to Genus level.
+bacterial groups they represent. However, it is easy to add human
+readable names. We can fetch those from rowData. Here we use Genus level
+names.
 
-    # Agglomerates data to Genus level
-    tse_genus <- agglomerateByRank(tse, rank = "Genus")
+    # Gets corresponding Genus level names and stores them to top.coef
+    names <- rowData(tse)[names(top.coef), ][,"Genus"]
 
-    # Relative abundance table
-    rel_abund_assay_genus <- assays(tse_genus)$relabundance
+    # Adds new labels to the plot
+    top_taxa_coeffient_plot <- top_taxa_coeffient_plot +
+      scale_y_discrete(labels = names) # Adds new labels
 
-    # Transposes it to get taxa to columns
-    rel_abund_assay_genus <- t(rel_abund_assay_genus)
+    top_taxa_coeffient_plot
 
-    permanova_cohort_genus <- vegan::adonis(rel_abund_assay_genus ~ cohort,
-                                            data = colData(tse_genus),
-                                            permutations = 9999)
-
-    # P-value
-    print(paste0("Different different cohorts and variance of abundance between samples, p-value: ", 
-                 as.data.frame(permanova_cohort_genus$aov.tab)["cohort", "Pr(>F)"]))
-
-    ## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7758"
-
-    # Gets the coefficients
-    coef <- coefficients(permanova_cohort_genus)["cohort1",]
-
-    # Gets the highest coefficients
-    top.coef <- sort(head(coef[rev(order(abs(coef)))],20))
-
-    # Plots the coefficients
-    top_taxa_coeffient_genus_plot <- ggplot(data.frame(x = top.coef,
-                                                       y = factor(names(top.coef),
-                                                                  unique(names(top.coef)))),
-                                            aes(x = x, y = y)) +
-      geom_bar(stat="identity") +
-      labs(x="", y="", title="Top Taxa") +
-      theme_bw()
-
-    top_taxa_coeffient_genus_plot
-
-![](beta_files/figure-markdown_strict/unnamed-chunk-14-1.png)
+![](beta_files/figure-markdown_strict/unnamed-chunk-13-1.png)
 
 ## Further resources
 

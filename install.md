@@ -28,7 +28,9 @@ installation needs to be done just once.
     # Loading all packages into session
     sapply(c(cran_pkg , bioc_pkg), require, character.only = TRUE)
 
-    ##          BiocManager                dplyr              ecodist              ggplot2            gridExtra                knitr                vegan 
-    ##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
-    ##              ANCOMBC                  ape               DESeq2 DirichletMultinomial                  mia               miaViz 
-    ##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE
+    ##          BiocManager                dplyr              ecodist              ggplot2            gridExtra                knitr 
+    ##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
+    ##                vegan              ANCOMBC                  ape               DESeq2 DirichletMultinomial                  mia 
+    ##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
+    ##               miaViz 
+    ##                 TRUE
