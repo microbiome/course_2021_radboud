@@ -167,7 +167,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7" data-path="abundance.html">
+        <li class="chapter " data-level="1.7" data-path="dmm.html">
+            
+                <a href="dmm.html">
+            
+                    
+                    DMM analysis
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="abundance.html">
             
                 <a href="abundance.html">
             
@@ -356,19 +369,19 @@ faith_box &lt;- ggplot(as.data.frame(colData(tse)), aes(x = patient_status,
 gridExtra::grid.arrange(shannon_box, faith_box, nrow = 2)
 </code></pre><p><img src="alpha_files/figure-markdown_strict/unnamed-chunk-5-1.png" alt=""></p>
 <h2 id="statistical-testing-and-comparisons">Statistical testing and comparisons</h2>
-<p>To further investigate if diet explains the variation of Shannon index,
-let&#x2019;s do Wilcoxon test.</p>
+<p>To further investigate if patient status explains the variation of
+Shannon index, let&#x2019;s do Wilcoxon test.</p>
 <p>Wilcoxon test is similar to Student&#x2019;s t-test, however, Student&#x2019;s t-test
 is parametric. It means that the data must be normally distributed.
 Wilcoxon test is non-parametric so it doesn&#x2019;t make any assumptions about
 the distribution.</p>
 <p>Wilcoxon test tests if there are statistical differences between two
-groups. Here it tests, if western diet and control groups have different
-Shannon index values. As we can see, there is no difference between
-groups, because p-value is over 0.05, which is often used as a standard
-cutoff point.</p>
+groups. Here it tests, if ADHD and control groups have different Shannon
+index values. As we can see, there is no difference between groups,
+because p-value is over 0.05, which is often used as a standard cutoff
+point.</p>
 <pre><code># Wilcoxon test, where Shannon index is the variable that we are comparing. 
-# Diet - western or control - is the factor that we use for grouping. 
+# Patient status - ADHD or control - is the factor that we use for grouping. 
 wilcoxon_shannon &lt;- wilcox.test(Shannon_index ~ patient_status, data = colData(tse))
 
 wilcoxon_shannon
@@ -378,6 +391,32 @@ wilcoxon_shannon
 ## 
 ## data:  Shannon_index by patient_status
 ## W = 76, p-value = 0.4879
+## alternative hypothesis: true location shift is not equal to 0
+</code></pre><p>Another test that we can make is to test if ADHD samples differs between
+different cohorts. From boxplot that we made in previous step, we can
+see that there might be statistically significant difference between
+different cohorts.</p>
+<p>Let&#x2019;s compare Shannon index of ADHD samples between cohort 2 and cohort
+3.</p>
+<p>As we can see, there is statistically significant difference between the
+cohorts.</p>
+<pre><code># Takes subset of colData. Takes only ADHD samples
+ADHD_shannon &lt;- colData(tse)[ colData(tse)[, &quot;patient_status&quot;] == &quot;ADHD&quot; , ]
+
+# Takes subset of colData. Takes only samples that are in cohort 2 or cohort 3.
+ADHD_shannon &lt;- ADHD_shannon[ ADHD_shannon[, &quot;cohort&quot;] %in% c(&quot;Cohort_2&quot;, &quot;Cohort_3&quot;) , ]
+
+# Wilcoxon test, where Shannon index is the variable that we are comparing. 
+# Cohort - 2 or 3 - is the factor that we use for grouping. 
+wilcoxon_shannon_ADHD_cohorts &lt;- wilcox.test(Shannon_index ~ cohort, data = ADHD_shannon)
+
+wilcoxon_shannon_ADHD_cohorts
+
+## 
+##  Wilcoxon rank sum exact test
+## 
+## data:  Shannon_index by cohort
+## W = 20, p-value = 0.01587
 ## alternative hypothesis: true location shift is not equal to 0
 </code></pre><h2 id="further-resources">Further resources</h2>
 <p>For more examples, see a dedicated section on alpha diversity in the
@@ -425,7 +464,7 @@ wilcoxon_shannon
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Calculate alpha diversity","level":"1.5","depth":1,"next":{"title":"Calculate beta diversity","level":"1.6","depth":1,"path":"beta.md","ref":"beta.md","articles":[]},"previous":{"title":"Explore data","level":"1.4","depth":1,"path":"explore.md","ref":"explore.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"alpha.md","mtime":"2021-06-01T08:35:15.462Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-01T08:41:59.322Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Calculate alpha diversity","level":"1.5","depth":1,"next":{"title":"Calculate beta diversity","level":"1.6","depth":1,"path":"beta.md","ref":"beta.md","articles":[]},"previous":{"title":"Explore data","level":"1.4","depth":1,"path":"explore.md","ref":"explore.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"alpha.md","mtime":"2021-06-01T14:47:07.842Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-01T14:49:12.638Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

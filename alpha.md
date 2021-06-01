@@ -148,8 +148,8 @@ Boxplot is suitable for that purpose.
 
 ## Statistical testing and comparisons
 
-To further investigate if diet explains the variation of Shannon index,
-let’s do Wilcoxon test.
+To further investigate if patient status explains the variation of
+Shannon index, let’s do Wilcoxon test.
 
 Wilcoxon test is similar to Student’s t-test, however, Student’s t-test
 is parametric. It means that the data must be normally distributed.
@@ -157,13 +157,13 @@ Wilcoxon test is non-parametric so it doesn’t make any assumptions about
 the distribution.
 
 Wilcoxon test tests if there are statistical differences between two
-groups. Here it tests, if western diet and control groups have different
-Shannon index values. As we can see, there is no difference between
-groups, because p-value is over 0.05, which is often used as a standard
-cutoff point.
+groups. Here it tests, if ADHD and control groups have different Shannon
+index values. As we can see, there is no difference between groups,
+because p-value is over 0.05, which is often used as a standard cutoff
+point.
 
     # Wilcoxon test, where Shannon index is the variable that we are comparing. 
-    # Diet - western or control - is the factor that we use for grouping. 
+    # Patient status - ADHD or control - is the factor that we use for grouping. 
     wilcoxon_shannon <- wilcox.test(Shannon_index ~ patient_status, data = colData(tse))
 
     wilcoxon_shannon
@@ -173,6 +173,36 @@ cutoff point.
     ## 
     ## data:  Shannon_index by patient_status
     ## W = 76, p-value = 0.4879
+    ## alternative hypothesis: true location shift is not equal to 0
+
+Another test that we can make is to test if ADHD samples differs between
+different cohorts. From boxplot that we made in previous step, we can
+see that there might be statistically significant difference between
+different cohorts.
+
+Let’s compare Shannon index of ADHD samples between cohort 2 and cohort
+3.
+
+As we can see, there is statistically significant difference between the
+cohorts.
+
+    # Takes subset of colData. Takes only ADHD samples
+    ADHD_shannon <- colData(tse)[ colData(tse)[, "patient_status"] == "ADHD" , ]
+
+    # Takes subset of colData. Takes only samples that are in cohort 2 or cohort 3.
+    ADHD_shannon <- ADHD_shannon[ ADHD_shannon[, "cohort"] %in% c("Cohort_2", "Cohort_3") , ]
+
+    # Wilcoxon test, where Shannon index is the variable that we are comparing. 
+    # Cohort - 2 or 3 - is the factor that we use for grouping. 
+    wilcoxon_shannon_ADHD_cohorts <- wilcox.test(Shannon_index ~ cohort, data = ADHD_shannon)
+
+    wilcoxon_shannon_ADHD_cohorts
+
+    ## 
+    ##  Wilcoxon rank sum exact test
+    ## 
+    ## data:  Shannon_index by cohort
+    ## W = 20, p-value = 0.01587
     ## alternative hypothesis: true location shift is not equal to 0
 
 ## Further resources

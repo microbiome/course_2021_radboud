@@ -2,7 +2,7 @@
 
 In this notebook, we analyse abundances with two different methods:
 **Wilcoxon test**, and **DESeq2**. Both of these test statistical
-differences between groups.
+differences between groups. We analyse Genus level abundances.
 
 ### Wilcoxon test
 
@@ -12,27 +12,25 @@ does not require normally distributed data.
 
 Let’s first collect the data for the testing purpose.
 
+    # Agglomerates data to Genus level
+    tse_genus <- agglomerateByRank(tse, rank = "Genus")
+
     # Does clr transformation. Pseudocount is added, because data contains zeros, and
     # clr transformation includes log transformation.
-    tse <- transformCounts(tse, method = "clr", pseudocount = 1)
+    tse_genus <- transformCounts(tse_genus, method = "clr", pseudocount = 1)
 
     # Does transpose, so samples are in rows, then creates a data frame.
-    abundance_analysis_data <- data.frame(t(assay(tse, "clr")))
+    abundance_analysis_data <- data.frame(t(assay(tse_genus, "clr")))
 
     # Then we need variable for grouping samples. "patient_status" column includes information
     # about patients' status. There two groups "ADHD" and "control". Let's include that to the data frame.
-    abundance_analysis_data <- cbind(abundance_analysis_data, patient_status = colData(tse)$patient_status)
-
-    # Subsets data if, more than 2 different groups
-    # abundance_analysis_data_sub <- abundance_analysis_data[
-    #abundance_analysis_data$patient_status_vs_cohort == "ADHD_Cohort_1" |
-    #abundance_analysis_data$patient_status_vs_cohort == "Control_Cohort_3",]
+    abundance_analysis_data <- cbind(abundance_analysis_data, patient_status = colData(tse_genus)$patient_status)
 
 Now we can do the Wilcoxon test. We test all the taxa by looping through
 columns, and store individual p-values to a vector. Then we create a
 data frame from collected data.
 
-Do Wilcoxon test only for columns that contain abundances, not for
+Does Wilcoxon test only for columns that contain abundances, not for
 column that contain patient status.
 
     colnames <- names(abundance_analysis_data[, !names(abundance_analysis_data) %in% "patient_status"])
@@ -100,11 +98,13 @@ Now let us show how to do this. Start by loading the libraries.
 Run the DESeq2 analysis
 
     # Creates DESeq2 object from the data. Uses "patient_status" to create groups. 
-    ds2 <- DESeqDataSet(tse, ~patient_status)
+    ds2 <- DESeqDataSet(tse_genus, ~patient_status)
 
     ## converting counts to integer mode
 
-    ## Warning in DESeqDataSet(tse, ~patient_status): some variables in design formula are characters, converting to factors
+    ## Warning in DESeqDataSet(tse_genus, ~patient_status): 2 duplicate rownames were renamed by adding numbers
+
+    ## Warning in DESeqDataSet(tse_genus, ~patient_status): some variables in design formula are characters, converting to factors
 
     # Does the analysis
     dds <- DESeq(ds2)
@@ -121,7 +121,7 @@ Run the DESeq2 analysis
 
     ## fitting model and testing
 
-    ## -- replacing outliers and refitting for 37 genes
+    ## -- replacing outliers and refitting for 11 genes
     ## -- DESeq argument 'minReplicatesForReplace' = 7 
     ## -- original counts are preserved in counts(dds)
 
@@ -144,12 +144,12 @@ Run the DESeq2 analysis
 
     print(head(knitr::kable((df))))
 
-    ## [1] "|          |     baseMean| log2FoldChange|     lfcSE|        stat|    pvalue|      padj|taxon     |"
-    ## [2] "|:---------|------------:|--------------:|---------:|-----------:|---------:|---------:|:---------|"
-    ## [3] "|172647132 |  314.5908947|    -28.5039241| 2.9385343|  -9.7000480| 0.0000000| 0.0000000|172647132 |"
-    ## [4] "|17264734  |  256.7705318|    -28.2271404| 2.6184022| -10.7802922| 0.0000000| 0.0000000|17264734  |"
-    ## [5] "|17264728  |  179.4126934|    -27.7393863| 2.3292853| -11.9089691| 0.0000000| 0.0000000|17264728  |"
-    ## [6] "|17264733  |  140.2097080|    -27.3955424| 2.3215709| -11.8004333| 0.0000000| 0.0000000|17264733  |"
+    ## [1] "|                                            |     baseMean| log2FoldChange|     lfcSE|        stat|    pvalue|      padj|taxon                                       |"
+    ## [2] "|:-------------------------------------------|------------:|--------------:|---------:|-----------:|---------:|---------:|:-------------------------------------------|"
+    ## [3] "|Genus:Ruminococcaceae_UCG-014               |   22.5482967|    -24.8912675| 2.4606839| -10.1155893| 0.0000000| 0.0000000|Genus:Ruminococcaceae_UCG-014               |"
+    ## [4] "|Order:Bacteroidales                         |   40.3537330|     -9.2417977| 2.1362046|  -4.3262698| 0.0000152| 0.0002730|Order:Bacteroidales                         |"
+    ## [5] "|Genus:Faecalibacterium                      |  231.0795021|     -7.0744335| 1.7456124|  -4.0526944| 0.0000506| 0.0006835|Genus:Faecalibacterium                      |"
+    ## [6] "|Genus:Catabacter                            |   18.0456142|     -6.6154539| 1.7161497|  -3.8548233| 0.0001158| 0.0012508|Genus:Catabacter                            |"
 
 ### ANCOM-BC
 
@@ -269,19 +269,17 @@ Wilcoxon test.
 
     print(p)
 
-    ## Warning: Removed 18 rows containing non-finite values (stat_sum).
-
 ![](abundance_files/figure-markdown_strict/unnamed-chunk-9-1.png)
 
 Prints number of p-values under 0.05
 
     print(paste0("DESeq2 p-values under 0.05: ", sum(df$padj<0.05, na.rm = TRUE), "/", length(df$padj)))
 
-    ## [1] "DESeq2 p-values under 0.05: 27/151"
+    ## [1] "DESeq2 p-values under 0.05: 7/54"
 
     print(paste0("Wilcoxon test p-values under 0.05: ", sum(wilcoxon_p$p_adjusted<0.05, na.rm = TRUE), "/", length(wilcoxon_p$p_adjusted)))
 
-    ## [1] "Wilcoxon test p-values under 0.05: 2/151"
+    ## [1] "Wilcoxon test p-values under 0.05: 2/54"
 
 ### Comparison of abundance
 
@@ -291,36 +289,37 @@ visually if abundances of those taxa differ in ADHD and control samples.
 For comparison, let’s plot also taxa that do not differ between ADHD and
 control groups.
 
+    # There are some taxa that does not include Genus level information. They are
+    # excluded from analysis.
+    # str_detect finds if the pattern is present in values of "taxon" column.
+    # Subset is taken, only those rows are included that do not include the pattern.
+    df <- df[ !stringr::str_detect(df$taxon, "Genus:uncultured"), ]
+
     # Sorts p-values in increasing order. Takes 3rd first ones. Takes those rows that match
     # with p-values. Takes taxa. 
     highest3 <- df[df$padj %in% sort(df$padj, decreasing = FALSE)[1:3], ]$taxon
 
     # From clr transformed table, takes only those taxa that had highest p-values
-    highest3 <-assay(tse, "clr")[highest3, ]
+    highest3 <- assay(tse_genus, "clr")[highest3, ]
 
     # Transposes the table
     highest3 <- t(highest3)
 
     # Adds colData that includes patient status infomation
-    highest3 <- data.frame(highest3, as.data.frame(colData(tse)))
+    highest3 <- data.frame(highest3, as.data.frame(colData(tse_genus)))
 
     # Sorts p-values in decreasing order. Takes 3rd first ones. Takes those rows that match
     # with p-values. Takes taxa. 
     lowest3 <- df[df$padj %in% sort(df$padj, decreasing = TRUE)[1:3], ]$taxon
 
     # From clr transformed table, takes only those taxa that had lowest p-values
-    lowest3 <-assay(tse, "clr")[lowest3, ]
+    lowest3 <-assay(tse_genus, "clr")[lowest3, ]
 
     # Transposes the table
     lowest3 <- t(lowest3)
 
     # Adds colData that includes patient status infomation
-    lowest3 <- data.frame(lowest3, as.data.frame(colData(tse)))
-
-## This plot below to Genus level?
-
-It would give more information, however DESeq analysis needs to be done
-again with Genus level
+    lowest3 <- data.frame(lowest3, as.data.frame(colData(tse_genus)))
 
     # Puts plots in the same picture
     gridExtra::grid.arrange(
@@ -330,8 +329,8 @@ again with Genus level
         geom_boxplot() + 
         ylab("CLR abundances") + # y axis title
         ggtitle(names(highest3)[1]) + # main title
-        theme(title = element_text(size = 10),
-              axis.text = element_text(size = 12),
+        theme(title = element_text(size = 7),
+              axis.text = element_text(size = 7),
               axis.title.x=element_blank()), # makes titles smaller, removes x axis title
       
       # Plot 2
@@ -339,8 +338,8 @@ again with Genus level
         geom_boxplot() + 
         ylab("CLR abundances") + # y axis title
         ggtitle(names(highest3)[2]) + # main title
-        theme(title = element_text(size = 10),
-              axis.text = element_text(size = 12),
+        theme(title = element_text(size = 7),
+              axis.text = element_text(size = 7),
               axis.title.x=element_blank()), # makes titles smaller, removes x axis title
       
       # Plot 3
@@ -348,8 +347,8 @@ again with Genus level
         geom_boxplot() + 
         ylab("CLR abundances") + # y axis title
         ggtitle(names(highest3)[3]) + # main title
-        theme(title = element_text(size = 10),
-              axis.text = element_text(size = 12),
+        theme(title = element_text(size = 7),
+              axis.text = element_text(size = 7),
               axis.title.x=element_blank()), # makes titles smaller, removes x axis title
       
       # Plot 4
@@ -357,8 +356,8 @@ again with Genus level
         geom_boxplot() + 
         ylab("CLR abundances") + # y axis title
         ggtitle(names(lowest3)[1]) + # main title
-        theme(title = element_text(size = 10),
-              axis.text = element_text(size = 12),
+        theme(title = element_text(size = 7),
+              axis.text = element_text(size = 7),
               axis.title.x=element_blank()), # makes titles smaller, removes x axis title
       
       # Plot 5
@@ -366,8 +365,8 @@ again with Genus level
         geom_boxplot() + 
         ylab("CLR abundances") + # y axis title
         ggtitle(names(lowest3)[2]) + # main title
-        theme(title = element_text(size = 10),
-              axis.text = element_text(size = 12),
+        theme(title = element_text(size = 7),
+              axis.text = element_text(size = 7),
               axis.title.x=element_blank()), # makes titles smaller, removes x axis title
       
       # Plot 6
@@ -375,8 +374,8 @@ again with Genus level
         geom_boxplot() + 
         ylab("CLR abundances") + # y axis title
         ggtitle(names(lowest3)[3]) + # main title
-        theme(title = element_text(size = 10),
-              axis.text = element_text(size = 12),
+        theme(title = element_text(size = 7),
+              axis.text = element_text(size = 7),
               axis.title.x=element_blank()), # makes titles smaller, removes x axis title
       
       # 3 columns and 2 rows

@@ -57,7 +57,7 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="abundance.html" />
+    <link rel="next" href="dmm.html" />
     
     
     <link rel="prev" href="alpha.html" />
@@ -167,7 +167,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7" data-path="abundance.html">
+        <li class="chapter " data-level="1.7" data-path="dmm.html">
+            
+                <a href="dmm.html">
+            
+                    
+                    DMM analysis
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="abundance.html">
             
                 <a href="abundance.html">
             
@@ -398,161 +411,6 @@ euclidean_shannon_plot &lt;- ggplot(data = euclidean_shannon_pcoa_df,
 
 euclidean_shannon_plot
 </code></pre><p><img src="beta_files/figure-markdown_strict/pcoa_coloring-1.png" alt=""></p>
-<h2 id="clustering-example">Clustering example</h2>
-<h3 id="dirichlet-multinomial-mixtures">Dirichlet-Multinomial Mixtures</h3>
-<p>One technique that allows to search for groups of samples that are
-similar to each other is the <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0030126" target="_blank">Dirichlet-Multinomial Mixture
-Model</a>.
-In DMM, we first determine the number of clusters (k) that best fit the
-data (model evidence) using Laplace approximation. After fitting the
-model with k clusters, we obtain for each sample k probabilities that
-reflect the probability that a sample belongs to the given cluster.</p>
-<p>Let&#x2019;s cluster the data with DMM clustering.</p>
-<pre><code># Runs model and calculates the most likely number of clusters from 1 to 7. 
-# For this small data, takes about 10 seconds. For larger data, can take much longer
-# because this demands lots of resources. 
-tse_dmn &lt;- runDMN(tse, name = &quot;DMN&quot;, k = 1:7)
-
-# It is stored in metadata
-tse_dmn
-
-## class: TreeSummarizedExperiment 
-## dim: 151 27 
-## metadata(1): DMN
-## assays(3): counts relabundance clr
-## rownames(151): 1726470 1726471 ... 17264756 17264757
-## rowData names(6): Kingdom Phylum ... Family Genus
-## colnames(27): A110 A12 ... A35 A38
-## colData names(6): patient_status cohort ... Shannon_index Faith_diversity_index
-## reducedDimNames(0):
-## mainExpName: NULL
-## altExpNames(0):
-## rowLinks: a LinkDataFrame (151 rows)
-## rowTree: 1 phylo tree(s) (151 leaves)
-## colLinks: NULL
-## colTree: NULL
-</code></pre><p>Return information on metadata that the object contains.</p>
-<pre><code>names(metadata(tse_dmn))
-
-## [1] &quot;DMN&quot;
-</code></pre><p>This returns a list of DMN objects for a closer investigation.</p>
-<pre><code>## [[1]]
-## class: DMN 
-## k: 1 
-## samples x taxa: 27 x 151 
-## Laplace: 12049.73 BIC: 12271.38 AIC: 12173.55 
-## 
-## [[2]]
-## class: DMN 
-## k: 2 
-## samples x taxa: 27 x 151 
-## Laplace: 11440.98 BIC: 12161.29 AIC: 11964.97 
-## 
-## [[3]]
-## class: DMN 
-## k: 3 
-## samples x taxa: 27 x 151 
-## Laplace: 11059.63 BIC: 12266.31 AIC: 11971.51 
-## 
-## [[4]]
-## class: DMN 
-## k: 4 
-## samples x taxa: 27 x 151 
-## Laplace: 11417.58 BIC: 13047.39 AIC: 12654.11 
-## 
-## [[5]]
-## class: DMN 
-## k: 5 
-## samples x taxa: 27 x 151 
-## Laplace: 11325.67 BIC: 13255.59 AIC: 12763.82 
-## 
-## [[6]]
-## class: DMN 
-## k: 6 
-## samples x taxa: 27 x 151 
-## Laplace: 11202.28 BIC: 13718.9 AIC: 13128.65 
-## 
-## [[7]]
-## class: DMN 
-## k: 7 
-## samples x taxa: 27 x 151 
-## Laplace: 11311.06 BIC: 14200.57 AIC: 13511.84
-</code></pre><p>Show Laplace approximation (model evidence) for each model of the k
-models.</p>
-<pre><code>plotDMNFit(tse_dmn, type = &quot;laplace&quot;)
-</code></pre><p><img src="beta_files/figure-markdown_strict/unnamed-chunk-4-1.png" alt=""></p>
-<p>Return the model that has the best fit.</p>
-<pre><code>getBestDMNFit(tse_dmn, type = &quot;laplace&quot;)
-
-## class: DMN 
-## k: 3 
-## samples x taxa: 27 x 151 
-## Laplace: 11059.63 BIC: 12266.31 AIC: 11971.51
-</code></pre><h3 id="pcoa-for-asv-level-data-with-bray-curtis-with-dmm-clusters-shown-with-colors">PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors</h3>
-<p>Group samples and return DMNGroup object that contains a summary.
-Patient status is used for grouping.</p>
-<pre><code>dmn_group &lt;- calculateDMNgroup(tse_dmn, variable = &quot;patient_status&quot;, 
-                             exprs_values = &quot;counts&quot;, k = 3)
-
-dmn_group
-
-## class: DMNGroup 
-## summary:
-##         k samples taxa      NLE    LogDet  Laplace      BIC      AIC
-## ADHD    3      13  151 6018.131 -344.3973 5427.816 6601.657 6473.131
-## Control 3      14  151 6647.269 -147.5136 6155.395 7247.655 7102.269
-</code></pre><p>Mixture weights (rough measure of the cluster size).</p>
-<pre><code>DirichletMultinomial::mixturewt(getBestDMNFit(tse_dmn))
-
-##          pi    theta
-## 1 0.4814815 31.27764
-## 2 0.2962963 47.34478
-## 3 0.2222222 92.27382
-</code></pre><p>Samples-cluster assignment probabilities.</p>
-<pre><code>head(DirichletMultinomial::mixture(getBestDMNFit(tse_dmn)))
-
-##               [,1]          [,2]          [,3]
-## A110  1.000000e+00 1.263720e-144 7.529826e-205
-## A12  9.901630e-117  6.162596e-93  1.000000e+00
-## A15   1.000000e+00 9.639041e-119 3.343372e-234
-## A19  5.418072e-112 1.834471e-107  1.000000e+00
-## A21   2.161480e-93  4.769801e-96  1.000000e+00
-## A23   1.000000e+00 8.909295e-111 1.926440e-161
-</code></pre><p>Contribution of samples to each component.</p>
-<pre><code>head(DirichletMultinomial::fitted(getBestDMNFit(tse_dmn)))
-
-##                [,1]        [,2]       [,3]
-## 1726470  6.35219270 2.898805224 20.1893854
-## 1726471  5.28793777 0.002048358  0.1532217
-## 17264731 0.00124924 9.144887207  2.0112168
-## 17264726 0.14047999 1.363494430  7.5891813
-## 1726472  2.10414759 3.523533846  2.6656536
-## 17264724 0.07236409 0.002048358  9.8545722
-</code></pre><p>Get the assignment probabilities</p>
-<pre><code>prob &lt;- DirichletMultinomial::mixture(getBestDMNFit(tse_dmn))
-# Add column names
-colnames(prob) &lt;- c(&quot;comp1&quot;, &quot;comp2&quot;, &quot;comp3&quot;)
-
-# For each row, finds column that has the highest value. Then extract the column 
-# names of highest values.
-vec &lt;- colnames(prob)[max.col(prob,ties.method = &quot;first&quot;)]
-
-# Creates a data frame that contains principal coordinates and DMM information
-euclidean_dmm_pcoa_df &lt;- cbind(euclidean_pcoa_df,
-                               dmm_component = vec)
-
-# Creates a plot
-euclidean_dmm_plot &lt;- ggplot(data = euclidean_dmm_pcoa_df, 
-                             aes(x=pcoa1, y=pcoa2,
-                                 color = dmm_component)) +
-  geom_point() +
-  labs(x = &quot;Coordinate 1&quot;,
-       y = &quot;Coordinate 2&quot;,
-       title = &quot;PCoA with Aitchison distances&quot;) +  
-  theme(title = element_text(size = 12)) # makes titles smaller
-
-euclidean_dmm_plot
-</code></pre><p><img src="beta_files/figure-markdown_strict/unnamed-chunk-10-1.png" alt=""></p>
 <h2 id="estimating-associations-with-an-external-variable">Estimating associations with an external variable</h2>
 <p>Next we show how the quantify the strength of association between the
 variation in community composition (beta diversity) and external
@@ -573,7 +431,7 @@ permanova_cohort &lt;- vegan::adonis(rel_abund_assay ~ cohort,
 print(paste0(&quot;Different different cohorts and variance of abundance between samples, p-value: &quot;, 
              as.data.frame(permanova_cohort$aov.tab)[&quot;cohort&quot;, &quot;Pr(&gt;F)&quot;]))
 
-## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7439&quot;
+## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7335&quot;
 </code></pre><p>As we see, the cohort variable is not significantly associated with
 microbiota composition (p-value is over 0.05).</p>
 <p>We can, however, visualize those taxa whose abundance are the most
@@ -596,47 +454,20 @@ top_taxa_coeffient_plot &lt;- ggplot(data.frame(x = top.coef,
   theme_bw()
 
 top_taxa_coeffient_plot
-</code></pre><p><img src="beta_files/figure-markdown_strict/unnamed-chunk-12-1.png" alt=""></p>
+</code></pre><p><img src="beta_files/figure-markdown_strict/unnamed-chunk-2-1.png" alt=""></p>
 <p>The above plot shows taxa as code names, and it is hard to tell which
-bacterial groups they represent. It is easy to add human readable names.
-The lowest available taxonomic level is Genus, so let&#x2019;s first
-agglomerate taxa to Genus level.</p>
-<pre><code># Agglomerates data to Genus level
-tse_genus &lt;- agglomerateByRank(tse, rank = &quot;Genus&quot;)
+bacterial groups they represent. However, it is easy to add human
+readable names. We can fetch those from rowData. Here we use Genus level
+names.</p>
+<pre><code># Gets corresponding Genus level names and stores them to top.coef
+names &lt;- rowData(tse)[names(top.coef), ][,&quot;Genus&quot;]
 
-# Relative abundance table
-rel_abund_assay_genus &lt;- assays(tse_genus)$relabundance
+# Adds new labels to the plot
+top_taxa_coeffient_plot &lt;- top_taxa_coeffient_plot +
+  scale_y_discrete(labels = names) # Adds new labels
 
-# Transposes it to get taxa to columns
-rel_abund_assay_genus &lt;- t(rel_abund_assay_genus)
-
-permanova_cohort_genus &lt;- vegan::adonis(rel_abund_assay_genus ~ cohort,
-                                        data = colData(tse_genus),
-                                        permutations = 9999)
-
-# P-value
-print(paste0(&quot;Different different cohorts and variance of abundance between samples, p-value: &quot;, 
-             as.data.frame(permanova_cohort_genus$aov.tab)[&quot;cohort&quot;, &quot;Pr(&gt;F)&quot;]))
-
-## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7758&quot;
-
-# Gets the coefficients
-coef &lt;- coefficients(permanova_cohort_genus)[&quot;cohort1&quot;,]
-
-# Gets the highest coefficients
-top.coef &lt;- sort(head(coef[rev(order(abs(coef)))],20))
-
-# Plots the coefficients
-top_taxa_coeffient_genus_plot &lt;- ggplot(data.frame(x = top.coef,
-                                                   y = factor(names(top.coef),
-                                                              unique(names(top.coef)))),
-                                        aes(x = x, y = y)) +
-  geom_bar(stat=&quot;identity&quot;) +
-  labs(x=&quot;&quot;, y=&quot;&quot;, title=&quot;Top Taxa&quot;) +
-  theme_bw()
-
-top_taxa_coeffient_genus_plot
-</code></pre><p><img src="beta_files/figure-markdown_strict/unnamed-chunk-14-1.png" alt=""></p>
+top_taxa_coeffient_plot
+</code></pre><p><img src="beta_files/figure-markdown_strict/unnamed-chunk-3-1.png" alt=""></p>
 <h2 id="further-resources">Further resources</h2>
 <p>For more examples, see a dedicated section on beta diversity in the
 <a href="https://microbiome.github.io/OMA/" target="_blank">online book</a>.</p>
@@ -672,7 +503,7 @@ top_taxa_coeffient_genus_plot
                 </a>
                 
                 
-                <a href="abundance.html" class="navigation navigation-next " aria-label="Next page: Differential abundance analysis">
+                <a href="dmm.html" class="navigation navigation-next " aria-label="Next page: DMM analysis">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -683,7 +514,7 @@ top_taxa_coeffient_genus_plot
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Calculate beta diversity","level":"1.6","depth":1,"next":{"title":"Differential abundance analysis","level":"1.7","depth":1,"path":"abundance.md","ref":"abundance.md","articles":[]},"previous":{"title":"Calculate alpha diversity","level":"1.5","depth":1,"path":"alpha.md","ref":"alpha.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"beta.md","mtime":"2021-06-01T08:35:15.466Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-01T08:41:59.322Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Calculate beta diversity","level":"1.6","depth":1,"next":{"title":"DMM analysis","level":"1.7","depth":1,"path":"dmm.md","ref":"dmm.md","articles":[]},"previous":{"title":"Calculate alpha diversity","level":"1.5","depth":1,"path":"alpha.md","ref":"alpha.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"beta.md","mtime":"2021-06-01T14:47:14.286Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-01T14:49:12.638Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

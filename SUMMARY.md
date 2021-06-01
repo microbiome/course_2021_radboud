@@ -6,6 +6,7 @@
 * [Explore data](explore.md)
 * [Calculate alpha diversity](alpha.md)
 * [Calculate beta diversity](beta.md)
+* [DMM analysis](dmm.md)
 * [Differential abundance analysis](abundance.md)
 
 
