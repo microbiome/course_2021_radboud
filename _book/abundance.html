@@ -223,7 +223,8 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>In this notebook, we analyse abundances with two different methods: <strong>Wilcoxon test</strong>, and <strong>DESeq2</strong>.
+                                <h1 id="differential-abundance-analysis">Differential abundance analysis</h1>
+<p>In this notebook, we analyse abundances with two different methods: <strong>Wilcoxon test</strong>, and <strong>DESeq2</strong>.
 Both of these test statistical differences between groups.</p>
 <h3 id="wilcoxon-test">Wilcoxon test</h3>
 <p>Wilcoxon test estimates difference between two groups. It is a
@@ -346,7 +347,94 @@ print(head(knitr::kable((df))))
 ## [4] &quot;|17264734  |  256.7705318|    -28.2271404| 2.6184022| -10.7802922| 0.0000000| 0.0000000|17264734  |&quot;
 ## [5] &quot;|17264728  |  179.4126934|    -27.7393863| 2.3292853| -11.9089691| 0.0000000| 0.0000000|17264728  |&quot;
 ## [6] &quot;|17264733  |  140.2097080|    -27.3955424| 2.3215709| -11.8004333| 0.0000000| 0.0000000|17264733  |&quot;
-</code></pre><h3 id="comparison-of-wilcoxon-test-and-deseq2">Comparison of Wilcoxon test and DESeq2</h3>
+</code></pre><h3 id="ancom-bc">ANCOM-BC</h3>
+<p><a href="https://www.nature.com/articles/s41467-020-17041-7" target="_blank">The analysis of composition of microbiomes with bias correction (ANCOM-BC)</a> 
+is a recently developed method for differential abundance testing. It is based on an 
+<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4450248/" target="_blank">earlier published approach</a>. 
+This method could be recommended as part of several approaches:
+A <a href="https://www.biorxiv.org/content/10.1101/2021.05.10.443486v1.full" target="_blank">recent study</a> 
+compared several mainstream methods and found that among another method, ANCOM-BC produced 
+the most consistent results and is probably a conservative approach. Please note that 
+based on this and other comparisons, no single method can be recommended across all datasets. 
+Rather, it could be recommended to apply several methods and look at the overlap/differences. </p>
+<p>As the only method, ANCOM-BC incorporates the so called <em>sampling fraction</em> into the model. 
+The latter term could be empirically estimated by the ratio of the library size to the microbial load. 
+Variations in this sampling fraction would bias differential abundance analyses if ignored. 
+Furthermore, this method provides p-values, and confidence intervals for each taxon. 
+It also controls the FDR and it is computationally simple to implement. </p>
+<p>As we will see below, to obtain results, all that is needed is to pass 
+a phyloseq object to the <code>ancombc()</code> function. Therefore, below we first convert 
+our <code>tse</code> object to a <code>phyloseq</code> object. Then, we specify the formula. In this formula, 
+other covariates could potentially be included to adjust for confounding. 
+Please check the <a href="https://rdrr.io/github/FrederickHuangLin/ANCOMBC/man/ancombc.html" target="_blank">function documentation</a> 
+to learn about the additional arguments that we specify below.</p>
+<pre><code class="lang-r"><span class="hljs-keyword">library</span>(ANCOMBC)
+
+<span class="hljs-comment"># currently, ancombc requires the phyloseq format, but we can easily convert:</span>
+pseq &lt;- makePhyloseqFromTreeSummarizedExperiment(tse)
+pseq_genus &lt;- phyloseq::tax_glom(pseq, taxrank = <span class="hljs-string">&quot;Genus&quot;</span>)
+
+out = ancombc(
+  phyloseq = pseq_genus, 
+  formula = <span class="hljs-string">&quot;patient_status&quot;</span>, 
+  p_adj_method = <span class="hljs-string">&quot;holm&quot;</span>, 
+  zero_cut = <span class="hljs-number">0.90</span>, 
+  lib_cut = <span class="hljs-number">0</span>, 
+  group = <span class="hljs-string">&quot;patient_status&quot;</span>, 
+  struc_zero = <span class="hljs-literal">TRUE</span>, 
+  neg_lb = <span class="hljs-literal">TRUE</span>, 
+  tol = <span class="hljs-number">1e-5</span>, 
+  max_iter = <span class="hljs-number">100</span>, 
+  conserve = <span class="hljs-literal">TRUE</span>, 
+  alpha = <span class="hljs-number">0.05</span>, 
+  global = <span class="hljs-literal">TRUE</span>
+)
+res &lt;- out$res
+</code></pre>
+<p>The object <code>out</code> contains all relevant information. Again, see the 
+<a href="https://rdrr.io/github/FrederickHuangLin/ANCOMBC/man/ancombc.html" target="_blank">documentation of the function</a> 
+under <strong>Value</strong> for an explanation of all the output objects. Our question can be answered 
+by looking at the <code>res</code> object, which now contains dataframes with the coefficients, 
+standard errors, p-values and q-values. Conveniently, there is a dataframe <code>diff_abn</code>. 
+Here, we can find all differentiallt abundant taxa. Below we show the first 6 entries of this dataframe:  </p>
+<pre><code class="lang-r">knitr::kable(head(res$diff_abn))
+</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left">patient_statusControl</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">172647198</td>
+<td style="text-align:left">FALSE</td>
+</tr>
+<tr>
+<td style="text-align:left">1726478</td>
+<td style="text-align:left">FALSE</td>
+</tr>
+<tr>
+<td style="text-align:left">172647201</td>
+<td style="text-align:left">FALSE</td>
+</tr>
+<tr>
+<td style="text-align:left">17264798</td>
+<td style="text-align:left">FALSE</td>
+</tr>
+<tr>
+<td style="text-align:left">172647195</td>
+<td style="text-align:left">FALSE</td>
+</tr>
+<tr>
+<td style="text-align:left">1726472</td>
+<td style="text-align:left">FALSE</td>
+</tr>
+</tbody>
+</table>
+<p>In total, this method detects 13 differentially abundant taxa.</p>
+<h3 id="comparison-of-wilcoxon-test-and-deseq2">Comparison of Wilcoxon test and DESeq2</h3>
 <p>Let&apos;s compare results that we got from the Wilcoxon test and DESeq2.
 As we can see from the scatter plot, DESeq2 gives lower p-values than Wilcoxon test. </p>
 <pre><code class="lang-r">mf &lt;- data.frame(df$padj, wilcoxon_p$p_adjusted)
@@ -358,7 +446,7 @@ p &lt;- ggplot(mf, aes(x = df$padj, y = wilcoxon_p$p_adjusted)) +
 print(p)
 </code></pre>
 <pre><code>## Warning: Removed 18 rows containing non-finite values (stat_sum).
-</code></pre><p><img src="abundance_files/figure-html/unnamed-chunk-7-1.png" alt=""><!-- --></p>
+</code></pre><p><img src="abundance_files/figure-html/unnamed-chunk-9-1.png" alt=""><!-- --></p>
 <p>Prints number of p-values under 0.05</p>
 <pre><code class="lang-r">print(paste0(<span class="hljs-string">&quot;DESeq2 p-values under 0.05: &quot;</span>, sum(df$padj&lt;<span class="hljs-number">0.05</span>, na.rm = <span class="hljs-literal">TRUE</span>), <span class="hljs-string">&quot;/&quot;</span>, length(df$padj)))
 </code></pre>
@@ -461,7 +549,7 @@ gridExtra::grid.arrange(
   nrow = <span class="hljs-number">2</span>
 )
 </code></pre>
-<p><img src="abundance_files/figure-html/unnamed-chunk-10-1.png" alt=""><!-- --></p>
+<p><img src="abundance_files/figure-html/unnamed-chunk-12-1.png" alt=""><!-- --></p>
 
                                 
                                 </section>
@@ -501,7 +589,7 @@ gridExtra::grid.arrange(
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Differential abundance analysis","output":{"html_document":{"keep_md":true}},"level":"1.7","depth":1,"previous":{"title":"Calculate beta diversity","level":"1.6","depth":1,"path":"beta.md","ref":"beta.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"abundance.md","mtime":"2021-05-31T08:01:37.519Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-05-31T08:03:02.773Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Differential abundance analysis","output":{"html_document":{"keep_md":true}},"level":"1.7","depth":1,"previous":{"title":"Calculate beta diversity","level":"1.6","depth":1,"path":"beta.md","ref":"beta.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"abundance.md","mtime":"2021-06-01T07:52:12.864Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-01T07:52:23.946Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

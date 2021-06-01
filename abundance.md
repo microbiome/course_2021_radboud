@@ -5,6 +5,8 @@ output:
     keep_md: true
 ---
 
+# Differential abundance analysis
+
 In this notebook, we analyse abundances with two different methods: **Wilcoxon test**, and **DESeq2**.
 Both of these test statistical differences between groups.
 
@@ -206,6 +208,88 @@ print(head(knitr::kable((df))))
 ## [6] "|17264733  |  140.2097080|    -27.3955424| 2.3215709| -11.8004333| 0.0000000| 0.0000000|17264733  |"
 ```
 
+### ANCOM-BC
+
+
+[The analysis of composition of microbiomes with bias correction (ANCOM-BC)](https://www.nature.com/articles/s41467-020-17041-7) 
+is a recently developed method for differential abundance testing. It is based on an 
+[earlier published approach](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4450248/). 
+This method could be recommended as part of several approaches:
+A [recent study](https://www.biorxiv.org/content/10.1101/2021.05.10.443486v1.full) 
+compared several mainstream methods and found that among another method, ANCOM-BC produced 
+the most consistent results and is probably a conservative approach. Please note that 
+based on this and other comparisons, no single method can be recommended across all datasets. 
+Rather, it could be recommended to apply several methods and look at the overlap/differences. 
+
+As the only method, ANCOM-BC incorporates the so called *sampling fraction* into the model. 
+The latter term could be empirically estimated by the ratio of the library size to the microbial load. 
+Variations in this sampling fraction would bias differential abundance analyses if ignored. 
+Furthermore, this method provides p-values, and confidence intervals for each taxon. 
+It also controls the FDR and it is computationally simple to implement. 
+
+As we will see below, to obtain results, all that is needed is to pass 
+a phyloseq object to the `ancombc()` function. Therefore, below we first convert 
+our `tse` object to a `phyloseq` object. Then, we specify the formula. In this formula, 
+other covariates could potentially be included to adjust for confounding. 
+Please check the [function documentation](https://rdrr.io/github/FrederickHuangLin/ANCOMBC/man/ancombc.html) 
+to learn about the additional arguments that we specify below.
+
+
+
+
+```r
+library(ANCOMBC)
+
+# currently, ancombc requires the phyloseq format, but we can easily convert:
+pseq <- makePhyloseqFromTreeSummarizedExperiment(tse)
+pseq_genus <- phyloseq::tax_glom(pseq, taxrank = "Genus")
+
+out = ancombc(
+  phyloseq = pseq_genus, 
+  formula = "patient_status", 
+  p_adj_method = "holm", 
+  zero_cut = 0.90, 
+  lib_cut = 0, 
+  group = "patient_status", 
+  struc_zero = TRUE, 
+  neg_lb = TRUE, 
+  tol = 1e-5, 
+  max_iter = 100, 
+  conserve = TRUE, 
+  alpha = 0.05, 
+  global = TRUE
+)
+res <- out$res
+```
+
+The object `out` contains all relevant information. Again, see the 
+[documentation of the function](https://rdrr.io/github/FrederickHuangLin/ANCOMBC/man/ancombc.html) 
+under **Value** for an explanation of all the output objects. Our question can be answered 
+by looking at the `res` object, which now contains dataframes with the coefficients, 
+standard errors, p-values and q-values. Conveniently, there is a dataframe `diff_abn`. 
+Here, we can find all differentiallt abundant taxa. Below we show the first 6 entries of this dataframe:  
+
+
+```r
+knitr::kable(head(res$diff_abn))
+```
+
+
+
+|          |patient_statusControl |
+|:---------|:---------------------|
+|172647198 |FALSE                 |
+|1726478   |FALSE                 |
+|172647201 |FALSE                 |
+|17264798  |FALSE                 |
+|172647195 |FALSE                 |
+|1726472   |FALSE                 |
+
+In total, this method detects 13 differentially abundant taxa.
+
+
+
+
 ### Comparison of Wilcoxon test and DESeq2
 
 Let's compare results that we got from the Wilcoxon test and DESeq2.
@@ -226,7 +310,7 @@ print(p)
 ## Warning: Removed 18 rows containing non-finite values (stat_sum).
 ```
 
-![](abundance_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+![](abundance_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
 
 Prints number of p-values under 0.05
 
@@ -352,4 +436,8 @@ gridExtra::grid.arrange(
 )
 ```
 
-![](abundance_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+![](abundance_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+
+
+
+

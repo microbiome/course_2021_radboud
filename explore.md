@@ -5,6 +5,8 @@ output:
     keep_md: true
 ---
 
+# Data exploration
+
 Now we have loaded the data set in R, and investigated that it has all
 the necessary components.
 

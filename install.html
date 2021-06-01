@@ -168,6 +168,8 @@ pre code {
 </div>
 
 
+<div id="installation-of-the-necessary-r-packages" class="section level1">
+<h1>Installation of the necessary R packages</h1>
 <p>This notebook shows how to install all required packages. The installation needs to be done just once.</p>
 <pre class="r"><code># List of packages that we need from cran and bioc 
 cran_pkg &lt;- c(&quot;BiocManager&quot;, &quot;dplyr&quot;, &quot;ecodist&quot;, &quot;ggplot2&quot;, &quot;gridExtra&quot;, &quot;knitr&quot;, &quot;vegan&quot;)
@@ -196,6 +198,7 @@ sapply(c(cran_pkg , bioc_pkg), require, character.only = TRUE)</code></pre>
 ##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
 ##               miaViz 
 ##                 TRUE</code></pre>
+</div>
 
 
 

@@ -5,6 +5,8 @@ output:
     keep_md: true
 ---
 
+# Installation of the necessary R packages
+
 This notebook shows how to install all required packages. The
 installation needs to be done just once.
 

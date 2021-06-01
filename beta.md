@@ -5,6 +5,8 @@ output:
     keep_md: true
 ---
 
+# Beta diversity
+
 This notebook shows how to analyse and visualize beta diversity.
 
 Beta diversity reflects the difference in microbial composition
@@ -301,37 +303,37 @@ This returns a list of DMN objects for a closer investigation.
 ## class: DMN 
 ## k: 2 
 ## samples x taxa: 27 x 151 
-## Laplace: 11441.01 BIC: 12161.29 AIC: 11964.97 
+## Laplace: 11440.96 BIC: 12161.29 AIC: 11964.97 
 ## 
 ## [[3]]
 ## class: DMN 
 ## k: 3 
 ## samples x taxa: 27 x 151 
-## Laplace: 11059.99 BIC: 12266.31 AIC: 11971.51 
+## Laplace: 11059.97 BIC: 12266.31 AIC: 11971.51 
 ## 
 ## [[4]]
 ## class: DMN 
 ## k: 4 
 ## samples x taxa: 27 x 151 
-## Laplace: 11417.52 BIC: 13047.39 AIC: 12654.11 
+## Laplace: 11417.28 BIC: 13047.39 AIC: 12654.11 
 ## 
 ## [[5]]
 ## class: DMN 
 ## k: 5 
 ## samples x taxa: 27 x 151 
-## Laplace: 11217.5 BIC: 13305.58 AIC: 12813.8 
+## Laplace: 11069.01 BIC: 13160.95 AIC: 12669.18 
 ## 
 ## [[6]]
 ## class: DMN 
 ## k: 6 
 ## samples x taxa: 27 x 151 
-## Laplace: 11407.97 BIC: 13774.56 AIC: 13184.3 
+## Laplace: 11407.19 BIC: 13774.56 AIC: 13184.3 
 ## 
 ## [[7]]
 ## class: DMN 
 ## k: 7 
 ## samples x taxa: 27 x 151 
-## Laplace: 11428.83 BIC: 14172.79 AIC: 13484.06
+## Laplace: 11619.29 BIC: 14381.81 AIC: 13693.07
 ```
 
 
@@ -355,7 +357,7 @@ getBestDMNFit(tse_dmn, type = "laplace")
 ## class: DMN 
 ## k: 3 
 ## samples x taxa: 27 x 151 
-## Laplace: 11059.99 BIC: 12266.31 AIC: 11971.51
+## Laplace: 11059.97 BIC: 12266.31 AIC: 11971.51
 ```
 
 
@@ -375,9 +377,9 @@ dmn_group
 ```
 ## class: DMNGroup 
 ## summary:
-##         k samples taxa      NLE    LogDet  Laplace      BIC      AIC
-## ADHD    3      13  151 6018.131 -345.0946 5427.467 6601.657 6473.131
-## Control 3      14  151 6647.269 -148.0811 6155.112 7247.655 7102.269
+##         k samples taxa      NLE     LogDet  Laplace      BIC      AIC
+## ADHD    3      13  151 6345.540  -65.71946 5894.563 6929.066 6800.540
+## Control 3      14  151 6647.269 -148.36904 6154.968 7247.655 7102.269
 ```
 
 Mixture weights  (rough measure of the cluster size).
@@ -390,9 +392,9 @@ DirichletMultinomial::mixturewt(getBestDMNFit(tse_dmn))
 
 ```
 ##          pi    theta
-## 1 0.4814815 31.27754
-## 2 0.2962963 47.34433
-## 3 0.2222222 92.27428
+## 1 0.4814815 31.27730
+## 2 0.2962963 47.34419
+## 3 0.2222222 92.27386
 ```
 
 
@@ -405,12 +407,12 @@ head(DirichletMultinomial::mixture(getBestDMNFit(tse_dmn)))
 
 ```
 ##               [,1]          [,2]          [,3]
-## A110  1.000000e+00 1.246951e-144 7.560551e-205
-## A12  9.805466e-117  6.106507e-93  1.000000e+00
-## A15   1.000000e+00 9.479092e-119 3.386199e-234
-## A19  5.360015e-112 1.814865e-107  1.000000e+00
-## A21   2.140447e-93  4.714803e-96  1.000000e+00
-## A23   1.000000e+00 8.797010e-111 1.934780e-161
+## A110  1.000000e+00 1.252694e-144 7.536057e-205
+## A12  9.496843e-117  6.114200e-93  1.000000e+00
+## A15   1.000000e+00 9.510791e-119 3.364089e-234
+## A19  5.170982e-112 1.817823e-107  1.000000e+00
+## A21   2.070616e-93  4.722673e-96  1.000000e+00
+## A23   1.000000e+00 8.826587e-111 1.927686e-161
 ```
 
 Contribution of samples to each component.
@@ -422,12 +424,12 @@ head(DirichletMultinomial::fitted(getBestDMNFit(tse_dmn)))
 
 ```
 ##                 [,1]        [,2]       [,3]
-## 1726470  6.352132461 2.898843474 20.1893646
-## 1726471  5.287865948 0.002047286  0.1532233
-## 17264731 0.001248689 9.144396540  2.0112046
-## 17264726 0.140479806 1.363560557  7.5894528
-## 1726472  2.104171994 3.523602044  2.6656752
-## 17264724 0.072365285 0.002047286  9.8545964
+## 1726470  6.351902901 2.898804514 20.1892120
+## 1726471  5.287690248 0.002047436  0.1532199
+## 17264731 0.001246951 9.144060623  2.0111883
+## 17264726 0.140480253 1.363569114  7.5895514
+## 1726472  2.104196044 3.523541287  2.6656701
+## 17264724 0.072370005 0.002047436  9.8546643
 ```
 
 Get the assignment probabilities
@@ -490,7 +492,7 @@ print(paste0("Different different cohorts and variance of abundance between samp
 ```
 
 ```
-## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7427"
+## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7367"
 ```
 
 As we see, the cohort variable is not significantly associated with
@@ -551,7 +553,7 @@ print(paste0("Different different cohorts and variance of abundance between samp
 ```
 
 ```
-## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7829"
+## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7751"
 ```
 
 

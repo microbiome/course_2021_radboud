@@ -5,6 +5,8 @@ output:
     keep_md: true
 ---
 
+# Differential abundance analysis
+
 In this notebook, we analyse abundances with two different methods: **Wilcoxon test**, and **DESeq2**.
 Both of these test statistical differences between groups.
 

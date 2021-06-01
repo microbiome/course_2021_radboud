@@ -5,22 +5,23 @@ output:
     keep_md: true
 ---
 
+# Installation of the necessary R packages
+
 This notebook shows how to install all required packages. The
 installation needs to be done just once.
 
 
 
 ```r
-# Lists packages that we need from cran and bioc. 
-# Some of these packages are installed automatically when mia and miaViz are installed. 
+# List of packages that we need from cran and bioc 
 cran_pkg <- c("BiocManager", "dplyr", "ecodist", "ggplot2", "gridExtra", "knitr", "vegan")
-bioc_pkg <- c("ape", "DESeq2",  "DirichletMultinomial", "mia", "miaViz")
+bioc_pkg <- c("ANCOMBC", "ape", "DESeq2",  "DirichletMultinomial", "mia", "miaViz")
 
 # Gets those packages that are already installed
 cran_pkg_already_installed <- cran_pkg[ cran_pkg %in% installed.packages() ]
 bioc_pkg_already_installed <- bioc_pkg[ bioc_pkg %in% installed.packages() ]
 
-# Gets those packages that needs to be installed
+# Gets those packages that need to be installed
 cran_pkg_to_be_installed <- setdiff(cran_pkg, cran_pkg_already_installed)
 bioc_pkg_to_be_installed <- setdiff(bioc_pkg, bioc_pkg_already_installed)
 ```
@@ -37,7 +38,7 @@ if( length(cran_pkg_to_be_installed) ) {
 ```r
 # If there are packages that need to be installed, installs them
 if( length(bioc_pkg_to_be_installed) ) {
-   BiocManager::install(cran_pkg_to_be_installed, ask = F)
+   BiocManager::install(bioc_pkg_to_be_installed, ask = F)
 }
 ```
 
@@ -50,7 +51,9 @@ sapply(c(cran_pkg , bioc_pkg), require, character.only = TRUE)
 ```
 ##          BiocManager                dplyr              ecodist              ggplot2            gridExtra                knitr 
 ##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
-##                vegan                  ape               DESeq2 DirichletMultinomial                  mia               miaViz 
-##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE
+##                vegan              ANCOMBC                  ape               DESeq2 DirichletMultinomial                  mia 
+##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
+##               miaViz 
+##                 TRUE
 ```
 

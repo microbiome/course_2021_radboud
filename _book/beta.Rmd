@@ -5,6 +5,8 @@ output:
     keep_md: true
 ---
 
+# Beta diversity
+
 This notebook shows how to analyse and visualize beta diversity.
 
 Beta diversity reflects the difference in microbial composition
