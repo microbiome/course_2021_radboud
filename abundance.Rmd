@@ -136,11 +136,28 @@ print(head(knitr::kable((df))))
 ### ANCOM-BC
 
 
-[The analysis of composition of microbiomes with bias correction (ANCOM-BC)](https://www.nature.com/articles/s41467-020-17041-7) is a recently developed method for differential abundance testing. It is based on an [earlier published approach](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4450248/). This method could be recommended as part of several approaches: A [recent study](https://www.biorxiv.org/content/10.1101/2021.05.10.443486v1.full) compared several mainstream methods and found that among another method, ANCOM-BC produced the most consistent results and is probably a conservative approach. Please note that based on this and other comparisons, no single method can be recommended across all datasets. Rather, it could be recommended to apply several methods and look at the overlap/differences. 
+[The analysis of composition of microbiomes with bias correction (ANCOM-BC)](https://www.nature.com/articles/s41467-020-17041-7) 
+is a recently developed method for differential abundance testing. It is based on an 
+[earlier published approach](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4450248/). 
+This method could be recommended as part of several approaches: f
+A [recent study](https://www.biorxiv.org/content/10.1101/2021.05.10.443486v1.full) 
+compared several mainstream methods and found that among another method, ANCOM-BC produced 
+the most consistent results and is probably a conservative approach. Please note that 
+based on this and other comparisons, no single method can be recommended across all datasets. 
+Rather, it could be recommended to apply several methods and look at the overlap/differences. 
 
-As the only method, ANCOM-BC incorporates the so called *sampling fraction* into the model. The latter term could be empirically estimated by the ratio of the library size to the microbial load. Variations in this sampling fraction would bias differential abundance analyses if ignored. Furthermore, this method provides p-values, and confidence intervals for each taxon. It also controls the FDR and it is computationally simple to implement. 
+As the only method, ANCOM-BC incorporates the so called *sampling fraction* into the model. 
+The latter term could be empirically estimated by the ratio of the library size to the microbial load. 
+Variations in this sampling fraction would bias differential abundance analyses if ignored. 
+Furthermore, this method provides p-values, and confidence intervals for each taxon. 
+It also controls the FDR and it is computationally simple to implement. 
 
-As we will see below, to obtain results, all that is needed is to pass a phyloseq object to the `ancombc()` function. Therefore, below we first convert our `tse` object to a `phyloseq` object. Then, we specify the formula. In this formula, other covariates could potentially be included to adjust for confounding. Please check the [function documentation](https://rdrr.io/github/FrederickHuangLin/ANCOMBC/man/ancombc.html) to learn about the additional arguments that we specify below.
+As we will see below, to obtain results, all that is needed is to pass 
+a phyloseq object to the `ancombc()` function. Therefore, below we first convert 
+our `tse` object to a `phyloseq` object. Then, we specify the formula. In this formula, 
+other covariates could potentially be included to adjust for confounding. 
+Please check the [function documentation](https://rdrr.io/github/FrederickHuangLin/ANCOMBC/man/ancombc.html) 
+to learn about the additional arguments that we specify below.
 
 
 
@@ -169,7 +186,12 @@ out = ancombc(
 res <- out$res
 ```
 
-The object `out` contains all relevant information. Again, see the [documentation of the function](https://rdrr.io/github/FrederickHuangLin/ANCOMBC/man/ancombc.html) under **Value** for an explanation of all the output objects. Our question can be answered by looking at the `res` object, which now contains dataframes with the coefficients, standard errors, p-values and q-values. Conveniently, there is a dataframe `diff_abn`. Here, we can find all differentiallt abundant taxa. Below we show the first 6 entries of this dataframe:  
+The object `out` contains all relevant information. Again, see the 
+[documentation of the function](https://rdrr.io/github/FrederickHuangLin/ANCOMBC/man/ancombc.html) 
+under **Value** for an explanation of all the output objects. Our question can be answered 
+by looking at the `res` object, which now contains dataframes with the coefficients, 
+standard errors, p-values and q-values. Conveniently, there is a dataframe `diff_abn`. 
+Here, we can find all differentiallt abundant taxa. Below we show the first 6 entries of this dataframe:  
 
 ```{r}
 knitr::kable(head(res$diff_abn))
