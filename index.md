@@ -17,6 +17,8 @@ All files can be rendered at one go by running [main.R](main.R)
  * [Alpha diversity](alpha.nb.html)
 
  * [Beta diversity](beta.html)
+ 
+ * [DMM analysis](dmm.html)
 
  * [Differential abundance](abundance.nb.html)
 
