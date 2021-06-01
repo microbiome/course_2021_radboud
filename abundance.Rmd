@@ -139,7 +139,7 @@ print(head(knitr::kable((df))))
 [The analysis of composition of microbiomes with bias correction (ANCOM-BC)](https://www.nature.com/articles/s41467-020-17041-7) 
 is a recently developed method for differential abundance testing. It is based on an 
 [earlier published approach](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4450248/). 
-This method could be recommended as part of several approaches: f
+This method could be recommended as part of several approaches:
 A [recent study](https://www.biorxiv.org/content/10.1101/2021.05.10.443486v1.full) 
 compared several mainstream methods and found that among another method, ANCOM-BC produced 
 the most consistent results and is probably a conservative approach. Please note that 
