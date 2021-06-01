@@ -1,8 +1,6 @@
 ---
 title: "Differential abundance analysis"
-output: 
-  html_document: 
-    keep_md: true
+output: md_document
 ---
 
 # Differential abundance analysis

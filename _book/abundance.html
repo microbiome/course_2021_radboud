@@ -224,332 +224,353 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="differential-abundance-analysis">Differential abundance analysis</h1>
-<p>In this notebook, we analyse abundances with two different methods: <strong>Wilcoxon test</strong>, and <strong>DESeq2</strong>.
-Both of these test statistical differences between groups.</p>
+<p>In this notebook, we analyse abundances with two different methods:
+<strong>Wilcoxon test</strong>, and <strong>DESeq2</strong>. Both of these test statistical
+differences between groups.</p>
 <h3 id="wilcoxon-test">Wilcoxon test</h3>
 <p>Wilcoxon test estimates difference between two groups. It is a
 non-parametric alternative to t-test, which means that Wilcoxon test
 does not require normally distributed data.</p>
-<p>Let&apos;s first collect the data for the testing purpose.</p>
-<pre><code class="lang-r"><span class="hljs-comment"># Does clr transformation. Pseudocount is added, because data contains zeros, and</span>
-<span class="hljs-comment"># clr transformation includes log transformation.</span>
-tse &lt;- transformCounts(tse, method = <span class="hljs-string">&quot;clr&quot;</span>, pseudocount = <span class="hljs-number">1</span>)
+<p>Let&#x2019;s first collect the data for the testing purpose.</p>
+<pre><code># Does clr transformation. Pseudocount is added, because data contains zeros, and
+# clr transformation includes log transformation.
+tse &lt;- transformCounts(tse, method = &quot;clr&quot;, pseudocount = 1)
 
-<span class="hljs-comment"># Does transpose, so samples are in rows, then creates a data frame.</span>
-abundance_analysis_data &lt;- data.frame(t(assay(tse, <span class="hljs-string">&quot;clr&quot;</span>)))
+# Does transpose, so samples are in rows, then creates a data frame.
+abundance_analysis_data &lt;- data.frame(t(assay(tse, &quot;clr&quot;)))
 
-<span class="hljs-comment"># Then we need variable for grouping samples. &quot;patient_status&quot; column includes information</span>
-<span class="hljs-comment"># about patients&apos; status. There two groups &quot;ADHD&quot; and &quot;control&quot;. Let&apos;s include that to the data frame.</span>
+# Then we need variable for grouping samples. &quot;patient_status&quot; column includes information
+# about patients&apos; status. There two groups &quot;ADHD&quot; and &quot;control&quot;. Let&apos;s include that to the data frame.
 abundance_analysis_data &lt;- cbind(abundance_analysis_data, patient_status = colData(tse)$patient_status)
 
-<span class="hljs-comment"># Subsets data if, more than 2 different groups</span>
-<span class="hljs-comment"># abundance_analysis_data_sub &lt;- abundance_analysis_data[</span>
-<span class="hljs-comment">#abundance_analysis_data$patient_status_vs_cohort == &quot;ADHD_Cohort_1&quot; |</span>
-<span class="hljs-comment">#abundance_analysis_data$patient_status_vs_cohort == &quot;Control_Cohort_3&quot;,]</span>
-</code></pre>
-<p>Now we can do the Wilcoxon test. We test all the taxa by looping through columns,
-and store individual p-values to a vector. Then we create a data frame from collected
-data.</p>
-<p>Do Wilcoxon test only for columns that contain abundances, not for column that contain patient status.</p>
-<pre><code class="lang-r">colnames &lt;- names(abundance_analysis_data[, !names(abundance_analysis_data) %<span class="hljs-keyword">in</span>% <span class="hljs-string">&quot;patient_status&quot;</span>])
+# Subsets data if, more than 2 different groups
+# abundance_analysis_data_sub &lt;- abundance_analysis_data[
+#abundance_analysis_data$patient_status_vs_cohort == &quot;ADHD_Cohort_1&quot; |
+#abundance_analysis_data$patient_status_vs_cohort == &quot;Control_Cohort_3&quot;,]
+</code></pre><p>Now we can do the Wilcoxon test. We test all the taxa by looping through
+columns, and store individual p-values to a vector. Then we create a
+data frame from collected data.</p>
+<p>Do Wilcoxon test only for columns that contain abundances, not for
+column that contain patient status.</p>
+<pre><code>colnames &lt;- names(abundance_analysis_data[, !names(abundance_analysis_data) %in% &quot;patient_status&quot;])
 
-wilcoxon_p &lt;- c() <span class="hljs-comment"># Initialize empty vector for p-values</span>
+wilcoxon_p &lt;- c() # Initialize empty vector for p-values
 
-<span class="hljs-comment"># Do for loop over selected column names</span>
-<span class="hljs-keyword">for</span> (i <span class="hljs-keyword">in</span> colnames) {
+# Do for loop over selected column names
+for (i in colnames) {
 
   result &lt;- wilcox.test(abundance_analysis_data[, i] ~ patient_status,
                         data = abundance_analysis_data)
 
-  <span class="hljs-comment"># Stores p-value to the vector with this column name</span>
+  # Stores p-value to the vector with this column name
   wilcoxon_p[[i]]  &lt;- result$p.value
 
 }
 
 wilcoxon_p &lt;- data.frame(taxa =  names(wilcoxon_p),
                          p_raw = unlist(wilcoxon_p))
-</code></pre>
-<p>Multiple tests were performed. These are not independent, so we need
-to adjust p-values for multiple testing. Otherwise, we would increase
-the chance of a type I error drastically depending on our p-value
-threshold. By applying p-value adjustment, we can keep the false
-positive rate at a level that is acceptable. What is acceptable
-depends on our research goals. Here we use the fdr method, but there
-are several other methods as well.</p>
-<pre><code class="lang-r">wilcoxon_p$p_adjusted &lt;- p.adjust(wilcoxon_p$p_raw, method = <span class="hljs-string">&quot;fdr&quot;</span>)
-</code></pre>
-<pre><code class="lang-r">df &lt;- data.frame(x = c(wilcoxon_p$p_raw, wilcoxon_p$p_adjusted), 
-                type=rep(c(<span class="hljs-string">&quot;raw&quot;</span>, <span class="hljs-string">&quot;holm&quot;</span>),
+</code></pre><p>Multiple tests were performed. These are not independent, so we need to
+adjust p-values for multiple testing. Otherwise, we would increase the
+chance of a type I error drastically depending on our p-value threshold.
+By applying p-value adjustment, we can keep the false positive rate at a
+level that is acceptable. What is acceptable depends on our research
+goals. Here we use the fdr method, but there are several other methods
+as well.</p>
+<pre><code>wilcoxon_p$p_adjusted &lt;- p.adjust(wilcoxon_p$p_raw, method = &quot;fdr&quot;)
+
+df &lt;- data.frame(x = c(wilcoxon_p$p_raw, wilcoxon_p$p_adjusted), 
+                type=rep(c(&quot;raw&quot;, &quot;holm&quot;),
         c(length(wilcoxon_p$p_raw),
           length(wilcoxon_p$p_adjusted))))
 
 wilcoxon_plot &lt;- ggplot(df) +
   geom_histogram(aes(x=x, fill=type)) +
-  labs(x = <span class="hljs-string">&quot;p-value&quot;</span>, y = <span class="hljs-string">&quot;Frequency&quot;</span>) 
+  labs(x = &quot;p-value&quot;, y = &quot;Frequency&quot;) 
 
 wilcoxon_plot
-</code></pre>
-<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-</code></pre><p><img src="abundance_files/figure-html/unnamed-chunk-4-1.png" alt=""><!-- --></p>
+
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+</code></pre><p><img src="abundance_files/figure-markdown_strict/unnamed-chunk-4-1.png" alt=""></p>
 <h3 id="deseq2">DESeq2</h3>
 <p>Our second analysis method is DESeq2. This performs the data
-normalization automatically.  It also takes care of the p-value
-adjustment, so we don&apos;t have to worry about that.</p>
-<p>DESeq2 uses negative binomial distribution to detect differences in
-read counts between groups. Its normalization takes care of the
-differences between library sizes and compositions. DESeq2 analysis
-includes multiple steps, but they are done automatically. More
-information can be found, e.g., from Harvard Chan Bioinformatic Core&apos;s
-tutorial <a href="https://hbctraining.github.io/DGE_workshop/lessons/04_DGE_DESeq2_analysis.html" target="_blank">Introduction to DGE -
+normalization automatically. It also takes care of the p-value
+adjustment, so we don&#x2019;t have to worry about that.</p>
+<p>DESeq2 uses negative binomial distribution to detect differences in read
+counts between groups. Its normalization takes care of the differences
+between library sizes and compositions. DESeq2 analysis includes
+multiple steps, but they are done automatically. More information can be
+found, e.g., from Harvard Chan Bioinformatic Core&#x2019;s tutorial
+<a href="https://hbctraining.github.io/DGE_workshop/lessons/04_DGE_DESeq2_analysis.html" target="_blank">Introduction to DGE -
 ARCHIVED</a></p>
 <p>Now let us show how to do this. Start by loading the libraries.</p>
-<pre><code class="lang-r"><span class="hljs-keyword">library</span>(DESeq2)
-<span class="hljs-keyword">library</span>(dplyr)
-</code></pre>
-<p>Run the DESeq2 analysis</p>
-<pre><code class="lang-r"><span class="hljs-comment"># Creates DESeq2 object from the data. Uses &quot;patient_status&quot; to create groups. </span>
+<pre><code>library(DESeq2)
+library(dplyr)
+</code></pre><p>Run the DESeq2 analysis</p>
+<pre><code># Creates DESeq2 object from the data. Uses &quot;patient_status&quot; to create groups. 
 ds2 &lt;- DESeqDataSet(tse, ~patient_status)
-</code></pre>
-<pre><code>## converting counts to integer mode
-</code></pre><pre><code>## Warning in DESeqDataSet(tse, ~patient_status): some variables in design formula are characters, converting to factors
-</code></pre><pre><code class="lang-r"><span class="hljs-comment"># Does the analysis</span>
+
+## converting counts to integer mode
+
+## Warning in DESeqDataSet(tse, ~patient_status): some variables in design formula are characters, converting to factors
+
+# Does the analysis
 dds &lt;- DESeq(ds2)
-</code></pre>
-<pre><code>## estimating size factors
-</code></pre><pre><code>## estimating dispersions
-</code></pre><pre><code>## gene-wise dispersion estimates
-</code></pre><pre><code>## mean-dispersion relationship
-</code></pre><pre><code>## final dispersion estimates
-</code></pre><pre><code>## fitting model and testing
-</code></pre><pre><code>## -- replacing outliers and refitting for 37 genes
+
+## estimating size factors
+
+## estimating dispersions
+
+## gene-wise dispersion estimates
+
+## mean-dispersion relationship
+
+## final dispersion estimates
+
+## fitting model and testing
+
+## -- replacing outliers and refitting for 37 genes
 ## -- DESeq argument &apos;minReplicatesForReplace&apos; = 7 
 ## -- original counts are preserved in counts(dds)
-</code></pre><pre><code>## estimating dispersions
-</code></pre><pre><code>## fitting model and testing
-</code></pre><pre><code class="lang-r"><span class="hljs-comment"># Gets the results from the object</span>
+
+## estimating dispersions
+
+## fitting model and testing
+
+# Gets the results from the object
 res &lt;- results(dds)
 
-<span class="hljs-comment"># Creates a data frame from results</span>
+# Creates a data frame from results
 df &lt;- as.data.frame(res)
 
-<span class="hljs-comment"># Adds taxon column that includes names of taxa</span>
+# Adds taxon column that includes names of taxa
 df$taxon &lt;- rownames(df)
 
-<span class="hljs-comment"># Orders the rows of data frame in increasing order firstly based on column &quot;log2FoldChange&quot; </span>
-<span class="hljs-comment"># and secondly based on &quot;padj&quot; column</span>
+# Orders the rows of data frame in increasing order firstly based on column &quot;log2FoldChange&quot; 
+# and secondly based on &quot;padj&quot; column
 df &lt;- df %&gt;% arrange(log2FoldChange, padj)
 
 print(head(knitr::kable((df))))
-</code></pre>
-<pre><code>## [1] &quot;|          |     baseMean| log2FoldChange|     lfcSE|        stat|    pvalue|      padj|taxon     |&quot;
+
+## [1] &quot;|          |     baseMean| log2FoldChange|     lfcSE|        stat|    pvalue|      padj|taxon     |&quot;
 ## [2] &quot;|:---------|------------:|--------------:|---------:|-----------:|---------:|---------:|:---------|&quot;
 ## [3] &quot;|172647132 |  314.5908947|    -28.5039241| 2.9385343|  -9.7000480| 0.0000000| 0.0000000|172647132 |&quot;
 ## [4] &quot;|17264734  |  256.7705318|    -28.2271404| 2.6184022| -10.7802922| 0.0000000| 0.0000000|17264734  |&quot;
 ## [5] &quot;|17264728  |  179.4126934|    -27.7393863| 2.3292853| -11.9089691| 0.0000000| 0.0000000|17264728  |&quot;
 ## [6] &quot;|17264733  |  140.2097080|    -27.3955424| 2.3215709| -11.8004333| 0.0000000| 0.0000000|17264733  |&quot;
 </code></pre><h3 id="ancom-bc">ANCOM-BC</h3>
-<p><a href="https://www.nature.com/articles/s41467-020-17041-7" target="_blank">The analysis of composition of microbiomes with bias correction (ANCOM-BC)</a> 
-is a recently developed method for differential abundance testing. It is based on an 
-<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4450248/" target="_blank">earlier published approach</a>. 
-This method could be recommended as part of several approaches:
-A <a href="https://www.biorxiv.org/content/10.1101/2021.05.10.443486v1.full" target="_blank">recent study</a> 
-compared several mainstream methods and found that among another method, ANCOM-BC produced 
-the most consistent results and is probably a conservative approach. Please note that 
-based on this and other comparisons, no single method can be recommended across all datasets. 
-Rather, it could be recommended to apply several methods and look at the overlap/differences. </p>
-<p>As the only method, ANCOM-BC incorporates the so called <em>sampling fraction</em> into the model. 
-The latter term could be empirically estimated by the ratio of the library size to the microbial load. 
-Variations in this sampling fraction would bias differential abundance analyses if ignored. 
-Furthermore, this method provides p-values, and confidence intervals for each taxon. 
-It also controls the FDR and it is computationally simple to implement. </p>
-<p>As we will see below, to obtain results, all that is needed is to pass 
-a phyloseq object to the <code>ancombc()</code> function. Therefore, below we first convert 
-our <code>tse</code> object to a <code>phyloseq</code> object. Then, we specify the formula. In this formula, 
-other covariates could potentially be included to adjust for confounding. 
-Please check the <a href="https://rdrr.io/github/FrederickHuangLin/ANCOMBC/man/ancombc.html" target="_blank">function documentation</a> 
+<p><a href="https://www.nature.com/articles/s41467-020-17041-7" target="_blank">The analysis of composition of microbiomes with bias correction
+(ANCOM-BC)</a> is a
+recently developed method for differential abundance testing. It is
+based on an <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4450248/" target="_blank">earlier published
+approach</a>. This
+method could be recommended as part of several approaches: A <a href="https://www.biorxiv.org/content/10.1101/2021.05.10.443486v1.full" target="_blank">recent
+study</a>
+compared several mainstream methods and found that among another method,
+ANCOM-BC produced the most consistent results and is probably a
+conservative approach. Please note that based on this and other
+comparisons, no single method can be recommended across all datasets.
+Rather, it could be recommended to apply several methods and look at the
+overlap/differences.</p>
+<p>As the only method, ANCOM-BC incorporates the so called <em>sampling
+fraction</em> into the model. The latter term could be empirically estimated
+by the ratio of the library size to the microbial load. Variations in
+this sampling fraction would bias differential abundance analyses if
+ignored. Furthermore, this method provides p-values, and confidence
+intervals for each taxon. It also controls the FDR and it is
+computationally simple to implement.</p>
+<p>As we will see below, to obtain results, all that is needed is to pass a
+phyloseq object to the <code>ancombc()</code> function. Therefore, below we first
+convert our <code>tse</code> object to a <code>phyloseq</code> object. Then, we specify the
+formula. In this formula, other covariates could potentially be included
+to adjust for confounding. Please check the <a href="https://rdrr.io/github/FrederickHuangLin/ANCOMBC/man/ancombc.html" target="_blank">function
+documentation</a>
 to learn about the additional arguments that we specify below.</p>
-<pre><code class="lang-r"><span class="hljs-keyword">library</span>(ANCOMBC)
+<pre><code>library(ANCOMBC)
 
-<span class="hljs-comment"># currently, ancombc requires the phyloseq format, but we can easily convert:</span>
+# currently, ancombc requires the phyloseq format, but we can easily convert:
 pseq &lt;- makePhyloseqFromTreeSummarizedExperiment(tse)
-pseq_genus &lt;- phyloseq::tax_glom(pseq, taxrank = <span class="hljs-string">&quot;Genus&quot;</span>)
+pseq_genus &lt;- phyloseq::tax_glom(pseq, taxrank = &quot;Genus&quot;)
 
 out = ancombc(
   phyloseq = pseq_genus, 
-  formula = <span class="hljs-string">&quot;patient_status&quot;</span>, 
-  p_adj_method = <span class="hljs-string">&quot;holm&quot;</span>, 
-  zero_cut = <span class="hljs-number">0.90</span>, 
-  lib_cut = <span class="hljs-number">0</span>, 
-  group = <span class="hljs-string">&quot;patient_status&quot;</span>, 
-  struc_zero = <span class="hljs-literal">TRUE</span>, 
-  neg_lb = <span class="hljs-literal">TRUE</span>, 
-  tol = <span class="hljs-number">1e-5</span>, 
-  max_iter = <span class="hljs-number">100</span>, 
-  conserve = <span class="hljs-literal">TRUE</span>, 
-  alpha = <span class="hljs-number">0.05</span>, 
-  global = <span class="hljs-literal">TRUE</span>
+  formula = &quot;patient_status&quot;, 
+  p_adj_method = &quot;holm&quot;, 
+  zero_cut = 0.90, 
+  lib_cut = 0, 
+  group = &quot;patient_status&quot;, 
+  struc_zero = TRUE, 
+  neg_lb = TRUE, 
+  tol = 1e-5, 
+  max_iter = 100, 
+  conserve = TRUE, 
+  alpha = 0.05, 
+  global = TRUE
 )
 res &lt;- out$res
-</code></pre>
-<p>The object <code>out</code> contains all relevant information. Again, see the 
-<a href="https://rdrr.io/github/FrederickHuangLin/ANCOMBC/man/ancombc.html" target="_blank">documentation of the function</a> 
-under <strong>Value</strong> for an explanation of all the output objects. Our question can be answered 
-by looking at the <code>res</code> object, which now contains dataframes with the coefficients, 
-standard errors, p-values and q-values. Conveniently, there is a dataframe <code>diff_abn</code>. 
-Here, we can find all differentiallt abundant taxa. Below we show the first 6 entries of this dataframe:  </p>
-<pre><code class="lang-r">knitr::kable(head(res$diff_abn))
-</code></pre>
-<table>
+</code></pre><p>The object <code>out</code> contains all relevant information. Again, see the
+<a href="https://rdrr.io/github/FrederickHuangLin/ANCOMBC/man/ancombc.html" target="_blank">documentation of the
+function</a>
+under <strong>Value</strong> for an explanation of all the output objects. Our
+question can be answered by looking at the <code>res</code> object, which now
+contains dataframes with the coefficients, standard errors, p-values and
+q-values. Conveniently, there is a dataframe <code>diff_abn</code>. Here, we can
+find all differentiallt abundant taxa. Below we show the first 6 entries
+of this dataframe:</p>
+<pre><code>knitr::kable(head(res$diff_abn))
+</code></pre><table>
 <thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:left">patient_statusControl</th>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">patient_statusControl</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">172647198</td>
-<td style="text-align:left">FALSE</td>
+<tr class="odd">
+<td style="text-align: left;">172647198</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
-<tr>
-<td style="text-align:left">1726478</td>
-<td style="text-align:left">FALSE</td>
+<tr class="even">
+<td style="text-align: left;">1726478</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
-<tr>
-<td style="text-align:left">172647201</td>
-<td style="text-align:left">FALSE</td>
+<tr class="odd">
+<td style="text-align: left;">172647201</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
-<tr>
-<td style="text-align:left">17264798</td>
-<td style="text-align:left">FALSE</td>
+<tr class="even">
+<td style="text-align: left;">17264798</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
-<tr>
-<td style="text-align:left">172647195</td>
-<td style="text-align:left">FALSE</td>
+<tr class="odd">
+<td style="text-align: left;">172647195</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
-<tr>
-<td style="text-align:left">1726472</td>
-<td style="text-align:left">FALSE</td>
+<tr class="even">
+<td style="text-align: left;">1726472</td>
+<td style="text-align: left;">FALSE</td>
 </tr>
 </tbody>
 </table>
+
 <p>In total, this method detects 13 differentially abundant taxa.</p>
 <h3 id="comparison-of-wilcoxon-test-and-deseq2">Comparison of Wilcoxon test and DESeq2</h3>
-<p>Let&apos;s compare results that we got from the Wilcoxon test and DESeq2.
-As we can see from the scatter plot, DESeq2 gives lower p-values than Wilcoxon test. </p>
-<pre><code class="lang-r">mf &lt;- data.frame(df$padj, wilcoxon_p$p_adjusted)
+<p>Let&#x2019;s compare results that we got from the Wilcoxon test and DESeq2. As
+we can see from the scatter plot, DESeq2 gives lower p-values than
+Wilcoxon test.</p>
+<pre><code>mf &lt;- data.frame(df$padj, wilcoxon_p$p_adjusted)
 p &lt;- ggplot(mf, aes(x = df$padj, y = wilcoxon_p$p_adjusted)) +
-       labs(x = <span class="hljs-string">&quot;DESeq2 adjusted p-value&quot;</span>, y = <span class="hljs-string">&quot;t-test adjusted p-value&quot;</span>) +
+       labs(x = &quot;DESeq2 adjusted p-value&quot;, y = &quot;t-test adjusted p-value&quot;) +
        geom_count() +
- scale_size_area(max_size = <span class="hljs-number">10</span>)
+ scale_size_area(max_size = 10)
 
 print(p)
-</code></pre>
-<pre><code>## Warning: Removed 18 rows containing non-finite values (stat_sum).
-</code></pre><p><img src="abundance_files/figure-html/unnamed-chunk-9-1.png" alt=""><!-- --></p>
+
+## Warning: Removed 18 rows containing non-finite values (stat_sum).
+</code></pre><p><img src="abundance_files/figure-markdown_strict/unnamed-chunk-9-1.png" alt=""></p>
 <p>Prints number of p-values under 0.05</p>
-<pre><code class="lang-r">print(paste0(<span class="hljs-string">&quot;DESeq2 p-values under 0.05: &quot;</span>, sum(df$padj&lt;<span class="hljs-number">0.05</span>, na.rm = <span class="hljs-literal">TRUE</span>), <span class="hljs-string">&quot;/&quot;</span>, length(df$padj)))
-</code></pre>
-<pre><code>## [1] &quot;DESeq2 p-values under 0.05: 27/151&quot;
-</code></pre><pre><code class="lang-r">print(paste0(<span class="hljs-string">&quot;Wilcoxon test p-values under 0.05: &quot;</span>, sum(wilcoxon_p$p_adjusted&lt;<span class="hljs-number">0.05</span>, na.rm = <span class="hljs-literal">TRUE</span>), <span class="hljs-string">&quot;/&quot;</span>, length(wilcoxon_p$p_adjusted)))
-</code></pre>
-<pre><code>## [1] &quot;Wilcoxon test p-values under 0.05: 2/151&quot;
+<pre><code>print(paste0(&quot;DESeq2 p-values under 0.05: &quot;, sum(df$padj&lt;0.05, na.rm = TRUE), &quot;/&quot;, length(df$padj)))
+
+## [1] &quot;DESeq2 p-values under 0.05: 27/151&quot;
+
+print(paste0(&quot;Wilcoxon test p-values under 0.05: &quot;, sum(wilcoxon_p$p_adjusted&lt;0.05, na.rm = TRUE), &quot;/&quot;, length(wilcoxon_p$p_adjusted)))
+
+## [1] &quot;Wilcoxon test p-values under 0.05: 2/151&quot;
 </code></pre><h3 id="comparison-of-abundance">Comparison of abundance</h3>
-<p>In previous steps, we got information which taxa vary between ADHD and control groups.
-Let&apos;s plot those taxa in the boxplot, and compare visually if abundances of those taxa
-differ in ADHD and control samples. For comparison, let&apos;s plot also taxa that do not
-differ between ADHD and control groups. </p>
-<pre><code class="lang-r"><span class="hljs-comment"># Sorts p-values in increasing order. Takes 3rd first ones. Takes those rows that match</span>
-<span class="hljs-comment"># with p-values. Takes taxa. </span>
-highest3 &lt;- df[df$padj %<span class="hljs-keyword">in</span>% sort(df$padj, decreasing = <span class="hljs-literal">FALSE</span>)[<span class="hljs-number">1</span>:<span class="hljs-number">3</span>], ]$taxon
+<p>In previous steps, we got information which taxa vary between ADHD and
+control groups. Let&#x2019;s plot those taxa in the boxplot, and compare
+visually if abundances of those taxa differ in ADHD and control samples.
+For comparison, let&#x2019;s plot also taxa that do not differ between ADHD and
+control groups.</p>
+<pre><code># Sorts p-values in increasing order. Takes 3rd first ones. Takes those rows that match
+# with p-values. Takes taxa. 
+highest3 &lt;- df[df$padj %in% sort(df$padj, decreasing = FALSE)[1:3], ]$taxon
 
-<span class="hljs-comment"># From clr transformed table, takes only those taxa that had highest p-values</span>
-highest3 &lt;-assay(tse, <span class="hljs-string">&quot;clr&quot;</span>)[highest3, ]
+# From clr transformed table, takes only those taxa that had highest p-values
+highest3 &lt;-assay(tse, &quot;clr&quot;)[highest3, ]
 
-<span class="hljs-comment"># Transposes the table</span>
+# Transposes the table
 highest3 &lt;- t(highest3)
 
-<span class="hljs-comment"># Adds colData that includes patient status infomation</span>
+# Adds colData that includes patient status infomation
 highest3 &lt;- data.frame(highest3, as.data.frame(colData(tse)))
 
-<span class="hljs-comment"># Sorts p-values in decreasing order. Takes 3rd first ones. Takes those rows that match</span>
-<span class="hljs-comment"># with p-values. Takes taxa. </span>
-lowest3 &lt;- df[df$padj %<span class="hljs-keyword">in</span>% sort(df$padj, decreasing = <span class="hljs-literal">TRUE</span>)[<span class="hljs-number">1</span>:<span class="hljs-number">3</span>], ]$taxon
+# Sorts p-values in decreasing order. Takes 3rd first ones. Takes those rows that match
+# with p-values. Takes taxa. 
+lowest3 &lt;- df[df$padj %in% sort(df$padj, decreasing = TRUE)[1:3], ]$taxon
 
-<span class="hljs-comment"># From clr transformed table, takes only those taxa that had lowest p-values</span>
-lowest3 &lt;-assay(tse, <span class="hljs-string">&quot;clr&quot;</span>)[lowest3, ]
+# From clr transformed table, takes only those taxa that had lowest p-values
+lowest3 &lt;-assay(tse, &quot;clr&quot;)[lowest3, ]
 
-<span class="hljs-comment"># Transposes the table</span>
+# Transposes the table
 lowest3 &lt;- t(lowest3)
 
-<span class="hljs-comment"># Adds colData that includes patient status infomation</span>
+# Adds colData that includes patient status infomation
 lowest3 &lt;- data.frame(lowest3, as.data.frame(colData(tse)))
-</code></pre>
-<h2 id="this-plot-below-to-genus-level">This plot below to Genus level?</h2>
-<p>It would give more information, however DESeq analysis needs to be done again with Genus level</p>
-<pre><code class="lang-r"><span class="hljs-comment"># Puts plots in the same picture</span>
+</code></pre><h2 id="this-plot-below-to-genus-level">This plot below to Genus level?</h2>
+<p>It would give more information, however DESeq analysis needs to be done
+again with Genus level</p>
+<pre><code># Puts plots in the same picture
 gridExtra::grid.arrange(
 
-  <span class="hljs-comment"># Plot 1</span>
-  ggplot(highest3, aes(x = patient_status, y = highest3[,<span class="hljs-number">1</span>])) + 
+  # Plot 1
+  ggplot(highest3, aes(x = patient_status, y = highest3[,1])) + 
     geom_boxplot() + 
-    ylab(<span class="hljs-string">&quot;CLR abundances&quot;</span>) + <span class="hljs-comment"># y axis title</span>
-    ggtitle(names(highest3)[<span class="hljs-number">1</span>]) + <span class="hljs-comment"># main title</span>
-    theme(title = element_text(size = <span class="hljs-number">10</span>),
-          axis.text = element_text(size = <span class="hljs-number">12</span>),
-          axis.title.x=element_blank()), <span class="hljs-comment"># makes titles smaller, removes x axis title</span>
+    ylab(&quot;CLR abundances&quot;) + # y axis title
+    ggtitle(names(highest3)[1]) + # main title
+    theme(title = element_text(size = 10),
+          axis.text = element_text(size = 12),
+          axis.title.x=element_blank()), # makes titles smaller, removes x axis title
 
-  <span class="hljs-comment"># Plot 2</span>
-  ggplot(highest3, aes(x = patient_status, y = highest3[,<span class="hljs-number">2</span>])) + 
+  # Plot 2
+  ggplot(highest3, aes(x = patient_status, y = highest3[,2])) + 
     geom_boxplot() + 
-    ylab(<span class="hljs-string">&quot;CLR abundances&quot;</span>) + <span class="hljs-comment"># y axis title</span>
-    ggtitle(names(highest3)[<span class="hljs-number">2</span>]) + <span class="hljs-comment"># main title</span>
-    theme(title = element_text(size = <span class="hljs-number">10</span>),
-          axis.text = element_text(size = <span class="hljs-number">12</span>),
-          axis.title.x=element_blank()), <span class="hljs-comment"># makes titles smaller, removes x axis title</span>
+    ylab(&quot;CLR abundances&quot;) + # y axis title
+    ggtitle(names(highest3)[2]) + # main title
+    theme(title = element_text(size = 10),
+          axis.text = element_text(size = 12),
+          axis.title.x=element_blank()), # makes titles smaller, removes x axis title
 
-  <span class="hljs-comment"># Plot 3</span>
-  ggplot(highest3, aes(x = patient_status, y = highest3[,<span class="hljs-number">3</span>])) + 
+  # Plot 3
+  ggplot(highest3, aes(x = patient_status, y = highest3[,3])) + 
     geom_boxplot() + 
-    ylab(<span class="hljs-string">&quot;CLR abundances&quot;</span>) + <span class="hljs-comment"># y axis title</span>
-    ggtitle(names(highest3)[<span class="hljs-number">3</span>]) + <span class="hljs-comment"># main title</span>
-    theme(title = element_text(size = <span class="hljs-number">10</span>),
-          axis.text = element_text(size = <span class="hljs-number">12</span>),
-          axis.title.x=element_blank()), <span class="hljs-comment"># makes titles smaller, removes x axis title</span>
+    ylab(&quot;CLR abundances&quot;) + # y axis title
+    ggtitle(names(highest3)[3]) + # main title
+    theme(title = element_text(size = 10),
+          axis.text = element_text(size = 12),
+          axis.title.x=element_blank()), # makes titles smaller, removes x axis title
 
-  <span class="hljs-comment"># Plot 4</span>
-  ggplot(lowest3, aes(x = patient_status, y = lowest3[,<span class="hljs-number">1</span>])) + 
+  # Plot 4
+  ggplot(lowest3, aes(x = patient_status, y = lowest3[,1])) + 
     geom_boxplot() + 
-    ylab(<span class="hljs-string">&quot;CLR abundances&quot;</span>) + <span class="hljs-comment"># y axis title</span>
-    ggtitle(names(lowest3)[<span class="hljs-number">1</span>]) + <span class="hljs-comment"># main title</span>
-    theme(title = element_text(size = <span class="hljs-number">10</span>),
-          axis.text = element_text(size = <span class="hljs-number">12</span>),
-          axis.title.x=element_blank()), <span class="hljs-comment"># makes titles smaller, removes x axis title</span>
+    ylab(&quot;CLR abundances&quot;) + # y axis title
+    ggtitle(names(lowest3)[1]) + # main title
+    theme(title = element_text(size = 10),
+          axis.text = element_text(size = 12),
+          axis.title.x=element_blank()), # makes titles smaller, removes x axis title
 
-  <span class="hljs-comment"># Plot 5</span>
-  ggplot(lowest3, aes(x = patient_status, y = lowest3[,<span class="hljs-number">2</span>])) + 
+  # Plot 5
+  ggplot(lowest3, aes(x = patient_status, y = lowest3[,2])) + 
     geom_boxplot() + 
-    ylab(<span class="hljs-string">&quot;CLR abundances&quot;</span>) + <span class="hljs-comment"># y axis title</span>
-    ggtitle(names(lowest3)[<span class="hljs-number">2</span>]) + <span class="hljs-comment"># main title</span>
-    theme(title = element_text(size = <span class="hljs-number">10</span>),
-          axis.text = element_text(size = <span class="hljs-number">12</span>),
-          axis.title.x=element_blank()), <span class="hljs-comment"># makes titles smaller, removes x axis title</span>
+    ylab(&quot;CLR abundances&quot;) + # y axis title
+    ggtitle(names(lowest3)[2]) + # main title
+    theme(title = element_text(size = 10),
+          axis.text = element_text(size = 12),
+          axis.title.x=element_blank()), # makes titles smaller, removes x axis title
 
-  <span class="hljs-comment"># Plot 6</span>
-  ggplot(lowest3, aes(x = patient_status, y = lowest3[,<span class="hljs-number">3</span>])) + 
+  # Plot 6
+  ggplot(lowest3, aes(x = patient_status, y = lowest3[,3])) + 
     geom_boxplot() + 
-    ylab(<span class="hljs-string">&quot;CLR abundances&quot;</span>) + <span class="hljs-comment"># y axis title</span>
-    ggtitle(names(lowest3)[<span class="hljs-number">3</span>]) + <span class="hljs-comment"># main title</span>
-    theme(title = element_text(size = <span class="hljs-number">10</span>),
-          axis.text = element_text(size = <span class="hljs-number">12</span>),
-          axis.title.x=element_blank()), <span class="hljs-comment"># makes titles smaller, removes x axis title</span>
+    ylab(&quot;CLR abundances&quot;) + # y axis title
+    ggtitle(names(lowest3)[3]) + # main title
+    theme(title = element_text(size = 10),
+          axis.text = element_text(size = 12),
+          axis.title.x=element_blank()), # makes titles smaller, removes x axis title
 
-  <span class="hljs-comment"># 3 columns and 2 rows</span>
-  ncol = <span class="hljs-number">3</span>, 
-  nrow = <span class="hljs-number">2</span>
+  # 3 columns and 2 rows
+  ncol = 3, 
+  nrow = 2
 )
-</code></pre>
-<p><img src="abundance_files/figure-html/unnamed-chunk-12-1.png" alt=""><!-- --></p>
+</code></pre><p><img src="abundance_files/figure-markdown_strict/unnamed-chunk-12-1.png" alt=""></p>
 
                                 
                                 </section>
@@ -589,7 +610,7 @@ gridExtra::grid.arrange(
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Differential abundance analysis","output":{"html_document":{"keep_md":true}},"level":"1.7","depth":1,"previous":{"title":"Calculate beta diversity","level":"1.6","depth":1,"path":"beta.md","ref":"beta.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"abundance.md","mtime":"2021-06-01T07:52:12.864Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-01T07:52:23.946Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Differential abundance analysis","level":"1.7","depth":1,"previous":{"title":"Calculate beta diversity","level":"1.6","depth":1,"path":"beta.md","ref":"beta.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"abundance.md","mtime":"2021-06-01T08:03:04.056Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-01T08:03:16.068Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

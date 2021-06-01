@@ -1,8 +1,6 @@
 ---
 title: "Installation of the necessary R packages"
-output: 
-  html_document: 
-    keep_md: true
+output: md_document
 ---
 
 # Installation of the necessary R packages

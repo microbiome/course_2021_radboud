@@ -1,35 +1,26 @@
----
-title: "Beta diversity"
-output: 
-  html_document: 
-    keep_md: true
----
-
 # Beta diversity
 
 This notebook shows how to analyse and visualize beta diversity.
 
-Beta diversity reflects the difference in microbial composition
-between two samples. Similar samples have a low beta diversity.
+Beta diversity reflects the difference in microbial composition between
+two samples. Similar samples have a low beta diversity.
 
 Several different distance metrics are available. Some of the common
-choices include Bray-Curtis, Unifrac, Jaccard, and Aitchison
-index. Each of these dissimilarity measures emphasize different
-aspects of similarity.
-
+choices include Bray-Curtis, Unifrac, Jaccard, and Aitchison index. Each
+of these dissimilarity measures emphasize different aspects of
+similarity.
 
 ## Examples of PCoA with different settings
 
-After estimating beta diversity we can vizualize sample similarity
-with dimension reduction techniques such as Principal Coordinate
-Analysis (PCoA).
+After estimating beta diversity we can vizualize sample similarity with
+dimension reduction techniques such as Principal Coordinate Analysis
+(PCoA).
 
-PCoA takes a dissimilarity matrix as input. The output is usually a 2
-or 3-dimensional euclidean space. The idea is to project the data so
-that the distances between different samples are maximized. The
-projection is often non-linear and designed to reveal local or global
-structures in the data distribution.
-
+PCoA takes a dissimilarity matrix as input. The output is usually a 2 or
+3-dimensional euclidean space. The idea is to project the data so that
+the distances between different samples are maximized. The projection is
+often non-linear and designed to reveal local or global structures in
+the data distribution.
 
 ### PCoA for ASV-level data with Bray-Curtis
 
@@ -37,102 +28,90 @@ Let us next show how to visualize sample similarities using the PCoA
 method and a selected dissimilarity measure. We use the same tse data
 object defined in the earlier notebooks.
 
+    # Relative abundance table
+    rel_abund_assay <- assays(tse)$relabundance
 
-```r
-# Relative abundance table
-rel_abund_assay <- assays(tse)$relabundance
+    # Transposes it to get taxa to columns
+    rel_abund_assay <- t(rel_abund_assay)
 
-# Transposes it to get taxa to columns
-rel_abund_assay <- t(rel_abund_assay)
+    # Calculates Bray-Curtis distances between samples. Because taxa is in columns,
+    # it is used to compare different samples.
+    bray_curtis_dist <- vegan::vegdist(rel_abund_assay, method = "bray")
 
-# Calculates Bray-Curtis distances between samples. Because taxa is in columns,
-# it is used to compare different samples.
-bray_curtis_dist <- vegan::vegdist(rel_abund_assay, method = "bray")
+    # Does principal coordinate analysis
+    bray_curtis_pcoa <- ecodist::pco(bray_curtis_dist)
 
-# Does principal coordinate analysis
-bray_curtis_pcoa <- ecodist::pco(bray_curtis_dist)
+    # Creates a data frame from principal coordinates
+    bray_curtis_pcoa_df <- data.frame(pcoa1 = bray_curtis_pcoa$vectors[,1], 
+                                      pcoa2 = bray_curtis_pcoa$vectors[,2])
 
-# Creates a data frame from principal coordinates
-bray_curtis_pcoa_df <- data.frame(pcoa1 = bray_curtis_pcoa$vectors[,1], 
-                                  pcoa2 = bray_curtis_pcoa$vectors[,2])
+    # Creates a plot
+    bray_curtis_plot <- ggplot(data = bray_curtis_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
+      geom_point() +
+      labs(x = "Coordinate 1",
+           y = "Coordinate 2", 
+           title = "Bray-Curtis PCoA with relative abundances") 
+      theme(title = element_text(size = 10)) # makes titles smaller
 
-# Creates a plot
-bray_curtis_plot <- ggplot(data = bray_curtis_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
-  geom_point() +
-  labs(x = "Coordinate 1",
-       y = "Coordinate 2", 
-       title = "Bray-Curtis PCoA with relative abundances") 
-  theme(title = element_text(size = 10)) # makes titles smaller
-```
+    ## List of 1
+    ##  $ title:List of 11
+    ##   ..$ family       : NULL
+    ##   ..$ face         : NULL
+    ##   ..$ colour       : NULL
+    ##   ..$ size         : num 10
+    ##   ..$ hjust        : NULL
+    ##   ..$ vjust        : NULL
+    ##   ..$ angle        : NULL
+    ##   ..$ lineheight   : NULL
+    ##   ..$ margin       : NULL
+    ##   ..$ debug        : NULL
+    ##   ..$ inherit.blank: logi FALSE
+    ##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+    ##  - attr(*, "class")= chr [1:2] "theme" "gg"
+    ##  - attr(*, "complete")= logi FALSE
+    ##  - attr(*, "validate")= logi TRUE
 
-```
-## List of 1
-##  $ title:List of 11
-##   ..$ family       : NULL
-##   ..$ face         : NULL
-##   ..$ colour       : NULL
-##   ..$ size         : num 10
-##   ..$ hjust        : NULL
-##   ..$ vjust        : NULL
-##   ..$ angle        : NULL
-##   ..$ lineheight   : NULL
-##   ..$ margin       : NULL
-##   ..$ debug        : NULL
-##   ..$ inherit.blank: logi FALSE
-##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
-##  - attr(*, "class")= chr [1:2] "theme" "gg"
-##  - attr(*, "complete")= logi FALSE
-##  - attr(*, "validate")= logi TRUE
-```
+    bray_curtis_plot
 
-```r
-bray_curtis_plot
-```
-
-![](beta_files/figure-html/pcoa_asv_bc-1.png)<!-- -->
-
+![](beta_files/figure-markdown_strict/pcoa_asv_bc-1.png)
 
 ### PCoA for ASV-level data with Aitchison distance
 
 Aitchison distance corresponds to Euclidean distances between CLR
 transformed sample abundance vectors.
 
+    # Does clr transformation. Pseudocount is added, because data contains zeros. 
+    tse <- transformCounts(tse, method = "clr", pseudocount = 1)
 
-```r
-# Does clr transformation. Pseudocount is added, because data contains zeros. 
-tse <- transformCounts(tse, method = "clr", pseudocount = 1)
+    # Gets clr table
+    clr_assay <- assays(tse)$clr
 
-# Gets clr table
-clr_assay <- assays(tse)$clr
+    # Transposes it to get taxa to columns
+    clr_assay <- t(clr_assay)
 
-# Transposes it to get taxa to columns
-clr_assay <- t(clr_assay)
-
-# Calculates Euclidean distances between samples. Because taxa is in columns,
-# it is used to compare different samples.
-euclidean_dist <- vegan::vegdist(clr_assay, method = "euclidean")
+    # Calculates Euclidean distances between samples. Because taxa is in columns,
+    # it is used to compare different samples.
+    euclidean_dist <- vegan::vegdist(clr_assay, method = "euclidean")
 
 
-# Does principal coordinate analysis
-euclidean_pcoa <- ecodist::pco(euclidean_dist)
+    # Does principal coordinate analysis
+    euclidean_pcoa <- ecodist::pco(euclidean_dist)
 
-# Creates a data frame from principal coordinates
-euclidean_pcoa_df <- data.frame(pcoa1 = euclidean_pcoa$vectors[,1], 
-                                pcoa2 = euclidean_pcoa$vectors[,2])
+    # Creates a data frame from principal coordinates
+    euclidean_pcoa_df <- data.frame(pcoa1 = euclidean_pcoa$vectors[,1], 
+                                    pcoa2 = euclidean_pcoa$vectors[,2])
 
-# Creates a plot
-euclidean_plot <- ggplot(data = euclidean_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
-  geom_point() +
-  labs(x = "Coordinate 1",
-       y = "Coordinate 2",
-       title = "Euclidean PCoA with CLR transformation") +
-  theme(title = element_text(size = 12)) # makes titles smaller
+    # Creates a plot
+    euclidean_plot <- ggplot(data = euclidean_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
+      geom_point() +
+      labs(x = "Coordinate 1",
+           y = "Coordinate 2",
+           title = "Euclidean PCoA with CLR transformation") +
+      theme(title = element_text(size = 12)) # makes titles smaller
 
-euclidean_plot
-```
+    euclidean_plot
 
-![](beta_files/figure-html/pcoa_asv_aitchison-1.png)<!-- -->
-
+![](beta_files/figure-markdown_strict/pcoa_asv_aitchison-1.png)
 
 ### PCoA aggregated to Phylum level
 
@@ -140,97 +119,85 @@ We use again the Aitchison distances in this example but this time we
 use data that was aggregated to the phylum level in the earlier
 examples.
 
+    # Does clr transformation. Psuedocount is added, because data contains zeros. 
+    tse_phylum <- transformCounts(tse_phylum, method = "clr", pseudocount = 1)
 
-```r
-# Does clr transformation. Psuedocount is added, because data contains zeros. 
-tse_phylum <- transformCounts(tse_phylum, method = "clr", pseudocount = 1)
+    # Gets clr table
+    clr_phylum_assay <- assays(tse_phylum)$clr
 
-# Gets clr table
-clr_phylum_assay <- assays(tse_phylum)$clr
+    # Transposes it to get taxa to columns
+    clr_phylum_assay <- t(clr_phylum_assay)
 
-# Transposes it to get taxa to columns
-clr_phylum_assay <- t(clr_phylum_assay)
+    # Calculates Euclidean distances between samples. Because taxa is in columns,
+    # it is used to compare different samples.
+    euclidean_phylum_dist <- vegan::vegdist(clr_assay, method = "euclidean")
 
-# Calculates Euclidean distances between samples. Because taxa is in columns,
-# it is used to compare different samples.
-euclidean_phylum_dist <- vegan::vegdist(clr_assay, method = "euclidean")
+    # Does principal coordinate analysis
+    euclidean_phylum_pcoa <- ecodist::pco(euclidean_phylum_dist)
 
-# Does principal coordinate analysis
-euclidean_phylum_pcoa <- ecodist::pco(euclidean_phylum_dist)
+    # Creates a data frame from principal coordinates
+    euclidean_phylum_pcoa_df <- data.frame(pcoa1 = euclidean_phylum_pcoa$vectors[,1], 
+                                           pcoa2 = euclidean_phylum_pcoa$vectors[,2])
 
-# Creates a data frame from principal coordinates
-euclidean_phylum_pcoa_df <- data.frame(pcoa1 = euclidean_phylum_pcoa$vectors[,1], 
-                                       pcoa2 = euclidean_phylum_pcoa$vectors[,2])
+    # Creates a plot
+    euclidean_phylum_plot <- ggplot(data = euclidean_phylum_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
+      geom_point() +
+      labs(x = "Coordinate 1",
+           y = "Coordinate 2",
+           title = "Aitchison distances at Phylum level") +  
+      theme(title = element_text(size = 12)) # makes titles smaller
 
-# Creates a plot
-euclidean_phylum_plot <- ggplot(data = euclidean_phylum_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
-  geom_point() +
-  labs(x = "Coordinate 1",
-       y = "Coordinate 2",
-       title = "Aitchison distances at Phylum level") +  
-  theme(title = element_text(size = 12)) # makes titles smaller
+    euclidean_phylum_plot
 
-euclidean_phylum_plot
-```
-
-![](beta_files/figure-html/pcoa_phylum_aitchison-1.png)<!-- -->
+![](beta_files/figure-markdown_strict/pcoa_phylum_aitchison-1.png)
 
 ## Highlighting external variables on PCoA plot
 
 ### PCoA with discrete sample grouping variable shown with colors
 
-We can add grouping variable to existing plots. Let's add coloring to the CLR transformed,
-Genus level PCoA.
+We can add grouping variable to existing plots. Let’s add coloring to
+the CLR transformed, Genus level PCoA.
 
+    # Adds coloring information to the data frame, creates new column
+    euclidean_patient_status_pcoa_df <- cbind(euclidean_pcoa_df,
+                                 patient_status = colData(tse)$patient_status)
 
-```r
-# Adds coloring information to the data frame, creates new column
-euclidean_patient_status_pcoa_df <- cbind(euclidean_pcoa_df,
-                             patient_status = colData(tse)$patient_status)
+    # Creates a plot
+    euclidean_patient_status_plot <- ggplot(data = euclidean_patient_status_pcoa_df, 
+                                            aes(x=pcoa1, y=pcoa2,
+                                                color = patient_status)) +
+      geom_point() +
+      labs(x = "Coordinate 1",
+           y = "Coordinate 2",
+           title = "PCoA with Aitchison distances") +
+      theme(title = element_text(size = 12)) # makes titles smaller
 
-# Creates a plot
-euclidean_patient_status_plot <- ggplot(data = euclidean_patient_status_pcoa_df, 
-                                        aes(x=pcoa1, y=pcoa2,
-                                            color = patient_status)) +
-  geom_point() +
-  labs(x = "Coordinate 1",
-       y = "Coordinate 2",
-       title = "PCoA with Aitchison distances") +
-  theme(title = element_text(size = 12)) # makes titles smaller
+    euclidean_patient_status_plot
 
-euclidean_patient_status_plot
-```
-
-![](beta_files/figure-html/pcoa_genus-1.png)<!-- -->
-
+![](beta_files/figure-markdown_strict/pcoa_genus-1.png)
 
 ### PCoA with continuous sample grouping variable shown with colors
 
-We can also use continues values to group variables. Let's use Shannon diversity
-index that we calculated in "Alpha diversity" notebook.
+We can also use continues values to group variables. Let’s use Shannon
+diversity index that we calculated in “Alpha diversity” notebook.
 
+    # Adds coloring information to the data frame, creates new column
+    euclidean_shannon_pcoa_df <- cbind(euclidean_pcoa_df,
+                                 shannon = colData(tse)$Shannon_index)
 
+    # Creates a plot
+    euclidean_shannon_plot <- ggplot(data = euclidean_shannon_pcoa_df, 
+                                     aes(x=pcoa1, y=pcoa2,
+                                         color = shannon)) + 
+      geom_point() +
+      labs(x = "Coordinate 1",
+           y = "Coordinate 2",
+           title = "PCoA with Aitchison distances") +
+      theme(title = element_text(size = 12)) # makes titles smaller
 
-```r
-# Adds coloring information to the data frame, creates new column
-euclidean_shannon_pcoa_df <- cbind(euclidean_pcoa_df,
-                             shannon = colData(tse)$Shannon_index)
+    euclidean_shannon_plot
 
-# Creates a plot
-euclidean_shannon_plot <- ggplot(data = euclidean_shannon_pcoa_df, 
-                                 aes(x=pcoa1, y=pcoa2,
-                                     color = shannon)) + 
-  geom_point() +
-  labs(x = "Coordinate 1",
-       y = "Coordinate 2",
-       title = "PCoA with Aitchison distances") +
-  theme(title = element_text(size = 12)) # makes titles smaller
-
-euclidean_shannon_plot
-```
-
-![](beta_files/figure-html/pcoa_coloring-1.png)<!-- -->
-
+![](beta_files/figure-markdown_strict/pcoa_coloring-1.png)
 
 ## Clustering example
 
@@ -238,232 +205,180 @@ euclidean_shannon_plot
 
 One technique that allows to search for groups of samples that are
 similar to each other is the [Dirichlet-Multinomial Mixture
-Model](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0030126). In
-DMM, we first determine the number of clusters (k) that best fit the
+Model](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0030126).
+In DMM, we first determine the number of clusters (k) that best fit the
 data (model evidence) using Laplace approximation. After fitting the
 model with k clusters, we obtain for each sample k probabilities that
 reflect the probability that a sample belongs to the given cluster.
 
-Let's cluster the data with DMM clustering. 
+Let’s cluster the data with DMM clustering.
 
+    # Runs model and calculates the most likely number of clusters from 1 to 7. 
+    # For this small data, takes about 10 seconds. For larger data, can take much longer
+    # because this demands lots of resources. 
+    tse_dmn <- runDMN(tse, name = "DMN", k = 1:7)
 
-```r
-# Runs model and calculates the most likely number of clusters from 1 to 7. 
-# For this small data, takes about 10 seconds. For larger data, can take much longer
-# because this demands lots of resources. 
-tse_dmn <- runDMN(tse, name = "DMN", k = 1:7)
-```
+    # It is stored in metadata
+    tse_dmn
 
-
-```r
-# It is stored in metadata
-tse_dmn
-```
-
-```
-## class: TreeSummarizedExperiment 
-## dim: 151 27 
-## metadata(1): DMN
-## assays(3): counts relabundance clr
-## rownames(151): 1726470 1726471 ... 17264756 17264757
-## rowData names(6): Kingdom Phylum ... Family Genus
-## colnames(27): A110 A12 ... A35 A38
-## colData names(6): patient_status cohort ... Shannon_index Faith_diversity_index
-## reducedDimNames(0):
-## mainExpName: NULL
-## altExpNames(0):
-## rowLinks: a LinkDataFrame (151 rows)
-## rowTree: 1 phylo tree(s) (151 leaves)
-## colLinks: NULL
-## colTree: NULL
-```
+    ## class: TreeSummarizedExperiment 
+    ## dim: 151 27 
+    ## metadata(1): DMN
+    ## assays(3): counts relabundance clr
+    ## rownames(151): 1726470 1726471 ... 17264756 17264757
+    ## rowData names(6): Kingdom Phylum ... Family Genus
+    ## colnames(27): A110 A12 ... A35 A38
+    ## colData names(6): patient_status cohort ... Shannon_index Faith_diversity_index
+    ## reducedDimNames(0):
+    ## mainExpName: NULL
+    ## altExpNames(0):
+    ## rowLinks: a LinkDataFrame (151 rows)
+    ## rowTree: 1 phylo tree(s) (151 leaves)
+    ## colLinks: NULL
+    ## colTree: NULL
 
 Return information on metadata that the object contains.
 
+    names(metadata(tse_dmn))
 
-```r
-names(metadata(tse_dmn))
-```
-
-```
-## [1] "DMN"
-```
+    ## [1] "DMN"
 
 This returns a list of DMN objects for a closer investigation.
 
+    ## [[1]]
+    ## class: DMN 
+    ## k: 1 
+    ## samples x taxa: 27 x 151 
+    ## Laplace: 12049.73 BIC: 12271.38 AIC: 12173.55 
+    ## 
+    ## [[2]]
+    ## class: DMN 
+    ## k: 2 
+    ## samples x taxa: 27 x 151 
+    ## Laplace: 11440.98 BIC: 12161.29 AIC: 11964.97 
+    ## 
+    ## [[3]]
+    ## class: DMN 
+    ## k: 3 
+    ## samples x taxa: 27 x 151 
+    ## Laplace: 11059.63 BIC: 12266.31 AIC: 11971.51 
+    ## 
+    ## [[4]]
+    ## class: DMN 
+    ## k: 4 
+    ## samples x taxa: 27 x 151 
+    ## Laplace: 11417.58 BIC: 13047.39 AIC: 12654.11 
+    ## 
+    ## [[5]]
+    ## class: DMN 
+    ## k: 5 
+    ## samples x taxa: 27 x 151 
+    ## Laplace: 11325.67 BIC: 13255.59 AIC: 12763.82 
+    ## 
+    ## [[6]]
+    ## class: DMN 
+    ## k: 6 
+    ## samples x taxa: 27 x 151 
+    ## Laplace: 11202.28 BIC: 13718.9 AIC: 13128.65 
+    ## 
+    ## [[7]]
+    ## class: DMN 
+    ## k: 7 
+    ## samples x taxa: 27 x 151 
+    ## Laplace: 11311.06 BIC: 14200.57 AIC: 13511.84
 
-```
-## [[1]]
-## class: DMN 
-## k: 1 
-## samples x taxa: 27 x 151 
-## Laplace: 12049.73 BIC: 12271.38 AIC: 12173.55 
-## 
-## [[2]]
-## class: DMN 
-## k: 2 
-## samples x taxa: 27 x 151 
-## Laplace: 11440.96 BIC: 12161.29 AIC: 11964.97 
-## 
-## [[3]]
-## class: DMN 
-## k: 3 
-## samples x taxa: 27 x 151 
-## Laplace: 11059.97 BIC: 12266.31 AIC: 11971.51 
-## 
-## [[4]]
-## class: DMN 
-## k: 4 
-## samples x taxa: 27 x 151 
-## Laplace: 11417.28 BIC: 13047.39 AIC: 12654.11 
-## 
-## [[5]]
-## class: DMN 
-## k: 5 
-## samples x taxa: 27 x 151 
-## Laplace: 11069.01 BIC: 13160.95 AIC: 12669.18 
-## 
-## [[6]]
-## class: DMN 
-## k: 6 
-## samples x taxa: 27 x 151 
-## Laplace: 11407.19 BIC: 13774.56 AIC: 13184.3 
-## 
-## [[7]]
-## class: DMN 
-## k: 7 
-## samples x taxa: 27 x 151 
-## Laplace: 11619.29 BIC: 14381.81 AIC: 13693.07
-```
+Show Laplace approximation (model evidence) for each model of the k
+models.
 
+    plotDMNFit(tse_dmn, type = "laplace")
 
-Show Laplace approximation (model evidence) for each model of the k models.
-
-
-```r
-plotDMNFit(tse_dmn, type = "laplace")
-```
-
-![](beta_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+![](beta_files/figure-markdown_strict/unnamed-chunk-4-1.png)
 
 Return the model that has the best fit.
 
+    getBestDMNFit(tse_dmn, type = "laplace")
 
-```r
-getBestDMNFit(tse_dmn, type = "laplace")
-```
-
-```
-## class: DMN 
-## k: 3 
-## samples x taxa: 27 x 151 
-## Laplace: 11059.97 BIC: 12266.31 AIC: 11971.51
-```
-
+    ## class: DMN 
+    ## k: 3 
+    ## samples x taxa: 27 x 151 
+    ## Laplace: 11059.63 BIC: 12266.31 AIC: 11971.51
 
 ### PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors
 
 Group samples and return DMNGroup object that contains a summary.
 Patient status is used for grouping.
 
+    dmn_group <- calculateDMNgroup(tse_dmn, variable = "patient_status", 
+                                 exprs_values = "counts", k = 3)
 
-```r
-dmn_group <- calculateDMNgroup(tse_dmn, variable = "patient_status", 
-                             exprs_values = "counts", k = 3)
+    dmn_group
 
-dmn_group
-```
+    ## class: DMNGroup 
+    ## summary:
+    ##         k samples taxa      NLE    LogDet  Laplace      BIC      AIC
+    ## ADHD    3      13  151 6018.131 -344.3973 5427.816 6601.657 6473.131
+    ## Control 3      14  151 6647.269 -147.5136 6155.395 7247.655 7102.269
 
-```
-## class: DMNGroup 
-## summary:
-##         k samples taxa      NLE     LogDet  Laplace      BIC      AIC
-## ADHD    3      13  151 6345.540  -65.71946 5894.563 6929.066 6800.540
-## Control 3      14  151 6647.269 -148.36904 6154.968 7247.655 7102.269
-```
+Mixture weights (rough measure of the cluster size).
 
-Mixture weights  (rough measure of the cluster size).
+    DirichletMultinomial::mixturewt(getBestDMNFit(tse_dmn))
 
-
-
-```r
-DirichletMultinomial::mixturewt(getBestDMNFit(tse_dmn))
-```
-
-```
-##          pi    theta
-## 1 0.4814815 31.27730
-## 2 0.2962963 47.34419
-## 3 0.2222222 92.27386
-```
-
+    ##          pi    theta
+    ## 1 0.4814815 31.27764
+    ## 2 0.2962963 47.34478
+    ## 3 0.2222222 92.27382
 
 Samples-cluster assignment probabilities.
 
+    head(DirichletMultinomial::mixture(getBestDMNFit(tse_dmn)))
 
-```r
-head(DirichletMultinomial::mixture(getBestDMNFit(tse_dmn)))
-```
-
-```
-##               [,1]          [,2]          [,3]
-## A110  1.000000e+00 1.252694e-144 7.536057e-205
-## A12  9.496843e-117  6.114200e-93  1.000000e+00
-## A15   1.000000e+00 9.510791e-119 3.364089e-234
-## A19  5.170982e-112 1.817823e-107  1.000000e+00
-## A21   2.070616e-93  4.722673e-96  1.000000e+00
-## A23   1.000000e+00 8.826587e-111 1.927686e-161
-```
+    ##               [,1]          [,2]          [,3]
+    ## A110  1.000000e+00 1.263720e-144 7.529826e-205
+    ## A12  9.901630e-117  6.162596e-93  1.000000e+00
+    ## A15   1.000000e+00 9.639041e-119 3.343372e-234
+    ## A19  5.418072e-112 1.834471e-107  1.000000e+00
+    ## A21   2.161480e-93  4.769801e-96  1.000000e+00
+    ## A23   1.000000e+00 8.909295e-111 1.926440e-161
 
 Contribution of samples to each component.
 
+    head(DirichletMultinomial::fitted(getBestDMNFit(tse_dmn)))
 
-```r
-head(DirichletMultinomial::fitted(getBestDMNFit(tse_dmn)))
-```
-
-```
-##                 [,1]        [,2]       [,3]
-## 1726470  6.351902901 2.898804514 20.1892120
-## 1726471  5.287690248 0.002047436  0.1532199
-## 17264731 0.001246951 9.144060623  2.0111883
-## 17264726 0.140480253 1.363569114  7.5895514
-## 1726472  2.104196044 3.523541287  2.6656701
-## 17264724 0.072370005 0.002047436  9.8546643
-```
+    ##                [,1]        [,2]       [,3]
+    ## 1726470  6.35219270 2.898805224 20.1893854
+    ## 1726471  5.28793777 0.002048358  0.1532217
+    ## 17264731 0.00124924 9.144887207  2.0112168
+    ## 17264726 0.14047999 1.363494430  7.5891813
+    ## 1726472  2.10414759 3.523533846  2.6656536
+    ## 17264724 0.07236409 0.002048358  9.8545722
 
 Get the assignment probabilities
 
+    prob <- DirichletMultinomial::mixture(getBestDMNFit(tse_dmn))
+    # Add column names
+    colnames(prob) <- c("comp1", "comp2", "comp3")
 
+    # For each row, finds column that has the highest value. Then extract the column 
+    # names of highest values.
+    vec <- colnames(prob)[max.col(prob,ties.method = "first")]
 
-```r
-prob <- DirichletMultinomial::mixture(getBestDMNFit(tse_dmn))
-# Add column names
-colnames(prob) <- c("comp1", "comp2", "comp3")
+    # Creates a data frame that contains principal coordinates and DMM information
+    euclidean_dmm_pcoa_df <- cbind(euclidean_pcoa_df,
+                                   dmm_component = vec)
 
-# For each row, finds column that has the highest value. Then extract the column 
-# names of highest values.
-vec <- colnames(prob)[max.col(prob,ties.method = "first")]
+    # Creates a plot
+    euclidean_dmm_plot <- ggplot(data = euclidean_dmm_pcoa_df, 
+                                 aes(x=pcoa1, y=pcoa2,
+                                     color = dmm_component)) +
+      geom_point() +
+      labs(x = "Coordinate 1",
+           y = "Coordinate 2",
+           title = "PCoA with Aitchison distances") +  
+      theme(title = element_text(size = 12)) # makes titles smaller
 
-# Creates a data frame that contains principal coordinates and DMM information
-euclidean_dmm_pcoa_df <- cbind(euclidean_pcoa_df,
-                               dmm_component = vec)
+    euclidean_dmm_plot
 
-# Creates a plot
-euclidean_dmm_plot <- ggplot(data = euclidean_dmm_pcoa_df, 
-                             aes(x=pcoa1, y=pcoa2,
-                                 color = dmm_component)) +
-  geom_point() +
-  labs(x = "Coordinate 1",
-       y = "Coordinate 2",
-       title = "PCoA with Aitchison distances") +  
-  theme(title = element_text(size = 12)) # makes titles smaller
-
-euclidean_dmm_plot
-```
-
-![](beta_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
-
+![](beta_files/figure-markdown_strict/unnamed-chunk-10-1.png)
 
 ## Estimating associations with an external variable
 
@@ -474,113 +389,94 @@ factors.
 The standard way to do this is to perform a so-called permutational
 multivariate analysis of variance (PERMANOVA) test.
 
+    # Relative abundance table
+    rel_abund_assay <- assays(tse)$relabundance
 
-```r
-# Relative abundance table
-rel_abund_assay <- assays(tse)$relabundance
+    # Transposes it to get taxa to columns
+    rel_abund_assay <- t(rel_abund_assay)
 
-# Transposes it to get taxa to columns
-rel_abund_assay <- t(rel_abund_assay)
+    permanova_cohort <- vegan::adonis(rel_abund_assay ~ cohort,
+                                      data = colData(tse),
+                                      permutations = 9999)
 
-permanova_cohort <- vegan::adonis(rel_abund_assay ~ cohort,
-                                  data = colData(tse),
-                                  permutations = 9999)
+    # P-value
+    print(paste0("Different different cohorts and variance of abundance between samples, p-value: ", 
+                 as.data.frame(permanova_cohort$aov.tab)["cohort", "Pr(>F)"]))
 
-# P-value
-print(paste0("Different different cohorts and variance of abundance between samples, p-value: ", 
-             as.data.frame(permanova_cohort$aov.tab)["cohort", "Pr(>F)"]))
-```
-
-```
-## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7367"
-```
+    ## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7439"
 
 As we see, the cohort variable is not significantly associated with
 microbiota composition (p-value is over 0.05).
 
 We can, however, visualize those taxa whose abundance are the most
-different between cohorts. This gives us information which taxa's
+different between cohorts. This gives us information which taxa’s
 abundances tend to differ between different cohorts.
 
 In order to do that, we need coefficients of taxa.
 
+    # Gets the coefficients
+    coef <- coefficients(permanova_cohort)["cohort1",]
 
-```r
-# Gets the coefficients
-coef <- coefficients(permanova_cohort)["cohort1",]
+    # Gets the highest coefficients
+    top.coef <- sort(head(coef[rev(order(abs(coef)))],20))
 
-# Gets the highest coefficients
-top.coef <- sort(head(coef[rev(order(abs(coef)))],20))
+    # Plots the coefficients
+    top_taxa_coeffient_plot <- ggplot(data.frame(x = top.coef,
+                                                 y = factor(names(top.coef),
+                                                            unique(names(top.coef)))),
+                                      aes(x = x, y = y)) +
+      geom_bar(stat="identity") +
+      labs(x="", y="", title="Top Taxa") +
+      theme_bw()
 
-# Plots the coefficients
-top_taxa_coeffient_plot <- ggplot(data.frame(x = top.coef,
-                                             y = factor(names(top.coef),
-                                                        unique(names(top.coef)))),
-                                  aes(x = x, y = y)) +
-  geom_bar(stat="identity") +
-  labs(x="", y="", title="Top Taxa") +
-  theme_bw()
+    top_taxa_coeffient_plot
 
-top_taxa_coeffient_plot
-```
-
-![](beta_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+![](beta_files/figure-markdown_strict/unnamed-chunk-12-1.png)
 
 The above plot shows taxa as code names, and it is hard to tell which
-bacterial groups they represent. It is easy to add human readable
-names. The lowest available taxonomic level is Genus, so let's first
+bacterial groups they represent. It is easy to add human readable names.
+The lowest available taxonomic level is Genus, so let’s first
 agglomerate taxa to Genus level.
 
+    # Agglomerates data to Genus level
+    tse_genus <- agglomerateByRank(tse, rank = "Genus")
 
+    # Relative abundance table
+    rel_abund_assay_genus <- assays(tse_genus)$relabundance
 
-```r
-# Agglomerates data to Genus level
-tse_genus <- agglomerateByRank(tse, rank = "Genus")
+    # Transposes it to get taxa to columns
+    rel_abund_assay_genus <- t(rel_abund_assay_genus)
 
-# Relative abundance table
-rel_abund_assay_genus <- assays(tse_genus)$relabundance
+    permanova_cohort_genus <- vegan::adonis(rel_abund_assay_genus ~ cohort,
+                                            data = colData(tse_genus),
+                                            permutations = 9999)
 
-# Transposes it to get taxa to columns
-rel_abund_assay_genus <- t(rel_abund_assay_genus)
+    # P-value
+    print(paste0("Different different cohorts and variance of abundance between samples, p-value: ", 
+                 as.data.frame(permanova_cohort_genus$aov.tab)["cohort", "Pr(>F)"]))
 
-permanova_cohort_genus <- vegan::adonis(rel_abund_assay_genus ~ cohort,
-                                        data = colData(tse_genus),
-                                        permutations = 9999)
+    ## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7758"
 
-# P-value
-print(paste0("Different different cohorts and variance of abundance between samples, p-value: ", 
-             as.data.frame(permanova_cohort_genus$aov.tab)["cohort", "Pr(>F)"]))
-```
+    # Gets the coefficients
+    coef <- coefficients(permanova_cohort_genus)["cohort1",]
 
-```
-## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7751"
-```
+    # Gets the highest coefficients
+    top.coef <- sort(head(coef[rev(order(abs(coef)))],20))
 
+    # Plots the coefficients
+    top_taxa_coeffient_genus_plot <- ggplot(data.frame(x = top.coef,
+                                                       y = factor(names(top.coef),
+                                                                  unique(names(top.coef)))),
+                                            aes(x = x, y = y)) +
+      geom_bar(stat="identity") +
+      labs(x="", y="", title="Top Taxa") +
+      theme_bw()
 
-```r
-# Gets the coefficients
-coef <- coefficients(permanova_cohort_genus)["cohort1",]
+    top_taxa_coeffient_genus_plot
 
-# Gets the highest coefficients
-top.coef <- sort(head(coef[rev(order(abs(coef)))],20))
-
-# Plots the coefficients
-top_taxa_coeffient_genus_plot <- ggplot(data.frame(x = top.coef,
-                                                   y = factor(names(top.coef),
-                                                              unique(names(top.coef)))),
-                                        aes(x = x, y = y)) +
-  geom_bar(stat="identity") +
-  labs(x="", y="", title="Top Taxa") +
-  theme_bw()
-
-top_taxa_coeffient_genus_plot
-```
-
-![](beta_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
-
+![](beta_files/figure-markdown_strict/unnamed-chunk-14-1.png)
 
 ## Further resources
 
 For more examples, see a dedicated section on beta diversity in the
 [online book](https://microbiome.github.io/OMA/).
-

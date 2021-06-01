@@ -227,51 +227,51 @@
                                 
                                 <h1 id="beta-diversity">Beta diversity</h1>
 <p>This notebook shows how to analyse and visualize beta diversity.</p>
-<p>Beta diversity reflects the difference in microbial composition
-between two samples. Similar samples have a low beta diversity.</p>
+<p>Beta diversity reflects the difference in microbial composition between
+two samples. Similar samples have a low beta diversity.</p>
 <p>Several different distance metrics are available. Some of the common
-choices include Bray-Curtis, Unifrac, Jaccard, and Aitchison
-index. Each of these dissimilarity measures emphasize different
-aspects of similarity.</p>
+choices include Bray-Curtis, Unifrac, Jaccard, and Aitchison index. Each
+of these dissimilarity measures emphasize different aspects of
+similarity.</p>
 <h2 id="examples-of-pcoa-with-different-settings">Examples of PCoA with different settings</h2>
-<p>After estimating beta diversity we can vizualize sample similarity
-with dimension reduction techniques such as Principal Coordinate
-Analysis (PCoA).</p>
-<p>PCoA takes a dissimilarity matrix as input. The output is usually a 2
-or 3-dimensional euclidean space. The idea is to project the data so
-that the distances between different samples are maximized. The
-projection is often non-linear and designed to reveal local or global
-structures in the data distribution.</p>
+<p>After estimating beta diversity we can vizualize sample similarity with
+dimension reduction techniques such as Principal Coordinate Analysis
+(PCoA).</p>
+<p>PCoA takes a dissimilarity matrix as input. The output is usually a 2 or
+3-dimensional euclidean space. The idea is to project the data so that
+the distances between different samples are maximized. The projection is
+often non-linear and designed to reveal local or global structures in
+the data distribution.</p>
 <h3 id="pcoa-for-asv-level-data-with-bray-curtis">PCoA for ASV-level data with Bray-Curtis</h3>
 <p>Let us next show how to visualize sample similarities using the PCoA
 method and a selected dissimilarity measure. We use the same tse data
 object defined in the earlier notebooks.</p>
-<pre><code class="lang-r"><span class="hljs-comment"># Relative abundance table</span>
+<pre><code># Relative abundance table
 rel_abund_assay &lt;- assays(tse)$relabundance
 
-<span class="hljs-comment"># Transposes it to get taxa to columns</span>
+# Transposes it to get taxa to columns
 rel_abund_assay &lt;- t(rel_abund_assay)
 
-<span class="hljs-comment"># Calculates Bray-Curtis distances between samples. Because taxa is in columns,</span>
-<span class="hljs-comment"># it is used to compare different samples.</span>
-bray_curtis_dist &lt;- vegan::vegdist(rel_abund_assay, method = <span class="hljs-string">&quot;bray&quot;</span>)
+# Calculates Bray-Curtis distances between samples. Because taxa is in columns,
+# it is used to compare different samples.
+bray_curtis_dist &lt;- vegan::vegdist(rel_abund_assay, method = &quot;bray&quot;)
 
-<span class="hljs-comment"># Does principal coordinate analysis</span>
+# Does principal coordinate analysis
 bray_curtis_pcoa &lt;- ecodist::pco(bray_curtis_dist)
 
-<span class="hljs-comment"># Creates a data frame from principal coordinates</span>
-bray_curtis_pcoa_df &lt;- data.frame(pcoa1 = bray_curtis_pcoa$vectors[,<span class="hljs-number">1</span>], 
-                                  pcoa2 = bray_curtis_pcoa$vectors[,<span class="hljs-number">2</span>])
+# Creates a data frame from principal coordinates
+bray_curtis_pcoa_df &lt;- data.frame(pcoa1 = bray_curtis_pcoa$vectors[,1], 
+                                  pcoa2 = bray_curtis_pcoa$vectors[,2])
 
-<span class="hljs-comment"># Creates a plot</span>
+# Creates a plot
 bray_curtis_plot &lt;- ggplot(data = bray_curtis_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
   geom_point() +
-  labs(x = <span class="hljs-string">&quot;Coordinate 1&quot;</span>,
-       y = <span class="hljs-string">&quot;Coordinate 2&quot;</span>, 
-       title = <span class="hljs-string">&quot;Bray-Curtis PCoA with relative abundances&quot;</span>) 
-  theme(title = element_text(size = <span class="hljs-number">10</span>)) <span class="hljs-comment"># makes titles smaller</span>
-</code></pre>
-<pre><code>## List of 1
+  labs(x = &quot;Coordinate 1&quot;,
+       y = &quot;Coordinate 2&quot;, 
+       title = &quot;Bray-Curtis PCoA with relative abundances&quot;) 
+  theme(title = element_text(size = 10)) # makes titles smaller
+
+## List of 1
 ##  $ title:List of 11
 ##   ..$ family       : NULL
 ##   ..$ face         : NULL
@@ -288,139 +288,135 @@ bray_curtis_plot &lt;- ggplot(data = bray_curtis_pcoa_df, aes(x=pcoa1, y=pcoa2))
 ##  - attr(*, &quot;class&quot;)= chr [1:2] &quot;theme&quot; &quot;gg&quot;
 ##  - attr(*, &quot;complete&quot;)= logi FALSE
 ##  - attr(*, &quot;validate&quot;)= logi TRUE
-</code></pre><pre><code class="lang-r">bray_curtis_plot
-</code></pre>
-<p><img src="beta_files/figure-html/pcoa_asv_bc-1.png" alt=""><!-- --></p>
+
+bray_curtis_plot
+</code></pre><p><img src="beta_files/figure-markdown_strict/pcoa_asv_bc-1.png" alt=""></p>
 <h3 id="pcoa-for-asv-level-data-with-aitchison-distance">PCoA for ASV-level data with Aitchison distance</h3>
 <p>Aitchison distance corresponds to Euclidean distances between CLR
 transformed sample abundance vectors.</p>
-<pre><code class="lang-r"><span class="hljs-comment"># Does clr transformation. Pseudocount is added, because data contains zeros. </span>
-tse &lt;- transformCounts(tse, method = <span class="hljs-string">&quot;clr&quot;</span>, pseudocount = <span class="hljs-number">1</span>)
+<pre><code># Does clr transformation. Pseudocount is added, because data contains zeros. 
+tse &lt;- transformCounts(tse, method = &quot;clr&quot;, pseudocount = 1)
 
-<span class="hljs-comment"># Gets clr table</span>
+# Gets clr table
 clr_assay &lt;- assays(tse)$clr
 
-<span class="hljs-comment"># Transposes it to get taxa to columns</span>
+# Transposes it to get taxa to columns
 clr_assay &lt;- t(clr_assay)
 
-<span class="hljs-comment"># Calculates Euclidean distances between samples. Because taxa is in columns,</span>
-<span class="hljs-comment"># it is used to compare different samples.</span>
-euclidean_dist &lt;- vegan::vegdist(clr_assay, method = <span class="hljs-string">&quot;euclidean&quot;</span>)
+# Calculates Euclidean distances between samples. Because taxa is in columns,
+# it is used to compare different samples.
+euclidean_dist &lt;- vegan::vegdist(clr_assay, method = &quot;euclidean&quot;)
 
 
-<span class="hljs-comment"># Does principal coordinate analysis</span>
+# Does principal coordinate analysis
 euclidean_pcoa &lt;- ecodist::pco(euclidean_dist)
 
-<span class="hljs-comment"># Creates a data frame from principal coordinates</span>
-euclidean_pcoa_df &lt;- data.frame(pcoa1 = euclidean_pcoa$vectors[,<span class="hljs-number">1</span>], 
-                                pcoa2 = euclidean_pcoa$vectors[,<span class="hljs-number">2</span>])
+# Creates a data frame from principal coordinates
+euclidean_pcoa_df &lt;- data.frame(pcoa1 = euclidean_pcoa$vectors[,1], 
+                                pcoa2 = euclidean_pcoa$vectors[,2])
 
-<span class="hljs-comment"># Creates a plot</span>
+# Creates a plot
 euclidean_plot &lt;- ggplot(data = euclidean_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
   geom_point() +
-  labs(x = <span class="hljs-string">&quot;Coordinate 1&quot;</span>,
-       y = <span class="hljs-string">&quot;Coordinate 2&quot;</span>,
-       title = <span class="hljs-string">&quot;Euclidean PCoA with CLR transformation&quot;</span>) +
-  theme(title = element_text(size = <span class="hljs-number">12</span>)) <span class="hljs-comment"># makes titles smaller</span>
+  labs(x = &quot;Coordinate 1&quot;,
+       y = &quot;Coordinate 2&quot;,
+       title = &quot;Euclidean PCoA with CLR transformation&quot;) +
+  theme(title = element_text(size = 12)) # makes titles smaller
 
 euclidean_plot
-</code></pre>
-<p><img src="beta_files/figure-html/pcoa_asv_aitchison-1.png" alt=""><!-- --></p>
+</code></pre><p><img src="beta_files/figure-markdown_strict/pcoa_asv_aitchison-1.png" alt=""></p>
 <h3 id="pcoa-aggregated-to-phylum-level">PCoA aggregated to Phylum level</h3>
 <p>We use again the Aitchison distances in this example but this time we
 use data that was aggregated to the phylum level in the earlier
 examples.</p>
-<pre><code class="lang-r"><span class="hljs-comment"># Does clr transformation. Psuedocount is added, because data contains zeros. </span>
-tse_phylum &lt;- transformCounts(tse_phylum, method = <span class="hljs-string">&quot;clr&quot;</span>, pseudocount = <span class="hljs-number">1</span>)
+<pre><code># Does clr transformation. Psuedocount is added, because data contains zeros. 
+tse_phylum &lt;- transformCounts(tse_phylum, method = &quot;clr&quot;, pseudocount = 1)
 
-<span class="hljs-comment"># Gets clr table</span>
+# Gets clr table
 clr_phylum_assay &lt;- assays(tse_phylum)$clr
 
-<span class="hljs-comment"># Transposes it to get taxa to columns</span>
+# Transposes it to get taxa to columns
 clr_phylum_assay &lt;- t(clr_phylum_assay)
 
-<span class="hljs-comment"># Calculates Euclidean distances between samples. Because taxa is in columns,</span>
-<span class="hljs-comment"># it is used to compare different samples.</span>
-euclidean_phylum_dist &lt;- vegan::vegdist(clr_assay, method = <span class="hljs-string">&quot;euclidean&quot;</span>)
+# Calculates Euclidean distances between samples. Because taxa is in columns,
+# it is used to compare different samples.
+euclidean_phylum_dist &lt;- vegan::vegdist(clr_assay, method = &quot;euclidean&quot;)
 
-<span class="hljs-comment"># Does principal coordinate analysis</span>
+# Does principal coordinate analysis
 euclidean_phylum_pcoa &lt;- ecodist::pco(euclidean_phylum_dist)
 
-<span class="hljs-comment"># Creates a data frame from principal coordinates</span>
-euclidean_phylum_pcoa_df &lt;- data.frame(pcoa1 = euclidean_phylum_pcoa$vectors[,<span class="hljs-number">1</span>], 
-                                       pcoa2 = euclidean_phylum_pcoa$vectors[,<span class="hljs-number">2</span>])
+# Creates a data frame from principal coordinates
+euclidean_phylum_pcoa_df &lt;- data.frame(pcoa1 = euclidean_phylum_pcoa$vectors[,1], 
+                                       pcoa2 = euclidean_phylum_pcoa$vectors[,2])
 
-<span class="hljs-comment"># Creates a plot</span>
+# Creates a plot
 euclidean_phylum_plot &lt;- ggplot(data = euclidean_phylum_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
   geom_point() +
-  labs(x = <span class="hljs-string">&quot;Coordinate 1&quot;</span>,
-       y = <span class="hljs-string">&quot;Coordinate 2&quot;</span>,
-       title = <span class="hljs-string">&quot;Aitchison distances at Phylum level&quot;</span>) +  
-  theme(title = element_text(size = <span class="hljs-number">12</span>)) <span class="hljs-comment"># makes titles smaller</span>
+  labs(x = &quot;Coordinate 1&quot;,
+       y = &quot;Coordinate 2&quot;,
+       title = &quot;Aitchison distances at Phylum level&quot;) +  
+  theme(title = element_text(size = 12)) # makes titles smaller
 
 euclidean_phylum_plot
-</code></pre>
-<p><img src="beta_files/figure-html/pcoa_phylum_aitchison-1.png" alt=""><!-- --></p>
+</code></pre><p><img src="beta_files/figure-markdown_strict/pcoa_phylum_aitchison-1.png" alt=""></p>
 <h2 id="highlighting-external-variables-on-pcoa-plot">Highlighting external variables on PCoA plot</h2>
 <h3 id="pcoa-with-discrete-sample-grouping-variable-shown-with-colors">PCoA with discrete sample grouping variable shown with colors</h3>
-<p>We can add grouping variable to existing plots. Let&apos;s add coloring to the CLR transformed,
-Genus level PCoA.</p>
-<pre><code class="lang-r"><span class="hljs-comment"># Adds coloring information to the data frame, creates new column</span>
+<p>We can add grouping variable to existing plots. Let&#x2019;s add coloring to
+the CLR transformed, Genus level PCoA.</p>
+<pre><code># Adds coloring information to the data frame, creates new column
 euclidean_patient_status_pcoa_df &lt;- cbind(euclidean_pcoa_df,
                              patient_status = colData(tse)$patient_status)
 
-<span class="hljs-comment"># Creates a plot</span>
+# Creates a plot
 euclidean_patient_status_plot &lt;- ggplot(data = euclidean_patient_status_pcoa_df, 
                                         aes(x=pcoa1, y=pcoa2,
                                             color = patient_status)) +
   geom_point() +
-  labs(x = <span class="hljs-string">&quot;Coordinate 1&quot;</span>,
-       y = <span class="hljs-string">&quot;Coordinate 2&quot;</span>,
-       title = <span class="hljs-string">&quot;PCoA with Aitchison distances&quot;</span>) +
-  theme(title = element_text(size = <span class="hljs-number">12</span>)) <span class="hljs-comment"># makes titles smaller</span>
+  labs(x = &quot;Coordinate 1&quot;,
+       y = &quot;Coordinate 2&quot;,
+       title = &quot;PCoA with Aitchison distances&quot;) +
+  theme(title = element_text(size = 12)) # makes titles smaller
 
 euclidean_patient_status_plot
-</code></pre>
-<p><img src="beta_files/figure-html/pcoa_genus-1.png" alt=""><!-- --></p>
+</code></pre><p><img src="beta_files/figure-markdown_strict/pcoa_genus-1.png" alt=""></p>
 <h3 id="pcoa-with-continuous-sample-grouping-variable-shown-with-colors">PCoA with continuous sample grouping variable shown with colors</h3>
-<p>We can also use continues values to group variables. Let&apos;s use Shannon diversity
-index that we calculated in &quot;Alpha diversity&quot; notebook.</p>
-<pre><code class="lang-r"><span class="hljs-comment"># Adds coloring information to the data frame, creates new column</span>
+<p>We can also use continues values to group variables. Let&#x2019;s use Shannon
+diversity index that we calculated in &#x201C;Alpha diversity&#x201D; notebook.</p>
+<pre><code># Adds coloring information to the data frame, creates new column
 euclidean_shannon_pcoa_df &lt;- cbind(euclidean_pcoa_df,
                              shannon = colData(tse)$Shannon_index)
 
-<span class="hljs-comment"># Creates a plot</span>
+# Creates a plot
 euclidean_shannon_plot &lt;- ggplot(data = euclidean_shannon_pcoa_df, 
                                  aes(x=pcoa1, y=pcoa2,
                                      color = shannon)) + 
   geom_point() +
-  labs(x = <span class="hljs-string">&quot;Coordinate 1&quot;</span>,
-       y = <span class="hljs-string">&quot;Coordinate 2&quot;</span>,
-       title = <span class="hljs-string">&quot;PCoA with Aitchison distances&quot;</span>) +
-  theme(title = element_text(size = <span class="hljs-number">12</span>)) <span class="hljs-comment"># makes titles smaller</span>
+  labs(x = &quot;Coordinate 1&quot;,
+       y = &quot;Coordinate 2&quot;,
+       title = &quot;PCoA with Aitchison distances&quot;) +
+  theme(title = element_text(size = 12)) # makes titles smaller
 
 euclidean_shannon_plot
-</code></pre>
-<p><img src="beta_files/figure-html/pcoa_coloring-1.png" alt=""><!-- --></p>
+</code></pre><p><img src="beta_files/figure-markdown_strict/pcoa_coloring-1.png" alt=""></p>
 <h2 id="clustering-example">Clustering example</h2>
 <h3 id="dirichlet-multinomial-mixtures">Dirichlet-Multinomial Mixtures</h3>
 <p>One technique that allows to search for groups of samples that are
 similar to each other is the <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0030126" target="_blank">Dirichlet-Multinomial Mixture
-Model</a>. In
-DMM, we first determine the number of clusters (k) that best fit the
+Model</a>.
+In DMM, we first determine the number of clusters (k) that best fit the
 data (model evidence) using Laplace approximation. After fitting the
 model with k clusters, we obtain for each sample k probabilities that
 reflect the probability that a sample belongs to the given cluster.</p>
-<p>Let&apos;s cluster the data with DMM clustering. </p>
-<pre><code class="lang-r"><span class="hljs-comment"># Runs model and calculates the most likely number of clusters from 1 to 7. </span>
-<span class="hljs-comment"># For this small data, takes about 10 seconds. For larger data, can take much longer</span>
-<span class="hljs-comment"># because this demands lots of resources. </span>
-tse_dmn &lt;- runDMN(tse, name = <span class="hljs-string">&quot;DMN&quot;</span>, k = <span class="hljs-number">1</span>:<span class="hljs-number">7</span>)
-</code></pre>
-<pre><code class="lang-r"><span class="hljs-comment"># It is stored in metadata</span>
+<p>Let&#x2019;s cluster the data with DMM clustering.</p>
+<pre><code># Runs model and calculates the most likely number of clusters from 1 to 7. 
+# For this small data, takes about 10 seconds. For larger data, can take much longer
+# because this demands lots of resources. 
+tse_dmn &lt;- runDMN(tse, name = &quot;DMN&quot;, k = 1:7)
+
+# It is stored in metadata
 tse_dmn
-</code></pre>
-<pre><code>## class: TreeSummarizedExperiment 
+
+## class: TreeSummarizedExperiment 
 ## dim: 151 27 
 ## metadata(1): DMN
 ## assays(3): counts relabundance clr
@@ -436,9 +432,9 @@ tse_dmn
 ## colLinks: NULL
 ## colTree: NULL
 </code></pre><p>Return information on metadata that the object contains.</p>
-<pre><code class="lang-r">names(metadata(tse_dmn))
-</code></pre>
-<pre><code>## [1] &quot;DMN&quot;
+<pre><code>names(metadata(tse_dmn))
+
+## [1] &quot;DMN&quot;
 </code></pre><p>This returns a list of DMN objects for a closer investigation.</p>
 <pre><code>## [[1]]
 ## class: DMN 
@@ -450,199 +446,197 @@ tse_dmn
 ## class: DMN 
 ## k: 2 
 ## samples x taxa: 27 x 151 
-## Laplace: 11440.96 BIC: 12161.29 AIC: 11964.97 
+## Laplace: 11440.98 BIC: 12161.29 AIC: 11964.97 
 ## 
 ## [[3]]
 ## class: DMN 
 ## k: 3 
 ## samples x taxa: 27 x 151 
-## Laplace: 11059.97 BIC: 12266.31 AIC: 11971.51 
+## Laplace: 11059.63 BIC: 12266.31 AIC: 11971.51 
 ## 
 ## [[4]]
 ## class: DMN 
 ## k: 4 
 ## samples x taxa: 27 x 151 
-## Laplace: 11417.28 BIC: 13047.39 AIC: 12654.11 
+## Laplace: 11417.58 BIC: 13047.39 AIC: 12654.11 
 ## 
 ## [[5]]
 ## class: DMN 
 ## k: 5 
 ## samples x taxa: 27 x 151 
-## Laplace: 11069.01 BIC: 13160.95 AIC: 12669.18 
+## Laplace: 11325.67 BIC: 13255.59 AIC: 12763.82 
 ## 
 ## [[6]]
 ## class: DMN 
 ## k: 6 
 ## samples x taxa: 27 x 151 
-## Laplace: 11407.19 BIC: 13774.56 AIC: 13184.3 
+## Laplace: 11202.28 BIC: 13718.9 AIC: 13128.65 
 ## 
 ## [[7]]
 ## class: DMN 
 ## k: 7 
 ## samples x taxa: 27 x 151 
-## Laplace: 11619.29 BIC: 14381.81 AIC: 13693.07
-</code></pre><p>Show Laplace approximation (model evidence) for each model of the k models.</p>
-<pre><code class="lang-r">plotDMNFit(tse_dmn, type = <span class="hljs-string">&quot;laplace&quot;</span>)
-</code></pre>
-<p><img src="beta_files/figure-html/unnamed-chunk-4-1.png" alt=""><!-- --></p>
+## Laplace: 11311.06 BIC: 14200.57 AIC: 13511.84
+</code></pre><p>Show Laplace approximation (model evidence) for each model of the k
+models.</p>
+<pre><code>plotDMNFit(tse_dmn, type = &quot;laplace&quot;)
+</code></pre><p><img src="beta_files/figure-markdown_strict/unnamed-chunk-4-1.png" alt=""></p>
 <p>Return the model that has the best fit.</p>
-<pre><code class="lang-r">getBestDMNFit(tse_dmn, type = <span class="hljs-string">&quot;laplace&quot;</span>)
-</code></pre>
-<pre><code>## class: DMN 
+<pre><code>getBestDMNFit(tse_dmn, type = &quot;laplace&quot;)
+
+## class: DMN 
 ## k: 3 
 ## samples x taxa: 27 x 151 
-## Laplace: 11059.97 BIC: 12266.31 AIC: 11971.51
+## Laplace: 11059.63 BIC: 12266.31 AIC: 11971.51
 </code></pre><h3 id="pcoa-for-asv-level-data-with-bray-curtis-with-dmm-clusters-shown-with-colors">PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors</h3>
 <p>Group samples and return DMNGroup object that contains a summary.
 Patient status is used for grouping.</p>
-<pre><code class="lang-r">dmn_group &lt;- calculateDMNgroup(tse_dmn, variable = <span class="hljs-string">&quot;patient_status&quot;</span>, 
-                             exprs_values = <span class="hljs-string">&quot;counts&quot;</span>, k = <span class="hljs-number">3</span>)
+<pre><code>dmn_group &lt;- calculateDMNgroup(tse_dmn, variable = &quot;patient_status&quot;, 
+                             exprs_values = &quot;counts&quot;, k = 3)
 
 dmn_group
-</code></pre>
-<pre><code>## class: DMNGroup 
+
+## class: DMNGroup 
 ## summary:
-##         k samples taxa      NLE     LogDet  Laplace      BIC      AIC
-## ADHD    3      13  151 6345.540  -65.71946 5894.563 6929.066 6800.540
-## Control 3      14  151 6647.269 -148.36904 6154.968 7247.655 7102.269
-</code></pre><p>Mixture weights  (rough measure of the cluster size).</p>
-<pre><code class="lang-r">DirichletMultinomial::mixturewt(getBestDMNFit(tse_dmn))
-</code></pre>
-<pre><code>##          pi    theta
-## 1 0.4814815 31.27730
-## 2 0.2962963 47.34419
-## 3 0.2222222 92.27386
+##         k samples taxa      NLE    LogDet  Laplace      BIC      AIC
+## ADHD    3      13  151 6018.131 -344.3973 5427.816 6601.657 6473.131
+## Control 3      14  151 6647.269 -147.5136 6155.395 7247.655 7102.269
+</code></pre><p>Mixture weights (rough measure of the cluster size).</p>
+<pre><code>DirichletMultinomial::mixturewt(getBestDMNFit(tse_dmn))
+
+##          pi    theta
+## 1 0.4814815 31.27764
+## 2 0.2962963 47.34478
+## 3 0.2222222 92.27382
 </code></pre><p>Samples-cluster assignment probabilities.</p>
-<pre><code class="lang-r">head(DirichletMultinomial::mixture(getBestDMNFit(tse_dmn)))
-</code></pre>
-<pre><code>##               [,1]          [,2]          [,3]
-## A110  1.000000e+00 1.252694e-144 7.536057e-205
-## A12  9.496843e-117  6.114200e-93  1.000000e+00
-## A15   1.000000e+00 9.510791e-119 3.364089e-234
-## A19  5.170982e-112 1.817823e-107  1.000000e+00
-## A21   2.070616e-93  4.722673e-96  1.000000e+00
-## A23   1.000000e+00 8.826587e-111 1.927686e-161
+<pre><code>head(DirichletMultinomial::mixture(getBestDMNFit(tse_dmn)))
+
+##               [,1]          [,2]          [,3]
+## A110  1.000000e+00 1.263720e-144 7.529826e-205
+## A12  9.901630e-117  6.162596e-93  1.000000e+00
+## A15   1.000000e+00 9.639041e-119 3.343372e-234
+## A19  5.418072e-112 1.834471e-107  1.000000e+00
+## A21   2.161480e-93  4.769801e-96  1.000000e+00
+## A23   1.000000e+00 8.909295e-111 1.926440e-161
 </code></pre><p>Contribution of samples to each component.</p>
-<pre><code class="lang-r">head(DirichletMultinomial::fitted(getBestDMNFit(tse_dmn)))
-</code></pre>
-<pre><code>##                 [,1]        [,2]       [,3]
-## 1726470  6.351902901 2.898804514 20.1892120
-## 1726471  5.287690248 0.002047436  0.1532199
-## 17264731 0.001246951 9.144060623  2.0111883
-## 17264726 0.140480253 1.363569114  7.5895514
-## 1726472  2.104196044 3.523541287  2.6656701
-## 17264724 0.072370005 0.002047436  9.8546643
+<pre><code>head(DirichletMultinomial::fitted(getBestDMNFit(tse_dmn)))
+
+##                [,1]        [,2]       [,3]
+## 1726470  6.35219270 2.898805224 20.1893854
+## 1726471  5.28793777 0.002048358  0.1532217
+## 17264731 0.00124924 9.144887207  2.0112168
+## 17264726 0.14047999 1.363494430  7.5891813
+## 1726472  2.10414759 3.523533846  2.6656536
+## 17264724 0.07236409 0.002048358  9.8545722
 </code></pre><p>Get the assignment probabilities</p>
-<pre><code class="lang-r">prob &lt;- DirichletMultinomial::mixture(getBestDMNFit(tse_dmn))
-<span class="hljs-comment"># Add column names</span>
-colnames(prob) &lt;- c(<span class="hljs-string">&quot;comp1&quot;</span>, <span class="hljs-string">&quot;comp2&quot;</span>, <span class="hljs-string">&quot;comp3&quot;</span>)
+<pre><code>prob &lt;- DirichletMultinomial::mixture(getBestDMNFit(tse_dmn))
+# Add column names
+colnames(prob) &lt;- c(&quot;comp1&quot;, &quot;comp2&quot;, &quot;comp3&quot;)
 
-<span class="hljs-comment"># For each row, finds column that has the highest value. Then extract the column </span>
-<span class="hljs-comment"># names of highest values.</span>
-vec &lt;- colnames(prob)[max.col(prob,ties.method = <span class="hljs-string">&quot;first&quot;</span>)]
+# For each row, finds column that has the highest value. Then extract the column 
+# names of highest values.
+vec &lt;- colnames(prob)[max.col(prob,ties.method = &quot;first&quot;)]
 
-<span class="hljs-comment"># Creates a data frame that contains principal coordinates and DMM information</span>
+# Creates a data frame that contains principal coordinates and DMM information
 euclidean_dmm_pcoa_df &lt;- cbind(euclidean_pcoa_df,
                                dmm_component = vec)
 
-<span class="hljs-comment"># Creates a plot</span>
+# Creates a plot
 euclidean_dmm_plot &lt;- ggplot(data = euclidean_dmm_pcoa_df, 
                              aes(x=pcoa1, y=pcoa2,
                                  color = dmm_component)) +
   geom_point() +
-  labs(x = <span class="hljs-string">&quot;Coordinate 1&quot;</span>,
-       y = <span class="hljs-string">&quot;Coordinate 2&quot;</span>,
-       title = <span class="hljs-string">&quot;PCoA with Aitchison distances&quot;</span>) +  
-  theme(title = element_text(size = <span class="hljs-number">12</span>)) <span class="hljs-comment"># makes titles smaller</span>
+  labs(x = &quot;Coordinate 1&quot;,
+       y = &quot;Coordinate 2&quot;,
+       title = &quot;PCoA with Aitchison distances&quot;) +  
+  theme(title = element_text(size = 12)) # makes titles smaller
 
 euclidean_dmm_plot
-</code></pre>
-<p><img src="beta_files/figure-html/unnamed-chunk-10-1.png" alt=""><!-- --></p>
+</code></pre><p><img src="beta_files/figure-markdown_strict/unnamed-chunk-10-1.png" alt=""></p>
 <h2 id="estimating-associations-with-an-external-variable">Estimating associations with an external variable</h2>
 <p>Next we show how the quantify the strength of association between the
 variation in community composition (beta diversity) and external
 factors.</p>
 <p>The standard way to do this is to perform a so-called permutational
 multivariate analysis of variance (PERMANOVA) test.</p>
-<pre><code class="lang-r"><span class="hljs-comment"># Relative abundance table</span>
+<pre><code># Relative abundance table
 rel_abund_assay &lt;- assays(tse)$relabundance
 
-<span class="hljs-comment"># Transposes it to get taxa to columns</span>
+# Transposes it to get taxa to columns
 rel_abund_assay &lt;- t(rel_abund_assay)
 
 permanova_cohort &lt;- vegan::adonis(rel_abund_assay ~ cohort,
                                   data = colData(tse),
-                                  permutations = <span class="hljs-number">9999</span>)
+                                  permutations = 9999)
 
-<span class="hljs-comment"># P-value</span>
-print(paste0(<span class="hljs-string">&quot;Different different cohorts and variance of abundance between samples, p-value: &quot;</span>, 
-             as.data.frame(permanova_cohort$aov.tab)[<span class="hljs-string">&quot;cohort&quot;</span>, <span class="hljs-string">&quot;Pr(&gt;F)&quot;</span>]))
-</code></pre>
-<pre><code>## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7367&quot;
+# P-value
+print(paste0(&quot;Different different cohorts and variance of abundance between samples, p-value: &quot;, 
+             as.data.frame(permanova_cohort$aov.tab)[&quot;cohort&quot;, &quot;Pr(&gt;F)&quot;]))
+
+## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7439&quot;
 </code></pre><p>As we see, the cohort variable is not significantly associated with
 microbiota composition (p-value is over 0.05).</p>
 <p>We can, however, visualize those taxa whose abundance are the most
-different between cohorts. This gives us information which taxa&apos;s
+different between cohorts. This gives us information which taxa&#x2019;s
 abundances tend to differ between different cohorts.</p>
 <p>In order to do that, we need coefficients of taxa.</p>
-<pre><code class="lang-r"><span class="hljs-comment"># Gets the coefficients</span>
-coef &lt;- coefficients(permanova_cohort)[<span class="hljs-string">&quot;cohort1&quot;</span>,]
+<pre><code># Gets the coefficients
+coef &lt;- coefficients(permanova_cohort)[&quot;cohort1&quot;,]
 
-<span class="hljs-comment"># Gets the highest coefficients</span>
-top.coef &lt;- sort(head(coef[rev(order(abs(coef)))],<span class="hljs-number">20</span>))
+# Gets the highest coefficients
+top.coef &lt;- sort(head(coef[rev(order(abs(coef)))],20))
 
-<span class="hljs-comment"># Plots the coefficients</span>
+# Plots the coefficients
 top_taxa_coeffient_plot &lt;- ggplot(data.frame(x = top.coef,
                                              y = factor(names(top.coef),
                                                         unique(names(top.coef)))),
                                   aes(x = x, y = y)) +
-  geom_bar(stat=<span class="hljs-string">&quot;identity&quot;</span>) +
-  labs(x=<span class="hljs-string">&quot;&quot;</span>, y=<span class="hljs-string">&quot;&quot;</span>, title=<span class="hljs-string">&quot;Top Taxa&quot;</span>) +
+  geom_bar(stat=&quot;identity&quot;) +
+  labs(x=&quot;&quot;, y=&quot;&quot;, title=&quot;Top Taxa&quot;) +
   theme_bw()
 
 top_taxa_coeffient_plot
-</code></pre>
-<p><img src="beta_files/figure-html/unnamed-chunk-12-1.png" alt=""><!-- --></p>
+</code></pre><p><img src="beta_files/figure-markdown_strict/unnamed-chunk-12-1.png" alt=""></p>
 <p>The above plot shows taxa as code names, and it is hard to tell which
-bacterial groups they represent. It is easy to add human readable
-names. The lowest available taxonomic level is Genus, so let&apos;s first
+bacterial groups they represent. It is easy to add human readable names.
+The lowest available taxonomic level is Genus, so let&#x2019;s first
 agglomerate taxa to Genus level.</p>
-<pre><code class="lang-r"><span class="hljs-comment"># Agglomerates data to Genus level</span>
-tse_genus &lt;- agglomerateByRank(tse, rank = <span class="hljs-string">&quot;Genus&quot;</span>)
+<pre><code># Agglomerates data to Genus level
+tse_genus &lt;- agglomerateByRank(tse, rank = &quot;Genus&quot;)
 
-<span class="hljs-comment"># Relative abundance table</span>
+# Relative abundance table
 rel_abund_assay_genus &lt;- assays(tse_genus)$relabundance
 
-<span class="hljs-comment"># Transposes it to get taxa to columns</span>
+# Transposes it to get taxa to columns
 rel_abund_assay_genus &lt;- t(rel_abund_assay_genus)
 
 permanova_cohort_genus &lt;- vegan::adonis(rel_abund_assay_genus ~ cohort,
                                         data = colData(tse_genus),
-                                        permutations = <span class="hljs-number">9999</span>)
+                                        permutations = 9999)
 
-<span class="hljs-comment"># P-value</span>
-print(paste0(<span class="hljs-string">&quot;Different different cohorts and variance of abundance between samples, p-value: &quot;</span>, 
-             as.data.frame(permanova_cohort_genus$aov.tab)[<span class="hljs-string">&quot;cohort&quot;</span>, <span class="hljs-string">&quot;Pr(&gt;F)&quot;</span>]))
-</code></pre>
-<pre><code>## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7751&quot;
-</code></pre><pre><code class="lang-r"><span class="hljs-comment"># Gets the coefficients</span>
-coef &lt;- coefficients(permanova_cohort_genus)[<span class="hljs-string">&quot;cohort1&quot;</span>,]
+# P-value
+print(paste0(&quot;Different different cohorts and variance of abundance between samples, p-value: &quot;, 
+             as.data.frame(permanova_cohort_genus$aov.tab)[&quot;cohort&quot;, &quot;Pr(&gt;F)&quot;]))
 
-<span class="hljs-comment"># Gets the highest coefficients</span>
-top.coef &lt;- sort(head(coef[rev(order(abs(coef)))],<span class="hljs-number">20</span>))
+## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7758&quot;
 
-<span class="hljs-comment"># Plots the coefficients</span>
+# Gets the coefficients
+coef &lt;- coefficients(permanova_cohort_genus)[&quot;cohort1&quot;,]
+
+# Gets the highest coefficients
+top.coef &lt;- sort(head(coef[rev(order(abs(coef)))],20))
+
+# Plots the coefficients
 top_taxa_coeffient_genus_plot &lt;- ggplot(data.frame(x = top.coef,
                                                    y = factor(names(top.coef),
                                                               unique(names(top.coef)))),
                                         aes(x = x, y = y)) +
-  geom_bar(stat=<span class="hljs-string">&quot;identity&quot;</span>) +
-  labs(x=<span class="hljs-string">&quot;&quot;</span>, y=<span class="hljs-string">&quot;&quot;</span>, title=<span class="hljs-string">&quot;Top Taxa&quot;</span>) +
+  geom_bar(stat=&quot;identity&quot;) +
+  labs(x=&quot;&quot;, y=&quot;&quot;, title=&quot;Top Taxa&quot;) +
   theme_bw()
 
 top_taxa_coeffient_genus_plot
-</code></pre>
-<p><img src="beta_files/figure-html/unnamed-chunk-14-1.png" alt=""><!-- --></p>
+</code></pre><p><img src="beta_files/figure-markdown_strict/unnamed-chunk-14-1.png" alt=""></p>
 <h2 id="further-resources">Further resources</h2>
 <p>For more examples, see a dedicated section on beta diversity in the
 <a href="https://microbiome.github.io/OMA/" target="_blank">online book</a>.</p>
@@ -689,7 +683,7 @@ top_taxa_coeffient_genus_plot
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Calculate beta diversity","output":{"html_document":{"keep_md":true}},"level":"1.6","depth":1,"next":{"title":"Differential abundance analysis","level":"1.7","depth":1,"path":"abundance.md","ref":"abundance.md","articles":[]},"previous":{"title":"Calculate alpha diversity","level":"1.5","depth":1,"path":"alpha.md","ref":"alpha.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"beta.md","mtime":"2021-06-01T07:51:43.892Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-01T07:52:23.946Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Calculate beta diversity","level":"1.6","depth":1,"next":{"title":"Differential abundance analysis","level":"1.7","depth":1,"path":"abundance.md","ref":"abundance.md","articles":[]},"previous":{"title":"Calculate alpha diversity","level":"1.5","depth":1,"path":"alpha.md","ref":"alpha.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"beta.md","mtime":"2021-06-01T08:02:21.164Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-01T08:03:16.068Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

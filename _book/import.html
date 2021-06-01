@@ -229,13 +229,13 @@
 <h2 id="data">Data</h2>
 <p>This workflow demonstrates the use of miaverse using data from the
 following publication, which you can check for a more detailed
-description of the samples and experimental design: Tengeler AC, Dam
-SA, Wiesmann M, Naaijen J, van Bodegom M, Belzer C, Dederen PJ,
-Verweij V, Franke B, Kozicz T, Vasquez AA &amp; Kiliaan AJ (2020) <a href="https://doi.org/10.1186/s40168-020-00816-x" target="_blank"><strong>Gut
-microbiota from persons with attention-deficit/hyperactivity disorder
-affects the brain in
-mice</strong></a> Microbiome 8:44.</p>
-<p>Data is located in a &quot;data&quot; subfolder. Data consists of 3 files: </p>
+description of the samples and experimental design: Tengeler AC, Dam SA,
+Wiesmann M, Naaijen J, van Bodegom M, Belzer C, Dederen PJ, Verweij V,
+Franke B, Kozicz T, Vasquez AA &amp; Kiliaan AJ (2020) <a href="https://doi.org/10.1186/s40168-020-00816-x" target="_blank"><strong>Gut microbiota
+from persons with attention-deficit/hyperactivity disorder affects the
+brain in mice</strong></a> Microbiome
+8:44.</p>
+<p>Data is located in a &#x201C;data&#x201D; subfolder. Data consists of 3 files:</p>
 <ul>
 <li>biom file that contains abundance table and taxonomy information</li>
 <li>csv file that contains sample metadata</li>
@@ -247,21 +247,18 @@ files to a <em>TreeSummarizedExperiment</em> object.</p>
 <p><a href="install.html">Install</a> the necessary R packages if you have not already
 done it.</p>
 <p>Then load the R packages.</p>
-<pre><code class="lang-r"><span class="hljs-keyword">library</span>(<span class="hljs-string">&quot;mia&quot;</span>)
-</code></pre>
-<p>Define source file paths.</p>
-<pre><code class="lang-r">biom_file_path &lt;- <span class="hljs-string">&quot;data/Aggregated_humanization2.biom&quot;</span>
-sample_meta_file_path &lt;- <span class="hljs-string">&quot;data/Mapping_file_ADHD_aggregated.csv&quot;</span>
-tree_file_path &lt;- <span class="hljs-string">&quot;data/Data_humanization_phylo_aggregation.tre&quot;</span>
-</code></pre>
-<p>Load the (biom) data into a SummarizedExperiment (SE) object.</p>
-<pre><code class="lang-r">se &lt;- loadFromBiom(biom_file_path)
-</code></pre>
-<h2 id="investigate-the-r-data-object">Investigate the R data object</h2>
+<pre><code>library(&quot;mia&quot;)
+</code></pre><p>Define source file paths.</p>
+<pre><code>biom_file_path &lt;- &quot;data/Aggregated_humanization2.biom&quot;
+sample_meta_file_path &lt;- &quot;data/Mapping_file_ADHD_aggregated.csv&quot;
+tree_file_path &lt;- &quot;data/Data_humanization_phylo_aggregation.tre&quot;
+</code></pre><p>Load the (biom) data into a SummarizedExperiment (SE) object.</p>
+<pre><code>se &lt;- loadFromBiom(biom_file_path)
+</code></pre><h2 id="investigate-the-r-data-object">Investigate the R data object</h2>
 <p>We have now imported the data set in R. Let us investigate its contents.</p>
-<pre><code class="lang-r">print(se)
-</code></pre>
-<pre><code>## class: SummarizedExperiment 
+<pre><code>print(se)
+
+## class: SummarizedExperiment 
 ## dim: 151 27 
 ## metadata(0):
 ## assays(1): counts
@@ -269,281 +266,299 @@ tree_file_path &lt;- <span class="hljs-string">&quot;data/Data_humanization_phyl
 ## rowData names(6): taxonomy1 taxonomy2 ... taxonomy5 taxonomy6
 ## colnames(27): A110 A111 ... A38 A39
 ## colData names(0):
-</code></pre><p>Counts include the abundance table from biom file. Let us just use first cols and rows.</p>
-<pre><code class="lang-r">assays(se)$counts[<span class="hljs-number">1</span>:<span class="hljs-number">3</span>, <span class="hljs-number">1</span>:<span class="hljs-number">3</span>]
-</code></pre>
-<pre><code>##           A110  A111  A12
+</code></pre><p>Counts include the abundance table from biom file. Let us just use first
+cols and rows.</p>
+<pre><code>assays(se)$counts[1:3, 1:3]
+
+##           A110  A111  A12
 ## 1726470  17722 11630    0
 ## 1726471  12052     0 2679
 ## 17264731     0   970    0
 </code></pre><h3 id="rowdata-taxonomic-information">rowData (taxonomic information)</h3>
-<p>The rowdata includes taxonomic information from biom file. The head() command
-shows just the beginning of the data table for an overview.</p>
-<pre><code class="lang-r">knitr::kable(head(rowData(se)))
-</code></pre>
-<table>
+<p>The rowdata includes taxonomic information from biom file. The head()
+command shows just the beginning of the data table for an overview.</p>
+<pre><code>knitr::kable(head(rowData(se)))
+</code></pre><table style="width:100%;">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 10%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 17%">
+<col style="width: 18%">
+<col style="width: 15%">
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:left">taxonomy1</th>
-<th style="text-align:left">taxonomy2</th>
-<th style="text-align:left">taxonomy3</th>
-<th style="text-align:left">taxonomy4</th>
-<th style="text-align:left">taxonomy5</th>
-<th style="text-align:left">taxonomy6</th>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">taxonomy1</th>
+<th style="text-align: left;">taxonomy2</th>
+<th style="text-align: left;">taxonomy3</th>
+<th style="text-align: left;">taxonomy4</th>
+<th style="text-align: left;">taxonomy5</th>
+<th style="text-align: left;">taxonomy6</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">1726470</td>
-<td style="text-align:left">&quot;k__Bacteria</td>
-<td style="text-align:left">p__Bacteroidetes</td>
-<td style="text-align:left">c__Bacteroidia</td>
-<td style="text-align:left">o__Bacteroidales</td>
-<td style="text-align:left">f__Bacteroidaceae</td>
-<td style="text-align:left">g__Bacteroides&quot;</td>
+<tr class="odd">
+<td style="text-align: left;">1726470</td>
+<td style="text-align: left;">&quot;k__Bacteria</td>
+<td style="text-align: left;">p__Bacteroidetes</td>
+<td style="text-align: left;">c__Bacteroidia</td>
+<td style="text-align: left;">o__Bacteroidales</td>
+<td style="text-align: left;">f__Bacteroidaceae</td>
+<td style="text-align: left;">g__Bacteroides&quot;</td>
 </tr>
-<tr>
-<td style="text-align:left">1726471</td>
-<td style="text-align:left">&quot;k__Bacteria</td>
-<td style="text-align:left">p__Bacteroidetes</td>
-<td style="text-align:left">c__Bacteroidia</td>
-<td style="text-align:left">o__Bacteroidales</td>
-<td style="text-align:left">f__Bacteroidaceae</td>
-<td style="text-align:left">g__Bacteroides&quot;</td>
+<tr class="even">
+<td style="text-align: left;">1726471</td>
+<td style="text-align: left;">&quot;k__Bacteria</td>
+<td style="text-align: left;">p__Bacteroidetes</td>
+<td style="text-align: left;">c__Bacteroidia</td>
+<td style="text-align: left;">o__Bacteroidales</td>
+<td style="text-align: left;">f__Bacteroidaceae</td>
+<td style="text-align: left;">g__Bacteroides&quot;</td>
 </tr>
-<tr>
-<td style="text-align:left">17264731</td>
-<td style="text-align:left">&quot;k__Bacteria</td>
-<td style="text-align:left">p__Bacteroidetes</td>
-<td style="text-align:left">c__Bacteroidia</td>
-<td style="text-align:left">o__Bacteroidales</td>
-<td style="text-align:left">f__Porphyromonadaceae</td>
-<td style="text-align:left">g__Parabacteroides&quot;</td>
+<tr class="odd">
+<td style="text-align: left;">17264731</td>
+<td style="text-align: left;">&quot;k__Bacteria</td>
+<td style="text-align: left;">p__Bacteroidetes</td>
+<td style="text-align: left;">c__Bacteroidia</td>
+<td style="text-align: left;">o__Bacteroidales</td>
+<td style="text-align: left;">f__Porphyromonadaceae</td>
+<td style="text-align: left;">g__Parabacteroides&quot;</td>
 </tr>
-<tr>
-<td style="text-align:left">17264726</td>
-<td style="text-align:left">&quot;k__Bacteria</td>
-<td style="text-align:left">p__Bacteroidetes</td>
-<td style="text-align:left">c__Bacteroidia</td>
-<td style="text-align:left">o__Bacteroidales</td>
-<td style="text-align:left">f__Bacteroidaceae</td>
-<td style="text-align:left">g__Bacteroides&quot;</td>
+<tr class="even">
+<td style="text-align: left;">17264726</td>
+<td style="text-align: left;">&quot;k__Bacteria</td>
+<td style="text-align: left;">p__Bacteroidetes</td>
+<td style="text-align: left;">c__Bacteroidia</td>
+<td style="text-align: left;">o__Bacteroidales</td>
+<td style="text-align: left;">f__Bacteroidaceae</td>
+<td style="text-align: left;">g__Bacteroides&quot;</td>
 </tr>
-<tr>
-<td style="text-align:left">1726472</td>
-<td style="text-align:left">&quot;k__Bacteria</td>
-<td style="text-align:left">p__Verrucomicrobia</td>
-<td style="text-align:left">c__Verrucomicrobiae</td>
-<td style="text-align:left">o__Verrucomicrobiales</td>
-<td style="text-align:left">f__Verrucomicrobiaceae</td>
-<td style="text-align:left">g__Akkermansia&quot;</td>
+<tr class="odd">
+<td style="text-align: left;">1726472</td>
+<td style="text-align: left;">&quot;k__Bacteria</td>
+<td style="text-align: left;">p__Verrucomicrobia</td>
+<td style="text-align: left;">c__Verrucomicrobiae</td>
+<td style="text-align: left;">o__Verrucomicrobiales</td>
+<td style="text-align: left;">f__Verrucomicrobiaceae</td>
+<td style="text-align: left;">g__Akkermansia&quot;</td>
 </tr>
-<tr>
-<td style="text-align:left">17264724</td>
-<td style="text-align:left">&quot;k__Bacteria</td>
-<td style="text-align:left">p__Bacteroidetes</td>
-<td style="text-align:left">c__Bacteroidia</td>
-<td style="text-align:left">o__Bacteroidales</td>
-<td style="text-align:left">f__Bacteroidaceae</td>
-<td style="text-align:left">g__Bacteroides&quot;</td>
+<tr class="even">
+<td style="text-align: left;">17264724</td>
+<td style="text-align: left;">&quot;k__Bacteria</td>
+<td style="text-align: left;">p__Bacteroidetes</td>
+<td style="text-align: left;">c__Bacteroidia</td>
+<td style="text-align: left;">o__Bacteroidales</td>
+<td style="text-align: left;">f__Bacteroidaceae</td>
+<td style="text-align: left;">g__Bacteroides&quot;</td>
 </tr>
 </tbody>
 </table>
-<p>Taxonomic ranks are not real rank names. Let&apos;s replace those taxonomic classes 
-with real rank names. </p>
-<p>In addition to that, taxa names include, e.g., &apos;&quot;k__&apos; before the name, so let&apos;s
-make them cleaner by removing them. </p>
-<pre><code class="lang-r">names(rowData(se)) &lt;- c(<span class="hljs-string">&quot;Kingdom&quot;</span>, <span class="hljs-string">&quot;Phylum&quot;</span>, <span class="hljs-string">&quot;Class&quot;</span>, <span class="hljs-string">&quot;Order&quot;</span>, 
-                        <span class="hljs-string">&quot;Family&quot;</span>, <span class="hljs-string">&quot;Genus&quot;</span>)
 
-<span class="hljs-comment"># Goes through whole DataFrame. Removes &apos;.*[kpcofg]__&apos; from strings, where [kpcofg] </span>
-<span class="hljs-comment"># is any character from listed ones, and .* any character.</span>
+<p>Taxonomic ranks are not real rank names. Let&#x2019;s replace those taxonomic
+classes with real rank names.</p>
+<p>In addition to that, taxa names include, e.g., &#x2019;&quot;k__&#x2019; before the name,
+so let&#x2019;s make them cleaner by removing them.</p>
+<pre><code>names(rowData(se)) &lt;- c(&quot;Kingdom&quot;, &quot;Phylum&quot;, &quot;Class&quot;, &quot;Order&quot;, 
+                        &quot;Family&quot;, &quot;Genus&quot;)
+
+# Goes through whole DataFrame. Removes &apos;.*[kpcofg]__&apos; from strings, where [kpcofg] 
+# is any character from listed ones, and .* any character.
 rowdata_modified &lt;- BiocParallel::bplapply(rowData(se), 
                                            FUN = stringr::str_remove, 
-                                           pattern = <span class="hljs-string">&apos;.*[kpcofg]__&apos;</span>)
+                                           pattern = &apos;.*[kpcofg]__&apos;)
 
-<span class="hljs-comment"># Genus level has additional &apos;\&quot;&apos;, so let&apos;s delete that also</span>
+# Genus level has additional &apos;\&quot;&apos;, so let&apos;s delete that also
 rowdata_modified &lt;- BiocParallel::bplapply(rowdata_modified, 
                                            FUN = stringr::str_remove, 
-                                           pattern = <span class="hljs-string">&apos;\&quot;&apos;</span>)
+                                           pattern = &apos;\&quot;&apos;)
 
-<span class="hljs-comment"># rowdata_modified is list, so it is converted back to DataFrame. </span>
+# rowdata_modified is list, so it is converted back to DataFrame. 
 rowdata_modified &lt;- DataFrame(rowdata_modified)
 
-<span class="hljs-comment"># And then assigned back to the SE object</span>
+# And then assigned back to the SE object
 rowData(se) &lt;- rowdata_modified
 
-<span class="hljs-comment"># Now we have a nicer table</span>
+# Now we have a nicer table
 knitr::kable(head(rowData(se)))
-</code></pre>
-<table>
+</code></pre><table>
+<colgroup>
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 15%">
+<col style="width: 16%">
+<col style="width: 17%">
+<col style="width: 18%">
+<col style="width: 15%">
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:left">Kingdom</th>
-<th style="text-align:left">Phylum</th>
-<th style="text-align:left">Class</th>
-<th style="text-align:left">Order</th>
-<th style="text-align:left">Family</th>
-<th style="text-align:left">Genus</th>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Kingdom</th>
+<th style="text-align: left;">Phylum</th>
+<th style="text-align: left;">Class</th>
+<th style="text-align: left;">Order</th>
+<th style="text-align: left;">Family</th>
+<th style="text-align: left;">Genus</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">1726470</td>
-<td style="text-align:left">Bacteria</td>
-<td style="text-align:left">Bacteroidetes</td>
-<td style="text-align:left">Bacteroidia</td>
-<td style="text-align:left">Bacteroidales</td>
-<td style="text-align:left">Bacteroidaceae</td>
-<td style="text-align:left">Bacteroides</td>
+<tr class="odd">
+<td style="text-align: left;">1726470</td>
+<td style="text-align: left;">Bacteria</td>
+<td style="text-align: left;">Bacteroidetes</td>
+<td style="text-align: left;">Bacteroidia</td>
+<td style="text-align: left;">Bacteroidales</td>
+<td style="text-align: left;">Bacteroidaceae</td>
+<td style="text-align: left;">Bacteroides</td>
 </tr>
-<tr>
-<td style="text-align:left">1726471</td>
-<td style="text-align:left">Bacteria</td>
-<td style="text-align:left">Bacteroidetes</td>
-<td style="text-align:left">Bacteroidia</td>
-<td style="text-align:left">Bacteroidales</td>
-<td style="text-align:left">Bacteroidaceae</td>
-<td style="text-align:left">Bacteroides</td>
+<tr class="even">
+<td style="text-align: left;">1726471</td>
+<td style="text-align: left;">Bacteria</td>
+<td style="text-align: left;">Bacteroidetes</td>
+<td style="text-align: left;">Bacteroidia</td>
+<td style="text-align: left;">Bacteroidales</td>
+<td style="text-align: left;">Bacteroidaceae</td>
+<td style="text-align: left;">Bacteroides</td>
 </tr>
-<tr>
-<td style="text-align:left">17264731</td>
-<td style="text-align:left">Bacteria</td>
-<td style="text-align:left">Bacteroidetes</td>
-<td style="text-align:left">Bacteroidia</td>
-<td style="text-align:left">Bacteroidales</td>
-<td style="text-align:left">Porphyromonadaceae</td>
-<td style="text-align:left">Parabacteroides</td>
+<tr class="odd">
+<td style="text-align: left;">17264731</td>
+<td style="text-align: left;">Bacteria</td>
+<td style="text-align: left;">Bacteroidetes</td>
+<td style="text-align: left;">Bacteroidia</td>
+<td style="text-align: left;">Bacteroidales</td>
+<td style="text-align: left;">Porphyromonadaceae</td>
+<td style="text-align: left;">Parabacteroides</td>
 </tr>
-<tr>
-<td style="text-align:left">17264726</td>
-<td style="text-align:left">Bacteria</td>
-<td style="text-align:left">Bacteroidetes</td>
-<td style="text-align:left">Bacteroidia</td>
-<td style="text-align:left">Bacteroidales</td>
-<td style="text-align:left">Bacteroidaceae</td>
-<td style="text-align:left">Bacteroides</td>
+<tr class="even">
+<td style="text-align: left;">17264726</td>
+<td style="text-align: left;">Bacteria</td>
+<td style="text-align: left;">Bacteroidetes</td>
+<td style="text-align: left;">Bacteroidia</td>
+<td style="text-align: left;">Bacteroidales</td>
+<td style="text-align: left;">Bacteroidaceae</td>
+<td style="text-align: left;">Bacteroides</td>
 </tr>
-<tr>
-<td style="text-align:left">1726472</td>
-<td style="text-align:left">Bacteria</td>
-<td style="text-align:left">Verrucomicrobia</td>
-<td style="text-align:left">Verrucomicrobiae</td>
-<td style="text-align:left">Verrucomicrobiales</td>
-<td style="text-align:left">Verrucomicrobiaceae</td>
-<td style="text-align:left">Akkermansia</td>
+<tr class="odd">
+<td style="text-align: left;">1726472</td>
+<td style="text-align: left;">Bacteria</td>
+<td style="text-align: left;">Verrucomicrobia</td>
+<td style="text-align: left;">Verrucomicrobiae</td>
+<td style="text-align: left;">Verrucomicrobiales</td>
+<td style="text-align: left;">Verrucomicrobiaceae</td>
+<td style="text-align: left;">Akkermansia</td>
 </tr>
-<tr>
-<td style="text-align:left">17264724</td>
-<td style="text-align:left">Bacteria</td>
-<td style="text-align:left">Bacteroidetes</td>
-<td style="text-align:left">Bacteroidia</td>
-<td style="text-align:left">Bacteroidales</td>
-<td style="text-align:left">Bacteroidaceae</td>
-<td style="text-align:left">Bacteroides</td>
+<tr class="even">
+<td style="text-align: left;">17264724</td>
+<td style="text-align: left;">Bacteria</td>
+<td style="text-align: left;">Bacteroidetes</td>
+<td style="text-align: left;">Bacteroidia</td>
+<td style="text-align: left;">Bacteroidales</td>
+<td style="text-align: left;">Bacteroidaceae</td>
+<td style="text-align: left;">Bacteroides</td>
 </tr>
 </tbody>
 </table>
+
 <h3 id="coldata-sample-information">colData (sample information)</h3>
 <p>We notice that the imported biom file did not contain sample meta data
 yet, so it includes empty data frame</p>
-<pre><code class="lang-r">head(colData(se))
-</code></pre>
-<pre><code>## DataFrame with 6 rows and 0 columns
+<pre><code>head(colData(se))
+
+## DataFrame with 6 rows and 0 columns
 </code></pre><p>Let us add sample meta data file</p>
-<pre><code class="lang-r"><span class="hljs-comment"># We use this to check what type of data is it</span>
-<span class="hljs-comment"># read.table(sample_meta_file_path)</span>
+<pre><code># We use this to check what type of data is it
+# read.table(sample_meta_file_path)
 
-<span class="hljs-comment"># It seems like a comma separated file and includes headers</span>
-<span class="hljs-comment"># Let us read it and then convert from data.frame to DataFrame</span>
-<span class="hljs-comment"># (required for our purposes)</span>
-sample_meta &lt;- DataFrame(read.table(sample_meta_file_path, sep = <span class="hljs-string">&quot;,&quot;</span>, header = <span class="hljs-literal">FALSE</span>))
+# It seems like a comma separated file and includes headers
+# Let us read it and then convert from data.frame to DataFrame
+# (required for our purposes)
+sample_meta &lt;- DataFrame(read.table(sample_meta_file_path, sep = &quot;,&quot;, header = FALSE))
 
-<span class="hljs-comment"># Add sample names to rownames</span>
+# Add sample names to rownames
 
-rownames(sample_meta) &lt;- sample_meta[,<span class="hljs-number">1</span>]
+rownames(sample_meta) &lt;- sample_meta[,1]
 
-<span class="hljs-comment"># Delete column that included sample names</span>
-sample_meta[,<span class="hljs-number">1</span>] &lt;- <span class="hljs-literal">NULL</span>
+# Delete column that included sample names
+sample_meta[,1] &lt;- NULL
 
-<span class="hljs-comment"># We can add titles </span>
-colnames(sample_meta) &lt;- c(<span class="hljs-string">&quot;patient_status&quot;</span>, <span class="hljs-string">&quot;cohort&quot;</span>, <span class="hljs-string">&quot;patient_status_vs_cohort&quot;</span>, <span class="hljs-string">&quot;sample_name&quot;</span>)
+# We can add titles 
+colnames(sample_meta) &lt;- c(&quot;patient_status&quot;, &quot;cohort&quot;, &quot;patient_status_vs_cohort&quot;, &quot;sample_name&quot;)
 
-<span class="hljs-comment"># Then it can be added to colData</span>
+# Then it can be added to colData
 colData(se) &lt;- sample_meta
-</code></pre>
-<p>Now colData includes sample metadata. Use kable to print it more nicely.</p>
-<pre><code class="lang-r">knitr::kable(head(colData(se)))
-</code></pre>
-<table>
+</code></pre><p>Now colData includes sample metadata. Use kable to print it more nicely.</p>
+<pre><code>knitr::kable(head(colData(se)))
+</code></pre><table>
 <thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:left">patient_status</th>
-<th style="text-align:left">cohort</th>
-<th style="text-align:left">patient_status_vs_cohort</th>
-<th style="text-align:left">sample_name</th>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">patient_status</th>
+<th style="text-align: left;">cohort</th>
+<th style="text-align: left;">patient_status_vs_cohort</th>
+<th style="text-align: left;">sample_name</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">A110</td>
-<td style="text-align:left">ADHD</td>
-<td style="text-align:left">Cohort_1</td>
-<td style="text-align:left">ADHD_Cohort_1</td>
-<td style="text-align:left">A110</td>
+<tr class="odd">
+<td style="text-align: left;">A110</td>
+<td style="text-align: left;">ADHD</td>
+<td style="text-align: left;">Cohort_1</td>
+<td style="text-align: left;">ADHD_Cohort_1</td>
+<td style="text-align: left;">A110</td>
 </tr>
-<tr>
-<td style="text-align:left">A12</td>
-<td style="text-align:left">ADHD</td>
-<td style="text-align:left">Cohort_1</td>
-<td style="text-align:left">ADHD_Cohort_1</td>
-<td style="text-align:left">A12</td>
+<tr class="even">
+<td style="text-align: left;">A12</td>
+<td style="text-align: left;">ADHD</td>
+<td style="text-align: left;">Cohort_1</td>
+<td style="text-align: left;">ADHD_Cohort_1</td>
+<td style="text-align: left;">A12</td>
 </tr>
-<tr>
-<td style="text-align:left">A15</td>
-<td style="text-align:left">ADHD</td>
-<td style="text-align:left">Cohort_1</td>
-<td style="text-align:left">ADHD_Cohort_1</td>
-<td style="text-align:left">A15</td>
+<tr class="odd">
+<td style="text-align: left;">A15</td>
+<td style="text-align: left;">ADHD</td>
+<td style="text-align: left;">Cohort_1</td>
+<td style="text-align: left;">ADHD_Cohort_1</td>
+<td style="text-align: left;">A15</td>
 </tr>
-<tr>
-<td style="text-align:left">A19</td>
-<td style="text-align:left">ADHD</td>
-<td style="text-align:left">Cohort_1</td>
-<td style="text-align:left">ADHD_Cohort_1</td>
-<td style="text-align:left">A19</td>
+<tr class="even">
+<td style="text-align: left;">A19</td>
+<td style="text-align: left;">ADHD</td>
+<td style="text-align: left;">Cohort_1</td>
+<td style="text-align: left;">ADHD_Cohort_1</td>
+<td style="text-align: left;">A19</td>
 </tr>
-<tr>
-<td style="text-align:left">A21</td>
-<td style="text-align:left">ADHD</td>
-<td style="text-align:left">Cohort_2</td>
-<td style="text-align:left">ADHD_Cohort_2</td>
-<td style="text-align:left">A21</td>
+<tr class="odd">
+<td style="text-align: left;">A21</td>
+<td style="text-align: left;">ADHD</td>
+<td style="text-align: left;">Cohort_2</td>
+<td style="text-align: left;">ADHD_Cohort_2</td>
+<td style="text-align: left;">A21</td>
 </tr>
-<tr>
-<td style="text-align:left">A23</td>
-<td style="text-align:left">ADHD</td>
-<td style="text-align:left">Cohort_2</td>
-<td style="text-align:left">ADHD_Cohort_2</td>
-<td style="text-align:left">A23</td>
+<tr class="even">
+<td style="text-align: left;">A23</td>
+<td style="text-align: left;">ADHD</td>
+<td style="text-align: left;">Cohort_2</td>
+<td style="text-align: left;">ADHD_Cohort_2</td>
+<td style="text-align: left;">A23</td>
 </tr>
 </tbody>
 </table>
-<h3 id="phylogenetic-tree-information">Phylogenetic tree information</h3>
-<p>Now, let&apos;s add a phylogenetic tree.</p>
-<p>The current data object, se, is a SummarizedExperiment object. This
-does not include a slot for adding a phylogenetic tree. In order to do
-this, we can convert SE object to an extended TreeSummarizedExperiment
-object which also includes a rowTree slot.</p>
-<pre><code class="lang-r">tse &lt;- as(se, <span class="hljs-string">&quot;TreeSummarizedExperiment&quot;</span>)
 
-<span class="hljs-comment"># tse includes same data as se</span>
+<h3 id="phylogenetic-tree-information">Phylogenetic tree information</h3>
+<p>Now, let&#x2019;s add a phylogenetic tree.</p>
+<p>The current data object, se, is a SummarizedExperiment object. This does
+not include a slot for adding a phylogenetic tree. In order to do this,
+we can convert SE object to an extended TreeSummarizedExperiment object
+which also includes a rowTree slot.</p>
+<pre><code>tse &lt;- as(se, &quot;TreeSummarizedExperiment&quot;)
+
+# tse includes same data as se
 print(tse)
-</code></pre>
-<pre><code>## class: TreeSummarizedExperiment 
+
+## class: TreeSummarizedExperiment 
 ## dim: 151 27 
 ## metadata(0):
 ## assays(1): counts
@@ -558,16 +573,17 @@ print(tse)
 ## rowTree: NULL
 ## colLinks: NULL
 ## colTree: NULL
-</code></pre><p>Next, let us read the tree data file and add it to the R data object (tse).</p>
-<pre><code class="lang-r">tree &lt;- ape::read.tree(tree_file_path)
+</code></pre><p>Next, let us read the tree data file and add it to the R data object
+(tse).</p>
+<pre><code>tree &lt;- ape::read.tree(tree_file_path)
 
-<span class="hljs-comment"># Add tree to rowTree</span>
+# Add tree to rowTree
 rowTree(tse) &lt;- tree
 
-<span class="hljs-comment"># Check</span>
+# Check
 head(tse)
-</code></pre>
-<pre><code>## class: TreeSummarizedExperiment 
+
+## class: TreeSummarizedExperiment 
 ## dim: 6 27 
 ## metadata(0):
 ## assays(1): counts
@@ -583,9 +599,8 @@ head(tse)
 ## colLinks: NULL
 ## colTree: NULL
 </code></pre><p>Now rowTree includes phylogenetic tree:</p>
-<pre><code class="lang-r">head(rowTree(tse))
+<pre><code>head(rowTree(tse))
 </code></pre>
-
                                 
                                 </section>
                             
@@ -628,7 +643,7 @@ head(tse)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Import data","output":{"html_document":{"keep_md":true}},"level":"1.3","depth":1,"next":{"title":"Explore data","level":"1.4","depth":1,"path":"explore.md","ref":"explore.md","articles":[]},"previous":{"title":"Install necessary packages","level":"1.2","depth":1,"path":"install.md","ref":"install.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"import.md","mtime":"2021-06-01T07:51:12.752Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-01T07:52:23.946Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Import data","level":"1.3","depth":1,"next":{"title":"Explore data","level":"1.4","depth":1,"path":"explore.md","ref":"explore.md","articles":[]},"previous":{"title":"Install necessary packages","level":"1.2","depth":1,"path":"install.md","ref":"install.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"import.md","mtime":"2021-06-01T08:01:35.404Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-01T08:03:16.068Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

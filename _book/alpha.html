@@ -226,154 +226,155 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="alpha-diversity">Alpha diversity</h1>
-<p>This notebook calculates alpha diversity indices. </p>
+<p>This notebook calculates alpha diversity indices.</p>
 <p>Alpha diversity is a quantity that measures diversity of taxa in one
-sample.  Higher numbers of unique taxa, and more even abundance
+sample. Higher numbers of unique taxa, and more even abundance
 distributions within a sample yield larger values for alpha diversity.</p>
-<p>Alpha diversity is an important quantity in microbiome research. The
-mia package provides access to a wide variety of alpha diversity
-indices. As an example, we show how to calculate Shannon and Faith
-diversity indices.</p>
-<p>Shannon index reflects how many different taxa there are and how
-evenly they are distributed within a sample. Faith index additionally
-takes into account the phylogenetic relations between the taxa when
+<p>Alpha diversity is an important quantity in microbiome research. The mia
+package provides access to a wide variety of alpha diversity indices. As
+an example, we show how to calculate Shannon and Faith diversity
+indices.</p>
+<p>Shannon index reflects how many different taxa there are and how evenly
+they are distributed within a sample. Faith index additionally takes
+into account the phylogenetic relations between the taxa when
 quantifying the overall community diversity. In both indices, higher
 values represent higher diversity.</p>
-<pre><code class="lang-r"><span class="hljs-comment"># Indices to be calculated. If we don&apos;t specify indices, by default, every index</span>
-<span class="hljs-comment"># is calculated.</span>
-indices &lt;- c(<span class="hljs-string">&quot;shannon&quot;</span>, <span class="hljs-string">&quot;faith&quot;</span>)
+<pre><code># Indices to be calculated. If we don&apos;t specify indices, by default, every index
+# is calculated.
+indices &lt;- c(&quot;shannon&quot;, &quot;faith&quot;)
 
-<span class="hljs-comment"># Indices are stored in colData (i.e., sample metadata). We can specify the name</span>
-<span class="hljs-comment"># of column, or we can use the default name which is the name of index </span>
-<span class="hljs-comment"># (i.e., &quot;shannon&quot; and &quot;faith&quot;). </span>
-names &lt;- c(<span class="hljs-string">&quot;Shannon_index&quot;</span>, <span class="hljs-string">&quot;Faith_diversity_index&quot;</span>)
+# Indices are stored in colData (i.e., sample metadata). We can specify the name
+# of column, or we can use the default name which is the name of index 
+# (i.e., &quot;shannon&quot; and &quot;faith&quot;). 
+names &lt;- c(&quot;Shannon_index&quot;, &quot;Faith_diversity_index&quot;)
 
-<span class="hljs-comment"># Calculates indices</span>
+# Calculates indices
 tse &lt;- estimateDiversity(tse, index = indices, name = names)
 
-<span class="hljs-comment"># Shows the calculated indices</span>
+# Shows the calculated indices
 knitr::kable(head(colData(tse)[names]))
-</code></pre>
-<table>
+</code></pre><table>
 <thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:right">Shannon_index</th>
-<th style="text-align:right">Faith_diversity_index</th>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Shannon_index</th>
+<th style="text-align: right;">Faith_diversity_index</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">A110</td>
-<td style="text-align:right">1.765407</td>
-<td style="text-align:right">7.39224</td>
+<tr class="odd">
+<td style="text-align: left;">A110</td>
+<td style="text-align: right;">1.765407</td>
+<td style="text-align: right;">7.39224</td>
 </tr>
-<tr>
-<td style="text-align:left">A12</td>
-<td style="text-align:right">2.716438</td>
-<td style="text-align:right">6.29378</td>
+<tr class="even">
+<td style="text-align: left;">A12</td>
+<td style="text-align: right;">2.716438</td>
+<td style="text-align: right;">6.29378</td>
 </tr>
-<tr>
-<td style="text-align:left">A15</td>
-<td style="text-align:right">3.178103</td>
-<td style="text-align:right">6.60608</td>
+<tr class="odd">
+<td style="text-align: left;">A15</td>
+<td style="text-align: right;">3.178103</td>
+<td style="text-align: right;">6.60608</td>
 </tr>
-<tr>
-<td style="text-align:left">A19</td>
-<td style="text-align:right">2.891987</td>
-<td style="text-align:right">6.79708</td>
+<tr class="even">
+<td style="text-align: left;">A19</td>
+<td style="text-align: right;">2.891987</td>
+<td style="text-align: right;">6.79708</td>
 </tr>
-<tr>
-<td style="text-align:left">A21</td>
-<td style="text-align:right">2.841979</td>
-<td style="text-align:right">6.65110</td>
+<tr class="odd">
+<td style="text-align: left;">A21</td>
+<td style="text-align: right;">2.841979</td>
+<td style="text-align: right;">6.65110</td>
 </tr>
-<tr>
-<td style="text-align:left">A23</td>
-<td style="text-align:right">2.797942</td>
-<td style="text-align:right">5.96246</td>
+<tr class="even">
+<td style="text-align: left;">A23</td>
+<td style="text-align: right;">2.797942</td>
+<td style="text-align: right;">5.96246</td>
 </tr>
 </tbody>
 </table>
+
 <p>Next we can visualize Shannon index with histogram.</p>
-<pre><code class="lang-r"><span class="hljs-comment"># ggplot needs data.frame as input. Because colData is DataFrame, it needs to be </span>
-<span class="hljs-comment"># converted. </span>
+<pre><code># ggplot needs data.frame as input. Because colData is DataFrame, it needs to be 
+# converted. 
 shannon_hist &lt;- ggplot(as.data.frame(colData(tse)), 
                        aes(x = Shannon_index)) + 
-  geom_histogram(bins = <span class="hljs-number">20</span>, fill = <span class="hljs-string">&quot;gray&quot;</span>, color = <span class="hljs-string">&quot;black&quot;</span>) +
-  labs(x = <span class="hljs-string">&quot;Shannon index&quot;</span>, y = <span class="hljs-string">&quot;Sample frequency&quot;</span>)
+  geom_histogram(bins = 20, fill = &quot;gray&quot;, color = &quot;black&quot;) +
+  labs(x = &quot;Shannon index&quot;, y = &quot;Sample frequency&quot;)
 
 shannon_hist
-</code></pre>
-<p><img src="alpha_files/figure-html/unnamed-chunk-2-1.png" alt=""><!-- --></p>
-<pre><code class="lang-r"><span class="hljs-comment"># # Same thing but done differently</span>
-<span class="hljs-comment"># # Creates histogram. With &quot;break&quot;, number of bins can be specified. However, the</span>
-<span class="hljs-comment"># # value is taken as a suggestion, because hist() uses pretty() to calculate breakpoints.</span>
-<span class="hljs-comment"># hist(colData(tse)$Shannon_index, col = &quot;green&quot;, breaks = 20,</span>
-<span class="hljs-comment"># xlab = &quot;Shannon index&quot;,</span>
-<span class="hljs-comment"># ylab = &quot;Sample frequency&quot;,</span>
-<span class="hljs-comment"># main = &quot;Histogram of Shannon index&quot;)</span>
-</code></pre>
-<p>To see, if there is dependency between Shannon and Faith, we can do cross-plot i.e., 
-scatter plot, where one index is on the x-axis and another on the y-axis.</p>
-<p>It seems that, there is a positive correlation between these two indices. </p>
-<pre><code class="lang-r"><span class="hljs-comment"># # Does the same thing but differently</span>
-<span class="hljs-comment"># plot(colData(tse)$Shannon_index, colData(tse)$Faith_diversity_index,</span>
-<span class="hljs-comment">#      xlab = &quot;Shannon index&quot;,</span>
-<span class="hljs-comment">#      ylab = &quot;Faith diversity index&quot;,</span>
-<span class="hljs-comment">#      main = &quot;plot()&quot;) +</span>
-<span class="hljs-comment">#   # Adds regression line</span>
-<span class="hljs-comment">#   abline(lm(colData(tse)$Faith_diversity_index ~ colData(tse)$Shannon_index)) </span>
+</code></pre><p><img src="alpha_files/figure-markdown_strict/unnamed-chunk-2-1.png" alt=""></p>
+<pre><code># # Same thing but done differently
+# # Creates histogram. With &quot;break&quot;, number of bins can be specified. However, the
+# # value is taken as a suggestion, because hist() uses pretty() to calculate breakpoints.
+# hist(colData(tse)$Shannon_index, col = &quot;green&quot;, breaks = 20,
+# xlab = &quot;Shannon index&quot;,
+# ylab = &quot;Sample frequency&quot;,
+# main = &quot;Histogram of Shannon index&quot;)
+</code></pre><p>To see, if there is dependency between Shannon and Faith, we can do
+cross-plot i.e., scatter plot, where one index is on the x-axis and
+another on the y-axis.</p>
+<p>It seems that, there is a positive correlation between these two
+indices.</p>
+<pre><code># # Does the same thing but differently
+# plot(colData(tse)$Shannon_index, colData(tse)$Faith_diversity_index,
+#      xlab = &quot;Shannon index&quot;,
+#      ylab = &quot;Faith diversity index&quot;,
+#      main = &quot;plot()&quot;) +
+#   # Adds regression line
+#   abline(lm(colData(tse)$Faith_diversity_index ~ colData(tse)$Shannon_index)) 
 
 cross_plot &lt;- ggplot2::ggplot(as.data.frame(colData(tse)), 
                                      aes(x = Shannon_index, y = Faith_diversity_index)) + 
-  geom_point() + <span class="hljs-comment"># Adds points</span>
-  geom_smooth(method=lm) + <span class="hljs-comment"># Adds regression line</span>
-  xlab(<span class="hljs-string">&quot;Shannon index&quot;</span>) + <span class="hljs-comment"># x axis title</span>
-  ylab(<span class="hljs-string">&quot;Faith diversity index&quot;</span>)  <span class="hljs-comment"># y axis title</span>
+  geom_point() + # Adds points
+  geom_smooth(method=lm) + # Adds regression line
+  xlab(&quot;Shannon index&quot;) + # x axis title
+  ylab(&quot;Faith diversity index&quot;)  # y axis title
 
 cross_plot
-</code></pre>
-<pre><code>## `geom_smooth()` using formula &apos;y ~ x&apos;
-</code></pre><p><img src="alpha_files/figure-html/unnamed-chunk-4-1.png" alt=""><!-- --></p>
+
+## `geom_smooth()` using formula &apos;y ~ x&apos;
+</code></pre><p><img src="alpha_files/figure-markdown_strict/unnamed-chunk-4-1.png" alt=""></p>
 <h2 id="visualization">Visualization</h2>
-<p>Next let&apos;s compare indices between different genotypes and diets. Boxplot is 
-suitable for that purpose. </p>
-<pre><code class="lang-r"><span class="hljs-comment"># Creates Shannon boxplot </span>
+<p>Next let&#x2019;s compare indices between different genotypes and diets.
+Boxplot is suitable for that purpose.</p>
+<pre><code># Creates Shannon boxplot 
 shannon_box &lt;- ggplot(as.data.frame(colData(tse)), aes(x = patient_status, 
                                                        y = Shannon_index, fill = cohort)) + 
   geom_boxplot() +
-  theme(title = element_text(size = <span class="hljs-number">12</span>)) <span class="hljs-comment"># makes titles smaller</span>
+  theme(title = element_text(size = 12)) # makes titles smaller
 
-<span class="hljs-comment"># Creates Faith boxplot </span>
+# Creates Faith boxplot 
 faith_box &lt;- ggplot(as.data.frame(colData(tse)), aes(x = patient_status, 
                                                      y = Faith_diversity_index, 
                                                      fill = cohort)) + 
   geom_boxplot() +
-  theme(title = element_text(size = <span class="hljs-number">12</span>)) <span class="hljs-comment"># makes titles smaller</span>
+  theme(title = element_text(size = 12)) # makes titles smaller
 
-<span class="hljs-comment"># Puts them into same picture</span>
-gridExtra::grid.arrange(shannon_box, faith_box, nrow = <span class="hljs-number">2</span>)
-</code></pre>
-<p><img src="alpha_files/figure-html/unnamed-chunk-5-1.png" alt=""><!-- --></p>
+# Puts them into same picture
+gridExtra::grid.arrange(shannon_box, faith_box, nrow = 2)
+</code></pre><p><img src="alpha_files/figure-markdown_strict/unnamed-chunk-5-1.png" alt=""></p>
 <h2 id="statistical-testing-and-comparisons">Statistical testing and comparisons</h2>
-<p>To further investigate if diet explains the variation of Shannon index, let&apos;s 
-do Wilcoxon test. </p>
-<p>Wilcoxon test is similar to Student&apos;s t-test, however, Student&apos;s t-test is parametric.
-It means that the data must be normally distributed. Wilcoxon test is non-parametric
-so it doesn&apos;t make any assumptions about the distribution. </p>
-<p>Wilcoxon test tests if there are statistical differences between two groups. 
-Here it tests, if western diet and control groups have different Shannon index values.
-As we can see, there is no difference between groups, because p-value is over 0.05, 
-which is often used as a standard cutoff point.</p>
-<pre><code class="lang-r"><span class="hljs-comment"># Wilcoxon test, where Shannon index is the variable that we are comparing. </span>
-<span class="hljs-comment"># Diet - western or control - is the factor that we use for grouping. </span>
+<p>To further investigate if diet explains the variation of Shannon index,
+let&#x2019;s do Wilcoxon test.</p>
+<p>Wilcoxon test is similar to Student&#x2019;s t-test, however, Student&#x2019;s t-test
+is parametric. It means that the data must be normally distributed.
+Wilcoxon test is non-parametric so it doesn&#x2019;t make any assumptions about
+the distribution.</p>
+<p>Wilcoxon test tests if there are statistical differences between two
+groups. Here it tests, if western diet and control groups have different
+Shannon index values. As we can see, there is no difference between
+groups, because p-value is over 0.05, which is often used as a standard
+cutoff point.</p>
+<pre><code># Wilcoxon test, where Shannon index is the variable that we are comparing. 
+# Diet - western or control - is the factor that we use for grouping. 
 wilcoxon_shannon &lt;- wilcox.test(Shannon_index ~ patient_status, data = colData(tse))
 
 wilcoxon_shannon
-</code></pre>
-<pre><code>## 
-##     Wilcoxon rank sum exact test
+
+## 
+##  Wilcoxon rank sum exact test
 ## 
 ## data:  Shannon_index by patient_status
 ## W = 76, p-value = 0.4879
@@ -424,7 +425,7 @@ wilcoxon_shannon
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Calculate alpha diversity","output":{"html_document":{"keep_md":true}},"level":"1.5","depth":1,"next":{"title":"Calculate beta diversity","level":"1.6","depth":1,"path":"beta.md","ref":"beta.md","articles":[]},"previous":{"title":"Explore data","level":"1.4","depth":1,"path":"explore.md","ref":"explore.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"alpha.md","mtime":"2021-06-01T07:51:22.828Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-01T07:52:23.946Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Calculate alpha diversity","level":"1.5","depth":1,"next":{"title":"Calculate beta diversity","level":"1.6","depth":1,"path":"beta.md","ref":"beta.md","articles":[]},"previous":{"title":"Explore data","level":"1.4","depth":1,"path":"explore.md","ref":"explore.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"alpha.md","mtime":"2021-06-01T08:01:50.744Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-01T08:03:16.068Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
