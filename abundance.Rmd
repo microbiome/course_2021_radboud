@@ -244,16 +244,14 @@ highest3 <- data.frame(highest3, as.data.frame(colData(tse_genus)))
 # a line break after e.g. "Genus". Here the dot after e.g. Genus is replaced with 
 # ": \n"
 colnames(highest3)[1:3] <- lapply(colnames(highest3)[1:3], function(x){
-  # Some names have two dots after rank name, so they have to be found and treated 
-  # differently
-  if( stringr::str_detect(x, pattern = "[.][.]") ){
-    temp <- stringr::str_replace(x, pattern = "[.][.]", replacement = ": ")
-  } else {
-    temp <- stringr::str_replace(x, "[.]", ": ")
-  }
+  # Replaces the first dot
+  temp <- stringr::str_replace(x, "[.]", ": ")
   
-  # Adds line break after every space-separated word
-  temp <- stringr::str_wrap(temp, width = 1)
+  # Replace all other dots and underscores with space
+  temp <- stringr::str_replace_all(temp, c("[.]" = " ", "_" = " "))
+  
+  # Adds line break so that 30 characters is the maximal width
+  temp <- stringr::str_wrap(temp, width = 30)
 })
 ```
 
@@ -275,16 +273,14 @@ lowest3 <- data.frame(lowest3, as.data.frame(colData(tse_genus)))
 # a line break after e.g. "Genus". Here the dot after e.g. Genus is replaced with 
 # ": \n"
 colnames(lowest3)[1:3] <- lapply(colnames(lowest3)[1:3], function(x){
-  # Some names have two dots after rank name, so they have to be found and treated 
-  # differently
-  if( stringr::str_detect(x, pattern = "[.][.]") ){
-    temp <- stringr::str_replace(x, pattern = "[.][.]", replacement = ": ")
-  } else {
-    temp <- stringr::str_replace(x, "[.]", ": ")
-  }
+  # Replaces the first dot
+  temp <- stringr::str_replace(x, "[.]", ": ")
   
-  # Adds line break after every space-separated word
-  temp <- stringr::str_wrap(temp, width = 1)
+  # Replace all other dots and underscores with space
+  temp <- stringr::str_replace_all(temp, c("[.]" = " ", "_" = " "))
+  
+  # Adds line break so that 30 characters is the maximal width
+  temp <- stringr::str_wrap(temp, width = 30)
 })
 ```
 
