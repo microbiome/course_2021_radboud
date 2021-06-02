@@ -222,7 +222,7 @@ multivariate analysis of variance (PERMANOVA) test.
     print(paste0("Different different cohorts and variance of abundance between samples, p-value: ", 
                  as.data.frame(permanova_cohort$aov.tab)["cohort", "Pr(>F)"]))
 
-    ## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7431"
+    ## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7477"
 
 As we see, the cohort variable is not significantly associated with
 microbiota composition (p-value is over 0.05).
