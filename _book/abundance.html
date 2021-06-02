@@ -492,7 +492,7 @@ control groups. Let&#x2019;s plot those taxa in the boxplot, and compare
 visually if abundances of those taxa differ in ADHD and control samples.
 For comparison, let&#x2019;s plot also taxa that do not differ between ADHD and
 control groups.</p>
-<pre><code># There are some taxa that does not include Genus level information. They are
+<pre><code># There are some taxa that do not include Genus level information. They are
 # excluded from analysis.
 # str_detect finds if the pattern is present in values of &quot;taxon&quot; column.
 # Subset is taken, only those rows are included that do not include the pattern.
@@ -511,6 +511,22 @@ highest3 &lt;- t(highest3)
 # Adds colData that includes patient status infomation
 highest3 &lt;- data.frame(highest3, as.data.frame(colData(tse_genus)))
 
+# Some taxa names are that long that they don&apos;t fit nicely into title. So let&apos;s add there 
+# a line break after e.g. &quot;Genus&quot;. Here the dot after e.g. Genus is replaced with 
+# &quot;: \n&quot;
+colnames(highest3)[1:3] &lt;- lapply(colnames(highest3)[1:3], function(x){
+  # Some names have two dots after rank name, so they have to be found and treated 
+  # differently
+  if( stringr::str_detect(x, pattern = &quot;[.][.]&quot;) ){
+    temp &lt;- stringr::str_replace(x, pattern = &quot;[.][.]&quot;, replacement = &quot;: &quot;)
+  } else {
+    temp &lt;- stringr::str_replace(x, &quot;[.]&quot;, &quot;: &quot;)
+  }
+
+  # Adds line break after every space-separated word
+  temp &lt;- stringr::str_wrap(temp, width = 1)
+})
+
 # Sorts p-values in decreasing order. Takes 3rd first ones. Takes those rows that match
 # with p-values. Takes taxa. 
 lowest3 &lt;- df[df$padj %in% sort(df$padj, decreasing = TRUE)[1:3], ]$taxon
@@ -523,6 +539,22 @@ lowest3 &lt;- t(lowest3)
 
 # Adds colData that includes patient status infomation
 lowest3 &lt;- data.frame(lowest3, as.data.frame(colData(tse_genus)))
+
+# Some taxa names are that long that they don&apos;t fit nicely into title. So let&apos;s add there 
+# a line break after e.g. &quot;Genus&quot;. Here the dot after e.g. Genus is replaced with 
+# &quot;: \n&quot;
+colnames(lowest3)[1:3] &lt;- lapply(colnames(lowest3)[1:3], function(x){
+  # Some names have two dots after rank name, so they have to be found and treated 
+  # differently
+  if( stringr::str_detect(x, pattern = &quot;[.][.]&quot;) ){
+    temp &lt;- stringr::str_replace(x, pattern = &quot;[.][.]&quot;, replacement = &quot;: &quot;)
+  } else {
+    temp &lt;- stringr::str_replace(x, &quot;[.]&quot;, &quot;: &quot;)
+  }
+
+  # Adds line break after every space-separated word
+  temp &lt;- stringr::str_wrap(temp, width = 1)
+})
 
 # Puts plots in the same picture
 gridExtra::grid.arrange(
@@ -585,7 +617,7 @@ gridExtra::grid.arrange(
   ncol = 3, 
   nrow = 2
 )
-</code></pre><p><img src="abundance_files/figure-markdown_strict/unnamed-chunk-12-1.png" alt=""></p>
+</code></pre><p><img src="abundance_files/figure-markdown_strict/unnamed-chunk-13-1.png" alt=""></p>
 
                                 
                                 </section>
@@ -625,7 +657,7 @@ gridExtra::grid.arrange(
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Differential abundance analysis","level":"1.8","depth":1,"previous":{"title":"DMM analysis","level":"1.7","depth":1,"path":"dmm.md","ref":"dmm.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"abundance.md","mtime":"2021-06-01T14:47:56.746Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-01T14:49:12.638Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Differential abundance analysis","level":"1.8","depth":1,"previous":{"title":"DMM analysis","level":"1.7","depth":1,"path":"dmm.md","ref":"dmm.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"abundance.md","mtime":"2021-06-02T08:15:57.589Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-02T08:17:05.349Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

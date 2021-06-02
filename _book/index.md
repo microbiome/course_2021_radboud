@@ -10,17 +10,17 @@ This site contains material for [Radboud Summer Course 7/2021](https://www.ru.nl
 All files can be rendered at one go by running [main.R](main.R)
  
  * Data import and exploration
-     - [Install the required R packages](install.html) 
-     - [Importing data (biom files)](import.nb.html)
-     - [Exploring data](explore.nb.html)
+     - [Install the required R packages](_book/install.html) 
+     - [Importing data (biom files)](_book/import.html)
+     - [Exploring data](_book/explore.html)
 
- * [Alpha diversity](alpha.nb.html)
+ * [Alpha diversity](_book/alpha.html)
 
- * [Beta diversity](beta.html)
+ * [Beta diversity](_book/beta.html)
  
- * [DMM analysis](dmm.html)
+ * [DMM analysis](_book/dmm.html)
 
- * [Differential abundance](abundance.nb.html)
+ * [Differential abundance](_book/abundance.html)
 
 
 

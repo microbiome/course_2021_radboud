@@ -289,7 +289,7 @@ visually if abundances of those taxa differ in ADHD and control samples.
 For comparison, let’s plot also taxa that do not differ between ADHD and
 control groups.
 
-    # There are some taxa that does not include Genus level information. They are
+    # There are some taxa that do not include Genus level information. They are
     # excluded from analysis.
     # str_detect finds if the pattern is present in values of "taxon" column.
     # Subset is taken, only those rows are included that do not include the pattern.
@@ -308,6 +308,22 @@ control groups.
     # Adds colData that includes patient status infomation
     highest3 <- data.frame(highest3, as.data.frame(colData(tse_genus)))
 
+    # Some taxa names are that long that they don't fit nicely into title. So let's add there 
+    # a line break after e.g. "Genus". Here the dot after e.g. Genus is replaced with 
+    # ": \n"
+    colnames(highest3)[1:3] <- lapply(colnames(highest3)[1:3], function(x){
+      # Some names have two dots after rank name, so they have to be found and treated 
+      # differently
+      if( stringr::str_detect(x, pattern = "[.][.]") ){
+        temp <- stringr::str_replace(x, pattern = "[.][.]", replacement = ": ")
+      } else {
+        temp <- stringr::str_replace(x, "[.]", ": ")
+      }
+      
+      # Adds line break after every space-separated word
+      temp <- stringr::str_wrap(temp, width = 1)
+    })
+
     # Sorts p-values in decreasing order. Takes 3rd first ones. Takes those rows that match
     # with p-values. Takes taxa. 
     lowest3 <- df[df$padj %in% sort(df$padj, decreasing = TRUE)[1:3], ]$taxon
@@ -320,6 +336,22 @@ control groups.
 
     # Adds colData that includes patient status infomation
     lowest3 <- data.frame(lowest3, as.data.frame(colData(tse_genus)))
+
+    # Some taxa names are that long that they don't fit nicely into title. So let's add there 
+    # a line break after e.g. "Genus". Here the dot after e.g. Genus is replaced with 
+    # ": \n"
+    colnames(lowest3)[1:3] <- lapply(colnames(lowest3)[1:3], function(x){
+      # Some names have two dots after rank name, so they have to be found and treated 
+      # differently
+      if( stringr::str_detect(x, pattern = "[.][.]") ){
+        temp <- stringr::str_replace(x, pattern = "[.][.]", replacement = ": ")
+      } else {
+        temp <- stringr::str_replace(x, "[.]", ": ")
+      }
+      
+      # Adds line break after every space-separated word
+      temp <- stringr::str_wrap(temp, width = 1)
+    })
 
     # Puts plots in the same picture
     gridExtra::grid.arrange(
@@ -383,4 +415,4 @@ control groups.
       nrow = 2
     )
 
-![](abundance_files/figure-markdown_strict/unnamed-chunk-12-1.png)
+![](abundance_files/figure-markdown_strict/unnamed-chunk-13-1.png)
