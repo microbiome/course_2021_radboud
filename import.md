@@ -1,199 +1,412 @@
----
-title: "Import data"
-output: html_notebook
----
+# Import data
 
+## Data
 
-This notebook imports _biom_ data to a _TreeSummarizedExperiment_ object. 
+This workflow demonstrates the use of miaverse using data from the
+following publication, which you can check for a more detailed
+description of the samples and experimental design: Tengeler AC, Dam SA,
+Wiesmann M, Naaijen J, van Bodegom M, Belzer C, Dederen PJ, Verweij V,
+Franke B, Kozicz T, Vasquez AA & Kiliaan AJ (2020) [**Gut microbiota
+from persons with attention-deficit/hyperactivity disorder affects the
+brain in mice**](https://doi.org/10.1186/s40168-020-00816-x) Microbiome
+8:44.
 
-You are expected to have the necessary data files in a local subfolder
-"data".
+Data is located in a “data” subfolder. Data consists of 3 files:
 
+-   biom file that contains abundance table and taxonomy information
+-   csv file that contains sample metadata
+-   tre file that contains a phylogenetic tree.
+
+This notebook shows how to import the *biom* and its accompanying data
+files to a *TreeSummarizedExperiment* object.
 
 ## Initialization
 
-[Install](install.R) the necessary R packages if you have not already
+[Install](install.html) the necessary R packages if you have not already
 done it.
 
 Then load the R packages.
 
-
-
-```r
-library("mia")
-```
+    library("mia")
 
 Define source file paths.
 
+    biom_file_path <- "data/Aggregated_humanization2.biom"
+    sample_meta_file_path <- "data/Mapping_file_ADHD_aggregated.csv"
+    tree_file_path <- "data/Data_humanization_phylo_aggregation.tre"
 
-```r
-biom_file_path <- "data/table-with-taxonomy.biom"
-sample_meta_file_path <- "data/WesternDietSert_extendedTimeComparisonsv4.txt"
-tree_file_path <- "data/tree.nwk"
-```
+Load the (biom) data into a SummarizedExperiment (SE) object.
 
-
-Create TSE object from biom file and investigate it.
-
-
-```r
-tse <- loadFromBiom(biom_file_path)
-```
-
+    se <- loadFromBiom(biom_file_path)
 
 ## Investigate the R data object
 
-We have now imported the data in R. Let us investigate its contents.
+We have now imported the data set in R. Let us investigate its contents.
 
+    print(se)
 
-```r
-print(tse)
-```
+    ## class: SummarizedExperiment 
+    ## dim: 151 27 
+    ## metadata(0):
+    ## assays(1): counts
+    ## rownames(151): 1726470 1726471 ... 17264756 17264757
+    ## rowData names(6): taxonomy1 taxonomy2 ... taxonomy5 taxonomy6
+    ## colnames(27): A110 A111 ... A38 A39
+    ## colData names(0):
 
-```
-## class: TreeSummarizedExperiment 
-## dim: 2805 88 
-## metadata(0):
-## assays(1): counts
-## rownames(2805): 429528823edb55fa5e24e1f20b322a57
-##   b821f00f48e4651623a105fb77872e44 ... 907b143b8c858095025a8c264731d477
-##   743aa3d9860dd464ef41b9ebd1b1e3c1
-## rowData names(8): confidence taxonomy1 ... taxonomy6 taxonomy7
-## colnames(88): 100 101 ... 186 99
-## colData names(0):
-## reducedDimNames(0):
-## mainExpName: NULL
-## altExpNames(0):
-## rowLinks: NULL
-## rowTree: NULL
-## colLinks: NULL
-## colTree: NULL
-```
+Counts include the abundance table from biom file. Let us just use first
+cols and rows.
 
+    assays(se)$counts[1:3, 1:3]
 
-Counts include the abundance table from biom file. Let us just use first cols and rows.
+    ##           A110  A111  A12
+    ## 1726470  17722 11630    0
+    ## 1726471  12052     0 2679
+    ## 17264731     0   970    0
 
+### rowData (taxonomic information)
 
-```r
-assays(tse)$counts[1:3, 1:3]
-```
+The rowdata includes taxonomic information from biom file. The head()
+command shows just the beginning of the data table for an overview.
 
-```
-##                                    100    101    102
-## 429528823edb55fa5e24e1f20b322a57     0      0      0
-## b821f00f48e4651623a105fb77872e44 55026 109435 118072
-## 0dcefd65571849dd41395e1d88748cee 88016  20218   2202
-```
+    knitr::kable(head(rowData(se)))
 
-Now rowdata includes taxonomical information from biom file. The head() command
-shows just the beginning of the data table for an overview.
+<table style="width:100%;">
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 10%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 17%" />
+<col style="width: 18%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">taxonomy1</th>
+<th style="text-align: left;">taxonomy2</th>
+<th style="text-align: left;">taxonomy3</th>
+<th style="text-align: left;">taxonomy4</th>
+<th style="text-align: left;">taxonomy5</th>
+<th style="text-align: left;">taxonomy6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1726470</td>
+<td style="text-align: left;">"k__Bacteria</td>
+<td style="text-align: left;">p__Bacteroidetes</td>
+<td style="text-align: left;">c__Bacteroidia</td>
+<td style="text-align: left;">o__Bacteroidales</td>
+<td style="text-align: left;">f__Bacteroidaceae</td>
+<td style="text-align: left;">g__Bacteroides"</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1726471</td>
+<td style="text-align: left;">"k__Bacteria</td>
+<td style="text-align: left;">p__Bacteroidetes</td>
+<td style="text-align: left;">c__Bacteroidia</td>
+<td style="text-align: left;">o__Bacteroidales</td>
+<td style="text-align: left;">f__Bacteroidaceae</td>
+<td style="text-align: left;">g__Bacteroides"</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">17264731</td>
+<td style="text-align: left;">"k__Bacteria</td>
+<td style="text-align: left;">p__Bacteroidetes</td>
+<td style="text-align: left;">c__Bacteroidia</td>
+<td style="text-align: left;">o__Bacteroidales</td>
+<td style="text-align: left;">f__Porphyromonadaceae</td>
+<td style="text-align: left;">g__Parabacteroides"</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">17264726</td>
+<td style="text-align: left;">"k__Bacteria</td>
+<td style="text-align: left;">p__Bacteroidetes</td>
+<td style="text-align: left;">c__Bacteroidia</td>
+<td style="text-align: left;">o__Bacteroidales</td>
+<td style="text-align: left;">f__Bacteroidaceae</td>
+<td style="text-align: left;">g__Bacteroides"</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1726472</td>
+<td style="text-align: left;">"k__Bacteria</td>
+<td style="text-align: left;">p__Verrucomicrobia</td>
+<td style="text-align: left;">c__Verrucomicrobiae</td>
+<td style="text-align: left;">o__Verrucomicrobiales</td>
+<td style="text-align: left;">f__Verrucomicrobiaceae</td>
+<td style="text-align: left;">g__Akkermansia"</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">17264724</td>
+<td style="text-align: left;">"k__Bacteria</td>
+<td style="text-align: left;">p__Bacteroidetes</td>
+<td style="text-align: left;">c__Bacteroidia</td>
+<td style="text-align: left;">o__Bacteroidales</td>
+<td style="text-align: left;">f__Bacteroidaceae</td>
+<td style="text-align: left;">g__Bacteroides"</td>
+</tr>
+</tbody>
+</table>
 
+Taxonomic ranks are not real rank names. Let’s replace those taxonomic
+classes with real rank names.
 
-```r
-knitr::kable(head(rowData(tse)))
-```
+In addition to that, taxa names include, e.g., ’"k\_\_’ before the name,
+so let’s make them cleaner by removing them.
 
+    names(rowData(se)) <- c("Kingdom", "Phylum", "Class", "Order", 
+                            "Family", "Genus")
 
+    # Goes through whole DataFrame. Removes '.*[kpcofg]__' from strings, where [kpcofg] 
+    # is any character from listed ones, and .* any character.
+    rowdata_modified <- BiocParallel::bplapply(rowData(se), 
+                                               FUN = stringr::str_remove, 
+                                               pattern = '.*[kpcofg]__')
 
-|                                 |confidence         |taxonomy1     |taxonomy2            |taxonomy3             |taxonomy4               |taxonomy5                |taxonomy6                 |taxonomy7                 |
-|:--------------------------------|:------------------|:-------------|:--------------------|:---------------------|:-----------------------|:------------------------|:-------------------------|:-------------------------|
-|429528823edb55fa5e24e1f20b322a57 |0.9999999629215087 |D_0__Bacteria |D_1__Firmicutes      |D_2__Bacilli          |D_3__Lactobacillales    |D_4__Streptococcaceae    |D_5__Lactococcus          |                          |
-|b821f00f48e4651623a105fb77872e44 |0.9162987510638083 |D_0__Bacteria |D_1__Bacteroidetes   |D_2__Bacteroidia      |D_3__Bacteroidales      |D_4__Muribaculaceae      |D_5__uncultured bacterium |D_6__uncultured bacterium |
-|0dcefd65571849dd41395e1d88748cee |0.9101147578136789 |D_0__Bacteria |D_1__Verrucomicrobia |D_2__Verrucomicrobiae |D_3__Verrucomicrobiales |D_4__Akkermansiaceae     |D_5__Akkermansia          |D_6__uncultured bacterium |
-|6fe357d6683c05da84a54a5c2a6fbe9e |0.9974611252130304 |D_0__Bacteria |D_1__Bacteroidetes   |D_2__Bacteroidia      |D_3__Bacteroidales      |D_4__Muribaculaceae      |D_5__uncultured bacterium |D_6__uncultured bacterium |
-|9d91175efc096377a71b6ea55cc7679e |0.9942398133795611 |D_0__Bacteria |D_1__Firmicutes      |D_2__Erysipelotrichia |D_3__Erysipelotrichales |D_4__Erysipelotrichaceae |D_5__Faecalibaculum       |D_6__uncultured bacterium |
-|388b5f3e63fdec5ad3d574070b253ca0 |0.9865806875655985 |D_0__Bacteria |D_1__Bacteroidetes   |D_2__Bacteroidia      |D_3__Bacteroidales      |D_4__Muribaculaceae      |D_5__uncultured bacterium |D_6__uncultured bacterium |
+    # Genus level has additional '\"', so let's delete that also
+    rowdata_modified <- BiocParallel::bplapply(rowdata_modified, 
+                                               FUN = stringr::str_remove, 
+                                               pattern = '\"')
 
+    # rowdata_modified is list, so it is converted back to DataFrame. 
+    rowdata_modified <- DataFrame(rowdata_modified)
+
+    # And then assigned back to the SE object
+    rowData(se) <- rowdata_modified
+
+    # Now we have a nicer table
+    knitr::kable(head(rowData(se)))
+
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 15%" />
+<col style="width: 16%" />
+<col style="width: 17%" />
+<col style="width: 18%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Kingdom</th>
+<th style="text-align: left;">Phylum</th>
+<th style="text-align: left;">Class</th>
+<th style="text-align: left;">Order</th>
+<th style="text-align: left;">Family</th>
+<th style="text-align: left;">Genus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1726470</td>
+<td style="text-align: left;">Bacteria</td>
+<td style="text-align: left;">Bacteroidetes</td>
+<td style="text-align: left;">Bacteroidia</td>
+<td style="text-align: left;">Bacteroidales</td>
+<td style="text-align: left;">Bacteroidaceae</td>
+<td style="text-align: left;">Bacteroides</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1726471</td>
+<td style="text-align: left;">Bacteria</td>
+<td style="text-align: left;">Bacteroidetes</td>
+<td style="text-align: left;">Bacteroidia</td>
+<td style="text-align: left;">Bacteroidales</td>
+<td style="text-align: left;">Bacteroidaceae</td>
+<td style="text-align: left;">Bacteroides</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">17264731</td>
+<td style="text-align: left;">Bacteria</td>
+<td style="text-align: left;">Bacteroidetes</td>
+<td style="text-align: left;">Bacteroidia</td>
+<td style="text-align: left;">Bacteroidales</td>
+<td style="text-align: left;">Porphyromonadaceae</td>
+<td style="text-align: left;">Parabacteroides</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">17264726</td>
+<td style="text-align: left;">Bacteria</td>
+<td style="text-align: left;">Bacteroidetes</td>
+<td style="text-align: left;">Bacteroidia</td>
+<td style="text-align: left;">Bacteroidales</td>
+<td style="text-align: left;">Bacteroidaceae</td>
+<td style="text-align: left;">Bacteroides</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1726472</td>
+<td style="text-align: left;">Bacteria</td>
+<td style="text-align: left;">Verrucomicrobia</td>
+<td style="text-align: left;">Verrucomicrobiae</td>
+<td style="text-align: left;">Verrucomicrobiales</td>
+<td style="text-align: left;">Verrucomicrobiaceae</td>
+<td style="text-align: left;">Akkermansia</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">17264724</td>
+<td style="text-align: left;">Bacteria</td>
+<td style="text-align: left;">Bacteroidetes</td>
+<td style="text-align: left;">Bacteroidia</td>
+<td style="text-align: left;">Bacteroidales</td>
+<td style="text-align: left;">Bacteroidaceae</td>
+<td style="text-align: left;">Bacteroides</td>
+</tr>
+</tbody>
+</table>
+
+### colData (sample information)
 
 We notice that the imported biom file did not contain sample meta data
 yet, so it includes empty data frame
 
+    head(colData(se))
 
-```r
-head(colData(tse))
-```
+    ## DataFrame with 6 rows and 0 columns
 
-```
-## DataFrame with 6 rows and 0 columns
-```
+Let us add sample meta data file
 
+    # We use this to check what type of data is it
+    # read.table(sample_meta_file_path)
 
-## Add side information
+    # It seems like a comma separated file and includes headers
+    # Let us read it and then convert from data.frame to DataFrame
+    # (required for our purposes)
+    sample_meta <- DataFrame(read.table(sample_meta_file_path, sep = ",", header = FALSE))
 
-Let us add a phylogenetic tree.
+    # Add sample names to rownames
 
+    rownames(sample_meta) <- sample_meta[,1]
 
-```r
-# Read the tree 
-tree <- ape::read.tree(tree_file_path)
+    # Delete column that included sample names
+    sample_meta[,1] <- NULL
 
-# Adds tree to rowTree
-rowTree(tse) <- tree
+    # We can add titles 
+    colnames(sample_meta) <- c("patient_status", "cohort", "patient_status_vs_cohort", "sample_name")
 
-# Check
-head(tse)
-```
-
-```
-## class: TreeSummarizedExperiment 
-## dim: 6 88 
-## metadata(0):
-## assays(1): counts
-## rownames(6): 429528823edb55fa5e24e1f20b322a57
-##   b821f00f48e4651623a105fb77872e44 ... 9d91175efc096377a71b6ea55cc7679e
-##   388b5f3e63fdec5ad3d574070b253ca0
-## rowData names(8): confidence taxonomy1 ... taxonomy6 taxonomy7
-## colnames(88): 100 101 ... 186 99
-## colData names(0):
-## reducedDimNames(0):
-## mainExpName: NULL
-## altExpNames(0):
-## rowLinks: a LinkDataFrame (6 rows)
-## rowTree: 1 phylo tree(s) (2805 leaves)
-## colLinks: NULL
-## colTree: NULL
-```
-
-Now rowTree includes phylogenetic tree:
-
-
-```r
-head(rowTree(tse))
-```
-
-Add sample meta data file
-
-
-```r
-# We use this to check what type of data is it
-# read.table(sample_meta_file_path)
-
-# It seems like a comma separated file and includes headers
-# Let us read it and then convert from data.frame to DataFrame
-# (required for our purposes)
-sample_meta <- 
-sample_meta <- DataFrame(read.table(sample_meta_file_path, sep = ",", header = TRUE))
-
-# Then it can be added to colData
-colData(tse) <- sample_meta
-```
+    # Then it can be added to colData
+    colData(se) <- sample_meta
 
 Now colData includes sample metadata. Use kable to print it more nicely.
 
+    knitr::kable(head(colData(se)))
 
-```r
-knitr::kable(head(colData(tse)))
-```
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">patient_status</th>
+<th style="text-align: left;">cohort</th>
+<th style="text-align: left;">patient_status_vs_cohort</th>
+<th style="text-align: left;">sample_name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">A110</td>
+<td style="text-align: left;">ADHD</td>
+<td style="text-align: left;">Cohort_1</td>
+<td style="text-align: left;">ADHD_Cohort_1</td>
+<td style="text-align: left;">A110</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A12</td>
+<td style="text-align: left;">ADHD</td>
+<td style="text-align: left;">Cohort_1</td>
+<td style="text-align: left;">ADHD_Cohort_1</td>
+<td style="text-align: left;">A12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A15</td>
+<td style="text-align: left;">ADHD</td>
+<td style="text-align: left;">Cohort_1</td>
+<td style="text-align: left;">ADHD_Cohort_1</td>
+<td style="text-align: left;">A15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A19</td>
+<td style="text-align: left;">ADHD</td>
+<td style="text-align: left;">Cohort_1</td>
+<td style="text-align: left;">ADHD_Cohort_1</td>
+<td style="text-align: left;">A19</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A21</td>
+<td style="text-align: left;">ADHD</td>
+<td style="text-align: left;">Cohort_2</td>
+<td style="text-align: left;">ADHD_Cohort_2</td>
+<td style="text-align: left;">A21</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A23</td>
+<td style="text-align: left;">ADHD</td>
+<td style="text-align: left;">Cohort_2</td>
+<td style="text-align: left;">ADHD_Cohort_2</td>
+<td style="text-align: left;">A23</td>
+</tr>
+</tbody>
+</table>
 
+### Phylogenetic tree information
 
+Now, let’s add a phylogenetic tree.
 
-| sample.id|MouseID_recoded |All           |Genotype |Diet    |Timepoint |Timepoint1vs2WTcontrol |Timepoint1vs2WTWestern |Timepoint1vs2HETcontrol |Timepoint1vs2HETWestern |Timepoint1vs2KOcontrol |Timepoint1vs2KOWestern |Timepoint1ControlWTvsHET |Timepoint1ControlWTvsKO |Timepoint1ControlHETvsKO |
-|---------:|:---------------|:-------------|:--------|:-------|:---------|:----------------------|:----------------------|:-----------------------|:-----------------------|:----------------------|:----------------------|:------------------------|:-----------------------|:------------------------|
-|        99|41_1            |KO_t1_western |ko       |Western |T1        |NA                     |NA                     |NA                      |NA                      |NA                     |KO_t1_western          |NA                       |NA                      |NA                       |
-|       100|42_1            |KO_t1_western |ko       |Western |T1        |NA                     |NA                     |NA                      |NA                      |NA                     |KO_t1_western          |NA                       |NA                      |NA                       |
-|       101|13_1            |KO_t1_control |ko       |Control |T1        |NA                     |NA                     |NA                      |NA                      |KO_t1_control          |NA                     |NA                       |KO_t1_control           |KO_t1_control            |
-|       102|14_1            |KO_t1_control |ko       |Control |T1        |NA                     |NA                     |NA                      |NA                      |KO_t1_control          |NA                     |NA                       |KO_t1_control           |KO_t1_control            |
-|       103|15_1            |KO_t1_control |ko       |Control |T1        |NA                     |NA                     |NA                      |NA                      |KO_t1_control          |NA                     |NA                       |KO_t1_control           |KO_t1_control            |
-|       104|16_1            |KO_t1_control |ko       |Control |T1        |NA                     |NA                     |NA                      |NA                      |KO_t1_control          |NA                     |NA                       |KO_t1_control           |KO_t1_control            |
+The current data object, se, is a SummarizedExperiment object. This does
+not include a slot for adding a phylogenetic tree. In order to do this,
+we can convert SE object to an extended TreeSummarizedExperiment object
+which also includes a rowTree slot.
 
+    tse <- as(se, "TreeSummarizedExperiment")
 
+    # tse includes same data as se
+    print(tse)
+
+    ## class: TreeSummarizedExperiment 
+    ## dim: 151 27 
+    ## metadata(0):
+    ## assays(1): counts
+    ## rownames(151): 1726470 1726471 ... 17264756 17264757
+    ## rowData names(6): Kingdom Phylum ... Family Genus
+    ## colnames(27): A110 A12 ... A35 A38
+    ## colData names(4): patient_status cohort patient_status_vs_cohort sample_name
+    ## reducedDimNames(0):
+    ## mainExpName: NULL
+    ## altExpNames(0):
+    ## rowLinks: NULL
+    ## rowTree: NULL
+    ## colLinks: NULL
+    ## colTree: NULL
+
+Next, let us read the tree data file and add it to the R data object
+(tse).
+
+    tree <- ape::read.tree(tree_file_path)
+
+    # Add tree to rowTree
+    rowTree(tse) <- tree
+
+    # Check
+    head(tse)
+
+    ## class: TreeSummarizedExperiment 
+    ## dim: 6 27 
+    ## metadata(0):
+    ## assays(1): counts
+    ## rownames(6): 1726470 1726471 ... 1726472 17264724
+    ## rowData names(6): Kingdom Phylum ... Family Genus
+    ## colnames(27): A110 A12 ... A35 A38
+    ## colData names(4): patient_status cohort patient_status_vs_cohort sample_name
+    ## reducedDimNames(0):
+    ## mainExpName: NULL
+    ## altExpNames(0):
+    ## rowLinks: a LinkDataFrame (6 rows)
+    ## rowTree: 1 phylo tree(s) (151 leaves)
+    ## colLinks: NULL
+    ## colTree: NULL
+
+Now rowTree includes phylogenetic tree:
+
+    head(rowTree(tse))
