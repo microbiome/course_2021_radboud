@@ -7,7 +7,7 @@ Belzer C, Dederen PJ, Verweij V, Franke B, Kozicz T, Vasquez AA & Kiliaan AJ (20
 [**Gut microbiota from persons with attention-deficit/hyperactivity disorder affects the brain in mice**](https://doi.org/10.1186/s40168-020-00816-x).
 Microbiome 8:44. 
 
-Contact: [Leo Lahti](http://datascience.utu.fi)
+Contact: [Leo Lahti](http://datascience.utu.fi/)
 
 Authors: Leo Lahti, Tuomas Borman, Henrik Eckermann
 
