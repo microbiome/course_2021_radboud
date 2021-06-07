@@ -1,6 +1,6 @@
 # Summary
 
-* [Introduction](README.md)
+* [Introduction](introduction.md)
 * [Install necessary packages](install.md)
 * [Import data](import.md)
 * [Explore data](explore.md)
