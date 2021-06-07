@@ -11,5 +11,5 @@ Contact: [Leo Lahti](datascience.utu.fi)
 
 Authors: Leo Lahti, Tuomas Borman, Henrik Eckermann
 
-See [docs/index.html](index.html) for more info.
+See [index.html](docs/index.html) for more info.
 
