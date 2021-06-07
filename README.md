@@ -13,3 +13,5 @@ Authors: Leo Lahti, Tuomas Borman, Henrik Eckermann
 
 See [index.html](index.html) for more info.
 
+Example workflow can be found from [here](https://microbiome.github.io/course_2021_radboud/).
+
