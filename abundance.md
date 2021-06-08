@@ -1,7 +1,7 @@
 # Differential abundance analysis
 
 Here, we analyse abundances with three different methods: **Wilcoxon
-test**, **DESeq2**, **ANCOM-BC**. Both of these test statistical
+test**, **DESeq2**, and **ANCOM-BC**. Both of these test statistical
 differences between groups. We analyse Genus level abundances.
 
 ### Wilcoxon test
@@ -208,18 +208,6 @@ to learn about the additional arguments that we specify below.
 
     # currently, ancombc requires the phyloseq format, but we can easily convert:
     pseq <- makePhyloseqFromTreeSummarizedExperiment(tse)
-
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
 
     ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
 
