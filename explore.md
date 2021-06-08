@@ -277,6 +277,99 @@ summed up.
 </tbody>
 </table>
 
+Argument na.rm = FALSE in default. When na.rm = TRUE, taxa that do not
+have information in specified level is removed. When na.rm = FALSE, they
+are not removed. Then those taxa that do not have information in
+specified level are agglomerated at lowest possible level that is left
+after agglomeration.
+
+    temp <- rowData(agglomerateByRank(tse, rank = "Genus"))
+
+    # Prints those taxa that do not have information in Genus level
+    knitr::kable(head(temp[temp$Genus == "",]))
+
+<table>
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 7%" />
+<col style="width: 13%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 16%" />
+<col style="width: 5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Kingdom</th>
+<th style="text-align: left;">Phylum</th>
+<th style="text-align: left;">Class</th>
+<th style="text-align: left;">Order</th>
+<th style="text-align: left;">Family</th>
+<th style="text-align: left;">Genus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Family:Lachnospiraceae</td>
+<td style="text-align: left;">Bacteria</td>
+<td style="text-align: left;">Firmicutes</td>
+<td style="text-align: left;">Clostridia</td>
+<td style="text-align: left;">Clostridiales</td>
+<td style="text-align: left;">Lachnospiraceae</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Order:Bacteroidales</td>
+<td style="text-align: left;">Bacteria</td>
+<td style="text-align: left;">Bacteroidetes</td>
+<td style="text-align: left;">Bacteroidia</td>
+<td style="text-align: left;">Bacteroidales</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Order:Clostridiales</td>
+<td style="text-align: left;">Bacteria</td>
+<td style="text-align: left;">Firmicutes</td>
+<td style="text-align: left;">Clostridia</td>
+<td style="text-align: left;">Clostridiales</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Family:Enterobacteriaceae</td>
+<td style="text-align: left;">Bacteria</td>
+<td style="text-align: left;">Proteobacteria</td>
+<td style="text-align: left;">Gammaproteobacteria</td>
+<td style="text-align: left;">Enterobacteriales</td>
+<td style="text-align: left;">Enterobacteriaceae</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Order:Gastranaerophilales</td>
+<td style="text-align: left;">Bacteria</td>
+<td style="text-align: left;">Cyanobacteria</td>
+<td style="text-align: left;">Melainabacteria</td>
+<td style="text-align: left;">Gastranaerophilales</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+
+Here agglomeration is done similarly, but na.rm = TRUE
+
+    temp2 <- rowData(agglomerateByRank(tse, rank = "Genus", na.rm = TRUE))
+
+    print(paste0("Agglomeration with na.rm = FALSE: ", dim(temp)[1], " taxa."))
+
+    ## [1] "Agglomeration with na.rm = FALSE: 54 taxa."
+
+    print(paste0("Agglomeration with na.rm = TRUE: ", dim(temp2)[1], " taxa."))
+
+    ## [1] "Agglomeration with na.rm = TRUE: 49 taxa."
+
 ## Visualization
 
 For plotting, we use miaViz package. We can plot the Phylum level
@@ -295,7 +388,7 @@ abundances.
 
     plot_abundance 
 
-![](explore_files/figure-markdown_strict/unnamed-chunk-8-1.png)
+![](explore_files/figure-markdown_strict/unnamed-chunk-10-1.png)
 
 From density plot, we could see, e.g., what is the most common
 abundance. Here we plot distribution of Firmicutes relative abundances
@@ -325,7 +418,7 @@ bit under 30 %.
 
     firmicutes_abund_plot
 
-![](explore_files/figure-markdown_strict/unnamed-chunk-9-1.png)
+![](explore_files/figure-markdown_strict/unnamed-chunk-11-1.png)
 
     # # Does the same thing but differently
     # # Calculates the density. Bandwidth can be adjusted; here, it is 0.065.

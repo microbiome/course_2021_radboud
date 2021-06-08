@@ -92,7 +92,26 @@ belongs to Firmicutes are summed up.
 knitr::kable(head(rowData(tse_phylum)))
 ```
 
+Argument na.rm = FALSE in default. When na.rm = TRUE, taxa that do not have
+information in specified level is removed. When na.rm = FALSE, they are not removed. 
+Then those taxa that do not have information in specified level are agglomerated 
+at lowest possible level that is left after agglomeration.
 
+```{r}
+temp <- rowData(agglomerateByRank(tse, rank = "Genus"))
+
+# Prints those taxa that do not have information in Genus level
+knitr::kable(head(temp[temp$Genus == "",]))
+```
+
+Here agglomeration is done similarly, but na.rm = TRUE
+
+```{r}
+temp2 <- rowData(agglomerateByRank(tse, rank = "Genus", na.rm = TRUE))
+
+print(paste0("Agglomeration with na.rm = FALSE: ", dim(temp)[1], " taxa."))
+print(paste0("Agglomeration with na.rm = TRUE: ", dim(temp2)[1], " taxa."))
+```
 
 ## Visualization
 
