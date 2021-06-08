@@ -1,7 +1,7 @@
 # Differential abundance analysis
 
 Here, we analyse abundances with three different methods: **Wilcoxon
-test**, **DESeq2**, and **ANCOM-BC**. Both of these test statistical
+test**, **DESeq2**, and **ANCOM-BC**. All of these test statistical
 differences between groups. We analyse Genus level abundances.
 
 ### Wilcoxon test
