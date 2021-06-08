@@ -256,7 +256,7 @@ Wilcoxon test.
 
     mf <- data.frame(df$padj, wilcoxon_p$p_adjusted)
     p <- ggplot(mf, aes(x = df$padj, y = wilcoxon_p$p_adjusted)) +
-           labs(x = "DESeq2 adjusted p-value", y = "t-test adjusted p-value") +
+           labs(x = "DESeq2 adjusted p-value", y = "Wilcoxon test adjusted p-value") +
            geom_count() +
      scale_size_area(max_size = 10)
 
