@@ -26,8 +26,9 @@ the data distribution.
 NOTE: PCoA is not same as PCA (principal component analysis). In PCoA
 distance matrix is first calculated, but PCA takes the data as it is.
 The main idea of PCA is to find from multidimensional data those
-variables / components that cause most of the variance, and that why
-reduce the dimensionality, e.g., to 2-dimensional.
+variables / components that cause most of the variance. After that data
+can be reduced, e.g., to 2-dimensional where x-axis represents variable
+1 and y-axis variable 2.
 
 ### PCoA for ASV-level data with Bray-Curtis
 
@@ -229,7 +230,7 @@ multivariate analysis of variance (PERMANOVA) test.
     print(paste0("Different different cohorts and variance of abundance between samples, p-value: ", 
                  as.data.frame(permanova_cohort$aov.tab)["cohort", "Pr(>F)"]))
 
-    ## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7472"
+    ## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7406"
 
 As we see, the cohort variable is not significantly associated with
 microbiota composition (p-value is over 0.05).
