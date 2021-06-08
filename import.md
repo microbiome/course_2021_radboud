@@ -1,33 +1,16 @@
 # Import data
 
-## Data
+This section shows how to import the *biom* and its accompanying data
+files to a *TreeSummarizedExperiment* object. TSE object is a standard
+data structure that is utilized in the miaverse.
 
-This workflow demonstrates the use of miaverse using data from the
-following publication, which you can check for a more detailed
-description of the samples and experimental design: Tengeler AC, Dam SA,
-Wiesmann M, Naaijen J, van Bodegom M, Belzer C, Dederen PJ, Verweij V,
-Franke B, Kozicz T, Vasquez AA & Kiliaan AJ (2020) [**Gut microbiota
-from persons with attention-deficit/hyperactivity disorder affects the
-brain in mice**](https://doi.org/10.1186/s40168-020-00816-x) Microbiome
-8:44.
+## Data
 
 Data is located in a “data” subfolder. Data consists of 3 files:
 
 -   biom file that contains abundance table and taxonomy information
 -   csv file that contains sample metadata
 -   tre file that contains a phylogenetic tree.
-
-This notebook shows how to import the *biom* and its accompanying data
-files to a *TreeSummarizedExperiment* object.
-
-## Initialization
-
-[Install](install.html) the necessary R packages if you have not already
-done it.
-
-Then load the R packages.
-
-    library("mia")
 
 Define source file paths.
 
@@ -388,8 +371,31 @@ Next, let us read the tree data file and add it to the R data object
     # Add tree to rowTree
     rowTree(tse) <- tree
 
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
     # Check
     head(tse)
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
 
     ## class: TreeSummarizedExperiment 
     ## dim: 6 27 
@@ -399,8 +405,16 @@ Next, let us read the tree data file and add it to the R data object
     ## rowData names(6): Kingdom Phylum ... Family Genus
     ## colnames(27): A110 A12 ... A35 A38
     ## colData names(4): patient_status cohort patient_status_vs_cohort sample_name
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
     ## reducedDimNames(0):
     ## mainExpName: NULL
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
     ## altExpNames(0):
     ## rowLinks: a LinkDataFrame (6 rows)
     ## rowTree: 1 phylo tree(s) (151 leaves)

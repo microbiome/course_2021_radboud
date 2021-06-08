@@ -107,7 +107,7 @@
                 <a href="install.html">
             
                     
-                    Install necessary packages
+                    Install and load required R packages
             
                 </a>
             
@@ -239,29 +239,17 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="import-data">Import data</h1>
+<p>This section shows how to import the <em>biom</em> and its accompanying data
+files to a <em>TreeSummarizedExperiment</em> object. TSE object is a standard
+data structure that is utilized in the miaverse.</p>
 <h2 id="data">Data</h2>
-<p>This workflow demonstrates the use of miaverse using data from the
-following publication, which you can check for a more detailed
-description of the samples and experimental design: Tengeler AC, Dam SA,
-Wiesmann M, Naaijen J, van Bodegom M, Belzer C, Dederen PJ, Verweij V,
-Franke B, Kozicz T, Vasquez AA &amp; Kiliaan AJ (2020) <a href="https://doi.org/10.1186/s40168-020-00816-x" target="_blank"><strong>Gut microbiota
-from persons with attention-deficit/hyperactivity disorder affects the
-brain in mice</strong></a> Microbiome
-8:44.</p>
 <p>Data is located in a &#x201C;data&#x201D; subfolder. Data consists of 3 files:</p>
 <ul>
 <li>biom file that contains abundance table and taxonomy information</li>
 <li>csv file that contains sample metadata</li>
 <li>tre file that contains a phylogenetic tree.</li>
 </ul>
-<p>This notebook shows how to import the <em>biom</em> and its accompanying data
-files to a <em>TreeSummarizedExperiment</em> object.</p>
-<h2 id="initialization">Initialization</h2>
-<p><a href="install.html">Install</a> the necessary R packages if you have not already
-done it.</p>
-<p>Then load the R packages.</p>
-<pre><code>library(&quot;mia&quot;)
-</code></pre><p>Define source file paths.</p>
+<p>Define source file paths.</p>
 <pre><code>biom_file_path &lt;- &quot;data/Aggregated_humanization2.biom&quot;
 sample_meta_file_path &lt;- &quot;data/Mapping_file_ADHD_aggregated.csv&quot;
 tree_file_path &lt;- &quot;data/Data_humanization_phylo_aggregation.tre&quot;
@@ -593,8 +581,31 @@ print(tse)
 # Add tree to rowTree
 rowTree(tse) &lt;- tree
 
+## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &apos;phyloseq&apos;
+
+## Also defined by &apos;TreeSummarizedExperiment&apos; &apos;tidytree&apos;
+
 # Check
 head(tse)
+
+## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &apos;phyloseq&apos;
+## Also defined by &apos;TreeSummarizedExperiment&apos; &apos;tidytree&apos;
+
+## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &apos;phyloseq&apos;
+
+## Also defined by &apos;TreeSummarizedExperiment&apos; &apos;tidytree&apos;
+
+## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &apos;phyloseq&apos;
+
+## Also defined by &apos;TreeSummarizedExperiment&apos; &apos;tidytree&apos;
+
+## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &apos;phyloseq&apos;
+
+## Also defined by &apos;TreeSummarizedExperiment&apos; &apos;tidytree&apos;
+
+## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &apos;phyloseq&apos;
+
+## Also defined by &apos;TreeSummarizedExperiment&apos; &apos;tidytree&apos;
 
 ## class: TreeSummarizedExperiment 
 ## dim: 6 27 
@@ -604,8 +615,16 @@ head(tse)
 ## rowData names(6): Kingdom Phylum ... Family Genus
 ## colnames(27): A110 A12 ... A35 A38
 ## colData names(4): patient_status cohort patient_status_vs_cohort sample_name
+
+## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &apos;phyloseq&apos;
+## Also defined by &apos;TreeSummarizedExperiment&apos; &apos;tidytree&apos;
+
 ## reducedDimNames(0):
 ## mainExpName: NULL
+
+## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &apos;phyloseq&apos;
+## Also defined by &apos;TreeSummarizedExperiment&apos; &apos;tidytree&apos;
+
 ## altExpNames(0):
 ## rowLinks: a LinkDataFrame (6 rows)
 ## rowTree: 1 phylo tree(s) (151 leaves)
@@ -640,7 +659,7 @@ head(tse)
 
             
                 
-                <a href="install.html" class="navigation navigation-prev " aria-label="Previous page: Install necessary packages">
+                <a href="install.html" class="navigation navigation-prev " aria-label="Previous page: Install and load required R packages">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -656,7 +675,7 @@ head(tse)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Import data","level":"1.3","depth":1,"next":{"title":"Explore data","level":"1.4","depth":1,"path":"explore.md","ref":"explore.md","articles":[]},"previous":{"title":"Install necessary packages","level":"1.2","depth":1,"path":"install.md","ref":"install.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"import.md","mtime":"2021-06-07T08:58:40.450Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-08T05:24:09.450Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Import data","level":"1.3","depth":1,"next":{"title":"Explore data","level":"1.4","depth":1,"path":"explore.md","ref":"explore.md","articles":[]},"previous":{"title":"Install and load required R packages","level":"1.2","depth":1,"path":"install.md","ref":"install.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"import.md","mtime":"2021-06-08T07:13:55.608Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-08T07:15:28.586Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

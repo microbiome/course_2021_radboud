@@ -1,7 +1,8 @@
-# Installation of the necessary R packages
+# Install and load required R packages
 
-This notebook shows how to install all required packages. The
-installation needs to be done just once.
+In this section, all required packages are installed and loaded into the
+session. If packages are already installed, installation step is
+skipped. Only uninstalled packages are installed.
 
     # List of packages that we need from cran and bioc 
     cran_pkg <- c("BiocManager", "dplyr", "ecodist", "ggplot2", "gridExtra", "knitr", "vegan")
@@ -25,7 +26,7 @@ installation needs to be done just once.
        BiocManager::install(bioc_pkg_to_be_installed, ask = F)
     }
 
-    # Loading all packages into session
+    # Loading all packages into session. Returns true if package was successfully loaded.
     sapply(c(cran_pkg , bioc_pkg), require, character.only = TRUE)
 
     ##          BiocManager                dplyr              ecodist              ggplot2            gridExtra                knitr 

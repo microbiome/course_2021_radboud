@@ -1,6 +1,7 @@
 # Beta diversity
 
-This notebook shows how to analyse and visualize beta diversity.
+In this section, we go through how to analyse and visualize beta
+diversity.
 
 Beta diversity reflects the difference in microbial composition between
 two samples. Similar samples have a low beta diversity.
@@ -12,7 +13,7 @@ similarity.
 
 ## Examples of PCoA with different settings
 
-After estimating beta diversity we can vizualize sample similarity with
+After estimating beta diversity we can visualize sample similarity with
 dimension reduction techniques such as Principal Coordinate Analysis
 (PCoA).
 
@@ -21,6 +22,12 @@ PCoA takes a dissimilarity matrix as input. The output is usually a 2 or
 the distances between different samples are maximized. The projection is
 often non-linear and designed to reveal local or global structures in
 the data distribution.
+
+NOTE: PCoA is not same as PCA (principal component analysis). In PCoA
+distance matrix is first calculated, but PCA takes the data as it is.
+The main idea of PCA is to find from multidimensional data those
+variables / components that cause most of the variance, and that why
+reduce the dimensionality, e.g., to 2-dimensional.
 
 ### PCoA for ASV-level data with Bray-Curtis
 
@@ -222,7 +229,7 @@ multivariate analysis of variance (PERMANOVA) test.
     print(paste0("Different different cohorts and variance of abundance between samples, p-value: ", 
                  as.data.frame(permanova_cohort$aov.tab)["cohort", "Pr(>F)"]))
 
-    ## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7477"
+    ## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7381"
 
 As we see, the cohort variable is not significantly associated with
 microbiota composition (p-value is over 0.05).

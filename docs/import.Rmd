@@ -4,38 +4,17 @@ output: md_document
 ---
 # Import data
 
+This section shows how to import the _biom_ and its accompanying data
+files to a _TreeSummarizedExperiment_ object. TSE object is a standard data structure 
+that is utilized in the miaverse.
+
 ## Data
-
-This workflow demonstrates the use of miaverse using data from the
-following publication, which you can check for a more detailed
-description of the samples and experimental design: Tengeler AC, Dam
-SA, Wiesmann M, Naaijen J, van Bodegom M, Belzer C, Dederen PJ,
-Verweij V, Franke B, Kozicz T, Vasquez AA & Kiliaan AJ (2020) [**Gut
-microbiota from persons with attention-deficit/hyperactivity disorder
-affects the brain in
-mice**](https://doi.org/10.1186/s40168-020-00816-x) Microbiome 8:44.
-
 
 Data is located in a "data" subfolder. Data consists of 3 files: 
 
 - biom file that contains abundance table and taxonomy information
 - csv file that contains sample metadata
 - tre file that contains a phylogenetic tree.
-
-This notebook shows how to import the _biom_ and its accompanying data
-files to a _TreeSummarizedExperiment_ object.
-
-
-## Initialization
-
-[Install](install.html) the necessary R packages if you have not already
-done it.
-
-Then load the R packages.
-
-```{r, results='hide'}
-library("mia")
-```  
 
 Define source file paths.
 

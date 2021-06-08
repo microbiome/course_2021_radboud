@@ -5,7 +5,7 @@ output: md_document
 
 # Dirichlet-Multinomial Mixtures
 
-This notebook does DMM analysis. 
+This section focus on DMM analysis. 
 
 One technique that allows to search for groups of samples that are
 similar to each other is the [Dirichlet-Multinomial Mixture
@@ -88,7 +88,6 @@ head(DirichletMultinomial::fitted(getBestDMNFit(tse_dmn)))
 ```
 
 Get the assignment probabilities
-
 
 ```{r}
 prob <- DirichletMultinomial::mixture(getBestDMNFit(tse_dmn))

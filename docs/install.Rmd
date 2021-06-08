@@ -1,13 +1,13 @@
 ---
-title: "Installation of the necessary R packages"
+title: "Install and load required R packages"
 output: md_document
 ---
 
-# Installation of the necessary R packages
+# Install and load required R packages
 
-This notebook shows how to install all required packages. The
-installation needs to be done just once.
-
+In this section, all required packages are installed and loaded into the session.
+If packages are already installed, installation step is skipped. Only uninstalled
+packages are installed.
 
 ```{r warning = FALSE, message = FALSE}
 # List of packages that we need from cran and bioc 
@@ -38,7 +38,7 @@ if( length(bioc_pkg_to_be_installed) ) {
 ```
 
 ```{r warning = FALSE, message = FALSE}
-# Loading all packages into session
+# Loading all packages into session. Returns true if package was successfully loaded.
 sapply(c(cran_pkg , bioc_pkg), require, character.only = TRUE)
 ```
 

@@ -107,7 +107,7 @@
                 <a href="install.html">
             
                     
-                    Install necessary packages
+                    Install and load required R packages
             
                 </a>
             
@@ -239,7 +239,8 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="beta-diversity">Beta diversity</h1>
-<p>This notebook shows how to analyse and visualize beta diversity.</p>
+<p>In this section, we go through how to analyse and visualize beta
+diversity.</p>
 <p>Beta diversity reflects the difference in microbial composition between
 two samples. Similar samples have a low beta diversity.</p>
 <p>Several different distance metrics are available. Some of the common
@@ -247,7 +248,7 @@ choices include Bray-Curtis, Unifrac, Jaccard, and Aitchison index. Each
 of these dissimilarity measures emphasize different aspects of
 similarity.</p>
 <h2 id="examples-of-pcoa-with-different-settings">Examples of PCoA with different settings</h2>
-<p>After estimating beta diversity we can vizualize sample similarity with
+<p>After estimating beta diversity we can visualize sample similarity with
 dimension reduction techniques such as Principal Coordinate Analysis
 (PCoA).</p>
 <p>PCoA takes a dissimilarity matrix as input. The output is usually a 2 or
@@ -255,6 +256,11 @@ dimension reduction techniques such as Principal Coordinate Analysis
 the distances between different samples are maximized. The projection is
 often non-linear and designed to reveal local or global structures in
 the data distribution.</p>
+<p>NOTE: PCoA is not same as PCA (principal component analysis). In PCoA
+distance matrix is first calculated, but PCA takes the data as it is.
+The main idea of PCA is to find from multidimensional data those
+variables / components that cause most of the variance, and that why
+reduce the dimensionality, e.g., to 2-dimensional.</p>
 <h3 id="pcoa-for-asv-level-data-with-bray-curtis">PCoA for ASV-level data with Bray-Curtis</h3>
 <p>Let us next show how to visualize sample similarities using the PCoA
 method and a selected dissimilarity measure. We use the same tse data
@@ -431,7 +437,7 @@ permanova_cohort &lt;- vegan::adonis(rel_abund_assay ~ cohort,
 print(paste0(&quot;Different different cohorts and variance of abundance between samples, p-value: &quot;, 
              as.data.frame(permanova_cohort$aov.tab)[&quot;cohort&quot;, &quot;Pr(&gt;F)&quot;]))
 
-## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7477&quot;
+## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7381&quot;
 </code></pre><p>As we see, the cohort variable is not significantly associated with
 microbiota composition (p-value is over 0.05).</p>
 <p>We can, however, visualize those taxa whose abundance are the most
@@ -514,7 +520,7 @@ top_taxa_coeffient_plot
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Calculate beta diversity","level":"1.6","depth":1,"next":{"title":"DMM analysis","level":"1.7","depth":1,"path":"dmm.md","ref":"dmm.md","articles":[]},"previous":{"title":"Calculate alpha diversity","level":"1.5","depth":1,"path":"alpha.md","ref":"alpha.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"beta.md","mtime":"2021-06-07T08:58:40.446Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-08T05:24:09.450Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Calculate beta diversity","level":"1.6","depth":1,"next":{"title":"DMM analysis","level":"1.7","depth":1,"path":"dmm.md","ref":"dmm.md","articles":[]},"previous":{"title":"Calculate alpha diversity","level":"1.5","depth":1,"path":"alpha.md","ref":"alpha.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"beta.md","mtime":"2021-06-08T07:14:11.584Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-08T07:15:28.586Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

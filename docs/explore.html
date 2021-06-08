@@ -107,7 +107,7 @@
                 <a href="install.html">
             
                     
-                    Install necessary packages
+                    Install and load required R packages
             
                 </a>
             
@@ -241,8 +241,7 @@
                                 <h1 id="data-exploration">Data exploration</h1>
 <p>Now we have loaded the data set in R, and investigated that it has all
 the necessary components.</p>
-<p>This notebook introduces now basic operations to briefly explore the
-data.</p>
+<p>Here, basic operations to briefly explore the data are introduced.</p>
 <h2 id="investigate-the-contents-of-a-microbiome-data-object">Investigate the contents of a microbiome data object</h2>
 <p>Dimensionality tells us, how many taxa and samples the data contains. As
 we can see, there are 151 taxa and 27 samples.</p>
@@ -407,9 +406,9 @@ is present, and <code>sort()</code> sorts the table to ascending order.</p>
 ##      13      14
 </code></pre><h2 id="manipulate-the-data">Manipulate the data</h2>
 <h3 id="transformations">Transformations</h3>
-<p>Abundances are always relative even though counts are calculated. That
-is due to technical aspects of the data generation process (see
-e.g. <a href="https://www.frontiersin.org/articles/10.3389/fmicb.2017.02224/full" target="_blank">Gloor et al.,
+<p>Abundances are always relative even though absolute counts are
+calculated. That is due to technical aspects of the data generation
+process (see e.g. <a href="https://www.frontiersin.org/articles/10.3389/fmicb.2017.02224/full" target="_blank">Gloor et al.,
 2017</a>).
 Below, we calculate relative abundances as these are usually easier to
 interpret than plain counts. For some statistical models we need to
@@ -422,6 +421,30 @@ tse &lt;- transformCounts(tse, method = &quot;relabundance&quot;)
 We can easily agglomerate the data based on taxonomic ranks. Here, we
 agglomerate the data at Phylum level.</p>
 <pre><code>tse_phylum &lt;- agglomerateByRank(tse, rank = &quot;Phylum&quot;)
+
+## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &apos;phyloseq&apos;
+
+## Also defined by &apos;TreeSummarizedExperiment&apos; &apos;tidytree&apos;
+
+## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &apos;phyloseq&apos;
+
+## Also defined by &apos;TreeSummarizedExperiment&apos; &apos;tidytree&apos;
+
+## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &apos;phyloseq&apos;
+
+## Also defined by &apos;TreeSummarizedExperiment&apos; &apos;tidytree&apos;
+
+## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &apos;phyloseq&apos;
+
+## Also defined by &apos;TreeSummarizedExperiment&apos; &apos;tidytree&apos;
+
+## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &apos;phyloseq&apos;
+
+## Also defined by &apos;TreeSummarizedExperiment&apos; &apos;tidytree&apos;
+
+## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &apos;phyloseq&apos;
+
+## Also defined by &apos;TreeSummarizedExperiment&apos; &apos;tidytree&apos;
 
 # Show dimensionality
 dim(tse_phylum)
@@ -496,9 +519,8 @@ summed up.</p>
 </table>
 
 <h2 id="visualization">Visualization</h2>
-<p>For plotting, we use miaViz package, so we have to load it.</p>
-<pre><code>library(&quot;miaViz&quot;)
-</code></pre><p>Next, we can plot the Phylum level abundances.</p>
+<p>For plotting, we use miaViz package. We can plot the Phylum level
+abundances.</p>
 <pre><code># Here we specify &quot;relabundance&quot; to be abundance table that we use for plotting.
 # Note that we can use agglomerated or non-agglomerated tse as an input, because
 # the function agglomeration is built-in option. 
@@ -511,7 +533,7 @@ plot_abundance &lt;- plotAbundance(tse, abund_values=&quot;relabundance&quot;, r
 ## Scale for &apos;y&apos; is already present. Adding another scale for &apos;y&apos;, which will replace the existing scale.
 
 plot_abundance 
-</code></pre><p><img src="explore_files/figure-markdown_strict/unnamed-chunk-9-1.png" alt=""></p>
+</code></pre><p><img src="explore_files/figure-markdown_strict/unnamed-chunk-8-1.png" alt=""></p>
 <p>From density plot, we could see, e.g., what is the most common
 abundance. Here we plot distribution of Firmicutes relative abundances
 in different samples. Density plot can be seen as smoothened histogram.</p>
@@ -519,6 +541,22 @@ in different samples. Density plot can be seen as smoothened histogram.</p>
 bit under 30 %.</p>
 <pre><code># Subset data by taking only Firmicutes
 tse_firmicutes &lt;- tse_phylum[&quot;Firmicutes&quot;]
+
+## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &apos;phyloseq&apos;
+
+## Also defined by &apos;TreeSummarizedExperiment&apos; &apos;tidytree&apos;
+
+## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &apos;phyloseq&apos;
+
+## Also defined by &apos;TreeSummarizedExperiment&apos; &apos;tidytree&apos;
+
+## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &apos;phyloseq&apos;
+
+## Also defined by &apos;TreeSummarizedExperiment&apos; &apos;tidytree&apos;
+
+## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &apos;phyloseq&apos;
+
+## Also defined by &apos;TreeSummarizedExperiment&apos; &apos;tidytree&apos;
 
 # Gets the abundance table
 abundance_firmicutes &lt;- assay(tse_firmicutes, &quot;relabundance&quot;)
@@ -537,7 +575,7 @@ firmicutes_abund_plot &lt;- ggplot(firmicutes_abund_df, aes(x = abund)) +
   scale_x_continuous(label = scales::percent)
 
 firmicutes_abund_plot
-</code></pre><p><img src="explore_files/figure-markdown_strict/unnamed-chunk-10-1.png" alt=""></p>
+</code></pre><p><img src="explore_files/figure-markdown_strict/unnamed-chunk-9-1.png" alt=""></p>
 <pre><code># # Does the same thing but differently
 # # Calculates the density. Bandwidth can be adjusted; here, it is 0.065.
 # # density() is from stats package
@@ -593,7 +631,7 @@ vignette</a>.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Explore data","level":"1.4","depth":1,"next":{"title":"Calculate alpha diversity","level":"1.5","depth":1,"path":"alpha.md","ref":"alpha.md","articles":[]},"previous":{"title":"Import data","level":"1.3","depth":1,"path":"import.md","ref":"import.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"explore.md","mtime":"2021-06-07T08:58:40.450Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-08T05:24:09.450Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Explore data","level":"1.4","depth":1,"next":{"title":"Calculate alpha diversity","level":"1.5","depth":1,"path":"alpha.md","ref":"alpha.md","articles":[]},"previous":{"title":"Import data","level":"1.3","depth":1,"path":"import.md","ref":"import.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"explore.md","mtime":"2021-06-08T07:14:00.252Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-08T07:15:28.586Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

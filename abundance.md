@@ -1,7 +1,7 @@
 # Differential abundance analysis
 
-In this notebook, we analyse abundances with two different methods:
-**Wilcoxon test**, and **DESeq2**. Both of these test statistical
+Here, we analyse abundances with three different methods: **Wilcoxon
+test**, **DESeq2**, **ANCOM-BC**. Both of these test statistical
 differences between groups. We analyse Genus level abundances.
 
 ### Wilcoxon test
@@ -14,6 +14,30 @@ Let’s first collect the data for the testing purpose.
 
     # Agglomerates data to Genus level
     tse_genus <- agglomerateByRank(tse, rank = "Genus")
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
 
     # Does clr transformation. Pseudocount is added, because data contains zeros, and
     # clr transformation includes log transformation.
@@ -90,12 +114,7 @@ found, e.g., from Harvard Chan Bioinformatic Core’s tutorial
 [Introduction to DGE -
 ARCHIVED](https://hbctraining.github.io/DGE_workshop/lessons/04_DGE_DESeq2_analysis.html)
 
-Now let us show how to do this. Start by loading the libraries.
-
-    library(DESeq2)
-    library(dplyr)
-
-Run the DESeq2 analysis
+Now let us show how to do this. First, run the DESeq2 analysis.
 
     # Creates DESeq2 object from the data. Uses "patient_status" to create groups. 
     ds2 <- DESeqDataSet(tse_genus, ~patient_status)
@@ -103,6 +122,10 @@ Run the DESeq2 analysis
     ## converting counts to integer mode
 
     ## Warning in DESeqDataSet(tse_genus, ~patient_status): 2 duplicate rownames were renamed by adding numbers
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
 
     ## Warning in DESeqDataSet(tse_genus, ~patient_status): some variables in design formula are characters, converting to factors
 
@@ -183,11 +206,825 @@ to adjust for confounding. Please check the [function
 documentation](https://rdrr.io/github/FrederickHuangLin/ANCOMBC/man/ancombc.html)
 to learn about the additional arguments that we specify below.
 
-    library(ANCOMBC)
-
     # currently, ancombc requires the phyloseq format, but we can easily convert:
     pseq <- makePhyloseqFromTreeSummarizedExperiment(tse)
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
     pseq_genus <- phyloseq::tax_glom(pseq, taxrank = "Genus")
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
 
     out = ancombc(
       phyloseq = pseq_genus, 
@@ -269,7 +1106,7 @@ Wilcoxon test.
 
     print(p)
 
-![](abundance_files/figure-markdown_strict/unnamed-chunk-9-1.png)
+![](abundance_files/figure-markdown_strict/unnamed-chunk-8-1.png)
 
 Prints number of p-values under 0.05
 
@@ -411,4 +1248,4 @@ control groups.
       nrow = 2
     )
 
-![](abundance_files/figure-markdown_strict/unnamed-chunk-13-1.png)
+![](abundance_files/figure-markdown_strict/unnamed-chunk-12-1.png)

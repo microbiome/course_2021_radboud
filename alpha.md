@@ -1,6 +1,6 @@
 # Alpha diversity
 
-This notebook calculates alpha diversity indices.
+This section demonstrates how alpha diversity indices are calculated.
 
 Alpha diversity is a quantity that measures diversity of taxa in one
 sample. Higher numbers of unique taxa, and more even abundance
@@ -28,6 +28,14 @@ values represent higher diversity.
 
     # Calculates indices
     tse <- estimateDiversity(tse, index = indices, name = names)
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
 
     # Shows the calculated indices
     knitr::kable(head(colData(tse)[names]))

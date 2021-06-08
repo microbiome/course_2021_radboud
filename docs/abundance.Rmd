@@ -5,9 +5,9 @@ output: md_document
 
 # Differential abundance analysis
 
-In this notebook, we analyse abundances with two different methods: **Wilcoxon test**, and **DESeq2**.
-Both of these test statistical differences between groups. We analyse Genus level
-abundances. 
+Here, we analyse abundances with three different methods: **Wilcoxon test**, **DESeq2**, 
+**ANCOM-BC**. Both of these test statistical differences between groups. 
+We analyse Genus level abundances. 
 
 ### Wilcoxon test
 
@@ -98,14 +98,7 @@ information can be found, e.g., from Harvard Chan Bioinformatic Core's
 tutorial [Introduction to DGE -
 ARCHIVED](https://hbctraining.github.io/DGE_workshop/lessons/04_DGE_DESeq2_analysis.html)
 
-Now let us show how to do this. Start by loading the libraries.
-
-```{r, results='hide'}
-library(DESeq2)
-library(dplyr)
-```
-
-Run the DESeq2 analysis
+Now let us show how to do this. First, run the DESeq2 analysis.
 
 ```{r}
 # Creates DESeq2 object from the data. Uses "patient_status" to create groups. 
@@ -156,8 +149,6 @@ Please check the [function documentation](https://rdrr.io/github/FrederickHuangL
 to learn about the additional arguments that we specify below.
 
 ```{r warning = FALSE}
-library(ANCOMBC)
-
 # currently, ancombc requires the phyloseq format, but we can easily convert:
 pseq <- makePhyloseqFromTreeSummarizedExperiment(tse)
 pseq_genus <- phyloseq::tax_glom(pseq, taxrank = "Genus")

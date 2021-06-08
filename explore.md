@@ -3,8 +3,7 @@
 Now we have loaded the data set in R, and investigated that it has all
 the necessary components.
 
-This notebook introduces now basic operations to briefly explore the
-data.
+Here, basic operations to briefly explore the data are introduced.
 
 ## Investigate the contents of a microbiome data object
 
@@ -183,9 +182,9 @@ There are 13 samples from patients having ADHD, and 14 control samples.
 
 ### Transformations
 
-Abundances are always relative even though counts are calculated. That
-is due to technical aspects of the data generation process (see
-e.g. [Gloor et al.,
+Abundances are always relative even though absolute counts are
+calculated. That is due to technical aspects of the data generation
+process (see e.g. [Gloor et al.,
 2017](https://www.frontiersin.org/articles/10.3389/fmicb.2017.02224/full)).
 Below, we calculate relative abundances as these are usually easier to
 interpret than plain counts. For some statistical models we need to
@@ -202,6 +201,30 @@ We can easily agglomerate the data based on taxonomic ranks. Here, we
 agglomerate the data at Phylum level.
 
     tse_phylum <- agglomerateByRank(tse, rank = "Phylum")
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
 
     # Show dimensionality
     dim(tse_phylum)
@@ -280,11 +303,8 @@ summed up.
 
 ## Visualization
 
-For plotting, we use miaViz package, so we have to load it.
-
-    library("miaViz")
-
-Next, we can plot the Phylum level abundances.
+For plotting, we use miaViz package. We can plot the Phylum level
+abundances.
 
     # Here we specify "relabundance" to be abundance table that we use for plotting.
     # Note that we can use agglomerated or non-agglomerated tse as an input, because
@@ -299,7 +319,7 @@ Next, we can plot the Phylum level abundances.
 
     plot_abundance 
 
-![](explore_files/figure-markdown_strict/unnamed-chunk-9-1.png)
+![](explore_files/figure-markdown_strict/unnamed-chunk-8-1.png)
 
 From density plot, we could see, e.g., what is the most common
 abundance. Here we plot distribution of Firmicutes relative abundances
@@ -310,6 +330,22 @@ bit under 30 %.
 
     # Subset data by taking only Firmicutes
     tse_firmicutes <- tse_phylum["Firmicutes"]
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
+
+    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
+
+    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
 
     # Gets the abundance table
     abundance_firmicutes <- assay(tse_firmicutes, "relabundance")
@@ -329,7 +365,7 @@ bit under 30 %.
 
     firmicutes_abund_plot
 
-![](explore_files/figure-markdown_strict/unnamed-chunk-10-1.png)
+![](explore_files/figure-markdown_strict/unnamed-chunk-9-1.png)
 
     # # Does the same thing but differently
     # # Calculates the density. Bandwidth can be adjusted; here, it is 0.065.

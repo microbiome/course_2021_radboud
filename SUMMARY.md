@@ -1,7 +1,7 @@
 # Summary
 
 * [Introduction](README.md)
-* [Install necessary packages](install.md)
+* [Install and load required R packages](install.md)
 * [Import data](import.md)
 * [Explore data](explore.md)
 * [Calculate alpha diversity](alpha.md)
