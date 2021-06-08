@@ -29,14 +29,6 @@ values represent higher diversity.
     # Calculates indices
     tse <- estimateDiversity(tse, index = indices, name = names)
 
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
     # Shows the calculated indices
     knitr::kable(head(colData(tse)[names]))
 

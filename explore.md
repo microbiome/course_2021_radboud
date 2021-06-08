@@ -202,30 +202,6 @@ agglomerate the data at Phylum level.
 
     tse_phylum <- agglomerateByRank(tse, rank = "Phylum")
 
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
     # Show dimensionality
     dim(tse_phylum)
 
@@ -330,22 +306,6 @@ bit under 30 %.
 
     # Subset data by taking only Firmicutes
     tse_firmicutes <- tse_phylum["Firmicutes"]
-
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
 
     # Gets the abundance table
     abundance_firmicutes <- assay(tse_firmicutes, "relabundance")

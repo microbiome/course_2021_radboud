@@ -20,10 +20,6 @@ Let’s cluster the data with DMM clustering.
     # It is stored in metadata
     tse_dmn
 
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
     ## class: TreeSummarizedExperiment 
     ## dim: 151 27 
     ## metadata(1): DMN
@@ -32,16 +28,8 @@ Let’s cluster the data with DMM clustering.
     ## rowData names(6): Kingdom Phylum ... Family Genus
     ## colnames(27): A110 A12 ... A35 A38
     ## colData names(6): patient_status cohort ... Shannon_index Faith_diversity_index
-
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
     ## reducedDimNames(0):
     ## mainExpName: NULL
-
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
     ## altExpNames(0):
     ## rowLinks: a LinkDataFrame (151 rows)
     ## rowTree: 1 phylo tree(s) (151 leaves)
@@ -66,13 +54,13 @@ This returns a list of DMN objects for a closer investigation.
     ## class: DMN 
     ## k: 2 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11440.96 BIC: 12161.29 AIC: 11964.97 
+    ## Laplace: 11440.98 BIC: 12161.29 AIC: 11964.97 
     ## 
     ## [[3]]
     ## class: DMN 
     ## k: 3 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11060.03 BIC: 12266.31 AIC: 11971.51 
+    ## Laplace: 11059.78 BIC: 12266.31 AIC: 11971.51 
     ## 
     ## [[4]]
     ## class: DMN 
@@ -84,19 +72,19 @@ This returns a list of DMN objects for a closer investigation.
     ## class: DMN 
     ## k: 5 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11217.5 BIC: 13305.58 AIC: 12813.8 
+    ## Laplace: 11217.49 BIC: 13305.58 AIC: 12813.8 
     ## 
     ## [[6]]
     ## class: DMN 
     ## k: 6 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11202.22 BIC: 13718.9 AIC: 13128.65 
+    ## Laplace: 11202.17 BIC: 13718.9 AIC: 13128.65 
     ## 
     ## [[7]]
     ## class: DMN 
     ## k: 7 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11619.29 BIC: 14381.81 AIC: 13693.07
+    ## Laplace: 11620.1 BIC: 14381.81 AIC: 13693.07
 
 Show Laplace approximation (model evidence) for each model of the k
 models.
@@ -112,7 +100,7 @@ Return the model that has the best fit.
     ## class: DMN 
     ## k: 3 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11060.03 BIC: 12266.31 AIC: 11971.51
+    ## Laplace: 11059.78 BIC: 12266.31 AIC: 11971.51
 
 ### PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors
 
@@ -127,41 +115,41 @@ Patient status is used for grouping.
     ## class: DMNGroup 
     ## summary:
     ##         k samples taxa      NLE    LogDet  Laplace      BIC      AIC
-    ## ADHD    3      13  151 6018.131 -344.7867 5427.621 6601.657 6473.131
-    ## Control 3      14  151 6647.269 -147.5187 6155.393 7247.655 7102.269
+    ## ADHD    3      13  151 6018.131 -344.7972 5427.616 6601.657 6473.131
+    ## Control 3      14  151 6647.269 -148.3673 6154.968 7247.655 7102.269
 
 Mixture weights (rough measure of the cluster size).
 
     DirichletMultinomial::mixturewt(getBestDMNFit(tse_dmn))
 
     ##          pi    theta
-    ## 1 0.4814815 31.27741
-    ## 2 0.2962963 47.34369
-    ## 3 0.2222222 92.27454
+    ## 1 0.4814815 31.27775
+    ## 2 0.2962963 47.34349
+    ## 3 0.2222222 92.27369
 
 Samples-cluster assignment probabilities.
 
     head(DirichletMultinomial::mixture(getBestDMNFit(tse_dmn)))
 
     ##               [,1]          [,2]          [,3]
-    ## A110  1.000000e+00 1.267392e-144 7.661347e-205
-    ## A12  9.901953e-117  6.173352e-93  1.000000e+00
-    ## A15   1.000000e+00 9.677790e-119 3.450792e-234
-    ## A19  5.406830e-112 1.837824e-107  1.000000e+00
-    ## A21   2.156819e-93  4.777051e-96  1.000000e+00
-    ## A23   1.000000e+00 8.919528e-111 1.961890e-161
+    ## A110  1.000000e+00 1.251518e-144 7.630015e-205
+    ## A12  1.016377e-116  6.122982e-93  1.000000e+00
+    ## A15   1.000000e+00 9.501905e-119 3.420975e-234
+    ## A19  5.573112e-112 1.818439e-107  1.000000e+00
+    ## A21   2.218990e-93  4.721610e-96  1.000000e+00
+    ## A23   1.000000e+00 8.817854e-111 1.952216e-161
 
 Contribution of samples to each component.
 
     head(DirichletMultinomial::fitted(getBestDMNFit(tse_dmn)))
 
-    ##                 [,1]        [,2]       [,3]
-    ## 1726470  6.352214909 2.898717916 20.1893039
-    ## 1726471  5.287705445 0.002048319  0.1532266
-    ## 17264731 0.001249086 9.144167235  2.0112145
-    ## 17264726 0.140477663 1.363553137  7.5894828
-    ## 1726472  2.104114837 3.523221498  2.6656979
-    ## 17264724 0.072369588 0.002048319  9.8547572
+    ##                [,1]        [,2]       [,3]
+    ## 1726470  6.35246337 2.898842018 20.1892621
+    ## 1726471  5.28763345 0.002047263  0.1532218
+    ## 17264731 0.00125068 9.143935817  2.0112084
+    ## 17264726 0.14048610 1.363493335  7.5893958
+    ## 1726472  2.10400755 3.523413501  2.6656993
+    ## 17264724 0.07235963 0.002047263  9.8544883
 
 Get the assignment probabilities
 

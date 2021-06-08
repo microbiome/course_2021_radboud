@@ -371,31 +371,8 @@ Next, let us read the tree data file and add it to the R data object
     # Add tree to rowTree
     rowTree(tse) <- tree
 
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
     # Check
     head(tse)
-
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
 
     ## class: TreeSummarizedExperiment 
     ## dim: 6 27 
@@ -405,16 +382,8 @@ Next, let us read the tree data file and add it to the R data object
     ## rowData names(6): Kingdom Phylum ... Family Genus
     ## colnames(27): A110 A12 ... A35 A38
     ## colData names(4): patient_status cohort patient_status_vs_cohort sample_name
-
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
     ## reducedDimNames(0):
     ## mainExpName: NULL
-
-    ## Found more than one class "phylo" in cache; using the first, from namespace 'phyloseq'
-    ## Also defined by 'TreeSummarizedExperiment' 'tidytree'
-
     ## altExpNames(0):
     ## rowLinks: a LinkDataFrame (6 rows)
     ## rowTree: 1 phylo tree(s) (151 leaves)
