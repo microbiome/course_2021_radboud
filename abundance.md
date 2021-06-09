@@ -137,14 +137,94 @@ Now let us show how to do this. First, run the DESeq2 analysis.
     # and secondly based on "padj" column
     df <- df %>% arrange(log2FoldChange, padj)
 
-    print(head(knitr::kable((df))))
+    knitr::kable(head(df))
 
-    ## [1] "|                                            |     baseMean| log2FoldChange|     lfcSE|        stat|    pvalue|      padj|taxon                                       |"
-    ## [2] "|:-------------------------------------------|------------:|--------------:|---------:|-----------:|---------:|---------:|:-------------------------------------------|"
-    ## [3] "|Genus:Ruminococcaceae_UCG-014               |   22.5482967|    -24.8912675| 2.4606839| -10.1155893| 0.0000000| 0.0000000|Genus:Ruminococcaceae_UCG-014               |"
-    ## [4] "|Order:Bacteroidales                         |   40.3537330|     -9.2417977| 2.1362046|  -4.3262698| 0.0000152| 0.0002730|Order:Bacteroidales                         |"
-    ## [5] "|Genus:Faecalibacterium                      |  231.0795021|     -7.0744335| 1.7456124|  -4.0526944| 0.0000506| 0.0006835|Genus:Faecalibacterium                      |"
-    ## [6] "|Genus:Catabacter                            |   18.0456142|     -6.6154539| 1.7161497|  -3.8548233| 0.0001158| 0.0012508|Genus:Catabacter                            |"
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 8%" />
+<col style="width: 11%" />
+<col style="width: 7%" />
+<col style="width: 8%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">baseMean</th>
+<th style="text-align: right;">log2FoldChange</th>
+<th style="text-align: right;">lfcSE</th>
+<th style="text-align: right;">stat</th>
+<th style="text-align: right;">pvalue</th>
+<th style="text-align: right;">padj</th>
+<th style="text-align: left;">taxon</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Genus:Ruminococcaceae_UCG-014</td>
+<td style="text-align: right;">22.548297</td>
+<td style="text-align: right;">-24.891268</td>
+<td style="text-align: right;">2.460684</td>
+<td style="text-align: right;">-10.115589</td>
+<td style="text-align: right;">0.0000000</td>
+<td style="text-align: right;">0.0000000</td>
+<td style="text-align: left;">Genus:Ruminococcaceae_UCG-014</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Order:Bacteroidales</td>
+<td style="text-align: right;">40.353733</td>
+<td style="text-align: right;">-9.241798</td>
+<td style="text-align: right;">2.136205</td>
+<td style="text-align: right;">-4.326270</td>
+<td style="text-align: right;">0.0000152</td>
+<td style="text-align: right;">0.0002730</td>
+<td style="text-align: left;">Order:Bacteroidales</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Genus:Faecalibacterium</td>
+<td style="text-align: right;">231.079502</td>
+<td style="text-align: right;">-7.074433</td>
+<td style="text-align: right;">1.745612</td>
+<td style="text-align: right;">-4.052694</td>
+<td style="text-align: right;">0.0000506</td>
+<td style="text-align: right;">0.0006835</td>
+<td style="text-align: left;">Genus:Faecalibacterium</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Genus:Catabacter</td>
+<td style="text-align: right;">18.045614</td>
+<td style="text-align: right;">-6.615454</td>
+<td style="text-align: right;">1.716150</td>
+<td style="text-align: right;">-3.854823</td>
+<td style="text-align: right;">0.0001158</td>
+<td style="text-align: right;">0.0012508</td>
+<td style="text-align: left;">Genus:Catabacter</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Genus:Butyricicoccus</td>
+<td style="text-align: right;">2.392885</td>
+<td style="text-align: right;">-5.179608</td>
+<td style="text-align: right;">2.948055</td>
+<td style="text-align: right;">-1.756957</td>
+<td style="text-align: right;">0.0789251</td>
+<td style="text-align: right;">0.3278426</td>
+<td style="text-align: left;">Genus:Butyricicoccus</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Order:Gastranaerophilales</td>
+<td style="text-align: right;">2.067972</td>
+<td style="text-align: right;">-3.054975</td>
+<td style="text-align: right;">2.938641</td>
+<td style="text-align: right;">-1.039588</td>
+<td style="text-align: right;">0.2985315</td>
+<td style="text-align: right;">0.7269742</td>
+<td style="text-align: left;">Order:Gastranaerophilales</td>
+</tr>
+</tbody>
+</table>
 
 ### ANCOM-BC
 

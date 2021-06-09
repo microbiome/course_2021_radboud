@@ -52,6 +52,8 @@ cols and rows.
 The rowdata includes taxonomic information from biom file. The head()
 command shows just the beginning of the data table for an overview.
 
+`knitr::kable()` is for printing the information more nicely.
+
     knitr::kable(head(rowData(se)))
 
 <table style="width:100%;">

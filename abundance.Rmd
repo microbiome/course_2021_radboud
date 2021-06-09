@@ -120,7 +120,7 @@ df$taxon <- rownames(df)
 # and secondly based on "padj" column
 df <- df %>% arrange(log2FoldChange, padj)
 
-print(head(knitr::kable((df))))
+knitr::kable(head(df))
 ```
 
 ### ANCOM-BC

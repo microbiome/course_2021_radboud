@@ -19,8 +19,6 @@ information for each 151 entries. With the `head()` command, it is
 possible to print only the beginning of the table. The rowData seems to
 contain information from 6 different taxonomy classes.
 
-`knitr::kable()` is for printing the information more nicely.
-
     knitr::kable(head(rowData(tse)))
 
 <table>
