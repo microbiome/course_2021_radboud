@@ -362,15 +362,17 @@ visually if abundances of those taxa differ in ADHD and control samples.
 For comparison, let’s plot also taxa that do not differ between ADHD and
 control groups.
 
+Let’s first gather data about taxa that have highest p-values.
+
     # There are some taxa that do not include Genus level information. They are
     # excluded from analysis.
     # str_detect finds if the pattern is present in values of "taxon" column.
     # Subset is taken, only those rows are included that do not include the pattern.
     df <- df[ !stringr::str_detect(df$taxon, "Genus:uncultured"), ]
 
-    # Sorts p-values in increasing order. Takes 3rd first ones. Takes those rows that match
+    # Sorts p-values in decreasing order. Takes 3rd first ones. Takes those rows that match
     # with p-values. Takes taxa. 
-    highest3 <- df[df$padj %in% sort(df$padj, decreasing = FALSE)[1:3], ]$taxon
+    highest3 <- df[df$padj %in% sort(df$padj, decreasing = TRUE)[1:3], ]$taxon
 
     # From clr transformed table, takes only those taxa that had highest p-values
     highest3 <- assay(tse_genus, "clr")[highest3, ]
@@ -395,9 +397,11 @@ control groups.
       temp <- stringr::str_wrap(temp, width = 25)
     })
 
-    # Sorts p-values in decreasing order. Takes 3rd first ones. Takes those rows that match
+Next, let’s do the same but for taxa with lowest p-values.
+
+    # Sorts p-values in increasing order. Takes 3rd first ones. Takes those rows that match
     # with p-values. Takes taxa. 
-    lowest3 <- df[df$padj %in% sort(df$padj, decreasing = TRUE)[1:3], ]$taxon
+    lowest3 <- df[df$padj %in% sort(df$padj, decreasing = FALSE)[1:3], ]$taxon
 
     # From clr transformed table, takes only those taxa that had lowest p-values
     lowest3 <-assay(tse_genus, "clr")[lowest3, ]
@@ -421,6 +425,9 @@ control groups.
       # Adds line break so that 25 characters is the maximal width
       temp <- stringr::str_wrap(temp, width = 25)
     })
+
+Then we can plot these six different taxa. Let’s arrange them into the
+same picture.
 
     # Puts plots in the same picture
     gridExtra::grid.arrange(
