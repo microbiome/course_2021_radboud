@@ -301,7 +301,7 @@ wilcoxon_plot &lt;- ggplot(df) +
 wilcoxon_plot
 
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-</code></pre><p><img src="abundance_files/figure-markdown_strict/unnamed-chunk-4-1.png" alt=""></p>
+</code></pre><p><img src="abundance_files/figure-markdown_strict/unnamed-chunk-12-1.png" alt=""></p>
 <h3 id="deseq2">DESeq2</h3>
 <p>Our second analysis method is DESeq2. This performs the data
 normalization automatically. It also takes care of the p-value
@@ -552,7 +552,7 @@ p &lt;- ggplot(mf, aes(x = df$padj, y = wilcoxon_p$p_adjusted)) +
  scale_size_area(max_size = 10)
 
 print(p)
-</code></pre><p><img src="abundance_files/figure-markdown_strict/unnamed-chunk-8-1.png" alt=""></p>
+</code></pre><p><img src="abundance_files/figure-markdown_strict/unnamed-chunk-16-1.png" alt=""></p>
 <p>Prints number of p-values under 0.05</p>
 <pre><code>print(paste0(&quot;DESeq2 p-values under 0.05: &quot;, sum(df$padj&lt;0.05, na.rm = TRUE), &quot;/&quot;, length(df$padj)))
 
@@ -596,8 +596,8 @@ colnames(highest3)[1:3] &lt;- lapply(colnames(highest3)[1:3], function(x){
   # Replace all other dots and underscores with space
   temp &lt;- stringr::str_replace_all(temp, c(&quot;[.]&quot; = &quot; &quot;, &quot;_&quot; = &quot; &quot;))
 
-  # Adds line break so that 30 characters is the maximal width
-  temp &lt;- stringr::str_wrap(temp, width = 30)
+  # Adds line break so that 25 characters is the maximal width
+  temp &lt;- stringr::str_wrap(temp, width = 25)
 })
 
 # Sorts p-values in decreasing order. Takes 3rd first ones. Takes those rows that match
@@ -623,8 +623,8 @@ colnames(lowest3)[1:3] &lt;- lapply(colnames(lowest3)[1:3], function(x){
   # Replace all other dots and underscores with space
   temp &lt;- stringr::str_replace_all(temp, c(&quot;[.]&quot; = &quot; &quot;, &quot;_&quot; = &quot; &quot;))
 
-  # Adds line break so that 30 characters is the maximal width
-  temp &lt;- stringr::str_wrap(temp, width = 30)
+  # Adds line break so that 25 characters is the maximal width
+  temp &lt;- stringr::str_wrap(temp, width = 25)
 })
 
 # Puts plots in the same picture
@@ -688,7 +688,7 @@ gridExtra::grid.arrange(
   ncol = 3, 
   nrow = 2
 )
-</code></pre><p><img src="abundance_files/figure-markdown_strict/unnamed-chunk-12-1.png" alt=""></p>
+</code></pre><p><img src="abundance_files/figure-markdown_strict/unnamed-chunk-20-1.png" alt=""></p>
 
                                 
                                 </section>
@@ -728,7 +728,7 @@ gridExtra::grid.arrange(
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Differential abundance analysis","level":"1.8","depth":1,"previous":{"title":"DMM analysis","level":"1.7","depth":1,"path":"dmm.md","ref":"dmm.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"abundance.md","mtime":"2021-06-09T07:39:48.897Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-09T07:39:57.998Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Differential abundance analysis","level":"1.8","depth":1,"previous":{"title":"DMM analysis","level":"1.7","depth":1,"path":"dmm.md","ref":"dmm.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"abundance.md","mtime":"2021-06-09T08:08:39.138Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-09T08:08:47.070Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

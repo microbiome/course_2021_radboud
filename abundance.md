@@ -74,7 +74,7 @@ as well.
 
     ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 
-![](abundance_files/figure-markdown_strict/unnamed-chunk-4-1.png)
+![](abundance_files/figure-markdown_strict/unnamed-chunk-12-1.png)
 
 ### DESeq2
 
@@ -342,7 +342,7 @@ Wilcoxon test.
 
     print(p)
 
-![](abundance_files/figure-markdown_strict/unnamed-chunk-8-1.png)
+![](abundance_files/figure-markdown_strict/unnamed-chunk-16-1.png)
 
 Prints number of p-values under 0.05
 
@@ -391,8 +391,8 @@ control groups.
       # Replace all other dots and underscores with space
       temp <- stringr::str_replace_all(temp, c("[.]" = " ", "_" = " "))
       
-      # Adds line break so that 30 characters is the maximal width
-      temp <- stringr::str_wrap(temp, width = 30)
+      # Adds line break so that 25 characters is the maximal width
+      temp <- stringr::str_wrap(temp, width = 25)
     })
 
     # Sorts p-values in decreasing order. Takes 3rd first ones. Takes those rows that match
@@ -418,8 +418,8 @@ control groups.
       # Replace all other dots and underscores with space
       temp <- stringr::str_replace_all(temp, c("[.]" = " ", "_" = " "))
       
-      # Adds line break so that 30 characters is the maximal width
-      temp <- stringr::str_wrap(temp, width = 30)
+      # Adds line break so that 25 characters is the maximal width
+      temp <- stringr::str_wrap(temp, width = 25)
     })
 
     # Puts plots in the same picture
@@ -484,4 +484,4 @@ control groups.
       nrow = 2
     )
 
-![](abundance_files/figure-markdown_strict/unnamed-chunk-12-1.png)
+![](abundance_files/figure-markdown_strict/unnamed-chunk-20-1.png)

@@ -243,8 +243,8 @@ colnames(highest3)[1:3] <- lapply(colnames(highest3)[1:3], function(x){
   # Replace all other dots and underscores with space
   temp <- stringr::str_replace_all(temp, c("[.]" = " ", "_" = " "))
   
-  # Adds line break so that 30 characters is the maximal width
-  temp <- stringr::str_wrap(temp, width = 30)
+  # Adds line break so that 25 characters is the maximal width
+  temp <- stringr::str_wrap(temp, width = 25)
 })
 ```
 
@@ -272,8 +272,8 @@ colnames(lowest3)[1:3] <- lapply(colnames(lowest3)[1:3], function(x){
   # Replace all other dots and underscores with space
   temp <- stringr::str_replace_all(temp, c("[.]" = " ", "_" = " "))
   
-  # Adds line break so that 30 characters is the maximal width
-  temp <- stringr::str_wrap(temp, width = 30)
+  # Adds line break so that 25 characters is the maximal width
+  temp <- stringr::str_wrap(temp, width = 25)
 })
 ```
 
