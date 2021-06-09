@@ -43,6 +43,3 @@ loaded before have higher priority.
     ##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
     ##                vegan 
     ##                 TRUE
-
-    library(mia)
-    library(miaViz)

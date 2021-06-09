@@ -49,11 +49,3 @@ bioc_pkg <- c(bioc_pkg[ bioc_pkg %in% c("mia", "miaViz") ], bioc_pkg[ !bioc_pkg 
 sapply(c(bioc_pkg, cran_pkg), require, character.only = TRUE)
 ```
  
- 
- 
-```{r}
-library(mia)
-library(miaViz)
-```
- 
-
