@@ -1,6 +1,7 @@
 # Summary
 
 * [Introduction](README.md)
+* [Getting started](start.md)
 * [Install and load required R packages](install.md)
 * [Import data](import.md)
 * [Explore data](explore.md)

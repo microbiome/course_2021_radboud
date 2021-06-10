@@ -1,10 +1,16 @@
 
 
 # This creates the md files
-# knitr::knit("import.Rmd")
+# knitr::knit("install.Rmd")
 
-# This creates the html files at
+# This creates the md files at
 # https://microbiome.github.io/course_2021_radboud/
+
+# md files can be converted to html files and to GitBook with GitBook documentation tool
+# https://github.com/GitbookIO/gitbook
+
+# Terminal command 'gitbook build ./ docs' creates html files from md files
+# that are located in root folder. It stores html files to 'docs' folder.
 
 # Sets the theme
 library(ggplot2)

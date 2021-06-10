@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Install and load required R packages · GitBook</title>
+        <title>Getting started · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="import.html" />
+    <link rel="next" href="install.html" />
     
     
-    <link rel="prev" href="start.html" />
+    <link rel="prev" href="./" />
     
 
     </head>
@@ -102,7 +102,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="start.html">
+        <li class="chapter active" data-level="1.2" data-path="start.html">
             
                 <a href="start.html">
             
@@ -115,7 +115,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3" data-path="install.html">
+        <li class="chapter " data-level="1.3" data-path="install.html">
             
                 <a href="install.html">
             
@@ -236,7 +236,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Install and load required R packages</a>
+        <a href="." >Getting started</a>
     </h1>
 </div>
 
@@ -251,48 +251,38 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="install-and-load-required-r-packages">Install and load required R packages</h1>
-<p>In this section, all required packages are installed and loaded into the
-session. If packages are already installed, installation step is
-skipped; only uninstalled packages are installed.</p>
-<pre><code># List of packages that we need from cran and bioc 
-cran_pkg &lt;- c(&quot;BiocManager&quot;, &quot;dplyr&quot;, &quot;ecodist&quot;, &quot;ggplot2&quot;, &quot;gridExtra&quot;, &quot;knitr&quot;, &quot;vegan&quot;)
-bioc_pkg &lt;- c(&quot;ANCOMBC&quot;, &quot;ape&quot;, &quot;DESeq2&quot;,  &quot;DirichletMultinomial&quot;, &quot;mia&quot;, &quot;miaViz&quot;)
+                                <h1 id="getting-started">Getting Started</h1>
+<h2 id="checklist-before-the-course">Checklist before the course</h2>
+<h3 id="r">R</h3>
+<p>miaverse requires at least version 4.1 of R. Because it takes some time to install it,
+you should have it installed before the course.</p>
+<p>Help for installing R you can find from <a href="https://www.r-project.org/" target="_blank">here</a>.</p>
+<h3 id="rstudio">RStudio</h3>
+<p>RStudio is optional but preferred. It&apos;s a integrated development environment (IDE)
+for R. Also installation of RStudio takes some time, so again you take this into account. </p>
+<p>Help for installing RStudio you can find from <a href="https://www.rstudio.com/" target="_blank">here</a>.</p>
+<h3 id="required-r-packages">Required R packages</h3>
+<p>After installing R (and RStudio) you should install required R packages by running 
+the code from <a href="install.html">Install and load required packages</a>.</p>
+<h2 id="start-workflow">Start workflow</h2>
+<p>After installing R (and RStudio) and required packages you should be able to start 
+the workflow. </p>
+<p>Start it by running the code from <a href="install.html">Install and load required packages</a>. 
+If you have required packages already installed, it only loads them into the session.</p>
+<h2 id="additional-resources">Additional resources</h2>
+<p>Rmarkdown
+-<a href="https://rmarkdown.rstudio.com/" target="_blank">Rmarkdown tips</a>
+-<a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf" target="_blank">Rmarkdown cheat sheet</a></p>
+<p>R programming
+-Basics of R programming: <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/master/base-r.pdf" target="_blank">Base R</a>
+-R visualization: <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/master/data-visualization-2.1.pdf" target="_blank">ggplot2</a>, and <a href="http://www.cookbook-r.com/Graphs/" target="_blank">R graphics cookbook</a></p>
+<p>RStudio
+-<a href="https://raw.githubusercontent.com/rstudio/cheatsheets/master/rstudio-ide.pdf" target="_blank">RStudio cheat sheet</a></p>
+<p>More cheat sheets for R programming
+-<a href="https://www.rstudio.com/resources/cheatsheets/" target="_blank">Full list of RStudio cheat sheets</a></p>
+<p>Microbiome research
+-<a href="https://microsud.github.io/Tools-Microbiome-Analysis/" target="_blank">List of R tools for microbiome analysis</a></p>
 
-# Gets those packages that are already installed
-cran_pkg_already_installed &lt;- cran_pkg[ cran_pkg %in% installed.packages() ]
-bioc_pkg_already_installed &lt;- bioc_pkg[ bioc_pkg %in% installed.packages() ]
-
-# Gets those packages that need to be installed
-cran_pkg_to_be_installed &lt;- setdiff(cran_pkg, cran_pkg_already_installed)
-bioc_pkg_to_be_installed &lt;- setdiff(bioc_pkg, bioc_pkg_already_installed)
-
-# If there are packages that need to be installed, installs them from CRAN
-if( length(cran_pkg_to_be_installed) ) {
-   install.packages(cran_pkg_to_be_installed)
-}
-
-# If there are packages that need to be installed, installs them from Bioconductor
-if( length(bioc_pkg_to_be_installed) ) {
-   BiocManager::install(bioc_pkg_to_be_installed, ask = F)
-}
-</code></pre><p>Now all required packages are be installed, so let&#x2019;s load them into
-session. Some function names occur in multiple packages. That is why
-miaverse&#x2019;s packages mia and miaViz are prioritized. Packages that are
-loaded before have higher priority.</p>
-<pre><code># Reorders bioc packages, so that mia and miaViz are first
-bioc_pkg &lt;- c(bioc_pkg[ bioc_pkg %in% c(&quot;mia&quot;, &quot;miaViz&quot;) ], bioc_pkg[ !bioc_pkg %in% c(&quot;mia&quot;, &quot;miaViz&quot;) ] ) 
-
-# Loading all packages into session. Returns true if package was successfully loaded.
-sapply(c(bioc_pkg, cran_pkg), require, character.only = TRUE)
-
-##                  mia               miaViz              ANCOMBC                  ape               DESeq2 DirichletMultinomial 
-##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
-##          BiocManager                dplyr              ecodist              ggplot2            gridExtra                knitr 
-##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
-##                vegan 
-##                 TRUE
-</code></pre>
                                 
                                 </section>
                             
@@ -319,12 +309,12 @@ sapply(c(bioc_pkg, cran_pkg), require, character.only = TRUE)
 
             
                 
-                <a href="start.html" class="navigation navigation-prev " aria-label="Previous page: Getting started">
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Introduction">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="import.html" class="navigation navigation-next " aria-label="Next page: Import data">
+                <a href="install.html" class="navigation navigation-next " aria-label="Next page: Install and load required R packages">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -335,7 +325,7 @@ sapply(c(bioc_pkg, cran_pkg), require, character.only = TRUE)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Install and load required R packages","level":"1.3","depth":1,"next":{"title":"Import data","level":"1.4","depth":1,"path":"import.md","ref":"import.md","articles":[]},"previous":{"title":"Getting started","level":"1.2","depth":1,"path":"start.md","ref":"start.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"install.md","mtime":"2021-06-09T07:08:40.067Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-10T09:23:16.230Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Getting started","level":"1.2","depth":1,"next":{"title":"Install and load required R packages","level":"1.3","depth":1,"path":"install.md","ref":"install.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"start.md","mtime":"2021-06-10T09:21:41.718Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-10T09:23:16.230Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
