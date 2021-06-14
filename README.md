@@ -51,6 +51,15 @@ Belzer C, Dederen PJ, Verweij V, Franke B, Kozicz T, Vasquez AA & Kiliaan AJ (20
 [**Gut microbiota from persons with attention-deficit/hyperactivity disorder affects the brain in mice**](https://doi.org/10.1186/s40168-020-00816-x).
 Microbiome 8:44. 
 
+Front page image is from article: 
+Moreno-Indias I, Lahti L, Nedyalkova M, Elbere I, Roshchupkin G, Adilovic M, Aydemir O,
+Bakir-Gungor B, Santa Pau EC, D’Elia D, Desai MS, Falquet L, Gundogdu A, Hron K, Klammsteiner T,
+Lopes MB, Marcos-Zambrano LJ, Marques C, Mason M, May P, Pašić L, Pio G, Pongor S, Promponas VJ,
+Przymus P, Saez-Rodriguez J, Sampri A, Shigdel R, Stres B, Suharoschi R, Truu J, Truică C,
+Vilne B, Vlachakis D, Yilmaz E, Zeller G, Zomer AL, Gómez-Cabrero D & Claesson MJ (2021)
+[**Statistical and Machine Learning Techniques in Human Microbiome Studies: Contemporary Challenges and Solutions**](https://doi.org/10.3389/fmicb.2021.635781). 
+Frontiers in Microbiology 12:11. 
+
 ## License
 
 All material is released under the open [MIT license](LICENSE).
