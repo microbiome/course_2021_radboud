@@ -6,6 +6,25 @@
 
 This site contains material for [Radboud Summer Course 7/2021](https://www.ru.nl/radboudsummerschool/courses/2021/brain-bacteria-behaviour/).
 
+
+## miaverse
+
+miaverse (mia = **MI**crobiome **A**nalysis) is a R ecosystem for microbiome analysis. It utilizes standard data 
+structure called **TreeSummarizedExperiment**. It extends **SingleCellExperiment** class by
+providing slots for phylogenetic tree and sample tree. 
+
+TreeSummarizedExperiment works as a container of different kind of information that is 
+obtained from the data set. Similarly, e.g., to **phyloseq** class, TreeSummarizedExperiment 
+includes standardized slots. Each of this classes can store specific kind of information. For example,
+assays can store abundance tables, and rowData information about taxa.
+The main advantage of TreeSummarizedExperiment compared to phyloseq is that it can store
+lots of more data than phyloseq.
+
+Currently, miaverse includes two packages: one for data analysis and one for visualization. 
+**mia** package includes wide variety of different kind of functions for data analysis. 
+**miaViz** is the package for visualization. The aim is to enable easy, reliable, and efficient 
+way to analyze microbiome data. 
+
 ## Example workflow
 
 This workflow demonstrates the use of miaverse using data from the
@@ -18,7 +37,6 @@ mice**](https://doi.org/10.1186/s40168-020-00816-x). Microbiome 8:44.
 In this study, gut microbiome of persons with and without ADHD (attention deficit 
 hyperactivity disorder) was transplanted into mice. The aim of this study was to 
 investigate if there is correlation between ADHD and gut microbiome.
-
 
 Material in html format can be found from [here](https://microbiome.github.io/course_2021_radboud/).
 
