@@ -314,7 +314,7 @@ wilcoxon_plot &lt;- ggplot(df) +
 wilcoxon_plot
 
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-</code></pre><p><img src="abundance_files/figure-markdown_strict/unnamed-chunk-12-1.png" alt=""></p>
+</code></pre><p><img src="abundance_files/figure-markdown_strict/unnamed-chunk-4-1.png" alt=""></p>
 <h3 id="deseq2">DESeq2</h3>
 <p>Our second analysis method is DESeq2. This performs the data
 normalization automatically. It also takes care of the p-value
@@ -565,7 +565,7 @@ p &lt;- ggplot(mf, aes(x = df$padj, y = wilcoxon_p$p_adjusted)) +
  scale_size_area(max_size = 10)
 
 print(p)
-</code></pre><p><img src="abundance_files/figure-markdown_strict/unnamed-chunk-16-1.png" alt=""></p>
+</code></pre><p><img src="abundance_files/figure-markdown_strict/unnamed-chunk-8-1.png" alt=""></p>
 <p>Prints number of p-values under 0.05</p>
 <pre><code>print(paste0(&quot;DESeq2 p-values under 0.05: &quot;, sum(df$padj&lt;0.05, na.rm = TRUE), &quot;/&quot;, length(df$padj)))
 
@@ -703,7 +703,7 @@ gridExtra::grid.arrange(
   ncol = 3, 
   nrow = 2
 )
-</code></pre><p><img src="abundance_files/figure-markdown_strict/unnamed-chunk-20-1.png" alt=""></p>
+</code></pre><p><img src="abundance_files/figure-markdown_strict/unnamed-chunk-12-1.png" alt=""></p>
 
                                 
                                 </section>
@@ -743,7 +743,7 @@ gridExtra::grid.arrange(
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Differential abundance analysis","level":"1.9","depth":1,"previous":{"title":"DMM analysis","level":"1.8","depth":1,"path":"dmm.md","ref":"dmm.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"abundance.md","mtime":"2021-06-09T08:40:09.169Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-14T07:39:10.901Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Differential abundance analysis","level":"1.9","depth":1,"previous":{"title":"DMM analysis","level":"1.8","depth":1,"path":"dmm.md","ref":"dmm.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"abundance.md","mtime":"2021-06-14T09:02:12.705Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-14T09:02:25.462Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

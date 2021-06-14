@@ -4,7 +4,7 @@
 
 ![](https://user-images.githubusercontent.com/60338854/121848694-1072a480-ccf3-11eb-9af2-7fdefd8d1794.png)
 
-This site contains material for [Radboud Summer Course 7/2021](https://www.ru.nl/radboudsummerschool/courses/2021/brain-bacteria-behaviour/).
+This site contains material for [Radboud Summer School 7/2021](https://www.ru.nl/radboudsummerschool/courses/2021/brain-bacteria-behaviour/).
 
 
 ## miaverse
@@ -34,9 +34,13 @@ microbiota from persons with attention-deficit/hyperactivity disorder
 affects the brain in
 mice**](https://doi.org/10.1186/s40168-020-00816-x). Microbiome 8:44.
 
-In this study, gut microbiome of persons with and without ADHD (attention deficit 
-hyperactivity disorder) was transplanted into mice. The aim of this study was to 
-investigate if there is correlation between ADHD and gut microbiome.
+In this study, mice are colonized with microbiota from participants with 
+ADHD (attention deficit hyperactivity disorder) and healthy participants. 
+The aim of the study was to assess whether the mice display ADHD behaviors after being 
+inoculated with ADHD microbiota, suggesting a role of the microbiome in ADHD pathology.
+
+You can run the workflow by cloning the repository or you can apply it to your own data, 
+e.g., by copy-pasting and tuning the code to fit to your data. 
 
 Material in html format can be found from [here](https://microbiome.github.io/course_2021_radboud/).
 

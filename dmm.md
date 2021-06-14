@@ -1,4 +1,4 @@
-# Dirichlet-Multinomial Mixtures
+# Dirichlet-Multinomial Mixture Model
 
 This section focus on DMM analysis.
 
@@ -44,6 +44,8 @@ Return information on metadata that the object contains.
 
 This returns a list of DMN objects for a closer investigation.
 
+    getDMN(tse_dmn)
+
     ## [[1]]
     ## class: DMN 
     ## k: 1 
@@ -54,46 +56,42 @@ This returns a list of DMN objects for a closer investigation.
     ## class: DMN 
     ## k: 2 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11440.94 BIC: 12161.29 AIC: 11964.97 
+    ## Laplace: 11441 BIC: 12161.29 AIC: 11964.97 
     ## 
     ## [[3]]
     ## class: DMN 
     ## k: 3 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11060.01 BIC: 12266.31 AIC: 11971.51 
+    ## Laplace: 11059.59 BIC: 12266.31 AIC: 11971.51 
     ## 
     ## [[4]]
     ## class: DMN 
     ## k: 4 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11417.28 BIC: 13047.39 AIC: 12654.11 
+    ## Laplace: 11417.58 BIC: 13047.39 AIC: 12654.11 
     ## 
     ## [[5]]
     ## class: DMN 
     ## k: 5 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11217.47 BIC: 13305.58 AIC: 12813.8 
+    ## Laplace: 11217.23 BIC: 13305.58 AIC: 12813.8 
     ## 
     ## [[6]]
     ## class: DMN 
     ## k: 6 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11202.17 BIC: 13718.9 AIC: 13128.65 
+    ## Laplace: 11201.94 BIC: 13718.9 AIC: 13128.65 
     ## 
     ## [[7]]
     ## class: DMN 
     ## k: 7 
     ## samples x taxa: 27 x 151 
-    ## Laplace: NaN BIC: NaN AIC: NaN
+    ## Laplace: 11428.49 BIC: 14172.79 AIC: 13484.06
 
 Show Laplace approximation (model evidence) for each model of the k
 models.
 
     plotDMNFit(tse_dmn, type = "laplace")
-
-    ## Warning: Removed 1 rows containing missing values (geom_point).
-
-    ## Warning: Removed 1 row(s) containing missing values (geom_path).
 
 ![](dmm_files/figure-markdown_strict/unnamed-chunk-4-1.png)
 
@@ -104,7 +102,7 @@ Return the model that has the best fit.
     ## class: DMN 
     ## k: 3 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11060.01 BIC: 12266.31 AIC: 11971.51
+    ## Laplace: 11059.59 BIC: 12266.31 AIC: 11971.51
 
 ### PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors
 
@@ -119,41 +117,42 @@ Patient status is used for grouping.
     ## class: DMNGroup 
     ## summary:
     ##         k samples taxa      NLE     LogDet  Laplace      BIC      AIC
-    ## ADHD    3      13  151 6330.860  -52.57341 5886.457 6914.386 6785.860
-    ## Control 3      14  151 6647.269 -148.36489 6154.970 7247.655 7102.269
+    ## ADHD    3      13  151 6330.860  -51.47729 5887.005 6914.386 6785.860
+    ## Control 3      14  151 6647.269 -147.52150 6155.391 7247.655 7102.269
 
 Mixture weights (rough measure of the cluster size).
 
     DirichletMultinomial::mixturewt(getBestDMNFit(tse_dmn))
 
     ##          pi    theta
-    ## 1 0.4814815 31.27752
-    ## 2 0.2962963 47.34420
-    ## 3 0.2222222 92.27447
+    ## 1 0.4814815 31.27755
+    ## 2 0.2962963 47.34355
+    ## 3 0.2222222 92.27414
 
-Samples-cluster assignment probabilities.
+Samples-cluster assignment probabilities / how probable it is that
+sample belongs to each cluster
 
     head(DirichletMultinomial::mixture(getBestDMNFit(tse_dmn)))
 
     ##               [,1]          [,2]          [,3]
-    ## A110  1.000000e+00 1.265615e-144 7.603914e-205
-    ## A12  9.737008e-117  6.165744e-93  1.000000e+00
-    ## A15   1.000000e+00 9.650972e-119 3.402198e-234
-    ## A19  5.311949e-112 1.835098e-107  1.000000e+00
-    ## A21   2.122941e-93  4.771671e-96  1.000000e+00
-    ## A23   1.000000e+00 8.910671e-111 1.945894e-161
+    ## A110  1.000000e+00 1.223209e-144 7.587066e-205
+    ## A12  9.914280e-117  6.053870e-93  1.000000e+00
+    ## A15   1.000000e+00 9.300327e-119 3.408194e-234
+    ## A19  5.422871e-112 1.791169e-107  1.000000e+00
+    ## A21   2.163367e-93  4.653314e-96  1.000000e+00
+    ## A23   1.000000e+00 8.648612e-111 1.942402e-161
 
-Contribution of samples to each component.
+Contribution of each taxa to each component
 
     head(DirichletMultinomial::fitted(getBestDMNFit(tse_dmn)))
 
     ##                 [,1]        [,2]       [,3]
-    ## 1726470  6.352191032 2.898811202 20.1895550
-    ## 1726471  5.287825073 0.002048244  0.1532214
-    ## 17264731 0.001248226 9.144320105  2.0112057
-    ## 17264726 0.140477826 1.363524818  7.5894247
-    ## 1726472  2.104206223 3.523313535  2.6657337
-    ## 17264724 0.072367307 0.002048244  9.8546050
+    ## 1726470  6.352083818 2.898698293 20.1892265
+    ## 1726471  5.287901457 0.002046088  0.1532233
+    ## 17264731 0.001249267 9.144257060  2.0111892
+    ## 17264726 0.140477912 1.363520574  7.5894996
+    ## 1726472  2.104222701 3.523457849  2.6657028
+    ## 17264724 0.072367202 0.002046088  9.8546806
 
 Get the assignment probabilities
 

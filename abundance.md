@@ -74,7 +74,7 @@ as well.
 
     ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 
-![](abundance_files/figure-markdown_strict/unnamed-chunk-12-1.png)
+![](abundance_files/figure-markdown_strict/unnamed-chunk-4-1.png)
 
 ### DESeq2
 
@@ -342,7 +342,7 @@ Wilcoxon test.
 
     print(p)
 
-![](abundance_files/figure-markdown_strict/unnamed-chunk-16-1.png)
+![](abundance_files/figure-markdown_strict/unnamed-chunk-8-1.png)
 
 Prints number of p-values under 0.05
 
@@ -491,4 +491,4 @@ same picture.
       nrow = 2
     )
 
-![](abundance_files/figure-markdown_strict/unnamed-chunk-20-1.png)
+![](abundance_files/figure-markdown_strict/unnamed-chunk-12-1.png)

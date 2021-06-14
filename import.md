@@ -257,7 +257,7 @@ Let us add sample meta data file
     # We use this to check what type of data is it
     # read.table(sample_meta_file_path)
 
-    # It seems like a comma separated file and includes headers
+    # It seems like a comma separated file and it does not include headers
     # Let us read it and then convert from data.frame to DataFrame
     # (required for our purposes)
     sample_meta <- DataFrame(read.table(sample_meta_file_path, sep = ",", header = FALSE))
@@ -269,7 +269,7 @@ Let us add sample meta data file
     # Delete column that included sample names
     sample_meta[,1] <- NULL
 
-    # We can add titles 
+    # We can add headers
     colnames(sample_meta) <- c("patient_status", "cohort", "patient_status_vs_cohort", "sample_name")
 
     # Then it can be added to colData

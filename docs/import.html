@@ -487,7 +487,7 @@ yet, so it includes empty data frame</p>
 <pre><code># We use this to check what type of data is it
 # read.table(sample_meta_file_path)
 
-# It seems like a comma separated file and includes headers
+# It seems like a comma separated file and it does not include headers
 # Let us read it and then convert from data.frame to DataFrame
 # (required for our purposes)
 sample_meta &lt;- DataFrame(read.table(sample_meta_file_path, sep = &quot;,&quot;, header = FALSE))
@@ -499,7 +499,7 @@ rownames(sample_meta) &lt;- sample_meta[,1]
 # Delete column that included sample names
 sample_meta[,1] &lt;- NULL
 
-# We can add titles 
+# We can add headers
 colnames(sample_meta) &lt;- c(&quot;patient_status&quot;, &quot;cohort&quot;, &quot;patient_status_vs_cohort&quot;, &quot;sample_name&quot;)
 
 # Then it can be added to colData
@@ -658,7 +658,7 @@ head(tse)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Import data","level":"1.4","depth":1,"next":{"title":"Explore data","level":"1.5","depth":1,"path":"explore.md","ref":"explore.md","articles":[]},"previous":{"title":"Install and load required R packages","level":"1.3","depth":1,"path":"install.md","ref":"install.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"import.md","mtime":"2021-06-09T07:08:44.807Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-14T07:39:10.901Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Import data","level":"1.4","depth":1,"next":{"title":"Explore data","level":"1.5","depth":1,"path":"explore.md","ref":"explore.md","articles":[]},"previous":{"title":"Install and load required R packages","level":"1.3","depth":1,"path":"install.md","ref":"install.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"import.md","mtime":"2021-06-14T09:01:11.245Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-14T09:02:25.462Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

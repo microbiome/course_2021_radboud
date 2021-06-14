@@ -125,7 +125,7 @@ indices.
 
 ## Visualization
 
-Next let’s compare indices between different genotypes and diets.
+Next let’s compare indices between different patient status and cohorts.
 Boxplot is suitable for that purpose.
 
     # Creates Shannon boxplot 

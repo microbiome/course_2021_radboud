@@ -3,7 +3,7 @@ title: "DMM analysis"
 output: md_document
 ---
 
-# Dirichlet-Multinomial Mixtures
+# Dirichlet-Multinomial Mixture Model
 
 This section focus on DMM analysis. 
 
@@ -37,7 +37,7 @@ names(metadata(tse_dmn))
 
 This returns a list of DMN objects for a closer investigation.
 
-```{r, echo=FALSE}
+```{r}
 getDMN(tse_dmn)
 ```
 
@@ -75,13 +75,14 @@ DirichletMultinomial::mixturewt(getBestDMNFit(tse_dmn))
 ```
 
 
-Samples-cluster assignment probabilities.
+Samples-cluster assignment probabilities / how probable it is that sample belongs
+to each cluster
 
 ```{r}
 head(DirichletMultinomial::mixture(getBestDMNFit(tse_dmn)))
 ```
 
-Contribution of samples to each component.
+Contribution of each taxa to each component
 
 ```{r}
 head(DirichletMultinomial::fitted(getBestDMNFit(tse_dmn)))

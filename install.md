@@ -26,7 +26,7 @@ skipped; only uninstalled packages are installed.
        BiocManager::install(bioc_pkg_to_be_installed, ask = F)
     }
 
-Now all required packages are be installed, so let’s load them into
+Now all required packages are installed, so let’s load them into
 session. Some function names occur in multiple packages. That is why
 miaverse’s packages mia and miaViz are prioritized. Packages that are
 loaded before have higher priority.
