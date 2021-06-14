@@ -2,6 +2,8 @@
 
 ## Welcome to Raboud Summer School 2021 - Microbiome Analysis (mia)
 
+![](https://user-images.githubusercontent.com/60338854/121848694-1072a480-ccf3-11eb-9af2-7fdefd8d1794.png)
+
 This site contains material for [Radboud Summer Course 7/2021](https://www.ru.nl/radboudsummerschool/courses/2021/brain-bacteria-behaviour/).
 
 ## Example workflow
