@@ -42,7 +42,7 @@ Material in html format can be found from [here](https://microbiome.github.io/co
 
 Repository that includes, e.g., Rmd files can be found from [here](https://github.com/microbiome/course_2021_radboud).
 
-All files can be rendered at one go by running [main.R](main.R)
+All files can be rendered at one go by running the file main.R
 
 ## Further resources
 
@@ -50,9 +50,6 @@ All files can be rendered at one go by running [main.R](main.R)
    [Orchestrating Microbiome Analysis](https://microbiome.github.io/OMA).
 
  * [**mia** project](https://microbiome.github.io)
-
- * [notebooks.md](notebooks.md) for information on Rmarkdown.
-
 
 ## References 
 
