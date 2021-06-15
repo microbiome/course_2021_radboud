@@ -252,19 +252,19 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="data-exploration">Data exploration</h1>
-<p>Now we have loaded the data set in R, and investigated that it has all
+<p>Now we have loaded the data set into R, and investigated that it has all
 the necessary components.</p>
 <p>Here, basic operations to briefly explore the data are introduced.</p>
 <h2 id="investigate-the-contents-of-a-microbiome-data-object">Investigate the contents of a microbiome data object</h2>
 <p>Dimensionality tells us, how many taxa and samples the data contains. As
-we can see, there are <code>r</code>dim(tse)[1]<code>taxa and</code>r <code>dim(tse)[2]</code> samples.</p>
+we can see, there are 151 taxa and 27 samples.</p>
 <pre><code>dim(tse)
 
 ## [1] 151  27
-</code></pre><p>The rowData slot contains a taxonomic table. It includes taxonomic
+</code></pre><p>The <code>rowData</code> slot contains a taxonomic table. It includes taxonomic
 information for each 151 entries. With the <code>head()</code> command, it is
-possible to print only the beginning of the table. The rowData seems to
-contain information from 6 different taxonomy classes.</p>
+possible to print only the beginning of the table. The <code>rowData</code> seems
+to contain information from 6 different taxonomy classes.</p>
 <pre><code>knitr::kable(head(rowData(tse)))
 </code></pre><table>
 <colgroup>
@@ -347,10 +347,19 @@ contain information from 6 different taxonomy classes.</p>
 
 <p>The colData slot contains sample metadata. It contains information for
 all 27 samples. However, here only the 6 first samples are shown as we
-use the <code>head()</code> command. There are 4 columns, that contain information,
+use the <code>head()</code> command. There are 6 columns, that contain information,
 e.g., about patients&#x2019; status, and cohort.</p>
 <pre><code>knitr::kable(head(colData(tse)))
 </code></pre><table>
+<colgroup>
+<col style="width: 4%">
+<col style="width: 14%">
+<col style="width: 8%">
+<col style="width: 24%">
+<col style="width: 11%">
+<col style="width: 13%">
+<col style="width: 21%">
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
@@ -358,6 +367,8 @@ e.g., about patients&#x2019; status, and cohort.</p>
 <th style="text-align: left;">cohort</th>
 <th style="text-align: left;">patient_status_vs_cohort</th>
 <th style="text-align: left;">sample_name</th>
+<th style="text-align: right;">Shannon_index</th>
+<th style="text-align: right;">Faith_diversity_index</th>
 </tr>
 </thead>
 <tbody>
@@ -367,6 +378,8 @@ e.g., about patients&#x2019; status, and cohort.</p>
 <td style="text-align: left;">Cohort_1</td>
 <td style="text-align: left;">ADHD_Cohort_1</td>
 <td style="text-align: left;">A110</td>
+<td style="text-align: right;">1.765407</td>
+<td style="text-align: right;">7.39224</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">A12</td>
@@ -374,6 +387,8 @@ e.g., about patients&#x2019; status, and cohort.</p>
 <td style="text-align: left;">Cohort_1</td>
 <td style="text-align: left;">ADHD_Cohort_1</td>
 <td style="text-align: left;">A12</td>
+<td style="text-align: right;">2.716438</td>
+<td style="text-align: right;">6.29378</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">A15</td>
@@ -381,6 +396,8 @@ e.g., about patients&#x2019; status, and cohort.</p>
 <td style="text-align: left;">Cohort_1</td>
 <td style="text-align: left;">ADHD_Cohort_1</td>
 <td style="text-align: left;">A15</td>
+<td style="text-align: right;">3.178103</td>
+<td style="text-align: right;">6.60608</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">A19</td>
@@ -388,6 +405,8 @@ e.g., about patients&#x2019; status, and cohort.</p>
 <td style="text-align: left;">Cohort_1</td>
 <td style="text-align: left;">ADHD_Cohort_1</td>
 <td style="text-align: left;">A19</td>
+<td style="text-align: right;">2.891987</td>
+<td style="text-align: right;">6.79708</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">A21</td>
@@ -395,6 +414,8 @@ e.g., about patients&#x2019; status, and cohort.</p>
 <td style="text-align: left;">Cohort_2</td>
 <td style="text-align: left;">ADHD_Cohort_2</td>
 <td style="text-align: left;">A21</td>
+<td style="text-align: right;">2.841979</td>
+<td style="text-align: right;">6.65110</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">A23</td>
@@ -402,6 +423,8 @@ e.g., about patients&#x2019; status, and cohort.</p>
 <td style="text-align: left;">Cohort_2</td>
 <td style="text-align: left;">ADHD_Cohort_2</td>
 <td style="text-align: left;">A23</td>
+<td style="text-align: right;">2.797942</td>
+<td style="text-align: right;">5.96246</td>
 </tr>
 </tbody>
 </table>
@@ -439,7 +462,7 @@ dim(tse_phylum)
 
 ## [1]  5 27
 </code></pre><p>Now there are 5 taxa and 27 samples. It means that there are 5 different
-Phylum level taxa. From rowData we might see little bit easier, how
+Phylum level taxa. From <code>rowData</code> we might see little bit easier, how
 ranks are agglomerated. For example, all Firmicutes are combined
 together. That is why all lower rank information is lost. From assay we
 could see, that all abundances of taxa that belongs to Firmicutes are
@@ -692,7 +715,7 @@ vignette</a>.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Explore data","level":"1.5","depth":1,"next":{"title":"Calculate alpha diversity","level":"1.6","depth":1,"path":"alpha.md","ref":"alpha.md","articles":[]},"previous":{"title":"Import data","level":"1.4","depth":1,"path":"import.md","ref":"import.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"explore.md","mtime":"2021-06-14T09:01:18.689Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-14T09:02:25.462Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Explore data","level":"1.5","depth":1,"next":{"title":"Calculate alpha diversity","level":"1.6","depth":1,"path":"alpha.md","ref":"alpha.md","articles":[]},"previous":{"title":"Import data","level":"1.4","depth":1,"path":"import.md","ref":"import.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"explore.md","mtime":"2021-06-15T09:29:00.143Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-15T09:29:07.098Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

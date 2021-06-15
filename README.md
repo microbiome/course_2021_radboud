@@ -42,11 +42,11 @@ inoculated with ADHD microbiota, suggesting a role of the microbiome in ADHD pat
 You can run the workflow by cloning the repository or you can apply it to your own data, 
 e.g., by copy-pasting and tuning the code to fit to your data. 
 
-Material in html format can be found from [here](https://microbiome.github.io/course_2021_radboud/).
+Material in a html format can be found from [here](https://microbiome.github.io/course_2021_radboud/).
 
-Repository that includes, e.g., Rmd files can be found from [here](https://github.com/microbiome/course_2021_radboud).
-
-All files can be rendered at one go by running the file main.R
+Repository can be found from [here](https://github.com/microbiome/course_2021_radboud).
+- Rmd files includes runnable code 
+- All files can be rendered at one go by running the file main.R
 
 ## Further resources
 

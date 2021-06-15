@@ -258,8 +258,8 @@ data structure that is utilized in the miaverse.</p>
 <h2 id="data">Data</h2>
 <p>Data is located in a &#x201C;data&#x201D; subfolder. Data consists of 3 files:</p>
 <ul>
-<li>biom file that contains abundance table and taxonomy information</li>
-<li>csv file that contains sample metadata</li>
+<li>biom file that contains an abundance table and taxonomy information</li>
+<li>csv file that contains a sample metadata</li>
 <li>tre file that contains a phylogenetic tree.</li>
 </ul>
 <p>Define source file paths.</p>
@@ -280,8 +280,8 @@ tree_file_path &lt;- &quot;data/Data_humanization_phylo_aggregation.tre&quot;
 ## rowData names(6): taxonomy1 taxonomy2 ... taxonomy5 taxonomy6
 ## colnames(27): A110 A111 ... A38 A39
 ## colData names(0):
-</code></pre><p>Counts include the abundance table from biom file. Let us just use first
-cols and rows.</p>
+</code></pre><p><code>assays</code> slot includes a list of abundance tables. Imported abundance
+table is named as &#x201C;counts&#x201D;. Let us just use first cols and rows.</p>
 <pre><code>assays(se)$counts[1:3, 1:3]
 
 ##           A110  A111  A12
@@ -289,8 +289,9 @@ cols and rows.</p>
 ## 1726471  12052     0 2679
 ## 17264731     0   970    0
 </code></pre><h3 id="rowdata-taxonomic-information">rowData (taxonomic information)</h3>
-<p>The rowdata includes taxonomic information from biom file. The head()
-command shows just the beginning of the data table for an overview.</p>
+<p>The <code>rowdata</code> includes taxonomic information from the biom file. The
+head() command shows just the beginning of the data table for an
+overview.</p>
 <p><code>knitr::kable()</code> is for printing the information more nicely.</p>
 <pre><code>knitr::kable(head(rowData(se)))
 </code></pre><table style="width:100%;">
@@ -478,12 +479,12 @@ knitr::kable(head(rowData(se)))
 </table>
 
 <h3 id="coldata-sample-information">colData (sample information)</h3>
-<p>We notice that the imported biom file did not contain sample meta data
-yet, so it includes empty data frame</p>
+<p>We notice that the imported biom file did not contain a sample meta data
+yet, so it includes an empty data frame.</p>
 <pre><code>head(colData(se))
 
 ## DataFrame with 6 rows and 0 columns
-</code></pre><p>Let us add sample meta data file</p>
+</code></pre><p>Let us add a sample meta data file.</p>
 <pre><code># We use this to check what type of data is it
 # read.table(sample_meta_file_path)
 
@@ -504,7 +505,8 @@ colnames(sample_meta) &lt;- c(&quot;patient_status&quot;, &quot;cohort&quot;, &q
 
 # Then it can be added to colData
 colData(se) &lt;- sample_meta
-</code></pre><p>Now colData includes sample metadata. Use kable to print it more nicely.</p>
+</code></pre><p>Now <code>colData</code> includes a sample metadata. Use kable to print it more
+nicely.</p>
 <pre><code>knitr::kable(head(colData(se)))
 </code></pre><table>
 <thead>
@@ -567,7 +569,7 @@ colData(se) &lt;- sample_meta
 <p>The current data object, se, is a SummarizedExperiment object. This does
 not include a slot for adding a phylogenetic tree. In order to do this,
 we can convert SE object to an extended TreeSummarizedExperiment object
-which also includes a rowTree slot.</p>
+which also includes a <code>rowTree</code> slot.</p>
 <pre><code>tse &lt;- as(se, &quot;TreeSummarizedExperiment&quot;)
 
 # tse includes same data as se
@@ -613,7 +615,7 @@ head(tse)
 ## rowTree: 1 phylo tree(s) (151 leaves)
 ## colLinks: NULL
 ## colTree: NULL
-</code></pre><p>Now rowTree includes phylogenetic tree:</p>
+</code></pre><p>Now <code>rowTree</code> includes a phylogenetic tree:</p>
 <pre><code>head(rowTree(tse))
 </code></pre>
                                 
@@ -658,7 +660,7 @@ head(tse)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Import data","level":"1.4","depth":1,"next":{"title":"Explore data","level":"1.5","depth":1,"path":"explore.md","ref":"explore.md","articles":[]},"previous":{"title":"Install and load required R packages","level":"1.3","depth":1,"path":"install.md","ref":"install.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"import.md","mtime":"2021-06-14T09:01:11.245Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-14T09:02:25.462Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Import data","level":"1.4","depth":1,"next":{"title":"Explore data","level":"1.5","depth":1,"path":"explore.md","ref":"explore.md","articles":[]},"previous":{"title":"Install and load required R packages","level":"1.3","depth":1,"path":"install.md","ref":"install.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"import.md","mtime":"2021-06-15T09:24:53.495Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-15T09:29:07.098Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

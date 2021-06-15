@@ -254,9 +254,9 @@
 test</strong>, <strong>DESeq2</strong>, and <strong>ANCOM-BC</strong>. All of these test statistical
 differences between groups. We analyse Genus level abundances.</p>
 <h3 id="wilcoxon-test">Wilcoxon test</h3>
-<p>Wilcoxon test estimates difference between two groups. It is a
-non-parametric alternative to t-test, which means that Wilcoxon test
-does not require normally distributed data.</p>
+<p>A Wilcoxon test estimates difference between two groups. It is a
+non-parametric alternative to a t-test, which means that the Wilcoxon
+test does not require normally distributed data.</p>
 <p>Let&#x2019;s first collect the data for the testing purpose.</p>
 <pre><code># Agglomerates data to Genus level
 tse_genus &lt;- agglomerateByRank(tse, rank = &quot;Genus&quot;)
@@ -274,8 +274,8 @@ abundance_analysis_data &lt;- cbind(abundance_analysis_data, patient_status = co
 </code></pre><p>Now we can do the Wilcoxon test. We test all the taxa by looping through
 columns, and store individual p-values to a vector. Then we create a
 data frame from collected data.</p>
-<p>Does Wilcoxon test only for columns that contain abundances, not for
-column that contain patient status.</p>
+<p>Code below does the Wilcoxon test only for columns that contain
+abundances, not for column that contain patient status.</p>
 <pre><code>colnames &lt;- names(abundance_analysis_data[, !names(abundance_analysis_data) %in% &quot;patient_status&quot;])
 
 wilcoxon_p &lt;- c() # Initialize empty vector for p-values
@@ -296,8 +296,8 @@ wilcoxon_p &lt;- data.frame(taxa =  names(wilcoxon_p),
 </code></pre><p>Multiple tests were performed. These are not independent, so we need to
 adjust p-values for multiple testing. Otherwise, we would increase the
 chance of a type I error drastically depending on our p-value threshold.
-By applying p-value adjustment, we can keep the false positive rate at a
-level that is acceptable. What is acceptable depends on our research
+By applying a p-value adjustment, we can keep the false positive rate at
+a level that is acceptable. What is acceptable depends on our research
 goals. Here we use the fdr method, but there are several other methods
 as well.</p>
 <pre><code>wilcoxon_p$p_adjusted &lt;- p.adjust(wilcoxon_p$p_raw, method = &quot;fdr&quot;)
@@ -743,7 +743,7 @@ gridExtra::grid.arrange(
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Differential abundance analysis","level":"1.9","depth":1,"previous":{"title":"DMM analysis","level":"1.8","depth":1,"path":"dmm.md","ref":"dmm.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"abundance.md","mtime":"2021-06-14T09:02:12.705Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-14T09:02:25.462Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Differential abundance analysis","level":"1.9","depth":1,"previous":{"title":"DMM analysis","level":"1.8","depth":1,"path":"dmm.md","ref":"dmm.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"abundance.md","mtime":"2021-06-15T09:27:05.235Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-15T09:29:07.098Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

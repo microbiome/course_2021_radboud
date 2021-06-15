@@ -6,9 +6,9 @@ differences between groups. We analyse Genus level abundances.
 
 ### Wilcoxon test
 
-Wilcoxon test estimates difference between two groups. It is a
-non-parametric alternative to t-test, which means that Wilcoxon test
-does not require normally distributed data.
+A Wilcoxon test estimates difference between two groups. It is a
+non-parametric alternative to a t-test, which means that the Wilcoxon
+test does not require normally distributed data.
 
 Let’s first collect the data for the testing purpose.
 
@@ -30,8 +30,8 @@ Now we can do the Wilcoxon test. We test all the taxa by looping through
 columns, and store individual p-values to a vector. Then we create a
 data frame from collected data.
 
-Does Wilcoxon test only for columns that contain abundances, not for
-column that contain patient status.
+Code below does the Wilcoxon test only for columns that contain
+abundances, not for column that contain patient status.
 
     colnames <- names(abundance_analysis_data[, !names(abundance_analysis_data) %in% "patient_status"])
 
@@ -54,8 +54,8 @@ column that contain patient status.
 Multiple tests were performed. These are not independent, so we need to
 adjust p-values for multiple testing. Otherwise, we would increase the
 chance of a type I error drastically depending on our p-value threshold.
-By applying p-value adjustment, we can keep the false positive rate at a
-level that is acceptable. What is acceptable depends on our research
+By applying a p-value adjustment, we can keep the false positive rate at
+a level that is acceptable. What is acceptable depends on our research
 goals. Here we use the fdr method, but there are several other methods
 as well.
 

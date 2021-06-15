@@ -8,8 +8,8 @@ data structure that is utilized in the miaverse.
 
 Data is located in a “data” subfolder. Data consists of 3 files:
 
--   biom file that contains abundance table and taxonomy information
--   csv file that contains sample metadata
+-   biom file that contains an abundance table and taxonomy information
+-   csv file that contains a sample metadata
 -   tre file that contains a phylogenetic tree.
 
 Define source file paths.
@@ -37,8 +37,8 @@ We have now imported the data set in R. Let us investigate its contents.
     ## colnames(27): A110 A111 ... A38 A39
     ## colData names(0):
 
-Counts include the abundance table from biom file. Let us just use first
-cols and rows.
+`assays` slot includes a list of abundance tables. Imported abundance
+table is named as “counts”. Let us just use first cols and rows.
 
     assays(se)$counts[1:3, 1:3]
 
@@ -49,8 +49,9 @@ cols and rows.
 
 ### rowData (taxonomic information)
 
-The rowdata includes taxonomic information from biom file. The head()
-command shows just the beginning of the data table for an overview.
+The `rowdata` includes taxonomic information from the biom file. The
+head() command shows just the beginning of the data table for an
+overview.
 
 `knitr::kable()` is for printing the information more nicely.
 
@@ -245,14 +246,14 @@ so let’s make them cleaner by removing them.
 
 ### colData (sample information)
 
-We notice that the imported biom file did not contain sample meta data
-yet, so it includes empty data frame
+We notice that the imported biom file did not contain a sample meta data
+yet, so it includes an empty data frame.
 
     head(colData(se))
 
     ## DataFrame with 6 rows and 0 columns
 
-Let us add sample meta data file
+Let us add a sample meta data file.
 
     # We use this to check what type of data is it
     # read.table(sample_meta_file_path)
@@ -275,7 +276,8 @@ Let us add sample meta data file
     # Then it can be added to colData
     colData(se) <- sample_meta
 
-Now colData includes sample metadata. Use kable to print it more nicely.
+Now `colData` includes a sample metadata. Use kable to print it more
+nicely.
 
     knitr::kable(head(colData(se)))
 
@@ -342,7 +344,7 @@ Now, let’s add a phylogenetic tree.
 The current data object, se, is a SummarizedExperiment object. This does
 not include a slot for adding a phylogenetic tree. In order to do this,
 we can convert SE object to an extended TreeSummarizedExperiment object
-which also includes a rowTree slot.
+which also includes a `rowTree` slot.
 
     tse <- as(se, "TreeSummarizedExperiment")
 
@@ -392,6 +394,6 @@ Next, let us read the tree data file and add it to the R data object
     ## colLinks: NULL
     ## colTree: NULL
 
-Now rowTree includes phylogenetic tree:
+Now `rowTree` includes a phylogenetic tree:
 
     head(rowTree(tse))

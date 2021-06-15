@@ -8,20 +8,20 @@ you should have it installed before the course.
 Help for installing R you can find from [here](https://www.r-project.org/).
 
 #### RStudio
-RStudio is optional but preferred. It's a integrated development environment (IDE)
-for R. Also installation of RStudio takes some time, so again you take this into account. 
+RStudio is optional but preferred. It is an integrated development environment (IDE)
+for R. Also installation of RStudio takes some time, so again, take this into account. 
 
 Help for installing RStudio you can find from [here](https://www.rstudio.com/).
 
 #### Required R packages
 After installing R (and RStudio) you should install required R packages by running 
-the code from [Install and load required packages](install.html).
+the code from [Install and load required packages / install.Rmd](install.html).
 
 ## Start workflow
 After installing R (and RStudio) and required packages you should be able to start 
 the workflow. 
 
-Start it by running the code from [Install and load required packages](install.html). 
+Start it by running the code from [Install and load required packages / install.Rmd](install.html). 
 If you have required packages already installed, it only loads them into the session.
 
 ## Additional resources

@@ -26,10 +26,10 @@ skipped; only uninstalled packages are installed.
        BiocManager::install(bioc_pkg_to_be_installed, ask = F)
     }
 
-Now all required packages are installed, so let’s load them into
+Now all required packages are installed, so let’s load them into the
 session. Some function names occur in multiple packages. That is why
 miaverse’s packages mia and miaViz are prioritized. Packages that are
-loaded before have higher priority.
+loaded first have higher priority.
 
     # Reorders bioc packages, so that mia and miaViz are first
     bioc_pkg <- c(bioc_pkg[ bioc_pkg %in% c("mia", "miaViz") ], bioc_pkg[ !bioc_pkg %in% c("mia", "miaViz") ] ) 

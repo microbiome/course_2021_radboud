@@ -2,14 +2,14 @@
 
 This section demonstrates how alpha diversity indices are calculated.
 
-Alpha diversity is a quantity that measures diversity of taxa in one
-sample. Higher numbers of unique taxa, and more even abundance
+Alpha diversity is a quantity that measures diversity of taxa in within
+the sample. Higher numbers of unique taxa, and more even abundance
 distributions within a sample yield larger values for alpha diversity.
 
-Alpha diversity is an important quantity in microbiome research. The mia
-package provides access to a wide variety of alpha diversity indices. As
-an example, we show how to calculate Shannon and Faith diversity
-indices.
+Alpha diversity is an important quantity in a microbiome research. The
+mia package provides access to a wide variety of alpha diversity
+indices. As an example, we show how to calculate Shannon and Faith
+diversity indices.
 
 Shannon index reflects how many different taxa there are and how evenly
 they are distributed within a sample. Faith index additionally takes
@@ -149,18 +149,18 @@ Boxplot is suitable for that purpose.
 ## Statistical testing and comparisons
 
 To further investigate if patient status explains the variation of
-Shannon index, let’s do Wilcoxon test.
+Shannon index, let’s do a Wilcoxon test.
 
-Wilcoxon test is similar to Student’s t-test, however, Student’s t-test
-is parametric. It means that the data must be normally distributed.
-Wilcoxon test is non-parametric so it doesn’t make any assumptions about
-the distribution.
+The Wilcoxon test is similar to a Student’s t-test, however, the
+Student’s t-test is parametric. It means that the data must be normally
+distributed. The Wilcoxon test is non-parametric so it doesn’t make any
+assumptions about the distribution.
 
-Wilcoxon test tests if there are statistical differences between two
+The Wilcoxon test tests if there are statistical differences between two
 groups. Here it tests, if ADHD and control groups have different Shannon
 index values. As we can see, there is no difference between groups,
-because p-value is over 0.05, which is often used as a standard cutoff
-point.
+because the p-value is over 0.05, which is often used as a standard
+cutoff point.
 
     # Wilcoxon test, where Shannon index is the variable that we are comparing. 
     # Patient status - ADHD or control - is the factor that we use for grouping. 
