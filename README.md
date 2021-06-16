@@ -9,7 +9,7 @@ This site contains material for [Radboud Summer School 7/2021](https://www.ru.nl
 
 ## miaverse
 
-miaverse (mia = **MI**crobiome **A**nalysis) is a R ecosystem for microbiome analysis. It utilizes standard data 
+miaverse (mia = **MI**crobiome **A**nalysis) is an R ecosystem for microbiome analysis. It utilizes standard data 
 structure called **TreeSummarizedExperiment**. It extends **SingleCellExperiment** class by
 providing slots for phylogenetic tree and sample tree. 
 
