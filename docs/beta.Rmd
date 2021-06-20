@@ -64,7 +64,7 @@ bray_curtis_plot <- ggplot(data = bray_curtis_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
   geom_point() +
   labs(x = "Coordinate 1",
        y = "Coordinate 2", 
-       title = "Bray-Curtis PCoA with relative abundances") 
+       title = "Bray-Curtis PCoA with relative abundances") +
   theme(title = element_text(size = 10)) # makes titles smaller
 
 bray_curtis_plot
