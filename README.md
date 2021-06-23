@@ -39,8 +39,8 @@ ADHD (attention deficit hyperactivity disorder) and healthy participants.
 The aim of the study was to assess whether the mice display ADHD behaviors after being 
 inoculated with ADHD microbiota, suggesting a role of the microbiome in ADHD pathology.
 
-You can run the workflow by cloning the repository or you can apply it to your own data, 
-e.g., by copy-pasting and tuning the code to fit to your data. 
+**You can run the workflow by cloning the repository or you can apply it to your own data, 
+e.g., by copy-pasting and tuning the code to fit to your data.**
 
 Material in an html format can be found from [here](https://microbiome.github.io/course_2021_radboud/).
 

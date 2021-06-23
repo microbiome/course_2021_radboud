@@ -1,6 +1,9 @@
 # Getting Started
 
 ## Checklist before the course
+
+Before the course, you should install:
+
 #### R
 miaverse requires at least version 4.1 of R. Because it takes some time to install it,
 you should have it installed before the course.

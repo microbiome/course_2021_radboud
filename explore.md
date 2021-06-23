@@ -102,21 +102,12 @@ to contain information from 6 different taxonomy classes.
 
 The colData slot contains sample metadata. It contains information for
 all 27 samples. However, here only the 6 first samples are shown as we
-use the `head()` command. There are 6 columns, that contain information,
+use the `head()` command. There are 4 columns, that contain information,
 e.g., about patients’ status, and cohort.
 
     knitr::kable(head(colData(tse)))
 
 <table>
-<colgroup>
-<col style="width: 4%" />
-<col style="width: 14%" />
-<col style="width: 8%" />
-<col style="width: 24%" />
-<col style="width: 11%" />
-<col style="width: 13%" />
-<col style="width: 21%" />
-</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
@@ -124,8 +115,6 @@ e.g., about patients’ status, and cohort.
 <th style="text-align: left;">cohort</th>
 <th style="text-align: left;">patient_status_vs_cohort</th>
 <th style="text-align: left;">sample_name</th>
-<th style="text-align: right;">Shannon_index</th>
-<th style="text-align: right;">Faith_diversity_index</th>
 </tr>
 </thead>
 <tbody>
@@ -135,8 +124,6 @@ e.g., about patients’ status, and cohort.
 <td style="text-align: left;">Cohort_1</td>
 <td style="text-align: left;">ADHD_Cohort_1</td>
 <td style="text-align: left;">A110</td>
-<td style="text-align: right;">1.765407</td>
-<td style="text-align: right;">7.39224</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">A12</td>
@@ -144,8 +131,6 @@ e.g., about patients’ status, and cohort.
 <td style="text-align: left;">Cohort_1</td>
 <td style="text-align: left;">ADHD_Cohort_1</td>
 <td style="text-align: left;">A12</td>
-<td style="text-align: right;">2.716438</td>
-<td style="text-align: right;">6.29378</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">A15</td>
@@ -153,8 +138,6 @@ e.g., about patients’ status, and cohort.
 <td style="text-align: left;">Cohort_1</td>
 <td style="text-align: left;">ADHD_Cohort_1</td>
 <td style="text-align: left;">A15</td>
-<td style="text-align: right;">3.178103</td>
-<td style="text-align: right;">6.60608</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">A19</td>
@@ -162,8 +145,6 @@ e.g., about patients’ status, and cohort.
 <td style="text-align: left;">Cohort_1</td>
 <td style="text-align: left;">ADHD_Cohort_1</td>
 <td style="text-align: left;">A19</td>
-<td style="text-align: right;">2.891987</td>
-<td style="text-align: right;">6.79708</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">A21</td>
@@ -171,8 +152,6 @@ e.g., about patients’ status, and cohort.
 <td style="text-align: left;">Cohort_2</td>
 <td style="text-align: left;">ADHD_Cohort_2</td>
 <td style="text-align: left;">A21</td>
-<td style="text-align: right;">2.841979</td>
-<td style="text-align: right;">6.65110</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">A23</td>
@@ -180,8 +159,6 @@ e.g., about patients’ status, and cohort.
 <td style="text-align: left;">Cohort_2</td>
 <td style="text-align: left;">ADHD_Cohort_2</td>
 <td style="text-align: left;">A23</td>
-<td style="text-align: right;">2.797942</td>
-<td style="text-align: right;">5.96246</td>
 </tr>
 </tbody>
 </table>

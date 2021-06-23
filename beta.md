@@ -58,26 +58,8 @@ object defined in the earlier notebooks.
       geom_point() +
       labs(x = "Coordinate 1",
            y = "Coordinate 2", 
-           title = "Bray-Curtis PCoA with relative abundances") 
+           title = "Bray-Curtis PCoA with relative abundances") +
       theme(title = element_text(size = 10)) # makes titles smaller
-
-    ## List of 1
-    ##  $ title:List of 11
-    ##   ..$ family       : NULL
-    ##   ..$ face         : NULL
-    ##   ..$ colour       : NULL
-    ##   ..$ size         : num 10
-    ##   ..$ hjust        : NULL
-    ##   ..$ vjust        : NULL
-    ##   ..$ angle        : NULL
-    ##   ..$ lineheight   : NULL
-    ##   ..$ margin       : NULL
-    ##   ..$ debug        : NULL
-    ##   ..$ inherit.blank: logi FALSE
-    ##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
-    ##  - attr(*, "class")= chr [1:2] "theme" "gg"
-    ##  - attr(*, "complete")= logi FALSE
-    ##  - attr(*, "validate")= logi TRUE
 
     bray_curtis_plot
 
@@ -230,7 +212,7 @@ multivariate analysis of variance (PERMANOVA) test.
     print(paste0("Different different cohorts and variance of abundance between samples, p-value: ", 
                  as.data.frame(permanova_cohort$aov.tab)["cohort", "Pr(>F)"]))
 
-    ## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7455"
+    ## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7387"
 
 As we see, the cohort variable is not significantly associated with
 microbiota composition (p-value is over 0.05).

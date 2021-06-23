@@ -10,7 +10,8 @@
 # https://github.com/GitbookIO/gitbook
 
 # Terminal command 'gitbook build ./ docs' creates html files from md files
-# that are located in root folder. It stores html files to 'docs' folder.
+# that are located in root folder. It stores html files to 'docs' folder. 
+# SUMMARY.md includes a list of files that will be rendered.
 
 # Sets the theme
 library(ggplot2)
