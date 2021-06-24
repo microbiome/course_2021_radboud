@@ -159,7 +159,7 @@ tree <- ape::read.tree(tree_file_path)
 rowTree(tse) <- tree
 
 # Check
-head(tse)
+tse
 ```
 
 Now `rowTree` includes a phylogenetic tree:

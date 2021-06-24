@@ -376,20 +376,20 @@ Next, let us read the tree data file and add it to the R data object
     rowTree(tse) <- tree
 
     # Check
-    head(tse)
+    tse
 
     ## class: TreeSummarizedExperiment 
-    ## dim: 6 27 
+    ## dim: 151 27 
     ## metadata(0):
     ## assays(1): counts
-    ## rownames(6): 1726470 1726471 ... 1726472 17264724
+    ## rownames(151): 1726470 1726471 ... 17264756 17264757
     ## rowData names(6): Kingdom Phylum ... Family Genus
     ## colnames(27): A110 A12 ... A35 A38
     ## colData names(4): patient_status cohort patient_status_vs_cohort sample_name
     ## reducedDimNames(0):
     ## mainExpName: NULL
     ## altExpNames(0):
-    ## rowLinks: a LinkDataFrame (6 rows)
+    ## rowLinks: a LinkDataFrame (151 rows)
     ## rowTree: 1 phylo tree(s) (151 leaves)
     ## colLinks: NULL
     ## colTree: NULL
