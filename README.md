@@ -1,8 +1,10 @@
 # Course
 
-## Welcome to Raboud Summer School 2021 - Microbiome Analysis (mia)
+## Welcome to miaverse basics training material
 
-![](https://user-images.githubusercontent.com/60338854/121848694-1072a480-ccf3-11eb-9af2-7fdefd8d1794.png)
+**Raboud Summer School 2021**
+
+<img src="https://user-images.githubusercontent.com/60338854/121848694-1072a480-ccf3-11eb-9af2-7fdefd8d1794.png" alt="ML4microbiome" width="50%"/>
 
 
 This site contains the sources for [miaverse teaching material](https://microbiome.github.io/course_2021_radboud/) for [Radboud Summer School 7/2021](https://www.ru.nl/radboudsummerschool/courses/2021/brain-bacteria-behaviour/).
