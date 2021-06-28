@@ -3,8 +3,11 @@
 # This creates the md files
 # knitr::knit("install.Rmd")
 
-# This creates the md files at
+# This creates the md files at:
 # https://microbiome.github.io/course_2021_radboud/
+
+# The source files can be cloned from
+# https://github.io/microbiome.github.io/course_2021_radboud/
 
 # md files can be converted to html files and to GitBook with GitBook documentation tool
 # https://github.com/GitbookIO/gitbook
