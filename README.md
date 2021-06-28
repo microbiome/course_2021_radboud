@@ -4,7 +4,8 @@
 
 ![](https://user-images.githubusercontent.com/60338854/121848694-1072a480-ccf3-11eb-9af2-7fdefd8d1794.png)
 
-This site contains material for [Radboud Summer School 7/2021](https://www.ru.nl/radboudsummerschool/courses/2021/brain-bacteria-behaviour/).
+
+This site contains the sources for [miaverse teaching material](https://microbiome.github.io/course_2021_radboud/) for [Radboud Summer School 7/2021](https://www.ru.nl/radboudsummerschool/courses/2021/brain-bacteria-behaviour/).
 
 
 ## miaverse
@@ -45,7 +46,7 @@ e.g., by copy-pasting and tuning the code to fit to your data.**
 Material in an html format can be found from [here](https://microbiome.github.io/course_2021_radboud/).
 
 Repository can be found from [here](https://github.com/microbiome/course_2021_radboud).
-- Rmd files includes runnable code 
+- Rmd files includes executable code 
 - All files can be rendered at one go by running the file main.R
 
 ## Further resources
@@ -82,6 +83,6 @@ Frontiers in Microbiology 12:11.
 
 ## License
 
-All material is released under the open [MIT license](LICENSE).
+All material is released under the open [CC BY-NC-SA 3.0 License](LICENSE).
 
 

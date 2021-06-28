@@ -1,4 +1,5 @@
-# Differential abundance analysis
+Differential abundance analysis
+===============================
 
 Here, we analyse abundances with three different methods: **Wilcoxon
 test**, **DESeq2**, and **ANCOM-BC**. All of these test statistical
@@ -97,9 +98,11 @@ Now let us show how to do this. First, run the DESeq2 analysis.
 
     ## converting counts to integer mode
 
-    ## Warning in DESeqDataSet(tse_genus, ~patient_status): 2 duplicate rownames were renamed by adding numbers
+    ## Warning in DESeqDataSet(tse_genus, ~patient_status): 2 duplicate rownames were
+    ## renamed by adding numbers
 
-    ## Warning in DESeqDataSet(tse_genus, ~patient_status): some variables in design formula are characters, converting to factors
+    ## Warning in DESeqDataSet(tse_genus, ~patient_status): some variables in design
+    ## formula are characters, converting to factors
 
     # Does the analysis
     dds <- DESeq(ds2)
