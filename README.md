@@ -1,6 +1,6 @@
 # Course material: miaverse basics 
 
-## Welcome to [**Raboud Summer School, July 2021**](https://www.ru.nl/radboudsummerschool/courses/2021/brain-bacteria-behaviour/).
+**Welcome to [Radboud Summer School, July 2021](https://www.ru.nl/radboudsummerschool/courses/2021/brain-bacteria-behaviour/)**
 
 
 <img src="https://user-images.githubusercontent.com/60338854/121848694-1072a480-ccf3-11eb-9af2-7fdefd8d1794.png" alt="ML4microbiome" width="50%"/>
@@ -13,15 +13,16 @@ Figure source: Moreno-Indias _et al_. (2021) [Statistical and Machine Learning T
 
 ## miaverse
 
-The _miaverse_ (mia = **MI**crobiome **A**nalysis) is an
+The [_miaverse_](https://microbiome.github.io) (mia = **MI**crobiome **A**nalysis) is an
 R/Bioconductor framework for microbiome data science. It aims to
 extend the capabilities of another popular framework,
 [phyloseq](https://joey711.github.io/phyloseq/).
 
-This framework consists of an efficient data structure, an associated
-package ecosystem, demonstration data sets, and comprehensive
-documentation. These are explained in more detail in the online book
-[Orchestrating Microbiome Analysis](https://microbiome.github.io/OMA).
+The miaverse framework consists of an efficient data structure based
+on the SummarizedExperiment class, an associated package ecosystem,
+demonstration data sets, and comprehensive documentation. These are
+explained in more detail in the online book [Orchestrating Microbiome
+Analysis](https://microbiome.github.io/OMA).
 
 This training material walks you through an example workflow that
 shows the standard steps of taxonomic data analysis covering data
@@ -32,19 +33,15 @@ examples from the [OMA book](https://microbiome.github.io/OMA), or try
 to apply the techniques to your own data.
 
 
-## References 
 
-The material can be attributed to the following sources (kindly cite):
+## Acknowledgments
 
- * Authors: Leo Lahti, Tuomas Borman, Henrik Eckermann
- * Contact: [Leo Lahti](http://datascience.utu.fi), University of Turku 
- * [mia Collective](https://microbiome.github.io)
+**Citation** "Radboud summer school training material for miaverse (2021). Tuomas
+Borman, Felix Ernst, Henrik Eckermann, Leo Lahti".
 
+**Contact** [Leo Lahti](http://datascience.utu.fi), University of Turku and [mia Collective](https://microbiome.github.io)
 
-
-## License
-
-All material is released under the open [CC BY-NC-SA 3.0 License](LICENSE).
+**License** All material is released under the open [CC BY-NC-SA 3.0 License](LICENSE).
 
 - Landing page (html): [miaverse teaching material](https://microbiome.github.io/course_2021_radboud/)
 - Source code (github): [miaverse teaching material](https://github.com/microbiome/course_2021_radboud)
