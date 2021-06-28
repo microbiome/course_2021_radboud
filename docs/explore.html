@@ -607,9 +607,14 @@ plot_abundance &lt;- plotAbundance(tse, abund_values=&quot;relabundance&quot;, r
   theme(legend.key.height = unit(0.5, &quot;cm&quot;)) +
   scale_y_continuous(label = scales::percent)
 
-## Scale for &apos;y&apos; is already present. Adding another scale for &apos;y&apos;, which will replace the existing scale.
+## Scale for &apos;y&apos; is already present. Adding another scale for &apos;y&apos;, which will
+## replace the existing scale.
 
 plot_abundance 
+
+## Warning in grid.Call.graphics(C_rect, x$x, x$y, x$width, x$height,
+## resolveHJust(x$just, : semi-transparency is not supported on this device:
+## reported only once per page
 </code></pre><p><img src="explore_files/figure-markdown_strict/unnamed-chunk-10-1.png" alt=""></p>
 <p>From density plot, we could see, e.g., what is the most common
 abundance. Here we plot distribution of Firmicutes relative abundances
@@ -692,7 +697,7 @@ vignette</a>.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Explore data","level":"1.5","depth":1,"next":{"title":"Calculate alpha diversity","level":"1.6","depth":1,"path":"alpha.md","ref":"alpha.md","articles":[]},"previous":{"title":"Import data","level":"1.4","depth":1,"path":"import.md","ref":"import.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"explore.md","mtime":"2021-06-24T09:57:42.798Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-24T09:59:01.327Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Explore data","level":"1.5","depth":1,"next":{"title":"Calculate alpha diversity","level":"1.6","depth":1,"path":"alpha.md","ref":"alpha.md","articles":[]},"previous":{"title":"Import data","level":"1.4","depth":1,"path":"import.md","ref":"import.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"explore.md","mtime":"2021-06-28T21:18:21.179Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-28T21:36:52.401Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
