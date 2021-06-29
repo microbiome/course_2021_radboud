@@ -1,82 +1,47 @@
-# Course
+# Course material: miaverse basics 
 
-## Welcome to Raboud Summer School 2021 - Microbiome Analysis (mia)
+**Welcome to [Radboud Summer School, July 2021](https://www.ru.nl/radboudsummerschool/courses/2021/brain-bacteria-behaviour/)**
 
-![](https://user-images.githubusercontent.com/60338854/121848694-1072a480-ccf3-11eb-9af2-7fdefd8d1794.png)
+<img src="https://user-images.githubusercontent.com/60338854/121848694-1072a480-ccf3-11eb-9af2-7fdefd8d1794.png" alt="ML4microbiome" width="50%"/>
 
-This site contains material for [Radboud Summer School 7/2021](https://www.ru.nl/radboudsummerschool/courses/2021/brain-bacteria-behaviour/).
+Figure source: Moreno-Indias _et al_. (2021) [Statistical and Machine Learning Techniques in Human Microbiome Studies: Contemporary Challenges and Solutions](https://doi.org/10.3389/fmicb.2021.635781). Frontiers in Microbiology 12:11. 
 
 
 ## miaverse
 
-miaverse (mia = **MI**crobiome **A**nalysis) is an R ecosystem for microbiome analysis. It utilizes a standard data 
-structure called **TreeSummarizedExperiment**. It extends the **SingleCellExperiment** class by
-providing slots for phylogenetic tree and sample tree. 
+The [_miaverse_](https://microbiome.github.io) (mia = **MI**crobiome **A**nalysis) is an
+R/Bioconductor framework for microbiome data science. It aims to
+extend the capabilities of another popular framework,
+[phyloseq](https://joey711.github.io/phyloseq/).
 
-TreeSummarizedExperiment works as a container of different kind of information that is 
-obtained from the data set. Similarly, e.g., to the **phyloseq** class, TreeSummarizedExperiment 
-includes standardized slots. Each of these classes can store specific kind of information. For example,
-assays can store abundance tables, and rowData information about taxa.
-The main advantage of TreeSummarizedExperiment compared to phyloseq is that it can store
-lots of more data than phyloseq.
+The miaverse framework consists of an efficient data structure based
+on the SummarizedExperiment class, an associated package ecosystem,
+demonstration data sets, and comprehensive documentation. These are
+explained in more detail in the online book [Orchestrating Microbiome
+Analysis](https://microbiome.github.io/OMA).
 
-Currently, miaverse includes two packages: one for data analysis and one for visualization. 
-The **mia** package includes a wide variety of different kinds of functions for data analysis. 
-**miaViz** is a package for visualization. The aim is to enable easy, reliable, and efficient 
-ways to analyze microbiome data. 
-
-## Example workflow
-
-This workflow demonstrates the use of the miaverse using data from the
-following publication: Tengeler AC et al. (2020) [**Gut
-microbiota from persons with attention-deficit/hyperactivity disorder
-affects the brain in
-mice**](https://doi.org/10.1186/s40168-020-00816-x). Microbiome 8:44. Check it out for a more detailed
-description of the samples and the experimental design.
-
-In this study, mice are colonized with the microbiota from participants with 
-ADHD (attention deficit hyperactivity disorder) and healthy participants. 
-The aim of the study was to assess whether the mice display ADHD behaviors after being 
-inoculated with ADHD microbiota, suggesting a role of the microbiome in ADHD pathology.
-
-**You can work through the course in different ways: The first way is to clone the [repository](https://github.com/microbiome/course_2021_radboud). Then you can run the code in the Rmd files step by step. The second way would be to just read through the [html version](https://microbiome.github.io/course_2021_radboud/) of the course. You can then copy-paste the code from the website into your R console (e.g. in Rstudio). In the latter case you either need to ensure a similar folder structure on your computer compared to the repository or modify the code so that it works with your local folder structure. In any case, a good exercise will be to modify the code so that it works with another dataset of your choice.**
- 
+This training material walks you through an example workflow that
+shows the standard steps of taxonomic data analysis covering data
+access, exploration, analysis, visualization and reporoducible
+reporting. **You can run the workflow by simply copy-pasting the
+examples.** For advanced material, you can test and modify further
+examples from the [OMA book](https://microbiome.github.io/OMA), or try
+to apply the techniques to your own data.
 
 
-## Further resources
+## Acknowledgments
 
- * Open online book (beta version):
-   [Orchestrating Microbiome Analysis](https://microbiome.github.io/OMA).
+**Citation** "Radboud summer school training material for miaverse (2021). Tuomas
+Borman, Felix Ernst, Henrik Eckermann, Leo Lahti".
 
- * [**mia** project](https://microbiome.github.io)
+**Contact** [Leo Lahti](http://datascience.utu.fi), University of Turku and [mia Collective](https://microbiome.github.io)
 
-## References 
+**License** All material is released under the open [CC BY-NC-SA 3.0 License](LICENSE).
 
-The material can be attributed to the following sources (kindly cite):
+- Landing page (html): [miaverse teaching material](https://microbiome.github.io/course_2021_radboud/)
+- Source code (github): [miaverse teaching material](https://github.com/microbiome/course_2021_radboud)
 
- * Authors: Leo Lahti, Tuomas Borman, Henrik Eckermann
- * Contact: [Leo Lahti](http://datascience.utu.fi), University of Turku 
- * [Mia Collective](https://microbiome.github.io)
- 
-Data is from article:
-
-Tengeler AC, Dam SA, Wiesmann M, Naaijen J, van Bodegom M, 
-Belzer C, Dederen PJ, Verweij V, Franke B, Kozicz T, Vasquez AA & Kiliaan AJ (2020)
-[**Gut microbiota from persons with attention-deficit/hyperactivity disorder affects the brain in mice**](https://doi.org/10.1186/s40168-020-00816-x).
-Microbiome 8:44. 
-
-Front page image is from article: 
-
-Moreno-Indias I, Lahti L, Nedyalkova M, Elbere I, Roshchupkin G, Adilovic M, Aydemir O,
-Bakir-Gungor B, Santa Pau EC, D’Elia D, Desai MS, Falquet L, Gundogdu A, Hron K, Klammsteiner T,
-Lopes MB, Marcos-Zambrano LJ, Marques C, Mason M, May P, Pašić L, Pio G, Pongor S, Promponas VJ,
-Przymus P, Saez-Rodriguez J, Sampri A, Shigdel R, Stres B, Suharoschi R, Truu J, Truică C,
-Vilne B, Vlachakis D, Yilmaz E, Zeller G, Zomer AL, Gómez-Cabrero D & Claesson MJ (2021)
-[**Statistical and Machine Learning Techniques in Human Microbiome Studies: Contemporary Challenges and Solutions**](https://doi.org/10.3389/fmicb.2021.635781). 
-Frontiers in Microbiology 12:11. 
-
-## License
-
-All material is released under the open [MIT license](LICENSE).
-
-
+This repository is fully reproducible. It contains the Rmd files
+includes executable code. All files can be rendered at one go by
+running the file [main.R](main.R). See the file for details on how to
+clone the repository and convert it into a gitbook.

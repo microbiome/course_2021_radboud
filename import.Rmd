@@ -8,6 +8,19 @@ This section shows how to import the _biom_ and its accompanying data
 files to a _TreeSummarizedExperiment_ object. A TSE object is a standard data structure 
 that is utilized in the miaverse.
 
+We use example data from the following publication: Tengeler AC, Dam
+SA, Wiesmann M, Naaijen J, van Bodegom M, Belzer C, Dederen PJ,
+Verweij V, Franke B, Kozicz T, Vasquez AA & Kiliaan AJ (2020) [**Gut
+microbiota from persons with attention-deficit/hyperactivity disorder
+affects the brain in
+mice**](https://doi.org/10.1186/s40168-020-00816-x). Microbiome 8:44.
+
+In this study, mice are colonized with microbiota from participants
+with ADHD (attention deficit hyperactivity disorder) and healthy
+participants.  The aim of the study was to assess whether the mice
+display ADHD behaviors after being inoculated with ADHD microbiota,
+suggesting a role of the microbiome in ADHD pathology.
+
 ## Data
 
 The Data is located in a "data" subfolder. It consists of 3 files:

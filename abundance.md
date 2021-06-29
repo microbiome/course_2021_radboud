@@ -4,7 +4,7 @@ Here, we analyse abundances with three different methods: **Wilcoxon
 test**, **DESeq2**, and **ANCOM-BC**. All of these test statistical
 differences between groups. We analyse Genus level abundances.
 
-### Wilcoxon test
+## Wilcoxon test
 
 A Wilcoxon test estimates difference between two groups. It is a
 non-parametric alternative to a t-test, which means that the Wilcoxon
@@ -76,7 +76,7 @@ as well.
 
 ![](abundance_files/figure-markdown_strict/unnamed-chunk-4-1.png)
 
-### DESeq2
+## DESeq2
 
 Our second analysis method is DESeq2. This performs the data
 normalization automatically. It also takes care of the p-value
@@ -226,7 +226,7 @@ Now let us show how to do this. First, run the DESeq2 analysis.
 </tbody>
 </table>
 
-### ANCOM-BC
+## ANCOM-BC
 
 [The analysis of composition of microbiomes with bias correction
 (ANCOM-BC)](https://www.nature.com/articles/s41467-020-17041-7) is a
@@ -328,7 +328,7 @@ of this dataframe:
 
 In total, this method detects 13 differentially abundant taxa.
 
-### Comparison of Wilcoxon test and DESeq2
+## Comparison of Wilcoxon test and DESeq2
 
 Let’s compare results that we got from the Wilcoxon test and DESeq2. As
 we can see from the scatter plot, DESeq2 gives lower p-values than
@@ -354,7 +354,7 @@ Prints number of p-values under 0.05
 
     ## [1] "Wilcoxon test p-values under 0.05: 2/54"
 
-### Comparison of abundance
+## Comparison of abundance
 
 In previous steps, we got information which taxa vary between ADHD and
 control groups. Let’s plot those taxa in the boxplot, and compare

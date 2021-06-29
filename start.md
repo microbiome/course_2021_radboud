@@ -27,6 +27,15 @@ the workflow.
 Start it by running the code from [Install and load required packages / install.Rmd](install.html). 
 If you have required packages already installed, it only loads them into the session.
 
+
+## Online support
+
+Join us at:
+
+ * Users: [miaverse Gitter channel](https://gitter.im/microbiome/miaverse?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+ * Developers: [Bioconductor Slack](https://bioc-community.herokuapp.com) #microbiomeexperiment channel
+
+
 ## Additional resources
 
 Rmarkdown

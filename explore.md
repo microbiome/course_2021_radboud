@@ -429,5 +429,7 @@ bit under 30 %.
     #      ylab="Density",
     #      main=paste0("Firmicutes (",density_firmicutes$n, " obs, ", density_firmicutes$bw, " bw)"))
 
+## Further resources
+
 For more visualization options and examples, see the [miaViz
 vignette](https://microbiome.github.io/miaViz/articles/miaViz.html).

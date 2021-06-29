@@ -56,13 +56,13 @@ This returns a list of DMN objects for a closer investigation.
     ## class: DMN 
     ## k: 2 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11704.4 BIC: 12399.15 AIC: 12202.83 
+    ## Laplace: 11441 BIC: 12161.29 AIC: 11964.97 
     ## 
     ## [[3]]
     ## class: DMN 
     ## k: 3 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11059.62 BIC: 12266.31 AIC: 11971.51 
+    ## Laplace: 11059.64 BIC: 12266.31 AIC: 11971.51 
     ## 
     ## [[4]]
     ## class: DMN 
@@ -74,19 +74,19 @@ This returns a list of DMN objects for a closer investigation.
     ## class: DMN 
     ## k: 5 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11217.58 BIC: 13305.58 AIC: 12813.8 
+    ## Laplace: 11069.12 BIC: 13160.95 AIC: 12669.18 
     ## 
     ## [[6]]
     ## class: DMN 
     ## k: 6 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11330.56 BIC: 13813.5 AIC: 13223.24 
+    ## Laplace: 11202.17 BIC: 13718.9 AIC: 13128.65 
     ## 
     ## [[7]]
     ## class: DMN 
     ## k: 7 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11620.17 BIC: 14381.81 AIC: 13693.07
+    ## Laplace: 11735.44 BIC: 14388.95 AIC: 13700.21
 
 Show Laplace approximation (model evidence) for each model of the k
 models.
@@ -102,9 +102,9 @@ Return the model that has the best fit.
     ## class: DMN 
     ## k: 3 
     ## samples x taxa: 27 x 151 
-    ## Laplace: 11059.62 BIC: 12266.31 AIC: 11971.51
+    ## Laplace: 11059.64 BIC: 12266.31 AIC: 11971.51
 
-### PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors
+## PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors
 
 Group samples and return DMNGroup object that contains a summary.
 Patient status is used for grouping.
@@ -117,17 +117,17 @@ Patient status is used for grouping.
     ## class: DMNGroup 
     ## summary:
     ##         k samples taxa      NLE    LogDet  Laplace      BIC      AIC
-    ## ADHD    3      13  151 6018.131 -344.3867 5427.821 6601.657 6473.131
-    ## Control 3      14  151 6647.269 -148.3665 6154.969 7247.655 7102.269
+    ## ADHD    3      13  151 6018.131 -345.0655 5427.482 6601.657 6473.131
+    ## Control 3      14  151 6647.269 -147.5221 6155.391 7247.655 7102.269
 
 Mixture weights (rough measure of the cluster size).
 
     DirichletMultinomial::mixturewt(getBestDMNFit(tse_dmn))
 
     ##          pi    theta
-    ## 1 0.4814815 31.27745
-    ## 2 0.2962963 47.34449
-    ## 3 0.2222222 92.27427
+    ## 1 0.4814815 31.27752
+    ## 2 0.2962963 47.34441
+    ## 3 0.2222222 92.27433
 
 Samples-cluster assignment probabilities / how probable it is that
 sample belongs to each cluster
@@ -135,24 +135,24 @@ sample belongs to each cluster
     head(DirichletMultinomial::mixture(getBestDMNFit(tse_dmn)))
 
     ##               [,1]          [,2]          [,3]
-    ## A110  1.000000e+00 1.259849e-144 7.570149e-205
-    ## A12  9.801819e-117  6.149319e-93  1.000000e+00
-    ## A15   1.000000e+00 9.592949e-119 3.398642e-234
-    ## A19  5.354108e-112 1.829953e-107  1.000000e+00
-    ## A21   2.137914e-93  4.755155e-96  1.000000e+00
-    ## A23   1.000000e+00 8.876657e-111 1.937588e-161
+    ## A110  1.000000e+00 1.247985e-144 7.594745e-205
+    ## A12  1.018086e-116  6.119864e-93  1.000000e+00
+    ## A15   1.000000e+00 9.521011e-119 3.402250e-234
+    ## A19  5.577185e-112 1.818399e-107  1.000000e+00
+    ## A21   2.219715e-93  4.725810e-96  1.000000e+00
+    ## A23   1.000000e+00 8.803750e-111 1.944008e-161
 
 Contribution of each taxa to each component
 
     head(DirichletMultinomial::fitted(getBestDMNFit(tse_dmn)))
 
     ##                 [,1]        [,2]       [,3]
-    ## 1726470  6.351993769 2.898845921 20.1894639
-    ## 1726471  5.287988209 0.002047979  0.1532246
-    ## 17264731 0.001248639 9.144371961  2.0112064
-    ## 17264726 0.140478579 1.363534189  7.5894508
-    ## 1726472  2.104206368 3.523397954  2.6657035
-    ## 17264724 0.072364321 0.002047979  9.8545597
+    ## 1726470  6.351935332 2.898697969 20.1893328
+    ## 1726471  5.287995022 0.002047468  0.1532163
+    ## 17264731 0.001250655 9.144582471  2.0112003
+    ## 17264726 0.140476307 1.363536615  7.5894166
+    ## 1726472  2.104309481 3.523485143  2.6657104
+    ## 17264724 0.072369363 0.002047468  9.8546846
 
 Get the assignment probabilities
 

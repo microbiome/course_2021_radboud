@@ -4,9 +4,22 @@ This section shows how to import the *biom* and its accompanying data
 files to a *TreeSummarizedExperiment* object. A TSE object is a standard
 data structure that is utilized in the miaverse.
 
+We use example data from the following publication: Tengeler AC, Dam SA,
+Wiesmann M, Naaijen J, van Bodegom M, Belzer C, Dederen PJ, Verweij V,
+Franke B, Kozicz T, Vasquez AA & Kiliaan AJ (2020) [**Gut microbiota
+from persons with attention-deficit/hyperactivity disorder affects the
+brain in mice**](https://doi.org/10.1186/s40168-020-00816-x). Microbiome
+8:44.
+
+In this study, mice are colonized with microbiota from participants with
+ADHD (attention deficit hyperactivity disorder) and healthy
+participants. The aim of the study was to assess whether the mice
+display ADHD behaviors after being inoculated with ADHD microbiota,
+suggesting a role of the microbiome in ADHD pathology.
+
 ## Data
 
-The Data is located in a "data" subfolder. It consists of 3 files:
+The Data is located in a “data” subfolder. It consists of 3 files:
 
 -   biom file: contains an abundance table and taxonomy information
 -   csv file: contains the sample metadata
@@ -37,8 +50,9 @@ We have now imported the data set in R. Let us investigate its contents.
     ## colnames(27): A110 A111 ... A38 A39
     ## colData names(0):
 
-The `assays` slot includes a list of abundance tables. The imported abundance
-table is named as “counts”. Let us inspect only the first cols and rows.
+The `assays` slot includes a list of abundance tables. The imported
+abundance table is named as “counts”. Let us inspect only the first cols
+and rows.
 
     assays(se)$counts[1:3, 1:3]
 
@@ -136,10 +150,11 @@ overview.
 </tbody>
 </table>
 
-These taxonomic rank names (column names) are not real rank names. Let’s replace them with real rank names.
+These taxonomic rank names (column names) are not real rank names. Let’s
+replace them with real rank names.
 
-In addition to that, the taxa names include, e.g., ’"k\_\_’ before the name,
-so let’s make them cleaner by removing them.
+In addition to that, the taxa names include, e.g., ’"k\_\_’ before the
+name, so let’s make them cleaner by removing them.
 
     names(rowData(se)) <- c("Kingdom", "Phylum", "Class", "Order", 
                             "Family", "Genus")
@@ -245,8 +260,8 @@ so let’s make them cleaner by removing them.
 
 ### colData (sample information)
 
-We notice that the imported biom file did not contain the sample meta data
-yet, so it includes an empty data frame.
+We notice that the imported biom file did not contain the sample meta
+data yet, so it includes an empty data frame.
 
     head(colData(se))
 
@@ -341,8 +356,8 @@ Now, let’s add a phylogenetic tree.
 
 The current data object, se, is a SummarizedExperiment object. This does
 not include a slot for adding a phylogenetic tree. In order to do this,
-we can convert the SE object to an extended TreeSummarizedExperiment object
-which also includes a `rowTree` slot.
+we can convert the SE object to an extended TreeSummarizedExperiment
+object which also includes a `rowTree` slot.
 
     tse <- as(se, "TreeSummarizedExperiment")
 
