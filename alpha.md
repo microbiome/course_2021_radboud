@@ -1,5 +1,4 @@
-Alpha diversity
-===============
+# Alpha diversity
 
 This section demonstrates how alpha diversity indices are calculated.
 
@@ -122,13 +121,9 @@ indices.
 
     ## `geom_smooth()` using formula 'y ~ x'
 
-    ## Warning in grid.Call.graphics(C_polygon, x$x, x$y, index): semi-transparency is
-    ## not supported on this device: reported only once per page
-
 ![](alpha_files/figure-markdown_strict/unnamed-chunk-4-1.png)
 
-Visualization
--------------
+## Visualization
 
 Next let’s compare indices between different patient status and cohorts.
 Boxplot is suitable for that purpose.
@@ -151,8 +146,7 @@ Boxplot is suitable for that purpose.
 
 ![](alpha_files/figure-markdown_strict/unnamed-chunk-5-1.png)
 
-Statistical testing and comparisons
------------------------------------
+## Statistical testing and comparisons
 
 To further investigate if patient status explains the variation of
 Shannon index, let’s do a Wilcoxon test.
@@ -211,8 +205,7 @@ cohorts.
     ## W = 20, p-value = 0.01587
     ## alternative hypothesis: true location shift is not equal to 0
 
-Further resources
------------------
+## Further resources
 
 For more examples, see a dedicated section on alpha diversity in the
 [online book](https://microbiome.github.io/OMA/).

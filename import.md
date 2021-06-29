@@ -1,12 +1,23 @@
-Import data
-===========
+# Import data
 
 This section shows how to import the *biom* and its accompanying data
 files to a *TreeSummarizedExperiment* object. TSE object is a standard
 data structure that is utilized in the miaverse.
 
-Data
-----
+We use example data from the following publication: Tengeler AC, Dam SA,
+Wiesmann M, Naaijen J, van Bodegom M, Belzer C, Dederen PJ, Verweij V,
+Franke B, Kozicz T, Vasquez AA & Kiliaan AJ (2020) [**Gut microbiota
+from persons with attention-deficit/hyperactivity disorder affects the
+brain in mice**](https://doi.org/10.1186/s40168-020-00816-x). Microbiome
+8:44.
+
+In this study, mice are colonized with microbiota from participants with
+ADHD (attention deficit hyperactivity disorder) and healthy
+participants. The aim of the study was to assess whether the mice
+display ADHD behaviors after being inoculated with ADHD microbiota,
+suggesting a role of the microbiome in ADHD pathology.
+
+## Data
 
 Data is located in a “data” subfolder. Data consists of 3 files:
 
@@ -24,8 +35,7 @@ Load the (biom) data into a SummarizedExperiment (SE) object.
 
     se <- loadFromBiom(biom_file_path)
 
-Investigate the R data object
------------------------------
+## Investigate the R data object
 
 We have now imported the data set in R. Let us investigate its contents.
 
@@ -361,8 +371,7 @@ which also includes a `rowTree` slot.
     ## rownames(151): 1726470 1726471 ... 17264756 17264757
     ## rowData names(6): Kingdom Phylum ... Family Genus
     ## colnames(27): A110 A12 ... A35 A38
-    ## colData names(4): patient_status cohort patient_status_vs_cohort
-    ##   sample_name
+    ## colData names(4): patient_status cohort patient_status_vs_cohort sample_name
     ## reducedDimNames(0):
     ## mainExpName: NULL
     ## altExpNames(0):
@@ -389,8 +398,7 @@ Next, let us read the tree data file and add it to the R data object
     ## rownames(151): 1726470 1726471 ... 17264756 17264757
     ## rowData names(6): Kingdom Phylum ... Family Genus
     ## colnames(27): A110 A12 ... A35 A38
-    ## colData names(4): patient_status cohort patient_status_vs_cohort
-    ##   sample_name
+    ## colData names(4): patient_status cohort patient_status_vs_cohort sample_name
     ## reducedDimNames(0):
     ## mainExpName: NULL
     ## altExpNames(0):

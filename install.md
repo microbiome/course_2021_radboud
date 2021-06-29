@@ -1,5 +1,4 @@
-Install and load required R packages
-====================================
+# Install and load required R packages
 
 In this section, all required packages are installed and loaded into the
 session. If packages are already installed, installation step is
@@ -22,8 +21,6 @@ skipped; only uninstalled packages are installed.
        install.packages(cran_pkg_to_be_installed)
     }
 
-    ## --- Please select a CRAN mirror for use in this session ---
-
     # If there are packages that need to be installed, installs them from Bioconductor
     if( length(bioc_pkg_to_be_installed) ) {
        BiocManager::install(bioc_pkg_to_be_installed, ask = F)
@@ -40,13 +37,9 @@ loaded first have higher priority.
     # Loading all packages into session. Returns true if package was successfully loaded.
     sapply(c(bioc_pkg, cran_pkg), require, character.only = TRUE)
 
-    ##                  mia               miaViz              ANCOMBC 
-    ##                 TRUE                 TRUE                 TRUE 
-    ##                  ape               DESeq2 DirichletMultinomial 
-    ##                 TRUE                 TRUE                 TRUE 
-    ##          BiocManager                dplyr              ecodist 
-    ##                 TRUE                 TRUE                 TRUE 
-    ##              ggplot2            gridExtra                knitr 
-    ##                 TRUE                 TRUE                 TRUE 
+    ##                  mia               miaViz              ANCOMBC                  ape               DESeq2 DirichletMultinomial 
+    ##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
+    ##          BiocManager                dplyr              ecodist              ggplot2            gridExtra                knitr 
+    ##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
     ##                vegan 
     ##                 TRUE

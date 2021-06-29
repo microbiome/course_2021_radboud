@@ -1,5 +1,4 @@
-Beta diversity
-==============
+# Beta diversity
 
 In this section, we go through how to analyse and visualize beta
 diversity.
@@ -12,8 +11,7 @@ choices include Bray-Curtis, Unifrac, Jaccard, and Aitchison index. Each
 of these dissimilarity measures emphasize different aspects of
 similarity.
 
-Examples of PCoA with different settings
-----------------------------------------
+## Examples of PCoA with different settings
 
 After estimating beta diversity we can visualize sample similarity with
 dimension reduction techniques such as Principal Coordinate Analysis
@@ -143,8 +141,7 @@ examples.
 
 ![](beta_files/figure-markdown_strict/pcoa_phylum_aitchison-1.png)
 
-Highlighting external variables on PCoA plot
---------------------------------------------
+## Highlighting external variables on PCoA plot
 
 ### PCoA with discrete sample grouping variable shown with colors
 
@@ -192,8 +189,7 @@ diversity index that we calculated in “Alpha diversity” notebook.
 
 ![](beta_files/figure-markdown_strict/pcoa_coloring-1.png)
 
-Estimating associations with an external variable
--------------------------------------------------
+## Estimating associations with an external variable
 
 Next we show how the quantify the strength of association between the
 variation in community composition (beta diversity) and external
@@ -216,7 +212,7 @@ multivariate analysis of variance (PERMANOVA) test.
     print(paste0("Different different cohorts and variance of abundance between samples, p-value: ", 
                  as.data.frame(permanova_cohort$aov.tab)["cohort", "Pr(>F)"]))
 
-    ## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7406"
+    ## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7433"
 
 As we see, the cohort variable is not significantly associated with
 microbiota composition (p-value is over 0.05).
@@ -262,8 +258,7 @@ names.
 
 ![](beta_files/figure-markdown_strict/unnamed-chunk-3-1.png)
 
-Further resources
------------------
+## Further resources
 
 For more examples, see a dedicated section on beta diversity in the
 [online book](https://microbiome.github.io/OMA/).

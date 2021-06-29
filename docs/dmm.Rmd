@@ -55,7 +55,7 @@ getBestDMNFit(tse_dmn, type = "laplace")
 ```
 
 
-### PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors
+## PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors
 
 Group samples and return DMNGroup object that contains a summary.
 Patient status is used for grouping.
