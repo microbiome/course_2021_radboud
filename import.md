@@ -1,7 +1,7 @@
 # Import data
 
 This section shows how to import the *biom* and its accompanying data
-files to a *TreeSummarizedExperiment* object. TSE object is a standard
+files to a *TreeSummarizedExperiment* object. A TSE object is a standard
 data structure that is utilized in the miaverse.
 
 We use example data from the following publication: Tengeler AC, Dam SA,
@@ -19,11 +19,11 @@ suggesting a role of the microbiome in ADHD pathology.
 
 ## Data
 
-Data is located in a “data” subfolder. Data consists of 3 files:
+The Data is located in a “data” subfolder. It consists of 3 files:
 
--   biom file that contains an abundance table and taxonomy information
--   csv file that contains a sample metadata
--   tre file that contains a phylogenetic tree.
+-   biom file: contains an abundance table and taxonomy information
+-   csv file: contains the sample metadata
+-   tree file: contains a phylogenetic tree.
 
 Define source file paths.
 
@@ -50,8 +50,9 @@ We have now imported the data set in R. Let us investigate its contents.
     ## colnames(27): A110 A111 ... A38 A39
     ## colData names(0):
 
-`assays` slot includes a list of abundance tables. Imported abundance
-table is named as “counts”. Let us just use first cols and rows.
+The `assays` slot includes a list of abundance tables. The imported
+abundance table is named as “counts”. Let us inspect only the first cols
+and rows.
 
     assays(se)$counts[1:3, 1:3]
 
@@ -63,7 +64,7 @@ table is named as “counts”. Let us just use first cols and rows.
 ### rowData (taxonomic information)
 
 The `rowdata` includes taxonomic information from the biom file. The
-head() command shows just the beginning of the data table for an
+`head()` command shows just the beginning of the data table for an
 overview.
 
 `knitr::kable()` is for printing the information more nicely.
@@ -149,16 +150,16 @@ overview.
 </tbody>
 </table>
 
-Taxonomic ranks are not real rank names. Let’s replace those taxonomic
-classes with real rank names.
+These taxonomic rank names (column names) are not real rank names. Let’s
+replace them with real rank names.
 
-In addition to that, taxa names include, e.g., ’"k\_\_’ before the name,
-so let’s make them cleaner by removing them.
+In addition to that, the taxa names include, e.g., ’"k\_\_’ before the
+name, so let’s make them cleaner by removing them.
 
     names(rowData(se)) <- c("Kingdom", "Phylum", "Class", "Order", 
                             "Family", "Genus")
 
-    # Goes through whole DataFrame. Removes '.*[kpcofg]__' from strings, where [kpcofg] 
+    # Goes through the whole DataFrame. Removes '.*[kpcofg]__' from strings, where [kpcofg] 
     # is any character from listed ones, and .* any character.
     rowdata_modified <- BiocParallel::bplapply(rowData(se), 
                                                FUN = stringr::str_remove, 
@@ -169,7 +170,7 @@ so let’s make them cleaner by removing them.
                                                FUN = stringr::str_remove, 
                                                pattern = '\"')
 
-    # rowdata_modified is list, so it is converted back to DataFrame. 
+    # rowdata_modified is a list, so it is converted back to DataFrame format. 
     rowdata_modified <- DataFrame(rowdata_modified)
 
     # And then assigned back to the SE object
@@ -259,8 +260,8 @@ so let’s make them cleaner by removing them.
 
 ### colData (sample information)
 
-We notice that the imported biom file did not contain a sample meta data
-yet, so it includes an empty data frame.
+We notice that the imported biom file did not contain the sample meta
+data yet, so it includes an empty data frame.
 
     head(colData(se))
 
@@ -268,7 +269,7 @@ yet, so it includes an empty data frame.
 
 Let us add a sample meta data file.
 
-    # We use this to check what type of data is it
+    # We use this to check what type of data it is
     # read.table(sample_meta_file_path)
 
     # It seems like a comma separated file and it does not include headers
@@ -277,7 +278,6 @@ Let us add a sample meta data file.
     sample_meta <- DataFrame(read.table(sample_meta_file_path, sep = ",", header = FALSE))
 
     # Add sample names to rownames
-
     rownames(sample_meta) <- sample_meta[,1]
 
     # Delete column that included sample names
@@ -289,7 +289,7 @@ Let us add a sample meta data file.
     # Then it can be added to colData
     colData(se) <- sample_meta
 
-Now `colData` includes a sample metadata. Use kable to print it more
+Now `colData` includes the sample metadata. Use kable to print it more
 nicely.
 
     knitr::kable(head(colData(se)))
@@ -356,8 +356,8 @@ Now, let’s add a phylogenetic tree.
 
 The current data object, se, is a SummarizedExperiment object. This does
 not include a slot for adding a phylogenetic tree. In order to do this,
-we can convert SE object to an extended TreeSummarizedExperiment object
-which also includes a `rowTree` slot.
+we can convert the SE object to an extended TreeSummarizedExperiment
+object which also includes a `rowTree` slot.
 
     tse <- as(se, "TreeSummarizedExperiment")
 
