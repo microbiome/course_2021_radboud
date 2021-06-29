@@ -1,14 +1,12 @@
 # Summary
 
-* [Introduction](README.md)
-  * [miaverse](README.md#miaverse)
+* [Overview](README.md)
+  * [The miaverse framework](README.md#miaverse)
+  * [Learning goals](README.md#goals)  
   * [Acknowledgments](README.md#acknowledgments)
 * [Getting started](start.md)
   * [Checklist before the course](start.md#checklist-before-the-course)
-  * [Start workflow](start.md#start-workflow)
-  * [Online support](start.md#online-support)
-  * [Additional resources](start.md#additional-resources)
-* [Install and load required R packages](install.md)
+  * [Support and resources](start.md#additional-resources)
 * [Import data](import.md)
   * [Data](import.md#data)
   * [Investigate the R data object](import.md#investigate-the-r-data-object)
@@ -44,4 +42,6 @@
   * [ANCOM-BC](abundance.md#ancom-bc)
   * [Comparison of Wilcoxon test and DESeq2](abundance.md#comparison-of-wilcoxon-test-and-deseq2)
   * [Comparison of abundance](abundance.md#comparison-of-abundance)
+
+* [Study material](material.md)
 

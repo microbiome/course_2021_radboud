@@ -1,61 +1,34 @@
 # Getting Started
 
-## Checklist before the course
 
-Before the course, you should install:
+## Checklist (before the course)
 
-#### R
-miaverse requires at least version 4.1 of R. Because it takes some time to install it,
-you should have it installed before the course.
-
-Help for installing R you can find from [here](https://www.r-project.org/).
-
-#### RStudio
-RStudio is optional but preferred. It is an integrated development environment (IDE)
-for R. Also installation of RStudio takes some time, so again, take this into account. 
-
-Help for installing RStudio you can find from [here](https://www.rstudio.com/).
-
-#### Required R packages
-After installing R (and RStudio) you should install required R packages by running 
-the code from [Install and load required packages / install.Rmd](install.html).
-
-## Start workflow
-After installing R (and RStudio) and required packages you should be able to start 
-the workflow. 
-
-Start it by running the code from [Install and load required packages / install.Rmd](install.html). 
-If you have required packages already installed, it only loads them into the session.
+Install the following software in advance in order to avoid
+unnecessary delays and leaving more time for the course contents.
 
 
-## Online support
+* [R (version >4.1.0)](https://www.r-project.org/) 
 
-Join us at:
+* [RStudio](https://www.rstudio.com/products/rstudio/download/);
+  choose "Rstudio Desktop" to download the latest version. Optional
+  but preferred. For further details, check the [Rstudio home
+  page](https://www.rstudio.com/).
+
+* [Install and load required R packages](install.html).
+
+* After a successful installation you can start trying out the
+  case study examples in this training material
+
+
+## Support and resources
+
+For additional reading and online material, see [Material](material.html) section
+
+For online support on installation and other matters, you can join us at:
 
  * Users: [miaverse Gitter channel](https://gitter.im/microbiome/miaverse?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
  * Developers: [Bioconductor Slack](https://bioc-community.herokuapp.com) #microbiomeexperiment channel
 
 
-## Additional resources
 
-Rmarkdown
 
-* [Rmarkdown tips](https://rmarkdown.rstudio.com/)
-* [Rmarkdown cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
-
-R programming
-
-* Basics of R programming: [Base R](https://raw.githubusercontent.com/rstudio/cheatsheets/master/base-r.pdf)
-* R visualization: [ggplot2](https://raw.githubusercontent.com/rstudio/cheatsheets/master/data-visualization-2.1.pdf), and [R graphics cookbook](http://www.cookbook-r.com/Graphs/)
-
-RStudio
-
-* [RStudio cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/master/rstudio-ide.pdf)
-
-More cheat sheets for R programming
-
-* [Full list of RStudio cheat sheets](https://www.rstudio.com/resources/cheatsheets/)
-
-Microbiome research
-
-* [List of R tools for microbiome analysis](https://microsud.github.io/Tools-Microbiome-Analysis/)
