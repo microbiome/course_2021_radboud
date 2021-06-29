@@ -9,44 +9,39 @@ This site contains material for [Radboud Summer School 7/2021](https://www.ru.nl
 
 ## miaverse
 
-miaverse (mia = **MI**crobiome **A**nalysis) is an R ecosystem for microbiome analysis. It utilizes standard data 
-structure called **TreeSummarizedExperiment**. It extends **SingleCellExperiment** class by
+miaverse (mia = **MI**crobiome **A**nalysis) is an R ecosystem for microbiome analysis. It utilizes a standard data 
+structure called **TreeSummarizedExperiment**. It extends the **SingleCellExperiment** class by
 providing slots for phylogenetic tree and sample tree. 
 
 TreeSummarizedExperiment works as a container of different kind of information that is 
-obtained from the data set. Similarly, e.g., to **phyloseq** class, TreeSummarizedExperiment 
-includes standardized slots. Each of this classes can store specific kind of information. For example,
+obtained from the data set. Similarly, e.g., to the **phyloseq** class, TreeSummarizedExperiment 
+includes standardized slots. Each of these classes can store specific kind of information. For example,
 assays can store abundance tables, and rowData information about taxa.
 The main advantage of TreeSummarizedExperiment compared to phyloseq is that it can store
 lots of more data than phyloseq.
 
 Currently, miaverse includes two packages: one for data analysis and one for visualization. 
-**mia** package includes wide variety of different kind of functions for data analysis. 
-**miaViz** is the package for visualization. The aim is to enable easy, reliable, and efficient 
-way to analyze microbiome data. 
+The **mia** package includes a wide variety of different kinds of functions for data analysis. 
+**miaViz** is a package for visualization. The aim is to enable easy, reliable, and efficient 
+ways to analyze microbiome data. 
 
 ## Example workflow
 
-This workflow demonstrates the use of miaverse using data from the
-following publication, which you can check for a more detailed
-description of the samples and experimental design: Tengeler AC et al. (2020) [**Gut
+This workflow demonstrates the use of the miaverse using data from the
+following publication: Tengeler AC et al. (2020) [**Gut
 microbiota from persons with attention-deficit/hyperactivity disorder
 affects the brain in
-mice**](https://doi.org/10.1186/s40168-020-00816-x). Microbiome 8:44.
+mice**](https://doi.org/10.1186/s40168-020-00816-x). Microbiome 8:44. Check it out for a more detailed
+description of the samples and the experimental design.
 
-In this study, mice are colonized with microbiota from participants with 
+In this study, mice are colonized with the microbiota from participants with 
 ADHD (attention deficit hyperactivity disorder) and healthy participants. 
 The aim of the study was to assess whether the mice display ADHD behaviors after being 
 inoculated with ADHD microbiota, suggesting a role of the microbiome in ADHD pathology.
 
-**You can run the workflow by cloning the repository or you can apply it to your own data, 
-e.g., by copy-pasting and tuning the code to fit to your data.**
+**You can work through the course in different ways: Either by cloning the [repository](https://github.com/microbiome/course_2021_radboud) and then run the code in the Rmd files step by step. Or you can just read through the [html version](https://microbiome.github.io/course_2021_radboud/) of the course and copy-paste the code from the website into your R console (e.g. in Rstudio). In the latter case you either need to ensure a similar folder structure on your computer compared to the repository or modify the code so that it works with your local folder structure. In any case, a good exercise will to modify the code such that it works with another dataset.**
+ 
 
-Material in an html format can be found from [here](https://microbiome.github.io/course_2021_radboud/).
-
-Repository can be found from [here](https://github.com/microbiome/course_2021_radboud).
-- Rmd files includes runnable code 
-- All files can be rendered at one go by running the file main.R
 
 ## Further resources
 
