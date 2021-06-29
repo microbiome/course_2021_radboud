@@ -1,13 +1,11 @@
-Data exploration
-================
+# Data exploration
 
 Now we have loaded the data set into R, and investigated that it has all
 the necessary components.
 
 Here, basic operations to briefly explore the data are introduced.
 
-Investigate the contents of a microbiome data object
-----------------------------------------------------
+## Investigate the contents of a microbiome data object
 
 Dimensionality tells us, how many taxa and samples the data contains. As
 we can see, there are 151 taxa and 27 samples.
@@ -178,8 +176,7 @@ There are 13 samples from patients having ADHD, and 14 control samples.
     ##    ADHD Control 
     ##      13      14
 
-Manipulate the data
--------------------
+## Manipulate the data
 
 ### Transformations
 
@@ -371,8 +368,7 @@ Here agglomeration is done similarly, but na.rm = TRUE
 
     ## [1] "Agglomeration with na.rm = TRUE: 49 taxa."
 
-Visualization
--------------
+## Visualization
 
 For plotting, we use miaViz package. We can plot the Phylum level
 abundances.
@@ -386,14 +382,9 @@ abundances.
       theme(legend.key.height = unit(0.5, "cm")) +
       scale_y_continuous(label = scales::percent)
 
-    ## Scale for 'y' is already present. Adding another scale for 'y', which will
-    ## replace the existing scale.
+    ## Scale for 'y' is already present. Adding another scale for 'y', which will replace the existing scale.
 
     plot_abundance 
-
-    ## Warning in grid.Call.graphics(C_rect, x$x, x$y, x$width, x$height,
-    ## resolveHJust(x$just, : semi-transparency is not supported on this device:
-    ## reported only once per page
 
 ![](explore_files/figure-markdown_strict/unnamed-chunk-10-1.png)
 
@@ -437,6 +428,8 @@ bit under 30 %.
     #      xlab="Relative abundance",
     #      ylab="Density",
     #      main=paste0("Firmicutes (",density_firmicutes$n, " obs, ", density_firmicutes$bw, " bw)"))
+
+## Further resources
 
 For more visualization options and examples, see the [miaViz
 vignette](https://microbiome.github.io/miaViz/articles/miaViz.html).
