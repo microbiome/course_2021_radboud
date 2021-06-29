@@ -39,7 +39,7 @@ ADHD (attention deficit hyperactivity disorder) and healthy participants.
 The aim of the study was to assess whether the mice display ADHD behaviors after being 
 inoculated with ADHD microbiota, suggesting a role of the microbiome in ADHD pathology.
 
-**You can work through the course in different ways: Either by cloning the [repository](https://github.com/microbiome/course_2021_radboud) and then run the code in the Rmd files step by step. Or you can just read through the [html version](https://microbiome.github.io/course_2021_radboud/) of the course and copy-paste the code from the website into your R console (e.g. in Rstudio). In the latter case you either need to ensure a similar folder structure on your computer compared to the repository or modify the code so that it works with your local folder structure. In any case, a good exercise will to modify the code such that it works with another dataset.**
+**You can work through the course in different ways: The first way is to clone the [repository](https://github.com/microbiome/course_2021_radboud). Then you can run the code in the Rmd files step by step. The second way would be to just read through the [html version](https://microbiome.github.io/course_2021_radboud/) of the course. You can then copy-paste the code from the website into your R console (e.g. in Rstudio). In the latter case you either need to ensure a similar folder structure on your computer compared to the repository or modify the code so that it works with your local folder structure. In any case, a good exercise will be to modify the code so that it works with another dataset of your choice.**
  
 
 
