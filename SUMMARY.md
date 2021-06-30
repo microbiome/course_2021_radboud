@@ -1,8 +1,8 @@
 # Summary
 
 * [Overview](README.md)
-  * [The miaverse framework](README.md#miaverse)
-  * [Learning goals](README.md#goals)  
+  * [The miaverse framework](README.md#the-miaverse-framework)
+  * [Learning goals](README.md#learning-goals)  
   * [Acknowledgments](README.md#acknowledgments)
 * [Getting started](start.md)
   * [Checklist before the course](start.md#checklist-before-the-course)
