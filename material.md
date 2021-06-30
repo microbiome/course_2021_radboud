@@ -28,7 +28,17 @@ RStudio
 
 * [RStudio cheat sheet](https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf)  
 
+## Resources for TreeSummarizedExperiment
 
+ * SingleCellExperiment
+   + [Publication](https://bioconductor.org/packages/release/bioc/vignettes/SingleCellExperiment/inst/doc/intro.html)
+   + [Project page](https://bioconductor.org/packages/release/bioc/html/SingleCellExperiment.html)
+ * SummarizedExperiment
+   + [Publication](https://bioconductor.org/packages/release/bioc/vignettes/SummarizedExperiment/inst/doc/SummarizedExperiment.html)
+   + [Project page](https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html)
+ * TreeSummarizedExperiment
+   + [Publication](https://f1000research.com/articles/9-1246)
+   + [Project page](https://www.bioconductor.org/packages/release/bioc/html/TreeSummarizedExperiment.html)
 
 ## Resources for phyloseq
 
