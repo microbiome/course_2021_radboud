@@ -1,0 +1,15 @@
+delete_merged_file: true
+rmd_files:
+  - index.Rmd
+  - 01-program.Rmd
+  - 02-start.Rmd
+  - 03-install.Rmd
+  - 04-import.Rmd
+  - 05-explore.Rmd
+  - 06-alpha.Rmd
+  - 07-beta.Rmd
+  - 08-dmm.Rmd
+  - 09-abundance.Rmd
+  - 10-material.Rmd
+  - 11-misc.Rmd
+output_dir: docs

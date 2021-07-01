@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Miscellaneous material</title>
+  <title>3 Getting started | Miscellaneous material</title>
   <meta name="description" content="Course material" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Miscellaneous material" />
+  <meta property="og:title" content="3 Getting started | Miscellaneous material" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="microbiome/course_2021_radboud" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Miscellaneous material" />
+  <meta name="twitter:title" content="3 Getting started | Miscellaneous material" />
   
   <meta name="twitter:description" content="Course material" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="program.html"/>
+<link rel="prev" href="program.html"/>
+<link rel="next" href="install-and-load-required-r-packages.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -244,69 +244,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Miscellaneous material</h1>
-<p class="author"><em>Leo Lahti, Tuomas Borman, Henrik Eckerman</em></p>
-<p class="date" style="margin-top: 1.5em;"><em>2021-07-01</em></p>
-</div>
-<div id="overview" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Overview</h1>
-<p><strong>Welcome to <a href="https://www.ru.nl/radboudsummerschool/courses/2021/brain-bacteria-behaviour/">Radboud Summer School, July 2021</a></strong></p>
-<p><img src="https://user-images.githubusercontent.com/60338854/121848694-1072a480-ccf3-11eb-9af2-7fdefd8d1794.png" alt="ML4microbiome" width="50%"/></p>
-<p>Figure source: Moreno-Indias <em>et al</em>. (2021) <a href="https://doi.org/10.3389/fmicb.2021.635781">Statistical and Machine Learning Techniques in Human Microbiome Studies: Contemporary Challenges and Solutions</a>. Frontiers in Microbiology 12:11.</p>
-<div id="the-miaverse-framework" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> The miaverse framework</h2>
-<p>The <a href="https://microbiome.github.io"><em>miaverse</em></a> (mia = <strong>MI</strong>crobiome <strong>A</strong>nalysis) is an
-R/Bioconductor framework for microbiome data science. It aims to
-extend the capabilities of another popular framework,
-<a href="https://joey711.github.io/phyloseq/">phyloseq</a>.</p>
-<p>The miaverse framework consists of an efficient data structure, an
-associated package ecosystem, demonstration data sets, and open
-documentation. These are explained in more detail in the online book
-<a href="https://microbiome.github.io/OMA">Orchestrating Microbiome Analysis</a>.</p>
-<p>This training material walks you through an example workflow that
-shows the standard steps of taxonomic data analysis covering data
-access, exploration, analysis, visualization and reporoducible
-reporting. <strong>You can run the workflow by simply copy-pasting the
-examples.</strong> For advanced material, you can test and modify further
-examples from the <a href="https://microbiome.github.io/OMA">OMA book</a>, or try
-to apply the techniques to your own data.</p>
-</div>
-<div id="learning-goals" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Learning goals</h2>
-<p>This course provides an overview of the standard bioinformatics
-workflow in taxonomic profiling studies, ranging from data
-preprocessing to statistical analysis and reproducible reporting, with
-a focus on examples from human gut microbiota studies. You
-will become familiar with standard bioinformatics concepts and methods
-in taxonomic profiling studies of the human microbiome. This includes
-better understanding of the specific statistical challenges, practical
-hands-on experience with the commonly used methods, and reproducible
-research with R.</p>
-<p>After the course you will know how to approach new tasks in microbiome
-data science by utilizing available documentation and R tools.</p>
-<p><strong>Target audience</strong> Advanced students and applied researchers who wish
-to develop their skills in microbial community analysis.</p>
-<p><strong>Venue</strong> <a href="">Radboud University / Online</a>, Nijmegen. July 5-16, 2021,
-with contributions by <a href="http://datascience.utu.fi">University of
-Turku</a>, Finland.</p>
-</div>
-<div id="acknowledgments" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> Acknowledgments</h2>
-<p><strong>Citation</strong> “Introduction to miaverse (2021). Tuomas Borman, Felix Ernst, Sudarshan Shetty, Henrik Eckermann, Leo Lahti. URL: <a href="https://microbiome.github.io" class="uri">https://microbiome.github.io</a>.”</p>
-<p><strong>Contact</strong>
-- <a href="http://datascience.utu.fi">Leo Lahti</a>, University of Turku
-- <a href="https://microbiome.github.io">mia Collective</a></p>
-<p><strong>License</strong> All material is released under the open <a href="LICENSE">CC BY-NC-SA 3.0 License</a>.</p>
+<div id="getting-started" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Getting started</h1>
+<div id="checklist-before-the-course" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Checklist (before the course)</h2>
+<p>Install the following software in advance in order to avoid
+unnecessary delays and leaving more time for the course contents.</p>
 <ul>
-<li>Landing page (html): <a href="https://microbiome.github.io/course_2021_radboud/">miaverse teaching material</a></li>
-<li>Source code (github): <a href="https://github.com/microbiome/course_2021_radboud">miaverse teaching material</a></li>
+<li><p><a href="https://www.r-project.org/">R (version &gt;4.1.0)</a></p></li>
+<li><p><a href="https://www.rstudio.com/products/rstudio/download/">RStudio</a>;
+choose “Rstudio Desktop” to download the latest version. Optional
+but preferred. For further details, check the <a href="https://www.rstudio.com/">Rstudio home
+page</a>.</p></li>
+<li><p><a href="install.html">Install and load required R packages</a>.</p></li>
+<li><p>After a successful installation you can start trying out the
+case study examples in this training material</p></li>
 </ul>
-<p>The source code of this repository is fully reproducible and contains
-the Rmd files with executable code. All files can be rendered at one
-go by running the file <a href="main.R">main.R</a>. You can check the file for
-details on how to clone the repository and convert it into a gitbook,
-although this is not necessary for the training.</p>
+</div>
+<div id="support-and-resources" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Support and resources</h2>
+<p>For additional reading and online material, see <a href="material.html">Material</a> section</p>
+<p>For online support on installation and other matters, you can join us at:</p>
+<ul>
+<li>Users: <a href="https://gitter.im/microbiome/miaverse?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge">miaverse Gitter channel</a></li>
+<li>Developers: <a href="https://bioc-community.herokuapp.com">Bioconductor Slack</a> #microbiomeexperiment channel</li>
+</ul>
 
 </div>
 </div>
@@ -315,8 +277,8 @@ although this is not necessary for the training.</p>
           </div>
         </div>
       </div>
-
-<a href="program.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="program.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="install-and-load-required-r-packages.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
