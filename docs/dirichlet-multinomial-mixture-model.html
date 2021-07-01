@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Study material</title>
+  <title>9 Dirichlet-Multinomial Mixture Model | Study material</title>
   <meta name="description" content="Course material" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Study material" />
+  <meta property="og:title" content="9 Dirichlet-Multinomial Mixture Model | Study material" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="microbiome/course_2021_radboud" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Study material" />
+  <meta name="twitter:title" content="9 Dirichlet-Multinomial Mixture Model | Study material" />
   
   <meta name="twitter:description" content="Course material" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="program.html"/>
+<link rel="prev" href="beta-diversity.html"/>
+<link rel="next" href="differential-abundance-analysis.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -244,69 +244,156 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Study material</h1>
-<p class="author"><em>Leo Lahti, Tuomas Borman, Henrik Eckerman</em></p>
-<p class="date" style="margin-top: 1.5em;"><em>2021-07-01</em></p>
-</div>
-<div id="overview" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Overview</h1>
-<p><strong>Welcome to <a href="https://www.ru.nl/radboudsummerschool/courses/2021/brain-bacteria-behaviour/">Radboud Summer School, July 2021</a></strong></p>
-<p><img src="https://user-images.githubusercontent.com/60338854/121848694-1072a480-ccf3-11eb-9af2-7fdefd8d1794.png" alt="ML4microbiome" width="50%"/></p>
-<p>Figure source: Moreno-Indias <em>et al</em>. (2021) <a href="https://doi.org/10.3389/fmicb.2021.635781">Statistical and Machine Learning Techniques in Human Microbiome Studies: Contemporary Challenges and Solutions</a>. Frontiers in Microbiology 12:11.</p>
-<div id="the-miaverse-framework" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> The miaverse framework</h2>
-<p>The <a href="https://microbiome.github.io"><em>miaverse</em></a> (mia = <strong>MI</strong>crobiome <strong>A</strong>nalysis) is an
-R/Bioconductor framework for microbiome data science. It aims to
-extend the capabilities of another popular framework,
-<a href="https://joey711.github.io/phyloseq/">phyloseq</a>.</p>
-<p>The miaverse framework consists of an efficient data structure, an
-associated package ecosystem, demonstration data sets, and open
-documentation. These are explained in more detail in the online book
-<a href="https://microbiome.github.io/OMA">Orchestrating Microbiome Analysis</a>.</p>
-<p>This training material walks you through an example workflow that
-shows the standard steps of taxonomic data analysis covering data
-access, exploration, analysis, visualization and reporoducible
-reporting. <strong>You can run the workflow by simply copy-pasting the
-examples.</strong> For advanced material, you can test and modify further
-examples from the <a href="https://microbiome.github.io/OMA">OMA book</a>, or try
-to apply the techniques to your own data.</p>
-</div>
-<div id="learning-goals" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Learning goals</h2>
-<p>This course provides an overview of the standard bioinformatics
-workflow in taxonomic profiling studies, ranging from data
-preprocessing to statistical analysis and reproducible reporting, with
-a focus on examples from human gut microbiota studies. You
-will become familiar with standard bioinformatics concepts and methods
-in taxonomic profiling studies of the human microbiome. This includes
-better understanding of the specific statistical challenges, practical
-hands-on experience with the commonly used methods, and reproducible
-research with R.</p>
-<p>After the course you will know how to approach new tasks in microbiome
-data science by utilizing available documentation and R tools.</p>
-<p><strong>Target audience</strong> Advanced students and applied researchers who wish
-to develop their skills in microbial community analysis.</p>
-<p><strong>Venue</strong> <a href="">Radboud University / Online</a>, Nijmegen. July 5-16, 2021,
-with contributions by <a href="http://datascience.utu.fi">University of
-Turku</a>, Finland.</p>
-</div>
-<div id="acknowledgments" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> Acknowledgments</h2>
-<p><strong>Citation</strong> “Introduction to miaverse (2021). Tuomas Borman, Felix Ernst, Sudarshan Shetty, Henrik Eckermann, Leo Lahti. URL: <a href="https://microbiome.github.io" class="uri">https://microbiome.github.io</a>.”</p>
-<p><strong>Contact</strong>
-- <a href="http://datascience.utu.fi">Leo Lahti</a>, University of Turku
-- <a href="https://microbiome.github.io">mia Collective</a></p>
-<p><strong>License</strong> All material is released under the open <a href="LICENSE">CC BY-NC-SA 3.0 License</a>.</p>
-<ul>
-<li>Landing page (html): <a href="https://microbiome.github.io/course_2021_radboud/">miaverse teaching material</a></li>
-<li>Source code (github): <a href="https://github.com/microbiome/course_2021_radboud">miaverse teaching material</a></li>
-</ul>
-<p>The source code of this repository is fully reproducible and contains
-the Rmd files with executable code. All files can be rendered at one
-go by running the file <a href="main.R">main.R</a>. You can check the file for
-details on how to clone the repository and convert it into a gitbook,
-although this is not necessary for the training.</p>
+<div id="dirichlet-multinomial-mixture-model" class="section level1" number="9">
+<h1><span class="header-section-number">9</span> Dirichlet-Multinomial Mixture Model</h1>
+<p>This section focus on DMM analysis.</p>
+<p>One technique that allows to search for groups of samples that are
+similar to each other is the <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0030126">Dirichlet-Multinomial Mixture
+Model</a>. In
+DMM, we first determine the number of clusters (k) that best fit the
+data (model evidence) using Laplace approximation. After fitting the
+model with k clusters, we obtain for each sample k probabilities that
+reflect the probability that a sample belongs to the given cluster.</p>
+<p>Let’s cluster the data with DMM clustering.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="dirichlet-multinomial-mixture-model.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Runs model and calculates the most likely number of clusters from 1 to 7. </span></span>
+<span id="cb62-2"><a href="dirichlet-multinomial-mixture-model.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="co"># For this small data, takes about 10 seconds. For larger data, can take much longer</span></span>
+<span id="cb62-3"><a href="dirichlet-multinomial-mixture-model.html#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="co"># because this demands lots of resources. </span></span>
+<span id="cb62-4"><a href="dirichlet-multinomial-mixture-model.html#cb62-4" aria-hidden="true" tabindex="-1"></a>tse_dmn <span class="ot">&lt;-</span> <span class="fu">runDMN</span>(tse, <span class="at">name =</span> <span class="st">&quot;DMN&quot;</span>, <span class="at">k =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="dirichlet-multinomial-mixture-model.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># It is stored in metadata</span></span>
+<span id="cb63-2"><a href="dirichlet-multinomial-mixture-model.html#cb63-2" aria-hidden="true" tabindex="-1"></a>tse_dmn</span></code></pre></div>
+<pre><code>## class: TreeSummarizedExperiment 
+## dim: 151 27 
+## metadata(1): DMN
+## assays(3): counts relabundance clr
+## rownames(151): 1726470 1726471 ... 17264756 17264757
+## rowData names(6): Kingdom Phylum ... Family Genus
+## colnames(27): A110 A12 ... A35 A38
+## colData names(6): patient_status cohort ... Shannon_index Faith_diversity_index
+## reducedDimNames(0):
+## mainExpName: NULL
+## altExpNames(0):
+## rowLinks: a LinkDataFrame (151 rows)
+## rowTree: 1 phylo tree(s) (151 leaves)
+## colLinks: NULL
+## colTree: NULL</code></pre>
+<p>Return information on metadata that the object contains.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="dirichlet-multinomial-mixture-model.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(<span class="fu">metadata</span>(tse_dmn))</span></code></pre></div>
+<pre><code>## [1] &quot;DMN&quot;</code></pre>
+<p>This returns a list of DMN objects for a closer investigation.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="dirichlet-multinomial-mixture-model.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getDMN</span>(tse_dmn)</span></code></pre></div>
+<pre><code>## [[1]]
+## class: DMN 
+## k: 1 
+## samples x taxa: 27 x 151 
+## Laplace: 12049.73 BIC: 12271.38 AIC: 12173.55 
+## 
+## [[2]]
+## class: DMN 
+## k: 2 
+## samples x taxa: 27 x 151 
+## Laplace: 11441 BIC: 12161.29 AIC: 11964.97 
+## 
+## [[3]]
+## class: DMN 
+## k: 3 
+## samples x taxa: 27 x 151 
+## Laplace: 11060.04 BIC: 12266.31 AIC: 11971.51 
+## 
+## [[4]]
+## class: DMN 
+## k: 4 
+## samples x taxa: 27 x 151 
+## Laplace: 11417.3 BIC: 13047.39 AIC: 12654.11 
+## 
+## [[5]]
+## class: DMN 
+## k: 5 
+## samples x taxa: 27 x 151 
+## Laplace: 11530.57 BIC: 13555.32 AIC: 13063.55 
+## 
+## [[6]]
+## class: DMN 
+## k: 6 
+## samples x taxa: 27 x 151 
+## Laplace: 11164.03 BIC: 13725.19 AIC: 13134.94 
+## 
+## [[7]]
+## class: DMN 
+## k: 7 
+## samples x taxa: 27 x 151 
+## Laplace: 11428.86 BIC: 14172.79 AIC: 13484.06</code></pre>
+<p>Show Laplace approximation (model evidence) for each model of the k models.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="dirichlet-multinomial-mixture-model.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotDMNFit</span>(tse_dmn, <span class="at">type =</span> <span class="st">&quot;laplace&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<p>Return the model that has the best fit.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="dirichlet-multinomial-mixture-model.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getBestDMNFit</span>(tse_dmn, <span class="at">type =</span> <span class="st">&quot;laplace&quot;</span>)</span></code></pre></div>
+<pre><code>## class: DMN 
+## k: 3 
+## samples x taxa: 27 x 151 
+## Laplace: 11060.04 BIC: 12266.31 AIC: 11971.51</code></pre>
+<div id="pcoa-for-asv-level-data-with-bray-curtis-with-dmm-clusters-shown-with-colors" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors</h2>
+<p>Group samples and return DMNGroup object that contains a summary.
+Patient status is used for grouping.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="dirichlet-multinomial-mixture-model.html#cb72-1" aria-hidden="true" tabindex="-1"></a>dmn_group <span class="ot">&lt;-</span> <span class="fu">calculateDMNgroup</span>(tse_dmn, <span class="at">variable =</span> <span class="st">&quot;patient_status&quot;</span>, </span>
+<span id="cb72-2"><a href="dirichlet-multinomial-mixture-model.html#cb72-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">exprs_values =</span> <span class="st">&quot;counts&quot;</span>, <span class="at">k =</span> <span class="dv">3</span>)</span>
+<span id="cb72-3"><a href="dirichlet-multinomial-mixture-model.html#cb72-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-4"><a href="dirichlet-multinomial-mixture-model.html#cb72-4" aria-hidden="true" tabindex="-1"></a>dmn_group</span></code></pre></div>
+<pre><code>## class: DMNGroup 
+## summary:
+##         k samples taxa      NLE    LogDet  Laplace      BIC      AIC
+## ADHD    3      13  151 6018.131 -345.0673 5427.481 6601.657 6473.131
+## Control 3      14  151 6647.269 -148.3688 6154.968 7247.655 7102.269</code></pre>
+<p>Mixture weights (rough measure of the cluster size).</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="dirichlet-multinomial-mixture-model.html#cb74-1" aria-hidden="true" tabindex="-1"></a>DirichletMultinomial<span class="sc">::</span><span class="fu">mixturewt</span>(<span class="fu">getBestDMNFit</span>(tse_dmn))</span></code></pre></div>
+<pre><code>##          pi    theta
+## 1 0.4814815 31.27778
+## 2 0.2962963 47.34378
+## 3 0.2222222 92.27398</code></pre>
+<p>Samples-cluster assignment probabilities / how probable it is that sample belongs
+to each cluster</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="dirichlet-multinomial-mixture-model.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(DirichletMultinomial<span class="sc">::</span><span class="fu">mixture</span>(<span class="fu">getBestDMNFit</span>(tse_dmn)))</span></code></pre></div>
+<pre><code>##               [,1]          [,2]          [,3]
+## A110  1.000000e+00 1.269403e-144 7.636874e-205
+## A12  1.007738e-116  6.179338e-93  1.000000e+00
+## A15   1.000000e+00 9.662823e-119 3.421946e-234
+## A19  5.527959e-112 1.840808e-107  1.000000e+00
+## A21   2.202289e-93  4.785328e-96  1.000000e+00
+## A23   1.000000e+00 8.940019e-111 1.955921e-161</code></pre>
+<p>Contribution of each taxa to each component</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="dirichlet-multinomial-mixture-model.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(DirichletMultinomial<span class="sc">::</span><span class="fu">fitted</span>(<span class="fu">getBestDMNFit</span>(tse_dmn)))</span></code></pre></div>
+<pre><code>##                 [,1]        [,2]       [,3]
+## 1726470  6.351978301 2.898719324 20.1892631
+## 1726471  5.288058132 0.002048491  0.1532241
+## 17264731 0.001250263 9.144208664  2.0111928
+## 17264726 0.140483113 1.363559249  7.5894591
+## 1726472  2.104282937 3.523214339  2.6657329
+## 17264724 0.072359177 0.002048491  9.8545574</code></pre>
+<p>Get the assignment probabilities</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="dirichlet-multinomial-mixture-model.html#cb80-1" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> DirichletMultinomial<span class="sc">::</span><span class="fu">mixture</span>(<span class="fu">getBestDMNFit</span>(tse_dmn))</span>
+<span id="cb80-2"><a href="dirichlet-multinomial-mixture-model.html#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Add column names</span></span>
+<span id="cb80-3"><a href="dirichlet-multinomial-mixture-model.html#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(prob) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;comp1&quot;</span>, <span class="st">&quot;comp2&quot;</span>, <span class="st">&quot;comp3&quot;</span>)</span>
+<span id="cb80-4"><a href="dirichlet-multinomial-mixture-model.html#cb80-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-5"><a href="dirichlet-multinomial-mixture-model.html#cb80-5" aria-hidden="true" tabindex="-1"></a><span class="co"># For each row, finds column that has the highest value. Then extract the column </span></span>
+<span id="cb80-6"><a href="dirichlet-multinomial-mixture-model.html#cb80-6" aria-hidden="true" tabindex="-1"></a><span class="co"># names of highest values.</span></span>
+<span id="cb80-7"><a href="dirichlet-multinomial-mixture-model.html#cb80-7" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">colnames</span>(prob)[<span class="fu">max.col</span>(prob,<span class="at">ties.method =</span> <span class="st">&quot;first&quot;</span>)]</span>
+<span id="cb80-8"><a href="dirichlet-multinomial-mixture-model.html#cb80-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-9"><a href="dirichlet-multinomial-mixture-model.html#cb80-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates a data frame that contains principal coordinates and DMM information</span></span>
+<span id="cb80-10"><a href="dirichlet-multinomial-mixture-model.html#cb80-10" aria-hidden="true" tabindex="-1"></a>euclidean_dmm_pcoa_df <span class="ot">&lt;-</span> <span class="fu">cbind</span>(euclidean_pcoa_df,</span>
+<span id="cb80-11"><a href="dirichlet-multinomial-mixture-model.html#cb80-11" aria-hidden="true" tabindex="-1"></a>                               <span class="at">dmm_component =</span> vec)</span>
+<span id="cb80-12"><a href="dirichlet-multinomial-mixture-model.html#cb80-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-13"><a href="dirichlet-multinomial-mixture-model.html#cb80-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates a plot</span></span>
+<span id="cb80-14"><a href="dirichlet-multinomial-mixture-model.html#cb80-14" aria-hidden="true" tabindex="-1"></a>euclidean_dmm_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> euclidean_dmm_pcoa_df, </span>
+<span id="cb80-15"><a href="dirichlet-multinomial-mixture-model.html#cb80-15" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">aes</span>(<span class="at">x=</span>pcoa1, <span class="at">y=</span>pcoa2,</span>
+<span id="cb80-16"><a href="dirichlet-multinomial-mixture-model.html#cb80-16" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">color =</span> dmm_component)) <span class="sc">+</span></span>
+<span id="cb80-17"><a href="dirichlet-multinomial-mixture-model.html#cb80-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb80-18"><a href="dirichlet-multinomial-mixture-model.html#cb80-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Coordinate 1&quot;</span>,</span>
+<span id="cb80-19"><a href="dirichlet-multinomial-mixture-model.html#cb80-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Coordinate 2&quot;</span>,</span>
+<span id="cb80-20"><a href="dirichlet-multinomial-mixture-model.html#cb80-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;PCoA with Aitchison distances&quot;</span>) <span class="sc">+</span>  </span>
+<span id="cb80-21"><a href="dirichlet-multinomial-mixture-model.html#cb80-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)) <span class="co"># makes titles smaller</span></span>
+<span id="cb80-22"><a href="dirichlet-multinomial-mixture-model.html#cb80-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-23"><a href="dirichlet-multinomial-mixture-model.html#cb80-23" aria-hidden="true" tabindex="-1"></a>euclidean_dmm_plot</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 
 </div>
 </div>
@@ -315,8 +402,8 @@ although this is not necessary for the training.</p>
           </div>
         </div>
       </div>
-
-<a href="program.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="beta-diversity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="differential-abundance-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

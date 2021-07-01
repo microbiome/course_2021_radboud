@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Import data | Study material</title>
+  <meta name="description" content="Course material" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Import data | Study material" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Course material" />
+  <meta name="github-repo" content="microbiome/course_2021_radboud" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Import data | Study material" />
+  
+  <meta name="twitter:description" content="Course material" />
+  
+
+<meta name="author" content="Leo Lahti, Tuomas Borman, Henrik Eckerman" />
+
+
+<meta name="date" content="2021-07-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="install-and-load-required-r-packages.html"/>
+<link rel="next" href="data-exploration.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#the-miaverse-framework"><i class="fa fa-check"></i><b>1.1</b> The miaverse framework</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#learning-goals"><i class="fa fa-check"></i><b>1.2</b> Learning goals</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#acknowledgments"><i class="fa fa-check"></i><b>1.3</b> Acknowledgments</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="program.html"><a href="program.html"><i class="fa fa-check"></i><b>2</b> Program</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="program.html"><a href="program.html#monday-12-july-from-raw-sequences-to-ecological-data-analysis"><i class="fa fa-check"></i><b>2.1</b> Monday 12 July: from raw sequences to ecological data analysis</a></li>
+<li class="chapter" data-level="2.2" data-path="program.html"><a href="program.html#tuesday-13-july-key-concepts-in-data-analysis-alpha-diversity"><i class="fa fa-check"></i><b>2.2</b> Tuesday 13 July: Key concepts in data analysis: alpha diversity</a></li>
+<li class="chapter" data-level="2.3" data-path="program.html"><a href="program.html#wednesday-14-july-key-concepts-in-data-analysis-beta-diversity"><i class="fa fa-check"></i><b>2.3</b> Wednesday 14 July: Key concepts in data analysis: beta diversity</a></li>
+<li class="chapter" data-level="2.4" data-path="program.html"><a href="program.html#thursday-15-july-key-concepts-in-data-analysis-differential-abundance"><i class="fa fa-check"></i><b>2.4</b> Thursday 15 July: Key concepts in data analysis: differential abundance</a></li>
+<li class="chapter" data-level="2.5" data-path="program.html"><a href="program.html#friday-16-july-presentations-closing"><i class="fa fa-check"></i><b>2.5</b> Friday 16 July: Presentations &amp; closing</a></li>
+<li class="chapter" data-level="2.6" data-path="program.html"><a href="program.html#course-assignments-todo"><i class="fa fa-check"></i><b>2.6</b> Course assignments (TODO)</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="program.html"><a href="program.html#monday-12-july-done"><i class="fa fa-check"></i><b>2.6.1</b> Monday 12 July: DONE</a></li>
+<li class="chapter" data-level="2.6.2" data-path="program.html"><a href="program.html#tue-13-july-alpha-diversity"><i class="fa fa-check"></i><b>2.6.2</b> Tue 13 July: alpha diversity</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>3</b> Getting started</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="getting-started.html"><a href="getting-started.html#checklist-before-the-course"><i class="fa fa-check"></i><b>3.1</b> Checklist (before the course)</a></li>
+<li class="chapter" data-level="3.2" data-path="getting-started.html"><a href="getting-started.html#support-and-resources"><i class="fa fa-check"></i><b>3.2</b> Support and resources</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="install-and-load-required-r-packages.html"><a href="install-and-load-required-r-packages.html"><i class="fa fa-check"></i><b>4</b> Install and load required R packages</a></li>
+<li class="chapter" data-level="5" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>5</b> Import data</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="import-data.html"><a href="import-data.html#data"><i class="fa fa-check"></i><b>5.1</b> Data</a></li>
+<li class="chapter" data-level="5.2" data-path="import-data.html"><a href="import-data.html#investigate-the-r-data-object"><i class="fa fa-check"></i><b>5.2</b> Investigate the R data object</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="import-data.html"><a href="import-data.html#rowdata-taxonomic-information"><i class="fa fa-check"></i><b>5.2.1</b> rowData (taxonomic information)</a></li>
+<li class="chapter" data-level="5.2.2" data-path="import-data.html"><a href="import-data.html#coldata-sample-information"><i class="fa fa-check"></i><b>5.2.2</b> colData (sample information)</a></li>
+<li class="chapter" data-level="5.2.3" data-path="import-data.html"><a href="import-data.html#phylogenetic-tree-information"><i class="fa fa-check"></i><b>5.2.3</b> Phylogenetic tree information</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data-exploration.html"><a href="data-exploration.html"><i class="fa fa-check"></i><b>6</b> Data exploration</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="data-exploration.html"><a href="data-exploration.html#investigate-the-contents-of-a-microbiome-data-object"><i class="fa fa-check"></i><b>6.1</b> Investigate the contents of a microbiome data object</a></li>
+<li class="chapter" data-level="6.2" data-path="data-exploration.html"><a href="data-exploration.html#manipulate-the-data"><i class="fa fa-check"></i><b>6.2</b> Manipulate the data</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="data-exploration.html"><a href="data-exploration.html#transformations"><i class="fa fa-check"></i><b>6.2.1</b> Transformations</a></li>
+<li class="chapter" data-level="6.2.2" data-path="data-exploration.html"><a href="data-exploration.html#aggregation"><i class="fa fa-check"></i><b>6.2.2</b> Aggregation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="data-exploration.html"><a href="data-exploration.html#visualization"><i class="fa fa-check"></i><b>6.3</b> Visualization</a></li>
+<li class="chapter" data-level="6.4" data-path="data-exploration.html"><a href="data-exploration.html#further-resources"><i class="fa fa-check"></i><b>6.4</b> Further resources</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="alpha-diversity.html"><a href="alpha-diversity.html"><i class="fa fa-check"></i><b>7</b> Alpha diversity</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#visualization-1"><i class="fa fa-check"></i><b>7.1</b> Visualization</a></li>
+<li class="chapter" data-level="7.2" data-path="alpha-diversity.html"><a href="alpha-diversity.html#statistical-testing-and-comparisons"><i class="fa fa-check"></i><b>7.2</b> Statistical testing and comparisons</a></li>
+<li class="chapter" data-level="7.3" data-path="alpha-diversity.html"><a href="alpha-diversity.html#further-resources-1"><i class="fa fa-check"></i><b>7.3</b> Further resources</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="beta-diversity.html"><a href="beta-diversity.html"><i class="fa fa-check"></i><b>8</b> Beta diversity</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="beta-diversity.html"><a href="beta-diversity.html#examples-of-pcoa-with-different-settings"><i class="fa fa-check"></i><b>8.1</b> Examples of PCoA with different settings</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="beta-diversity.html"><a href="beta-diversity.html#pcoa-for-asv-level-data-with-bray-curtis"><i class="fa fa-check"></i><b>8.1.1</b> PCoA for ASV-level data with Bray-Curtis</a></li>
+<li class="chapter" data-level="8.1.2" data-path="beta-diversity.html"><a href="beta-diversity.html#pcoa-for-asv-level-data-with-aitchison-distance"><i class="fa fa-check"></i><b>8.1.2</b> PCoA for ASV-level data with Aitchison distance</a></li>
+<li class="chapter" data-level="8.1.3" data-path="beta-diversity.html"><a href="beta-diversity.html#pcoa-aggregated-to-phylum-level"><i class="fa fa-check"></i><b>8.1.3</b> PCoA aggregated to Phylum level</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="beta-diversity.html"><a href="beta-diversity.html#highlighting-external-variables-on-pcoa-plot"><i class="fa fa-check"></i><b>8.2</b> Highlighting external variables on PCoA plot</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="beta-diversity.html"><a href="beta-diversity.html#pcoa-with-discrete-sample-grouping-variable-shown-with-colors"><i class="fa fa-check"></i><b>8.2.1</b> PCoA with discrete sample grouping variable shown with colors</a></li>
+<li class="chapter" data-level="8.2.2" data-path="beta-diversity.html"><a href="beta-diversity.html#pcoa-with-continuous-sample-grouping-variable-shown-with-colors"><i class="fa fa-check"></i><b>8.2.2</b> PCoA with continuous sample grouping variable shown with colors</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="beta-diversity.html"><a href="beta-diversity.html#estimating-associations-with-an-external-variable"><i class="fa fa-check"></i><b>8.3</b> Estimating associations with an external variable</a></li>
+<li class="chapter" data-level="8.4" data-path="beta-diversity.html"><a href="beta-diversity.html#further-resources-2"><i class="fa fa-check"></i><b>8.4</b> Further resources</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="dirichlet-multinomial-mixture-model.html"><a href="dirichlet-multinomial-mixture-model.html"><i class="fa fa-check"></i><b>9</b> Dirichlet-Multinomial Mixture Model</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="dirichlet-multinomial-mixture-model.html"><a href="dirichlet-multinomial-mixture-model.html#pcoa-for-asv-level-data-with-bray-curtis-with-dmm-clusters-shown-with-colors"><i class="fa fa-check"></i><b>9.1</b> PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html"><i class="fa fa-check"></i><b>10</b> Differential abundance analysis</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#wilcoxon-test"><i class="fa fa-check"></i><b>10.1</b> Wilcoxon test</a></li>
+<li class="chapter" data-level="10.2" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#deseq2"><i class="fa fa-check"></i><b>10.2</b> DESeq2</a></li>
+<li class="chapter" data-level="10.3" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#ancom-bc"><i class="fa fa-check"></i><b>10.3</b> ANCOM-BC</a></li>
+<li class="chapter" data-level="10.4" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#comparison-of-wilcoxon-test-and-deseq2"><i class="fa fa-check"></i><b>10.4</b> Comparison of Wilcoxon test and DESeq2</a></li>
+<li class="chapter" data-level="10.5" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#comparison-of-abundance"><i class="fa fa-check"></i><b>10.5</b> Comparison of abundance</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="study-material.html"><a href="study-material.html"><i class="fa fa-check"></i><b>11</b> Study material</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="study-material.html"><a href="study-material.html#lecture-slides"><i class="fa fa-check"></i><b>11.1</b> Lecture slides</a></li>
+<li class="chapter" data-level="11.2" data-path="study-material.html"><a href="study-material.html#example-solutions"><i class="fa fa-check"></i><b>11.2</b> Example solutions</a></li>
+<li class="chapter" data-level="11.3" data-path="study-material.html"><a href="study-material.html#r-programming-resources"><i class="fa fa-check"></i><b>11.3</b> R programming resources</a></li>
+<li class="chapter" data-level="11.4" data-path="study-material.html"><a href="study-material.html#resources-for-treesummarizedexperiment"><i class="fa fa-check"></i><b>11.4</b> Resources for TreeSummarizedExperiment</a></li>
+<li class="chapter" data-level="11.5" data-path="study-material.html"><a href="study-material.html#resources-for-phyloseq"><i class="fa fa-check"></i><b>11.5</b> Resources for phyloseq</a></li>
+<li class="chapter" data-level="11.6" data-path="study-material.html"><a href="study-material.html#further-reading"><i class="fa fa-check"></i><b>11.6</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html"><i class="fa fa-check"></i><b>12</b> Miscellaneous material</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html#shapiro-wilk-test"><i class="fa fa-check"></i><b>12.1</b> Shapiro-Wilk test</a></li>
+<li class="chapter" data-level="12.2" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html#deseq-details"><i class="fa fa-check"></i><b>12.2</b> Deseq details</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Study material</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="import-data" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Import data</h1>
+<p>This section shows how to import the <em>biom</em> and its accompanying data
+files to a <em>TreeSummarizedExperiment</em> object. A TSE object is a standard data structure
+that is utilized in the miaverse.</p>
+<p>We use example data from the following publication: Tengeler AC, Dam
+SA, Wiesmann M, Naaijen J, van Bodegom M, Belzer C, Dederen PJ,
+Verweij V, Franke B, Kozicz T, Vasquez AA &amp; Kiliaan AJ (2020) <a href="https://doi.org/10.1186/s40168-020-00816-x"><strong>Gut
+microbiota from persons with attention-deficit/hyperactivity disorder
+affects the brain in
+mice</strong></a>. Microbiome 8:44.</p>
+<p>In this study, mice are colonized with microbiota from participants
+with ADHD (attention deficit hyperactivity disorder) and healthy
+participants. The aim of the study was to assess whether the mice
+display ADHD behaviors after being inoculated with ADHD microbiota,
+suggesting a role of the microbiome in ADHD pathology.</p>
+<div id="data" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Data</h2>
+<p>The Data is located in a “data” subfolder. It consists of 3 files:</p>
+<ul>
+<li>biom file: contains an abundance table and taxonomy information</li>
+<li>csv file: contains the sample metadata</li>
+<li>tree file: contains a phylogenetic tree.</li>
+</ul>
+<p>Define source file paths.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="import-data.html#cb6-1" aria-hidden="true" tabindex="-1"></a>biom_file_path <span class="ot">&lt;-</span> <span class="st">&quot;data/Aggregated_humanization2.biom&quot;</span></span>
+<span id="cb6-2"><a href="import-data.html#cb6-2" aria-hidden="true" tabindex="-1"></a>sample_meta_file_path <span class="ot">&lt;-</span> <span class="st">&quot;data/Mapping_file_ADHD_aggregated.csv&quot;</span></span>
+<span id="cb6-3"><a href="import-data.html#cb6-3" aria-hidden="true" tabindex="-1"></a>tree_file_path <span class="ot">&lt;-</span> <span class="st">&quot;data/Data_humanization_phylo_aggregation.tre&quot;</span></span></code></pre></div>
+<p>Load the (biom) data into a SummarizedExperiment (SE) object.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="import-data.html#cb7-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">loadFromBiom</span>(biom_file_path)</span></code></pre></div>
+</div>
+<div id="investigate-the-r-data-object" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Investigate the R data object</h2>
+<p>We have now imported the data set in R. Let us investigate its contents.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="import-data.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(se)</span></code></pre></div>
+<pre><code>## class: SummarizedExperiment 
+## dim: 151 27 
+## metadata(0):
+## assays(1): counts
+## rownames(151): 1726470 1726471 ... 17264756 17264757
+## rowData names(6): taxonomy1 taxonomy2 ... taxonomy5 taxonomy6
+## colnames(27): A110 A111 ... A38 A39
+## colData names(0):</code></pre>
+<p>The <code>assays</code> slot includes a list of abundance tables. The imported abundance table is named as “counts.”
+Let us inspect only the first cols and rows.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="import-data.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assays</span>(se)<span class="sc">$</span>counts[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
+<pre><code>##           A110  A111  A12
+## 1726470  17722 11630    0
+## 1726471  12052     0 2679
+## 17264731     0   970    0</code></pre>
+<div id="rowdata-taxonomic-information" class="section level3" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> rowData (taxonomic information)</h3>
+<p>The <code>rowdata</code> includes taxonomic information from the biom file. The <code>head()</code> command
+shows just the beginning of the data table for an overview.</p>
+<p><code>knitr::kable()</code> is for printing the information more nicely.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="import-data.html#cb12-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(<span class="fu">rowData</span>(se)))</span></code></pre></div>
+<table style="width:100%;">
+<colgroup>
+<col width="7%" />
+<col width="10%" />
+<col width="15%" />
+<col width="15%" />
+<col width="17%" />
+<col width="18%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">taxonomy1</th>
+<th align="left">taxonomy2</th>
+<th align="left">taxonomy3</th>
+<th align="left">taxonomy4</th>
+<th align="left">taxonomy5</th>
+<th align="left">taxonomy6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1726470</td>
+<td align="left">"k__Bacteria</td>
+<td align="left">p__Bacteroidetes</td>
+<td align="left">c__Bacteroidia</td>
+<td align="left">o__Bacteroidales</td>
+<td align="left">f__Bacteroidaceae</td>
+<td align="left">g__Bacteroides"</td>
+</tr>
+<tr class="even">
+<td align="left">1726471</td>
+<td align="left">"k__Bacteria</td>
+<td align="left">p__Bacteroidetes</td>
+<td align="left">c__Bacteroidia</td>
+<td align="left">o__Bacteroidales</td>
+<td align="left">f__Bacteroidaceae</td>
+<td align="left">g__Bacteroides"</td>
+</tr>
+<tr class="odd">
+<td align="left">17264731</td>
+<td align="left">"k__Bacteria</td>
+<td align="left">p__Bacteroidetes</td>
+<td align="left">c__Bacteroidia</td>
+<td align="left">o__Bacteroidales</td>
+<td align="left">f__Porphyromonadaceae</td>
+<td align="left">g__Parabacteroides"</td>
+</tr>
+<tr class="even">
+<td align="left">17264726</td>
+<td align="left">"k__Bacteria</td>
+<td align="left">p__Bacteroidetes</td>
+<td align="left">c__Bacteroidia</td>
+<td align="left">o__Bacteroidales</td>
+<td align="left">f__Bacteroidaceae</td>
+<td align="left">g__Bacteroides"</td>
+</tr>
+<tr class="odd">
+<td align="left">1726472</td>
+<td align="left">"k__Bacteria</td>
+<td align="left">p__Verrucomicrobia</td>
+<td align="left">c__Verrucomicrobiae</td>
+<td align="left">o__Verrucomicrobiales</td>
+<td align="left">f__Verrucomicrobiaceae</td>
+<td align="left">g__Akkermansia"</td>
+</tr>
+<tr class="even">
+<td align="left">17264724</td>
+<td align="left">"k__Bacteria</td>
+<td align="left">p__Bacteroidetes</td>
+<td align="left">c__Bacteroidia</td>
+<td align="left">o__Bacteroidales</td>
+<td align="left">f__Bacteroidaceae</td>
+<td align="left">g__Bacteroides"</td>
+</tr>
+</tbody>
+</table>
+<p>These taxonomic rank names (column names) are not real rank names. Let’s replace them with real rank names.</p>
+<p>In addition to that, the taxa names include, e.g., ’"k__’ before the name, so let’s
+make them cleaner by removing them.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="import-data.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(<span class="fu">rowData</span>(se)) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Kingdom&quot;</span>, <span class="st">&quot;Phylum&quot;</span>, <span class="st">&quot;Class&quot;</span>, <span class="st">&quot;Order&quot;</span>, </span>
+<span id="cb13-2"><a href="import-data.html#cb13-2" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;Family&quot;</span>, <span class="st">&quot;Genus&quot;</span>)</span>
+<span id="cb13-3"><a href="import-data.html#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="import-data.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Goes through the whole DataFrame. Removes &#39;.*[kpcofg]__&#39; from strings, where [kpcofg] </span></span>
+<span id="cb13-5"><a href="import-data.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># is any character from listed ones, and .* any character.</span></span>
+<span id="cb13-6"><a href="import-data.html#cb13-6" aria-hidden="true" tabindex="-1"></a>rowdata_modified <span class="ot">&lt;-</span> BiocParallel<span class="sc">::</span><span class="fu">bplapply</span>(<span class="fu">rowData</span>(se), </span>
+<span id="cb13-7"><a href="import-data.html#cb13-7" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">FUN =</span> stringr<span class="sc">::</span>str_remove, </span>
+<span id="cb13-8"><a href="import-data.html#cb13-8" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">pattern =</span> <span class="st">&#39;.*[kpcofg]__&#39;</span>)</span>
+<span id="cb13-9"><a href="import-data.html#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="import-data.html#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Genus level has additional &#39;\&quot;&#39;, so let&#39;s delete that also</span></span>
+<span id="cb13-11"><a href="import-data.html#cb13-11" aria-hidden="true" tabindex="-1"></a>rowdata_modified <span class="ot">&lt;-</span> BiocParallel<span class="sc">::</span><span class="fu">bplapply</span>(rowdata_modified, </span>
+<span id="cb13-12"><a href="import-data.html#cb13-12" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">FUN =</span> stringr<span class="sc">::</span>str_remove, </span>
+<span id="cb13-13"><a href="import-data.html#cb13-13" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">pattern =</span> <span class="st">&#39;</span><span class="sc">\&quot;</span><span class="st">&#39;</span>)</span>
+<span id="cb13-14"><a href="import-data.html#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="import-data.html#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co"># rowdata_modified is a list, so it is converted back to DataFrame format. </span></span>
+<span id="cb13-16"><a href="import-data.html#cb13-16" aria-hidden="true" tabindex="-1"></a>rowdata_modified <span class="ot">&lt;-</span> <span class="fu">DataFrame</span>(rowdata_modified)</span>
+<span id="cb13-17"><a href="import-data.html#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-18"><a href="import-data.html#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co"># And then assigned back to the SE object</span></span>
+<span id="cb13-19"><a href="import-data.html#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(se) <span class="ot">&lt;-</span> rowdata_modified</span>
+<span id="cb13-20"><a href="import-data.html#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-21"><a href="import-data.html#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Now we have a nicer table</span></span>
+<span id="cb13-22"><a href="import-data.html#cb13-22" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(<span class="fu">rowData</span>(se)))</span></code></pre></div>
+<table>
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="15%" />
+<col width="16%" />
+<col width="17%" />
+<col width="18%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Kingdom</th>
+<th align="left">Phylum</th>
+<th align="left">Class</th>
+<th align="left">Order</th>
+<th align="left">Family</th>
+<th align="left">Genus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1726470</td>
+<td align="left">Bacteria</td>
+<td align="left">Bacteroidetes</td>
+<td align="left">Bacteroidia</td>
+<td align="left">Bacteroidales</td>
+<td align="left">Bacteroidaceae</td>
+<td align="left">Bacteroides</td>
+</tr>
+<tr class="even">
+<td align="left">1726471</td>
+<td align="left">Bacteria</td>
+<td align="left">Bacteroidetes</td>
+<td align="left">Bacteroidia</td>
+<td align="left">Bacteroidales</td>
+<td align="left">Bacteroidaceae</td>
+<td align="left">Bacteroides</td>
+</tr>
+<tr class="odd">
+<td align="left">17264731</td>
+<td align="left">Bacteria</td>
+<td align="left">Bacteroidetes</td>
+<td align="left">Bacteroidia</td>
+<td align="left">Bacteroidales</td>
+<td align="left">Porphyromonadaceae</td>
+<td align="left">Parabacteroides</td>
+</tr>
+<tr class="even">
+<td align="left">17264726</td>
+<td align="left">Bacteria</td>
+<td align="left">Bacteroidetes</td>
+<td align="left">Bacteroidia</td>
+<td align="left">Bacteroidales</td>
+<td align="left">Bacteroidaceae</td>
+<td align="left">Bacteroides</td>
+</tr>
+<tr class="odd">
+<td align="left">1726472</td>
+<td align="left">Bacteria</td>
+<td align="left">Verrucomicrobia</td>
+<td align="left">Verrucomicrobiae</td>
+<td align="left">Verrucomicrobiales</td>
+<td align="left">Verrucomicrobiaceae</td>
+<td align="left">Akkermansia</td>
+</tr>
+<tr class="even">
+<td align="left">17264724</td>
+<td align="left">Bacteria</td>
+<td align="left">Bacteroidetes</td>
+<td align="left">Bacteroidia</td>
+<td align="left">Bacteroidales</td>
+<td align="left">Bacteroidaceae</td>
+<td align="left">Bacteroides</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="coldata-sample-information" class="section level3" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> colData (sample information)</h3>
+<p>We notice that the imported biom file did not contain the sample meta data
+yet, so it includes an empty data frame.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="import-data.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">colData</span>(se))</span></code></pre></div>
+<pre><code>## DataFrame with 6 rows and 0 columns</code></pre>
+<p>Let us add a sample meta data file.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="import-data.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We use this to check what type of data it is</span></span>
+<span id="cb16-2"><a href="import-data.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># read.table(sample_meta_file_path)</span></span>
+<span id="cb16-3"><a href="import-data.html#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="import-data.html#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># It seems like a comma separated file and it does not include headers</span></span>
+<span id="cb16-5"><a href="import-data.html#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Let us read it and then convert from data.frame to DataFrame</span></span>
+<span id="cb16-6"><a href="import-data.html#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># (required for our purposes)</span></span>
+<span id="cb16-7"><a href="import-data.html#cb16-7" aria-hidden="true" tabindex="-1"></a>sample_meta <span class="ot">&lt;-</span> <span class="fu">DataFrame</span>(<span class="fu">read.table</span>(sample_meta_file_path, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="at">header =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb16-8"><a href="import-data.html#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="import-data.html#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add sample names to rownames</span></span>
+<span id="cb16-10"><a href="import-data.html#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(sample_meta) <span class="ot">&lt;-</span> sample_meta[,<span class="dv">1</span>]</span>
+<span id="cb16-11"><a href="import-data.html#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="import-data.html#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete column that included sample names</span></span>
+<span id="cb16-13"><a href="import-data.html#cb16-13" aria-hidden="true" tabindex="-1"></a>sample_meta[,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb16-14"><a href="import-data.html#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="import-data.html#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co"># We can add headers</span></span>
+<span id="cb16-16"><a href="import-data.html#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(sample_meta) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;patient_status&quot;</span>, <span class="st">&quot;cohort&quot;</span>, <span class="st">&quot;patient_status_vs_cohort&quot;</span>, <span class="st">&quot;sample_name&quot;</span>)</span>
+<span id="cb16-17"><a href="import-data.html#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-18"><a href="import-data.html#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Then it can be added to colData</span></span>
+<span id="cb16-19"><a href="import-data.html#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(se) <span class="ot">&lt;-</span> sample_meta</span></code></pre></div>
+<p>Now <code>colData</code> includes the sample metadata. Use kable to print it more nicely.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="import-data.html#cb17-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(<span class="fu">colData</span>(se)))</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">patient_status</th>
+<th align="left">cohort</th>
+<th align="left">patient_status_vs_cohort</th>
+<th align="left">sample_name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">A110</td>
+<td align="left">ADHD</td>
+<td align="left">Cohort_1</td>
+<td align="left">ADHD_Cohort_1</td>
+<td align="left">A110</td>
+</tr>
+<tr class="even">
+<td align="left">A12</td>
+<td align="left">ADHD</td>
+<td align="left">Cohort_1</td>
+<td align="left">ADHD_Cohort_1</td>
+<td align="left">A12</td>
+</tr>
+<tr class="odd">
+<td align="left">A15</td>
+<td align="left">ADHD</td>
+<td align="left">Cohort_1</td>
+<td align="left">ADHD_Cohort_1</td>
+<td align="left">A15</td>
+</tr>
+<tr class="even">
+<td align="left">A19</td>
+<td align="left">ADHD</td>
+<td align="left">Cohort_1</td>
+<td align="left">ADHD_Cohort_1</td>
+<td align="left">A19</td>
+</tr>
+<tr class="odd">
+<td align="left">A21</td>
+<td align="left">ADHD</td>
+<td align="left">Cohort_2</td>
+<td align="left">ADHD_Cohort_2</td>
+<td align="left">A21</td>
+</tr>
+<tr class="even">
+<td align="left">A23</td>
+<td align="left">ADHD</td>
+<td align="left">Cohort_2</td>
+<td align="left">ADHD_Cohort_2</td>
+<td align="left">A23</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="phylogenetic-tree-information" class="section level3" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> Phylogenetic tree information</h3>
+<p>Now, let’s add a phylogenetic tree.</p>
+<p>The current data object, se, is a SummarizedExperiment object. This
+does not include a slot for adding a phylogenetic tree. In order to do
+this, we can convert the SE object to an extended TreeSummarizedExperiment
+object which also includes a <code>rowTree</code> slot.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="import-data.html#cb18-1" aria-hidden="true" tabindex="-1"></a>tse <span class="ot">&lt;-</span> <span class="fu">as</span>(se, <span class="st">&quot;TreeSummarizedExperiment&quot;</span>)</span>
+<span id="cb18-2"><a href="import-data.html#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="import-data.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># tse includes same data as se</span></span>
+<span id="cb18-4"><a href="import-data.html#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tse)</span></code></pre></div>
+<pre><code>## class: TreeSummarizedExperiment 
+## dim: 151 27 
+## metadata(0):
+## assays(1): counts
+## rownames(151): 1726470 1726471 ... 17264756 17264757
+## rowData names(6): Kingdom Phylum ... Family Genus
+## colnames(27): A110 A12 ... A35 A38
+## colData names(4): patient_status cohort patient_status_vs_cohort sample_name
+## reducedDimNames(0):
+## mainExpName: NULL
+## altExpNames(0):
+## rowLinks: NULL
+## rowTree: NULL
+## colLinks: NULL
+## colTree: NULL</code></pre>
+<p>Next, let us read the tree data file and add it to the R data object (tse).</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="import-data.html#cb20-1" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> ape<span class="sc">::</span><span class="fu">read.tree</span>(tree_file_path)</span>
+<span id="cb20-2"><a href="import-data.html#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="import-data.html#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add tree to rowTree</span></span>
+<span id="cb20-4"><a href="import-data.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rowTree</span>(tse) <span class="ot">&lt;-</span> tree</span>
+<span id="cb20-5"><a href="import-data.html#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="import-data.html#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Check</span></span>
+<span id="cb20-7"><a href="import-data.html#cb20-7" aria-hidden="true" tabindex="-1"></a>tse</span></code></pre></div>
+<pre><code>## class: TreeSummarizedExperiment 
+## dim: 151 27 
+## metadata(0):
+## assays(1): counts
+## rownames(151): 1726470 1726471 ... 17264756 17264757
+## rowData names(6): Kingdom Phylum ... Family Genus
+## colnames(27): A110 A12 ... A35 A38
+## colData names(4): patient_status cohort patient_status_vs_cohort sample_name
+## reducedDimNames(0):
+## mainExpName: NULL
+## altExpNames(0):
+## rowLinks: a LinkDataFrame (151 rows)
+## rowTree: 1 phylo tree(s) (151 leaves)
+## colLinks: NULL
+## colTree: NULL</code></pre>
+<p>Now <code>rowTree</code> includes a phylogenetic tree:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="import-data.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rowTree</span>(tse))</span></code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="install-and-load-required-r-packages.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-exploration.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
