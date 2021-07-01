@@ -33,7 +33,7 @@
   
 <link rel="prev" href="dirichlet-multinomial-mixture-model.html"/>
 <link rel="next" href="study-material.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/header-attrs-2.8.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
@@ -59,7 +60,6 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -255,41 +255,41 @@ We analyse Genus level abundances.</p>
 non-parametric alternative to a t-test, which means that the Wilcoxon test
 does not require normally distributed data.</p>
 <p>Let’s first collect the data for the testing purpose.</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="differential-abundance-analysis.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Agglomerates data to Genus level</span></span>
-<span id="cb81-2"><a href="differential-abundance-analysis.html#cb81-2" aria-hidden="true" tabindex="-1"></a>tse_genus <span class="ot">&lt;-</span> <span class="fu">agglomerateByRank</span>(tse, <span class="at">rank =</span> <span class="st">&quot;Genus&quot;</span>)</span>
-<span id="cb81-3"><a href="differential-abundance-analysis.html#cb81-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-4"><a href="differential-abundance-analysis.html#cb81-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Does clr transformation. Pseudocount is added, because data contains zeros, and</span></span>
-<span id="cb81-5"><a href="differential-abundance-analysis.html#cb81-5" aria-hidden="true" tabindex="-1"></a><span class="co"># clr transformation includes log transformation.</span></span>
-<span id="cb81-6"><a href="differential-abundance-analysis.html#cb81-6" aria-hidden="true" tabindex="-1"></a>tse_genus <span class="ot">&lt;-</span> <span class="fu">transformCounts</span>(tse_genus, <span class="at">method =</span> <span class="st">&quot;clr&quot;</span>, <span class="at">pseudocount =</span> <span class="dv">1</span>)</span>
-<span id="cb81-7"><a href="differential-abundance-analysis.html#cb81-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-8"><a href="differential-abundance-analysis.html#cb81-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Does transpose, so samples are in rows, then creates a data frame.</span></span>
-<span id="cb81-9"><a href="differential-abundance-analysis.html#cb81-9" aria-hidden="true" tabindex="-1"></a>abundance_analysis_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">t</span>(<span class="fu">assay</span>(tse_genus, <span class="st">&quot;clr&quot;</span>)))</span>
-<span id="cb81-10"><a href="differential-abundance-analysis.html#cb81-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-11"><a href="differential-abundance-analysis.html#cb81-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Then we need variable for grouping samples. &quot;patient_status&quot; column includes information</span></span>
-<span id="cb81-12"><a href="differential-abundance-analysis.html#cb81-12" aria-hidden="true" tabindex="-1"></a><span class="co"># about patients&#39; status. There two groups &quot;ADHD&quot; and &quot;control&quot;. Let&#39;s include that to the data frame.</span></span>
-<span id="cb81-13"><a href="differential-abundance-analysis.html#cb81-13" aria-hidden="true" tabindex="-1"></a>abundance_analysis_data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(abundance_analysis_data, <span class="at">patient_status =</span> <span class="fu">colData</span>(tse_genus)<span class="sc">$</span>patient_status)</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="differential-abundance-analysis.html#cb83-1" aria-hidden="true"></a><span class="co"># Agglomerates data to Genus level</span></span>
+<span id="cb83-2"><a href="differential-abundance-analysis.html#cb83-2" aria-hidden="true"></a>tse_genus &lt;-<span class="st"> </span><span class="kw">agglomerateByRank</span>(tse, <span class="dt">rank =</span> <span class="st">&quot;Genus&quot;</span>)</span>
+<span id="cb83-3"><a href="differential-abundance-analysis.html#cb83-3" aria-hidden="true"></a></span>
+<span id="cb83-4"><a href="differential-abundance-analysis.html#cb83-4" aria-hidden="true"></a><span class="co"># Does clr transformation. Pseudocount is added, because data contains zeros, and</span></span>
+<span id="cb83-5"><a href="differential-abundance-analysis.html#cb83-5" aria-hidden="true"></a><span class="co"># clr transformation includes log transformation.</span></span>
+<span id="cb83-6"><a href="differential-abundance-analysis.html#cb83-6" aria-hidden="true"></a>tse_genus &lt;-<span class="st"> </span><span class="kw">transformCounts</span>(tse_genus, <span class="dt">method =</span> <span class="st">&quot;clr&quot;</span>, <span class="dt">pseudocount =</span> <span class="dv">1</span>)</span>
+<span id="cb83-7"><a href="differential-abundance-analysis.html#cb83-7" aria-hidden="true"></a></span>
+<span id="cb83-8"><a href="differential-abundance-analysis.html#cb83-8" aria-hidden="true"></a><span class="co"># Does transpose, so samples are in rows, then creates a data frame.</span></span>
+<span id="cb83-9"><a href="differential-abundance-analysis.html#cb83-9" aria-hidden="true"></a>abundance_analysis_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">t</span>(<span class="kw">assay</span>(tse_genus, <span class="st">&quot;clr&quot;</span>)))</span>
+<span id="cb83-10"><a href="differential-abundance-analysis.html#cb83-10" aria-hidden="true"></a></span>
+<span id="cb83-11"><a href="differential-abundance-analysis.html#cb83-11" aria-hidden="true"></a><span class="co"># Then we need variable for grouping samples. &quot;patient_status&quot; column includes information</span></span>
+<span id="cb83-12"><a href="differential-abundance-analysis.html#cb83-12" aria-hidden="true"></a><span class="co"># about patients&#39; status. There two groups &quot;ADHD&quot; and &quot;control&quot;. Let&#39;s include that to the data frame.</span></span>
+<span id="cb83-13"><a href="differential-abundance-analysis.html#cb83-13" aria-hidden="true"></a>abundance_analysis_data &lt;-<span class="st"> </span><span class="kw">cbind</span>(abundance_analysis_data, <span class="dt">patient_status =</span> <span class="kw">colData</span>(tse_genus)<span class="op">$</span>patient_status)</span></code></pre></div>
 <p>Now we can do the Wilcoxon test. We test all the taxa by looping through columns,
 and store individual p-values to a vector. Then we create a data frame from collected
 data.</p>
 <p>Code below does the Wilcoxon test only for columns that contain abundances,
 not for column that contain patient status.</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="differential-abundance-analysis.html#cb82-1" aria-hidden="true" tabindex="-1"></a>colnames <span class="ot">&lt;-</span> <span class="fu">names</span>(abundance_analysis_data[, <span class="sc">!</span><span class="fu">names</span>(abundance_analysis_data) <span class="sc">%in%</span> <span class="st">&quot;patient_status&quot;</span>])</span>
-<span id="cb82-2"><a href="differential-abundance-analysis.html#cb82-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-3"><a href="differential-abundance-analysis.html#cb82-3" aria-hidden="true" tabindex="-1"></a>wilcoxon_p <span class="ot">&lt;-</span> <span class="fu">c</span>() <span class="co"># Initialize empty vector for p-values</span></span>
-<span id="cb82-4"><a href="differential-abundance-analysis.html#cb82-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-5"><a href="differential-abundance-analysis.html#cb82-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Do for loop over selected column names</span></span>
-<span id="cb82-6"><a href="differential-abundance-analysis.html#cb82-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> colnames) {</span>
-<span id="cb82-7"><a href="differential-abundance-analysis.html#cb82-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-8"><a href="differential-abundance-analysis.html#cb82-8" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(abundance_analysis_data[, i] <span class="sc">~</span> patient_status,</span>
-<span id="cb82-9"><a href="differential-abundance-analysis.html#cb82-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">data =</span> abundance_analysis_data)</span>
-<span id="cb82-10"><a href="differential-abundance-analysis.html#cb82-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb82-11"><a href="differential-abundance-analysis.html#cb82-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Stores p-value to the vector with this column name</span></span>
-<span id="cb82-12"><a href="differential-abundance-analysis.html#cb82-12" aria-hidden="true" tabindex="-1"></a>  wilcoxon_p[[i]]  <span class="ot">&lt;-</span> result<span class="sc">$</span>p.value</span>
-<span id="cb82-13"><a href="differential-abundance-analysis.html#cb82-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-14"><a href="differential-abundance-analysis.html#cb82-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb82-15"><a href="differential-abundance-analysis.html#cb82-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-16"><a href="differential-abundance-analysis.html#cb82-16" aria-hidden="true" tabindex="-1"></a>wilcoxon_p <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">taxa =</span>  <span class="fu">names</span>(wilcoxon_p),</span>
-<span id="cb82-17"><a href="differential-abundance-analysis.html#cb82-17" aria-hidden="true" tabindex="-1"></a>                         <span class="at">p_raw =</span> <span class="fu">unlist</span>(wilcoxon_p))</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="differential-abundance-analysis.html#cb84-1" aria-hidden="true"></a>colnames &lt;-<span class="st"> </span><span class="kw">names</span>(abundance_analysis_data[, <span class="op">!</span><span class="kw">names</span>(abundance_analysis_data) <span class="op">%in%</span><span class="st"> &quot;patient_status&quot;</span>])</span>
+<span id="cb84-2"><a href="differential-abundance-analysis.html#cb84-2" aria-hidden="true"></a></span>
+<span id="cb84-3"><a href="differential-abundance-analysis.html#cb84-3" aria-hidden="true"></a>wilcoxon_p &lt;-<span class="st"> </span><span class="kw">c</span>() <span class="co"># Initialize empty vector for p-values</span></span>
+<span id="cb84-4"><a href="differential-abundance-analysis.html#cb84-4" aria-hidden="true"></a></span>
+<span id="cb84-5"><a href="differential-abundance-analysis.html#cb84-5" aria-hidden="true"></a><span class="co"># Do for loop over selected column names</span></span>
+<span id="cb84-6"><a href="differential-abundance-analysis.html#cb84-6" aria-hidden="true"></a><span class="cf">for</span> (i <span class="cf">in</span> colnames) {</span>
+<span id="cb84-7"><a href="differential-abundance-analysis.html#cb84-7" aria-hidden="true"></a></span>
+<span id="cb84-8"><a href="differential-abundance-analysis.html#cb84-8" aria-hidden="true"></a>  result &lt;-<span class="st"> </span><span class="kw">wilcox.test</span>(abundance_analysis_data[, i] <span class="op">~</span><span class="st"> </span>patient_status,</span>
+<span id="cb84-9"><a href="differential-abundance-analysis.html#cb84-9" aria-hidden="true"></a>                        <span class="dt">data =</span> abundance_analysis_data)</span>
+<span id="cb84-10"><a href="differential-abundance-analysis.html#cb84-10" aria-hidden="true"></a>  </span>
+<span id="cb84-11"><a href="differential-abundance-analysis.html#cb84-11" aria-hidden="true"></a>  <span class="co"># Stores p-value to the vector with this column name</span></span>
+<span id="cb84-12"><a href="differential-abundance-analysis.html#cb84-12" aria-hidden="true"></a>  wilcoxon_p[[i]]  &lt;-<span class="st"> </span>result<span class="op">$</span>p.value</span>
+<span id="cb84-13"><a href="differential-abundance-analysis.html#cb84-13" aria-hidden="true"></a></span>
+<span id="cb84-14"><a href="differential-abundance-analysis.html#cb84-14" aria-hidden="true"></a>}</span>
+<span id="cb84-15"><a href="differential-abundance-analysis.html#cb84-15" aria-hidden="true"></a></span>
+<span id="cb84-16"><a href="differential-abundance-analysis.html#cb84-16" aria-hidden="true"></a>wilcoxon_p &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">taxa =</span>  <span class="kw">names</span>(wilcoxon_p),</span>
+<span id="cb84-17"><a href="differential-abundance-analysis.html#cb84-17" aria-hidden="true"></a>                         <span class="dt">p_raw =</span> <span class="kw">unlist</span>(wilcoxon_p))</span></code></pre></div>
 <p>Multiple tests were performed. These are not independent, so we need
 to adjust p-values for multiple testing. Otherwise, we would increase
 the chance of a type I error drastically depending on our p-value
@@ -297,17 +297,17 @@ threshold. By applying a p-value adjustment, we can keep the false
 positive rate at a level that is acceptable. What is acceptable
 depends on our research goals. Here we use the fdr method, but there
 are several other methods as well.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="differential-abundance-analysis.html#cb83-1" aria-hidden="true" tabindex="-1"></a>wilcoxon_p<span class="sc">$</span>p_adjusted <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(wilcoxon_p<span class="sc">$</span>p_raw, <span class="at">method =</span> <span class="st">&quot;fdr&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="differential-abundance-analysis.html#cb84-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(wilcoxon_p<span class="sc">$</span>p_raw, wilcoxon_p<span class="sc">$</span>p_adjusted), </span>
-<span id="cb84-2"><a href="differential-abundance-analysis.html#cb84-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">type=</span><span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;raw&quot;</span>, <span class="st">&quot;holm&quot;</span>),</span>
-<span id="cb84-3"><a href="differential-abundance-analysis.html#cb84-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="fu">length</span>(wilcoxon_p<span class="sc">$</span>p_raw),</span>
-<span id="cb84-4"><a href="differential-abundance-analysis.html#cb84-4" aria-hidden="true" tabindex="-1"></a>          <span class="fu">length</span>(wilcoxon_p<span class="sc">$</span>p_adjusted))))</span>
-<span id="cb84-5"><a href="differential-abundance-analysis.html#cb84-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-6"><a href="differential-abundance-analysis.html#cb84-6" aria-hidden="true" tabindex="-1"></a>wilcoxon_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df) <span class="sc">+</span></span>
-<span id="cb84-7"><a href="differential-abundance-analysis.html#cb84-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">fill=</span>type)) <span class="sc">+</span></span>
-<span id="cb84-8"><a href="differential-abundance-analysis.html#cb84-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;p-value&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Frequency&quot;</span>) </span>
-<span id="cb84-9"><a href="differential-abundance-analysis.html#cb84-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-10"><a href="differential-abundance-analysis.html#cb84-10" aria-hidden="true" tabindex="-1"></a>wilcoxon_plot</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="differential-abundance-analysis.html#cb85-1" aria-hidden="true"></a>wilcoxon_p<span class="op">$</span>p_adjusted &lt;-<span class="st"> </span><span class="kw">p.adjust</span>(wilcoxon_p<span class="op">$</span>p_raw, <span class="dt">method =</span> <span class="st">&quot;fdr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="differential-abundance-analysis.html#cb86-1" aria-hidden="true"></a>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">c</span>(wilcoxon_p<span class="op">$</span>p_raw, wilcoxon_p<span class="op">$</span>p_adjusted), </span>
+<span id="cb86-2"><a href="differential-abundance-analysis.html#cb86-2" aria-hidden="true"></a>                <span class="dt">type=</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;raw&quot;</span>, <span class="st">&quot;holm&quot;</span>),</span>
+<span id="cb86-3"><a href="differential-abundance-analysis.html#cb86-3" aria-hidden="true"></a>        <span class="kw">c</span>(<span class="kw">length</span>(wilcoxon_p<span class="op">$</span>p_raw),</span>
+<span id="cb86-4"><a href="differential-abundance-analysis.html#cb86-4" aria-hidden="true"></a>          <span class="kw">length</span>(wilcoxon_p<span class="op">$</span>p_adjusted))))</span>
+<span id="cb86-5"><a href="differential-abundance-analysis.html#cb86-5" aria-hidden="true"></a></span>
+<span id="cb86-6"><a href="differential-abundance-analysis.html#cb86-6" aria-hidden="true"></a>wilcoxon_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df) <span class="op">+</span></span>
+<span id="cb86-7"><a href="differential-abundance-analysis.html#cb86-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">fill=</span>type)) <span class="op">+</span></span>
+<span id="cb86-8"><a href="differential-abundance-analysis.html#cb86-8" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;p-value&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Frequency&quot;</span>) </span>
+<span id="cb86-9"><a href="differential-abundance-analysis.html#cb86-9" aria-hidden="true"></a></span>
+<span id="cb86-10"><a href="differential-abundance-analysis.html#cb86-10" aria-hidden="true"></a>wilcoxon_plot</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="_main_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 </div>
@@ -324,13 +324,15 @@ information can be found, e.g., from Harvard Chan Bioinformatic Core’s
 tutorial <a href="https://hbctraining.github.io/DGE_workshop/lessons/04_DGE_DESeq2_analysis.html">Introduction to DGE -
 ARCHIVED</a></p>
 <p>Now let us show how to do this. First, run the DESeq2 analysis.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="differential-abundance-analysis.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates DESeq2 object from the data. Uses &quot;patient_status&quot; to create groups. </span></span>
-<span id="cb86-2"><a href="differential-abundance-analysis.html#cb86-2" aria-hidden="true" tabindex="-1"></a>ds2 <span class="ot">&lt;-</span> <span class="fu">DESeqDataSet</span>(tse_genus, <span class="sc">~</span>patient_status)</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="differential-abundance-analysis.html#cb88-1" aria-hidden="true"></a><span class="co"># Creates DESeq2 object from the data. Uses &quot;patient_status&quot; to create groups. </span></span>
+<span id="cb88-2"><a href="differential-abundance-analysis.html#cb88-2" aria-hidden="true"></a>ds2 &lt;-<span class="st"> </span><span class="kw">DESeqDataSet</span>(tse_genus, <span class="op">~</span>patient_status)</span></code></pre></div>
 <pre><code>## converting counts to integer mode</code></pre>
-<pre><code>## Warning in DESeqDataSet(tse_genus, ~patient_status): 2 duplicate rownames were renamed by adding numbers</code></pre>
-<pre><code>## Warning in DESeqDataSet(tse_genus, ~patient_status): some variables in design formula are characters, converting to factors</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="differential-abundance-analysis.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Does the analysis</span></span>
-<span id="cb90-2"><a href="differential-abundance-analysis.html#cb90-2" aria-hidden="true" tabindex="-1"></a>dds <span class="ot">&lt;-</span> <span class="fu">DESeq</span>(ds2)</span></code></pre></div>
+<pre><code>## Warning in DESeqDataSet(tse_genus, ~patient_status): 2 duplicate rownames were
+## renamed by adding numbers</code></pre>
+<pre><code>## Warning in DESeqDataSet(tse_genus, ~patient_status): some variables in design
+## formula are characters, converting to factors</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="differential-abundance-analysis.html#cb92-1" aria-hidden="true"></a><span class="co"># Does the analysis</span></span>
+<span id="cb92-2"><a href="differential-abundance-analysis.html#cb92-2" aria-hidden="true"></a>dds &lt;-<span class="st"> </span><span class="kw">DESeq</span>(ds2)</span></code></pre></div>
 <pre><code>## estimating size factors</code></pre>
 <pre><code>## estimating dispersions</code></pre>
 <pre><code>## gene-wise dispersion estimates</code></pre>
@@ -342,20 +344,20 @@ ARCHIVED</a></p>
 ## -- original counts are preserved in counts(dds)</code></pre>
 <pre><code>## estimating dispersions</code></pre>
 <pre><code>## fitting model and testing</code></pre>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="differential-abundance-analysis.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gets the results from the object</span></span>
-<span id="cb100-2"><a href="differential-abundance-analysis.html#cb100-2" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">results</span>(dds)</span>
-<span id="cb100-3"><a href="differential-abundance-analysis.html#cb100-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-4"><a href="differential-abundance-analysis.html#cb100-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates a data frame from results</span></span>
-<span id="cb100-5"><a href="differential-abundance-analysis.html#cb100-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(res)</span>
-<span id="cb100-6"><a href="differential-abundance-analysis.html#cb100-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-7"><a href="differential-abundance-analysis.html#cb100-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Adds taxon column that includes names of taxa</span></span>
-<span id="cb100-8"><a href="differential-abundance-analysis.html#cb100-8" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>taxon <span class="ot">&lt;-</span> <span class="fu">rownames</span>(df)</span>
-<span id="cb100-9"><a href="differential-abundance-analysis.html#cb100-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-10"><a href="differential-abundance-analysis.html#cb100-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Orders the rows of data frame in increasing order firstly based on column &quot;log2FoldChange&quot; </span></span>
-<span id="cb100-11"><a href="differential-abundance-analysis.html#cb100-11" aria-hidden="true" tabindex="-1"></a><span class="co"># and secondly based on &quot;padj&quot; column</span></span>
-<span id="cb100-12"><a href="differential-abundance-analysis.html#cb100-12" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(log2FoldChange, padj)</span>
-<span id="cb100-13"><a href="differential-abundance-analysis.html#cb100-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-14"><a href="differential-abundance-analysis.html#cb100-14" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(df))</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="differential-abundance-analysis.html#cb102-1" aria-hidden="true"></a><span class="co"># Gets the results from the object</span></span>
+<span id="cb102-2"><a href="differential-abundance-analysis.html#cb102-2" aria-hidden="true"></a>res &lt;-<span class="st"> </span><span class="kw">results</span>(dds)</span>
+<span id="cb102-3"><a href="differential-abundance-analysis.html#cb102-3" aria-hidden="true"></a></span>
+<span id="cb102-4"><a href="differential-abundance-analysis.html#cb102-4" aria-hidden="true"></a><span class="co"># Creates a data frame from results</span></span>
+<span id="cb102-5"><a href="differential-abundance-analysis.html#cb102-5" aria-hidden="true"></a>df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(res)</span>
+<span id="cb102-6"><a href="differential-abundance-analysis.html#cb102-6" aria-hidden="true"></a></span>
+<span id="cb102-7"><a href="differential-abundance-analysis.html#cb102-7" aria-hidden="true"></a><span class="co"># Adds taxon column that includes names of taxa</span></span>
+<span id="cb102-8"><a href="differential-abundance-analysis.html#cb102-8" aria-hidden="true"></a>df<span class="op">$</span>taxon &lt;-<span class="st"> </span><span class="kw">rownames</span>(df)</span>
+<span id="cb102-9"><a href="differential-abundance-analysis.html#cb102-9" aria-hidden="true"></a></span>
+<span id="cb102-10"><a href="differential-abundance-analysis.html#cb102-10" aria-hidden="true"></a><span class="co"># Orders the rows of data frame in increasing order firstly based on column &quot;log2FoldChange&quot; </span></span>
+<span id="cb102-11"><a href="differential-abundance-analysis.html#cb102-11" aria-hidden="true"></a><span class="co"># and secondly based on &quot;padj&quot; column</span></span>
+<span id="cb102-12"><a href="differential-abundance-analysis.html#cb102-12" aria-hidden="true"></a>df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(log2FoldChange, padj)</span>
+<span id="cb102-13"><a href="differential-abundance-analysis.html#cb102-13" aria-hidden="true"></a></span>
+<span id="cb102-14"><a href="differential-abundance-analysis.html#cb102-14" aria-hidden="true"></a>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(df))</span></code></pre></div>
 <table>
 <colgroup>
 <col width="23%" />
@@ -465,33 +467,33 @@ our <code>tse</code> object to a <code>phyloseq</code> object. Then, we specify 
 other covariates could potentially be included to adjust for confounding.
 Please check the <a href="https://rdrr.io/github/FrederickHuangLin/ANCOMBC/man/ancombc.html">function documentation</a>
 to learn about the additional arguments that we specify below.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="differential-abundance-analysis.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="co"># currently, ancombc requires the phyloseq format, but we can easily convert:</span></span>
-<span id="cb101-2"><a href="differential-abundance-analysis.html#cb101-2" aria-hidden="true" tabindex="-1"></a>pseq <span class="ot">&lt;-</span> <span class="fu">makePhyloseqFromTreeSummarizedExperiment</span>(tse)</span>
-<span id="cb101-3"><a href="differential-abundance-analysis.html#cb101-3" aria-hidden="true" tabindex="-1"></a>pseq_genus <span class="ot">&lt;-</span> phyloseq<span class="sc">::</span><span class="fu">tax_glom</span>(pseq, <span class="at">taxrank =</span> <span class="st">&quot;Genus&quot;</span>)</span>
-<span id="cb101-4"><a href="differential-abundance-analysis.html#cb101-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb101-5"><a href="differential-abundance-analysis.html#cb101-5" aria-hidden="true" tabindex="-1"></a>out <span class="ot">=</span> <span class="fu">ancombc</span>(</span>
-<span id="cb101-6"><a href="differential-abundance-analysis.html#cb101-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">phyloseq =</span> pseq_genus, </span>
-<span id="cb101-7"><a href="differential-abundance-analysis.html#cb101-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> <span class="st">&quot;patient_status&quot;</span>, </span>
-<span id="cb101-8"><a href="differential-abundance-analysis.html#cb101-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">p_adj_method =</span> <span class="st">&quot;holm&quot;</span>, </span>
-<span id="cb101-9"><a href="differential-abundance-analysis.html#cb101-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">zero_cut =</span> <span class="fl">0.90</span>, </span>
-<span id="cb101-10"><a href="differential-abundance-analysis.html#cb101-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">lib_cut =</span> <span class="dv">0</span>, </span>
-<span id="cb101-11"><a href="differential-abundance-analysis.html#cb101-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="st">&quot;patient_status&quot;</span>, </span>
-<span id="cb101-12"><a href="differential-abundance-analysis.html#cb101-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">struc_zero =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb101-13"><a href="differential-abundance-analysis.html#cb101-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">neg_lb =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb101-14"><a href="differential-abundance-analysis.html#cb101-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">tol =</span> <span class="fl">1e-5</span>, </span>
-<span id="cb101-15"><a href="differential-abundance-analysis.html#cb101-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_iter =</span> <span class="dv">100</span>, </span>
-<span id="cb101-16"><a href="differential-abundance-analysis.html#cb101-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">conserve =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb101-17"><a href="differential-abundance-analysis.html#cb101-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span>, </span>
-<span id="cb101-18"><a href="differential-abundance-analysis.html#cb101-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">global =</span> <span class="cn">TRUE</span></span>
-<span id="cb101-19"><a href="differential-abundance-analysis.html#cb101-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb101-20"><a href="differential-abundance-analysis.html#cb101-20" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> out<span class="sc">$</span>res</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="differential-abundance-analysis.html#cb103-1" aria-hidden="true"></a><span class="co"># currently, ancombc requires the phyloseq format, but we can easily convert:</span></span>
+<span id="cb103-2"><a href="differential-abundance-analysis.html#cb103-2" aria-hidden="true"></a>pseq &lt;-<span class="st"> </span><span class="kw">makePhyloseqFromTreeSummarizedExperiment</span>(tse)</span>
+<span id="cb103-3"><a href="differential-abundance-analysis.html#cb103-3" aria-hidden="true"></a>pseq_genus &lt;-<span class="st"> </span>phyloseq<span class="op">::</span><span class="kw">tax_glom</span>(pseq, <span class="dt">taxrank =</span> <span class="st">&quot;Genus&quot;</span>)</span>
+<span id="cb103-4"><a href="differential-abundance-analysis.html#cb103-4" aria-hidden="true"></a></span>
+<span id="cb103-5"><a href="differential-abundance-analysis.html#cb103-5" aria-hidden="true"></a>out =<span class="st"> </span><span class="kw">ancombc</span>(</span>
+<span id="cb103-6"><a href="differential-abundance-analysis.html#cb103-6" aria-hidden="true"></a>  <span class="dt">phyloseq =</span> pseq_genus, </span>
+<span id="cb103-7"><a href="differential-abundance-analysis.html#cb103-7" aria-hidden="true"></a>  <span class="dt">formula =</span> <span class="st">&quot;patient_status&quot;</span>, </span>
+<span id="cb103-8"><a href="differential-abundance-analysis.html#cb103-8" aria-hidden="true"></a>  <span class="dt">p_adj_method =</span> <span class="st">&quot;holm&quot;</span>, </span>
+<span id="cb103-9"><a href="differential-abundance-analysis.html#cb103-9" aria-hidden="true"></a>  <span class="dt">zero_cut =</span> <span class="fl">0.90</span>, </span>
+<span id="cb103-10"><a href="differential-abundance-analysis.html#cb103-10" aria-hidden="true"></a>  <span class="dt">lib_cut =</span> <span class="dv">0</span>, </span>
+<span id="cb103-11"><a href="differential-abundance-analysis.html#cb103-11" aria-hidden="true"></a>  <span class="dt">group =</span> <span class="st">&quot;patient_status&quot;</span>, </span>
+<span id="cb103-12"><a href="differential-abundance-analysis.html#cb103-12" aria-hidden="true"></a>  <span class="dt">struc_zero =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb103-13"><a href="differential-abundance-analysis.html#cb103-13" aria-hidden="true"></a>  <span class="dt">neg_lb =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb103-14"><a href="differential-abundance-analysis.html#cb103-14" aria-hidden="true"></a>  <span class="dt">tol =</span> <span class="fl">1e-5</span>, </span>
+<span id="cb103-15"><a href="differential-abundance-analysis.html#cb103-15" aria-hidden="true"></a>  <span class="dt">max_iter =</span> <span class="dv">100</span>, </span>
+<span id="cb103-16"><a href="differential-abundance-analysis.html#cb103-16" aria-hidden="true"></a>  <span class="dt">conserve =</span> <span class="ot">TRUE</span>, </span>
+<span id="cb103-17"><a href="differential-abundance-analysis.html#cb103-17" aria-hidden="true"></a>  <span class="dt">alpha =</span> <span class="fl">0.05</span>, </span>
+<span id="cb103-18"><a href="differential-abundance-analysis.html#cb103-18" aria-hidden="true"></a>  <span class="dt">global =</span> <span class="ot">TRUE</span></span>
+<span id="cb103-19"><a href="differential-abundance-analysis.html#cb103-19" aria-hidden="true"></a>)</span>
+<span id="cb103-20"><a href="differential-abundance-analysis.html#cb103-20" aria-hidden="true"></a>res &lt;-<span class="st"> </span>out<span class="op">$</span>res</span></code></pre></div>
 <p>The object <code>out</code> contains all relevant information. Again, see the
 <a href="https://rdrr.io/github/FrederickHuangLin/ANCOMBC/man/ancombc.html">documentation of the function</a>
 under <strong>Value</strong> for an explanation of all the output objects. Our question can be answered
 by looking at the <code>res</code> object, which now contains dataframes with the coefficients,
 standard errors, p-values and q-values. Conveniently, there is a dataframe <code>diff_abn</code>.
 Here, we can find all differentiallt abundant taxa. Below we show the first 6 entries of this dataframe:</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="differential-abundance-analysis.html#cb102-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(res<span class="sc">$</span>diff_abn))</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="differential-abundance-analysis.html#cb104-1" aria-hidden="true"></a>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(res<span class="op">$</span>diff_abn))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -532,18 +534,18 @@ Here, we can find all differentiallt abundant taxa. Below we show the first 6 en
 <h2><span class="header-section-number">10.4</span> Comparison of Wilcoxon test and DESeq2</h2>
 <p>Let’s compare results that we got from the Wilcoxon test and DESeq2.
 As we can see from the scatter plot, DESeq2 gives lower p-values than Wilcoxon test.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="differential-abundance-analysis.html#cb103-1" aria-hidden="true" tabindex="-1"></a>mf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(df<span class="sc">$</span>padj, wilcoxon_p<span class="sc">$</span>p_adjusted)</span>
-<span id="cb103-2"><a href="differential-abundance-analysis.html#cb103-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mf, <span class="fu">aes</span>(<span class="at">x =</span> df<span class="sc">$</span>padj, <span class="at">y =</span> wilcoxon_p<span class="sc">$</span>p_adjusted)) <span class="sc">+</span></span>
-<span id="cb103-3"><a href="differential-abundance-analysis.html#cb103-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;DESeq2 adjusted p-value&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Wilcoxon test adjusted p-value&quot;</span>) <span class="sc">+</span></span>
-<span id="cb103-4"><a href="differential-abundance-analysis.html#cb103-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">geom_count</span>() <span class="sc">+</span></span>
-<span id="cb103-5"><a href="differential-abundance-analysis.html#cb103-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_size_area</span>(<span class="at">max_size =</span> <span class="dv">10</span>)</span>
-<span id="cb103-6"><a href="differential-abundance-analysis.html#cb103-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb103-7"><a href="differential-abundance-analysis.html#cb103-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p)</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="differential-abundance-analysis.html#cb105-1" aria-hidden="true"></a>mf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(df<span class="op">$</span>padj, wilcoxon_p<span class="op">$</span>p_adjusted)</span>
+<span id="cb105-2"><a href="differential-abundance-analysis.html#cb105-2" aria-hidden="true"></a>p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mf, <span class="kw">aes</span>(<span class="dt">x =</span> df<span class="op">$</span>padj, <span class="dt">y =</span> wilcoxon_p<span class="op">$</span>p_adjusted)) <span class="op">+</span></span>
+<span id="cb105-3"><a href="differential-abundance-analysis.html#cb105-3" aria-hidden="true"></a><span class="st">       </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;DESeq2 adjusted p-value&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Wilcoxon test adjusted p-value&quot;</span>) <span class="op">+</span></span>
+<span id="cb105-4"><a href="differential-abundance-analysis.html#cb105-4" aria-hidden="true"></a><span class="st">       </span><span class="kw">geom_count</span>() <span class="op">+</span></span>
+<span id="cb105-5"><a href="differential-abundance-analysis.html#cb105-5" aria-hidden="true"></a><span class="st"> </span><span class="kw">scale_size_area</span>(<span class="dt">max_size =</span> <span class="dv">10</span>)</span>
+<span id="cb105-6"><a href="differential-abundance-analysis.html#cb105-6" aria-hidden="true"></a></span>
+<span id="cb105-7"><a href="differential-abundance-analysis.html#cb105-7" aria-hidden="true"></a><span class="kw">print</span>(p)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
 <p>Prints number of p-values under 0.05</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="differential-abundance-analysis.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;DESeq2 p-values under 0.05: &quot;</span>, <span class="fu">sum</span>(df<span class="sc">$</span>padj<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="st">&quot;/&quot;</span>, <span class="fu">length</span>(df<span class="sc">$</span>padj)))</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="differential-abundance-analysis.html#cb106-1" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">paste0</span>(<span class="st">&quot;DESeq2 p-values under 0.05: &quot;</span>, <span class="kw">sum</span>(df<span class="op">$</span>padj<span class="op">&lt;</span><span class="fl">0.05</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), <span class="st">&quot;/&quot;</span>, <span class="kw">length</span>(df<span class="op">$</span>padj)))</span></code></pre></div>
 <pre><code>## [1] &quot;DESeq2 p-values under 0.05: 7/54&quot;</code></pre>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="differential-abundance-analysis.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Wilcoxon test p-values under 0.05: &quot;</span>, <span class="fu">sum</span>(wilcoxon_p<span class="sc">$</span>p_adjusted<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="st">&quot;/&quot;</span>, <span class="fu">length</span>(wilcoxon_p<span class="sc">$</span>p_adjusted)))</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="differential-abundance-analysis.html#cb108-1" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">paste0</span>(<span class="st">&quot;Wilcoxon test p-values under 0.05: &quot;</span>, <span class="kw">sum</span>(wilcoxon_p<span class="op">$</span>p_adjusted<span class="op">&lt;</span><span class="fl">0.05</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), <span class="st">&quot;/&quot;</span>, <span class="kw">length</span>(wilcoxon_p<span class="op">$</span>p_adjusted)))</span></code></pre></div>
 <pre><code>## [1] &quot;Wilcoxon test p-values under 0.05: 2/54&quot;</code></pre>
 </div>
 <div id="comparison-of-abundance" class="section level2" number="10.5">
@@ -553,127 +555,127 @@ Let’s plot those taxa in the boxplot, and compare visually if abundances of th
 differ in ADHD and control samples. For comparison, let’s plot also taxa that do not
 differ between ADHD and control groups.</p>
 <p>Let’s first gather data about taxa that have highest p-values.</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="differential-abundance-analysis.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># There are some taxa that do not include Genus level information. They are</span></span>
-<span id="cb108-2"><a href="differential-abundance-analysis.html#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="co"># excluded from analysis.</span></span>
-<span id="cb108-3"><a href="differential-abundance-analysis.html#cb108-3" aria-hidden="true" tabindex="-1"></a><span class="co"># str_detect finds if the pattern is present in values of &quot;taxon&quot; column.</span></span>
-<span id="cb108-4"><a href="differential-abundance-analysis.html#cb108-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset is taken, only those rows are included that do not include the pattern.</span></span>
-<span id="cb108-5"><a href="differential-abundance-analysis.html#cb108-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[ <span class="sc">!</span>stringr<span class="sc">::</span><span class="fu">str_detect</span>(df<span class="sc">$</span>taxon, <span class="st">&quot;Genus:uncultured&quot;</span>), ]</span>
-<span id="cb108-6"><a href="differential-abundance-analysis.html#cb108-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb108-7"><a href="differential-abundance-analysis.html#cb108-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Sorts p-values in decreasing order. Takes 3rd first ones. Takes those rows that match</span></span>
-<span id="cb108-8"><a href="differential-abundance-analysis.html#cb108-8" aria-hidden="true" tabindex="-1"></a><span class="co"># with p-values. Takes taxa. </span></span>
-<span id="cb108-9"><a href="differential-abundance-analysis.html#cb108-9" aria-hidden="true" tabindex="-1"></a>highest3 <span class="ot">&lt;-</span> df[df<span class="sc">$</span>padj <span class="sc">%in%</span> <span class="fu">sort</span>(df<span class="sc">$</span>padj, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], ]<span class="sc">$</span>taxon</span>
-<span id="cb108-10"><a href="differential-abundance-analysis.html#cb108-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb108-11"><a href="differential-abundance-analysis.html#cb108-11" aria-hidden="true" tabindex="-1"></a><span class="co"># From clr transformed table, takes only those taxa that had highest p-values</span></span>
-<span id="cb108-12"><a href="differential-abundance-analysis.html#cb108-12" aria-hidden="true" tabindex="-1"></a>highest3 <span class="ot">&lt;-</span> <span class="fu">assay</span>(tse_genus, <span class="st">&quot;clr&quot;</span>)[highest3, ]</span>
-<span id="cb108-13"><a href="differential-abundance-analysis.html#cb108-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb108-14"><a href="differential-abundance-analysis.html#cb108-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Transposes the table</span></span>
-<span id="cb108-15"><a href="differential-abundance-analysis.html#cb108-15" aria-hidden="true" tabindex="-1"></a>highest3 <span class="ot">&lt;-</span> <span class="fu">t</span>(highest3)</span>
-<span id="cb108-16"><a href="differential-abundance-analysis.html#cb108-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb108-17"><a href="differential-abundance-analysis.html#cb108-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Adds colData that includes patient status infomation</span></span>
-<span id="cb108-18"><a href="differential-abundance-analysis.html#cb108-18" aria-hidden="true" tabindex="-1"></a>highest3 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(highest3, <span class="fu">as.data.frame</span>(<span class="fu">colData</span>(tse_genus)))</span>
-<span id="cb108-19"><a href="differential-abundance-analysis.html#cb108-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb108-20"><a href="differential-abundance-analysis.html#cb108-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Some taxa names are that long that they don&#39;t fit nicely into title. So let&#39;s add there </span></span>
-<span id="cb108-21"><a href="differential-abundance-analysis.html#cb108-21" aria-hidden="true" tabindex="-1"></a><span class="co"># a line break after e.g. &quot;Genus&quot;. Here the dot after e.g. Genus is replaced with </span></span>
-<span id="cb108-22"><a href="differential-abundance-analysis.html#cb108-22" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;: \n&quot;</span></span>
-<span id="cb108-23"><a href="differential-abundance-analysis.html#cb108-23" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(highest3)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">colnames</span>(highest3)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="cf">function</span>(x){</span>
-<span id="cb108-24"><a href="differential-abundance-analysis.html#cb108-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Replaces the first dot</span></span>
-<span id="cb108-25"><a href="differential-abundance-analysis.html#cb108-25" aria-hidden="true" tabindex="-1"></a>  temp <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_replace</span>(x, <span class="st">&quot;[.]&quot;</span>, <span class="st">&quot;: &quot;</span>)</span>
-<span id="cb108-26"><a href="differential-abundance-analysis.html#cb108-26" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb108-27"><a href="differential-abundance-analysis.html#cb108-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Replace all other dots and underscores with space</span></span>
-<span id="cb108-28"><a href="differential-abundance-analysis.html#cb108-28" aria-hidden="true" tabindex="-1"></a>  temp <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(temp, <span class="fu">c</span>(<span class="st">&quot;[.]&quot;</span> <span class="ot">=</span> <span class="st">&quot; &quot;</span>, <span class="st">&quot;_&quot;</span> <span class="ot">=</span> <span class="st">&quot; &quot;</span>))</span>
-<span id="cb108-29"><a href="differential-abundance-analysis.html#cb108-29" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb108-30"><a href="differential-abundance-analysis.html#cb108-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Adds line break so that 25 characters is the maximal width</span></span>
-<span id="cb108-31"><a href="differential-abundance-analysis.html#cb108-31" aria-hidden="true" tabindex="-1"></a>  temp <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_wrap</span>(temp, <span class="at">width =</span> <span class="dv">25</span>)</span>
-<span id="cb108-32"><a href="differential-abundance-analysis.html#cb108-32" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="differential-abundance-analysis.html#cb110-1" aria-hidden="true"></a><span class="co"># There are some taxa that do not include Genus level information. They are</span></span>
+<span id="cb110-2"><a href="differential-abundance-analysis.html#cb110-2" aria-hidden="true"></a><span class="co"># excluded from analysis.</span></span>
+<span id="cb110-3"><a href="differential-abundance-analysis.html#cb110-3" aria-hidden="true"></a><span class="co"># str_detect finds if the pattern is present in values of &quot;taxon&quot; column.</span></span>
+<span id="cb110-4"><a href="differential-abundance-analysis.html#cb110-4" aria-hidden="true"></a><span class="co"># Subset is taken, only those rows are included that do not include the pattern.</span></span>
+<span id="cb110-5"><a href="differential-abundance-analysis.html#cb110-5" aria-hidden="true"></a>df &lt;-<span class="st"> </span>df[ <span class="op">!</span>stringr<span class="op">::</span><span class="kw">str_detect</span>(df<span class="op">$</span>taxon, <span class="st">&quot;Genus:uncultured&quot;</span>), ]</span>
+<span id="cb110-6"><a href="differential-abundance-analysis.html#cb110-6" aria-hidden="true"></a></span>
+<span id="cb110-7"><a href="differential-abundance-analysis.html#cb110-7" aria-hidden="true"></a><span class="co"># Sorts p-values in decreasing order. Takes 3rd first ones. Takes those rows that match</span></span>
+<span id="cb110-8"><a href="differential-abundance-analysis.html#cb110-8" aria-hidden="true"></a><span class="co"># with p-values. Takes taxa. </span></span>
+<span id="cb110-9"><a href="differential-abundance-analysis.html#cb110-9" aria-hidden="true"></a>highest3 &lt;-<span class="st"> </span>df[df<span class="op">$</span>padj <span class="op">%in%</span><span class="st"> </span><span class="kw">sort</span>(df<span class="op">$</span>padj, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], ]<span class="op">$</span>taxon</span>
+<span id="cb110-10"><a href="differential-abundance-analysis.html#cb110-10" aria-hidden="true"></a></span>
+<span id="cb110-11"><a href="differential-abundance-analysis.html#cb110-11" aria-hidden="true"></a><span class="co"># From clr transformed table, takes only those taxa that had highest p-values</span></span>
+<span id="cb110-12"><a href="differential-abundance-analysis.html#cb110-12" aria-hidden="true"></a>highest3 &lt;-<span class="st"> </span><span class="kw">assay</span>(tse_genus, <span class="st">&quot;clr&quot;</span>)[highest3, ]</span>
+<span id="cb110-13"><a href="differential-abundance-analysis.html#cb110-13" aria-hidden="true"></a></span>
+<span id="cb110-14"><a href="differential-abundance-analysis.html#cb110-14" aria-hidden="true"></a><span class="co"># Transposes the table</span></span>
+<span id="cb110-15"><a href="differential-abundance-analysis.html#cb110-15" aria-hidden="true"></a>highest3 &lt;-<span class="st"> </span><span class="kw">t</span>(highest3)</span>
+<span id="cb110-16"><a href="differential-abundance-analysis.html#cb110-16" aria-hidden="true"></a></span>
+<span id="cb110-17"><a href="differential-abundance-analysis.html#cb110-17" aria-hidden="true"></a><span class="co"># Adds colData that includes patient status infomation</span></span>
+<span id="cb110-18"><a href="differential-abundance-analysis.html#cb110-18" aria-hidden="true"></a>highest3 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(highest3, <span class="kw">as.data.frame</span>(<span class="kw">colData</span>(tse_genus)))</span>
+<span id="cb110-19"><a href="differential-abundance-analysis.html#cb110-19" aria-hidden="true"></a></span>
+<span id="cb110-20"><a href="differential-abundance-analysis.html#cb110-20" aria-hidden="true"></a><span class="co"># Some taxa names are that long that they don&#39;t fit nicely into title. So let&#39;s add there </span></span>
+<span id="cb110-21"><a href="differential-abundance-analysis.html#cb110-21" aria-hidden="true"></a><span class="co"># a line break after e.g. &quot;Genus&quot;. Here the dot after e.g. Genus is replaced with </span></span>
+<span id="cb110-22"><a href="differential-abundance-analysis.html#cb110-22" aria-hidden="true"></a><span class="co"># &quot;: \n&quot;</span></span>
+<span id="cb110-23"><a href="differential-abundance-analysis.html#cb110-23" aria-hidden="true"></a><span class="kw">colnames</span>(highest3)[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">colnames</span>(highest3)[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="cf">function</span>(x){</span>
+<span id="cb110-24"><a href="differential-abundance-analysis.html#cb110-24" aria-hidden="true"></a>  <span class="co"># Replaces the first dot</span></span>
+<span id="cb110-25"><a href="differential-abundance-analysis.html#cb110-25" aria-hidden="true"></a>  temp &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_replace</span>(x, <span class="st">&quot;[.]&quot;</span>, <span class="st">&quot;: &quot;</span>)</span>
+<span id="cb110-26"><a href="differential-abundance-analysis.html#cb110-26" aria-hidden="true"></a>  </span>
+<span id="cb110-27"><a href="differential-abundance-analysis.html#cb110-27" aria-hidden="true"></a>  <span class="co"># Replace all other dots and underscores with space</span></span>
+<span id="cb110-28"><a href="differential-abundance-analysis.html#cb110-28" aria-hidden="true"></a>  temp &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_replace_all</span>(temp, <span class="kw">c</span>(<span class="st">&quot;[.]&quot;</span> =<span class="st"> &quot; &quot;</span>, <span class="st">&quot;_&quot;</span> =<span class="st"> &quot; &quot;</span>))</span>
+<span id="cb110-29"><a href="differential-abundance-analysis.html#cb110-29" aria-hidden="true"></a>  </span>
+<span id="cb110-30"><a href="differential-abundance-analysis.html#cb110-30" aria-hidden="true"></a>  <span class="co"># Adds line break so that 25 characters is the maximal width</span></span>
+<span id="cb110-31"><a href="differential-abundance-analysis.html#cb110-31" aria-hidden="true"></a>  temp &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_wrap</span>(temp, <span class="dt">width =</span> <span class="dv">25</span>)</span>
+<span id="cb110-32"><a href="differential-abundance-analysis.html#cb110-32" aria-hidden="true"></a>})</span></code></pre></div>
 <p>Next, let’s do the same but for taxa with lowest p-values.</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="differential-abundance-analysis.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sorts p-values in increasing order. Takes 3rd first ones. Takes those rows that match</span></span>
-<span id="cb109-2"><a href="differential-abundance-analysis.html#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="co"># with p-values. Takes taxa. </span></span>
-<span id="cb109-3"><a href="differential-abundance-analysis.html#cb109-3" aria-hidden="true" tabindex="-1"></a>lowest3 <span class="ot">&lt;-</span> df[df<span class="sc">$</span>padj <span class="sc">%in%</span> <span class="fu">sort</span>(df<span class="sc">$</span>padj, <span class="at">decreasing =</span> <span class="cn">FALSE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], ]<span class="sc">$</span>taxon</span>
-<span id="cb109-4"><a href="differential-abundance-analysis.html#cb109-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb109-5"><a href="differential-abundance-analysis.html#cb109-5" aria-hidden="true" tabindex="-1"></a><span class="co"># From clr transformed table, takes only those taxa that had lowest p-values</span></span>
-<span id="cb109-6"><a href="differential-abundance-analysis.html#cb109-6" aria-hidden="true" tabindex="-1"></a>lowest3 <span class="ot">&lt;-</span><span class="fu">assay</span>(tse_genus, <span class="st">&quot;clr&quot;</span>)[lowest3, ]</span>
-<span id="cb109-7"><a href="differential-abundance-analysis.html#cb109-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb109-8"><a href="differential-abundance-analysis.html#cb109-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Transposes the table</span></span>
-<span id="cb109-9"><a href="differential-abundance-analysis.html#cb109-9" aria-hidden="true" tabindex="-1"></a>lowest3 <span class="ot">&lt;-</span> <span class="fu">t</span>(lowest3)</span>
-<span id="cb109-10"><a href="differential-abundance-analysis.html#cb109-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb109-11"><a href="differential-abundance-analysis.html#cb109-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Adds colData that includes patient status infomation</span></span>
-<span id="cb109-12"><a href="differential-abundance-analysis.html#cb109-12" aria-hidden="true" tabindex="-1"></a>lowest3 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(lowest3, <span class="fu">as.data.frame</span>(<span class="fu">colData</span>(tse_genus)))</span>
-<span id="cb109-13"><a href="differential-abundance-analysis.html#cb109-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb109-14"><a href="differential-abundance-analysis.html#cb109-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Some taxa names are that long that they don&#39;t fit nicely into title. So let&#39;s add there </span></span>
-<span id="cb109-15"><a href="differential-abundance-analysis.html#cb109-15" aria-hidden="true" tabindex="-1"></a><span class="co"># a line break after e.g. &quot;Genus&quot;. Here the dot after e.g. Genus is replaced with </span></span>
-<span id="cb109-16"><a href="differential-abundance-analysis.html#cb109-16" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;: \n&quot;</span></span>
-<span id="cb109-17"><a href="differential-abundance-analysis.html#cb109-17" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(lowest3)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">colnames</span>(lowest3)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="cf">function</span>(x){</span>
-<span id="cb109-18"><a href="differential-abundance-analysis.html#cb109-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Replaces the first dot</span></span>
-<span id="cb109-19"><a href="differential-abundance-analysis.html#cb109-19" aria-hidden="true" tabindex="-1"></a>  temp <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_replace</span>(x, <span class="st">&quot;[.]&quot;</span>, <span class="st">&quot;: &quot;</span>)</span>
-<span id="cb109-20"><a href="differential-abundance-analysis.html#cb109-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb109-21"><a href="differential-abundance-analysis.html#cb109-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Replace all other dots and underscores with space</span></span>
-<span id="cb109-22"><a href="differential-abundance-analysis.html#cb109-22" aria-hidden="true" tabindex="-1"></a>  temp <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(temp, <span class="fu">c</span>(<span class="st">&quot;[.]&quot;</span> <span class="ot">=</span> <span class="st">&quot; &quot;</span>, <span class="st">&quot;_&quot;</span> <span class="ot">=</span> <span class="st">&quot; &quot;</span>))</span>
-<span id="cb109-23"><a href="differential-abundance-analysis.html#cb109-23" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb109-24"><a href="differential-abundance-analysis.html#cb109-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Adds line break so that 25 characters is the maximal width</span></span>
-<span id="cb109-25"><a href="differential-abundance-analysis.html#cb109-25" aria-hidden="true" tabindex="-1"></a>  temp <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_wrap</span>(temp, <span class="at">width =</span> <span class="dv">25</span>)</span>
-<span id="cb109-26"><a href="differential-abundance-analysis.html#cb109-26" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="differential-abundance-analysis.html#cb111-1" aria-hidden="true"></a><span class="co"># Sorts p-values in increasing order. Takes 3rd first ones. Takes those rows that match</span></span>
+<span id="cb111-2"><a href="differential-abundance-analysis.html#cb111-2" aria-hidden="true"></a><span class="co"># with p-values. Takes taxa. </span></span>
+<span id="cb111-3"><a href="differential-abundance-analysis.html#cb111-3" aria-hidden="true"></a>lowest3 &lt;-<span class="st"> </span>df[df<span class="op">$</span>padj <span class="op">%in%</span><span class="st"> </span><span class="kw">sort</span>(df<span class="op">$</span>padj, <span class="dt">decreasing =</span> <span class="ot">FALSE</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], ]<span class="op">$</span>taxon</span>
+<span id="cb111-4"><a href="differential-abundance-analysis.html#cb111-4" aria-hidden="true"></a></span>
+<span id="cb111-5"><a href="differential-abundance-analysis.html#cb111-5" aria-hidden="true"></a><span class="co"># From clr transformed table, takes only those taxa that had lowest p-values</span></span>
+<span id="cb111-6"><a href="differential-abundance-analysis.html#cb111-6" aria-hidden="true"></a>lowest3 &lt;-<span class="kw">assay</span>(tse_genus, <span class="st">&quot;clr&quot;</span>)[lowest3, ]</span>
+<span id="cb111-7"><a href="differential-abundance-analysis.html#cb111-7" aria-hidden="true"></a></span>
+<span id="cb111-8"><a href="differential-abundance-analysis.html#cb111-8" aria-hidden="true"></a><span class="co"># Transposes the table</span></span>
+<span id="cb111-9"><a href="differential-abundance-analysis.html#cb111-9" aria-hidden="true"></a>lowest3 &lt;-<span class="st"> </span><span class="kw">t</span>(lowest3)</span>
+<span id="cb111-10"><a href="differential-abundance-analysis.html#cb111-10" aria-hidden="true"></a></span>
+<span id="cb111-11"><a href="differential-abundance-analysis.html#cb111-11" aria-hidden="true"></a><span class="co"># Adds colData that includes patient status infomation</span></span>
+<span id="cb111-12"><a href="differential-abundance-analysis.html#cb111-12" aria-hidden="true"></a>lowest3 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(lowest3, <span class="kw">as.data.frame</span>(<span class="kw">colData</span>(tse_genus)))</span>
+<span id="cb111-13"><a href="differential-abundance-analysis.html#cb111-13" aria-hidden="true"></a></span>
+<span id="cb111-14"><a href="differential-abundance-analysis.html#cb111-14" aria-hidden="true"></a><span class="co"># Some taxa names are that long that they don&#39;t fit nicely into title. So let&#39;s add there </span></span>
+<span id="cb111-15"><a href="differential-abundance-analysis.html#cb111-15" aria-hidden="true"></a><span class="co"># a line break after e.g. &quot;Genus&quot;. Here the dot after e.g. Genus is replaced with </span></span>
+<span id="cb111-16"><a href="differential-abundance-analysis.html#cb111-16" aria-hidden="true"></a><span class="co"># &quot;: \n&quot;</span></span>
+<span id="cb111-17"><a href="differential-abundance-analysis.html#cb111-17" aria-hidden="true"></a><span class="kw">colnames</span>(lowest3)[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>] &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">colnames</span>(lowest3)[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="cf">function</span>(x){</span>
+<span id="cb111-18"><a href="differential-abundance-analysis.html#cb111-18" aria-hidden="true"></a>  <span class="co"># Replaces the first dot</span></span>
+<span id="cb111-19"><a href="differential-abundance-analysis.html#cb111-19" aria-hidden="true"></a>  temp &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_replace</span>(x, <span class="st">&quot;[.]&quot;</span>, <span class="st">&quot;: &quot;</span>)</span>
+<span id="cb111-20"><a href="differential-abundance-analysis.html#cb111-20" aria-hidden="true"></a>  </span>
+<span id="cb111-21"><a href="differential-abundance-analysis.html#cb111-21" aria-hidden="true"></a>  <span class="co"># Replace all other dots and underscores with space</span></span>
+<span id="cb111-22"><a href="differential-abundance-analysis.html#cb111-22" aria-hidden="true"></a>  temp &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_replace_all</span>(temp, <span class="kw">c</span>(<span class="st">&quot;[.]&quot;</span> =<span class="st"> &quot; &quot;</span>, <span class="st">&quot;_&quot;</span> =<span class="st"> &quot; &quot;</span>))</span>
+<span id="cb111-23"><a href="differential-abundance-analysis.html#cb111-23" aria-hidden="true"></a>  </span>
+<span id="cb111-24"><a href="differential-abundance-analysis.html#cb111-24" aria-hidden="true"></a>  <span class="co"># Adds line break so that 25 characters is the maximal width</span></span>
+<span id="cb111-25"><a href="differential-abundance-analysis.html#cb111-25" aria-hidden="true"></a>  temp &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_wrap</span>(temp, <span class="dt">width =</span> <span class="dv">25</span>)</span>
+<span id="cb111-26"><a href="differential-abundance-analysis.html#cb111-26" aria-hidden="true"></a>})</span></code></pre></div>
 <p>Then we can plot these six different taxa. Let’s arrange them into the same picture.</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="differential-abundance-analysis.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Puts plots in the same picture</span></span>
-<span id="cb110-2"><a href="differential-abundance-analysis.html#cb110-2" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(</span>
-<span id="cb110-3"><a href="differential-abundance-analysis.html#cb110-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb110-4"><a href="differential-abundance-analysis.html#cb110-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Plot 1</span></span>
-<span id="cb110-5"><a href="differential-abundance-analysis.html#cb110-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(highest3, <span class="fu">aes</span>(<span class="at">x =</span> patient_status, <span class="at">y =</span> highest3[,<span class="dv">1</span>])) <span class="sc">+</span> </span>
-<span id="cb110-6"><a href="differential-abundance-analysis.html#cb110-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
-<span id="cb110-7"><a href="differential-abundance-analysis.html#cb110-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;CLR abundances&quot;</span>) <span class="sc">+</span> <span class="co"># y axis title</span></span>
-<span id="cb110-8"><a href="differential-abundance-analysis.html#cb110-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="fu">names</span>(highest3)[<span class="dv">1</span>]) <span class="sc">+</span> <span class="co"># main title</span></span>
-<span id="cb110-9"><a href="differential-abundance-analysis.html#cb110-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>),</span>
-<span id="cb110-10"><a href="differential-abundance-analysis.html#cb110-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>),</span>
-<span id="cb110-11"><a href="differential-abundance-analysis.html#cb110-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.title.x=</span><span class="fu">element_blank</span>()), <span class="co"># makes titles smaller, removes x axis title</span></span>
-<span id="cb110-12"><a href="differential-abundance-analysis.html#cb110-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb110-13"><a href="differential-abundance-analysis.html#cb110-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Plot 2</span></span>
-<span id="cb110-14"><a href="differential-abundance-analysis.html#cb110-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(highest3, <span class="fu">aes</span>(<span class="at">x =</span> patient_status, <span class="at">y =</span> highest3[,<span class="dv">2</span>])) <span class="sc">+</span> </span>
-<span id="cb110-15"><a href="differential-abundance-analysis.html#cb110-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
-<span id="cb110-16"><a href="differential-abundance-analysis.html#cb110-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;CLR abundances&quot;</span>) <span class="sc">+</span> <span class="co"># y axis title</span></span>
-<span id="cb110-17"><a href="differential-abundance-analysis.html#cb110-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="fu">names</span>(highest3)[<span class="dv">2</span>]) <span class="sc">+</span> <span class="co"># main title</span></span>
-<span id="cb110-18"><a href="differential-abundance-analysis.html#cb110-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>),</span>
-<span id="cb110-19"><a href="differential-abundance-analysis.html#cb110-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>),</span>
-<span id="cb110-20"><a href="differential-abundance-analysis.html#cb110-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.title.x=</span><span class="fu">element_blank</span>()), <span class="co"># makes titles smaller, removes x axis title</span></span>
-<span id="cb110-21"><a href="differential-abundance-analysis.html#cb110-21" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb110-22"><a href="differential-abundance-analysis.html#cb110-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Plot 3</span></span>
-<span id="cb110-23"><a href="differential-abundance-analysis.html#cb110-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(highest3, <span class="fu">aes</span>(<span class="at">x =</span> patient_status, <span class="at">y =</span> highest3[,<span class="dv">3</span>])) <span class="sc">+</span> </span>
-<span id="cb110-24"><a href="differential-abundance-analysis.html#cb110-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
-<span id="cb110-25"><a href="differential-abundance-analysis.html#cb110-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;CLR abundances&quot;</span>) <span class="sc">+</span> <span class="co"># y axis title</span></span>
-<span id="cb110-26"><a href="differential-abundance-analysis.html#cb110-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="fu">names</span>(highest3)[<span class="dv">3</span>]) <span class="sc">+</span> <span class="co"># main title</span></span>
-<span id="cb110-27"><a href="differential-abundance-analysis.html#cb110-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>),</span>
-<span id="cb110-28"><a href="differential-abundance-analysis.html#cb110-28" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>),</span>
-<span id="cb110-29"><a href="differential-abundance-analysis.html#cb110-29" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.title.x=</span><span class="fu">element_blank</span>()), <span class="co"># makes titles smaller, removes x axis title</span></span>
-<span id="cb110-30"><a href="differential-abundance-analysis.html#cb110-30" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb110-31"><a href="differential-abundance-analysis.html#cb110-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Plot 4</span></span>
-<span id="cb110-32"><a href="differential-abundance-analysis.html#cb110-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(lowest3, <span class="fu">aes</span>(<span class="at">x =</span> patient_status, <span class="at">y =</span> lowest3[,<span class="dv">1</span>])) <span class="sc">+</span> </span>
-<span id="cb110-33"><a href="differential-abundance-analysis.html#cb110-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
-<span id="cb110-34"><a href="differential-abundance-analysis.html#cb110-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;CLR abundances&quot;</span>) <span class="sc">+</span> <span class="co"># y axis title</span></span>
-<span id="cb110-35"><a href="differential-abundance-analysis.html#cb110-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="fu">names</span>(lowest3)[<span class="dv">1</span>]) <span class="sc">+</span> <span class="co"># main title</span></span>
-<span id="cb110-36"><a href="differential-abundance-analysis.html#cb110-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>),</span>
-<span id="cb110-37"><a href="differential-abundance-analysis.html#cb110-37" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>),</span>
-<span id="cb110-38"><a href="differential-abundance-analysis.html#cb110-38" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.title.x=</span><span class="fu">element_blank</span>()), <span class="co"># makes titles smaller, removes x axis title</span></span>
-<span id="cb110-39"><a href="differential-abundance-analysis.html#cb110-39" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb110-40"><a href="differential-abundance-analysis.html#cb110-40" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Plot 5</span></span>
-<span id="cb110-41"><a href="differential-abundance-analysis.html#cb110-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(lowest3, <span class="fu">aes</span>(<span class="at">x =</span> patient_status, <span class="at">y =</span> lowest3[,<span class="dv">2</span>])) <span class="sc">+</span> </span>
-<span id="cb110-42"><a href="differential-abundance-analysis.html#cb110-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
-<span id="cb110-43"><a href="differential-abundance-analysis.html#cb110-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;CLR abundances&quot;</span>) <span class="sc">+</span> <span class="co"># y axis title</span></span>
-<span id="cb110-44"><a href="differential-abundance-analysis.html#cb110-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="fu">names</span>(lowest3)[<span class="dv">2</span>]) <span class="sc">+</span> <span class="co"># main title</span></span>
-<span id="cb110-45"><a href="differential-abundance-analysis.html#cb110-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>),</span>
-<span id="cb110-46"><a href="differential-abundance-analysis.html#cb110-46" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>),</span>
-<span id="cb110-47"><a href="differential-abundance-analysis.html#cb110-47" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.title.x=</span><span class="fu">element_blank</span>()), <span class="co"># makes titles smaller, removes x axis title</span></span>
-<span id="cb110-48"><a href="differential-abundance-analysis.html#cb110-48" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb110-49"><a href="differential-abundance-analysis.html#cb110-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Plot 6</span></span>
-<span id="cb110-50"><a href="differential-abundance-analysis.html#cb110-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(lowest3, <span class="fu">aes</span>(<span class="at">x =</span> patient_status, <span class="at">y =</span> lowest3[,<span class="dv">3</span>])) <span class="sc">+</span> </span>
-<span id="cb110-51"><a href="differential-abundance-analysis.html#cb110-51" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
-<span id="cb110-52"><a href="differential-abundance-analysis.html#cb110-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&quot;CLR abundances&quot;</span>) <span class="sc">+</span> <span class="co"># y axis title</span></span>
-<span id="cb110-53"><a href="differential-abundance-analysis.html#cb110-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="fu">names</span>(lowest3)[<span class="dv">3</span>]) <span class="sc">+</span> <span class="co"># main title</span></span>
-<span id="cb110-54"><a href="differential-abundance-analysis.html#cb110-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>),</span>
-<span id="cb110-55"><a href="differential-abundance-analysis.html#cb110-55" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>),</span>
-<span id="cb110-56"><a href="differential-abundance-analysis.html#cb110-56" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.title.x=</span><span class="fu">element_blank</span>()), <span class="co"># makes titles smaller, removes x axis title</span></span>
-<span id="cb110-57"><a href="differential-abundance-analysis.html#cb110-57" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb110-58"><a href="differential-abundance-analysis.html#cb110-58" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 3 columns and 2 rows</span></span>
-<span id="cb110-59"><a href="differential-abundance-analysis.html#cb110-59" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">3</span>, </span>
-<span id="cb110-60"><a href="differential-abundance-analysis.html#cb110-60" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">2</span></span>
-<span id="cb110-61"><a href="differential-abundance-analysis.html#cb110-61" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="differential-abundance-analysis.html#cb112-1" aria-hidden="true"></a><span class="co"># Puts plots in the same picture</span></span>
+<span id="cb112-2"><a href="differential-abundance-analysis.html#cb112-2" aria-hidden="true"></a>gridExtra<span class="op">::</span><span class="kw">grid.arrange</span>(</span>
+<span id="cb112-3"><a href="differential-abundance-analysis.html#cb112-3" aria-hidden="true"></a>  </span>
+<span id="cb112-4"><a href="differential-abundance-analysis.html#cb112-4" aria-hidden="true"></a>  <span class="co"># Plot 1</span></span>
+<span id="cb112-5"><a href="differential-abundance-analysis.html#cb112-5" aria-hidden="true"></a>  <span class="kw">ggplot</span>(highest3, <span class="kw">aes</span>(<span class="dt">x =</span> patient_status, <span class="dt">y =</span> highest3[,<span class="dv">1</span>])) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb112-6"><a href="differential-abundance-analysis.html#cb112-6" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb112-7"><a href="differential-abundance-analysis.html#cb112-7" aria-hidden="true"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;CLR abundances&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># y axis title</span></span>
+<span id="cb112-8"><a href="differential-abundance-analysis.html#cb112-8" aria-hidden="true"></a><span class="st">    </span><span class="kw">ggtitle</span>(<span class="kw">names</span>(highest3)[<span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span><span class="co"># main title</span></span>
+<span id="cb112-9"><a href="differential-abundance-analysis.html#cb112-9" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">7</span>),</span>
+<span id="cb112-10"><a href="differential-abundance-analysis.html#cb112-10" aria-hidden="true"></a>          <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">7</span>),</span>
+<span id="cb112-11"><a href="differential-abundance-analysis.html#cb112-11" aria-hidden="true"></a>          <span class="dt">axis.title.x=</span><span class="kw">element_blank</span>()), <span class="co"># makes titles smaller, removes x axis title</span></span>
+<span id="cb112-12"><a href="differential-abundance-analysis.html#cb112-12" aria-hidden="true"></a>  </span>
+<span id="cb112-13"><a href="differential-abundance-analysis.html#cb112-13" aria-hidden="true"></a>  <span class="co"># Plot 2</span></span>
+<span id="cb112-14"><a href="differential-abundance-analysis.html#cb112-14" aria-hidden="true"></a>  <span class="kw">ggplot</span>(highest3, <span class="kw">aes</span>(<span class="dt">x =</span> patient_status, <span class="dt">y =</span> highest3[,<span class="dv">2</span>])) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb112-15"><a href="differential-abundance-analysis.html#cb112-15" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb112-16"><a href="differential-abundance-analysis.html#cb112-16" aria-hidden="true"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;CLR abundances&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># y axis title</span></span>
+<span id="cb112-17"><a href="differential-abundance-analysis.html#cb112-17" aria-hidden="true"></a><span class="st">    </span><span class="kw">ggtitle</span>(<span class="kw">names</span>(highest3)[<span class="dv">2</span>]) <span class="op">+</span><span class="st"> </span><span class="co"># main title</span></span>
+<span id="cb112-18"><a href="differential-abundance-analysis.html#cb112-18" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">7</span>),</span>
+<span id="cb112-19"><a href="differential-abundance-analysis.html#cb112-19" aria-hidden="true"></a>          <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">7</span>),</span>
+<span id="cb112-20"><a href="differential-abundance-analysis.html#cb112-20" aria-hidden="true"></a>          <span class="dt">axis.title.x=</span><span class="kw">element_blank</span>()), <span class="co"># makes titles smaller, removes x axis title</span></span>
+<span id="cb112-21"><a href="differential-abundance-analysis.html#cb112-21" aria-hidden="true"></a>  </span>
+<span id="cb112-22"><a href="differential-abundance-analysis.html#cb112-22" aria-hidden="true"></a>  <span class="co"># Plot 3</span></span>
+<span id="cb112-23"><a href="differential-abundance-analysis.html#cb112-23" aria-hidden="true"></a>  <span class="kw">ggplot</span>(highest3, <span class="kw">aes</span>(<span class="dt">x =</span> patient_status, <span class="dt">y =</span> highest3[,<span class="dv">3</span>])) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb112-24"><a href="differential-abundance-analysis.html#cb112-24" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb112-25"><a href="differential-abundance-analysis.html#cb112-25" aria-hidden="true"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;CLR abundances&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># y axis title</span></span>
+<span id="cb112-26"><a href="differential-abundance-analysis.html#cb112-26" aria-hidden="true"></a><span class="st">    </span><span class="kw">ggtitle</span>(<span class="kw">names</span>(highest3)[<span class="dv">3</span>]) <span class="op">+</span><span class="st"> </span><span class="co"># main title</span></span>
+<span id="cb112-27"><a href="differential-abundance-analysis.html#cb112-27" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">7</span>),</span>
+<span id="cb112-28"><a href="differential-abundance-analysis.html#cb112-28" aria-hidden="true"></a>          <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">7</span>),</span>
+<span id="cb112-29"><a href="differential-abundance-analysis.html#cb112-29" aria-hidden="true"></a>          <span class="dt">axis.title.x=</span><span class="kw">element_blank</span>()), <span class="co"># makes titles smaller, removes x axis title</span></span>
+<span id="cb112-30"><a href="differential-abundance-analysis.html#cb112-30" aria-hidden="true"></a>  </span>
+<span id="cb112-31"><a href="differential-abundance-analysis.html#cb112-31" aria-hidden="true"></a>  <span class="co"># Plot 4</span></span>
+<span id="cb112-32"><a href="differential-abundance-analysis.html#cb112-32" aria-hidden="true"></a>  <span class="kw">ggplot</span>(lowest3, <span class="kw">aes</span>(<span class="dt">x =</span> patient_status, <span class="dt">y =</span> lowest3[,<span class="dv">1</span>])) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb112-33"><a href="differential-abundance-analysis.html#cb112-33" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb112-34"><a href="differential-abundance-analysis.html#cb112-34" aria-hidden="true"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;CLR abundances&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># y axis title</span></span>
+<span id="cb112-35"><a href="differential-abundance-analysis.html#cb112-35" aria-hidden="true"></a><span class="st">    </span><span class="kw">ggtitle</span>(<span class="kw">names</span>(lowest3)[<span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span><span class="co"># main title</span></span>
+<span id="cb112-36"><a href="differential-abundance-analysis.html#cb112-36" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">7</span>),</span>
+<span id="cb112-37"><a href="differential-abundance-analysis.html#cb112-37" aria-hidden="true"></a>          <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">7</span>),</span>
+<span id="cb112-38"><a href="differential-abundance-analysis.html#cb112-38" aria-hidden="true"></a>          <span class="dt">axis.title.x=</span><span class="kw">element_blank</span>()), <span class="co"># makes titles smaller, removes x axis title</span></span>
+<span id="cb112-39"><a href="differential-abundance-analysis.html#cb112-39" aria-hidden="true"></a>  </span>
+<span id="cb112-40"><a href="differential-abundance-analysis.html#cb112-40" aria-hidden="true"></a>  <span class="co"># Plot 5</span></span>
+<span id="cb112-41"><a href="differential-abundance-analysis.html#cb112-41" aria-hidden="true"></a>  <span class="kw">ggplot</span>(lowest3, <span class="kw">aes</span>(<span class="dt">x =</span> patient_status, <span class="dt">y =</span> lowest3[,<span class="dv">2</span>])) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb112-42"><a href="differential-abundance-analysis.html#cb112-42" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb112-43"><a href="differential-abundance-analysis.html#cb112-43" aria-hidden="true"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;CLR abundances&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># y axis title</span></span>
+<span id="cb112-44"><a href="differential-abundance-analysis.html#cb112-44" aria-hidden="true"></a><span class="st">    </span><span class="kw">ggtitle</span>(<span class="kw">names</span>(lowest3)[<span class="dv">2</span>]) <span class="op">+</span><span class="st"> </span><span class="co"># main title</span></span>
+<span id="cb112-45"><a href="differential-abundance-analysis.html#cb112-45" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">7</span>),</span>
+<span id="cb112-46"><a href="differential-abundance-analysis.html#cb112-46" aria-hidden="true"></a>          <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">7</span>),</span>
+<span id="cb112-47"><a href="differential-abundance-analysis.html#cb112-47" aria-hidden="true"></a>          <span class="dt">axis.title.x=</span><span class="kw">element_blank</span>()), <span class="co"># makes titles smaller, removes x axis title</span></span>
+<span id="cb112-48"><a href="differential-abundance-analysis.html#cb112-48" aria-hidden="true"></a>  </span>
+<span id="cb112-49"><a href="differential-abundance-analysis.html#cb112-49" aria-hidden="true"></a>  <span class="co"># Plot 6</span></span>
+<span id="cb112-50"><a href="differential-abundance-analysis.html#cb112-50" aria-hidden="true"></a>  <span class="kw">ggplot</span>(lowest3, <span class="kw">aes</span>(<span class="dt">x =</span> patient_status, <span class="dt">y =</span> lowest3[,<span class="dv">3</span>])) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb112-51"><a href="differential-abundance-analysis.html#cb112-51" aria-hidden="true"></a><span class="st">    </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb112-52"><a href="differential-abundance-analysis.html#cb112-52" aria-hidden="true"></a><span class="st">    </span><span class="kw">ylab</span>(<span class="st">&quot;CLR abundances&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># y axis title</span></span>
+<span id="cb112-53"><a href="differential-abundance-analysis.html#cb112-53" aria-hidden="true"></a><span class="st">    </span><span class="kw">ggtitle</span>(<span class="kw">names</span>(lowest3)[<span class="dv">3</span>]) <span class="op">+</span><span class="st"> </span><span class="co"># main title</span></span>
+<span id="cb112-54"><a href="differential-abundance-analysis.html#cb112-54" aria-hidden="true"></a><span class="st">    </span><span class="kw">theme</span>(<span class="dt">title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">7</span>),</span>
+<span id="cb112-55"><a href="differential-abundance-analysis.html#cb112-55" aria-hidden="true"></a>          <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">7</span>),</span>
+<span id="cb112-56"><a href="differential-abundance-analysis.html#cb112-56" aria-hidden="true"></a>          <span class="dt">axis.title.x=</span><span class="kw">element_blank</span>()), <span class="co"># makes titles smaller, removes x axis title</span></span>
+<span id="cb112-57"><a href="differential-abundance-analysis.html#cb112-57" aria-hidden="true"></a>  </span>
+<span id="cb112-58"><a href="differential-abundance-analysis.html#cb112-58" aria-hidden="true"></a>  <span class="co"># 3 columns and 2 rows</span></span>
+<span id="cb112-59"><a href="differential-abundance-analysis.html#cb112-59" aria-hidden="true"></a>  <span class="dt">ncol =</span> <span class="dv">3</span>, </span>
+<span id="cb112-60"><a href="differential-abundance-analysis.html#cb112-60" aria-hidden="true"></a>  <span class="dt">nrow =</span> <span class="dv">2</span></span>
+<span id="cb112-61"><a href="differential-abundance-analysis.html#cb112-61" aria-hidden="true"></a>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
 
 </div>

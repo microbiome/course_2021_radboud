@@ -2,7 +2,7 @@
 # This code below builds the Rmd file into a book
 authors <- "Leo Lahti, Tuomas Borman, Henrik Eckerman"
 library(bookdown)
-render_book(input = "index.Rmd", output_format = "bookdown::gitbook", output_dir = "docs")
+render_book()
 
 # Instead of render_book, you can run serve_book. The difference is that by serve_book
 # you can preview the book on your web browser live. However, when using serve_book you
