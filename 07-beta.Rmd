@@ -1,9 +1,3 @@
----
-title: "Beta diversity"
-author: "`r authors`"
-date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
----
 
 # Beta diversity
 

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>9 Dirichlet-Multinomial Mixture Model | Miscellaneous material</title>
+  <title>9 Dirichlet-Multinomial Mixture Model | Introduction to microbiome data science</title>
   <meta name="description" content="Course material" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="9 Dirichlet-Multinomial Mixture Model | Miscellaneous material" />
+  <meta property="og:title" content="9 Dirichlet-Multinomial Mixture Model | Introduction to microbiome data science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,12 +16,12 @@
   <meta name="github-repo" content="microbiome/course_2021_radboud" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="9 Dirichlet-Multinomial Mixture Model | Miscellaneous material" />
+  <meta name="twitter:title" content="9 Dirichlet-Multinomial Mixture Model | Introduction to microbiome data science" />
   
   <meta name="twitter:description" content="Course material" />
   
 
-<meta name="author" content="Leo Lahti, Tuomas Borman, Henrik Eckermann" />
+<meta name="author" content="Leo Lahti, Tuomas Borman, and Henrik Eckermann" />
 
 
 <meta name="date" content="2021-07-01" />
@@ -133,6 +133,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
+<li><a href="./">Introduction to miaverse</a></li>
+
+<li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#the-miaverse-framework"><i class="fa fa-check"></i><b>1.1</b> The miaverse framework</a></li>
@@ -227,6 +230,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html#shapiro-wilk-test"><i class="fa fa-check"></i><b>12.1</b> Shapiro-Wilk test</a></li>
 <li class="chapter" data-level="12.2" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html#deseq-details"><i class="fa fa-check"></i><b>12.2</b> Deseq details</a></li>
 </ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
 </ul>
 
       </nav>
@@ -236,7 +242,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Miscellaneous material</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to microbiome data science</a>
           </h1>
         </div>
 
@@ -291,37 +297,37 @@ reflect the probability that a sample belongs to the given cluster.</p>
 ## class: DMN 
 ## k: 2 
 ## samples x taxa: 27 x 151 
-## Laplace: 11704.82 BIC: 12399.15 AIC: 12202.83 
+## Laplace: 11441.02 BIC: 12161.29 AIC: 11964.97 
 ## 
 ## [[3]]
 ## class: DMN 
 ## k: 3 
 ## samples x taxa: 27 x 151 
-## Laplace: 11059.76 BIC: 12266.31 AIC: 11971.51 
+## Laplace: 11059.75 BIC: 12266.31 AIC: 11971.51 
 ## 
 ## [[4]]
 ## class: DMN 
 ## k: 4 
 ## samples x taxa: 27 x 151 
-## Laplace: 11417.51 BIC: 13047.39 AIC: 12654.11 
+## Laplace: 11417.58 BIC: 13047.39 AIC: 12654.11 
 ## 
 ## [[5]]
 ## class: DMN 
 ## k: 5 
 ## samples x taxa: 27 x 151 
-## Laplace: 11217.24 BIC: 13305.58 AIC: 12813.8 
+## Laplace: 11217.22 BIC: 13305.58 AIC: 12813.8 
 ## 
 ## [[6]]
 ## class: DMN 
 ## k: 6 
 ## samples x taxa: 27 x 151 
-## Laplace: 11202.18 BIC: 13718.9 AIC: 13128.65 
+## Laplace: 11201.94 BIC: 13718.9 AIC: 13128.65 
 ## 
 ## [[7]]
 ## class: DMN 
 ## k: 7 
 ## samples x taxa: 27 x 151 
-## Laplace: 11684.01 BIC: 14400.77 AIC: 13712.03</code></pre>
+## Laplace: 11428.51 BIC: 14172.79 AIC: 13484.06</code></pre>
 <p>Show Laplace approximation (model evidence) for each model of the k models.</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="dirichlet-multinomial-mixture-model.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotDMNFit</span>(tse_dmn, <span class="at">type =</span> <span class="st">&quot;laplace&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
@@ -330,7 +336,7 @@ reflect the probability that a sample belongs to the given cluster.</p>
 <pre><code>## class: DMN 
 ## k: 3 
 ## samples x taxa: 27 x 151 
-## Laplace: 11059.76 BIC: 12266.31 AIC: 11971.51</code></pre>
+## Laplace: 11059.75 BIC: 12266.31 AIC: 11971.51</code></pre>
 <div id="pcoa-for-asv-level-data-with-bray-curtis-with-dmm-clusters-shown-with-colors" class="section level2" number="9.1">
 <h2><span class="header-section-number">9.1</span> PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors</h2>
 <p>Group samples and return DMNGroup object that contains a summary.
@@ -341,34 +347,34 @@ Patient status is used for grouping.</p>
 <span id="cb72-4"><a href="dirichlet-multinomial-mixture-model.html#cb72-4" aria-hidden="true" tabindex="-1"></a>dmn_group</span></code></pre></div>
 <pre><code>## class: DMNGroup 
 ## summary:
-##         k samples taxa      NLE    LogDet Laplace      BIC      AIC
-## ADHD    3      13  151 6018.131 -344.7893 5427.62 6601.657 6473.131
-## Control 3      14  151 6647.269 -147.5241 6155.39 7247.655 7102.269</code></pre>
+##         k samples taxa      NLE    LogDet  Laplace      BIC      AIC
+## ADHD    3      13  151 6018.131 -345.1019 5427.463 6601.657 6473.131
+## Control 3      14  151 6647.269 -148.0803 6155.112 7247.655 7102.269</code></pre>
 <p>Mixture weights (rough measure of the cluster size).</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="dirichlet-multinomial-mixture-model.html#cb74-1" aria-hidden="true" tabindex="-1"></a>DirichletMultinomial<span class="sc">::</span><span class="fu">mixturewt</span>(<span class="fu">getBestDMNFit</span>(tse_dmn))</span></code></pre></div>
 <pre><code>##          pi    theta
-## 1 0.4814815 31.27764
-## 2 0.2962963 47.34431
-## 3 0.2222222 92.27394</code></pre>
+## 1 0.4814815 31.27700
+## 2 0.2962963 47.34444
+## 3 0.2222222 92.27402</code></pre>
 <p>Samples-cluster assignment probabilities / how probable it is that sample belongs
 to each cluster</p>
 <div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="dirichlet-multinomial-mixture-model.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(DirichletMultinomial<span class="sc">::</span><span class="fu">mixture</span>(<span class="fu">getBestDMNFit</span>(tse_dmn)))</span></code></pre></div>
 <pre><code>##               [,1]          [,2]          [,3]
-## A110  1.000000e+00 1.245878e-144 7.614906e-205
-## A12  9.815777e-117  6.112824e-93  1.000000e+00
-## A15   1.000000e+00 9.468644e-119 3.414255e-234
-## A19  5.373244e-112 1.814912e-107  1.000000e+00
-## A21   2.145215e-93  4.715927e-96  1.000000e+00
-## A23   1.000000e+00 8.790751e-111 1.948491e-161</code></pre>
+## A110  1.000000e+00 1.242922e-144 7.604010e-205
+## A12  9.846621e-117  6.101302e-93  1.000000e+00
+## A15   1.000000e+00 9.410022e-119 3.387068e-234
+## A19  5.380672e-112 1.811453e-107  1.000000e+00
+## A21   2.148334e-93  4.707870e-96  1.000000e+00
+## A23   1.000000e+00 8.762886e-111 1.943028e-161</code></pre>
 <p>Contribution of each taxa to each component</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="dirichlet-multinomial-mixture-model.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(DirichletMultinomial<span class="sc">::</span><span class="fu">fitted</span>(<span class="fu">getBestDMNFit</span>(tse_dmn)))</span></code></pre></div>
 <pre><code>##                 [,1]        [,2]       [,3]
-## 1726470  6.352199035 2.898736178 20.1892586
-## 1726471  5.287913008 0.002047309  0.1532229
-## 17264731 0.001248794 9.144551105  2.0112022
-## 17264726 0.140478993 1.363534648  7.5893565
-## 1726472  2.104142707 3.523458766  2.6656992
-## 17264724 0.072367856 0.002047309  9.8545567</code></pre>
+## 1726470  6.351953067 2.898749937 20.1892565
+## 1726471  5.287480124 0.002047158  0.1532234
+## 17264731 0.001248825 9.144572650  2.0112225
+## 17264726 0.140477330 1.363550110  7.5893557
+## 1726472  2.104190596 3.523384028  2.6657028
+## 17264724 0.072369460 0.002047158  9.8544914</code></pre>
 <p>Get the assignment probabilities</p>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="dirichlet-multinomial-mixture-model.html#cb80-1" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> DirichletMultinomial<span class="sc">::</span><span class="fu">mixture</span>(<span class="fu">getBestDMNFit</span>(tse_dmn))</span>
 <span id="cb80-2"><a href="dirichlet-multinomial-mixture-model.html#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Add column names</span></span>
@@ -419,10 +425,10 @@ to each cluster</p>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
-"linkedin": false,
+"linkedin": true,
 "weibo": false,
 "instapaper": false,
 "vk": false,
@@ -446,7 +452,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["_main.pdf"],
 "toc": {
 "collapse": "section"
 }

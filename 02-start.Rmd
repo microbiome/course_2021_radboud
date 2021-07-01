@@ -1,9 +1,3 @@
----
-title: "Getting Started"
-author: "`r authors`"
-date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
----
 
 # Getting started
 

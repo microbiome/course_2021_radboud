@@ -1,9 +1,3 @@
----
-title: "Install and load required R packages"
-author: "`r authors`"
-date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
----
 
 # Install and load required R packages
 

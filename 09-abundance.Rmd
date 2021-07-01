@@ -1,9 +1,3 @@
----
-title: "Differential abundance analysis"
-author: "`r authors`"
-date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
----
 
 # Differential abundance analysis
 

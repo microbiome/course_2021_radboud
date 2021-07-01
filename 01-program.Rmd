@@ -1,9 +1,3 @@
----
-title: "Program"
-author: "`r authors`"
-date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
----
 
 # Program
 

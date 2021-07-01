@@ -1,9 +1,3 @@
----
-title: "Study material"
-author: "`r authors`"
-date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
----
 
 # Study material
 
