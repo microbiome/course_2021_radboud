@@ -1,6 +1,6 @@
 
 # This code below builds the Rmd file into a book
-authors <- "Leo Lahti, Tuomas Borman, Henrik Eckerman"
+authors <- "Leo Lahti, Tuomas Borman, Henrik Eckermann"
 library(bookdown)
 render_book()
 
