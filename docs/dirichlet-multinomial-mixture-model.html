@@ -158,24 +158,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html"><i class="fa fa-check"></i><b>4</b> Importing microbiome data</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#data"><i class="fa fa-check"></i><b>4.1</b> Data</a></li>
+<li class="chapter" data-level="4.1" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#data-access"><i class="fa fa-check"></i><b>4.1</b> Data access</a></li>
 <li class="chapter" data-level="4.2" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#investigate-the-r-data-object"><i class="fa fa-check"></i><b>4.2</b> Investigate the R data object</a>
 <ul>
 <li class="chapter" data-level="4.2.1" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#rowdata-taxonomic-information"><i class="fa fa-check"></i><b>4.2.1</b> rowData (taxonomic information)</a></li>
 <li class="chapter" data-level="4.2.2" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#coldata-sample-information"><i class="fa fa-check"></i><b>4.2.2</b> colData (sample information)</a></li>
 <li class="chapter" data-level="4.2.3" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#phylogenetic-tree-information"><i class="fa fa-check"></i><b>4.2.3</b> Phylogenetic tree information</a></li>
 </ul></li>
+<li class="chapter" data-level="4.3" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#further-examples"><i class="fa fa-check"></i><b>4.3</b> Further examples</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="data-exploration.html"><a href="data-exploration.html"><i class="fa fa-check"></i><b>5</b> Data exploration</a>
+<li class="chapter" data-level="5" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html"><i class="fa fa-check"></i><b>5</b> Microbiome data exploration</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="data-exploration.html"><a href="data-exploration.html#investigate-the-contents-of-a-microbiome-data-object"><i class="fa fa-check"></i><b>5.1</b> Investigate the contents of a microbiome data object</a></li>
-<li class="chapter" data-level="5.2" data-path="data-exploration.html"><a href="data-exploration.html#manipulate-the-data"><i class="fa fa-check"></i><b>5.2</b> Manipulate the data</a>
+<li class="chapter" data-level="5.1" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#investigate-the-contents-of-a-microbiome-data-object"><i class="fa fa-check"></i><b>5.1</b> Investigate the contents of a microbiome data object</a></li>
+<li class="chapter" data-level="5.2" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#manipulate-the-data"><i class="fa fa-check"></i><b>5.2</b> Manipulate the data</a>
 <ul>
-<li class="chapter" data-level="5.2.1" data-path="data-exploration.html"><a href="data-exploration.html#transformations"><i class="fa fa-check"></i><b>5.2.1</b> Transformations</a></li>
-<li class="chapter" data-level="5.2.2" data-path="data-exploration.html"><a href="data-exploration.html#aggregation"><i class="fa fa-check"></i><b>5.2.2</b> Aggregation</a></li>
+<li class="chapter" data-level="5.2.1" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#transformations"><i class="fa fa-check"></i><b>5.2.1</b> Transformations</a></li>
+<li class="chapter" data-level="5.2.2" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#aggregation"><i class="fa fa-check"></i><b>5.2.2</b> Aggregation</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="data-exploration.html"><a href="data-exploration.html#visualization"><i class="fa fa-check"></i><b>5.3</b> Visualization</a></li>
-<li class="chapter" data-level="5.4" data-path="data-exploration.html"><a href="data-exploration.html#further-resources"><i class="fa fa-check"></i><b>5.4</b> Further resources</a></li>
+<li class="chapter" data-level="5.3" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#visualization"><i class="fa fa-check"></i><b>5.3</b> Visualization</a></li>
+<li class="chapter" data-level="5.4" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#further-resources"><i class="fa fa-check"></i><b>5.4</b> Further resources</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="alpha-diversity.html"><a href="alpha-diversity.html"><i class="fa fa-check"></i><b>6</b> Alpha diversity</a>
 <ul>
@@ -293,37 +294,37 @@ reflect the probability that a sample belongs to the given cluster.</p>
 ## class: DMN 
 ## k: 2 
 ## samples x taxa: 27 x 151 
-## Laplace: 11440.99 BIC: 12161.29 AIC: 11964.97 
+## Laplace: 11441 BIC: 12161.29 AIC: 11964.97 
 ## 
 ## [[3]]
 ## class: DMN 
 ## k: 3 
 ## samples x taxa: 27 x 151 
-## Laplace: 11059.63 BIC: 12266.31 AIC: 11971.51 
+## Laplace: 11059.75 BIC: 12266.31 AIC: 11971.51 
 ## 
 ## [[4]]
 ## class: DMN 
 ## k: 4 
 ## samples x taxa: 27 x 151 
-## Laplace: 11417.53 BIC: 13047.39 AIC: 12654.11 
+## Laplace: 11417.29 BIC: 13047.39 AIC: 12654.11 
 ## 
 ## [[5]]
 ## class: DMN 
 ## k: 5 
 ## samples x taxa: 27 x 151 
-## Laplace: 11325.68 BIC: 13255.59 AIC: 12763.82 
+## Laplace: 11325.82 BIC: 13255.59 AIC: 12763.82 
 ## 
 ## [[6]]
 ## class: DMN 
 ## k: 6 
 ## samples x taxa: 27 x 151 
-## Laplace: 11202.28 BIC: 13718.9 AIC: 13128.65 
+## Laplace: 11407.97 BIC: 13774.56 AIC: 13184.3 
 ## 
 ## [[7]]
 ## class: DMN 
 ## k: 7 
 ## samples x taxa: 27 x 151 
-## Laplace: 11405.76 BIC: 14266.05 AIC: 13577.31</code></pre>
+## Laplace: 11428.76 BIC: 14172.79 AIC: 13484.06</code></pre>
 <p>Show Laplace approximation (model evidence) for each model of the k models.</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="dirichlet-multinomial-mixture-model.html#cb69-1" aria-hidden="true"></a><span class="kw">plotDMNFit</span>(tse_dmn, <span class="dt">type =</span> <span class="st">&quot;laplace&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
@@ -332,7 +333,7 @@ reflect the probability that a sample belongs to the given cluster.</p>
 <pre><code>## class: DMN 
 ## k: 3 
 ## samples x taxa: 27 x 151 
-## Laplace: 11059.63 BIC: 12266.31 AIC: 11971.51</code></pre>
+## Laplace: 11059.75 BIC: 12266.31 AIC: 11971.51</code></pre>
 <div id="pcoa-for-asv-level-data-with-bray-curtis-with-dmm-clusters-shown-with-colors" class="section level2" number="8.1">
 <h2><span class="header-section-number">8.1</span> PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors</h2>
 <p>Group samples and return DMNGroup object that contains a summary.
@@ -344,33 +345,33 @@ Patient status is used for grouping.</p>
 <pre><code>## class: DMNGroup 
 ## summary:
 ##         k samples taxa      NLE    LogDet  Laplace      BIC      AIC
-## ADHD    3      13  151 6018.131 -345.0891 5427.470 6601.657 6473.131
-## Control 3      14  151 6647.269 -148.0814 6155.111 7247.655 7102.269</code></pre>
+## ADHD    3      13  151 6018.131 -344.7955 5427.617 6601.657 6473.131
+## Control 3      14  151 6647.269 -148.3706 6154.967 7247.655 7102.269</code></pre>
 <p>Mixture weights (rough measure of the cluster size).</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="dirichlet-multinomial-mixture-model.html#cb74-1" aria-hidden="true"></a>DirichletMultinomial<span class="op">::</span><span class="kw">mixturewt</span>(<span class="kw">getBestDMNFit</span>(tse_dmn))</span></code></pre></div>
 <pre><code>##          pi    theta
-## 1 0.4814815 31.27727
-## 2 0.2962963 47.34472
-## 3 0.2222222 92.27405</code></pre>
+## 1 0.4814815 31.27734
+## 2 0.2962963 47.34407
+## 3 0.2222222 92.27348</code></pre>
 <p>Samples-cluster assignment probabilities / how probable it is that sample belongs
 to each cluster</p>
 <div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="dirichlet-multinomial-mixture-model.html#cb76-1" aria-hidden="true"></a><span class="kw">head</span>(DirichletMultinomial<span class="op">::</span><span class="kw">mixture</span>(<span class="kw">getBestDMNFit</span>(tse_dmn)))</span></code></pre></div>
 <pre><code>##               [,1]          [,2]          [,3]
-## A110  1.000000e+00 1.267688e-144 7.593791e-205
-## A12  9.743736e-117  6.169813e-93  1.000000e+00
-## A15   1.000000e+00 9.627641e-119 3.388504e-234
-## A19  5.329918e-112 1.836731e-107  1.000000e+00
-## A21   2.128881e-93  4.776392e-96  1.000000e+00
-## A23   1.000000e+00 8.931054e-111 1.942699e-161</code></pre>
+## A110  1.000000e+00 1.259213e-144 7.520991e-205
+## A12  9.858822e-117  6.142661e-93  1.000000e+00
+## A15   1.000000e+00 9.591984e-119 3.350657e-234
+## A19  5.389390e-112 1.827685e-107  1.000000e+00
+## A21   2.150838e-93  4.749229e-96  1.000000e+00
+## A23   1.000000e+00 8.871202e-111 1.923607e-161</code></pre>
 <p>Contribution of each taxa to each component</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="dirichlet-multinomial-mixture-model.html#cb78-1" aria-hidden="true"></a><span class="kw">head</span>(DirichletMultinomial<span class="op">::</span><span class="kw">fitted</span>(<span class="kw">getBestDMNFit</span>(tse_dmn)))</span></code></pre></div>
 <pre><code>##                 [,1]        [,2]       [,3]
-## 1726470  6.351912804 2.898794764 20.1892434
-## 1726471  5.287852506 0.002048448  0.1532226
-## 17264731 0.001248394 9.144853034  2.0111987
-## 17264726 0.140479954 1.363495634  7.5893662
-## 1726472  2.104155692 3.523519422  2.6657346
-## 17264724 0.072367281 0.002048448  9.8545872</code></pre>
+## 1726470  6.351946316 2.898678978 20.1891701
+## 1726471  5.287901106 0.002047882  0.1532233
+## 17264731 0.001248975 9.144345166  2.0111594
+## 17264726 0.140478537 1.363569178  7.5893920
+## 1726472  2.104147252 3.523435485  2.6656884
+## 17264724 0.072366503 0.002047882  9.8546193</code></pre>
 <p>Get the assignment probabilities</p>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="dirichlet-multinomial-mixture-model.html#cb80-1" aria-hidden="true"></a>prob &lt;-<span class="st"> </span>DirichletMultinomial<span class="op">::</span><span class="kw">mixture</span>(<span class="kw">getBestDMNFit</span>(tse_dmn))</span>
 <span id="cb80-2"><a href="dirichlet-multinomial-mixture-model.html#cb80-2" aria-hidden="true"></a><span class="co"># Add column names</span></span>

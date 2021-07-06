@@ -158,24 +158,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html"><i class="fa fa-check"></i><b>4</b> Importing microbiome data</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#data"><i class="fa fa-check"></i><b>4.1</b> Data</a></li>
+<li class="chapter" data-level="4.1" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#data-access"><i class="fa fa-check"></i><b>4.1</b> Data access</a></li>
 <li class="chapter" data-level="4.2" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#investigate-the-r-data-object"><i class="fa fa-check"></i><b>4.2</b> Investigate the R data object</a>
 <ul>
 <li class="chapter" data-level="4.2.1" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#rowdata-taxonomic-information"><i class="fa fa-check"></i><b>4.2.1</b> rowData (taxonomic information)</a></li>
 <li class="chapter" data-level="4.2.2" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#coldata-sample-information"><i class="fa fa-check"></i><b>4.2.2</b> colData (sample information)</a></li>
 <li class="chapter" data-level="4.2.3" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#phylogenetic-tree-information"><i class="fa fa-check"></i><b>4.2.3</b> Phylogenetic tree information</a></li>
 </ul></li>
+<li class="chapter" data-level="4.3" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#further-examples"><i class="fa fa-check"></i><b>4.3</b> Further examples</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="data-exploration.html"><a href="data-exploration.html"><i class="fa fa-check"></i><b>5</b> Data exploration</a>
+<li class="chapter" data-level="5" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html"><i class="fa fa-check"></i><b>5</b> Microbiome data exploration</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="data-exploration.html"><a href="data-exploration.html#investigate-the-contents-of-a-microbiome-data-object"><i class="fa fa-check"></i><b>5.1</b> Investigate the contents of a microbiome data object</a></li>
-<li class="chapter" data-level="5.2" data-path="data-exploration.html"><a href="data-exploration.html#manipulate-the-data"><i class="fa fa-check"></i><b>5.2</b> Manipulate the data</a>
+<li class="chapter" data-level="5.1" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#investigate-the-contents-of-a-microbiome-data-object"><i class="fa fa-check"></i><b>5.1</b> Investigate the contents of a microbiome data object</a></li>
+<li class="chapter" data-level="5.2" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#manipulate-the-data"><i class="fa fa-check"></i><b>5.2</b> Manipulate the data</a>
 <ul>
-<li class="chapter" data-level="5.2.1" data-path="data-exploration.html"><a href="data-exploration.html#transformations"><i class="fa fa-check"></i><b>5.2.1</b> Transformations</a></li>
-<li class="chapter" data-level="5.2.2" data-path="data-exploration.html"><a href="data-exploration.html#aggregation"><i class="fa fa-check"></i><b>5.2.2</b> Aggregation</a></li>
+<li class="chapter" data-level="5.2.1" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#transformations"><i class="fa fa-check"></i><b>5.2.1</b> Transformations</a></li>
+<li class="chapter" data-level="5.2.2" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#aggregation"><i class="fa fa-check"></i><b>5.2.2</b> Aggregation</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="data-exploration.html"><a href="data-exploration.html#visualization"><i class="fa fa-check"></i><b>5.3</b> Visualization</a></li>
-<li class="chapter" data-level="5.4" data-path="data-exploration.html"><a href="data-exploration.html#further-resources"><i class="fa fa-check"></i><b>5.4</b> Further resources</a></li>
+<li class="chapter" data-level="5.3" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#visualization"><i class="fa fa-check"></i><b>5.3</b> Visualization</a></li>
+<li class="chapter" data-level="5.4" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#further-resources"><i class="fa fa-check"></i><b>5.4</b> Further resources</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="alpha-diversity.html"><a href="alpha-diversity.html"><i class="fa fa-check"></i><b>6</b> Alpha diversity</a>
 <ul>
@@ -403,7 +404,7 @@ factors. The current standard way to do this is to perform a so-called permutati
 <span id="cb58-10"><a href="beta-diversity.html#cb58-10" aria-hidden="true"></a><span class="co"># we can obtain a the p value for our predictor:</span></span>
 <span id="cb58-11"><a href="beta-diversity.html#cb58-11" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">paste0</span>(<span class="st">&quot;Different different cohorts and variance of abundance between samples, p-value: &quot;</span>, </span>
 <span id="cb58-12"><a href="beta-diversity.html#cb58-12" aria-hidden="true"></a>             <span class="kw">as.data.frame</span>(permanova_cohort<span class="op">$</span>aov.tab)[<span class="st">&quot;cohort&quot;</span>, <span class="st">&quot;Pr(&gt;F)&quot;</span>]))</span></code></pre></div>
-<pre><code>## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7469&quot;</code></pre>
+<pre><code>## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7372&quot;</code></pre>
 <p>As we see, the cohort variable is not significantly associated with
 microbiota composition (p-value is over 0.05).</p>
 <p>We can still visualize those taxa whose abundances are the most

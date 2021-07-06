@@ -1,5 +1,7 @@
 
-# Dirichlet-Multinomial Mixture Model
+# Community typing
+
+## Dirichlet-Multinomial Mixture Model
 
 This section focus on DMM analysis. 
 
