@@ -68,3 +68,4 @@ thursday-15-july---key-concepts-differential-abundance
 tuesday-13-july---alpha-diversity
 wednesday-14-july---beta-diversity
 thursday-15-july---differential-abundance
+installing-and-loading-the-required-r-packages
