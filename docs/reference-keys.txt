@@ -39,7 +39,7 @@ pcoa-for-asv-level-data-with-aitchison-distance
 pcoa-aggregated-to-phylum-level
 highlighting-external-variables-on-pcoa-plot
 pcoa-with-discrete-sample-grouping-variable-shown-with-colors
-pcoa-with-continuous-sample-grouping-variable-shown-with-colors
+pcoa-plot-with-continuous-variable
 estimating-associations-with-an-external-variable
 further-resources-2
 dirichlet-multinomial-mixture-model
@@ -60,3 +60,11 @@ further-reading
 miscellaneous-material
 shapiro-wilk-test
 deseq-details
+tuesday-13-july-key-concepts-in-data-analysis-alpha-diversity-leo-lahti
+tuesday-13-july-key-concepts-alpha-diversity
+tuesday-13-july---key-concepts-alpha-diversity
+wednesday-14-july---key-concepts-beta-diversity
+thursday-15-july---key-concepts-differential-abundance
+tuesday-13-july---alpha-diversity
+wednesday-14-july---beta-diversity
+thursday-15-july---differential-abundance
