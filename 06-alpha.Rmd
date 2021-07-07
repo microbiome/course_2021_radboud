@@ -33,7 +33,8 @@ names <- c("Shannon_index", "Faith_diversity_index")
 tse <- estimateDiversity(tse, index = indices, name = names)
 
 # Shows the calculated indices
-knitr::kable(head(colData(tse)[names]))
+knitr::kable(head(colData(tse)[names])) %>% kableExtra::kable_styling("striped") %>% 
+  kableExtra::scroll_box(width = "100%")
 ```
 
 Next we can visualize Shannon index with histogram.
@@ -74,8 +75,8 @@ It seems that, there is a positive correlation between these two indices.
 #   # Adds regression line
 #   abline(lm(colData(tse)$Faith_diversity_index ~ colData(tse)$Shannon_index)) 
 
-cross_plot <- ggplot2::ggplot(as.data.frame(colData(tse)), 
-                                     aes(x = Shannon_index, y = Faith_diversity_index)) + 
+cross_plot <- ggplot(as.data.frame(colData(tse)), 
+                     aes(x = Shannon_index, y = Faith_diversity_index)) + 
   geom_point() + # Adds points
   geom_smooth(method=lm) + # Adds regression line
   xlab("Shannon index") + # x axis title

@@ -117,7 +117,9 @@ df$taxon <- rownames(df)
 # and secondly based on "padj" column
 df <- df %>% arrange(log2FoldChange, padj)
 
-knitr::kable(head(df))
+knitr::kable(head(df)) %>% kableExtra::kable_styling("striped") %>% 
+  kableExtra::scroll_box(width = "100%")
+
 ```
 
 ## ANCOM-BC
@@ -176,7 +178,8 @@ standard errors, p-values and q-values. Conveniently, there is a dataframe `diff
 Here, we can find all differentiallt abundant taxa. Below we show the first 6 entries of this dataframe:  
 
 ```{r}
-knitr::kable(head(res$diff_abn))
+knitr::kable(head(res$diff_abn)) %>% kableExtra::kable_styling("striped") %>% 
+  kableExtra::scroll_box(width = "100%")
 ```
 
 In total, this method detects `r sum(out$res$diff_abn$patient_statusControl)` differentially abundant taxa.

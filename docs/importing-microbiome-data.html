@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Program | Introduction to microbiome data science</title>
+  <title>4 Importing microbiome data | Introduction to microbiome data science</title>
   <meta name="description" content="Course material" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Program | Introduction to microbiome data science" />
+  <meta property="og:title" content="4 Importing microbiome data | Introduction to microbiome data science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="microbiome/course_2021_radboud" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Program | Introduction to microbiome data science" />
+  <meta name="twitter:title" content="4 Importing microbiome data | Introduction to microbiome data science" />
   
   <meta name="twitter:description" content="Course material" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="getting-started.html"/>
+<link rel="prev" href="getting-started.html"/>
+<link rel="next" href="microbiome-data-exploration.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -241,66 +241,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="program" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Program</h1>
-<p>The course takes place on each working day from 9am – 1pm
-(CEST). Short breaks will be scheduled between sessions.</p>
-<div id="monday-12-july-from-raw-sequences-to-ecological-data-analysis" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Monday 12 July: from raw sequences to ecological data analysis</h2>
-<p><strong>Lectures</strong></p>
-<ul>
-<li><p>Microbiota analysis: association studies vs. causality; microbiota sequencing methods (16S, shotgun, metagenomics) - by dr. Tom Ederveen (Radboud UMC Nijmegen, The Netherlands)</p></li>
-<li><p>DNA isolation and 16S rRNA gene sequencing; bioinformatics step 1: from raw sequences to OTU table in a biom file – by Tom Ederveen (Radboudumc Nijmegen, The Netherlands)</p></li>
-</ul>
-<p><strong>Demonstration &amp; Practical</strong></p>
-<ul>
-<li>Importing the data to R environment for interactive data analysis – by prof. dr. Leo Lahti (<a href="datascience.utu.fi">University of Turku, Finland</a>)</li>
-</ul>
-<hr />
-</div>
-<div id="tuesday-13-july---alpha-diversity" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Tuesday 13 July - Alpha diversity</h2>
-<p><strong>Lecture</strong></p>
-<ul>
-<li>Key concepts in microbiome data science</li>
-</ul>
-<p><strong>Practical</strong></p>
-<ul>
-<li>Alpha diversity: estimation, analysis, and visualization</li>
-</ul>
-<hr />
-</div>
-<div id="wednesday-14-july---beta-diversity" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Wednesday 14 July - Beta diversity</h2>
-<p><strong>Demonstration</strong></p>
-<ul>
-<li>Community similarity</li>
-</ul>
-<p><strong>Practical</strong></p>
-<ul>
-<li>Beta diversity: estimation, analysis, and visualization</li>
-</ul>
-<hr />
-</div>
-<div id="thursday-15-july---differential-abundance" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> Thursday 15 July - Differential abundance</h2>
-<p><strong>Lecture</strong></p>
-<ul>
-<li>Differential abundance analysis methods</li>
-</ul>
-<p><strong>Practical</strong></p>
-<ul>
-<li>Differential abundance in practice</li>
-</ul>
-<p><strong>Lecture</strong></p>
-<ul>
-<li>Overview of microbiota data science methods &amp; concepts</li>
-</ul>
-<hr />
-</div>
-<div id="friday-16-july-presentations-closing" class="section level2" number="2.5">
-<h2><span class="header-section-number">2.5</span> Friday 16 July: Presentations &amp; closing</h2>
-<p><strong>Student presentations</strong> on microbiome data analytics</p>
+<div id="importing-microbiome-data" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Importing microbiome data</h1>
+<p>This section demonstrates how to import microbiome profiling data in R.</p>
+<p>The <em>biom</em> format is a standard file format for microbiome data. Here,
+we import <em>biom</em> data files into a specific data container (structure)
+in R. Specifically, we use a <em>TreeSummarizedExperiment</em> (TSE) data
+container. This provides the basis for the <em>miaverse</em> data science
+framework.</p>
+<p>We use example data from the following publication: Tengeler AC <em>et
+al.</em> (2020) <a href="https://doi.org/10.1186/s40168-020-00816-x"><strong>Gut microbiota from persons with
+attention-deficit/hyperactivity disorder affects the brain in
+mice</strong></a>. Microbiome
+8:44. In this study, mice are colonized with microbiota from
+participants with ADHD (attention deficit hyperactivity disorder) and
+healthy participants. The aim of the study was to assess whether the
+mice display ADHD behaviors after being inoculated with ADHD
+microbiota, suggesting a role of the microbiome in ADHD pathology.</p>
+<div id="data-access-and-example-of-importing-data" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Data access and example of importing data</h2>
+<p><strong>Downloading the data</strong> You can download the data from
+<a href="https://github.com/microbiome/course_2021_radboud/tree/main/data">data</a>
+subfolder.
+Change this data link——————————————————</p>
+<p><strong>For examples of importing biom files into R</strong>, see the online book for examples on
+<a href="https://microbiome.github.io/OMA/data-introduction.html#loading-experimental-microbiome-data">data exploration and manipulation</a>.</p>
 
 </div>
 </div>
@@ -309,8 +274,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="getting-started.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="getting-started.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="microbiome-data-exploration.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
