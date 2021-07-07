@@ -74,16 +74,21 @@ data science by utilizing available documentation and R tools.
 **Citation** "Introduction to miaverse (2021). Tuomas Borman, Felix Ernst, Sudarshan Shetty, Henrik Eckermann, Leo Lahti. URL: https://microbiome.github.io".
 
 **Contact**
-- [Leo Lahti](http://datascience.utu.fi), University of Turku
-- [mia Collective](https://microbiome.github.io)
+
+ * [Leo Lahti](http://datascience.utu.fi), University of Turku
+ * [miaverse collective](https://microbiome.github.io)
 
 **License** All material is released under the open [CC BY-NC-SA 3.0 License](LICENSE).
 
-- Landing page (html): [miaverse teaching material](https://microbiome.github.io/course_2021_radboud/)
-- Source code (github): [miaverse teaching material](https://github.com/microbiome/course_2021_radboud)
+**Source code**
 
 The source code of this repository is fully reproducible and contains
 the Rmd files with executable code. All files can be rendered at one
 go by running the file [main.R](main.R). You can check the file for
 details on how to clone the repository and convert it into a gitbook,
 although this is not necessary for the training.
+
+- Source code (github): [miaverse teaching material](https://github.com/microbiome/course_2021_radboud)
+- Course page (html): [miaverse teaching material](https://microbiome.github.io/course_2021_radboud/)
+
+
