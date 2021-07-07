@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Program | Introduction to microbiome data science</title>
+  <title>4 Importing microbiome data | Introduction to microbiome data science</title>
   <meta name="description" content="Course material" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Program | Introduction to microbiome data science" />
+  <meta property="og:title" content="4 Importing microbiome data | Introduction to microbiome data science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="microbiome/course_2021_radboud" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Program | Introduction to microbiome data science" />
+  <meta name="twitter:title" content="4 Importing microbiome data | Introduction to microbiome data science" />
   
   <meta name="twitter:description" content="Course material" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="getting-started.html"/>
+<link rel="prev" href="getting-started.html"/>
+<link rel="next" href="microbiome-data-exploration.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -231,66 +231,327 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="program" class="section level1">
-<h1><span class="header-section-number">2</span> Program</h1>
-<p>The course takes place on each working day from 9am – 1pm
-(CEST). Short breaks will be scheduled between sessions.</p>
-<div id="monday-12-july-from-raw-sequences-to-ecological-data-analysis" class="section level2">
-<h2><span class="header-section-number">2.1</span> Monday 12 July: from raw sequences to ecological data analysis</h2>
-<p><strong>Lectures</strong></p>
+<div id="importing-microbiome-data" class="section level1">
+<h1><span class="header-section-number">4</span> Importing microbiome data</h1>
+<p>This section demonstrates how to import microbiome profiling data in R.</p>
+<p>The <em>biom</em> format is a standard file format for microbiome data. Here,
+we import <em>biom</em> data files into a specific data container (structure)
+in R. Specifically, we use a <em>TreeSummarizedExperiment</em> (TSE) data
+container. This provides the basis for the <em>miaverse</em> data science
+framework.</p>
+<p>We use example data from the following publication: Tengeler AC <em>et
+al.</em> (2020) <a href="https://doi.org/10.1186/s40168-020-00816-x"><strong>Gut microbiota from persons with
+attention-deficit/hyperactivity disorder affects the brain in
+mice</strong></a>. Microbiome
+8:44. In this study, mice are colonized with microbiota from
+participants with ADHD (attention deficit hyperactivity disorder) and
+healthy participants. The aim of the study was to assess whether the
+mice display ADHD behaviors after being inoculated with ADHD
+microbiota, suggesting a role of the microbiome in ADHD pathology.</p>
+<div id="data-access" class="section level2">
+<h2><span class="header-section-number">4.1</span> Data access</h2>
+<p><strong>Downloading the data</strong> You can download the data from
+<a href="https://github.com/microbiome/course_2021_radboud/tree/main/data">data</a>
+subfolder.</p>
+<p>The data set consists of 3 files:</p>
 <ul>
-<li><p>Microbiota analysis: association studies vs. causality; microbiota sequencing methods (16S, shotgun, metagenomics) - by dr. Tom Ederveen (Radboud UMC Nijmegen, The Netherlands)</p></li>
-<li><p>DNA isolation and 16S rRNA gene sequencing; bioinformatics step 1: from raw sequences to OTU table in a biom file – by Tom Ederveen (Radboudumc Nijmegen, The Netherlands)</p></li>
+<li>biom file: abundance table and taxonomy information</li>
+<li>csv file: sample metadata</li>
+<li>tree file: phylogenetic tree</li>
 </ul>
-<p><strong>Demonstration &amp; Practical</strong></p>
-<ul>
-<li>Importing the data to R environment for interactive data analysis – by prof. dr. Leo Lahti (<a href="datascience.utu.fi">University of Turku, Finland</a>)</li>
-</ul>
-<hr />
+<p>Store the data in your desired local directory (for instance, <em>data/</em> under the
+working directory), and define source file paths</p>
+<p>Now we can load the (biom) data into a SummarizedExperiment (SE) object.</p>
 </div>
-<div id="tuesday-13-july---alpha-diversity" class="section level2">
-<h2><span class="header-section-number">2.2</span> Tuesday 13 July - Alpha diversity</h2>
-<p><strong>Lecture</strong></p>
-<ul>
-<li>Key concepts in microbiome data science</li>
-</ul>
-<p><strong>Practical</strong></p>
-<ul>
-<li>Alpha diversity: estimation, analysis, and visualization</li>
-</ul>
-<hr />
+<div id="investigate-the-r-data-object" class="section level2">
+<h2><span class="header-section-number">4.2</span> Investigate the R data object</h2>
+<p>We have now imported the data set in R. Let us investigate its contents.</p>
+<pre><code>## class: SummarizedExperiment 
+## dim: 151 27 
+## metadata(0):
+## assays(1): counts
+## rownames(151): 1726470 1726471 ... 17264756 17264757
+## rowData names(6): taxonomy1 taxonomy2 ... taxonomy5 taxonomy6
+## colnames(27): A110 A111 ... A38 A39
+## colData names(0):</code></pre>
+<p>The <code>assays</code> slot includes a list of abundance tables. The imported abundance table is named as “counts”.
+Let us inspect only the first cols and rows.</p>
+<pre><code>##           A110  A111  A12
+## 1726470  17722 11630    0
+## 1726471  12052     0 2679
+## 17264731     0   970    0</code></pre>
+<div id="rowdata-taxonomic-information" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> rowData (taxonomic information)</h3>
+<p>The <code>rowdata</code> includes taxonomic information from the biom file. The <code>head()</code> command
+shows just the beginning of the data table for an overview.</p>
+<p><code>knitr::kable()</code> is for printing the information more nicely.</p>
+<table style="width:100%;">
+<colgroup>
+<col width="7%" />
+<col width="10%" />
+<col width="15%" />
+<col width="15%" />
+<col width="17%" />
+<col width="18%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">taxonomy1</th>
+<th align="left">taxonomy2</th>
+<th align="left">taxonomy3</th>
+<th align="left">taxonomy4</th>
+<th align="left">taxonomy5</th>
+<th align="left">taxonomy6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1726470</td>
+<td align="left">"k__Bacteria</td>
+<td align="left">p__Bacteroidetes</td>
+<td align="left">c__Bacteroidia</td>
+<td align="left">o__Bacteroidales</td>
+<td align="left">f__Bacteroidaceae</td>
+<td align="left">g__Bacteroides"</td>
+</tr>
+<tr class="even">
+<td align="left">1726471</td>
+<td align="left">"k__Bacteria</td>
+<td align="left">p__Bacteroidetes</td>
+<td align="left">c__Bacteroidia</td>
+<td align="left">o__Bacteroidales</td>
+<td align="left">f__Bacteroidaceae</td>
+<td align="left">g__Bacteroides"</td>
+</tr>
+<tr class="odd">
+<td align="left">17264731</td>
+<td align="left">"k__Bacteria</td>
+<td align="left">p__Bacteroidetes</td>
+<td align="left">c__Bacteroidia</td>
+<td align="left">o__Bacteroidales</td>
+<td align="left">f__Porphyromonadaceae</td>
+<td align="left">g__Parabacteroides"</td>
+</tr>
+<tr class="even">
+<td align="left">17264726</td>
+<td align="left">"k__Bacteria</td>
+<td align="left">p__Bacteroidetes</td>
+<td align="left">c__Bacteroidia</td>
+<td align="left">o__Bacteroidales</td>
+<td align="left">f__Bacteroidaceae</td>
+<td align="left">g__Bacteroides"</td>
+</tr>
+<tr class="odd">
+<td align="left">1726472</td>
+<td align="left">"k__Bacteria</td>
+<td align="left">p__Verrucomicrobia</td>
+<td align="left">c__Verrucomicrobiae</td>
+<td align="left">o__Verrucomicrobiales</td>
+<td align="left">f__Verrucomicrobiaceae</td>
+<td align="left">g__Akkermansia"</td>
+</tr>
+<tr class="even">
+<td align="left">17264724</td>
+<td align="left">"k__Bacteria</td>
+<td align="left">p__Bacteroidetes</td>
+<td align="left">c__Bacteroidia</td>
+<td align="left">o__Bacteroidales</td>
+<td align="left">f__Bacteroidaceae</td>
+<td align="left">g__Bacteroides"</td>
+</tr>
+</tbody>
+</table>
+<p>These taxonomic rank names (column names) are not real rank names. Let’s replace them with real rank names.</p>
+<p>In addition to that, the taxa names include, e.g., ’"k__’ before the name, so let’s
+make them cleaner by removing them.</p>
+<table>
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="15%" />
+<col width="16%" />
+<col width="17%" />
+<col width="18%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Kingdom</th>
+<th align="left">Phylum</th>
+<th align="left">Class</th>
+<th align="left">Order</th>
+<th align="left">Family</th>
+<th align="left">Genus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1726470</td>
+<td align="left">Bacteria</td>
+<td align="left">Bacteroidetes</td>
+<td align="left">Bacteroidia</td>
+<td align="left">Bacteroidales</td>
+<td align="left">Bacteroidaceae</td>
+<td align="left">Bacteroides</td>
+</tr>
+<tr class="even">
+<td align="left">1726471</td>
+<td align="left">Bacteria</td>
+<td align="left">Bacteroidetes</td>
+<td align="left">Bacteroidia</td>
+<td align="left">Bacteroidales</td>
+<td align="left">Bacteroidaceae</td>
+<td align="left">Bacteroides</td>
+</tr>
+<tr class="odd">
+<td align="left">17264731</td>
+<td align="left">Bacteria</td>
+<td align="left">Bacteroidetes</td>
+<td align="left">Bacteroidia</td>
+<td align="left">Bacteroidales</td>
+<td align="left">Porphyromonadaceae</td>
+<td align="left">Parabacteroides</td>
+</tr>
+<tr class="even">
+<td align="left">17264726</td>
+<td align="left">Bacteria</td>
+<td align="left">Bacteroidetes</td>
+<td align="left">Bacteroidia</td>
+<td align="left">Bacteroidales</td>
+<td align="left">Bacteroidaceae</td>
+<td align="left">Bacteroides</td>
+</tr>
+<tr class="odd">
+<td align="left">1726472</td>
+<td align="left">Bacteria</td>
+<td align="left">Verrucomicrobia</td>
+<td align="left">Verrucomicrobiae</td>
+<td align="left">Verrucomicrobiales</td>
+<td align="left">Verrucomicrobiaceae</td>
+<td align="left">Akkermansia</td>
+</tr>
+<tr class="even">
+<td align="left">17264724</td>
+<td align="left">Bacteria</td>
+<td align="left">Bacteroidetes</td>
+<td align="left">Bacteroidia</td>
+<td align="left">Bacteroidales</td>
+<td align="left">Bacteroidaceae</td>
+<td align="left">Bacteroides</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="wednesday-14-july---beta-diversity" class="section level2">
-<h2><span class="header-section-number">2.3</span> Wednesday 14 July - Beta diversity</h2>
-<p><strong>Demonstration</strong></p>
-<ul>
-<li>Community similarity</li>
-</ul>
-<p><strong>Practical</strong></p>
-<ul>
-<li>Beta diversity: estimation, analysis, and visualization</li>
-</ul>
-<hr />
+<div id="coldata-sample-information" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> colData (sample information)</h3>
+<p>We notice that the imported biom file did not contain the sample meta data
+yet, so it includes an empty data frame.</p>
+<pre><code>## DataFrame with 6 rows and 0 columns</code></pre>
+<p>Let us add a sample meta data file.</p>
+<p>Now <code>colData</code> includes the sample metadata. Use kable to print it more nicely.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">patient_status</th>
+<th align="left">cohort</th>
+<th align="left">patient_status_vs_cohort</th>
+<th align="left">sample_name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">A110</td>
+<td align="left">ADHD</td>
+<td align="left">Cohort_1</td>
+<td align="left">ADHD_Cohort_1</td>
+<td align="left">A110</td>
+</tr>
+<tr class="even">
+<td align="left">A12</td>
+<td align="left">ADHD</td>
+<td align="left">Cohort_1</td>
+<td align="left">ADHD_Cohort_1</td>
+<td align="left">A12</td>
+</tr>
+<tr class="odd">
+<td align="left">A15</td>
+<td align="left">ADHD</td>
+<td align="left">Cohort_1</td>
+<td align="left">ADHD_Cohort_1</td>
+<td align="left">A15</td>
+</tr>
+<tr class="even">
+<td align="left">A19</td>
+<td align="left">ADHD</td>
+<td align="left">Cohort_1</td>
+<td align="left">ADHD_Cohort_1</td>
+<td align="left">A19</td>
+</tr>
+<tr class="odd">
+<td align="left">A21</td>
+<td align="left">ADHD</td>
+<td align="left">Cohort_2</td>
+<td align="left">ADHD_Cohort_2</td>
+<td align="left">A21</td>
+</tr>
+<tr class="even">
+<td align="left">A23</td>
+<td align="left">ADHD</td>
+<td align="left">Cohort_2</td>
+<td align="left">ADHD_Cohort_2</td>
+<td align="left">A23</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="thursday-15-july---differential-abundance" class="section level2">
-<h2><span class="header-section-number">2.4</span> Thursday 15 July - Differential abundance</h2>
-<p><strong>Lecture</strong></p>
-<ul>
-<li>Differential abundance analysis methods</li>
-</ul>
-<p><strong>Practical</strong></p>
-<ul>
-<li>Differential abundance in practice</li>
-</ul>
-<p><strong>Lecture</strong></p>
-<ul>
-<li>Overview of microbiota data science methods &amp; concepts</li>
-</ul>
-<hr />
+<div id="phylogenetic-tree-information" class="section level3">
+<h3><span class="header-section-number">4.2.3</span> Phylogenetic tree information</h3>
+<p>Now, let’s add a phylogenetic tree.</p>
+<p>The current data object, se, is a SummarizedExperiment object. This
+does not include a slot for adding a phylogenetic tree. In order to do
+this, we can convert the SE object to an extended TreeSummarizedExperiment
+object which also includes a <code>rowTree</code> slot.</p>
+<pre><code>## class: TreeSummarizedExperiment 
+## dim: 151 27 
+## metadata(0):
+## assays(1): counts
+## rownames(151): 1726470 1726471 ... 17264756 17264757
+## rowData names(6): Kingdom Phylum ... Family Genus
+## colnames(27): A110 A12 ... A35 A38
+## colData names(4): patient_status cohort patient_status_vs_cohort sample_name
+## reducedDimNames(0):
+## mainExpName: NULL
+## altExpNames(0):
+## rowLinks: NULL
+## rowTree: NULL
+## colLinks: NULL
+## colTree: NULL</code></pre>
+<p>Next, let us read the tree data file and add it to the R data object (tse).</p>
+<pre><code>## class: TreeSummarizedExperiment 
+## dim: 151 27 
+## metadata(0):
+## assays(1): counts
+## rownames(151): 1726470 1726471 ... 17264756 17264757
+## rowData names(6): Kingdom Phylum ... Family Genus
+## colnames(27): A110 A12 ... A35 A38
+## colData names(4): patient_status cohort patient_status_vs_cohort sample_name
+## reducedDimNames(0):
+## mainExpName: NULL
+## altExpNames(0):
+## rowLinks: a LinkDataFrame (151 rows)
+## rowTree: 1 phylo tree(s) (151 leaves)
+## colLinks: NULL
+## colTree: NULL</code></pre>
+<p>Now <code>rowTree</code> includes a phylogenetic tree:</p>
 </div>
-<div id="friday-16-july-presentations-closing" class="section level2">
-<h2><span class="header-section-number">2.5</span> Friday 16 July: Presentations &amp; closing</h2>
-<p><strong>Student presentations</strong> on microbiome data analytics</p>
+</div>
+<div id="further-examples" class="section level2">
+<h2><span class="header-section-number">4.3</span> Further examples</h2>
+<p>See the online book for more examples on <a href="https://microbiome.github.io/OMA/data-introduction.html#loading-experimental-microbiome-data">data exploration and manipulation</a>.</p>
 
 </div>
 </div>
@@ -299,8 +560,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="getting-started.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="getting-started.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="microbiome-data-exploration.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

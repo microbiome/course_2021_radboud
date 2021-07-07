@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Program | Introduction to microbiome data science</title>
+  <title>8 Community typing | Introduction to microbiome data science</title>
   <meta name="description" content="Course material" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Program | Introduction to microbiome data science" />
+  <meta property="og:title" content="8 Community typing | Introduction to microbiome data science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="microbiome/course_2021_radboud" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Program | Introduction to microbiome data science" />
+  <meta name="twitter:title" content="8 Community typing | Introduction to microbiome data science" />
   
   <meta name="twitter:description" content="Course material" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="getting-started.html"/>
+<link rel="prev" href="beta-diversity.html"/>
+<link rel="next" href="differential-abundance-analysis.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -231,66 +231,119 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="program" class="section level1">
-<h1><span class="header-section-number">2</span> Program</h1>
-<p>The course takes place on each working day from 9am – 1pm
-(CEST). Short breaks will be scheduled between sessions.</p>
-<div id="monday-12-july-from-raw-sequences-to-ecological-data-analysis" class="section level2">
-<h2><span class="header-section-number">2.1</span> Monday 12 July: from raw sequences to ecological data analysis</h2>
-<p><strong>Lectures</strong></p>
-<ul>
-<li><p>Microbiota analysis: association studies vs. causality; microbiota sequencing methods (16S, shotgun, metagenomics) - by dr. Tom Ederveen (Radboud UMC Nijmegen, The Netherlands)</p></li>
-<li><p>DNA isolation and 16S rRNA gene sequencing; bioinformatics step 1: from raw sequences to OTU table in a biom file – by Tom Ederveen (Radboudumc Nijmegen, The Netherlands)</p></li>
-</ul>
-<p><strong>Demonstration &amp; Practical</strong></p>
-<ul>
-<li>Importing the data to R environment for interactive data analysis – by prof. dr. Leo Lahti (<a href="datascience.utu.fi">University of Turku, Finland</a>)</li>
-</ul>
-<hr />
+<div id="community-typing" class="section level1">
+<h1><span class="header-section-number">8</span> Community typing</h1>
+<div id="dirichlet-multinomial-mixture-model" class="section level2">
+<h2><span class="header-section-number">8.1</span> Dirichlet-Multinomial Mixture Model</h2>
+<p>This section focus on DMM analysis.</p>
+<p>One technique that allows to search for groups of samples that are
+similar to each other is the <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0030126">Dirichlet-Multinomial Mixture
+Model</a>. In
+DMM, we first determine the number of clusters (k) that best fit the
+data (model evidence) using Laplace approximation. After fitting the
+model with k clusters, we obtain for each sample k probabilities that
+reflect the probability that a sample belongs to the given cluster.</p>
+<p>Let’s cluster the data with DMM clustering.</p>
+<pre><code>## class: TreeSummarizedExperiment 
+## dim: 151 27 
+## metadata(1): DMN
+## assays(3): counts relabundance clr
+## rownames(151): 1726470 1726471 ... 17264756 17264757
+## rowData names(6): Kingdom Phylum ... Family Genus
+## colnames(27): A110 A12 ... A35 A38
+## colData names(6): patient_status cohort ... Shannon_index Faith_diversity_index
+## reducedDimNames(0):
+## mainExpName: NULL
+## altExpNames(0):
+## rowLinks: a LinkDataFrame (151 rows)
+## rowTree: 1 phylo tree(s) (151 leaves)
+## colLinks: NULL
+## colTree: NULL</code></pre>
+<p>Return information on metadata that the object contains.</p>
+<pre><code>## [1] &quot;DMN&quot;</code></pre>
+<p>This returns a list of DMN objects for a closer investigation.</p>
+<pre><code>## [[1]]
+## class: DMN 
+## k: 1 
+## samples x taxa: 27 x 151 
+## Laplace: 12049.73 BIC: 12271.38 AIC: 12173.55 
+## 
+## [[2]]
+## class: DMN 
+## k: 2 
+## samples x taxa: 27 x 151 
+## Laplace: 11440.96 BIC: 12161.29 AIC: 11964.97 
+## 
+## [[3]]
+## class: DMN 
+## k: 3 
+## samples x taxa: 27 x 151 
+## Laplace: 11060.02 BIC: 12266.31 AIC: 11971.51 
+## 
+## [[4]]
+## class: DMN 
+## k: 4 
+## samples x taxa: 27 x 151 
+## Laplace: 11417.3 BIC: 13047.39 AIC: 12654.11 
+## 
+## [[5]]
+## class: DMN 
+## k: 5 
+## samples x taxa: 27 x 151 
+## Laplace: 11401.97 BIC: 13460.72 AIC: 12968.95 
+## 
+## [[6]]
+## class: DMN 
+## k: 6 
+## samples x taxa: 27 x 151 
+## Laplace: 11202.17 BIC: 13718.9 AIC: 13128.65 
+## 
+## [[7]]
+## class: DMN 
+## k: 7 
+## samples x taxa: 27 x 151 
+## Laplace: 11478.16 BIC: 14345.11 AIC: 13656.38</code></pre>
+<p>Show Laplace approximation (model evidence) for each model of the k models.</p>
+<p><img src="Figures/unnamed-chunk-43-1.png" width="672" /></p>
+<p>Return the model that has the best fit.</p>
+<pre><code>## class: DMN 
+## k: 3 
+## samples x taxa: 27 x 151 
+## Laplace: 11060.02 BIC: 12266.31 AIC: 11971.51</code></pre>
 </div>
-<div id="tuesday-13-july---alpha-diversity" class="section level2">
-<h2><span class="header-section-number">2.2</span> Tuesday 13 July - Alpha diversity</h2>
-<p><strong>Lecture</strong></p>
-<ul>
-<li>Key concepts in microbiome data science</li>
-</ul>
-<p><strong>Practical</strong></p>
-<ul>
-<li>Alpha diversity: estimation, analysis, and visualization</li>
-</ul>
-<hr />
-</div>
-<div id="wednesday-14-july---beta-diversity" class="section level2">
-<h2><span class="header-section-number">2.3</span> Wednesday 14 July - Beta diversity</h2>
-<p><strong>Demonstration</strong></p>
-<ul>
-<li>Community similarity</li>
-</ul>
-<p><strong>Practical</strong></p>
-<ul>
-<li>Beta diversity: estimation, analysis, and visualization</li>
-</ul>
-<hr />
-</div>
-<div id="thursday-15-july---differential-abundance" class="section level2">
-<h2><span class="header-section-number">2.4</span> Thursday 15 July - Differential abundance</h2>
-<p><strong>Lecture</strong></p>
-<ul>
-<li>Differential abundance analysis methods</li>
-</ul>
-<p><strong>Practical</strong></p>
-<ul>
-<li>Differential abundance in practice</li>
-</ul>
-<p><strong>Lecture</strong></p>
-<ul>
-<li>Overview of microbiota data science methods &amp; concepts</li>
-</ul>
-<hr />
-</div>
-<div id="friday-16-july-presentations-closing" class="section level2">
-<h2><span class="header-section-number">2.5</span> Friday 16 July: Presentations &amp; closing</h2>
-<p><strong>Student presentations</strong> on microbiome data analytics</p>
+<div id="pcoa-for-asv-level-data-with-bray-curtis-with-dmm-clusters-shown-with-colors" class="section level2">
+<h2><span class="header-section-number">8.2</span> PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors</h2>
+<p>Group samples and return DMNGroup object that contains a summary.
+Patient status is used for grouping.</p>
+<pre><code>## class: DMNGroup 
+## summary:
+##         k samples taxa      NLE    LogDet  Laplace      BIC      AIC
+## ADHD    3      13  151 6018.131 -344.4241 5427.802 6601.657 6473.131
+## Control 3      14  151 6647.269 -148.0803 6155.112 7247.655 7102.269</code></pre>
+<p>Mixture weights (rough measure of the cluster size).</p>
+<pre><code>##          pi    theta
+## 1 0.4814815 31.27780
+## 2 0.2962963 47.34473
+## 3 0.2222222 92.27382</code></pre>
+<p>Samples-cluster assignment probabilities / how probable it is that sample belongs
+to each cluster</p>
+<pre><code>##               [,1]          [,2]          [,3]
+## A110  1.000000e+00 1.264474e-144 7.542654e-205
+## A12  9.950681e-117  6.163945e-93  1.000000e+00
+## A15   1.000000e+00 9.655263e-119 3.396526e-234
+## A19  5.450412e-112 1.835766e-107  1.000000e+00
+## A21   2.174035e-93  4.774233e-96  1.000000e+00
+## A23   1.000000e+00 8.916806e-111 1.931535e-161</code></pre>
+<p>Contribution of each taxa to each component</p>
+<pre><code>##                [,1]        [,2]       [,3]
+## 1726470  6.35231134 2.898796316 20.1893420
+## 1726471  5.28797424 0.002048411  0.1532223
+## 17264731 0.00124954 9.144853437  2.0111994
+## 17264726 0.14048115 1.363495916  7.5894131
+## 1726472  2.10411256 3.523511489  2.6656623
+## 17264724 0.07236314 0.002048411  9.8546091</code></pre>
+<p>Get the assignment probabilities</p>
+<p><img src="Figures/unnamed-chunk-49-1.png" width="672" /></p>
 
 </div>
 </div>
@@ -299,8 +352,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="getting-started.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="beta-diversity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="differential-abundance-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

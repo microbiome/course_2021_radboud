@@ -24,7 +24,7 @@
 <meta name="author" content="Leo Lahti, Tuomas Borman, and Henrik Eckermann" />
 
 
-<meta name="date" content="2021-07-06" />
+<meta name="date" content="2021-07-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,6 @@
   
 
 <link rel="next" href="program.html"/>
-<script src="libs/header-attrs-2.8.4/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -57,17 +56,18 @@
 
 
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,7 +87,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -136,84 +136,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Introduction to miaverse</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a>
-<ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a><ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#the-miaverse-framework"><i class="fa fa-check"></i><b>1.1</b> The miaverse framework</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#learning-goals"><i class="fa fa-check"></i><b>1.2</b> Learning goals</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#acknowledgments"><i class="fa fa-check"></i><b>1.3</b> Acknowledgments</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="program.html"><a href="program.html"><i class="fa fa-check"></i><b>2</b> Program</a>
-<ul>
+<li class="chapter" data-level="2" data-path="program.html"><a href="program.html"><i class="fa fa-check"></i><b>2</b> Program</a><ul>
 <li class="chapter" data-level="2.1" data-path="program.html"><a href="program.html#monday-12-july-from-raw-sequences-to-ecological-data-analysis"><i class="fa fa-check"></i><b>2.1</b> Monday 12 July: from raw sequences to ecological data analysis</a></li>
 <li class="chapter" data-level="2.2" data-path="program.html"><a href="program.html#tuesday-13-july---alpha-diversity"><i class="fa fa-check"></i><b>2.2</b> Tuesday 13 July - Alpha diversity</a></li>
 <li class="chapter" data-level="2.3" data-path="program.html"><a href="program.html#wednesday-14-july---beta-diversity"><i class="fa fa-check"></i><b>2.3</b> Wednesday 14 July - Beta diversity</a></li>
 <li class="chapter" data-level="2.4" data-path="program.html"><a href="program.html#thursday-15-july---differential-abundance"><i class="fa fa-check"></i><b>2.4</b> Thursday 15 July - Differential abundance</a></li>
 <li class="chapter" data-level="2.5" data-path="program.html"><a href="program.html#friday-16-july-presentations-closing"><i class="fa fa-check"></i><b>2.5</b> Friday 16 July: Presentations &amp; closing</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>3</b> Getting started</a>
-<ul>
+<li class="chapter" data-level="3" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>3</b> Getting started</a><ul>
 <li class="chapter" data-level="3.1" data-path="getting-started.html"><a href="getting-started.html#checklist-before-the-course"><i class="fa fa-check"></i><b>3.1</b> Checklist (before the course)</a></li>
 <li class="chapter" data-level="3.2" data-path="getting-started.html"><a href="getting-started.html#support-and-resources"><i class="fa fa-check"></i><b>3.2</b> Support and resources</a></li>
 <li class="chapter" data-level="3.3" data-path="getting-started.html"><a href="getting-started.html#installing-and-loading-the-required-r-packages"><i class="fa fa-check"></i><b>3.3</b> Installing and loading the required R packages</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html"><i class="fa fa-check"></i><b>4</b> Importing microbiome data</a>
-<ul>
+<li class="chapter" data-level="4" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html"><i class="fa fa-check"></i><b>4</b> Importing microbiome data</a><ul>
 <li class="chapter" data-level="4.1" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#data-access"><i class="fa fa-check"></i><b>4.1</b> Data access</a></li>
-<li class="chapter" data-level="4.2" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#investigate-the-r-data-object"><i class="fa fa-check"></i><b>4.2</b> Investigate the R data object</a>
-<ul>
+<li class="chapter" data-level="4.2" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#investigate-the-r-data-object"><i class="fa fa-check"></i><b>4.2</b> Investigate the R data object</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#rowdata-taxonomic-information"><i class="fa fa-check"></i><b>4.2.1</b> rowData (taxonomic information)</a></li>
 <li class="chapter" data-level="4.2.2" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#coldata-sample-information"><i class="fa fa-check"></i><b>4.2.2</b> colData (sample information)</a></li>
 <li class="chapter" data-level="4.2.3" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#phylogenetic-tree-information"><i class="fa fa-check"></i><b>4.2.3</b> Phylogenetic tree information</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#further-examples"><i class="fa fa-check"></i><b>4.3</b> Further examples</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html"><i class="fa fa-check"></i><b>5</b> Microbiome data exploration</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#investigate-the-contents-of-a-microbiome-data-object"><i class="fa fa-check"></i><b>5.1</b> Investigate the contents of a microbiome data object</a></li>
-<li class="chapter" data-level="5.2" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#manipulate-the-data"><i class="fa fa-check"></i><b>5.2</b> Manipulate the data</a>
-<ul>
+<li class="chapter" data-level="5" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html"><i class="fa fa-check"></i><b>5</b> Microbiome data exploration</a><ul>
+<li class="chapter" data-level="5.1" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#investigate"><i class="fa fa-check"></i><b>5.1</b> Investigate</a></li>
+<li class="chapter" data-level="5.2" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#manipulate"><i class="fa fa-check"></i><b>5.2</b> Manipulate</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#transformations"><i class="fa fa-check"></i><b>5.2.1</b> Transformations</a></li>
 <li class="chapter" data-level="5.2.2" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#aggregation"><i class="fa fa-check"></i><b>5.2.2</b> Aggregation</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#visualization"><i class="fa fa-check"></i><b>5.3</b> Visualization</a></li>
-<li class="chapter" data-level="5.4" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#further-resources"><i class="fa fa-check"></i><b>5.4</b> Further resources</a></li>
+<li class="chapter" data-level="5.3" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#visualize"><i class="fa fa-check"></i><b>5.3</b> Visualize</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="alpha-diversity.html"><a href="alpha-diversity.html"><i class="fa fa-check"></i><b>6</b> Alpha diversity</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#visualization-1"><i class="fa fa-check"></i><b>6.1</b> Visualization</a></li>
+<li class="chapter" data-level="6" data-path="alpha-diversity.html"><a href="alpha-diversity.html"><i class="fa fa-check"></i><b>6</b> Alpha diversity</a><ul>
+<li class="chapter" data-level="6.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#visualization"><i class="fa fa-check"></i><b>6.1</b> Visualization</a></li>
 <li class="chapter" data-level="6.2" data-path="alpha-diversity.html"><a href="alpha-diversity.html#statistical-testing-and-comparisons"><i class="fa fa-check"></i><b>6.2</b> Statistical testing and comparisons</a></li>
-<li class="chapter" data-level="6.3" data-path="alpha-diversity.html"><a href="alpha-diversity.html#further-resources-1"><i class="fa fa-check"></i><b>6.3</b> Further resources</a></li>
+<li class="chapter" data-level="6.3" data-path="alpha-diversity.html"><a href="alpha-diversity.html#further-resources"><i class="fa fa-check"></i><b>6.3</b> Further resources</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="beta-diversity.html"><a href="beta-diversity.html"><i class="fa fa-check"></i><b>7</b> Beta diversity</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="beta-diversity.html"><a href="beta-diversity.html#examples-of-pcoa-with-different-settings"><i class="fa fa-check"></i><b>7.1</b> Examples of PCoA with different settings</a>
-<ul>
+<li class="chapter" data-level="7" data-path="beta-diversity.html"><a href="beta-diversity.html"><i class="fa fa-check"></i><b>7</b> Beta diversity</a><ul>
+<li class="chapter" data-level="7.1" data-path="beta-diversity.html"><a href="beta-diversity.html#examples-of-pcoa-with-different-settings"><i class="fa fa-check"></i><b>7.1</b> Examples of PCoA with different settings</a><ul>
 <li class="chapter" data-level="7.1.1" data-path="beta-diversity.html"><a href="beta-diversity.html#pcoa-for-asv-level-data-with-bray-curtis"><i class="fa fa-check"></i><b>7.1.1</b> PCoA for ASV-level data with Bray-Curtis</a></li>
 <li class="chapter" data-level="7.1.2" data-path="beta-diversity.html"><a href="beta-diversity.html#pcoa-for-asv-level-data-with-aitchison-distance"><i class="fa fa-check"></i><b>7.1.2</b> PCoA for ASV-level data with Aitchison distance</a></li>
 <li class="chapter" data-level="7.1.3" data-path="beta-diversity.html"><a href="beta-diversity.html#pcoa-aggregated-to-phylum-level"><i class="fa fa-check"></i><b>7.1.3</b> PCoA aggregated to Phylum level</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="beta-diversity.html"><a href="beta-diversity.html#highlighting-external-variables-on-pcoa-plot"><i class="fa fa-check"></i><b>7.2</b> Highlighting external variables on PCoA plot</a>
-<ul>
+<li class="chapter" data-level="7.2" data-path="beta-diversity.html"><a href="beta-diversity.html#highlighting-external-variables-on-pcoa-plot"><i class="fa fa-check"></i><b>7.2</b> Highlighting external variables on PCoA plot</a><ul>
 <li class="chapter" data-level="7.2.1" data-path="beta-diversity.html"><a href="beta-diversity.html#pcoa-with-discrete-sample-grouping-variable-shown-with-colors"><i class="fa fa-check"></i><b>7.2.1</b> PCoA with discrete sample grouping variable shown with colors</a></li>
 <li class="chapter" data-level="7.2.2" data-path="beta-diversity.html"><a href="beta-diversity.html#pcoa-plot-with-continuous-variable"><i class="fa fa-check"></i><b>7.2.2</b> PCoA plot with continuous variable</a></li>
 </ul></li>
 <li class="chapter" data-level="7.3" data-path="beta-diversity.html"><a href="beta-diversity.html#estimating-associations-with-an-external-variable"><i class="fa fa-check"></i><b>7.3</b> Estimating associations with an external variable</a></li>
-<li class="chapter" data-level="7.4" data-path="beta-diversity.html"><a href="beta-diversity.html#further-resources-2"><i class="fa fa-check"></i><b>7.4</b> Further resources</a></li>
+<li class="chapter" data-level="7.4" data-path="beta-diversity.html"><a href="beta-diversity.html#further-resources-1"><i class="fa fa-check"></i><b>7.4</b> Further resources</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="dirichlet-multinomial-mixture-model.html"><a href="dirichlet-multinomial-mixture-model.html"><i class="fa fa-check"></i><b>8</b> Dirichlet-Multinomial Mixture Model</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="dirichlet-multinomial-mixture-model.html"><a href="dirichlet-multinomial-mixture-model.html#pcoa-for-asv-level-data-with-bray-curtis-with-dmm-clusters-shown-with-colors"><i class="fa fa-check"></i><b>8.1</b> PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors</a></li>
+<li class="chapter" data-level="8" data-path="community-typing.html"><a href="community-typing.html"><i class="fa fa-check"></i><b>8</b> Community typing</a><ul>
+<li class="chapter" data-level="8.1" data-path="community-typing.html"><a href="community-typing.html#dirichlet-multinomial-mixture-model"><i class="fa fa-check"></i><b>8.1</b> Dirichlet-Multinomial Mixture Model</a></li>
+<li class="chapter" data-level="8.2" data-path="community-typing.html"><a href="community-typing.html#pcoa-for-asv-level-data-with-bray-curtis-with-dmm-clusters-shown-with-colors"><i class="fa fa-check"></i><b>8.2</b> PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html"><i class="fa fa-check"></i><b>9</b> Differential abundance analysis</a>
-<ul>
+<li class="chapter" data-level="9" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html"><i class="fa fa-check"></i><b>9</b> Differential abundance analysis</a><ul>
 <li class="chapter" data-level="9.1" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#wilcoxon-test"><i class="fa fa-check"></i><b>9.1</b> Wilcoxon test</a></li>
 <li class="chapter" data-level="9.2" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#deseq2"><i class="fa fa-check"></i><b>9.2</b> DESeq2</a></li>
 <li class="chapter" data-level="9.3" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#ancom-bc"><i class="fa fa-check"></i><b>9.3</b> ANCOM-BC</a></li>
 <li class="chapter" data-level="9.4" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#comparison-of-wilcoxon-test-and-deseq2"><i class="fa fa-check"></i><b>9.4</b> Comparison of Wilcoxon test and DESeq2</a></li>
 <li class="chapter" data-level="9.5" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#comparison-of-abundance"><i class="fa fa-check"></i><b>9.5</b> Comparison of abundance</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="study-material.html"><a href="study-material.html"><i class="fa fa-check"></i><b>10</b> Study material</a>
-<ul>
+<li class="chapter" data-level="10" data-path="study-material.html"><a href="study-material.html"><i class="fa fa-check"></i><b>10</b> Study material</a><ul>
 <li class="chapter" data-level="10.1" data-path="study-material.html"><a href="study-material.html#lecture-slides"><i class="fa fa-check"></i><b>10.1</b> Lecture slides</a></li>
 <li class="chapter" data-level="10.2" data-path="study-material.html"><a href="study-material.html#example-solutions"><i class="fa fa-check"></i><b>10.2</b> Example solutions</a></li>
 <li class="chapter" data-level="10.3" data-path="study-material.html"><a href="study-material.html#r-programming-resources"><i class="fa fa-check"></i><b>10.3</b> R programming resources</a></li>
@@ -221,8 +207,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="study-material.html"><a href="study-material.html#resources-for-phyloseq"><i class="fa fa-check"></i><b>10.5</b> Resources for phyloseq</a></li>
 <li class="chapter" data-level="10.6" data-path="study-material.html"><a href="study-material.html#further-reading"><i class="fa fa-check"></i><b>10.6</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html"><i class="fa fa-check"></i><b>11</b> Miscellaneous material</a>
-<ul>
+<li class="chapter" data-level="11" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html"><i class="fa fa-check"></i><b>11</b> Miscellaneous material</a><ul>
 <li class="chapter" data-level="11.1" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html#shapiro-wilk-test"><i class="fa fa-check"></i><b>11.1</b> Shapiro-Wilk test</a></li>
 <li class="chapter" data-level="11.2" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html#deseq-details"><i class="fa fa-check"></i><b>11.2</b> Deseq details</a></li>
 </ul></li>
@@ -249,14 +234,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Introduction to microbiome data science</h1>
 <p class="author"><em>Leo Lahti, Tuomas Borman, and Henrik Eckermann</em></p>
-<p class="date" style="margin-top: 1.5em;"><em>2021-07-06</em></p>
+<p class="date" style="margin-top: 1.5em;"><em>2021-07-07</em></p>
 </div>
-<div id="overview" class="section level1" number="1">
+<div id="overview" class="section level1">
 <h1><span class="header-section-number">1</span> Overview</h1>
 <p><strong>Welcome to <a href="https://www.ru.nl/radboudsummerschool/courses/2021/brain-bacteria-behaviour/">Radboud Summer School, July 2021</a></strong></p>
 <p><img src="https://user-images.githubusercontent.com/60338854/121848694-1072a480-ccf3-11eb-9af2-7fdefd8d1794.png" alt="ML4microbiome" width="50%"/></p>
 <p>Figure source: Moreno-Indias <em>et al</em>. (2021) <a href="https://doi.org/10.3389/fmicb.2021.635781">Statistical and Machine Learning Techniques in Human Microbiome Studies: Contemporary Challenges and Solutions</a>. Frontiers in Microbiology 12:11.</p>
-<div id="the-miaverse-framework" class="section level2" number="1.1">
+<div id="the-miaverse-framework" class="section level2">
 <h2><span class="header-section-number">1.1</span> The miaverse framework</h2>
 <p>The <a href="https://microbiome.github.io"><em>miaverse</em></a> (mia = <strong>MI</strong>crobiome <strong>A</strong>nalysis) is an
 R/Bioconductor framework for microbiome data science. It aims to
@@ -274,7 +259,7 @@ examples.</strong> For advanced material, you can test and modify further
 examples from the <a href="https://microbiome.github.io/OMA">OMA book</a>, or try
 to apply the techniques to your own data.</p>
 </div>
-<div id="learning-goals" class="section level2" number="1.2">
+<div id="learning-goals" class="section level2">
 <h2><span class="header-section-number">1.2</span> Learning goals</h2>
 <p>This course provides an overview of the standard bioinformatics
 workflow in taxonomic profiling studies, ranging from data
@@ -293,7 +278,7 @@ to develop their skills in microbial community analysis.</p>
 with contributions by <a href="http://datascience.utu.fi">University of
 Turku</a>, Finland.</p>
 </div>
-<div id="acknowledgments" class="section level2" number="1.3">
+<div id="acknowledgments" class="section level2">
 <h2><span class="header-section-number">1.3</span> Acknowledgments</h2>
 <p><strong>Citation</strong> “Introduction to miaverse (2021). Tuomas Borman, Felix Ernst, Sudarshan Shetty, Henrik Eckermann, Leo Lahti. URL: <a href="https://microbiome.github.io" class="uri">https://microbiome.github.io</a>”.</p>
 <p><strong>Contact</strong></p>
