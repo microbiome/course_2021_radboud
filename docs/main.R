@@ -4,7 +4,7 @@ setHook(packageEvent("knitr", "attach"),
         function(...) knitr::opts_chunk$set(echo = FALSE, fig.path="Figures/"))
 
 # This code below builds the Rmd file into a book
-authors <- "Leo Lahti, Tuomas Borman, Henrik Eckermann"
+authors <- "Leo Lahti, Tuomas Borman, Henrik Eckermann, Chouaib Benchraka"
 library(bookdown)
 render_book()
 

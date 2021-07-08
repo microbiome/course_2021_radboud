@@ -1,6 +1,6 @@
 --- 
 title: "Introduction to microbiome data science"
-author: "Leo Lahti, Tuomas Borman, and Henrik Eckermann"
+author: "Leo Lahti, Tuomas Borman, Henrik Eckermann, and Chouaib Benchraka"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
