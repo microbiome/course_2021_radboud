@@ -21,11 +21,9 @@ microbiota, suggesting a role of the microbiome in ADHD pathology.
 
 ## Data access and example of importing data
 
-**Downloading the data** You can download the data from
+You can download the data from
   [data](https://github.com/microbiome/course_2021_radboud/tree/main/data)
   subfolder.
-Change this data link------------------------------------------------------
 
-
-**For examples of importing biom files into R**, see the online book for examples on 
+To get tips for importing biom files into R, see the online book for examples on 
 [data exploration and manipulation](https://microbiome.github.io/OMA/data-introduction.html#loading-experimental-microbiome-data).
