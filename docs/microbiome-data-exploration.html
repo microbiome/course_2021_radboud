@@ -24,7 +24,7 @@
 <meta name="author" content="Leo Lahti, Tuomas Borman, and Henrik Eckermann" />
 
 
-<meta name="date" content="2021-07-07" />
+<meta name="date" content="2021-07-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -928,7 +928,7 @@ data visualization. Let us plot the Phylum level abundances.</p>
 <span id="cb21-8"><a href="microbiome-data-exploration.html#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">label =</span> scales<span class="sc">::</span>percent)</span></code></pre></div>
 <pre><code>## Scale for &#39;y&#39; is already present. Adding another scale for &#39;y&#39;, which will replace the existing scale.</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="microbiome-data-exploration.html#cb23-1" aria-hidden="true" tabindex="-1"></a>plot_abundance </span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p><strong>Density plot</strong> shows the overall abundance distribution for a given
 taxonomic group. Let us check the relative abundance of Firmicutes
 across the sample collection. The density plot is a smoothened
@@ -954,7 +954,7 @@ version of a standard histogram.</p>
 <span id="cb24-18"><a href="microbiome-data-exploration.html#cb24-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">label =</span> scales<span class="sc">::</span>percent)</span>
 <span id="cb24-19"><a href="microbiome-data-exploration.html#cb24-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-20"><a href="microbiome-data-exploration.html#cb24-20" aria-hidden="true" tabindex="-1"></a>firmicutes_abund_plot</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="microbiome-data-exploration.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # Does the same thing but differently</span></span>
 <span id="cb25-2"><a href="microbiome-data-exploration.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># # Calculates the density. Bandwidth can be adjusted; here, it is 0.065.</span></span>
 <span id="cb25-3"><a href="microbiome-data-exploration.html#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># # density() is from stats package</span></span>

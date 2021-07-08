@@ -24,7 +24,7 @@
 <meta name="author" content="Leo Lahti, Tuomas Borman, and Henrik Eckermann" />
 
 
-<meta name="date" content="2021-07-07" />
+<meta name="date" content="2021-07-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -399,7 +399,7 @@ factors. The current standard way to do this is to perform a so-called permutati
 <span id="cb41-10"><a href="beta-diversity.html#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="co"># we can obtain a the p value for our predictor:</span></span>
 <span id="cb41-11"><a href="beta-diversity.html#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Different different cohorts and variance of abundance between samples, p-value: &quot;</span>, </span>
 <span id="cb41-12"><a href="beta-diversity.html#cb41-12" aria-hidden="true" tabindex="-1"></a>             <span class="fu">as.data.frame</span>(permanova_cohort<span class="sc">$</span>aov.tab)[<span class="st">&quot;cohort&quot;</span>, <span class="st">&quot;Pr(&gt;F)&quot;</span>]))</span></code></pre></div>
-<pre><code>## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.739&quot;</code></pre>
+<pre><code>## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7378&quot;</code></pre>
 <p>As we see, the cohort variable is not significantly associated with
 microbiota composition (p-value is over 0.05).</p>
 <p>We can still visualize those taxa whose abundances are the most
@@ -418,7 +418,7 @@ different between cohorts. This gives us information how taxonomic abundances te
 <span id="cb43-12"><a href="beta-diversity.html#cb43-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
 <span id="cb43-13"><a href="beta-diversity.html#cb43-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-14"><a href="beta-diversity.html#cb43-14" aria-hidden="true" tabindex="-1"></a>top_taxa_coeffient_plot</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>The above plot shows taxa as code names, and it is hard to tell which
 bacterial groups they represent. However, it is easy to add human readable
 names. We can fetch those from our rowData. Here we use Genus level names:</p>
@@ -428,7 +428,7 @@ names. We can fetch those from our rowData. Here we use Genus level names:</p>
 <span id="cb44-4"><a href="beta-diversity.html#cb44-4" aria-hidden="true" tabindex="-1"></a>top_taxa_coeffient_plot <span class="ot">&lt;-</span> top_taxa_coeffient_plot <span class="sc">+</span></span>
 <span id="cb44-5"><a href="beta-diversity.html#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">labels =</span> names) <span class="co"># Adds new labels</span></span>
 <span id="cb44-6"><a href="beta-diversity.html#cb44-6" aria-hidden="true" tabindex="-1"></a>top_taxa_coeffient_plot</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 </div>
 <div id="further-resources-1" class="section level2" number="7.4">
 <h2><span class="header-section-number">7.4</span> Further resources</h2>

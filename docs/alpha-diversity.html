@@ -24,7 +24,7 @@
 <meta name="author" content="Leo Lahti, Tuomas Borman, and Henrik Eckermann" />
 
 
-<meta name="date" content="2021-07-07" />
+<meta name="date" content="2021-07-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -364,7 +364,7 @@ A23
 <span id="cb27-6"><a href="alpha-diversity.html#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Shannon index&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample frequency&quot;</span>)</span>
 <span id="cb27-7"><a href="alpha-diversity.html#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-8"><a href="alpha-diversity.html#cb27-8" aria-hidden="true" tabindex="-1"></a>shannon_hist</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="alpha-diversity.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # Same thing but done differently</span></span>
 <span id="cb28-2"><a href="alpha-diversity.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># # Creates histogram. With &quot;break&quot;, number of bins can be specified. However, the</span></span>
 <span id="cb28-3"><a href="alpha-diversity.html#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># # value is taken as a suggestion, because hist() uses pretty() to calculate breakpoints.</span></span>
@@ -392,7 +392,7 @@ scatter plot, where one index is on the x-axis and another on the y-axis.</p>
 <span id="cb29-15"><a href="alpha-diversity.html#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-16"><a href="alpha-diversity.html#cb29-16" aria-hidden="true" tabindex="-1"></a>cross_plot</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <div id="visualization" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> Visualization</h2>
 <p>Next let’s compare indices between different patient status and cohorts. Boxplot is
@@ -412,7 +412,7 @@ suitable for that purpose.</p>
 <span id="cb31-13"><a href="alpha-diversity.html#cb31-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-14"><a href="alpha-diversity.html#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Puts them into same picture</span></span>
 <span id="cb31-15"><a href="alpha-diversity.html#cb31-15" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(shannon_box, faith_box, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 </div>
 <div id="statistical-testing-and-comparisons" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> Statistical testing and comparisons</h2>

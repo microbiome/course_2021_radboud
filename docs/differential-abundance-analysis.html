@@ -24,7 +24,7 @@
 <meta name="author" content="Leo Lahti, Tuomas Borman, and Henrik Eckermann" />
 
 
-<meta name="date" content="2021-07-07" />
+<meta name="date" content="2021-07-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -306,7 +306,7 @@ are several other methods as well.</p>
 <span id="cb67-9"><a href="differential-abundance-analysis.html#cb67-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb67-10"><a href="differential-abundance-analysis.html#cb67-10" aria-hidden="true" tabindex="-1"></a>wilcoxon_plot</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 </div>
 <div id="deseq2" class="section level2" number="9.2">
 <h2><span class="header-section-number">9.2</span> DESeq2</h2>
@@ -670,7 +670,7 @@ As we can see from the scatter plot, DESeq2 gives lower p-values than Wilcoxon t
 <span id="cb86-5"><a href="differential-abundance-analysis.html#cb86-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_size_area</span>(<span class="at">max_size =</span> <span class="dv">10</span>)</span>
 <span id="cb86-6"><a href="differential-abundance-analysis.html#cb86-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb86-7"><a href="differential-abundance-analysis.html#cb86-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
 <p>Prints number of p-values under 0.05</p>
 <div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="differential-abundance-analysis.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;DESeq2 p-values under 0.05: &quot;</span>, <span class="fu">sum</span>(df<span class="sc">$</span>padj<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="st">&quot;/&quot;</span>, <span class="fu">length</span>(df<span class="sc">$</span>padj)))</span></code></pre></div>
 <pre><code>## [1] &quot;DESeq2 p-values under 0.05: 7/54&quot;</code></pre>
@@ -805,7 +805,7 @@ differ between ADHD and control groups.</p>
 <span id="cb93-59"><a href="differential-abundance-analysis.html#cb93-59" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">3</span>, </span>
 <span id="cb93-60"><a href="differential-abundance-analysis.html#cb93-60" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">2</span></span>
 <span id="cb93-61"><a href="differential-abundance-analysis.html#cb93-61" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 
 </div>
 </div>

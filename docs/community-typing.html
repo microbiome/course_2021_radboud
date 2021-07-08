@@ -24,7 +24,7 @@
 <meta name="author" content="Leo Lahti, Tuomas Borman, and Henrik Eckermann" />
 
 
-<meta name="date" content="2021-07-07" />
+<meta name="date" content="2021-07-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -290,46 +290,46 @@ reflect the probability that a sample belongs to the given cluster.</p>
 ## class: DMN 
 ## k: 2 
 ## samples x taxa: 27 x 151 
-## Laplace: 11440.99 BIC: 12161.29 AIC: 11964.97 
+## Laplace: 11440.79 BIC: 12161.29 AIC: 11964.97 
 ## 
 ## [[3]]
 ## class: DMN 
 ## k: 3 
 ## samples x taxa: 27 x 151 
-## Laplace: 11059.58 BIC: 12266.31 AIC: 11971.51 
+## Laplace: 11059.99 BIC: 12266.31 AIC: 11971.51 
 ## 
 ## [[4]]
 ## class: DMN 
 ## k: 4 
 ## samples x taxa: 27 x 151 
-## Laplace: 11417.54 BIC: 13047.39 AIC: 12654.11 
+## Laplace: 11417.27 BIC: 13047.39 AIC: 12654.11 
 ## 
 ## [[5]]
 ## class: DMN 
 ## k: 5 
 ## samples x taxa: 27 x 151 
-## Laplace: 11217.72 BIC: 13305.58 AIC: 12813.8 
+## Laplace: 11217.73 BIC: 13305.58 AIC: 12813.8 
 ## 
 ## [[6]]
 ## class: DMN 
 ## k: 6 
 ## samples x taxa: 27 x 151 
-## Laplace: 11201.93 BIC: 13718.9 AIC: 13128.65 
+## Laplace: 11201.92 BIC: 13718.9 AIC: 13128.65 
 ## 
 ## [[7]]
 ## class: DMN 
 ## k: 7 
 ## samples x taxa: 27 x 151 
-## Laplace: 11478.19 BIC: 14345.11 AIC: 13656.38</code></pre>
+## Laplace: 11310.72 BIC: 14200.57 AIC: 13511.84</code></pre>
 <p>Show Laplace approximation (model evidence) for each model of the k models.</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="community-typing.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotDMNFit</span>(tse_dmn, <span class="at">type =</span> <span class="st">&quot;laplace&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <p>Return the model that has the best fit.</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="community-typing.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getBestDMNFit</span>(tse_dmn, <span class="at">type =</span> <span class="st">&quot;laplace&quot;</span>)</span></code></pre></div>
 <pre><code>## class: DMN 
 ## k: 3 
 ## samples x taxa: 27 x 151 
-## Laplace: 11059.58 BIC: 12266.31 AIC: 11971.51</code></pre>
+## Laplace: 11059.99 BIC: 12266.31 AIC: 11971.51</code></pre>
 </div>
 <div id="pcoa-for-asv-level-data-with-bray-curtis-with-dmm-clusters-shown-with-colors" class="section level2" number="8.2">
 <h2><span class="header-section-number">8.2</span> PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors</h2>
@@ -342,33 +342,33 @@ Patient status is used for grouping.</p>
 <pre><code>## class: DMNGroup 
 ## summary:
 ##         k samples taxa      NLE    LogDet  Laplace      BIC      AIC
-## ADHD    3      13  151 6018.131 -344.4249 5427.802 6601.657 6473.131
-## Control 3      14  151 6647.269 -147.5200 6155.392 7247.655 7102.269</code></pre>
+## ADHD    3      13  151 6018.131 -344.8009 5427.614 6601.657 6473.131
+## Control 3      14  151 6647.269 -148.3687 6154.968 7247.655 7102.269</code></pre>
 <p>Mixture weights (rough measure of the cluster size).</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="community-typing.html#cb57-1" aria-hidden="true" tabindex="-1"></a>DirichletMultinomial<span class="sc">::</span><span class="fu">mixturewt</span>(<span class="fu">getBestDMNFit</span>(tse_dmn))</span></code></pre></div>
 <pre><code>##          pi    theta
-## 1 0.4814815 31.27742
-## 2 0.2962963 47.34371
-## 3 0.2222222 92.27446</code></pre>
+## 1 0.4814815 31.27863
+## 2 0.2962963 47.34308
+## 3 0.2222222 92.27333</code></pre>
 <p>Samples-cluster assignment probabilities / how probable it is that sample belongs
 to each cluster</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="community-typing.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(DirichletMultinomial<span class="sc">::</span><span class="fu">mixture</span>(<span class="fu">getBestDMNFit</span>(tse_dmn)))</span></code></pre></div>
 <pre><code>##               [,1]          [,2]          [,3]
-## A110  1.000000e+00 1.227294e-144 7.615076e-205
-## A12  9.623583e-117  6.067220e-93  1.000000e+00
-## A15   1.000000e+00 9.305812e-119 3.401318e-234
-## A19  5.257196e-112 1.796094e-107  1.000000e+00
-## A21   2.102529e-93  4.666185e-96  1.000000e+00
-## A23   1.000000e+00 8.673431e-111 1.948761e-161</code></pre>
+## A110  1.000000e+00 1.235758e-144 7.653716e-205
+## A12  9.867970e-117  6.084208e-93  1.000000e+00
+## A15   1.000000e+00 9.413553e-119 3.446331e-234
+## A19  5.415317e-112 1.802421e-107  1.000000e+00
+## A21   2.159562e-93  4.680678e-96  1.000000e+00
+## A23   1.000000e+00 8.730628e-111 1.959176e-161</code></pre>
 <p>Contribution of each taxa to each component</p>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="community-typing.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(DirichletMultinomial<span class="sc">::</span><span class="fu">fitted</span>(<span class="fu">getBestDMNFit</span>(tse_dmn)))</span></code></pre></div>
-<pre><code>##                 [,1]        [,2]      [,3]
-## 1726470  6.351985283 2.898710394 20.189517
-## 1726471  5.287880072 0.002046338  0.153224
-## 17264731 0.001247701 9.144412923  2.011208
-## 17264726 0.140478589 1.363521886  7.589419
-## 1726472  2.104168465 3.523411087  2.665696
-## 17264724 0.072367391 0.002046338  9.854631</code></pre>
+<pre><code>##                 [,1]        [,2]       [,3]
+## 1726470  6.351992077 2.898780860 20.1891457
+## 1726471  5.288492827 0.002046493  0.1532247
+## 17264731 0.001249353 9.144064501  2.0111965
+## 17264726 0.140484624 1.363522775  7.5892678
+## 1726472  2.104291632 3.523292544  2.6656639
+## 17264724 0.072374069 0.002046493  9.8545098</code></pre>
 <p>Get the assignment probabilities</p>
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="community-typing.html#cb63-1" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> DirichletMultinomial<span class="sc">::</span><span class="fu">mixture</span>(<span class="fu">getBestDMNFit</span>(tse_dmn))</span>
 <span id="cb63-2"><a href="community-typing.html#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Add column names</span></span>
@@ -393,7 +393,7 @@ to each cluster</p>
 <span id="cb63-21"><a href="community-typing.html#cb63-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)) <span class="co"># makes titles smaller</span></span>
 <span id="cb63-22"><a href="community-typing.html#cb63-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb63-23"><a href="community-typing.html#cb63-23" aria-hidden="true" tabindex="-1"></a>euclidean_dmm_plot</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 
 </div>
 </div>
