@@ -5,9 +5,11 @@
 
 # This code below builds the Rmd file into a book
 authors <- "Leo Lahti, Tuomas Borman, Henrik Eckermann, Chouaib Benchraka"
+
 library(bookdown)
 # Render html files
 render_book("index.Rmd", "bookdown::gitbook")
+
 # Render pdf files
 render_book("index.Rmd", "bookdown::pdf_document2")
 
@@ -18,4 +20,4 @@ render_book("index.Rmd", "bookdown::pdf_document2")
 # Installs servr package. Needs only to do once.
 # install.packages("servr")
 # starts local web browser and serve the HTML output
-# serve_book()
+serve_book()
