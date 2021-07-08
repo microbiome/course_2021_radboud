@@ -276,11 +276,16 @@ subfolder.</p>
 </ul>
 <p>Store the data in your desired local directory (for instance, <em>data/</em> under the
 working directory), and define source file paths</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="importing-microbiome-data.html#cb6-1" aria-hidden="true" tabindex="-1"></a>biom_file_path <span class="ot">&lt;-</span> <span class="st">&quot;data/Aggregated_humanization2.biom&quot;</span></span>
+<span id="cb6-2"><a href="importing-microbiome-data.html#cb6-2" aria-hidden="true" tabindex="-1"></a>sample_meta_file_path <span class="ot">&lt;-</span> <span class="st">&quot;data/Mapping_file_ADHD_aggregated.csv&quot;</span></span>
+<span id="cb6-3"><a href="importing-microbiome-data.html#cb6-3" aria-hidden="true" tabindex="-1"></a>tree_file_path <span class="ot">&lt;-</span> <span class="st">&quot;data/Data_humanization_phylo_aggregation.tre&quot;</span></span></code></pre></div>
 <p>Now we can load the (biom) data into a SummarizedExperiment (SE) object.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="importing-microbiome-data.html#cb7-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">loadFromBiom</span>(biom_file_path)</span></code></pre></div>
 </div>
 <div id="investigate-the-r-data-object" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Investigate the R data object</h2>
 <p>We have now imported the data set in R. Let us investigate its contents.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="importing-microbiome-data.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(se)</span></code></pre></div>
 <pre><code>## class: SummarizedExperiment 
 ## dim: 151 27 
 ## metadata(0):
@@ -291,6 +296,7 @@ working directory), and define source file paths</p>
 ## colData names(0):</code></pre>
 <p>The <code>assays</code> slot includes a list of abundance tables. The imported abundance table is named as “counts.”
 Let us inspect only the first cols and rows.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="importing-microbiome-data.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assays</span>(se)<span class="sc">$</span>counts[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
 <pre><code>##           A110  A111  A12
 ## 1726470  17722 11630    0
 ## 1726471  12052     0 2679
@@ -300,6 +306,7 @@ Let us inspect only the first cols and rows.</p>
 <p>The <code>rowdata</code> includes taxonomic information from the biom file. The <code>head()</code> command
 shows just the beginning of the data table for an overview.</p>
 <p><code>knitr::kable()</code> is for printing the information more nicely.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="importing-microbiome-data.html#cb12-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(<span class="fu">rowData</span>(se)))</span></code></pre></div>
 <table style="width:100%;">
 <colgroup>
 <col width="7%" />
@@ -381,6 +388,28 @@ shows just the beginning of the data table for an overview.</p>
 <p>These taxonomic rank names (column names) are not real rank names. Let’s replace them with real rank names.</p>
 <p>In addition to that, the taxa names include, e.g., ’"k__’ before the name, so let’s
 make them cleaner by removing them.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="importing-microbiome-data.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(<span class="fu">rowData</span>(se)) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Kingdom&quot;</span>, <span class="st">&quot;Phylum&quot;</span>, <span class="st">&quot;Class&quot;</span>, <span class="st">&quot;Order&quot;</span>, </span>
+<span id="cb13-2"><a href="importing-microbiome-data.html#cb13-2" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;Family&quot;</span>, <span class="st">&quot;Genus&quot;</span>)</span>
+<span id="cb13-3"><a href="importing-microbiome-data.html#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="importing-microbiome-data.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Goes through the whole DataFrame. Removes &#39;.*[kpcofg]__&#39; from strings, where [kpcofg] </span></span>
+<span id="cb13-5"><a href="importing-microbiome-data.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># is any character from listed ones, and .* any character.</span></span>
+<span id="cb13-6"><a href="importing-microbiome-data.html#cb13-6" aria-hidden="true" tabindex="-1"></a>rowdata_modified <span class="ot">&lt;-</span> BiocParallel<span class="sc">::</span><span class="fu">bplapply</span>(<span class="fu">rowData</span>(se), </span>
+<span id="cb13-7"><a href="importing-microbiome-data.html#cb13-7" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">FUN =</span> stringr<span class="sc">::</span>str_remove, </span>
+<span id="cb13-8"><a href="importing-microbiome-data.html#cb13-8" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">pattern =</span> <span class="st">&#39;.*[kpcofg]__&#39;</span>)</span>
+<span id="cb13-9"><a href="importing-microbiome-data.html#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="importing-microbiome-data.html#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Genus level has additional &#39;\&quot;&#39;, so let&#39;s delete that also</span></span>
+<span id="cb13-11"><a href="importing-microbiome-data.html#cb13-11" aria-hidden="true" tabindex="-1"></a>rowdata_modified <span class="ot">&lt;-</span> BiocParallel<span class="sc">::</span><span class="fu">bplapply</span>(rowdata_modified, </span>
+<span id="cb13-12"><a href="importing-microbiome-data.html#cb13-12" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">FUN =</span> stringr<span class="sc">::</span>str_remove, </span>
+<span id="cb13-13"><a href="importing-microbiome-data.html#cb13-13" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">pattern =</span> <span class="st">&#39;</span><span class="sc">\&quot;</span><span class="st">&#39;</span>)</span>
+<span id="cb13-14"><a href="importing-microbiome-data.html#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="importing-microbiome-data.html#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co"># rowdata_modified is a list, so it is converted back to DataFrame format. </span></span>
+<span id="cb13-16"><a href="importing-microbiome-data.html#cb13-16" aria-hidden="true" tabindex="-1"></a>rowdata_modified <span class="ot">&lt;-</span> <span class="fu">DataFrame</span>(rowdata_modified)</span>
+<span id="cb13-17"><a href="importing-microbiome-data.html#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-18"><a href="importing-microbiome-data.html#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co"># And then assigned back to the SE object</span></span>
+<span id="cb13-19"><a href="importing-microbiome-data.html#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="fu">rowData</span>(se) <span class="ot">&lt;-</span> rowdata_modified</span>
+<span id="cb13-20"><a href="importing-microbiome-data.html#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-21"><a href="importing-microbiome-data.html#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Now we have a nicer table</span></span>
+<span id="cb13-22"><a href="importing-microbiome-data.html#cb13-22" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(<span class="fu">rowData</span>(se)))</span></code></pre></div>
 <table>
 <colgroup>
 <col width="8%" />
@@ -464,9 +493,30 @@ make them cleaner by removing them.</p>
 <h3><span class="header-section-number">4.2.2</span> colData (sample information)</h3>
 <p>We notice that the imported biom file did not contain the sample meta data
 yet, so it includes an empty data frame.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="importing-microbiome-data.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">colData</span>(se))</span></code></pre></div>
 <pre><code>## DataFrame with 6 rows and 0 columns</code></pre>
 <p>Let us add a sample meta data file.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="importing-microbiome-data.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We use this to check what type of data it is</span></span>
+<span id="cb16-2"><a href="importing-microbiome-data.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># read.table(sample_meta_file_path)</span></span>
+<span id="cb16-3"><a href="importing-microbiome-data.html#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="importing-microbiome-data.html#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># It seems like a comma separated file and it does not include headers</span></span>
+<span id="cb16-5"><a href="importing-microbiome-data.html#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Let us read it and then convert from data.frame to DataFrame</span></span>
+<span id="cb16-6"><a href="importing-microbiome-data.html#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># (required for our purposes)</span></span>
+<span id="cb16-7"><a href="importing-microbiome-data.html#cb16-7" aria-hidden="true" tabindex="-1"></a>sample_meta <span class="ot">&lt;-</span> <span class="fu">DataFrame</span>(<span class="fu">read.table</span>(sample_meta_file_path, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="at">header =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb16-8"><a href="importing-microbiome-data.html#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="importing-microbiome-data.html#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add sample names to rownames</span></span>
+<span id="cb16-10"><a href="importing-microbiome-data.html#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(sample_meta) <span class="ot">&lt;-</span> sample_meta[,<span class="dv">1</span>]</span>
+<span id="cb16-11"><a href="importing-microbiome-data.html#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="importing-microbiome-data.html#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete column that included sample names</span></span>
+<span id="cb16-13"><a href="importing-microbiome-data.html#cb16-13" aria-hidden="true" tabindex="-1"></a>sample_meta[,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb16-14"><a href="importing-microbiome-data.html#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="importing-microbiome-data.html#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co"># We can add headers</span></span>
+<span id="cb16-16"><a href="importing-microbiome-data.html#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(sample_meta) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;patient_status&quot;</span>, <span class="st">&quot;cohort&quot;</span>, <span class="st">&quot;patient_status_vs_cohort&quot;</span>, <span class="st">&quot;sample_name&quot;</span>)</span>
+<span id="cb16-17"><a href="importing-microbiome-data.html#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-18"><a href="importing-microbiome-data.html#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Then it can be added to colData</span></span>
+<span id="cb16-19"><a href="importing-microbiome-data.html#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(se) <span class="ot">&lt;-</span> sample_meta</span></code></pre></div>
 <p>Now <code>colData</code> includes the sample metadata. Use kable to print it more nicely.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="importing-microbiome-data.html#cb17-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(<span class="fu">colData</span>(se)))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -530,6 +580,10 @@ yet, so it includes an empty data frame.</p>
 does not include a slot for adding a phylogenetic tree. In order to do
 this, we can convert the SE object to an extended TreeSummarizedExperiment
 object which also includes a <code>rowTree</code> slot.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="importing-microbiome-data.html#cb18-1" aria-hidden="true" tabindex="-1"></a>tse <span class="ot">&lt;-</span> <span class="fu">as</span>(se, <span class="st">&quot;TreeSummarizedExperiment&quot;</span>)</span>
+<span id="cb18-2"><a href="importing-microbiome-data.html#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="importing-microbiome-data.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># tse includes same data as se</span></span>
+<span id="cb18-4"><a href="importing-microbiome-data.html#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tse)</span></code></pre></div>
 <pre><code>## class: TreeSummarizedExperiment 
 ## dim: 151 27 
 ## metadata(0):
@@ -537,8 +591,7 @@ object which also includes a <code>rowTree</code> slot.</p>
 ## rownames(151): 1726470 1726471 ... 17264756 17264757
 ## rowData names(6): Kingdom Phylum ... Family Genus
 ## colnames(27): A110 A12 ... A35 A38
-## colData names(4): patient_status cohort patient_status_vs_cohort
-##   sample_name
+## colData names(4): patient_status cohort patient_status_vs_cohort sample_name
 ## reducedDimNames(0):
 ## mainExpName: NULL
 ## altExpNames(0):
@@ -547,6 +600,13 @@ object which also includes a <code>rowTree</code> slot.</p>
 ## colLinks: NULL
 ## colTree: NULL</code></pre>
 <p>Next, let us read the tree data file and add it to the R data object (tse).</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="importing-microbiome-data.html#cb20-1" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> ape<span class="sc">::</span><span class="fu">read.tree</span>(tree_file_path)</span>
+<span id="cb20-2"><a href="importing-microbiome-data.html#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="importing-microbiome-data.html#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add tree to rowTree</span></span>
+<span id="cb20-4"><a href="importing-microbiome-data.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rowTree</span>(tse) <span class="ot">&lt;-</span> tree</span>
+<span id="cb20-5"><a href="importing-microbiome-data.html#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="importing-microbiome-data.html#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Check</span></span>
+<span id="cb20-7"><a href="importing-microbiome-data.html#cb20-7" aria-hidden="true" tabindex="-1"></a>tse</span></code></pre></div>
 <pre><code>## class: TreeSummarizedExperiment 
 ## dim: 151 27 
 ## metadata(0):
@@ -554,8 +614,7 @@ object which also includes a <code>rowTree</code> slot.</p>
 ## rownames(151): 1726470 1726471 ... 17264756 17264757
 ## rowData names(6): Kingdom Phylum ... Family Genus
 ## colnames(27): A110 A12 ... A35 A38
-## colData names(4): patient_status cohort patient_status_vs_cohort
-##   sample_name
+## colData names(4): patient_status cohort patient_status_vs_cohort sample_name
 ## reducedDimNames(0):
 ## mainExpName: NULL
 ## altExpNames(0):
@@ -564,6 +623,7 @@ object which also includes a <code>rowTree</code> slot.</p>
 ## colLinks: NULL
 ## colTree: NULL</code></pre>
 <p>Now <code>rowTree</code> includes a phylogenetic tree:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="importing-microbiome-data.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rowTree</span>(tse))</span></code></pre></div>
 </div>
 </div>
 <div id="further-examples" class="section level2" number="4.3">
@@ -621,7 +681,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf"],
+"download": ["radboud2021_material.pdf"],
 "toc": {
 "collapse": "section"
 }

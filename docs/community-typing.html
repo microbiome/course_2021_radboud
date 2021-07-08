@@ -259,6 +259,12 @@ data (model evidence) using Laplace approximation. After fitting the
 model with k clusters, we obtain for each sample k probabilities that
 reflect the probability that a sample belongs to the given cluster.</p>
 <p>Let’s cluster the data with DMM clustering.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="community-typing.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Runs model and calculates the most likely number of clusters from 1 to 7. </span></span>
+<span id="cb62-2"><a href="community-typing.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="co"># For this small data, takes about 10 seconds. For larger data, can take much longer</span></span>
+<span id="cb62-3"><a href="community-typing.html#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="co"># because this demands lots of resources. </span></span>
+<span id="cb62-4"><a href="community-typing.html#cb62-4" aria-hidden="true" tabindex="-1"></a>tse_dmn <span class="ot">&lt;-</span> <span class="fu">runDMN</span>(tse, <span class="at">name =</span> <span class="st">&quot;DMN&quot;</span>, <span class="at">k =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="community-typing.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># It is stored in metadata</span></span>
+<span id="cb63-2"><a href="community-typing.html#cb63-2" aria-hidden="true" tabindex="-1"></a>tse_dmn</span></code></pre></div>
 <pre><code>## class: TreeSummarizedExperiment 
 ## dim: 151 27 
 ## metadata(1): DMN
@@ -266,8 +272,7 @@ reflect the probability that a sample belongs to the given cluster.</p>
 ## rownames(151): 1726470 1726471 ... 17264756 17264757
 ## rowData names(6): Kingdom Phylum ... Family Genus
 ## colnames(27): A110 A12 ... A35 A38
-## colData names(6): patient_status cohort ... Shannon_index
-##   Faith_diversity_index
+## colData names(6): patient_status cohort ... Shannon_index Faith_diversity_index
 ## reducedDimNames(0):
 ## mainExpName: NULL
 ## altExpNames(0):
@@ -276,8 +281,10 @@ reflect the probability that a sample belongs to the given cluster.</p>
 ## colLinks: NULL
 ## colTree: NULL</code></pre>
 <p>Return information on metadata that the object contains.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="community-typing.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(<span class="fu">metadata</span>(tse_dmn))</span></code></pre></div>
 <pre><code>## [1] &quot;DMN&quot;</code></pre>
 <p>This returns a list of DMN objects for a closer investigation.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="community-typing.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getDMN</span>(tse_dmn)</span></code></pre></div>
 <pre><code>## [[1]]
 ## class: DMN 
 ## k: 1 
@@ -288,78 +295,110 @@ reflect the probability that a sample belongs to the given cluster.</p>
 ## class: DMN 
 ## k: 2 
 ## samples x taxa: 27 x 151 
-## Laplace: 11704.82 BIC: 12399.15 AIC: 12202.83 
+## Laplace: 11441 BIC: 12161.29 AIC: 11964.97 
 ## 
 ## [[3]]
 ## class: DMN 
 ## k: 3 
 ## samples x taxa: 27 x 151 
-## Laplace: 11059.97 BIC: 12266.31 AIC: 11971.51 
+## Laplace: 11059.63 BIC: 12266.31 AIC: 11971.51 
 ## 
 ## [[4]]
 ## class: DMN 
 ## k: 4 
 ## samples x taxa: 27 x 151 
-## Laplace: 11417.59 BIC: 13047.39 AIC: 12654.11 
+## Laplace: 11417.54 BIC: 13047.39 AIC: 12654.11 
 ## 
 ## [[5]]
 ## class: DMN 
 ## k: 5 
 ## samples x taxa: 27 x 151 
-## Laplace: 11401.97 BIC: 13460.72 AIC: 12968.95 
+## Laplace: 11217.71 BIC: 13305.58 AIC: 12813.8 
 ## 
 ## [[6]]
 ## class: DMN 
 ## k: 6 
 ## samples x taxa: 27 x 151 
-## Laplace: 11408.07 BIC: 13774.56 AIC: 13184.3 
+## Laplace: 11407.17 BIC: 13774.56 AIC: 13184.3 
 ## 
 ## [[7]]
 ## class: DMN 
 ## k: 7 
 ## samples x taxa: 27 x 151 
-## Laplace: 11477.73 BIC: 14345.11 AIC: 13656.38</code></pre>
+## Laplace: 11427.94 BIC: 14172.79 AIC: 13484.06</code></pre>
 <p>Show Laplace approximation (model evidence) for each model of the k models.</p>
-<p><img src="Figures/unnamed-chunk-42-1.png" width="672" /></p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="community-typing.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotDMNFit</span>(tse_dmn, <span class="at">type =</span> <span class="st">&quot;laplace&quot;</span>)</span></code></pre></div>
+<p><img src="radboud2021_material_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
 <p>Return the model that has the best fit.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="community-typing.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getBestDMNFit</span>(tse_dmn, <span class="at">type =</span> <span class="st">&quot;laplace&quot;</span>)</span></code></pre></div>
 <pre><code>## class: DMN 
 ## k: 3 
 ## samples x taxa: 27 x 151 
-## Laplace: 11059.97 BIC: 12266.31 AIC: 11971.51</code></pre>
+## Laplace: 11059.63 BIC: 12266.31 AIC: 11971.51</code></pre>
 </div>
 <div id="pcoa-for-asv-level-data-with-bray-curtis-with-dmm-clusters-shown-with-colors" class="section level2" number="8.2">
 <h2><span class="header-section-number">8.2</span> PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors</h2>
 <p>Group samples and return DMNGroup object that contains a summary.
 Patient status is used for grouping.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="community-typing.html#cb72-1" aria-hidden="true" tabindex="-1"></a>dmn_group <span class="ot">&lt;-</span> <span class="fu">calculateDMNgroup</span>(tse_dmn, <span class="at">variable =</span> <span class="st">&quot;patient_status&quot;</span>, </span>
+<span id="cb72-2"><a href="community-typing.html#cb72-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">exprs_values =</span> <span class="st">&quot;counts&quot;</span>, <span class="at">k =</span> <span class="dv">3</span>)</span>
+<span id="cb72-3"><a href="community-typing.html#cb72-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-4"><a href="community-typing.html#cb72-4" aria-hidden="true" tabindex="-1"></a>dmn_group</span></code></pre></div>
 <pre><code>## class: DMNGroup 
 ## summary:
-##         k samples taxa      NLE    LogDet  Laplace      BIC      AIC
-## ADHD    3      13  151 6018.131 -344.8091 5427.610 6601.657 6473.131
-## Control 3      14  151 6647.269 -148.0803 6155.112 7247.655 7102.269</code></pre>
+##         k samples taxa      NLE   LogDet  Laplace      BIC      AIC
+## ADHD    3      13  151 6018.131 -345.077 5427.476 6601.657 6473.131
+## Control 3      14  151 6647.269 -147.517 6155.394 7247.655 7102.269</code></pre>
 <p>Mixture weights (rough measure of the cluster size).</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="community-typing.html#cb74-1" aria-hidden="true" tabindex="-1"></a>DirichletMultinomial<span class="sc">::</span><span class="fu">mixturewt</span>(<span class="fu">getBestDMNFit</span>(tse_dmn))</span></code></pre></div>
 <pre><code>##          pi    theta
-## 1 0.4814815 31.27737
-## 2 0.2962963 47.34371
-## 3 0.2222222 92.27353</code></pre>
+## 1 0.4814815 31.27754
+## 2 0.2962963 47.34454
+## 3 0.2222222 92.27467</code></pre>
 <p>Samples-cluster assignment probabilities / how probable it is that sample belongs
 to each cluster</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="community-typing.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(DirichletMultinomial<span class="sc">::</span><span class="fu">mixture</span>(<span class="fu">getBestDMNFit</span>(tse_dmn)))</span></code></pre></div>
 <pre><code>##               [,1]          [,2]          [,3]
-## A110  1.000000e+00 1.223467e-144 7.612561e-205
-## A12  9.723983e-117  6.053939e-93  1.000000e+00
-## A15   1.000000e+00 9.272244e-119 3.403624e-234
-## A19  5.317938e-112 1.791715e-107  1.000000e+00
-## A21   2.124816e-93  4.654811e-96  1.000000e+00
-## A23   1.000000e+00 8.651054e-111 1.948013e-161</code></pre>
+## A110  1.000000e+00 1.254416e-144 7.656724e-205
+## A12  9.760887e-117  6.131972e-93  1.000000e+00
+## A15   1.000000e+00 9.529106e-119 3.434146e-234
+## A19  5.338170e-112 1.824117e-107  1.000000e+00
+## A21   2.132140e-93  4.739560e-96  1.000000e+00
+## A23   1.000000e+00 8.843900e-111 1.960788e-161</code></pre>
 <p>Contribution of each taxa to each component</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="community-typing.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(DirichletMultinomial<span class="sc">::</span><span class="fu">fitted</span>(<span class="fu">getBestDMNFit</span>(tse_dmn)))</span></code></pre></div>
 <pre><code>##                 [,1]        [,2]       [,3]
-## 1726470  6.351949953 2.898697245 20.1890286
-## 1726471  5.287862450 0.002046128  0.1532219
-## 17264731 0.001248291 9.144396208  2.0112034
-## 17264726 0.140479884 1.363520514  7.5893540
-## 1726472  2.104174239 3.523432609  2.6656722
-## 17264724 0.072366198 0.002046128  9.8545785</code></pre>
+## 1726470  6.352172217 2.898831884 20.1895112
+## 1726471  5.287829825 0.002047711  0.1532268
+## 17264731 0.001248464 9.144493129  2.0112256
+## 17264726 0.140480698 1.363547275  7.5894470
+## 1726472  2.104152008 3.523459086  2.6657218
+## 17264724 0.072366046 0.002047711  9.8546743</code></pre>
 <p>Get the assignment probabilities</p>
-<p><img src="Figures/unnamed-chunk-48-1.png" width="672" /></p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="community-typing.html#cb80-1" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> DirichletMultinomial<span class="sc">::</span><span class="fu">mixture</span>(<span class="fu">getBestDMNFit</span>(tse_dmn))</span>
+<span id="cb80-2"><a href="community-typing.html#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Add column names</span></span>
+<span id="cb80-3"><a href="community-typing.html#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(prob) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;comp1&quot;</span>, <span class="st">&quot;comp2&quot;</span>, <span class="st">&quot;comp3&quot;</span>)</span>
+<span id="cb80-4"><a href="community-typing.html#cb80-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-5"><a href="community-typing.html#cb80-5" aria-hidden="true" tabindex="-1"></a><span class="co"># For each row, finds column that has the highest value. Then extract the column </span></span>
+<span id="cb80-6"><a href="community-typing.html#cb80-6" aria-hidden="true" tabindex="-1"></a><span class="co"># names of highest values.</span></span>
+<span id="cb80-7"><a href="community-typing.html#cb80-7" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">colnames</span>(prob)[<span class="fu">max.col</span>(prob,<span class="at">ties.method =</span> <span class="st">&quot;first&quot;</span>)]</span>
+<span id="cb80-8"><a href="community-typing.html#cb80-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-9"><a href="community-typing.html#cb80-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates a data frame that contains principal coordinates and DMM information</span></span>
+<span id="cb80-10"><a href="community-typing.html#cb80-10" aria-hidden="true" tabindex="-1"></a>euclidean_dmm_pcoa_df <span class="ot">&lt;-</span> <span class="fu">cbind</span>(euclidean_pcoa_df,</span>
+<span id="cb80-11"><a href="community-typing.html#cb80-11" aria-hidden="true" tabindex="-1"></a>                               <span class="at">dmm_component =</span> vec)</span>
+<span id="cb80-12"><a href="community-typing.html#cb80-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-13"><a href="community-typing.html#cb80-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates a plot</span></span>
+<span id="cb80-14"><a href="community-typing.html#cb80-14" aria-hidden="true" tabindex="-1"></a>euclidean_dmm_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> euclidean_dmm_pcoa_df, </span>
+<span id="cb80-15"><a href="community-typing.html#cb80-15" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">aes</span>(<span class="at">x=</span>pcoa1, <span class="at">y=</span>pcoa2,</span>
+<span id="cb80-16"><a href="community-typing.html#cb80-16" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">color =</span> dmm_component)) <span class="sc">+</span></span>
+<span id="cb80-17"><a href="community-typing.html#cb80-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb80-18"><a href="community-typing.html#cb80-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Coordinate 1&quot;</span>,</span>
+<span id="cb80-19"><a href="community-typing.html#cb80-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Coordinate 2&quot;</span>,</span>
+<span id="cb80-20"><a href="community-typing.html#cb80-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;PCoA with Aitchison distances&quot;</span>) <span class="sc">+</span>  </span>
+<span id="cb80-21"><a href="community-typing.html#cb80-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)) <span class="co"># makes titles smaller</span></span>
+<span id="cb80-22"><a href="community-typing.html#cb80-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-23"><a href="community-typing.html#cb80-23" aria-hidden="true" tabindex="-1"></a>euclidean_dmm_plot</span></code></pre></div>
+<p><img src="radboud2021_material_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 
 </div>
 </div>
@@ -412,7 +451,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf"],
+"download": ["radboud2021_material.pdf"],
 "toc": {
 "collapse": "section"
 }

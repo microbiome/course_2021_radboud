@@ -6,7 +6,10 @@ setHook(packageEvent("knitr", "attach"),
 # This code below builds the Rmd file into a book
 authors <- "Leo Lahti, Tuomas Borman, Henrik Eckermann, Chouaib Benchraka"
 library(bookdown)
-render_book()
+# Render html files
+render_book("index.Rmd", "bookdown::gitbook")
+# Render pdf files
+bookdown::render_book("index.Rmd", "bookdown::pdf_document2")
 
 # Instead of render_book, you can run serve_book. The difference is that by serve_book
 # you can preview the book on your web browser live. However, when using serve_book you

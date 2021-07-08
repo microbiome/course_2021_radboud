@@ -251,6 +251,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="shapiro-wilk-test" class="section level2" number="11.1">
 <h2><span class="header-section-number">11.1</span> Shapiro-Wilk test</h2>
 <p>If necessary, it is possible to assess normality of the data with Shapiro-Wilk test.</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="miscellaneous-material.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Does Shapiro-Wilk test. Does it only for columns that contain abundances, not for</span></span>
+<span id="cb111-2"><a href="miscellaneous-material.html#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="co"># column that contain Groups.</span></span>
+<span id="cb111-3"><a href="miscellaneous-material.html#cb111-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-4"><a href="miscellaneous-material.html#cb111-4" aria-hidden="true" tabindex="-1"></a>normality_test_p <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb111-5"><a href="miscellaneous-material.html#cb111-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-6"><a href="miscellaneous-material.html#cb111-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (column <span class="cf">in</span> </span>
+<span id="cb111-7"><a href="miscellaneous-material.html#cb111-7" aria-hidden="true" tabindex="-1"></a>     abundance_analysis_data[, <span class="sc">!</span><span class="fu">names</span>(abundance_analysis_data) <span class="sc">%in%</span> <span class="st">&quot;patient_status&quot;</span>]){</span>
+<span id="cb111-8"><a href="miscellaneous-material.html#cb111-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Does Shapiro-Wilk test</span></span>
+<span id="cb111-9"><a href="miscellaneous-material.html#cb111-9" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="fu">shapiro.test</span>(column)</span>
+<span id="cb111-10"><a href="miscellaneous-material.html#cb111-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb111-11"><a href="miscellaneous-material.html#cb111-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Stores p-value to vector</span></span>
+<span id="cb111-12"><a href="miscellaneous-material.html#cb111-12" aria-hidden="true" tabindex="-1"></a>  normality_test_p <span class="ot">&lt;-</span> <span class="fu">c</span>(normality_test_p, result<span class="sc">$</span>p.value)</span>
+<span id="cb111-13"><a href="miscellaneous-material.html#cb111-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb111-14"><a href="miscellaneous-material.html#cb111-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-15"><a href="miscellaneous-material.html#cb111-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;P-values over 0.05: &quot;</span>, <span class="fu">sum</span>(normality_test_p<span class="sc">&gt;</span><span class="fl">0.05</span>), <span class="st">&quot;/&quot;</span>, <span class="fu">length</span>(normality_test_p)))</span></code></pre></div>
 <pre><code>## [1] &quot;P-values over 0.05: 7/54&quot;</code></pre>
 </div>
 <div id="deseq-details" class="section level2" number="11.2">
@@ -320,7 +335,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf"],
+"download": ["radboud2021_material.pdf"],
 "toc": {
 "collapse": "section"
 }
