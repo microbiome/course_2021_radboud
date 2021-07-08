@@ -24,7 +24,7 @@
 <meta name="author" content="Leo Lahti, Tuomas Borman, and Henrik Eckermann" />
 
 
-<meta name="date" content="2021-07-07" />
+<meta name="date" content="2021-07-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -275,16 +275,16 @@ between samples. Unlike alpha diversity, where we calculate diversity within a s
 <p>Next to visualizing whether any variable is associated with differences between samples, we can also quantify the strength of the association between the
 variation in community composition (beta diversity) and external
 factors. The current standard way to do this is to perform a so-called permutational multivariate analysis of variance (PERMANOVA). This method takes as input the ASV/OTU table, which measure of distance you want to base the test on and a formula that tells the model how you think the variables are associated with each other. Let’s try it:</p>
-<pre><code>## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7408&quot;</code></pre>
+<pre><code>## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7443&quot;</code></pre>
 <p>As we see, the cohort variable is not significantly associated with
 microbiota composition (p-value is over 0.05).</p>
 <p>We can still visualize those taxa whose abundances are the most
 different between cohorts. This gives us information how taxonomic abundances tend to differ between different cohorts. In order to do that, we first need to extract the model coefficients of taxa:</p>
-<p><img src="Figures/unnamed-chunk-38-1.png" width="672" /></p>
+<p><img src="Figures/unnamed-chunk-37-1.png" width="672" /></p>
 <p>The above plot shows taxa as code names, and it is hard to tell which
 bacterial groups they represent. However, it is easy to add human readable
 names. We can fetch those from our rowData. Here we use Genus level names:</p>
-<p><img src="Figures/unnamed-chunk-39-1.png" width="672" /></p>
+<p><img src="Figures/unnamed-chunk-38-1.png" width="672" /></p>
 </div>
 <div id="further-resources-1" class="section level2">
 <h2><span class="header-section-number">7.4</span> Further resources</h2>

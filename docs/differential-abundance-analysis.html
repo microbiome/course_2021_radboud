@@ -24,7 +24,7 @@
 <meta name="author" content="Leo Lahti, Tuomas Borman, and Henrik Eckermann" />
 
 
-<meta name="date" content="2021-07-07" />
+<meta name="date" content="2021-07-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -255,7 +255,7 @@ positive rate at a level that is acceptable. What is acceptable
 depends on our research goals. Here we use the fdr method, but there
 are several other methods as well.</p>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="Figures/unnamed-chunk-53-1.png" width="672" /></p>
+<p><img src="Figures/unnamed-chunk-52-1.png" width="672" /></p>
 </div>
 <div id="deseq2" class="section level2">
 <h2><span class="header-section-number">9.2</span> DESeq2</h2>
@@ -272,7 +272,8 @@ ARCHIVED</a></p>
 <p>Now let us show how to do this. First, run the DESeq2 analysis.</p>
 <pre><code>## converting counts to integer mode</code></pre>
 <pre><code>## Warning in DESeqDataSet(tse_genus, ~patient_status): 2 duplicate rownames were renamed by adding numbers</code></pre>
-<pre><code>## Warning in DESeqDataSet(tse_genus, ~patient_status): some variables in design formula are characters, converting to factors</code></pre>
+<pre><code>## Warning in DESeqDataSet(tse_genus, ~patient_status): some variables in design formula are characters, converting
+## to factors</code></pre>
 <pre><code>## estimating size factors</code></pre>
 <pre><code>## estimating dispersions</code></pre>
 <pre><code>## gene-wise dispersion estimates</code></pre>
@@ -439,7 +440,7 @@ Here, we can find all differentiallt abundant taxa. Below we show the first 6 en
 <h2><span class="header-section-number">9.4</span> Comparison of Wilcoxon test and DESeq2</h2>
 <p>Let’s compare results that we got from the Wilcoxon test and DESeq2.
 As we can see from the scatter plot, DESeq2 gives lower p-values than Wilcoxon test.</p>
-<p><img src="Figures/unnamed-chunk-57-1.png" width="672" /></p>
+<p><img src="Figures/unnamed-chunk-56-1.png" width="672" /></p>
 <p>Prints number of p-values under 0.05</p>
 <pre><code>## [1] &quot;DESeq2 p-values under 0.05: 7/54&quot;</code></pre>
 <pre><code>## [1] &quot;Wilcoxon test p-values under 0.05: 2/54&quot;</code></pre>
@@ -453,7 +454,7 @@ differ between ADHD and control groups.</p>
 <p>Let’s first gather data about taxa that have highest p-values.</p>
 <p>Next, let’s do the same but for taxa with lowest p-values.</p>
 <p>Then we can plot these six different taxa. Let’s arrange them into the same picture.</p>
-<p><img src="Figures/unnamed-chunk-61-1.png" width="672" /></p>
+<p><img src="Figures/unnamed-chunk-60-1.png" width="672" /></p>
 
 </div>
 </div>

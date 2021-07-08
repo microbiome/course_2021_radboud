@@ -77,10 +77,5 @@ bioc_pkg <- c(bioc_pkg[ bioc_pkg %in% c("mia", "miaViz") ], bioc_pkg[ !bioc_pkg 
 sapply(c(bioc_pkg, cran_pkg), require, character.only = TRUE)
 ```
 
-```{r}
-# Setting path for saving figures generated throughout the notebook.
-knitr::opts_chunk$set(echo = FALSE, fig.path="Figures/")
-```
-
 
 

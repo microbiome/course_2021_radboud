@@ -24,7 +24,7 @@
 <meta name="author" content="Leo Lahti, Tuomas Borman, and Henrik Eckermann" />
 
 
-<meta name="date" content="2021-07-07" />
+<meta name="date" content="2021-07-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -288,14 +288,12 @@ mia and miaViz are prioritized. Packages that are loaded first have higher prior
 <span id="cb4-3"><a href="getting-started.html#cb4-3"></a></span>
 <span id="cb4-4"><a href="getting-started.html#cb4-4"></a><span class="co"># Loading all packages into session. Returns true if package was successfully loaded.</span></span>
 <span id="cb4-5"><a href="getting-started.html#cb4-5"></a><span class="kw">sapply</span>(<span class="kw">c</span>(bioc_pkg, cran_pkg), require, <span class="dt">character.only =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<pre><code>##                  mia               miaViz              ANCOMBC                  ape               DESeq2 DirichletMultinomial 
-##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
-##          BiocManager             bookdown                dplyr              ecodist              ggplot2            gridExtra 
-##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
-##                knitr                vegan 
-##                 TRUE                 TRUE</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="getting-started.html#cb6-1"></a><span class="co"># Setting path for saving figures generated throughout the notebook.</span></span>
-<span id="cb6-2"><a href="getting-started.html#cb6-2"></a>knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">echo =</span> <span class="ot">FALSE</span>, <span class="dt">fig.path=</span><span class="st">&quot;Figures/&quot;</span>)</span></code></pre></div>
+<pre><code>##                  mia               miaViz              ANCOMBC                  ape               DESeq2 
+##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
+## DirichletMultinomial          BiocManager             bookdown                dplyr              ecodist 
+##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
+##              ggplot2            gridExtra                knitr                vegan 
+##                 TRUE                 TRUE                 TRUE                 TRUE</code></pre>
 
 </div>
 </div>

@@ -24,7 +24,7 @@
 <meta name="author" content="Leo Lahti, Tuomas Borman, and Henrik Eckermann" />
 
 
-<meta name="date" content="2021-07-07" />
+<meta name="date" content="2021-07-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -278,7 +278,7 @@ reflect the probability that a sample belongs to the given cluster.</p>
 ## class: DMN 
 ## k: 3 
 ## samples x taxa: 27 x 151 
-## Laplace: 11060.02 BIC: 12266.31 AIC: 11971.51 
+## Laplace: 11060 BIC: 12266.31 AIC: 11971.51 
 ## 
 ## [[4]]
 ## class: DMN 
@@ -290,26 +290,26 @@ reflect the probability that a sample belongs to the given cluster.</p>
 ## class: DMN 
 ## k: 5 
 ## samples x taxa: 27 x 151 
-## Laplace: 11401.97 BIC: 13460.72 AIC: 12968.95 
+## Laplace: 11217.47 BIC: 13305.58 AIC: 12813.8 
 ## 
 ## [[6]]
 ## class: DMN 
 ## k: 6 
 ## samples x taxa: 27 x 151 
-## Laplace: 11202.17 BIC: 13718.9 AIC: 13128.65 
+## Laplace: 11202.19 BIC: 13718.9 AIC: 13128.65 
 ## 
 ## [[7]]
 ## class: DMN 
 ## k: 7 
 ## samples x taxa: 27 x 151 
-## Laplace: 11478.16 BIC: 14345.11 AIC: 13656.38</code></pre>
+## Laplace: 11529.59 BIC: 14333.29 AIC: 13644.55</code></pre>
 <p>Show Laplace approximation (model evidence) for each model of the k models.</p>
-<p><img src="Figures/unnamed-chunk-43-1.png" width="672" /></p>
+<p><img src="Figures/unnamed-chunk-42-1.png" width="672" /></p>
 <p>Return the model that has the best fit.</p>
 <pre><code>## class: DMN 
 ## k: 3 
 ## samples x taxa: 27 x 151 
-## Laplace: 11060.02 BIC: 12266.31 AIC: 11971.51</code></pre>
+## Laplace: 11060 BIC: 12266.31 AIC: 11971.51</code></pre>
 </div>
 <div id="pcoa-for-asv-level-data-with-bray-curtis-with-dmm-clusters-shown-with-colors" class="section level2">
 <h2><span class="header-section-number">8.2</span> PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors</h2>
@@ -318,32 +318,32 @@ Patient status is used for grouping.</p>
 <pre><code>## class: DMNGroup 
 ## summary:
 ##         k samples taxa      NLE    LogDet  Laplace      BIC      AIC
-## ADHD    3      13  151 6018.131 -344.4241 5427.802 6601.657 6473.131
-## Control 3      14  151 6647.269 -148.0803 6155.112 7247.655 7102.269</code></pre>
+## ADHD    3      13  151 6018.131 -345.0984 5427.465 6601.657 6473.131
+## Control 3      14  151 6647.269 -148.3676 6154.968 7247.655 7102.269</code></pre>
 <p>Mixture weights (rough measure of the cluster size).</p>
 <pre><code>##          pi    theta
-## 1 0.4814815 31.27780
-## 2 0.2962963 47.34473
-## 3 0.2222222 92.27382</code></pre>
+## 1 0.4814815 31.27812
+## 2 0.2962963 47.34434
+## 3 0.2222222 92.27437</code></pre>
 <p>Samples-cluster assignment probabilities / how probable it is that sample belongs
 to each cluster</p>
 <pre><code>##               [,1]          [,2]          [,3]
-## A110  1.000000e+00 1.264474e-144 7.542654e-205
-## A12  9.950681e-117  6.163945e-93  1.000000e+00
-## A15   1.000000e+00 9.655263e-119 3.396526e-234
-## A19  5.450412e-112 1.835766e-107  1.000000e+00
-## A21   2.174035e-93  4.774233e-96  1.000000e+00
-## A23   1.000000e+00 8.916806e-111 1.931535e-161</code></pre>
+## A110  1.000000e+00 1.256403e-144 7.622841e-205
+## A12  9.597549e-117  6.145643e-93  1.000000e+00
+## A15   1.000000e+00 9.591440e-119 3.423641e-234
+## A19  5.237031e-112 1.826630e-107  1.000000e+00
+## A21   2.094744e-93  4.748570e-96  1.000000e+00
+## A23   1.000000e+00 8.859733e-111 1.951411e-161</code></pre>
 <p>Contribution of each taxa to each component</p>
-<pre><code>##                [,1]        [,2]       [,3]
-## 1726470  6.35231134 2.898796316 20.1893420
-## 1726471  5.28797424 0.002048411  0.1532223
-## 17264731 0.00124954 9.144853437  2.0111994
-## 17264726 0.14048115 1.363495916  7.5894131
-## 1726472  2.10411256 3.523511489  2.6656623
-## 17264724 0.07236314 0.002048411  9.8546091</code></pre>
+<pre><code>##                 [,1]        [,2]       [,3]
+## 1726470  6.352419543 2.898802622 20.1892748
+## 1726471  5.287898995 0.002047884  0.1532227
+## 17264731 0.001247574 9.144616065  2.0112252
+## 17264726 0.140480610 1.363517219  7.5894904
+## 1726472  2.104237932 3.523383613  2.6657054
+## 17264724 0.072370108 0.002047884  9.8545780</code></pre>
 <p>Get the assignment probabilities</p>
-<p><img src="Figures/unnamed-chunk-49-1.png" width="672" /></p>
+<p><img src="Figures/unnamed-chunk-48-1.png" width="672" /></p>
 
 </div>
 </div>
