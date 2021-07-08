@@ -76,7 +76,6 @@ bioc_pkg <- c(bioc_pkg[ bioc_pkg %in% c("mia", "miaViz") ], bioc_pkg[ !bioc_pkg 
 # Loading all packages into session. Returns true if package was successfully loaded.
 sapply(c(bioc_pkg, cran_pkg), require, character.only = TRUE)
 ```
- 
 
 
 

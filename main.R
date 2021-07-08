@@ -1,3 +1,7 @@
+# Setting up a global variable for the pkg "knitr" when attached later
+# So as to save figures in a separate folder
+setHook(packageEvent("knitr", "attach"),
+        function(...) knitr::opts_chunk$set(echo = FALSE, fig.path="Figures/"))
 
 # This code below builds the Rmd file into a book
 authors <- "Leo Lahti, Tuomas Borman, Henrik Eckermann"

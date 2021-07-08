@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Introduction to microbiome data science</title>
+  <title>5 Microbiome data exploration | Introduction to microbiome data science</title>
   <meta name="description" content="Course material" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Introduction to microbiome data science" />
+  <meta property="og:title" content="5 Microbiome data exploration | Introduction to microbiome data science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="microbiome/course_2021_radboud" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Introduction to microbiome data science" />
+  <meta name="twitter:title" content="5 Microbiome data exploration | Introduction to microbiome data science" />
   
   <meta name="twitter:description" content="Course material" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="program.html"/>
+<link rel="prev" href="importing-microbiome-data.html"/>
+<link rel="next" href="alpha-diversity.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -231,72 +231,355 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Introduction to microbiome data science</h1>
-<p class="author"><em>Leo Lahti, Tuomas Borman, and Henrik Eckermann</em></p>
-<p class="date" style="margin-top: 1.5em;"><em>2021-07-08</em></p>
+<div id="microbiome-data-exploration" class="section level1">
+<h1><span class="header-section-number">5</span> Microbiome data exploration</h1>
+<p>Now we have loaded the data set into R and confirmed that it has all
+the necessary components. Next, let us walk through some basic
+operations for data exploration.</p>
+<div id="investigate" class="section level2">
+<h2><span class="header-section-number">5.1</span> Investigate</h2>
+<p>Dimensionality tells us, how many taxa and samples the data contains. As we can see,
+there are 151 taxa and 27 samples.</p>
+<pre><code>## [1] 151  27</code></pre>
+<p>The <code>rowData</code> slot contains a taxonomic table. This includes taxonomic
+information for each of the 151 entries. With the <code>head()</code>
+command, we can print just the beginning of the table.</p>
+<p>The <code>rowData</code> seems to contain information from 6
+different taxonomy classes.</p>
+<table>
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="15%" />
+<col width="16%" />
+<col width="17%" />
+<col width="18%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Kingdom</th>
+<th align="left">Phylum</th>
+<th align="left">Class</th>
+<th align="left">Order</th>
+<th align="left">Family</th>
+<th align="left">Genus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1726470</td>
+<td align="left">Bacteria</td>
+<td align="left">Bacteroidetes</td>
+<td align="left">Bacteroidia</td>
+<td align="left">Bacteroidales</td>
+<td align="left">Bacteroidaceae</td>
+<td align="left">Bacteroides</td>
+</tr>
+<tr class="even">
+<td align="left">1726471</td>
+<td align="left">Bacteria</td>
+<td align="left">Bacteroidetes</td>
+<td align="left">Bacteroidia</td>
+<td align="left">Bacteroidales</td>
+<td align="left">Bacteroidaceae</td>
+<td align="left">Bacteroides</td>
+</tr>
+<tr class="odd">
+<td align="left">17264731</td>
+<td align="left">Bacteria</td>
+<td align="left">Bacteroidetes</td>
+<td align="left">Bacteroidia</td>
+<td align="left">Bacteroidales</td>
+<td align="left">Porphyromonadaceae</td>
+<td align="left">Parabacteroides</td>
+</tr>
+<tr class="even">
+<td align="left">17264726</td>
+<td align="left">Bacteria</td>
+<td align="left">Bacteroidetes</td>
+<td align="left">Bacteroidia</td>
+<td align="left">Bacteroidales</td>
+<td align="left">Bacteroidaceae</td>
+<td align="left">Bacteroides</td>
+</tr>
+<tr class="odd">
+<td align="left">1726472</td>
+<td align="left">Bacteria</td>
+<td align="left">Verrucomicrobia</td>
+<td align="left">Verrucomicrobiae</td>
+<td align="left">Verrucomicrobiales</td>
+<td align="left">Verrucomicrobiaceae</td>
+<td align="left">Akkermansia</td>
+</tr>
+<tr class="even">
+<td align="left">17264724</td>
+<td align="left">Bacteria</td>
+<td align="left">Bacteroidetes</td>
+<td align="left">Bacteroidia</td>
+<td align="left">Bacteroidales</td>
+<td align="left">Bacteroidaceae</td>
+<td align="left">Bacteroides</td>
+</tr>
+</tbody>
+</table>
+<p>The colData slot contains sample metadata. It contains information for all 27 samples.
+However, here only the 6 first samples are shown as we use the <code>head()</code> command. There
+are 4 columns, that contain information, e.g., about patients’ status, and cohort.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">patient_status</th>
+<th align="left">cohort</th>
+<th align="left">patient_status_vs_cohort</th>
+<th align="left">sample_name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">A110</td>
+<td align="left">ADHD</td>
+<td align="left">Cohort_1</td>
+<td align="left">ADHD_Cohort_1</td>
+<td align="left">A110</td>
+</tr>
+<tr class="even">
+<td align="left">A12</td>
+<td align="left">ADHD</td>
+<td align="left">Cohort_1</td>
+<td align="left">ADHD_Cohort_1</td>
+<td align="left">A12</td>
+</tr>
+<tr class="odd">
+<td align="left">A15</td>
+<td align="left">ADHD</td>
+<td align="left">Cohort_1</td>
+<td align="left">ADHD_Cohort_1</td>
+<td align="left">A15</td>
+</tr>
+<tr class="even">
+<td align="left">A19</td>
+<td align="left">ADHD</td>
+<td align="left">Cohort_1</td>
+<td align="left">ADHD_Cohort_1</td>
+<td align="left">A19</td>
+</tr>
+<tr class="odd">
+<td align="left">A21</td>
+<td align="left">ADHD</td>
+<td align="left">Cohort_2</td>
+<td align="left">ADHD_Cohort_2</td>
+<td align="left">A21</td>
+</tr>
+<tr class="even">
+<td align="left">A23</td>
+<td align="left">ADHD</td>
+<td align="left">Cohort_2</td>
+<td align="left">ADHD_Cohort_2</td>
+<td align="left">A23</td>
+</tr>
+</tbody>
+</table>
+<p>From here, we can draw summaries of the sample (column) data, for
+instance to see what is the patient status distribution.</p>
+<p>The command <code>colData(tse)$patient_status</code> fetches the data from the
+column, and <code>table()</code> creates a table that shows how many times each
+class is present, and <code>sort()</code> sorts the table to ascending order.</p>
+<p>There are 13
+samples from patients having ADHD,
+and 14 control samples.</p>
+<pre><code>## 
+##    ADHD Control 
+##      13      14</code></pre>
 </div>
-<div id="overview" class="section level1">
-<h1><span class="header-section-number">1</span> Overview</h1>
-<p><strong>Welcome to <a href="https://www.ru.nl/radboudsummerschool/courses/2021/brain-bacteria-behaviour/">Radboud Summer School, July 2021</a></strong></p>
-<p><img src="https://user-images.githubusercontent.com/60338854/121848694-1072a480-ccf3-11eb-9af2-7fdefd8d1794.png" alt="ML4microbiome" width="50%"/></p>
-<p>Figure source: Moreno-Indias <em>et al</em>. (2021) <a href="https://doi.org/10.3389/fmicb.2021.635781">Statistical and Machine Learning Techniques in Human Microbiome Studies: Contemporary Challenges and Solutions</a>. Frontiers in Microbiology 12:11.</p>
-<div id="the-miaverse-framework" class="section level2">
-<h2><span class="header-section-number">1.1</span> The miaverse framework</h2>
-<p>The <a href="https://microbiome.github.io"><em>miaverse</em></a> (mia = <strong>MI</strong>crobiome <strong>A</strong>nalysis) is an
-R/Bioconductor framework for microbiome data science. It aims to
-extend the capabilities of another popular framework,
-<a href="https://joey711.github.io/phyloseq/">phyloseq</a>.</p>
-<p>The miaverse framework consists of an efficient data structure, an
-associated package ecosystem, demonstration data sets, and open
-documentation. These are explained in more detail in the online book
-<a href="https://microbiome.github.io/OMA">Orchestrating Microbiome Analysis</a>.</p>
-<p>This training material walks you through an example workflow that
-shows the standard steps of taxonomic data analysis covering data
-access, exploration, analysis, visualization and reporoducible
-reporting. <strong>You can run the workflow by simply copy-pasting the
-examples.</strong> For advanced material, you can test and modify further
-examples from the <a href="https://microbiome.github.io/OMA">OMA book</a>, or try
-to apply the techniques to your own data.</p>
+<div id="manipulate" class="section level2">
+<h2><span class="header-section-number">5.2</span> Manipulate</h2>
+<div id="transformations" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Transformations</h3>
+<p>Microbial abundances are typically ‘compositional’ (relative) in the
+current microbiome profiling data sets. This is due to technical
+aspects of the data generation process (see e.g. <a href="https://www.frontiersin.org/articles/10.3389/fmicb.2017.02224/full">Gloor et al.,
+2017</a>).</p>
+<p>The next example calculates relative abundances as these are usually easier to
+interpret than plain counts. For some statistical models we need to
+transform the data into other formats as explained in above link (and
+as we will see later).</p>
+<p>A variety of standard transformations for microbiome data are available for <code>TSE</code> data objects through <a href="https://microbiome.github.io/mia/reference/transformCounts.html">mia R package</a>.</p>
 </div>
-<div id="learning-goals" class="section level2">
-<h2><span class="header-section-number">1.2</span> Learning goals</h2>
-<p>This course provides an overview of the standard bioinformatics
-workflow in taxonomic profiling studies, ranging from data
-preprocessing to statistical analysis and reproducible reporting, with
-a focus on examples from human gut microbiota studies. You
-will become familiar with standard bioinformatics concepts and methods
-in taxonomic profiling studies of the human microbiome. This includes
-better understanding of the specific statistical challenges, practical
-hands-on experience with the commonly used methods, and reproducible
-research with R.</p>
-<p>After the course you will know how to approach new tasks in microbiome
-data science by utilizing available documentation and R tools.</p>
-<p><strong>Target audience</strong> Advanced students and applied researchers who wish
-to develop their skills in microbial community analysis.</p>
-<p><strong>Venue</strong> <a href="">Radboud University / Online</a>, Nijmegen. July 5-16, 2021,
-with contributions by <a href="http://datascience.utu.fi">University of
-Turku</a>, Finland.</p>
+<div id="aggregation" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> Aggregation</h3>
+<p>Microbial species can be called at multiple taxonomic resolutions. We
+can easily agglomerate the data based on taxonomic ranks. Here, we
+agglomerate the data at Phylum level.</p>
+<pre><code>## [1]  5 27</code></pre>
+<p>Now there are 5 taxa and 27
+samples, meaning that there are 5 different
+Phylum level taxonomic groups. Looking at the <code>rowData</code> after
+agglomeration shows all Firmicutes are combined together, and all
+lower rank information is lost.</p>
+<p>From the assay we can see that all abundances of taxa that belong to
+Firmicutes are summed up.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Kingdom</th>
+<th align="left">Phylum</th>
+<th align="left">Class</th>
+<th align="left">Order</th>
+<th align="left">Family</th>
+<th align="left">Genus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Bacteroidetes</td>
+<td align="left">Bacteria</td>
+<td align="left">Bacteroidetes</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">Verrucomicrobia</td>
+<td align="left">Bacteria</td>
+<td align="left">Verrucomicrobia</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">Proteobacteria</td>
+<td align="left">Bacteria</td>
+<td align="left">Proteobacteria</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">Firmicutes</td>
+<td align="left">Bacteria</td>
+<td align="left">Firmicutes</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">Cyanobacteria</td>
+<td align="left">Bacteria</td>
+<td align="left">Cyanobacteria</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
+<p>If you are sharp, you have by now noticed that all the aggregated
+values in the above example are NA’s (missing data). This is because
+the agglomeration is missing abundances for certain taxa, and in that
+case the sum is not defined by default (<code>na.rm = FALSE</code>). We can
+ignore the missing values in summing up the data by setting <code>na.rm = TRUE</code>; then the taxa that do not have information in specified level
+will be removed. Those taxa that do not have information in specified
+level are agglomerated at lowest possible level that is left after
+agglomeration.</p>
+<table>
+<colgroup>
+<col width="22%" />
+<col width="7%" />
+<col width="13%" />
+<col width="17%" />
+<col width="17%" />
+<col width="16%" />
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Kingdom</th>
+<th align="left">Phylum</th>
+<th align="left">Class</th>
+<th align="left">Order</th>
+<th align="left">Family</th>
+<th align="left">Genus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Family:Lachnospiraceae</td>
+<td align="left">Bacteria</td>
+<td align="left">Firmicutes</td>
+<td align="left">Clostridia</td>
+<td align="left">Clostridiales</td>
+<td align="left">Lachnospiraceae</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Order:Bacteroidales</td>
+<td align="left">Bacteria</td>
+<td align="left">Bacteroidetes</td>
+<td align="left">Bacteroidia</td>
+<td align="left">Bacteroidales</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Order:Clostridiales</td>
+<td align="left">Bacteria</td>
+<td align="left">Firmicutes</td>
+<td align="left">Clostridia</td>
+<td align="left">Clostridiales</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Family:Enterobacteriaceae</td>
+<td align="left">Bacteria</td>
+<td align="left">Proteobacteria</td>
+<td align="left">Gammaproteobacteria</td>
+<td align="left">Enterobacteriales</td>
+<td align="left">Enterobacteriaceae</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Order:Gastranaerophilales</td>
+<td align="left">Bacteria</td>
+<td align="left">Cyanobacteria</td>
+<td align="left">Melainabacteria</td>
+<td align="left">Gastranaerophilales</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>Here agglomeration is done similarly, but na.rm = TRUE</p>
+<pre><code>## [1] &quot;Agglomeration with na.rm = FALSE: 54 taxa.&quot;</code></pre>
+<pre><code>## [1] &quot;Agglomeration with na.rm = TRUE: 49 taxa.&quot;</code></pre>
+<p>The <a href="https://microbiome.github.io/mia/reference/index.html">mia
+package</a>
+contains further examples on various data agglomeration and splitting
+options.</p>
 </div>
-<div id="acknowledgments" class="section level2">
-<h2><span class="header-section-number">1.3</span> Acknowledgments</h2>
-<p><strong>Citation</strong> “Introduction to miaverse (2021). Tuomas Borman, Felix Ernst, Sudarshan Shetty, Henrik Eckermann, Leo Lahti. URL: <a href="https://microbiome.github.io" class="uri">https://microbiome.github.io</a>”.</p>
-<p><strong>Contact</strong></p>
-<ul>
-<li><a href="http://datascience.utu.fi">Leo Lahti</a>, University of Turku</li>
-<li><a href="https://microbiome.github.io">miaverse collective</a></li>
-</ul>
-<p><strong>License</strong> All material is released under the open <a href="LICENSE">CC BY-NC-SA 3.0 License</a>.</p>
-<p><strong>Source code</strong></p>
-<p>The source code of this repository is fully reproducible and contains
-the Rmd files with executable code. All files can be rendered at one
-go by running the file <a href="main.R">main.R</a>. You can check the file for
-details on how to clone the repository and convert it into a gitbook,
-although this is not necessary for the training.</p>
-<ul>
-<li>Source code (github): <a href="https://github.com/microbiome/course_2021_radboud">miaverse teaching material</a></li>
-<li>Course page (html): <a href="https://microbiome.github.io/course_2021_radboud/">miaverse teaching material</a></li>
-</ul>
+</div>
+<div id="visualize" class="section level2">
+<h2><span class="header-section-number">5.3</span> Visualize</h2>
+<p>The <a href="https://microbiome.github.io/miaViz/">miaViz package</a> facilitates
+data visualization. Let us plot the Phylum level abundances.</p>
+<pre><code>## Scale for &#39;y&#39; is already present. Adding another scale for &#39;y&#39;, which will replace the existing scale.</code></pre>
+<p><img src="Figures/unnamed-chunk-26-1.png" width="672" /></p>
+<p><strong>Density plot</strong> shows the overall abundance distribution for a given
+taxonomic group. Let us check the relative abundance of Firmicutes
+across the sample collection. The density plot is a smoothened
+version of a standard histogram.</p>
+<p>The plot shows peak abundances around 30 %.</p>
+<p><img src="Figures/unnamed-chunk-27-1.png" width="672" /></p>
+<p>For more visualization options and examples, see the <a href="https://microbiome.github.io/miaViz/articles/miaViz.html">miaViz vignette</a>.</p>
 
 </div>
 </div>
@@ -305,8 +588,8 @@ although this is not necessary for the training.</p>
           </div>
         </div>
       </div>
-
-<a href="program.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="importing-microbiome-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="alpha-diversity.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
