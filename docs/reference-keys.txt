@@ -1,5 +1,5 @@
 overview
-the-miaverse-framework
+introduction
 learning-goals
 acknowledgments
 program
@@ -28,17 +28,15 @@ visualize
 alpha-diversity
 visualization
 statistical-testing-and-comparisons
-further-resources
 beta-diversity
 examples-of-pcoa-with-different-settings
 pcoa-for-asv-level-data-with-bray-curtis
 pcoa-for-asv-level-data-with-aitchison-distance
 pcoa-aggregated-to-phylum-level
-highlighting-external-variables-on-pcoa-plot
-pcoa-with-discrete-sample-grouping-variable-shown-with-colors
+highlighting-external-variables
+discrete-grouping-variable-shown-with-colors
 pcoa-plot-with-continuous-variable
 estimating-associations-with-an-external-variable
-further-resources-1
 community-typing
 dirichlet-multinomial-mixture-model
 pcoa-for-asv-level-data-with-bray-curtis-with-dmm-clusters-shown-with-colors
@@ -58,7 +56,3 @@ further-reading
 miscellaneous-material
 shapiro-wilk-test
 deseq-details
-overview-1
-introduction
-highlighting-external-variables
-discrete-grouping-variable-shown-with-colors

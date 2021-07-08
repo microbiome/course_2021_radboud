@@ -184,13 +184,14 @@ euclidean_patient_status_plot
 ### PCoA plot with continuous variable
 
 We can do the same as above using any continuous variable. E.g. let us
-see how the plotted samples differ in their alpha diversity:
+see how the plotted samples differ in their alpha diversity (as an
+example of a continuous variable):
 
 
 ```{r pcoa_coloring}
 # Adds coloring information to the data frame, creates new column
 euclidean_shannon_pcoa_df <- cbind(euclidean_pcoa_df,
-                             shannon = colData(tse)$Shannon_index)
+                             shannon = colData(tse)$Shannon_diversity)
 
 # Creates a plot
 euclidean_shannon_plot <- ggplot(data = euclidean_shannon_pcoa_df, 
@@ -218,7 +219,7 @@ input the abundance table, which measure of distance you want to base
 the test on and a formula that tells the model how you think the
 variables are associated with each other. 
 
-```{r}
+```{r permanova}
 # First we get the relative abundance table
 rel_abund_assay <- assays(tse)$relabundance
 
@@ -244,7 +245,7 @@ differences between cohorts. We first need to extract the model
 coefficients of taxa:
 
 
-```{r}
+```{r permanova_coefs}
 # Gets the coefficients
 coef <- coefficients(permanova_cohort)["cohort1",]
 

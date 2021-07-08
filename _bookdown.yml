@@ -1,3 +1,4 @@
+book_filename: radboud2021_material
 delete_merged_file: true
 rmd_files:
   - index.Rmd
