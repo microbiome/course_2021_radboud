@@ -15,4 +15,4 @@ render_book()
 # Installs servr package. Needs only to do once.
 # install.packages("servr")
 # starts local web browser and serve the HTML output
-# serve_book()
+serve_book()
