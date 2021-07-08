@@ -295,37 +295,37 @@ reflect the probability that a sample belongs to the given cluster.</p>
 ## class: DMN 
 ## k: 2 
 ## samples x taxa: 27 x 151 
-## Laplace: 11441 BIC: 12161.29 AIC: 11964.97 
+## Laplace: 11704.83 BIC: 12399.15 AIC: 12202.83 
 ## 
 ## [[3]]
 ## class: DMN 
 ## k: 3 
 ## samples x taxa: 27 x 151 
-## Laplace: 11059.63 BIC: 12266.31 AIC: 11971.51 
+## Laplace: 11059.58 BIC: 12266.31 AIC: 11971.51 
 ## 
 ## [[4]]
 ## class: DMN 
 ## k: 4 
 ## samples x taxa: 27 x 151 
-## Laplace: 11417.54 BIC: 13047.39 AIC: 12654.11 
+## Laplace: 11417.53 BIC: 13047.39 AIC: 12654.11 
 ## 
 ## [[5]]
 ## class: DMN 
 ## k: 5 
 ## samples x taxa: 27 x 151 
-## Laplace: 11217.71 BIC: 13305.58 AIC: 12813.8 
+## Laplace: 11217.25 BIC: 13305.58 AIC: 12813.8 
 ## 
 ## [[6]]
 ## class: DMN 
 ## k: 6 
 ## samples x taxa: 27 x 151 
-## Laplace: 11407.17 BIC: 13774.56 AIC: 13184.3 
+## Laplace: 11407.67 BIC: 13852.58 AIC: 13262.32 
 ## 
 ## [[7]]
 ## class: DMN 
 ## k: 7 
 ## samples x taxa: 27 x 151 
-## Laplace: 11427.94 BIC: 14172.79 AIC: 13484.06</code></pre>
+## Laplace: 11310.95 BIC: 14200.57 AIC: 13511.84</code></pre>
 <p>Show Laplace approximation (model evidence) for each model of the k models.</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="community-typing.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotDMNFit</span>(tse_dmn, <span class="at">type =</span> <span class="st">&quot;laplace&quot;</span>)</span></code></pre></div>
 <p><img src="radboud2021_material_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
@@ -334,7 +334,7 @@ reflect the probability that a sample belongs to the given cluster.</p>
 <pre><code>## class: DMN 
 ## k: 3 
 ## samples x taxa: 27 x 151 
-## Laplace: 11059.63 BIC: 12266.31 AIC: 11971.51</code></pre>
+## Laplace: 11059.58 BIC: 12266.31 AIC: 11971.51</code></pre>
 </div>
 <div id="pcoa-for-asv-level-data-with-bray-curtis-with-dmm-clusters-shown-with-colors" class="section level2" number="8.2">
 <h2><span class="header-section-number">8.2</span> PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors</h2>
@@ -346,34 +346,34 @@ Patient status is used for grouping.</p>
 <span id="cb72-4"><a href="community-typing.html#cb72-4" aria-hidden="true" tabindex="-1"></a>dmn_group</span></code></pre></div>
 <pre><code>## class: DMNGroup 
 ## summary:
-##         k samples taxa      NLE   LogDet  Laplace      BIC      AIC
-## ADHD    3      13  151 6018.131 -345.077 5427.476 6601.657 6473.131
-## Control 3      14  151 6647.269 -147.517 6155.394 7247.655 7102.269</code></pre>
+##         k samples taxa      NLE    LogDet  Laplace      BIC      AIC
+## ADHD    3      13  151 6018.131 -344.7967 5427.616 6601.657 6473.131
+## Control 3      14  151 6647.269 -148.0781 6155.113 7247.655 7102.269</code></pre>
 <p>Mixture weights (rough measure of the cluster size).</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="community-typing.html#cb74-1" aria-hidden="true" tabindex="-1"></a>DirichletMultinomial<span class="sc">::</span><span class="fu">mixturewt</span>(<span class="fu">getBestDMNFit</span>(tse_dmn))</span></code></pre></div>
 <pre><code>##          pi    theta
-## 1 0.4814815 31.27754
-## 2 0.2962963 47.34454
-## 3 0.2222222 92.27467</code></pre>
+## 1 0.4814815 31.27763
+## 2 0.2962963 47.34284
+## 3 0.2222222 92.27331</code></pre>
 <p>Samples-cluster assignment probabilities / how probable it is that sample belongs
 to each cluster</p>
 <div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="community-typing.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(DirichletMultinomial<span class="sc">::</span><span class="fu">mixture</span>(<span class="fu">getBestDMNFit</span>(tse_dmn)))</span></code></pre></div>
 <pre><code>##               [,1]          [,2]          [,3]
-## A110  1.000000e+00 1.254416e-144 7.656724e-205
-## A12  9.760887e-117  6.131972e-93  1.000000e+00
-## A15   1.000000e+00 9.529106e-119 3.434146e-234
-## A19  5.338170e-112 1.824117e-107  1.000000e+00
-## A21   2.132140e-93  4.739560e-96  1.000000e+00
-## A23   1.000000e+00 8.843900e-111 1.960788e-161</code></pre>
+## A110  1.000000e+00 1.244798e-144 7.514955e-205
+## A12  9.815899e-117  6.096459e-93  1.000000e+00
+## A15   1.000000e+00 9.467436e-119 3.352526e-234
+## A19  5.361177e-112 1.810612e-107  1.000000e+00
+## A21   2.140838e-93  4.701014e-96  1.000000e+00
+## A23   1.000000e+00 8.773451e-111 1.919848e-161</code></pre>
 <p>Contribution of each taxa to each component</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="community-typing.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(DirichletMultinomial<span class="sc">::</span><span class="fu">fitted</span>(<span class="fu">getBestDMNFit</span>(tse_dmn)))</span></code></pre></div>
-<pre><code>##                 [,1]        [,2]       [,3]
-## 1726470  6.352172217 2.898831884 20.1895112
-## 1726471  5.287829825 0.002047711  0.1532268
-## 17264731 0.001248464 9.144493129  2.0112256
-## 17264726 0.140480698 1.363547275  7.5894470
-## 1726472  2.104152008 3.523459086  2.6657218
-## 17264724 0.072366046 0.002047711  9.8546743</code></pre>
+<pre><code>##                 [,1]       [,2]       [,3]
+## 1726470  6.352541580 2.89868070 20.1891427
+## 1726471  5.287483635 0.00204687  0.1532208
+## 17264731 0.001248688 9.14378060  2.0111654
+## 17264726 0.140481760 1.36349544  7.5893212
+## 1726472  2.104234271 3.52334115  2.6656588
+## 17264724 0.072360723 0.00204687  9.8545213</code></pre>
 <p>Get the assignment probabilities</p>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="community-typing.html#cb80-1" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> DirichletMultinomial<span class="sc">::</span><span class="fu">mixture</span>(<span class="fu">getBestDMNFit</span>(tse_dmn))</span>
 <span id="cb80-2"><a href="community-typing.html#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Add column names</span></span>

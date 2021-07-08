@@ -404,7 +404,7 @@ factors. The current standard way to do this is to perform a so-called permutati
 <span id="cb58-10"><a href="beta-diversity.html#cb58-10" aria-hidden="true" tabindex="-1"></a><span class="co"># we can obtain a the p value for our predictor:</span></span>
 <span id="cb58-11"><a href="beta-diversity.html#cb58-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Different different cohorts and variance of abundance between samples, p-value: &quot;</span>, </span>
 <span id="cb58-12"><a href="beta-diversity.html#cb58-12" aria-hidden="true" tabindex="-1"></a>             <span class="fu">as.data.frame</span>(permanova_cohort<span class="sc">$</span>aov.tab)[<span class="st">&quot;cohort&quot;</span>, <span class="st">&quot;Pr(&gt;F)&quot;</span>]))</span></code></pre></div>
-<pre><code>## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7394&quot;</code></pre>
+<pre><code>## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7389&quot;</code></pre>
 <p>As we see, the cohort variable is not significantly associated with
 microbiota composition (p-value is over 0.05).</p>
 <p>We can still visualize those taxa whose abundances are the most
