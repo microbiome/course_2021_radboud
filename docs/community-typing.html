@@ -266,7 +266,8 @@ reflect the probability that a sample belongs to the given cluster.</p>
 ## rownames(151): 1726470 1726471 ... 17264756 17264757
 ## rowData names(6): Kingdom Phylum ... Family Genus
 ## colnames(27): A110 A12 ... A35 A38
-## colData names(6): patient_status cohort ... Shannon_index Faith_diversity_index
+## colData names(6): patient_status cohort ... Shannon_index
+##   Faith_diversity_index
 ## reducedDimNames(0):
 ## mainExpName: NULL
 ## altExpNames(0):
@@ -287,44 +288,44 @@ reflect the probability that a sample belongs to the given cluster.</p>
 ## class: DMN 
 ## k: 2 
 ## samples x taxa: 27 x 151 
-## Laplace: 11704.4 BIC: 12399.15 AIC: 12202.83 
+## Laplace: 11704.82 BIC: 12399.15 AIC: 12202.83 
 ## 
 ## [[3]]
 ## class: DMN 
 ## k: 3 
 ## samples x taxa: 27 x 151 
-## Laplace: 11059.59 BIC: 12266.31 AIC: 11971.51 
+## Laplace: 11059.97 BIC: 12266.31 AIC: 11971.51 
 ## 
 ## [[4]]
 ## class: DMN 
 ## k: 4 
 ## samples x taxa: 27 x 151 
-## Laplace: 11417.3 BIC: 13047.39 AIC: 12654.11 
+## Laplace: 11417.59 BIC: 13047.39 AIC: 12654.11 
 ## 
 ## [[5]]
 ## class: DMN 
 ## k: 5 
 ## samples x taxa: 27 x 151 
-## Laplace: 11530 BIC: 13555.32 AIC: 13063.55 
+## Laplace: 11401.97 BIC: 13460.72 AIC: 12968.95 
 ## 
 ## [[6]]
 ## class: DMN 
 ## k: 6 
 ## samples x taxa: 27 x 151 
-## Laplace: 11407.73 BIC: 13774.56 AIC: 13184.3 
+## Laplace: 11408.07 BIC: 13774.56 AIC: 13184.3 
 ## 
 ## [[7]]
 ## class: DMN 
 ## k: 7 
 ## samples x taxa: 27 x 151 
-## Laplace: 11392.35 BIC: 14265.91 AIC: 13577.17</code></pre>
+## Laplace: 11477.73 BIC: 14345.11 AIC: 13656.38</code></pre>
 <p>Show Laplace approximation (model evidence) for each model of the k models.</p>
 <p><img src="Figures/unnamed-chunk-42-1.png" width="672" /></p>
 <p>Return the model that has the best fit.</p>
 <pre><code>## class: DMN 
 ## k: 3 
 ## samples x taxa: 27 x 151 
-## Laplace: 11059.59 BIC: 12266.31 AIC: 11971.51</code></pre>
+## Laplace: 11059.97 BIC: 12266.31 AIC: 11971.51</code></pre>
 </div>
 <div id="pcoa-for-asv-level-data-with-bray-curtis-with-dmm-clusters-shown-with-colors" class="section level2" number="8.2">
 <h2><span class="header-section-number">8.2</span> PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors</h2>
@@ -333,30 +334,30 @@ Patient status is used for grouping.</p>
 <pre><code>## class: DMNGroup 
 ## summary:
 ##         k samples taxa      NLE    LogDet  Laplace      BIC      AIC
-## ADHD    3      13  151 6000.305 -395.3765 5384.500 6583.831 6455.305
-## Control 3      14  151 6302.135 -156.3934 5805.821 6902.520 6757.135</code></pre>
+## ADHD    3      13  151 6018.131 -344.8091 5427.610 6601.657 6473.131
+## Control 3      14  151 6647.269 -148.0803 6155.112 7247.655 7102.269</code></pre>
 <p>Mixture weights (rough measure of the cluster size).</p>
 <pre><code>##          pi    theta
-## 1 0.4814815 31.27702
-## 2 0.2962963 47.34318
-## 3 0.2222222 92.27410</code></pre>
+## 1 0.4814815 31.27737
+## 2 0.2962963 47.34371
+## 3 0.2222222 92.27353</code></pre>
 <p>Samples-cluster assignment probabilities / how probable it is that sample belongs
 to each cluster</p>
 <pre><code>##               [,1]          [,2]          [,3]
-## A110  1.000000e+00 1.235822e-144 7.672463e-205
-## A12  9.692528e-117  6.079902e-93  1.000000e+00
-## A15   1.000000e+00 9.377453e-119 3.427162e-234
-## A19  5.292033e-112 1.802502e-107  1.000000e+00
-## A21   2.114436e-93  4.680206e-96  1.000000e+00
-## A23   1.000000e+00 8.726389e-111 1.962748e-161</code></pre>
+## A110  1.000000e+00 1.223467e-144 7.612561e-205
+## A12  9.723983e-117  6.053939e-93  1.000000e+00
+## A15   1.000000e+00 9.272244e-119 3.403624e-234
+## A19  5.317938e-112 1.791715e-107  1.000000e+00
+## A21   2.124816e-93  4.654811e-96  1.000000e+00
+## A23   1.000000e+00 8.651054e-111 1.948013e-161</code></pre>
 <p>Contribution of each taxa to each component</p>
 <pre><code>##                 [,1]        [,2]       [,3]
-## 1726470  6.352023580 2.898493801 20.1894187
-## 1726471  5.287578987 0.002046566  0.1532224
-## 17264731 0.001247989 9.144319507  2.0111732
-## 17264726 0.140480517 1.363456915  7.5893456
-## 1726472  2.104139420 3.523489241  2.6656990
-## 17264724 0.072366196 0.002046566  9.8546212</code></pre>
+## 1726470  6.351949953 2.898697245 20.1890286
+## 1726471  5.287862450 0.002046128  0.1532219
+## 17264731 0.001248291 9.144396208  2.0112034
+## 17264726 0.140479884 1.363520514  7.5893540
+## 1726472  2.104174239 3.523432609  2.6656722
+## 17264724 0.072366198 0.002046128  9.8545785</code></pre>
 <p>Get the assignment probabilities</p>
 <p><img src="Figures/unnamed-chunk-48-1.png" width="672" /></p>
 
