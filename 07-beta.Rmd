@@ -285,3 +285,6 @@ There are many alternative and complementary methods for analysing
 community composition. For more examples, see a dedicated section on
 beta diversity in the [online
 book](https://microbiome.github.io/OMA/).
+
+As for community typing, a dedicated section presenting examples of analytical methods is found at the [online
+book](https://microbiome.github.io/OMA/).
