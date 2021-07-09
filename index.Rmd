@@ -9,6 +9,9 @@ biblio-style: apalike
 link-citations: yes
 github-repo: microbiome/course_2021_radboud
 description: "Course material"
+output:
+  bookdown::gitbook
+  bookdown::pdf_document2
 ---
 
 # Overview 

@@ -12,3 +12,6 @@ bookdown::gitbook:
       twitter: yes
       facebook: no
       linkedin: yes
+
+bookdown::pdf_book:
+    keep_tex: yes
