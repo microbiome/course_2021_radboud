@@ -33,7 +33,8 @@ names <- c("Shannon_diversity", "Faith_diversity")
 tse <- estimateDiversity(tse, index = indices, name = names)
 
 # Shows the calculated indices
-knitr::kable(head(colData(tse)[names]))
+knitr::kable(head(colData(tse)[names])) %>% kableExtra::kable_styling("striped") %>% 
+  kableExtra::scroll_box(width = "100%")
 ```
 
 Next we can visualize Shannon index with histogram.
@@ -83,9 +84,6 @@ cross_plot
 #   # Adds regression line
 #   abline(lm(colData(tse)$Faith_diversity ~ colData(tse)$Shannon_diversity)) 
 ```
-
-
-
 
 ## Visualization
 

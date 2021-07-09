@@ -13,12 +13,7 @@ checklist-before-the-course
 support-and-resources
 installing-and-loading-the-required-r-packages
 importing-microbiome-data
-data-access
-investigate-the-r-data-object
-rowdata-taxonomic-information
-coldata-sample-information
-phylogenetic-tree-information
-further-examples
+data-access-and-example-of-importing-data
 microbiome-data-exploration
 investigate
 manipulate
