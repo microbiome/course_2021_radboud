@@ -192,7 +192,7 @@ unnecessary delays and leaving more time for the course contents.
   but preferred. For further details, check the [Rstudio home
   page](https://www.rstudio.com/).
 
-* [Install and load the required R packages](install.html).
+* Install and load the required R packages
 
 * After a successful installation you can start with the
   case study examples in this training material
