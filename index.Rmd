@@ -10,8 +10,14 @@ link-citations: yes
 github-repo: microbiome/course_2021_radboud
 description: "Course material"
 output:
+  bookdown::pdf_book
   bookdown::gitbook
-  bookdown::pdf_document2
+always_allow_html: yes
+classoption: oneside
+geometry:
+  - top=30mm
+  - left=15mm
+  
 ---
 
 # Overview 

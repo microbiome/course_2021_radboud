@@ -26,7 +26,8 @@ abundance_analysis_data <- data.frame(t(assay(tse_genus, "clr")))
 
 # Then we need variable for grouping samples. "patient_status" column includes information
 # about patients' status. There two groups "ADHD" and "control". Let's include that to the data frame.
-abundance_analysis_data <- cbind(abundance_analysis_data, patient_status = colData(tse_genus)$patient_status)
+abundance_analysis_data <- cbind(abundance_analysis_data, 
+                                 patient_status = colData(tse_genus)$patient_status)
 ```
 
 Now we can do the Wilcoxon test. We test all the taxa by looping through columns,
@@ -117,8 +118,7 @@ df$taxon <- rownames(df)
 # and secondly based on "padj" column
 df <- df %>% arrange(log2FoldChange, padj)
 
-knitr::kable(head(df)) %>% kableExtra::kable_styling("striped") %>% 
-  kableExtra::scroll_box(width = "100%")
+pandoc.table(as.matrix(head(df)),style="grid")
 
 ```
 
@@ -178,8 +178,7 @@ standard errors, p-values and q-values. Conveniently, there is a dataframe `diff
 Here, we can find all differentiallt abundant taxa. Below we show the first 6 entries of this dataframe:  
 
 ```{r}
-knitr::kable(head(res$diff_abn)) %>% kableExtra::kable_styling("striped") %>% 
-  kableExtra::scroll_box(width = "100%")
+pandoc.table(as.matrix(head(res$diff_abn)),style="grid")
 ```
 
 In total, this method detects `r sum(out$res$diff_abn$patient_statusControl)` differentially abundant taxa.
@@ -203,7 +202,8 @@ Prints number of p-values under 0.05
 
 ```{r}
 print(paste0("DESeq2 p-values under 0.05: ", sum(df$padj<0.05, na.rm = TRUE), "/", length(df$padj)))
-print(paste0("Wilcoxon test p-values under 0.05: ", sum(wilcoxon_p$p_adjusted<0.05, na.rm = TRUE), "/", length(wilcoxon_p$p_adjusted)))
+print(paste0("Wilcoxon test p-values under 0.05: ", 
+             sum(wilcoxon_p$p_adjusted<0.05, na.rm = TRUE), "/", length(wilcoxon_p$p_adjusted)))
 ```
 
 ## Comparison of abundance

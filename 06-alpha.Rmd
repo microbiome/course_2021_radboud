@@ -33,8 +33,7 @@ names <- c("Shannon_diversity", "Faith_diversity")
 tse <- estimateDiversity(tse, index = indices, name = names)
 
 # Shows the calculated indices
-knitr::kable(head(colData(tse)[names])) %>% kableExtra::kable_styling("striped") %>% 
-  kableExtra::scroll_box(width = "100%")
+pandoc.table(as.matrix(head(colData(tse)[names])),style="grid")
 ```
 
 Next we can visualize Shannon index with histogram.

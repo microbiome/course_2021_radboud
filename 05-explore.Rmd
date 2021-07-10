@@ -23,8 +23,7 @@ The `rowData` seems to contain information from `r ncol(rowData(tse))`
 different taxonomy classes.
 
 ```{r}
-knitr::kable(head(rowData(tse))) %>% kableExtra::kable_styling("striped") %>% 
-  kableExtra::scroll_box(width = "100%")
+pandoc.table(as.matrix(head(rowData(tse))),style="grid")
 ```
 
 The colData slot contains sample metadata. It contains information for all `r ncol(tse)` samples.
@@ -32,8 +31,7 @@ However, here only the 6 first samples are shown as we use the `head()` command.
 are `r ncol(colData(tse))` columns, that contain information, e.g., about patients' status, and cohort.
 
 ```{r}
-knitr::kable(head(colData(tse))) %>% kableExtra::kable_styling("striped") %>% 
-  kableExtra::scroll_box(width = "100%")
+pandoc.table(as.matrix(head(colData(tse))),style="grid")
 ```
 
 From here, we can draw summaries of the sample (column) data, for
@@ -99,8 +97,7 @@ From the assay we can see that all abundances of taxa that belong to
 Firmicutes are summed up.
 
 ```{r}
-knitr::kable(head(rowData(tse_phylum))) %>% kableExtra::kable_styling("striped") %>% 
-  kableExtra::scroll_box(width = "100%")
+pandoc.table(as.matrix(head(rowData(tse_phylum))),style="grid")
 ```
 
 If you are sharp, you have by now noticed that all the aggregated
@@ -117,8 +114,7 @@ agglomeration.
 temp <- rowData(agglomerateByRank(tse, rank = "Genus"))
 
 # Prints those taxa that do not have information at the Genus level
-knitr::kable(head(temp[temp$Genus == "",])) %>% kableExtra::kable_styling("striped") %>% 
-  kableExtra::scroll_box(width = "100%")
+pandoc.table(as.matrix(head(temp[temp$Genus == "",])) ,style="grid")
 ```
 
 Here agglomeration is done similarly, but na.rm = TRUE

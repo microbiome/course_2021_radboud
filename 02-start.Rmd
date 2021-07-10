@@ -40,7 +40,7 @@ the R session. Only uninstalled packages are installed.
 ```{r warning = FALSE, message = FALSE}
 # List of packages that we need from cran and bioc 
 cran_pkg <- c("BiocManager", "bookdown", "dplyr", "ecodist", "ggplot2", 
-              "gridExtra", "kableExtra", "knitr", "scales", "vegan")
+              "gridExtra", "kableExtra", "knitr", "scales", "vegan", "pander")
 bioc_pkg <- c("ANCOMBC", "ape", "DESeq2",  "DirichletMultinomial", "mia", "miaViz")
 
 # Gets those packages that are already installed
