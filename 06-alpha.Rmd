@@ -163,7 +163,7 @@ For more examples, see a dedicated section on alpha diversity in the
 
 
 
-## Tasks
+## Exercises
 
 Add the following in the reproducible summary report.
 

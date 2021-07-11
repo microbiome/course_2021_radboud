@@ -32,8 +32,8 @@
   
   
 <link rel="prev" href="study-material.html"/>
-<link rel="next" href="standard-workflow-in-microbiome-data-science.html"/>
-<script src="libs/header-attrs-2.8.4/header-attrs.js"></script>
+
+<script src="libs/header-attrs-2.8.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -194,6 +194,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.2" data-path="beta-diversity.html"><a href="beta-diversity.html#pcoa-plot-with-continuous-variable"><i class="fa fa-check"></i><b>8.2.2</b> PCoA plot with continuous variable</a></li>
 </ul></li>
 <li class="chapter" data-level="8.3" data-path="beta-diversity.html"><a href="beta-diversity.html#estimating-associations-with-an-external-variable"><i class="fa fa-check"></i><b>8.3</b> Estimating associations with an external variable</a></li>
+<li class="chapter" data-level="8.4" data-path="beta-diversity.html"><a href="beta-diversity.html#community-typing"><i class="fa fa-check"></i><b>8.4</b> Community typing</a></li>
+<li class="chapter" data-level="8.5" data-path="beta-diversity.html"><a href="beta-diversity.html#exercises-1"><i class="fa fa-check"></i><b>8.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html"><i class="fa fa-check"></i><b>9</b> Differential abundance analysis</a>
 <ul>
@@ -216,11 +218,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="11.1" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html#shapiro-wilk-test"><i class="fa fa-check"></i><b>11.1</b> Shapiro-Wilk test</a></li>
 <li class="chapter" data-level="11.2" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html#deseq-details"><i class="fa fa-check"></i><b>11.2</b> Deseq details</a></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="standard-workflow-in-microbiome-data-science.html"><a href="standard-workflow-in-microbiome-data-science.html"><i class="fa fa-check"></i><b>12</b> Standard workflow in microbiome data science</a>
-<ul>
-<li class="chapter" data-level="12.1" data-path="standard-workflow-in-microbiome-data-science.html"><a href="standard-workflow-in-microbiome-data-science.html#part-i-key-concepts"><i class="fa fa-check"></i><b>12.1</b> Part I: Key concepts</a></li>
-<li class="chapter" data-level="12.2" data-path="standard-workflow-in-microbiome-data-science.html"><a href="standard-workflow-in-microbiome-data-science.html#part-ii-statistical-testing"><i class="fa fa-check"></i><b>12.2</b> Part II: Statistical testing</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -247,21 +244,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="shapiro-wilk-test" class="section level2" number="11.1">
 <h2><span class="header-section-number">11.1</span> Shapiro-Wilk test</h2>
 <p>If necessary, it is possible to assess normality of the data with Shapiro-Wilk test.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="miscellaneous-material.html#cb76-1" aria-hidden="true"></a><span class="co"># Does Shapiro-Wilk test. Does it only for columns that contain abundances, not for</span></span>
-<span id="cb76-2"><a href="miscellaneous-material.html#cb76-2" aria-hidden="true"></a><span class="co"># column that contain Groups.</span></span>
-<span id="cb76-3"><a href="miscellaneous-material.html#cb76-3" aria-hidden="true"></a></span>
-<span id="cb76-4"><a href="miscellaneous-material.html#cb76-4" aria-hidden="true"></a>normality_test_p &lt;-<span class="st"> </span><span class="kw">c</span>()</span>
-<span id="cb76-5"><a href="miscellaneous-material.html#cb76-5" aria-hidden="true"></a></span>
-<span id="cb76-6"><a href="miscellaneous-material.html#cb76-6" aria-hidden="true"></a><span class="cf">for</span> (column <span class="cf">in</span> </span>
-<span id="cb76-7"><a href="miscellaneous-material.html#cb76-7" aria-hidden="true"></a>     abundance_analysis_data[, <span class="op">!</span><span class="kw">names</span>(abundance_analysis_data) <span class="op">%in%</span><span class="st"> &quot;patient_status&quot;</span>]){</span>
-<span id="cb76-8"><a href="miscellaneous-material.html#cb76-8" aria-hidden="true"></a>  <span class="co"># Does Shapiro-Wilk test</span></span>
-<span id="cb76-9"><a href="miscellaneous-material.html#cb76-9" aria-hidden="true"></a>  result &lt;-<span class="st"> </span><span class="kw">shapiro.test</span>(column)</span>
-<span id="cb76-10"><a href="miscellaneous-material.html#cb76-10" aria-hidden="true"></a>  </span>
-<span id="cb76-11"><a href="miscellaneous-material.html#cb76-11" aria-hidden="true"></a>  <span class="co"># Stores p-value to vector</span></span>
-<span id="cb76-12"><a href="miscellaneous-material.html#cb76-12" aria-hidden="true"></a>  normality_test_p &lt;-<span class="st"> </span><span class="kw">c</span>(normality_test_p, result<span class="op">$</span>p.value)</span>
-<span id="cb76-13"><a href="miscellaneous-material.html#cb76-13" aria-hidden="true"></a>}</span>
-<span id="cb76-14"><a href="miscellaneous-material.html#cb76-14" aria-hidden="true"></a></span>
-<span id="cb76-15"><a href="miscellaneous-material.html#cb76-15" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">paste0</span>(<span class="st">&quot;P-values over 0.05: &quot;</span>, <span class="kw">sum</span>(normality_test_p<span class="op">&gt;</span><span class="fl">0.05</span>), <span class="st">&quot;/&quot;</span>, <span class="kw">length</span>(normality_test_p)))</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="miscellaneous-material.html#cb78-1" aria-hidden="true"></a><span class="co"># Does Shapiro-Wilk test. Does it only for columns that contain abundances, not for</span></span>
+<span id="cb78-2"><a href="miscellaneous-material.html#cb78-2" aria-hidden="true"></a><span class="co"># column that contain Groups.</span></span>
+<span id="cb78-3"><a href="miscellaneous-material.html#cb78-3" aria-hidden="true"></a></span>
+<span id="cb78-4"><a href="miscellaneous-material.html#cb78-4" aria-hidden="true"></a>normality_test_p &lt;-<span class="st"> </span><span class="kw">c</span>()</span>
+<span id="cb78-5"><a href="miscellaneous-material.html#cb78-5" aria-hidden="true"></a></span>
+<span id="cb78-6"><a href="miscellaneous-material.html#cb78-6" aria-hidden="true"></a><span class="cf">for</span> (column <span class="cf">in</span> </span>
+<span id="cb78-7"><a href="miscellaneous-material.html#cb78-7" aria-hidden="true"></a>     abundance_analysis_data[, <span class="op">!</span><span class="kw">names</span>(abundance_analysis_data) <span class="op">%in%</span><span class="st"> &quot;patient_status&quot;</span>]){</span>
+<span id="cb78-8"><a href="miscellaneous-material.html#cb78-8" aria-hidden="true"></a>  <span class="co"># Does Shapiro-Wilk test</span></span>
+<span id="cb78-9"><a href="miscellaneous-material.html#cb78-9" aria-hidden="true"></a>  result &lt;-<span class="st"> </span><span class="kw">shapiro.test</span>(column)</span>
+<span id="cb78-10"><a href="miscellaneous-material.html#cb78-10" aria-hidden="true"></a>  </span>
+<span id="cb78-11"><a href="miscellaneous-material.html#cb78-11" aria-hidden="true"></a>  <span class="co"># Stores p-value to vector</span></span>
+<span id="cb78-12"><a href="miscellaneous-material.html#cb78-12" aria-hidden="true"></a>  normality_test_p &lt;-<span class="st"> </span><span class="kw">c</span>(normality_test_p, result<span class="op">$</span>p.value)</span>
+<span id="cb78-13"><a href="miscellaneous-material.html#cb78-13" aria-hidden="true"></a>}</span>
+<span id="cb78-14"><a href="miscellaneous-material.html#cb78-14" aria-hidden="true"></a></span>
+<span id="cb78-15"><a href="miscellaneous-material.html#cb78-15" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">paste0</span>(<span class="st">&quot;P-values over 0.05: &quot;</span>, <span class="kw">sum</span>(normality_test_p<span class="op">&gt;</span><span class="fl">0.05</span>), <span class="st">&quot;/&quot;</span>, <span class="kw">length</span>(normality_test_p)))</span></code></pre></div>
 <pre><code>## [1] &quot;P-values over 0.05: 7/54&quot;</code></pre>
 </div>
 <div id="deseq-details" class="section level2" number="11.2">
@@ -287,8 +284,8 @@ false positives.<br />
           </div>
         </div>
       </div>
-<a href="study-material.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="standard-workflow-in-microbiome-data-science.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="study-material.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

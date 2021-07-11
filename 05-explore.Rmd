@@ -205,13 +205,12 @@ For more visualization options and examples, see the [miaViz vignette](https://m
 
 
 
-## Exercises
+## Exercises (optional)
 
-Next, try to explore some of the following questions on your own by
-following examples in the [online
-book](https://microbiome.github.io/OMA/). Prepare a reproducible
-report (with Rmarkdown), and include the code that you use to import
-the data and generate the analyses.
+Explore some of the following questions on your own by following
+[online examples](https://microbiome.github.io/OMA/). Prepare a
+reproducible report (Rmarkdown), and include the code that you use to
+import the data and generate the analyses.
 
  * **Abundance table** Retrieve the taxonomic abundance table from the
    example data set (TSE object). Tip: check "assays" in [data import
