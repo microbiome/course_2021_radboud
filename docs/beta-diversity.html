@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7 Beta diversity | Introduction to microbiome data science</title>
+  <title>8 Beta diversity | Introduction to microbiome data science</title>
   <meta name="description" content="Course material" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7 Beta diversity | Introduction to microbiome data science" />
+  <meta property="og:title" content="8 Beta diversity | Introduction to microbiome data science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="microbiome/course_2021_radboud" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7 Beta diversity | Introduction to microbiome data science" />
+  <meta name="twitter:title" content="8 Beta diversity | Introduction to microbiome data science" />
   
   <meta name="twitter:description" content="Course material" />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Leo Lahti, Tuomas Borman, Henrik Eckermann, Chouaib Benchraka" />
 
 
-<meta name="date" content="2021-07-09" />
+<meta name="date" content="2021-07-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="alpha-diversity.html"/>
 <link rel="next" href="differential-abundance-analysis.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/header-attrs-2.8.4/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,17 +51,15 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -158,61 +156,66 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="getting-started.html"><a href="getting-started.html#support-and-resources"><i class="fa fa-check"></i><b>3.2</b> Support and resources</a></li>
 <li class="chapter" data-level="3.3" data-path="getting-started.html"><a href="getting-started.html#installing-and-loading-the-required-r-packages"><i class="fa fa-check"></i><b>3.3</b> Installing and loading the required R packages</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html"><i class="fa fa-check"></i><b>4</b> Importing microbiome data</a>
+<li class="chapter" data-level="4" data-path="reproducible-reporting-with-rmarkdown.html"><a href="reproducible-reporting-with-rmarkdown.html"><i class="fa fa-check"></i><b>4</b> Reproducible reporting with Rmarkdown</a></li>
+<li class="chapter" data-level="5" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html"><i class="fa fa-check"></i><b>5</b> Importing microbiome data</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#data-access-and-example-of-importing-data"><i class="fa fa-check"></i><b>4.1</b> Data access and example of importing data</a></li>
+<li class="chapter" data-level="5.1" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#data-access"><i class="fa fa-check"></i><b>5.1</b> Data access</a></li>
+<li class="chapter" data-level="5.2" data-path="importing-microbiome-data.html"><a href="importing-microbiome-data.html#importing-microbiome-data-in-r"><i class="fa fa-check"></i><b>5.2</b> Importing microbiome data in R</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html"><i class="fa fa-check"></i><b>5</b> Microbiome data exploration</a>
+<li class="chapter" data-level="6" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html"><i class="fa fa-check"></i><b>6</b> Microbiome data exploration</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#investigate"><i class="fa fa-check"></i><b>5.1</b> Investigate</a></li>
-<li class="chapter" data-level="5.2" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#manipulate"><i class="fa fa-check"></i><b>5.2</b> Manipulate</a>
+<li class="chapter" data-level="6.1" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#data-structure"><i class="fa fa-check"></i><b>6.1</b> Data structure</a>
 <ul>
-<li class="chapter" data-level="5.2.1" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#transformations"><i class="fa fa-check"></i><b>5.2.1</b> Transformations</a></li>
-<li class="chapter" data-level="5.2.2" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#aggregation"><i class="fa fa-check"></i><b>5.2.2</b> Aggregation</a></li>
+<li class="chapter" data-level="6.1.1" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#transformations"><i class="fa fa-check"></i><b>6.1.1</b> Transformations</a></li>
+<li class="chapter" data-level="6.1.2" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#aggregation"><i class="fa fa-check"></i><b>6.1.2</b> Aggregation</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#visualize"><i class="fa fa-check"></i><b>5.3</b> Visualize</a></li>
+<li class="chapter" data-level="6.2" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#visualization"><i class="fa fa-check"></i><b>6.2</b> Visualization</a></li>
+<li class="chapter" data-level="6.3" data-path="microbiome-data-exploration.html"><a href="microbiome-data-exploration.html#exercises"><i class="fa fa-check"></i><b>6.3</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="alpha-diversity.html"><a href="alpha-diversity.html"><i class="fa fa-check"></i><b>6</b> Alpha diversity</a>
+<li class="chapter" data-level="7" data-path="alpha-diversity.html"><a href="alpha-diversity.html"><i class="fa fa-check"></i><b>7</b> Alpha diversity</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#visualization"><i class="fa fa-check"></i><b>6.1</b> Visualization</a></li>
-<li class="chapter" data-level="6.2" data-path="alpha-diversity.html"><a href="alpha-diversity.html#statistical-testing-and-comparisons"><i class="fa fa-check"></i><b>6.2</b> Statistical testing and comparisons</a></li>
+<li class="chapter" data-level="7.1" data-path="alpha-diversity.html"><a href="alpha-diversity.html#visualization-1"><i class="fa fa-check"></i><b>7.1</b> Visualization</a></li>
+<li class="chapter" data-level="7.2" data-path="alpha-diversity.html"><a href="alpha-diversity.html#statistical-testing-and-comparisons"><i class="fa fa-check"></i><b>7.2</b> Statistical testing and comparisons</a></li>
+<li class="chapter" data-level="7.3" data-path="alpha-diversity.html"><a href="alpha-diversity.html#tasks"><i class="fa fa-check"></i><b>7.3</b> Tasks</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="beta-diversity.html"><a href="beta-diversity.html"><i class="fa fa-check"></i><b>7</b> Beta diversity</a>
+<li class="chapter" data-level="8" data-path="beta-diversity.html"><a href="beta-diversity.html"><i class="fa fa-check"></i><b>8</b> Beta diversity</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="beta-diversity.html"><a href="beta-diversity.html#examples-of-pcoa-with-different-settings"><i class="fa fa-check"></i><b>7.1</b> Examples of PCoA with different settings</a>
+<li class="chapter" data-level="8.1" data-path="beta-diversity.html"><a href="beta-diversity.html#examples-of-pcoa-with-different-settings"><i class="fa fa-check"></i><b>8.1</b> Examples of PCoA with different settings</a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="beta-diversity.html"><a href="beta-diversity.html#pcoa-for-asv-level-data-with-bray-curtis"><i class="fa fa-check"></i><b>7.1.1</b> PCoA for ASV-level data with Bray-Curtis</a></li>
-<li class="chapter" data-level="7.1.2" data-path="beta-diversity.html"><a href="beta-diversity.html#pcoa-for-asv-level-data-with-aitchison-distance"><i class="fa fa-check"></i><b>7.1.2</b> PCoA for ASV-level data with Aitchison distance</a></li>
-<li class="chapter" data-level="7.1.3" data-path="beta-diversity.html"><a href="beta-diversity.html#pcoa-aggregated-to-phylum-level"><i class="fa fa-check"></i><b>7.1.3</b> PCoA aggregated to Phylum level</a></li>
+<li class="chapter" data-level="8.1.1" data-path="beta-diversity.html"><a href="beta-diversity.html#pcoa-for-asv-level-data-with-bray-curtis"><i class="fa fa-check"></i><b>8.1.1</b> PCoA for ASV-level data with Bray-Curtis</a></li>
+<li class="chapter" data-level="8.1.2" data-path="beta-diversity.html"><a href="beta-diversity.html#pcoa-for-asv-level-data-with-aitchison-distance"><i class="fa fa-check"></i><b>8.1.2</b> PCoA for ASV-level data with Aitchison distance</a></li>
+<li class="chapter" data-level="8.1.3" data-path="beta-diversity.html"><a href="beta-diversity.html#pcoa-aggregated-to-phylum-level"><i class="fa fa-check"></i><b>8.1.3</b> PCoA aggregated to Phylum level</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="beta-diversity.html"><a href="beta-diversity.html#highlighting-external-variables"><i class="fa fa-check"></i><b>7.2</b> Highlighting external variables</a>
+<li class="chapter" data-level="8.2" data-path="beta-diversity.html"><a href="beta-diversity.html#highlighting-external-variables"><i class="fa fa-check"></i><b>8.2</b> Highlighting external variables</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="beta-diversity.html"><a href="beta-diversity.html#discrete-grouping-variable-shown-with-colors"><i class="fa fa-check"></i><b>7.2.1</b> Discrete grouping variable shown with colors</a></li>
-<li class="chapter" data-level="7.2.2" data-path="beta-diversity.html"><a href="beta-diversity.html#pcoa-plot-with-continuous-variable"><i class="fa fa-check"></i><b>7.2.2</b> PCoA plot with continuous variable</a></li>
+<li class="chapter" data-level="8.2.1" data-path="beta-diversity.html"><a href="beta-diversity.html#discrete-grouping-variable-shown-with-colors"><i class="fa fa-check"></i><b>8.2.1</b> Discrete grouping variable shown with colors</a></li>
+<li class="chapter" data-level="8.2.2" data-path="beta-diversity.html"><a href="beta-diversity.html#pcoa-plot-with-continuous-variable"><i class="fa fa-check"></i><b>8.2.2</b> PCoA plot with continuous variable</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="beta-diversity.html"><a href="beta-diversity.html#estimating-associations-with-an-external-variable"><i class="fa fa-check"></i><b>7.3</b> Estimating associations with an external variable</a></li>
+<li class="chapter" data-level="8.3" data-path="beta-diversity.html"><a href="beta-diversity.html#estimating-associations-with-an-external-variable"><i class="fa fa-check"></i><b>8.3</b> Estimating associations with an external variable</a></li>
+<li class="chapter" data-level="8.4" data-path="beta-diversity.html"><a href="beta-diversity.html#community-typing"><i class="fa fa-check"></i><b>8.4</b> Community typing</a></li>
+<li class="chapter" data-level="8.5" data-path="beta-diversity.html"><a href="beta-diversity.html#exercises-1"><i class="fa fa-check"></i><b>8.5</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html"><i class="fa fa-check"></i><b>8</b> Differential abundance analysis</a>
+<li class="chapter" data-level="9" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html"><i class="fa fa-check"></i><b>9</b> Differential abundance analysis</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#wilcoxon-test"><i class="fa fa-check"></i><b>8.1</b> Wilcoxon test</a></li>
-<li class="chapter" data-level="8.2" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#deseq2"><i class="fa fa-check"></i><b>8.2</b> DESeq2</a></li>
-<li class="chapter" data-level="8.3" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#ancom-bc"><i class="fa fa-check"></i><b>8.3</b> ANCOM-BC</a></li>
-<li class="chapter" data-level="8.4" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#comparison-of-wilcoxon-test-and-deseq2"><i class="fa fa-check"></i><b>8.4</b> Comparison of Wilcoxon test and DESeq2</a></li>
-<li class="chapter" data-level="8.5" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#comparison-of-abundance"><i class="fa fa-check"></i><b>8.5</b> Comparison of abundance</a></li>
+<li class="chapter" data-level="9.1" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#wilcoxon-test"><i class="fa fa-check"></i><b>9.1</b> Wilcoxon test</a></li>
+<li class="chapter" data-level="9.2" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#deseq2"><i class="fa fa-check"></i><b>9.2</b> DESeq2</a></li>
+<li class="chapter" data-level="9.3" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#ancom-bc"><i class="fa fa-check"></i><b>9.3</b> ANCOM-BC</a></li>
+<li class="chapter" data-level="9.4" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#comparison-of-wilcoxon-test-and-deseq2"><i class="fa fa-check"></i><b>9.4</b> Comparison of Wilcoxon test and DESeq2</a></li>
+<li class="chapter" data-level="9.5" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#comparison-of-abundance"><i class="fa fa-check"></i><b>9.5</b> Comparison of abundance</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="study-material.html"><a href="study-material.html"><i class="fa fa-check"></i><b>9</b> Study material</a>
+<li class="chapter" data-level="10" data-path="study-material.html"><a href="study-material.html"><i class="fa fa-check"></i><b>10</b> Study material</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="study-material.html"><a href="study-material.html#lecture-slides"><i class="fa fa-check"></i><b>9.1</b> Lecture slides</a></li>
-<li class="chapter" data-level="9.2" data-path="study-material.html"><a href="study-material.html#example-solutions"><i class="fa fa-check"></i><b>9.2</b> Example solutions</a></li>
-<li class="chapter" data-level="9.3" data-path="study-material.html"><a href="study-material.html#r-programming-resources"><i class="fa fa-check"></i><b>9.3</b> R programming resources</a></li>
-<li class="chapter" data-level="9.4" data-path="study-material.html"><a href="study-material.html#resources-for-treesummarizedexperiment"><i class="fa fa-check"></i><b>9.4</b> Resources for TreeSummarizedExperiment</a></li>
-<li class="chapter" data-level="9.5" data-path="study-material.html"><a href="study-material.html#resources-for-phyloseq"><i class="fa fa-check"></i><b>9.5</b> Resources for phyloseq</a></li>
-<li class="chapter" data-level="9.6" data-path="study-material.html"><a href="study-material.html#further-reading"><i class="fa fa-check"></i><b>9.6</b> Further reading</a></li>
+<li class="chapter" data-level="10.1" data-path="study-material.html"><a href="study-material.html#lecture-slides"><i class="fa fa-check"></i><b>10.1</b> Lecture slides</a></li>
+<li class="chapter" data-level="10.2" data-path="study-material.html"><a href="study-material.html#example-solutions"><i class="fa fa-check"></i><b>10.2</b> Example solutions</a></li>
+<li class="chapter" data-level="10.3" data-path="study-material.html"><a href="study-material.html#r-programming-resources"><i class="fa fa-check"></i><b>10.3</b> R programming resources</a></li>
+<li class="chapter" data-level="10.4" data-path="study-material.html"><a href="study-material.html#resources-for-treesummarizedexperiment"><i class="fa fa-check"></i><b>10.4</b> Resources for TreeSummarizedExperiment</a></li>
+<li class="chapter" data-level="10.5" data-path="study-material.html"><a href="study-material.html#resources-for-phyloseq"><i class="fa fa-check"></i><b>10.5</b> Resources for phyloseq</a></li>
+<li class="chapter" data-level="10.6" data-path="study-material.html"><a href="study-material.html#further-reading"><i class="fa fa-check"></i><b>10.6</b> Further reading</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html"><i class="fa fa-check"></i><b>10</b> Miscellaneous material</a>
+<li class="chapter" data-level="11" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html"><i class="fa fa-check"></i><b>11</b> Miscellaneous material</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html#shapiro-wilk-test"><i class="fa fa-check"></i><b>10.1</b> Shapiro-Wilk test</a></li>
-<li class="chapter" data-level="10.2" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html#deseq-details"><i class="fa fa-check"></i><b>10.2</b> Deseq details</a></li>
+<li class="chapter" data-level="11.1" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html#shapiro-wilk-test"><i class="fa fa-check"></i><b>11.1</b> Shapiro-Wilk test</a></li>
+<li class="chapter" data-level="11.2" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html#deseq-details"><i class="fa fa-check"></i><b>11.2</b> Deseq details</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -234,8 +237,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="beta-diversity" class="section level1" number="7">
-<h1><span class="header-section-number">7</span> Beta diversity</h1>
+<div id="beta-diversity" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> Beta diversity</h1>
 <p>Beta diversity is another name for sample dissimilarity. It quantifies
 differences in the overall taxonomic composition between two samples.</p>
 <p>Common indices include Bray-Curtis, Unifrac, Jaccard index, and the
@@ -245,8 +248,8 @@ information, and Jaccard index ignores exact abundances and considers
 only presence/absence values. For more background information
 and examples, you can check the dedicated section in <a href="https://microbiome.github.io/OMA/microbiome-diversity.html#beta-diversity">online
 book</a>.</p>
-<div id="examples-of-pcoa-with-different-settings" class="section level2" number="7.1">
-<h2><span class="header-section-number">7.1</span> Examples of PCoA with different settings</h2>
+<div id="examples-of-pcoa-with-different-settings" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> Examples of PCoA with different settings</h2>
 <p>Beta diversity estimation generates a (dis)similarity matrix that
 contains for each sample (rows) the dissimilarity to any other sample
 (columns).</p>
@@ -264,42 +267,158 @@ on each of these components, and each component measures the variation
 across a set of correlated taxa. The top components are then easily
 visualized on a two (or three) dimensional display.</p>
 <p>Let us next look at some concrete examples.</p>
-<div id="pcoa-for-asv-level-data-with-bray-curtis" class="section level3" number="7.1.1">
-<h3><span class="header-section-number">7.1.1</span> PCoA for ASV-level data with Bray-Curtis</h3>
+<div id="pcoa-for-asv-level-data-with-bray-curtis" class="section level3" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> PCoA for ASV-level data with Bray-Curtis</h3>
 <p>Let us start with PCoA based on a Bray-Curtis dissimilarity matrix
 calculated at Genus level abundances.</p>
-<p><img src="Figures/pcoa_asv_bc-1.png" width="672" /></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="beta-diversity.html#cb1-1" aria-hidden="true"></a><span class="co"># Pick the relative abundance table</span></span>
+<span id="cb1-2"><a href="beta-diversity.html#cb1-2" aria-hidden="true"></a>rel_abund_assay &lt;-<span class="st"> </span><span class="kw">assays</span>(tse)<span class="op">$</span>relabundance</span>
+<span id="cb1-3"><a href="beta-diversity.html#cb1-3" aria-hidden="true"></a></span>
+<span id="cb1-4"><a href="beta-diversity.html#cb1-4" aria-hidden="true"></a><span class="co"># Calculates Bray-Curtis distances between samples. Because taxa is in</span></span>
+<span id="cb1-5"><a href="beta-diversity.html#cb1-5" aria-hidden="true"></a><span class="co"># columns, it is used to compare different samples. We transpose the</span></span>
+<span id="cb1-6"><a href="beta-diversity.html#cb1-6" aria-hidden="true"></a><span class="co"># assay to get taxa to columns</span></span>
+<span id="cb1-7"><a href="beta-diversity.html#cb1-7" aria-hidden="true"></a>bray_curtis_dist &lt;-<span class="st"> </span>vegan<span class="op">::</span><span class="kw">vegdist</span>(<span class="kw">t</span>(rel_abund_assay), <span class="dt">method =</span> <span class="st">&quot;bray&quot;</span>)</span>
+<span id="cb1-8"><a href="beta-diversity.html#cb1-8" aria-hidden="true"></a></span>
+<span id="cb1-9"><a href="beta-diversity.html#cb1-9" aria-hidden="true"></a><span class="co"># PCoA</span></span>
+<span id="cb1-10"><a href="beta-diversity.html#cb1-10" aria-hidden="true"></a>bray_curtis_pcoa &lt;-<span class="st"> </span>ecodist<span class="op">::</span><span class="kw">pco</span>(bray_curtis_dist)</span>
+<span id="cb1-11"><a href="beta-diversity.html#cb1-11" aria-hidden="true"></a></span>
+<span id="cb1-12"><a href="beta-diversity.html#cb1-12" aria-hidden="true"></a><span class="co"># All components could be found here: </span></span>
+<span id="cb1-13"><a href="beta-diversity.html#cb1-13" aria-hidden="true"></a><span class="co"># bray_curtis_pcoa$vectors</span></span>
+<span id="cb1-14"><a href="beta-diversity.html#cb1-14" aria-hidden="true"></a><span class="co"># But we only need the first two to demonstrate what we can do:</span></span>
+<span id="cb1-15"><a href="beta-diversity.html#cb1-15" aria-hidden="true"></a>bray_curtis_pcoa_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">pcoa1 =</span> bray_curtis_pcoa<span class="op">$</span>vectors[,<span class="dv">1</span>], </span>
+<span id="cb1-16"><a href="beta-diversity.html#cb1-16" aria-hidden="true"></a>                                  <span class="dt">pcoa2 =</span> bray_curtis_pcoa<span class="op">$</span>vectors[,<span class="dv">2</span>])</span>
+<span id="cb1-17"><a href="beta-diversity.html#cb1-17" aria-hidden="true"></a></span>
+<span id="cb1-18"><a href="beta-diversity.html#cb1-18" aria-hidden="true"></a><span class="co"># Create a plot</span></span>
+<span id="cb1-19"><a href="beta-diversity.html#cb1-19" aria-hidden="true"></a>bray_curtis_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> bray_curtis_pcoa_df, <span class="kw">aes</span>(<span class="dt">x=</span>pcoa1, <span class="dt">y=</span>pcoa2)) <span class="op">+</span></span>
+<span id="cb1-20"><a href="beta-diversity.html#cb1-20" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb1-21"><a href="beta-diversity.html#cb1-21" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;PC1&quot;</span>,</span>
+<span id="cb1-22"><a href="beta-diversity.html#cb1-22" aria-hidden="true"></a>       <span class="dt">y =</span> <span class="st">&quot;PC2&quot;</span>, </span>
+<span id="cb1-23"><a href="beta-diversity.html#cb1-23" aria-hidden="true"></a>       <span class="dt">title =</span> <span class="st">&quot;Bray-Curtis PCoA&quot;</span>) <span class="op">+</span></span>
+<span id="cb1-24"><a href="beta-diversity.html#cb1-24" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>)) <span class="co"># makes titles smaller</span></span>
+<span id="cb1-25"><a href="beta-diversity.html#cb1-25" aria-hidden="true"></a></span>
+<span id="cb1-26"><a href="beta-diversity.html#cb1-26" aria-hidden="true"></a>bray_curtis_plot</span></code></pre></div>
+<p><img src="radboud2021_material_files/figure-html/pcoa_asv_bc-1.png" width="672" /></p>
 </div>
-<div id="pcoa-for-asv-level-data-with-aitchison-distance" class="section level3" number="7.1.2">
-<h3><span class="header-section-number">7.1.2</span> PCoA for ASV-level data with Aitchison distance</h3>
+<div id="pcoa-for-asv-level-data-with-aitchison-distance" class="section level3" number="8.1.2">
+<h3><span class="header-section-number">8.1.2</span> PCoA for ASV-level data with Aitchison distance</h3>
 <p>Now the same using Aitchison distance. This metric corresponds to
 Euclidean distances between CLR transformed sample abundance vectors.</p>
-<p><img src="Figures/pcoa_asv_aitchison-1.png" width="672" /></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="beta-diversity.html#cb2-1" aria-hidden="true"></a><span class="co"># Does clr transformation. Pseudocount is added, because data contains zeros. </span></span>
+<span id="cb2-2"><a href="beta-diversity.html#cb2-2" aria-hidden="true"></a>tse &lt;-<span class="st"> </span><span class="kw">transformCounts</span>(tse, <span class="dt">method =</span> <span class="st">&quot;clr&quot;</span>, <span class="dt">pseudocount =</span> <span class="dv">1</span>)</span>
+<span id="cb2-3"><a href="beta-diversity.html#cb2-3" aria-hidden="true"></a></span>
+<span id="cb2-4"><a href="beta-diversity.html#cb2-4" aria-hidden="true"></a><span class="co"># Gets clr table</span></span>
+<span id="cb2-5"><a href="beta-diversity.html#cb2-5" aria-hidden="true"></a>clr_assay &lt;-<span class="st"> </span><span class="kw">assays</span>(tse)<span class="op">$</span>clr</span>
+<span id="cb2-6"><a href="beta-diversity.html#cb2-6" aria-hidden="true"></a></span>
+<span id="cb2-7"><a href="beta-diversity.html#cb2-7" aria-hidden="true"></a><span class="co"># Transposes it to get taxa to columns</span></span>
+<span id="cb2-8"><a href="beta-diversity.html#cb2-8" aria-hidden="true"></a>clr_assay &lt;-<span class="st"> </span><span class="kw">t</span>(clr_assay)</span>
+<span id="cb2-9"><a href="beta-diversity.html#cb2-9" aria-hidden="true"></a></span>
+<span id="cb2-10"><a href="beta-diversity.html#cb2-10" aria-hidden="true"></a><span class="co"># Calculates Euclidean distances between samples. Because taxa is in columns,</span></span>
+<span id="cb2-11"><a href="beta-diversity.html#cb2-11" aria-hidden="true"></a><span class="co"># it is used to compare different samples.</span></span>
+<span id="cb2-12"><a href="beta-diversity.html#cb2-12" aria-hidden="true"></a>euclidean_dist &lt;-<span class="st"> </span>vegan<span class="op">::</span><span class="kw">vegdist</span>(clr_assay, <span class="dt">method =</span> <span class="st">&quot;euclidean&quot;</span>)</span>
+<span id="cb2-13"><a href="beta-diversity.html#cb2-13" aria-hidden="true"></a></span>
+<span id="cb2-14"><a href="beta-diversity.html#cb2-14" aria-hidden="true"></a><span class="co"># Does principal coordinate analysis</span></span>
+<span id="cb2-15"><a href="beta-diversity.html#cb2-15" aria-hidden="true"></a>euclidean_pcoa &lt;-<span class="st"> </span>ecodist<span class="op">::</span><span class="kw">pco</span>(euclidean_dist)</span>
+<span id="cb2-16"><a href="beta-diversity.html#cb2-16" aria-hidden="true"></a></span>
+<span id="cb2-17"><a href="beta-diversity.html#cb2-17" aria-hidden="true"></a><span class="co"># Creates a data frame from principal coordinates</span></span>
+<span id="cb2-18"><a href="beta-diversity.html#cb2-18" aria-hidden="true"></a>euclidean_pcoa_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">pcoa1 =</span> euclidean_pcoa<span class="op">$</span>vectors[,<span class="dv">1</span>], </span>
+<span id="cb2-19"><a href="beta-diversity.html#cb2-19" aria-hidden="true"></a>                                <span class="dt">pcoa2 =</span> euclidean_pcoa<span class="op">$</span>vectors[,<span class="dv">2</span>])</span>
+<span id="cb2-20"><a href="beta-diversity.html#cb2-20" aria-hidden="true"></a></span>
+<span id="cb2-21"><a href="beta-diversity.html#cb2-21" aria-hidden="true"></a><span class="co"># Creates the plot</span></span>
+<span id="cb2-22"><a href="beta-diversity.html#cb2-22" aria-hidden="true"></a>euclidean_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> euclidean_pcoa_df, <span class="kw">aes</span>(<span class="dt">x=</span>pcoa1, <span class="dt">y=</span>pcoa2)) <span class="op">+</span></span>
+<span id="cb2-23"><a href="beta-diversity.html#cb2-23" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb2-24"><a href="beta-diversity.html#cb2-24" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;PC1&quot;</span>,</span>
+<span id="cb2-25"><a href="beta-diversity.html#cb2-25" aria-hidden="true"></a>       <span class="dt">y =</span> <span class="st">&quot;PC22&quot;</span>,</span>
+<span id="cb2-26"><a href="beta-diversity.html#cb2-26" aria-hidden="true"></a>       <span class="dt">title =</span> <span class="st">&quot;Euclidean PCoA with CLR transformation&quot;</span>) <span class="op">+</span></span>
+<span id="cb2-27"><a href="beta-diversity.html#cb2-27" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>)) <span class="co"># makes titles smaller</span></span>
+<span id="cb2-28"><a href="beta-diversity.html#cb2-28" aria-hidden="true"></a></span>
+<span id="cb2-29"><a href="beta-diversity.html#cb2-29" aria-hidden="true"></a>euclidean_plot</span></code></pre></div>
+<p><img src="radboud2021_material_files/figure-html/pcoa_asv_aitchison-1.png" width="672" /></p>
 </div>
-<div id="pcoa-aggregated-to-phylum-level" class="section level3" number="7.1.3">
-<h3><span class="header-section-number">7.1.3</span> PCoA aggregated to Phylum level</h3>
+<div id="pcoa-aggregated-to-phylum-level" class="section level3" number="8.1.3">
+<h3><span class="header-section-number">8.1.3</span> PCoA aggregated to Phylum level</h3>
 <p>We use again the Aitchison distances in this example but this time applied to the phylum level.</p>
-<p><img src="Figures/pcoa_phylum_aitchison-1.png" width="672" /></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="beta-diversity.html#cb3-1" aria-hidden="true"></a><span class="co"># Does clr transformation. Psuedocount is added, because data contains zeros. </span></span>
+<span id="cb3-2"><a href="beta-diversity.html#cb3-2" aria-hidden="true"></a>tse_phylum &lt;-<span class="st"> </span><span class="kw">transformCounts</span>(tse_phylum, <span class="dt">method =</span> <span class="st">&quot;clr&quot;</span>, <span class="dt">pseudocount =</span> <span class="dv">1</span>)</span>
+<span id="cb3-3"><a href="beta-diversity.html#cb3-3" aria-hidden="true"></a></span>
+<span id="cb3-4"><a href="beta-diversity.html#cb3-4" aria-hidden="true"></a><span class="co"># Gets clr table</span></span>
+<span id="cb3-5"><a href="beta-diversity.html#cb3-5" aria-hidden="true"></a>clr_phylum_assay &lt;-<span class="st"> </span><span class="kw">assays</span>(tse_phylum)<span class="op">$</span>clr</span>
+<span id="cb3-6"><a href="beta-diversity.html#cb3-6" aria-hidden="true"></a></span>
+<span id="cb3-7"><a href="beta-diversity.html#cb3-7" aria-hidden="true"></a><span class="co"># Transposes it to get taxa to columns</span></span>
+<span id="cb3-8"><a href="beta-diversity.html#cb3-8" aria-hidden="true"></a>clr_phylum_assay &lt;-<span class="st"> </span><span class="kw">t</span>(clr_phylum_assay)</span>
+<span id="cb3-9"><a href="beta-diversity.html#cb3-9" aria-hidden="true"></a></span>
+<span id="cb3-10"><a href="beta-diversity.html#cb3-10" aria-hidden="true"></a><span class="co"># Calculates Euclidean distances between samples. Because taxa is in columns,</span></span>
+<span id="cb3-11"><a href="beta-diversity.html#cb3-11" aria-hidden="true"></a><span class="co"># it is used to compare different samples.</span></span>
+<span id="cb3-12"><a href="beta-diversity.html#cb3-12" aria-hidden="true"></a>euclidean_phylum_dist &lt;-<span class="st"> </span>vegan<span class="op">::</span><span class="kw">vegdist</span>(clr_assay, <span class="dt">method =</span> <span class="st">&quot;euclidean&quot;</span>)</span>
+<span id="cb3-13"><a href="beta-diversity.html#cb3-13" aria-hidden="true"></a></span>
+<span id="cb3-14"><a href="beta-diversity.html#cb3-14" aria-hidden="true"></a><span class="co"># Does principal coordinate analysis</span></span>
+<span id="cb3-15"><a href="beta-diversity.html#cb3-15" aria-hidden="true"></a>euclidean_phylum_pcoa &lt;-<span class="st"> </span>ecodist<span class="op">::</span><span class="kw">pco</span>(euclidean_phylum_dist)</span>
+<span id="cb3-16"><a href="beta-diversity.html#cb3-16" aria-hidden="true"></a></span>
+<span id="cb3-17"><a href="beta-diversity.html#cb3-17" aria-hidden="true"></a><span class="co"># Creates a data frame from principal coordinates</span></span>
+<span id="cb3-18"><a href="beta-diversity.html#cb3-18" aria-hidden="true"></a>euclidean_phylum_pcoa_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
+<span id="cb3-19"><a href="beta-diversity.html#cb3-19" aria-hidden="true"></a>  <span class="dt">pcoa1 =</span> euclidean_phylum_pcoa<span class="op">$</span>vectors[,<span class="dv">1</span>], </span>
+<span id="cb3-20"><a href="beta-diversity.html#cb3-20" aria-hidden="true"></a>  <span class="dt">pcoa2 =</span> euclidean_phylum_pcoa<span class="op">$</span>vectors[,<span class="dv">2</span>])</span>
+<span id="cb3-21"><a href="beta-diversity.html#cb3-21" aria-hidden="true"></a></span>
+<span id="cb3-22"><a href="beta-diversity.html#cb3-22" aria-hidden="true"></a><span class="co"># Creates a plot</span></span>
+<span id="cb3-23"><a href="beta-diversity.html#cb3-23" aria-hidden="true"></a>euclidean_phylum_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> euclidean_phylum_pcoa_df,</span>
+<span id="cb3-24"><a href="beta-diversity.html#cb3-24" aria-hidden="true"></a>  <span class="kw">aes</span>(<span class="dt">x=</span>pcoa1, <span class="dt">y=</span>pcoa2)) <span class="op">+</span></span>
+<span id="cb3-25"><a href="beta-diversity.html#cb3-25" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb3-26"><a href="beta-diversity.html#cb3-26" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;PC1&quot;</span>,</span>
+<span id="cb3-27"><a href="beta-diversity.html#cb3-27" aria-hidden="true"></a>       <span class="dt">y =</span> <span class="st">&quot;PC2&quot;</span>,</span>
+<span id="cb3-28"><a href="beta-diversity.html#cb3-28" aria-hidden="true"></a>       <span class="dt">title =</span> <span class="st">&quot;Aitchison distances at Phylum level&quot;</span>) <span class="op">+</span><span class="st">  </span></span>
+<span id="cb3-29"><a href="beta-diversity.html#cb3-29" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>)) <span class="co"># makes titles smaller</span></span>
+<span id="cb3-30"><a href="beta-diversity.html#cb3-30" aria-hidden="true"></a></span>
+<span id="cb3-31"><a href="beta-diversity.html#cb3-31" aria-hidden="true"></a>euclidean_phylum_plot</span></code></pre></div>
+<p><img src="radboud2021_material_files/figure-html/pcoa_phylum_aitchison-1.png" width="672" /></p>
 </div>
 </div>
-<div id="highlighting-external-variables" class="section level2" number="7.2">
-<h2><span class="header-section-number">7.2</span> Highlighting external variables</h2>
+<div id="highlighting-external-variables" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Highlighting external variables</h2>
 <p>We can map other variables on the same plot for example by coloring
 the points accordingly.</p>
-<div id="discrete-grouping-variable-shown-with-colors" class="section level3" number="7.2.1">
-<h3><span class="header-section-number">7.2.1</span> Discrete grouping variable shown with colors</h3>
-<p><img src="Figures/pcoa_genus-1.png" width="672" /></p>
+<div id="discrete-grouping-variable-shown-with-colors" class="section level3" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Discrete grouping variable shown with colors</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="beta-diversity.html#cb4-1" aria-hidden="true"></a><span class="co"># Adds the variable we later use for coloring to the data frame</span></span>
+<span id="cb4-2"><a href="beta-diversity.html#cb4-2" aria-hidden="true"></a>euclidean_patient_status_pcoa_df &lt;-<span class="st"> </span><span class="kw">cbind</span>(euclidean_pcoa_df,</span>
+<span id="cb4-3"><a href="beta-diversity.html#cb4-3" aria-hidden="true"></a>                             <span class="dt">patient_status =</span> <span class="kw">colData</span>(tse)<span class="op">$</span>patient_status)</span>
+<span id="cb4-4"><a href="beta-diversity.html#cb4-4" aria-hidden="true"></a></span>
+<span id="cb4-5"><a href="beta-diversity.html#cb4-5" aria-hidden="true"></a><span class="co"># Creates a plot</span></span>
+<span id="cb4-6"><a href="beta-diversity.html#cb4-6" aria-hidden="true"></a>euclidean_patient_status_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> euclidean_patient_status_pcoa_df, </span>
+<span id="cb4-7"><a href="beta-diversity.html#cb4-7" aria-hidden="true"></a>                                        <span class="kw">aes</span>(<span class="dt">x=</span>pcoa1, <span class="dt">y=</span>pcoa2,</span>
+<span id="cb4-8"><a href="beta-diversity.html#cb4-8" aria-hidden="true"></a>                                            <span class="dt">color =</span> patient_status)) <span class="op">+</span></span>
+<span id="cb4-9"><a href="beta-diversity.html#cb4-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb4-10"><a href="beta-diversity.html#cb4-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;PC1&quot;</span>,</span>
+<span id="cb4-11"><a href="beta-diversity.html#cb4-11" aria-hidden="true"></a>       <span class="dt">y =</span> <span class="st">&quot;PC2&quot;</span>,</span>
+<span id="cb4-12"><a href="beta-diversity.html#cb4-12" aria-hidden="true"></a>       <span class="dt">title =</span> <span class="st">&quot;PCoA with Aitchison distances&quot;</span>) <span class="op">+</span></span>
+<span id="cb4-13"><a href="beta-diversity.html#cb4-13" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>)) <span class="co"># makes titles smaller</span></span>
+<span id="cb4-14"><a href="beta-diversity.html#cb4-14" aria-hidden="true"></a></span>
+<span id="cb4-15"><a href="beta-diversity.html#cb4-15" aria-hidden="true"></a>euclidean_patient_status_plot</span></code></pre></div>
+<p><img src="radboud2021_material_files/figure-html/pcoa_genus-1.png" width="672" /></p>
 </div>
-<div id="pcoa-plot-with-continuous-variable" class="section level3" number="7.2.2">
-<h3><span class="header-section-number">7.2.2</span> PCoA plot with continuous variable</h3>
+<div id="pcoa-plot-with-continuous-variable" class="section level3" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> PCoA plot with continuous variable</h3>
 <p>We can do the same as above using any continuous variable. E.g. let us
 see how the plotted samples differ in their alpha diversity (as an
 example of a continuous variable):</p>
-<p><img src="Figures/pcoa_coloring-1.png" width="672" /></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="beta-diversity.html#cb5-1" aria-hidden="true"></a><span class="co"># Adds coloring information to the data frame, creates new column</span></span>
+<span id="cb5-2"><a href="beta-diversity.html#cb5-2" aria-hidden="true"></a>euclidean_shannon_pcoa_df &lt;-<span class="st"> </span><span class="kw">cbind</span>(euclidean_pcoa_df,</span>
+<span id="cb5-3"><a href="beta-diversity.html#cb5-3" aria-hidden="true"></a>                             <span class="dt">shannon =</span> <span class="kw">colData</span>(tse)<span class="op">$</span>Shannon_diversity)</span>
+<span id="cb5-4"><a href="beta-diversity.html#cb5-4" aria-hidden="true"></a></span>
+<span id="cb5-5"><a href="beta-diversity.html#cb5-5" aria-hidden="true"></a><span class="co"># Creates a plot</span></span>
+<span id="cb5-6"><a href="beta-diversity.html#cb5-6" aria-hidden="true"></a>euclidean_shannon_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> euclidean_shannon_pcoa_df, </span>
+<span id="cb5-7"><a href="beta-diversity.html#cb5-7" aria-hidden="true"></a>                                 <span class="kw">aes</span>(<span class="dt">x=</span>pcoa1, <span class="dt">y=</span>pcoa2,</span>
+<span id="cb5-8"><a href="beta-diversity.html#cb5-8" aria-hidden="true"></a>                                     <span class="dt">color =</span> shannon)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb5-9"><a href="beta-diversity.html#cb5-9" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb5-10"><a href="beta-diversity.html#cb5-10" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;PC1&quot;</span>,</span>
+<span id="cb5-11"><a href="beta-diversity.html#cb5-11" aria-hidden="true"></a>       <span class="dt">y =</span> <span class="st">&quot;PC2&quot;</span>,</span>
+<span id="cb5-12"><a href="beta-diversity.html#cb5-12" aria-hidden="true"></a>       <span class="dt">title =</span> <span class="st">&quot;PCoA with Aitchison distances&quot;</span>) <span class="op">+</span></span>
+<span id="cb5-13"><a href="beta-diversity.html#cb5-13" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>)) <span class="co"># makes titles smaller</span></span>
+<span id="cb5-14"><a href="beta-diversity.html#cb5-14" aria-hidden="true"></a></span>
+<span id="cb5-15"><a href="beta-diversity.html#cb5-15" aria-hidden="true"></a>euclidean_shannon_plot</span></code></pre></div>
+<p><img src="radboud2021_material_files/figure-html/pcoa_coloring-1.png" width="672" /></p>
 </div>
 </div>
-<div id="estimating-associations-with-an-external-variable" class="section level2" number="7.3">
-<h2><span class="header-section-number">7.3</span> Estimating associations with an external variable</h2>
+<div id="estimating-associations-with-an-external-variable" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> Estimating associations with an external variable</h2>
 <p>Next to visualizing whether any variable is associated with
 differences between samples, we can also quantify the strength of the
 association between community composition (beta diversity) and
@@ -309,23 +428,79 @@ multivariate analysis of variance (PERMANOVA). This method takes as
 input the abundance table, which measure of distance you want to base
 the test on and a formula that tells the model how you think the
 variables are associated with each other.</p>
-<pre><code>## [1] &quot;Different different cohorts and variance of abundance \n              between samples, p-value: 0.7519&quot;</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="beta-diversity.html#cb6-1" aria-hidden="true"></a><span class="co"># First we get the relative abundance table</span></span>
+<span id="cb6-2"><a href="beta-diversity.html#cb6-2" aria-hidden="true"></a>rel_abund_assay &lt;-<span class="st"> </span><span class="kw">assays</span>(tse)<span class="op">$</span>relabundance</span>
+<span id="cb6-3"><a href="beta-diversity.html#cb6-3" aria-hidden="true"></a></span>
+<span id="cb6-4"><a href="beta-diversity.html#cb6-4" aria-hidden="true"></a><span class="co"># again transpose it to get taxa to columns</span></span>
+<span id="cb6-5"><a href="beta-diversity.html#cb6-5" aria-hidden="true"></a>rel_abund_assay &lt;-<span class="st"> </span><span class="kw">t</span>(rel_abund_assay)</span>
+<span id="cb6-6"><a href="beta-diversity.html#cb6-6" aria-hidden="true"></a></span>
+<span id="cb6-7"><a href="beta-diversity.html#cb6-7" aria-hidden="true"></a><span class="co"># then we can perform the method</span></span>
+<span id="cb6-8"><a href="beta-diversity.html#cb6-8" aria-hidden="true"></a>permanova_cohort &lt;-<span class="st"> </span>vegan<span class="op">::</span><span class="kw">adonis</span>(rel_abund_assay <span class="op">~</span><span class="st"> </span>cohort,</span>
+<span id="cb6-9"><a href="beta-diversity.html#cb6-9" aria-hidden="true"></a>                                  <span class="dt">data =</span> <span class="kw">colData</span>(tse),</span>
+<span id="cb6-10"><a href="beta-diversity.html#cb6-10" aria-hidden="true"></a>                                  <span class="dt">permutations =</span> <span class="dv">9999</span>)</span>
+<span id="cb6-11"><a href="beta-diversity.html#cb6-11" aria-hidden="true"></a></span>
+<span id="cb6-12"><a href="beta-diversity.html#cb6-12" aria-hidden="true"></a><span class="co"># we can obtain a the p value for our predictor:</span></span>
+<span id="cb6-13"><a href="beta-diversity.html#cb6-13" aria-hidden="true"></a><span class="kw">print</span>(<span class="kw">paste0</span>(<span class="st">&quot;Different different cohorts and variance of abundance </span></span>
+<span id="cb6-14"><a href="beta-diversity.html#cb6-14" aria-hidden="true"></a><span class="st">              between samples, p-value: &quot;</span>, </span>
+<span id="cb6-15"><a href="beta-diversity.html#cb6-15" aria-hidden="true"></a>              <span class="kw">as.data.frame</span>(permanova_cohort<span class="op">$</span>aov.tab)[<span class="st">&quot;cohort&quot;</span>, <span class="st">&quot;Pr(&gt;F)&quot;</span>]))</span></code></pre></div>
+<pre><code>## [1] &quot;Different different cohorts and variance of abundance \n              between samples, p-value: 0.7436&quot;</code></pre>
 <p>The cohort variable is not significantly associated with
 microbiota composition (p-value is over 0.05).</p>
 <p>We can, however, visualize those taxa whose abundances drive the
 differences between cohorts. We first need to extract the model
 coefficients of taxa:</p>
-<p><img src="Figures/permanova_coefs-1.png" width="672" /></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="beta-diversity.html#cb8-1" aria-hidden="true"></a><span class="co"># Gets the coefficients</span></span>
+<span id="cb8-2"><a href="beta-diversity.html#cb8-2" aria-hidden="true"></a>coef &lt;-<span class="st"> </span><span class="kw">coefficients</span>(permanova_cohort)[<span class="st">&quot;cohort1&quot;</span>,]</span>
+<span id="cb8-3"><a href="beta-diversity.html#cb8-3" aria-hidden="true"></a></span>
+<span id="cb8-4"><a href="beta-diversity.html#cb8-4" aria-hidden="true"></a><span class="co"># Gets the highest coefficients</span></span>
+<span id="cb8-5"><a href="beta-diversity.html#cb8-5" aria-hidden="true"></a>top.coef &lt;-<span class="st"> </span><span class="kw">sort</span>(<span class="kw">head</span>(coef[<span class="kw">rev</span>(<span class="kw">order</span>(<span class="kw">abs</span>(coef)))],<span class="dv">20</span>))</span>
+<span id="cb8-6"><a href="beta-diversity.html#cb8-6" aria-hidden="true"></a></span>
+<span id="cb8-7"><a href="beta-diversity.html#cb8-7" aria-hidden="true"></a><span class="co"># Plots the coefficients</span></span>
+<span id="cb8-8"><a href="beta-diversity.html#cb8-8" aria-hidden="true"></a>top_taxa_coeffient_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">data.frame</span>(<span class="dt">x =</span> top.coef,</span>
+<span id="cb8-9"><a href="beta-diversity.html#cb8-9" aria-hidden="true"></a>                                             <span class="dt">y =</span> <span class="kw">factor</span>(<span class="kw">names</span>(top.coef),</span>
+<span id="cb8-10"><a href="beta-diversity.html#cb8-10" aria-hidden="true"></a>                         <span class="kw">unique</span>(<span class="kw">names</span>(top.coef)))),</span>
+<span id="cb8-11"><a href="beta-diversity.html#cb8-11" aria-hidden="true"></a>                                  <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span></span>
+<span id="cb8-12"><a href="beta-diversity.html#cb8-12" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="op">+</span></span>
+<span id="cb8-13"><a href="beta-diversity.html#cb8-13" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;&quot;</span>, <span class="dt">y=</span><span class="st">&quot;&quot;</span>, <span class="dt">title=</span><span class="st">&quot;Top Taxa&quot;</span>) <span class="op">+</span></span>
+<span id="cb8-14"><a href="beta-diversity.html#cb8-14" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme_bw</span>()</span>
+<span id="cb8-15"><a href="beta-diversity.html#cb8-15" aria-hidden="true"></a></span>
+<span id="cb8-16"><a href="beta-diversity.html#cb8-16" aria-hidden="true"></a>top_taxa_coeffient_plot</span></code></pre></div>
+<p><img src="radboud2021_material_files/figure-html/permanova_coefs-1.png" width="672" /></p>
 <p>The above plot shows taxa as code names, and it is hard to tell which
 bacterial groups they represent. However, it is easy to add human readable
 names. We can fetch those from our rowData. Here we use Genus level names:</p>
-<p><img src="Figures/unnamed-chunk-25-1.png" width="672" /></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="beta-diversity.html#cb9-1" aria-hidden="true"></a><span class="co"># Gets corresponding Genus level names and stores them to top.coef</span></span>
+<span id="cb9-2"><a href="beta-diversity.html#cb9-2" aria-hidden="true"></a>names &lt;-<span class="st"> </span><span class="kw">rowData</span>(tse)[<span class="kw">names</span>(top.coef), ][,<span class="st">&quot;Genus&quot;</span>]</span>
+<span id="cb9-3"><a href="beta-diversity.html#cb9-3" aria-hidden="true"></a></span>
+<span id="cb9-4"><a href="beta-diversity.html#cb9-4" aria-hidden="true"></a><span class="co"># Adds new labels to the plot</span></span>
+<span id="cb9-5"><a href="beta-diversity.html#cb9-5" aria-hidden="true"></a>top_taxa_coeffient_plot &lt;-<span class="st"> </span>top_taxa_coeffient_plot <span class="op">+</span></span>
+<span id="cb9-6"><a href="beta-diversity.html#cb9-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">scale_y_discrete</span>(<span class="dt">labels =</span> names) <span class="co"># Adds new labels</span></span>
+<span id="cb9-7"><a href="beta-diversity.html#cb9-7" aria-hidden="true"></a>top_taxa_coeffient_plot</span></code></pre></div>
+<p><img src="radboud2021_material_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>There are many alternative and complementary methods for analysing
 community composition. For more examples, see a dedicated section on
 beta diversity in the <a href="https://microbiome.github.io/OMA/">online
 book</a>.</p>
-<p>As for community typing, a dedicated section presenting examples of analytical methods is found at the <a href="https://microbiome.github.io/OMA/">online
-book</a>.</p>
+</div>
+<div id="community-typing" class="section level2" number="8.4">
+<h2><span class="header-section-number">8.4</span> Community typing</h2>
+<p>A dedicated section presenting examples on community typing is in the
+<a href="https://microbiome.github.io/OMA/">online book</a>.</p>
+</div>
+<div id="exercises-1" class="section level2" number="8.5">
+<h2><span class="header-section-number">8.5</span> Exercises</h2>
+<ul>
+<li><p>Visualize community variation with PCoA.</p></li>
+<li><p>Investigate the influence of the data transformations on
+statistical analysis: Visualize community variation with PCoA with
+the following options: 1) Bray-Curtis distances for compositional
+data; 2) Euclidean distances for CLR-transformed data.</p></li>
+<li><p>Community-level comparisons: Use PERMANOVA to investigate whether
+the community composition differs between two groups of individuals
+(e.g. males and females, or some other grouping of your
+choice). You can also include covariates such as age and gender,
+and see how this affects the results.</p></li>
+</ul>
 
 </div>
 </div>
