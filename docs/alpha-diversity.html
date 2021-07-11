@@ -24,7 +24,7 @@
 <meta name="author" content="Leo Lahti, Tuomas Borman, Henrik Eckermann, Chouaib Benchraka" />
 
 
-<meta name="date" content="2021-07-11" />
+<meta name="date" content="2021-07-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="microbiome-data-exploration.html"/>
 <link rel="next" href="beta-diversity.html"/>
-<script src="libs/header-attrs-2.8.3/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,7 +51,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
@@ -62,6 +61,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -256,26 +256,21 @@ and Faith. Shannon index reflects how many different taxa there are
 and how evenly they are distributed within a sample. Faith index
 additionally takes into account the phylogenetic relations into
 account.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="alpha-diversity.html#cb1-1" aria-hidden="true"></a><span class="co"># Indices to be calculated. </span></span>
-<span id="cb1-2"><a href="alpha-diversity.html#cb1-2" aria-hidden="true"></a><span class="co"># Every index is calculated by default if we don&#39;t specify indices.</span></span>
-<span id="cb1-3"><a href="alpha-diversity.html#cb1-3" aria-hidden="true"></a>indices &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;shannon&quot;</span>, <span class="st">&quot;faith&quot;</span>)</span>
-<span id="cb1-4"><a href="alpha-diversity.html#cb1-4" aria-hidden="true"></a></span>
-<span id="cb1-5"><a href="alpha-diversity.html#cb1-5" aria-hidden="true"></a><span class="co"># Indices are stored in colData (i.e., sample metadata). We can specify the name</span></span>
-<span id="cb1-6"><a href="alpha-diversity.html#cb1-6" aria-hidden="true"></a><span class="co"># of column, or we can use the default name which is the name of index </span></span>
-<span id="cb1-7"><a href="alpha-diversity.html#cb1-7" aria-hidden="true"></a><span class="co"># (i.e., &quot;shannon&quot; and &quot;faith&quot;). </span></span>
-<span id="cb1-8"><a href="alpha-diversity.html#cb1-8" aria-hidden="true"></a>names &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Shannon_diversity&quot;</span>, <span class="st">&quot;Faith_diversity&quot;</span>)</span>
-<span id="cb1-9"><a href="alpha-diversity.html#cb1-9" aria-hidden="true"></a></span>
-<span id="cb1-10"><a href="alpha-diversity.html#cb1-10" aria-hidden="true"></a><span class="co"># Calculates indices</span></span>
-<span id="cb1-11"><a href="alpha-diversity.html#cb1-11" aria-hidden="true"></a>tse &lt;-<span class="st"> </span><span class="kw">estimateDiversity</span>(tse, <span class="dt">index =</span> indices, <span class="dt">name =</span> names)</span></code></pre></div>
-<pre><code>## Warning: The following values are already present in `colData` and will be
-## overwritten: &#39;Shannon_diversity&#39;. Consider using the &#39;name&#39; argument to specify
-## alternative names.</code></pre>
-<pre><code>## Warning: The following values are already present in `colData` and will be
-## overwritten: &#39;Faith_diversity&#39;. Consider using the &#39;name&#39; argument to specify
-## alternative names.</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="alpha-diversity.html#cb4-1" aria-hidden="true"></a><span class="co"># Shows the calculated indices</span></span>
-<span id="cb4-2"><a href="alpha-diversity.html#cb4-2" aria-hidden="true"></a>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(<span class="kw">colData</span>(tse)[names])) <span class="op">%&gt;%</span><span class="st"> </span>kableExtra<span class="op">::</span><span class="kw">kable_styling</span>(<span class="st">&quot;striped&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb4-3"><a href="alpha-diversity.html#cb4-3" aria-hidden="true"></a><span class="st">  </span>kableExtra<span class="op">::</span><span class="kw">scroll_box</span>(<span class="dt">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="alpha-diversity.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Indices to be calculated. </span></span>
+<span id="cb25-2"><a href="alpha-diversity.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Every index is calculated by default if we don&#39;t specify indices.</span></span>
+<span id="cb25-3"><a href="alpha-diversity.html#cb25-3" aria-hidden="true" tabindex="-1"></a>indices <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;shannon&quot;</span>, <span class="st">&quot;faith&quot;</span>)</span>
+<span id="cb25-4"><a href="alpha-diversity.html#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="alpha-diversity.html#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Indices are stored in colData (i.e., sample metadata). We can specify the name</span></span>
+<span id="cb25-6"><a href="alpha-diversity.html#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co"># of column, or we can use the default name which is the name of index </span></span>
+<span id="cb25-7"><a href="alpha-diversity.html#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># (i.e., &quot;shannon&quot; and &quot;faith&quot;). </span></span>
+<span id="cb25-8"><a href="alpha-diversity.html#cb25-8" aria-hidden="true" tabindex="-1"></a>names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Shannon_diversity&quot;</span>, <span class="st">&quot;Faith_diversity&quot;</span>)</span>
+<span id="cb25-9"><a href="alpha-diversity.html#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="alpha-diversity.html#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculates indices</span></span>
+<span id="cb25-11"><a href="alpha-diversity.html#cb25-11" aria-hidden="true" tabindex="-1"></a>tse <span class="ot">&lt;-</span> <span class="fu">estimateDiversity</span>(tse, <span class="at">index =</span> indices, <span class="at">name =</span> names)</span>
+<span id="cb25-12"><a href="alpha-diversity.html#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="alpha-diversity.html#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Shows the calculated indices</span></span>
+<span id="cb25-14"><a href="alpha-diversity.html#cb25-14" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(<span class="fu">colData</span>(tse)[names])) <span class="sc">%&gt;%</span> kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-15"><a href="alpha-diversity.html#cb25-15" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -361,49 +356,47 @@ A23
 </table>
 </div>
 <p>Next we can visualize Shannon index with histogram.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="alpha-diversity.html#cb5-1" aria-hidden="true"></a><span class="co"># ggplot needs data.frame format as input.</span></span>
-<span id="cb5-2"><a href="alpha-diversity.html#cb5-2" aria-hidden="true"></a><span class="co"># Here, colData is DataFrame, therefore it needs to be converted to data.frame</span></span>
-<span id="cb5-3"><a href="alpha-diversity.html#cb5-3" aria-hidden="true"></a>shannon_hist &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">as.data.frame</span>(<span class="kw">colData</span>(tse)), </span>
-<span id="cb5-4"><a href="alpha-diversity.html#cb5-4" aria-hidden="true"></a>                       <span class="kw">aes</span>(<span class="dt">x =</span> Shannon_diversity)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb5-5"><a href="alpha-diversity.html#cb5-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">20</span>, <span class="dt">fill =</span> <span class="st">&quot;gray&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span></span>
-<span id="cb5-6"><a href="alpha-diversity.html#cb5-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Shannon index&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Sample frequency&quot;</span>)</span>
-<span id="cb5-7"><a href="alpha-diversity.html#cb5-7" aria-hidden="true"></a></span>
-<span id="cb5-8"><a href="alpha-diversity.html#cb5-8" aria-hidden="true"></a>shannon_hist</span></code></pre></div>
-<p><img src="radboud2021_material_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="alpha-diversity.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot needs data.frame format as input.</span></span>
+<span id="cb26-2"><a href="alpha-diversity.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Here, colData is DataFrame, therefore it needs to be converted to data.frame</span></span>
+<span id="cb26-3"><a href="alpha-diversity.html#cb26-3" aria-hidden="true" tabindex="-1"></a>shannon_hist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">as.data.frame</span>(<span class="fu">colData</span>(tse)), </span>
+<span id="cb26-4"><a href="alpha-diversity.html#cb26-4" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">aes</span>(<span class="at">x =</span> Shannon_diversity)) <span class="sc">+</span> </span>
+<span id="cb26-5"><a href="alpha-diversity.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>, <span class="at">fill =</span> <span class="st">&quot;gray&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb26-6"><a href="alpha-diversity.html#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Shannon index&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sample frequency&quot;</span>)</span>
+<span id="cb26-7"><a href="alpha-diversity.html#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="alpha-diversity.html#cb26-8" aria-hidden="true" tabindex="-1"></a>shannon_hist</span></code></pre></div>
+<p><img src="radboud2021_material_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>Next, let us compare the indices based on a scatter-plot.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="alpha-diversity.html#cb6-1" aria-hidden="true"></a>cross_plot &lt;-<span class="st"> </span>ggplot2<span class="op">::</span><span class="kw">ggplot</span>(<span class="kw">as.data.frame</span>(<span class="kw">colData</span>(tse)), </span>
-<span id="cb6-2"><a href="alpha-diversity.html#cb6-2" aria-hidden="true"></a>                                     <span class="kw">aes</span>(<span class="dt">x =</span> Shannon_diversity, <span class="dt">y =</span> Faith_diversity)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb6-3"><a href="alpha-diversity.html#cb6-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="co"># Adds points</span></span>
-<span id="cb6-4"><a href="alpha-diversity.html#cb6-4" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm) <span class="op">+</span><span class="st"> </span><span class="co"># Adds regression line</span></span>
-<span id="cb6-5"><a href="alpha-diversity.html#cb6-5" aria-hidden="true"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Shannon index&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Faith diversity&quot;</span>) </span>
-<span id="cb6-6"><a href="alpha-diversity.html#cb6-6" aria-hidden="true"></a></span>
-<span id="cb6-7"><a href="alpha-diversity.html#cb6-7" aria-hidden="true"></a>cross_plot</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="alpha-diversity.html#cb27-1" aria-hidden="true" tabindex="-1"></a>cross_plot <span class="ot">&lt;-</span> ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="fu">as.data.frame</span>(<span class="fu">colData</span>(tse)), </span>
+<span id="cb27-2"><a href="alpha-diversity.html#cb27-2" aria-hidden="true" tabindex="-1"></a>                                     <span class="fu">aes</span>(<span class="at">x =</span> Shannon_diversity, <span class="at">y =</span> Faith_diversity)) <span class="sc">+</span> </span>
+<span id="cb27-3"><a href="alpha-diversity.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co"># Adds points</span></span>
+<span id="cb27-4"><a href="alpha-diversity.html#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm) <span class="sc">+</span> <span class="co"># Adds regression line</span></span>
+<span id="cb27-5"><a href="alpha-diversity.html#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Shannon index&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Faith diversity&quot;</span>) </span>
+<span id="cb27-6"><a href="alpha-diversity.html#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="alpha-diversity.html#cb27-7" aria-hidden="true" tabindex="-1"></a>cross_plot</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<pre><code>## Warning in grid.Call.graphics(C_polygon, x$x, x$y, index): semi-transparency is
-## not supported on this device: reported only once per page</code></pre>
-<p><img src="radboud2021_material_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="radboud2021_material_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <div id="visualization-1" class="section level2" number="7.1">
 <h2><span class="header-section-number">7.1</span> Visualization</h2>
 <p>Next let us compare indices between different patient status and
 cohorts. Boxplot is suitable for that purpose.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="alpha-diversity.html#cb9-1" aria-hidden="true"></a><span class="co"># Creates Shannon boxplot </span></span>
-<span id="cb9-2"><a href="alpha-diversity.html#cb9-2" aria-hidden="true"></a>shannon_box &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">as.data.frame</span>(<span class="kw">colData</span>(tse)),</span>
-<span id="cb9-3"><a href="alpha-diversity.html#cb9-3" aria-hidden="true"></a>  <span class="kw">aes</span>(<span class="dt">x =</span> patient_status, </span>
-<span id="cb9-4"><a href="alpha-diversity.html#cb9-4" aria-hidden="true"></a>      <span class="dt">y =</span> Shannon_diversity,</span>
-<span id="cb9-5"><a href="alpha-diversity.html#cb9-5" aria-hidden="true"></a>      <span class="dt">fill =</span> cohort)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb9-6"><a href="alpha-diversity.html#cb9-6" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></span>
-<span id="cb9-7"><a href="alpha-diversity.html#cb9-7" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>)) <span class="co"># makes titles smaller</span></span>
-<span id="cb9-8"><a href="alpha-diversity.html#cb9-8" aria-hidden="true"></a></span>
-<span id="cb9-9"><a href="alpha-diversity.html#cb9-9" aria-hidden="true"></a><span class="co"># Creates Faith boxplot </span></span>
-<span id="cb9-10"><a href="alpha-diversity.html#cb9-10" aria-hidden="true"></a>faith_box &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="kw">as.data.frame</span>(<span class="kw">colData</span>(tse)), <span class="kw">aes</span>(<span class="dt">x =</span> patient_status, </span>
-<span id="cb9-11"><a href="alpha-diversity.html#cb9-11" aria-hidden="true"></a>                                                     <span class="dt">y =</span> Faith_diversity, </span>
-<span id="cb9-12"><a href="alpha-diversity.html#cb9-12" aria-hidden="true"></a>                                                     <span class="dt">fill =</span> cohort)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb9-13"><a href="alpha-diversity.html#cb9-13" aria-hidden="true"></a><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></span>
-<span id="cb9-14"><a href="alpha-diversity.html#cb9-14" aria-hidden="true"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>)) <span class="co"># makes titles smaller</span></span>
-<span id="cb9-15"><a href="alpha-diversity.html#cb9-15" aria-hidden="true"></a></span>
-<span id="cb9-16"><a href="alpha-diversity.html#cb9-16" aria-hidden="true"></a><span class="co"># Puts them into same picture</span></span>
-<span id="cb9-17"><a href="alpha-diversity.html#cb9-17" aria-hidden="true"></a>gridExtra<span class="op">::</span><span class="kw">grid.arrange</span>(shannon_box, faith_box, <span class="dt">nrow =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="radboud2021_material_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="alpha-diversity.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates Shannon boxplot </span></span>
+<span id="cb29-2"><a href="alpha-diversity.html#cb29-2" aria-hidden="true" tabindex="-1"></a>shannon_box <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">as.data.frame</span>(<span class="fu">colData</span>(tse)),</span>
+<span id="cb29-3"><a href="alpha-diversity.html#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> patient_status, </span>
+<span id="cb29-4"><a href="alpha-diversity.html#cb29-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> Shannon_diversity,</span>
+<span id="cb29-5"><a href="alpha-diversity.html#cb29-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> cohort)) <span class="sc">+</span> </span>
+<span id="cb29-6"><a href="alpha-diversity.html#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb29-7"><a href="alpha-diversity.html#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)) <span class="co"># makes titles smaller</span></span>
+<span id="cb29-8"><a href="alpha-diversity.html#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="alpha-diversity.html#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates Faith boxplot </span></span>
+<span id="cb29-10"><a href="alpha-diversity.html#cb29-10" aria-hidden="true" tabindex="-1"></a>faith_box <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">as.data.frame</span>(<span class="fu">colData</span>(tse)), <span class="fu">aes</span>(<span class="at">x =</span> patient_status, </span>
+<span id="cb29-11"><a href="alpha-diversity.html#cb29-11" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">y =</span> Faith_diversity, </span>
+<span id="cb29-12"><a href="alpha-diversity.html#cb29-12" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">fill =</span> cohort)) <span class="sc">+</span> </span>
+<span id="cb29-13"><a href="alpha-diversity.html#cb29-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb29-14"><a href="alpha-diversity.html#cb29-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)) <span class="co"># makes titles smaller</span></span>
+<span id="cb29-15"><a href="alpha-diversity.html#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-16"><a href="alpha-diversity.html#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Puts them into same picture</span></span>
+<span id="cb29-17"><a href="alpha-diversity.html#cb29-17" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(shannon_box, faith_box, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="radboud2021_material_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>For an alternative visualization, see examples with <a href="https://microbiome.github.io/OMA/microbiome-diversity.html#alpha-diversity">scater::plotColData</a>.</p>
 </div>
 <div id="statistical-testing-and-comparisons" class="section level2" number="7.2">
@@ -417,11 +410,11 @@ normally distributed observations.</p>
 two groups is statistically significant. Here the ADHD and control
 groups are not significantly different between groups (p-value is over
 0.05).</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="alpha-diversity.html#cb10-1" aria-hidden="true"></a><span class="co"># Wilcoxon test, where Shannon index is the variable that we are comparing. </span></span>
-<span id="cb10-2"><a href="alpha-diversity.html#cb10-2" aria-hidden="true"></a><span class="co"># Patient status - ADHD or control - is the factor that we use for grouping. </span></span>
-<span id="cb10-3"><a href="alpha-diversity.html#cb10-3" aria-hidden="true"></a>wilcoxon_shannon &lt;-<span class="st"> </span><span class="kw">wilcox.test</span>(Shannon_diversity <span class="op">~</span><span class="st"> </span>patient_status, <span class="dt">data =</span> <span class="kw">colData</span>(tse))</span>
-<span id="cb10-4"><a href="alpha-diversity.html#cb10-4" aria-hidden="true"></a></span>
-<span id="cb10-5"><a href="alpha-diversity.html#cb10-5" aria-hidden="true"></a>wilcoxon_shannon</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="alpha-diversity.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Wilcoxon test, where Shannon index is the variable that we are comparing. </span></span>
+<span id="cb30-2"><a href="alpha-diversity.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Patient status - ADHD or control - is the factor that we use for grouping. </span></span>
+<span id="cb30-3"><a href="alpha-diversity.html#cb30-3" aria-hidden="true" tabindex="-1"></a>wilcoxon_shannon <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(Shannon_diversity <span class="sc">~</span> patient_status, <span class="at">data =</span> <span class="fu">colData</span>(tse))</span>
+<span id="cb30-4"><a href="alpha-diversity.html#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="alpha-diversity.html#cb30-5" aria-hidden="true" tabindex="-1"></a>wilcoxon_shannon</span></code></pre></div>
 <pre><code>## 
 ##  Wilcoxon rank sum exact test
 ## 
@@ -433,17 +426,17 @@ cohorts. From boxplot that we made in previous step, we can see that there might
 be statistically significant difference between different cohorts.</p>
 <p>Let’s compare Shannon index of ADHD samples between cohort 2 and cohort 3.</p>
 <p>As we can see, there is statistically significant difference between the cohorts.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="alpha-diversity.html#cb12-1" aria-hidden="true"></a><span class="co"># Takes subset of colData. Takes only ADHD samples</span></span>
-<span id="cb12-2"><a href="alpha-diversity.html#cb12-2" aria-hidden="true"></a>ADHD_shannon &lt;-<span class="st"> </span><span class="kw">colData</span>(tse)[ <span class="kw">colData</span>(tse)[, <span class="st">&quot;patient_status&quot;</span>] <span class="op">==</span><span class="st"> &quot;ADHD&quot;</span> , ]</span>
-<span id="cb12-3"><a href="alpha-diversity.html#cb12-3" aria-hidden="true"></a></span>
-<span id="cb12-4"><a href="alpha-diversity.html#cb12-4" aria-hidden="true"></a><span class="co"># Takes subset of colData. Takes only samples that are in cohort 2 or cohort 3.</span></span>
-<span id="cb12-5"><a href="alpha-diversity.html#cb12-5" aria-hidden="true"></a>ADHD_shannon &lt;-<span class="st"> </span>ADHD_shannon[ ADHD_shannon[, <span class="st">&quot;cohort&quot;</span>] <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Cohort_2&quot;</span>, <span class="st">&quot;Cohort_3&quot;</span>) , ]</span>
-<span id="cb12-6"><a href="alpha-diversity.html#cb12-6" aria-hidden="true"></a></span>
-<span id="cb12-7"><a href="alpha-diversity.html#cb12-7" aria-hidden="true"></a><span class="co"># Wilcoxon test, where Shannon index is the variable that we are comparing. </span></span>
-<span id="cb12-8"><a href="alpha-diversity.html#cb12-8" aria-hidden="true"></a><span class="co"># Cohort - 2 or 3 - is the factor that we use for grouping. </span></span>
-<span id="cb12-9"><a href="alpha-diversity.html#cb12-9" aria-hidden="true"></a>wilcoxon_shannon_ADHD_cohorts &lt;-<span class="st"> </span><span class="kw">wilcox.test</span>(Shannon_diversity <span class="op">~</span><span class="st"> </span>cohort, <span class="dt">data =</span> ADHD_shannon)</span>
-<span id="cb12-10"><a href="alpha-diversity.html#cb12-10" aria-hidden="true"></a></span>
-<span id="cb12-11"><a href="alpha-diversity.html#cb12-11" aria-hidden="true"></a>wilcoxon_shannon_ADHD_cohorts</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="alpha-diversity.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Takes subset of colData. Takes only ADHD samples</span></span>
+<span id="cb32-2"><a href="alpha-diversity.html#cb32-2" aria-hidden="true" tabindex="-1"></a>ADHD_shannon <span class="ot">&lt;-</span> <span class="fu">colData</span>(tse)[ <span class="fu">colData</span>(tse)[, <span class="st">&quot;patient_status&quot;</span>] <span class="sc">==</span> <span class="st">&quot;ADHD&quot;</span> , ]</span>
+<span id="cb32-3"><a href="alpha-diversity.html#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="alpha-diversity.html#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Takes subset of colData. Takes only samples that are in cohort 2 or cohort 3.</span></span>
+<span id="cb32-5"><a href="alpha-diversity.html#cb32-5" aria-hidden="true" tabindex="-1"></a>ADHD_shannon <span class="ot">&lt;-</span> ADHD_shannon[ ADHD_shannon[, <span class="st">&quot;cohort&quot;</span>] <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Cohort_2&quot;</span>, <span class="st">&quot;Cohort_3&quot;</span>) , ]</span>
+<span id="cb32-6"><a href="alpha-diversity.html#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="alpha-diversity.html#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Wilcoxon test, where Shannon index is the variable that we are comparing. </span></span>
+<span id="cb32-8"><a href="alpha-diversity.html#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Cohort - 2 or 3 - is the factor that we use for grouping. </span></span>
+<span id="cb32-9"><a href="alpha-diversity.html#cb32-9" aria-hidden="true" tabindex="-1"></a>wilcoxon_shannon_ADHD_cohorts <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(Shannon_diversity <span class="sc">~</span> cohort, <span class="at">data =</span> ADHD_shannon)</span>
+<span id="cb32-10"><a href="alpha-diversity.html#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="alpha-diversity.html#cb32-11" aria-hidden="true" tabindex="-1"></a>wilcoxon_shannon_ADHD_cohorts</span></code></pre></div>
 <pre><code>## 
 ##  Wilcoxon rank sum exact test
 ## 

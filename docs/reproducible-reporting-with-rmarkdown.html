@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Program | Introduction to microbiome data science</title>
+  <title>4 Reproducible reporting with Rmarkdown | Introduction to microbiome data science</title>
   <meta name="description" content="Course material" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Program | Introduction to microbiome data science" />
+  <meta property="og:title" content="4 Reproducible reporting with Rmarkdown | Introduction to microbiome data science" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="microbiome/course_2021_radboud" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Program | Introduction to microbiome data science" />
+  <meta name="twitter:title" content="4 Reproducible reporting with Rmarkdown | Introduction to microbiome data science" />
   
   <meta name="twitter:description" content="Course material" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="getting-started.html"/>
+<link rel="prev" href="getting-started.html"/>
+<link rel="next" href="importing-microbiome-data.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -240,87 +240,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="program" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Program</h1>
-<p>The course takes place on each working day from 9am – 1pm
-(CEST). Short breaks will be scheduled between sessions.</p>
-<p>The hands-on sessions consists of a set of questions and example
-data. Solve the exercises by taking advantage of the online examples
-and resources that are pointed out in the study material. There is
-often more than one way to solve a given task. It is assumed that you
-have already installed the required software. Do not hesitate to ask
-support from the course assistants.</p>
-<div id="monday-12-july-from-raw-sequences-to-ecological-data-analysis" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Monday 12 July: from raw sequences to ecological data analysis</h2>
-<p><strong>Lectures</strong></p>
+<div id="reproducible-reporting-with-rmarkdown" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Reproducible reporting with Rmarkdown</h1>
+<p>Reproducible reporting is the starting point for robust interactive
+data science. Perform the following tasks:</p>
 <ul>
-<li><p>Microbiota analysis: association studies vs. causality; microbiota sequencing methods (16S, shotgun, metagenomics) - by dr. Tom Ederveen (Radboud UMC Nijmegen, The Netherlands)</p></li>
-<li><p>DNA isolation and 16S rRNA gene sequencing; bioinformatics step 1: from raw sequences to OTU table in a biom file – by Tom Ederveen (Radboudumc Nijmegen, The Netherlands)</p></li>
+<li><p>Create a Rmarkdown template in RStudio, and render it into a
+document (markdown, PDF, docx or other format)</p></li>
+<li><p>If you are entirely new to Markdown, take
+<a href="https://www.markdowntutorial.com/">this</a> 10 minute tutorial to get
+introduced to the most important functions within Markdown. Then
+experiment with different options with
+<a href="https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf">Rmarkdown</a></p></li>
 </ul>
-<p><strong>Demo &amp; Practical</strong></p>
-<ul>
-<li><p>Importing data to R for interactive data analysis</p></li>
-<li><p>Task: initialize reproducible report</p></li>
-</ul>
-<hr />
-</div>
-<div id="tuesday-13-july---alpha-diversity" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Tuesday 13 July - Alpha diversity</h2>
-<p><strong>Demo</strong></p>
-<ul>
-<li>Microbiome data exploration</li>
-</ul>
-<p><strong>Lecture</strong></p>
-<ul>
-<li>Key concepts in microbiome data science</li>
-</ul>
-<p><strong>Practical</strong></p>
-<ul>
-<li>Alpha diversity: estimation, analysis, and visualization</li>
-</ul>
-<hr />
-</div>
-<div id="wednesday-14-july---beta-diversity" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Wednesday 14 July - Beta diversity</h2>
-<p><strong>Demo</strong></p>
-<ul>
-<li>Community similarity</li>
-</ul>
-<p><strong>Practical</strong></p>
-<ul>
-<li>Beta diversity: estimation, analysis, and visualization</li>
-</ul>
-<hr />
-</div>
-<div id="thursday-15-july---differential-abundance" class="section level2" number="2.4">
-<h2><span class="header-section-number">2.4</span> Thursday 15 July - Differential abundance</h2>
-<p><strong>Lecture</strong></p>
-<ul>
-<li>Differential abundance analysis methods</li>
-</ul>
-<p><strong>Practical</strong></p>
-<ul>
-<li>Differential abundance in practice</li>
-</ul>
-<p><strong>Lecture</strong></p>
-<ul>
-<li>Overview of microbiota data science methods &amp; concepts</li>
-</ul>
-<hr />
-</div>
-<div id="friday-16-july-presentations-closing" class="section level2" number="2.5">
-<h2><span class="header-section-number">2.5</span> Friday 16 July: Presentations &amp; closing</h2>
-<p><strong>Student presentations</strong> on microbiome data analytics</p>
+<p>In case you are new to Rmarkdown <a href="https://rmarkdown.rstudio.com/lesson-1.html">Rstudio provides
+resources</a> to learn
+about the use cases and the basics of Rmarkdown. A good online
+tutorial to reproducible reporting is available by <a href="https://rpubs.com/marschmi/RMarkdown">Dr. C Titus
+Brown</a>.</p>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="getting-started.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="getting-started.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="importing-microbiome-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
