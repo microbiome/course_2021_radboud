@@ -23,7 +23,9 @@ The `rowData` seems to contain information from `r ncol(rowData(tse))`
 different taxonomy classes.
 
 ```{r}
-knitr::kable(head(rowData(tse))) %>% kableExtra::kable_styling("striped") %>% 
+knitr::kable(head(rowData(tse))) %>% 
+  kableExtra::kable_styling("striped", 
+                            latex_options="scale_down") %>% 
   kableExtra::scroll_box(width = "100%")
 ```
 
@@ -32,7 +34,9 @@ However, here only the 6 first samples are shown as we use the `head()` command.
 are `r ncol(colData(tse))` columns, that contain information, e.g., about patients' status, and cohort.
 
 ```{r}
-knitr::kable(head(colData(tse))) %>% kableExtra::kable_styling("striped") %>% 
+knitr::kable(head(colData(tse))) %>% 
+  kableExtra::kable_styling("striped", 
+                            latex_options="scale_down") %>% 
   kableExtra::scroll_box(width = "100%")
 ```
 
@@ -99,7 +103,9 @@ From the assay we can see that all abundances of taxa that belong to
 Firmicutes are summed up.
 
 ```{r}
-knitr::kable(head(rowData(tse_phylum))) %>% kableExtra::kable_styling("striped") %>% 
+knitr::kable(head(rowData(tse_phylum))) %>% 
+  kableExtra::kable_styling("striped", 
+                            latex_options="scale_down") %>% 
   kableExtra::scroll_box(width = "100%")
 ```
 
@@ -117,7 +123,9 @@ agglomeration.
 temp <- rowData(agglomerateByRank(tse, rank = "Genus"))
 
 # Prints those taxa that do not have information at the Genus level
-knitr::kable(head(temp[temp$Genus == "",])) %>% kableExtra::kable_styling("striped") %>% 
+knitr::kable(head(temp[temp$Genus == "",])) %>% 
+  kableExtra::kable_styling("striped", 
+                            latex_options="scale_down") %>% 
   kableExtra::scroll_box(width = "100%")
 ```
 
@@ -195,7 +203,8 @@ firmicutes_abund_plot
 # plot(density_firmicutes,
 #      xlab="Relative abundance",
 #      ylab="Density",
-#      main=paste0("Firmicutes (",density_firmicutes$n, " obs, ", density_firmicutes$bw, " bw)"))
+#      main=paste0("Firmicutes (",density_firmicutes$n, " obs, ", 
+#      density_firmicutes$bw, " bw)"))
 ```
 
 
