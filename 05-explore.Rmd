@@ -1,15 +1,17 @@
-
 # Microbiome data exploration
 
-Now we have loaded the data set into R and confirmed that it has all
-the necessary components. Next, let us walk through some basic
-operations for data exploration.
+Now we have loaded the data set into R. Next, let us walk through some
+basic operations for data exploration to confirm that the data has all
+the necessary components.
 
 
-## Investigate 
+## Data structure
 
-Dimensionality tells us, how many taxa and samples the data contains. As we can see, 
-there are `r dim(tse)[1]` taxa and `r dim(tse)[2]` samples.
+Let us now investigate how taxonomic profiling data is organized in R.
+
+Dimensionality tells us how many taxa and samples the data
+contains. As we can see, there are `r dim(tse)[1]` taxa and `r
+dim(tse)[2]` samples.
 
 ```{r}
 dim(tse)
@@ -51,7 +53,7 @@ and `r length(colData(tse)$patient_status[colData(tse)$patient_status == "Contro
 sort(table(colData(tse)$patient_status))
 ```
 
-## Manipulate
+
 
 
 ### Transformations
@@ -135,7 +137,7 @@ package](https://microbiome.github.io/mia/reference/index.html)
 contains further examples on various data agglomeration and splitting
 options.
 
-## Visualize
+## Visualization
 
 The [miaViz package](https://microbiome.github.io/miaViz/) facilitates
 data visualization. Let us plot the Phylum level abundances.
@@ -185,7 +187,7 @@ firmicutes_abund_plot
 
 ```
 
-```{r}
+```{r, echo=FALSE}
 # # Does the same thing but differently
 # # Calculates the density. Bandwidth can be adjusted; here, it is 0.065.
 # # density() is from stats package
@@ -200,3 +202,62 @@ firmicutes_abund_plot
 
 
 For more visualization options and examples, see the [miaViz vignette](https://microbiome.github.io/miaViz/articles/miaViz.html).
+
+
+
+## Exercises (optional)
+
+Explore some of the following questions on your own by following
+[online examples](https://microbiome.github.io/OMA/). Prepare a
+reproducible report (Rmarkdown), and include the code that you use to
+import the data and generate the analyses.
+
+ * **Abundance table** Retrieve the taxonomic abundance table from the
+   example data set (TSE object). Tip: check "assays" in [data import
+   section](https://microbiome.github.io/OMA/data-introduction.html#loading-experimental-microbiome-data)
+   
+ * How many different samples and genus-level groups this phyloseq
+   object has? Tips: see dim(), rowData()
+
+ * What is the maximum abundance of Akkermansia in this data set? Tip:
+   aggregate the data to Genus level with agglomerateByRank, pick
+   abundance assay, and check a given genus (row) in the assay
+
+ * Draw a histogram of library sizes (total number of reads per
+   sample). Tip: Library size section in
+   [OMA](https://microbiome.github.io/OMA/quality-control.html). You
+   can use the available function, or count the sum of reads per
+   sample by using the colSums command applied on the abundance
+   table. Check [Vandeputte et
+   al. 2017](https://www.nature.com/articles/nature24460) for further
+   discussion on the differences between absolute and relative
+   quantification of microbial abundances.
+
+ * **Taxonomy table** Retrieve the taxonomy table and print out the
+   first few lines of it with the R command head(). Investigate how
+   many different phylum-level groups this phyloseq object has? Tips:
+   rowData, taxonomicRanks in
+   [OMA](https://microbiome.github.io/OMA/taxonomic-information.html#functions-to-access-taxonomic-information).
+
+ * **Sample metadata** Retrieve sample metadata. How many patient
+     groups this data set has? Draw a histogram of sample
+     diversities. Tips: colData
+
+ * **Subsetting** Pick a subset of the data object including only
+     ADHD individuals from Cohort 1. How many there are? Tips: subsetSamples
+
+ * **Transformations** The data contains read counts. We can convert
+  these into relative abundances and other formats. Compare abundance
+  of a given taxonomic group using the example data before and after
+  the compositionality transformation (with a cross-plot, for
+  instance). You can also compare the results to CLR-transformed data
+  (see e.g. [Gloor et
+  al. 2017](https://www.frontiersin.org/articles/10.3389/fmicb.2017.02224/full))
+
+ * **Visual exploration** Visualize the population distribution of
+   abundances for certain taxonomic groups. Do the same for
+   CLR-transformed abundances. Tip: assays, transformCounts
+   
+ * Experiment with other data manipulation tools from
+   [OMA](https://microbiome.github.io/OMA/taxonomic-information.html#functions-to-access-taxonomic-information).
+

@@ -16,5 +16,5 @@ render_book("index.Rmd", "bookdown::gitbook")
 # Render pdf files
 render_book("index.Rmd", "bookdown::pdf_document2")
 
-# After you have rendered the book locally, you can observe rendered html files
-# that are located in docs subfolder.
+# After you have rendered the book locally, you can observe rendered
+# html files that are located in docs subfolder.

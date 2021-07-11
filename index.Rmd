@@ -12,6 +12,7 @@ description: "Course material"
 output:
   bookdown::gitbook
   bookdown::pdf_document2
+always_allow_html: true  
 ---
 
 # Overview 
@@ -24,12 +25,10 @@ output:
 
 
 
-
 ## Introduction
 
 This course is based on [_miaverse_](https://microbiome.github.io) (mia = **MI**crobiome **A**nalysis) is an
-R/Bioconductor framework for microbiome data science. It aims to
-extend the capabilities of another popular framework,
+R/Bioconductor framework for microbiome data science. It extends the capabilities of another popular framework,
 [phyloseq](https://joey711.github.io/phyloseq/).
 
 The miaverse framework consists of an efficient data structure, an
@@ -76,12 +75,15 @@ data science by utilizing available documentation and R tools.
 
 ## Acknowledgments
 
-**Citation** "Introduction to miaverse (2021). Tuomas Borman, Felix Ernst, Sudarshan Shetty, Henrik Eckermann, Leo Lahti. URL: https://microbiome.github.io".
+**Citation** "Introduction to microbiome data science (2021). 
+`r paste(authors, sep = ",")` URL: https://microbiome.github.io".
 
-**Contact**
+We thank Felix Ernst, Sudarshan Shetty, and other members of the
+[miaverse developers](https://microbiome.github.io) who have
+contributed open resources that supported the development of the
+training material.
 
- * [Leo Lahti](http://datascience.utu.fi), University of Turku
- * [miaverse collective](https://microbiome.github.io)
+**Contact** [Leo Lahti](http://datascience.utu.fi), University of Turku, Finland
 
 **License** All material is released under the open [CC BY-NC-SA 3.0 License](LICENSE).
 

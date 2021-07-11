@@ -4,6 +4,7 @@ rmd_files:
   - index.Rmd
   - 01-program.Rmd
   - 02-start.Rmd
+  - 03-reproduciblereporting.Rmd
   - 04-import.Rmd
   - 05-explore.Rmd
   - 06-alpha.Rmd

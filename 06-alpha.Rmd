@@ -1,10 +1,9 @@
-
 # Alpha diversity
 
 This section demonstrates the analysis of alpha diversity. This
 quantity measures microbial diversity within each sample. Higher
 numbers of unique taxa, and more even abundance distributions within a
-sample yield larger values for alpha diversity in general.
+sample yield larger values for alpha diversity.
 
 Alpha diversity is a key quantity in a microbiome research. The [_mia_
 package](https://microbiome.github.io/mia/) provides access to a wide
@@ -161,3 +160,18 @@ wilcoxon_shannon_ADHD_cohorts
 
 For more examples, see a dedicated section on alpha diversity in the
 [online book](https://microbiome.github.io/OMA/).
+
+
+
+## Exercises
+
+Add the following in the reproducible summary report.
+
+* Estimate alpha diversity for each sample and draw a histogram. Tip:
+  estimateDiversity
+
+* Compare the results between two or more
+  alpha diversity indices (visually and/or statistically).
+
+* See [online book](https://microbiome.github.io/OMA/) for further examples.
+

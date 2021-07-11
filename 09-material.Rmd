@@ -47,6 +47,10 @@ RStudio
  * [phyloseq](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0061217)
  * [microbiome tutorial](http://microbiome.github.io/tutorials/)
  * [microbiomeutilities](https://microsud.github.io/microbiomeutilities/)
+ * Bioconductor Workflow for Microbiome Data Analysis: from raw reads to community analyses ([Callahan et al. F1000, 2016](https://f1000research.com/articles/5-1492/v2)).
+
+
+
 
 
 ## Further reading
