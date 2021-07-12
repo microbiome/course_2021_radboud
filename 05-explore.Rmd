@@ -10,13 +10,13 @@ the necessary components.
 Let us now investigate how taxonomic profiling data is organized in R.
 
 Dimensionality tells us how many taxa and samples the data
-contains. As we can see, there are `r dim(tse)[1]` taxa and `r
-dim(tse)[2]` samples.
+contains. As we can see, there are `r dim(tse)[1]` taxa and `r dim(tse)[2]` samples.
 
 ```{r, echo=FALSE}
 # Read pre-built data objects into the session
 #se  <- readRDS(file = "data/se.rds")
 #tse <- readRDS(file = "data/tse.rds")
+tse <- 1 # At least TSE should be found now
 biom_file_path <- "data/Aggregated_humanization2.biom"
 sample_meta_file_path <- "data/Mapping_file_ADHD_aggregated.csv"
 tree_file_path <- "data/Data_humanization_phylo_aggregation.tre"
@@ -27,8 +27,9 @@ library(mia)
 se <- loadFromBiom(biom_file_path)
 
 
-names(rowData(se)) <- c("Kingdom", "Phylum", "Class", "Order", 
-                        "Family", "Genus")
+names(rowData(se)) <- c("Kingdom", "Phylum",
+                        "Class",   "Order", 
+                        "Family",  "Genus")
 
 # Goes through the whole DataFrame. Removes '.*[kpcofg]__' from strings, where [kpcofg] 
 # is any character from listed ones, and .* any character.
