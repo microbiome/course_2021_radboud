@@ -4,6 +4,12 @@
 The course takes place on each working day from 9am – 1pm
 (CEST). Short breaks will be scheduled between sessions.
 
+The hands-on sessions consists of a set of questions and example
+data. Solve the exercises by taking advantage of the online examples
+and resources that are pointed out in the study material. There is
+often more than one way to solve a given task. It is assumed that you
+have already installed the required software. Do not hesitate to ask
+support from the course assistants.
 
 ## Monday 12 July: from raw sequences to ecological data analysis
 
@@ -14,18 +20,23 @@ The course takes place on each working day from 9am – 1pm
  * DNA isolation and 16S rRNA gene sequencing; bioinformatics step 1: from raw sequences to OTU table in a biom file – by Tom Ederveen (Radboudumc Nijmegen, The Netherlands)
 
 
-**Demonstration & Practical**
+**Demo & Practical**
 
- * Importing the data to R environment for interactive data analysis – by prof. dr. Leo Lahti ([University of Turku, Finland](datascience.utu.fi))
+ * Importing data to R for interactive data analysis 
+
+ * Task: initialize reproducible report
 
 ----------------------------------------------------------------
 
 ## Tuesday 13 July - Alpha diversity 
 
+**Demo**
+
+- Microbiome data exploration
+
 **Lecture**
 
 - Key concepts in microbiome data science
-
 
 **Practical**
 
@@ -35,7 +46,7 @@ The course takes place on each working day from 9am – 1pm
 
 ## Wednesday 14 July - Beta diversity
 
-**Demonstration**
+**Demo**
 
 - Community similarity 
 

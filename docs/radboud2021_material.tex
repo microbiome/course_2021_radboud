@@ -3,7 +3,7 @@
 \PassOptionsToPackage{hyphens}{url}
 %
 \documentclass[
-]{book}
+  oneside]{book}
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{ifxetex,ifluatex}
@@ -41,6 +41,7 @@
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
+\usepackage[top=30mm,left=15mm]{geometry}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -128,7 +129,7 @@
 
 \title{Introduction to microbiome data science}
 \author{Leo Lahti, Tuomas Borman, Henrik Eckermann, Chouaib Benchraka}
-\date{2021-07-11}
+\date{2021-07-12}
 
 \begin{document}
 \maketitle
@@ -148,9 +149,7 @@ Figure source: Moreno-Indias \emph{et al}. (2021) \href{https://doi.org/10.3389/
 \section{Introduction}\label{introduction}}
 
 This course is based on \href{https://microbiome.github.io}{\emph{miaverse}} (mia = \textbf{MI}crobiome \textbf{A}nalysis) is an
-R/Bioconductor framework for microbiome data science. It aims to
-extend the capabilities of another popular framework,
-\href{https://joey711.github.io/phyloseq/}{phyloseq}.
+R/Bioconductor framework for microbiome data science. It extends another popular framework, \href{https://joey711.github.io/phyloseq/}{phyloseq}.
 
 The miaverse framework consists of an efficient data structure, an
 associated package ecosystem, demonstration data sets, and open
@@ -191,17 +190,15 @@ Turku}, Finland.
 \hypertarget{acknowledgments}{%
 \section{Acknowledgments}\label{acknowledgments}}
 
-\textbf{Citation} ``Introduction to miaverse (2021). Tuomas Borman, Felix Ernst, Sudarshan Shetty, Henrik Eckermann, Leo Lahti. URL: \url{https://microbiome.github.io}.''
+\textbf{Citation} ``Introduction to microbiome data science (2021).
+Leo Lahti, Tuomas Borman, Henrik Eckermann, Chouaib Benchraka URL: \url{https://microbiome.github.io}.''
 
-\textbf{Contact}
+We thank Felix Ernst, Sudarshan Shetty, and other members of the
+\href{https://microbiome.github.io}{miaverse developers} who have
+contributed open resources that supported the development of the
+training material.
 
-\begin{itemize}
-\tightlist
-\item
-  \href{http://datascience.utu.fi}{Leo Lahti}, University of Turku
-\item
-  \href{https://microbiome.github.io}{miaverse collective}
-\end{itemize}
+\textbf{Contact} \href{http://datascience.utu.fi}{Leo Lahti}, University of Turku, Finland
 
 \textbf{License} All material is released under the open \href{LICENSE}{CC BY-NC-SA 3.0 License}.
 
@@ -227,6 +224,13 @@ although this is not necessary for the training.
 The course takes place on each working day from 9am -- 1pm
 (CEST). Short breaks will be scheduled between sessions.
 
+The hands-on sessions consists of a set of questions and example
+data. Solve the exercises by taking advantage of the online examples
+and resources that are pointed out in the study material. There is
+often more than one way to solve a given task. It is assumed that you
+have already installed the required software. Do not hesitate to ask
+support from the course assistants.
+
 \hypertarget{monday-12-july-from-raw-sequences-to-ecological-data-analysis}{%
 \section{Monday 12 July: from raw sequences to ecological data analysis}\label{monday-12-july-from-raw-sequences-to-ecological-data-analysis}}
 
@@ -239,18 +243,27 @@ The course takes place on each working day from 9am -- 1pm
   DNA isolation and 16S rRNA gene sequencing; bioinformatics step 1: from raw sequences to OTU table in a biom file -- by Tom Ederveen (Radboudumc Nijmegen, The Netherlands)
 \end{itemize}
 
-\textbf{Demonstration \& Practical}
+\textbf{Demo \& Practical}
 
 \begin{itemize}
-\tightlist
 \item
-  Importing the data to R environment for interactive data analysis -- by prof. dr. Leo Lahti (\href{datascience.utu.fi}{University of Turku, Finland})
+  Importing data to R for interactive data analysis
+\item
+  Task: initialize reproducible report
 \end{itemize}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{tuesday-13-july---alpha-diversity}{%
 \section{Tuesday 13 July - Alpha diversity}\label{tuesday-13-july---alpha-diversity}}
+
+\textbf{Demo}
+
+\begin{itemize}
+\tightlist
+\item
+  Microbiome data exploration
+\end{itemize}
 
 \textbf{Lecture}
 
@@ -273,7 +286,7 @@ The course takes place on each working day from 9am -- 1pm
 \hypertarget{wednesday-14-july---beta-diversity}{%
 \section{Wednesday 14 July - Beta diversity}\label{wednesday-14-july---beta-diversity}}
 
-\textbf{Demonstration}
+\textbf{Demo}
 
 \begin{itemize}
 \tightlist
@@ -441,49 +454,138 @@ mia and miaViz are prioritized. Packages that are loaded first have higher prior
 ## vegan                  TRUE
 \end{verbatim}
 
+\hypertarget{reproducible-reporting-with-rmarkdown}{%
+\chapter{Reproducible reporting with Rmarkdown}\label{reproducible-reporting-with-rmarkdown}}
+
+Reproducible reporting is the starting point for robust interactive
+data science. Perform the following tasks:
+
+\begin{itemize}
+\item
+  Create a Rmarkdown template in RStudio, and render it into a
+  document (markdown, PDF, docx or other format)
+\item
+  If you are entirely new to Markdown, take
+  \href{https://www.markdowntutorial.com/}{this} 10 minute tutorial to get
+  introduced to the most important functions within Markdown. Then
+  experiment with different options with
+  \href{https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf}{Rmarkdown}
+\end{itemize}
+
+In case you are new to Rmarkdown \href{https://rmarkdown.rstudio.com/lesson-1.html}{Rstudio provides
+resources} to learn
+about the use cases and the basics of Rmarkdown. A good online
+tutorial to reproducible reporting is available by \href{https://rpubs.com/marschmi/RMarkdown}{Dr.~C Titus
+Brown}.
+
 \hypertarget{importing-microbiome-data}{%
 \chapter{Importing microbiome data}\label{importing-microbiome-data}}
 
 This section demonstrates how to import microbiome profiling data in R.
 
-The \emph{biom} format is a standard file format for microbiome data. Here,
-we import \emph{biom} data files into a specific data container (structure)
-in R. Specifically, we use a \emph{TreeSummarizedExperiment} (TSE) data
-container. This provides the basis for the \emph{miaverse} data science
-framework.
+\hypertarget{data-access}{%
+\section{Data access}\label{data-access}}
 
-We use example data from the following publication: Tengeler AC \emph{et
+\textbf{Option 1}
+
+\emph{ADHD-associated changes in gut microbiota and brain in a mouse model}
+
+Tengeler AC \emph{et
 al.} (2020) \href{https://doi.org/10.1186/s40168-020-00816-x}{\textbf{Gut microbiota from persons with
 attention-deficit/hyperactivity disorder affects the brain in
 mice}}. Microbiome
-8:44. In this study, mice are colonized with microbiota from
-participants with ADHD (attention deficit hyperactivity disorder) and
-healthy participants. The aim of the study was to assess whether the
-mice display ADHD behaviors after being inoculated with ADHD
-microbiota, suggesting a role of the microbiome in ADHD pathology.
+8:44.
 
-\hypertarget{data-access-and-example-of-importing-data}{%
-\section{Data access and example of importing data}\label{data-access-and-example-of-importing-data}}
+In this study, mice are colonized with microbiota from participants
+with ADHD (attention deficit hyperactivity disorder) and healthy
+participants. The aim of the study was to assess whether the mice
+display ADHD behaviors after being inoculated with ADHD microbiota,
+suggesting a role of the microbiome in ADHD pathology.
 
-You can download the data from
+Download the data from
 \href{https://github.com/microbiome/course_2021_radboud/tree/main/data}{data}
 subfolder.
 
-To get tips for importing biom files into R, see the online book for examples on
-\href{https://microbiome.github.io/OMA/data-introduction.html\#loading-experimental-microbiome-data}{data exploration and manipulation}.
+\textbf{Option 2}
+
+\emph{Western diet intervention study in serotonin transporter modified mouse model}
+
+Mice received three weeks of Western (high fat, high sugar) or Control diet in
+three Genotype groups, a wild-type group and 2 groups with either partial or
+complete knock-out of the serotonin transporter (SERT), leading to an excess of
+serotonin in the gut, brain and blood circulation. Mice were measured before
+and after the intervention. In total there are three factors in this design,
+Time (pre-,post-intervention), Diet (Control, Western diet) and Genotype group
+(WT, HET, KO). There are about 6-8 mice per group.
+
+Data can be found from Summer School's \href{https://brightspace.ru.nl/d2l/le/content/249077/Home}{Brightspace}.
+
+\textbf{Option 3}
+
+\emph{Open data set of your own choice}, see e.g.:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://bioconductor.org/packages/release/data/experiment/html/microbiomeDataSets.html}{Bioconductor microbiomeDataSets}
+\end{itemize}
+
+\hypertarget{importing-microbiome-data-in-r}{%
+\section{Importing microbiome data in R}\label{importing-microbiome-data-in-r}}
+
+\textbf{Import example data} by modifying the examples in the online book
+section on \href{https://microbiome.github.io/OMA/data-introduction.html\#loading-experimental-microbiome-data}{data exploration and
+manipulation}. The
+data files in our example are in \emph{biom} format, which is a standard
+file format for microbiome data. Other file formats exist as well, and
+import details vary by platform.
+
+Here, we import \emph{biom} data files into a specific data container (structure)
+in R, \emph{TreeSummarizedExperiment} (TSE) \href{https://f1000research.com/articles/9-1246}{Huang et
+al.~(2020)}. This provides
+the basis for downstream data analysis in the \emph{miaverse} data science
+framework.
+
+In this course, we focus on downstream analysis of taxonomic profiling
+data, and assume that the data has already been appropriately
+preprocessed and available in the TSE format. In addition to our
+example data, further demonstration data sets are readily available in
+the TSE format through
+\href{https://bioconductor.org/packages/release/data/experiment/html/microbiomeDataSets.html}{microbiomeDataSets}.
+
+\textbf{Figure sources:}
+
+\textbf{Original article}
+- Huang R \emph{et al}. (2021) \href{https://doi.org/10.12688/\%20f1000research.26669.2}{TreeSummarizedExperiment: a S4 class
+for data with hierarchical structure}. F1000Research 9:1246.
+
+\textbf{Reference Sequence slot extension}
+- Lahti L \emph{et al}. (2020) \href{https://doi.org/10.7490/\%20f1000research.1118447.1}{Upgrading the R/Bioconductor ecosystem for microbiome
+research} F1000Research 9:1464 (slides).
+
+\hypertarget{example-solutions}{%
+\section{Example solutions}\label{example-solutions}}
+
+\begin{itemize}
+\tightlist
+\item
+  Example code for data import: \url{import.Rmd}
+\end{itemize}
 
 \hypertarget{microbiome-data-exploration}{%
 \chapter{Microbiome data exploration}\label{microbiome-data-exploration}}
 
-Now we have loaded the data set into R and confirmed that it has all
-the necessary components. Next, let us walk through some basic
-operations for data exploration.
+Now we have loaded the data set into R. Next, let us walk through some
+basic operations for data exploration to confirm that the data has all
+the necessary components.
 
-\hypertarget{investigate}{%
-\section{Investigate}\label{investigate}}
+\hypertarget{data-structure}{%
+\section{Data structure}\label{data-structure}}
 
-Dimensionality tells us, how many taxa and samples the data contains. As we can see,
-there are 151 taxa and 27 samples.
+Let us now investigate how taxonomic profiling data is organized in R.
+
+Dimensionality tells us how many taxa and samples the data
+contains. As we can see, there are 151 taxa and \texttt{r\ dim(tse){[}2{]}} samples.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -590,9 +692,6 @@ and 14 control samples.
 ##    ADHD Control 
 ##      13      14
 \end{verbatim}
-
-\hypertarget{manipulate}{%
-\section{Manipulate}\label{manipulate}}
 
 \hypertarget{transformations}{%
 \subsection{Transformations}\label{transformations}}
@@ -744,8 +843,8 @@ package}
 contains further examples on various data agglomeration and splitting
 options.
 
-\hypertarget{visualize}{%
-\section{Visualize}\label{visualize}}
+\hypertarget{visualization}{%
+\section{Visualization}\label{visualization}}
 
 The \href{https://microbiome.github.io/miaViz/}{miaViz package} facilitates
 data visualization. Let us plot the Phylum level abundances.
@@ -809,23 +908,67 @@ The plot shows peak abundances around 30 \%.
 
 \includegraphics{radboud2021_material_files/figure-latex/unnamed-chunk-15-1.pdf}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# \# Does the same thing but differently}
-\CommentTok{\# \# Calculates the density. Bandwidth can be adjusted; here, it is 0.065.}
-\CommentTok{\# \# density() is from stats package}
-\CommentTok{\# density\_firmicutes \textless{}{-} density(abundance\_firmicutes, bw = 0.065)}
-\CommentTok{\# }
-\CommentTok{\# \# Plots the density}
-\CommentTok{\# plot(density\_firmicutes,}
-\CommentTok{\#      xlab="Relative abundance",}
-\CommentTok{\#      ylab="Density",}
-\CommentTok{\#      main=paste0("Firmicutes (",density\_firmicutes$n, " obs, ", }
-\CommentTok{\#      density\_firmicutes$bw, " bw)"))}
-\end{Highlighting}
-\end{Shaded}
-
 For more visualization options and examples, see the \href{https://microbiome.github.io/miaViz/articles/miaViz.html}{miaViz vignette}.
+
+\hypertarget{exercises-optional}{%
+\section{Exercises (optional)}\label{exercises-optional}}
+
+Explore some of the following questions on your own by following
+\href{https://microbiome.github.io/OMA/}{online examples}. Prepare a
+reproducible report (Rmarkdown), and include the code that you use to
+import the data and generate the analyses.
+
+\begin{itemize}
+\item
+  \textbf{Abundance table} Retrieve the taxonomic abundance table from the
+  example data set (TSE object). Tip: check ``assays'' in \href{https://microbiome.github.io/OMA/data-introduction.html\#loading-experimental-microbiome-data}{data import
+  section}
+\item
+  How many different samples and genus-level groups this phyloseq
+  object has? Tips: see dim(), rowData()
+\item
+  What is the maximum abundance of Akkermansia in this data set? Tip:
+  aggregate the data to Genus level with agglomerateByRank, pick
+  abundance assay, and check a given genus (row) in the assay
+\item
+  Draw a histogram of library sizes (total number of reads per
+  sample). Tip: Library size section in
+  \href{https://microbiome.github.io/OMA/quality-control.html}{OMA}. You
+  can use the available function, or count the sum of reads per
+  sample by using the colSums command applied on the abundance
+  table. Check \href{https://www.nature.com/articles/nature24460}{Vandeputte et
+  al.~2017} for further
+  discussion on the differences between absolute and relative
+  quantification of microbial abundances.
+\item
+  \textbf{Taxonomy table} Retrieve the taxonomy table and print out the
+  first few lines of it with the R command head(). Investigate how
+  many different phylum-level groups this phyloseq object has? Tips:
+  rowData, taxonomicRanks in
+  \href{https://microbiome.github.io/OMA/taxonomic-information.html\#functions-to-access-taxonomic-information}{OMA}.
+\item
+  \textbf{Sample metadata} Retrieve sample metadata. How many patient
+  groups this data set has? Draw a histogram of sample
+  diversities. Tips: colData
+\item
+  \textbf{Subsetting} Pick a subset of the data object including only
+  ADHD individuals from Cohort 1. How many there are? Tips: subsetSamples
+\item
+  \textbf{Transformations} The data contains read counts. We can convert
+  these into relative abundances and other formats. Compare abundance
+  of a given taxonomic group using the example data before and after
+  the compositionality transformation (with a cross-plot, for
+  instance). You can also compare the results to CLR-transformed data
+  (see e.g.~\href{https://www.frontiersin.org/articles/10.3389/fmicb.2017.02224/full}{Gloor et
+  al.~2017})
+\item
+  \textbf{Visual exploration} Visualize the population distribution of
+  abundances for certain taxonomic groups. Do the same for
+  CLR-transformed abundances. Tip: assays, transformCounts
+\item
+  Experiment with other data manipulation tools from
+  \href{https://microbiome.github.io/OMA/taxonomic-information.html\#functions-to-access-taxonomic-information}{OMA}.
+\end{itemize}
 
 \hypertarget{alpha-diversity}{%
 \chapter{Alpha diversity}\label{alpha-diversity}}
@@ -833,7 +976,7 @@ For more visualization options and examples, see the \href{https://microbiome.gi
 This section demonstrates the analysis of alpha diversity. This
 quantity measures microbial diversity within each sample. Higher
 numbers of unique taxa, and more even abundance distributions within a
-sample yield larger values for alpha diversity in general.
+sample yield larger values for alpha diversity.
 
 Alpha diversity is a key quantity in a microbiome research. The \href{https://microbiome.github.io/mia/}{\emph{mia}
 package} provides access to a wide
@@ -928,8 +1071,8 @@ Next, let us compare the indices based on a scatter-plot.
 
 \includegraphics{radboud2021_material_files/figure-latex/unnamed-chunk-20-1.pdf}
 
-\hypertarget{visualization}{%
-\section{Visualization}\label{visualization}}
+\hypertarget{visualization-1}{%
+\section{Visualization}\label{visualization-1}}
 
 Next let us compare indices between different patient status and
 cohorts. Boxplot is suitable for that purpose.
@@ -1028,6 +1171,22 @@ As we can see, there is statistically significant difference between the cohorts
 
 For more examples, see a dedicated section on alpha diversity in the
 \href{https://microbiome.github.io/OMA/}{online book}.
+
+\hypertarget{exercises}{%
+\section{Exercises}\label{exercises}}
+
+Add the following in the reproducible summary report.
+
+\begin{itemize}
+\item
+  Estimate alpha diversity for each sample and draw a histogram. Tip:
+  estimateDiversity
+\item
+  Compare the results between two or more
+  alpha diversity indices (visually and/or statistically).
+\item
+  See \href{https://microbiome.github.io/OMA/}{online book} for further examples.
+\end{itemize}
 
 \hypertarget{beta-diversity}{%
 \chapter{Beta diversity}\label{beta-diversity}}
@@ -1287,7 +1446,7 @@ variables are associated with each other.
 
 \begin{verbatim}
 ## Different different cohorts and variance of abundance
-##            between samples, p-value: 0.739
+##            between samples, p-value: 0.7376
 \end{verbatim}
 
 The cohort variable is not significantly associated with
@@ -1343,8 +1502,30 @@ community composition. For more examples, see a dedicated section on
 beta diversity in the \href{https://microbiome.github.io/OMA/}{online
 book}.
 
-As for community typing, a dedicated section presenting examples of analytical methods is found at the \href{https://microbiome.github.io/OMA/}{online
-book}.
+\hypertarget{community-typing}{%
+\section{Community typing}\label{community-typing}}
+
+A dedicated section presenting examples on community typing is in the
+\href{https://microbiome.github.io/OMA/}{online book}.
+
+\hypertarget{exercises-1}{%
+\section{Exercises}\label{exercises-1}}
+
+\begin{itemize}
+\item
+  Visualize community variation with PCoA.
+\item
+  Investigate the influence of the data transformations on
+  statistical analysis: Visualize community variation with PCoA with
+  the following options: 1) Bray-Curtis distances for compositional
+  data; 2) Euclidean distances for CLR-transformed data.
+\item
+  Community-level comparisons: Use PERMANOVA to investigate whether
+  the community composition differs between two groups of individuals
+  (e.g.~males and females, or some other grouping of your
+  choice). You can also include covariates such as age and gender,
+  and see how this affects the results.
+\end{itemize}
 
 \hypertarget{differential-abundance-analysis}{%
 \chapter{Differential abundance analysis}\label{differential-abundance-analysis}}
@@ -1867,8 +2048,8 @@ Then we can plot these six different taxa. Let's arrange them into the same pict
 
 To be added.
 
-\hypertarget{example-solutions}{%
-\section{Example solutions}\label{example-solutions}}
+\hypertarget{example-solutions-1}{%
+\section{Example solutions}\label{example-solutions-1}}
 
 To be added.
 
@@ -1955,6 +2136,8 @@ RStudio
   \href{http://microbiome.github.io/tutorials/}{microbiome tutorial}
 \item
   \href{https://microsud.github.io/microbiomeutilities/}{microbiomeutilities}
+\item
+  Bioconductor Workflow for Microbiome Data Analysis: from raw reads to community analyses (\href{https://f1000research.com/articles/5-1492/v2}{Callahan et al.~F1000, 2016}).
 \end{itemize}
 
 \hypertarget{further-reading}{%
