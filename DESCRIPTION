@@ -22,27 +22,35 @@ LazyData: true
 biocViews:
     Book
 Suggests:
-    bookdown,
-    dplyr,
-    ggplot2,
-    ggpubr,
-    knitr,
-    mia,
-    miaViz,
-    microbiomeDataSets,
-    picante,
-    rebook,
-    rmarkdown,
-    Rtsne,
-    scater,
-    scuttle,
-    scran,
-    tibble,
-    TreeSummarizedExperiment,
-    uwot,
-    phyloseq
+  BiocManager,
+  bookdown,
+  dplyr,
+  ecodist,
+  ggplot2, 
+  gridExtra,
+  kableExtra,
+  knitr,
+  scales,
+  vegan
+  ANCOMBC,
+  ape,
+  DESeq2,
+  DirichletMultinomial,
+  ggpubr,
+  picante,
+  rebook,
+  rmarkdown,
+  Rtsne,
+  scater,
+  scuttle,
+  scran,
+  tibble,
+  TreeSummarizedExperiment,
+  uwot,
+  phyloseq
 Remotes:
     github::microbiome/mia,
-    github::microbiome/miaViz
+    github::microbiome/miaViz,
+    github::microbiome/microbiomeDataSets
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1

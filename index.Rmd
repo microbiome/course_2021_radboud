@@ -15,6 +15,16 @@ output:
 always_allow_html: true  
 ---
 
+```{r, echo=FALSE}
+.gh_url <- file.path('https://github.com', rmarkdown::metadata[['github-repo']])
+```
+
+---
+date: "`r rebook::openingDetails(Copyright='', Source=.gh_url)`"
+url: "`r .gh_url`"
+---
+
+
 # Overview 
 
 **Welcome to [Radboud Summer School, July 2021](https://www.ru.nl/radboudsummerschool/courses/2021/brain-bacteria-behaviour/)**

@@ -1,6 +1,11 @@
 book_filename: radboud2021_material
+pagetitle: "Radboud 2021 summer school"
 delete_merged_file: true
-rmd_files:
+new_session: true
+language:
+  ui:
+    chapter_name: "Chapter "
+rmd_files: 
   - index.Rmd
   - 01-program.Rmd
   - 02-start.Rmd
