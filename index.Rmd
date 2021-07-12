@@ -28,8 +28,7 @@ always_allow_html: true
 ## Introduction
 
 This course is based on [_miaverse_](https://microbiome.github.io) (mia = **MI**crobiome **A**nalysis) is an
-R/Bioconductor framework for microbiome data science. It extends the capabilities of another popular framework,
-[phyloseq](https://joey711.github.io/phyloseq/).
+R/Bioconductor framework for microbiome data science. It extends another popular framework, [phyloseq](https://joey711.github.io/phyloseq/).
 
 The miaverse framework consists of an efficient data structure, an
 associated package ecosystem, demonstration data sets, and open
