@@ -1,0 +1,895 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Install and load required R packages · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="import.html" />
+    
+    
+    <link rel="prev" href="start.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1.1" data-path="./">
+            
+                <a href="./#miaverse">
+            
+                    
+                    miaverse
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.1.2" data-path="./">
+            
+                <a href="./#acknowledgments">
+            
+                    
+                    Acknowledgments
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="start.html">
+            
+                <a href="start.html">
+            
+                    
+                    Getting started
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="start.html">
+            
+                <a href="start.html#checklist-before-the-course">
+            
+                    
+                    Checklist before the course
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="start.html">
+            
+                <a href="start.html#start-workflow">
+            
+                    
+                    Start workflow
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="start.html">
+            
+                <a href="start.html#online-support">
+            
+                    
+                    Online support
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="start.html">
+            
+                <a href="start.html#additional-resources">
+            
+                    
+                    Additional resources
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3" data-path="install.html">
+            
+                <a href="install.html">
+            
+                    
+                    Install and load required R packages
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="import.html">
+            
+                <a href="import.html">
+            
+                    
+                    Import data
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="import.html">
+            
+                <a href="import.html#data">
+            
+                    
+                    Data
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="import.html">
+            
+                <a href="import.html#investigate-the-r-data-object">
+            
+                    
+                    Investigate the R data object
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="import.html">
+            
+                <a href="import.html#rowdata-taxonomic-information">
+            
+                    
+                    rowData (taxonomic information)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="import.html">
+            
+                <a href="import.html#coldata-sample-information">
+            
+                    
+                    colData (sample information)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="import.html">
+            
+                <a href="import.html#phylogenetic-tree-information">
+            
+                    
+                    Phylogenetic tree information
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="explore.html">
+            
+                <a href="explore.html">
+            
+                    
+                    Explore data
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="explore.html">
+            
+                <a href="explore.html#investigate-the-contents-of-a-microbiome-data-object">
+            
+                    
+                    Investigate the contents of a microbiome data object
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="explore.html">
+            
+                <a href="explore.html#manipulate-the-data">
+            
+                    
+                    Manipulate the data
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.2.1" data-path="explore.html">
+            
+                <a href="explore.html#transformations">
+            
+                    
+                    Transformations
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2.2" data-path="explore.html">
+            
+                <a href="explore.html#aggregation">
+            
+                    
+                    Aggregation
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="explore.html">
+            
+                <a href="explore.html#visualization">
+            
+                    
+                    Visualization
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="explore.html">
+            
+                <a href="explore.html#further-resources">
+            
+                    
+                    Further resources
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="alpha.html">
+            
+                <a href="alpha.html">
+            
+                    
+                    Calculate alpha diversity
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="alpha.html">
+            
+                <a href="alpha.html#visualization">
+            
+                    
+                    Visualization
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="alpha.html">
+            
+                <a href="alpha.html#statistical-testing-and-comparisons">
+            
+                    
+                    Statistical testing and comparisons
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="alpha.html">
+            
+                <a href="alpha.html#further-resources">
+            
+                    
+                    Further resources
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="beta.html">
+            
+                <a href="beta.html">
+            
+                    
+                    Calculate beta diversity
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="beta.html">
+            
+                <a href="beta.html#examples-of-pcoa-with-different-settings">
+            
+                    
+                    Examples of PCoA with different settings
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1.1" data-path="beta.html">
+            
+                <a href="beta.html#pcoa-for-asv-level-data-with-bray-curtis">
+            
+                    
+                    PCoA for ASV-level data with Bray-Curtis
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.2" data-path="beta.html">
+            
+                <a href="beta.html#pcoa-for-asv-level-data-with-aitchison-distance">
+            
+                    
+                    PCoA for ASV-level data with Aitchison distance
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.1.3" data-path="beta.html">
+            
+                <a href="beta.html#pcoa-aggregated-to-phylum-level">
+            
+                    
+                    PCoA aggregated to Phylum level
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="beta.html">
+            
+                <a href="beta.html#highlighting-external-variables-on-pcoa-plot">
+            
+                    
+                    Highlighting external variables on PCoA plot
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.1" data-path="beta.html">
+            
+                <a href="beta.html#pcoa-with-discrete-sample-grouping-variable-shown-with-colors">
+            
+                    
+                    PCoA with discrete sample grouping variable shown with colors
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.2" data-path="beta.html">
+            
+                <a href="beta.html#pcoa-with-continuous-sample-grouping-variable-shown-with-colors">
+            
+                    
+                    PCoA with continuous sample grouping variable shown with colors
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="beta.html">
+            
+                <a href="beta.html#estimating-associations-with-an-external-variable">
+            
+                    
+                    Estimating associations with an external variable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="beta.html">
+            
+                <a href="beta.html#further-resources">
+            
+                    
+                    Further resources
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="dmm.html">
+            
+                <a href="dmm.html">
+            
+                    
+                    DMM analysis
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="dmm.html">
+            
+                <a href="dmm.html#pcoa-for-asv-level-data-with-bray-curtis;-with-dmm-clusters-shown-with-colors">
+            
+                    
+                    PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="abundance.html">
+            
+                <a href="abundance.html">
+            
+                    
+                    Differential abundance analysis
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="abundance.html">
+            
+                <a href="abundance.html#wilcoxon-test">
+            
+                    
+                    Wilcoxon test
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="abundance.html">
+            
+                <a href="abundance.html#deseq2">
+            
+                    
+                    DESeq2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="abundance.html">
+            
+                <a href="abundance.html#ancom-bc">
+            
+                    
+                    ANCOM-BC
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="abundance.html">
+            
+                <a href="abundance.html#comparison-of-wilcoxon-test-and-deseq2">
+            
+                    
+                    Comparison of Wilcoxon test and DESeq2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="abundance.html">
+            
+                <a href="abundance.html#comparison-of-abundance">
+            
+                    
+                    Comparison of abundance
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Install and load required R packages</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="install-and-load-required-r-packages">Install and load required R packages</h1>
+<p>In this section, all required packages are installed and loaded into the
+session. If packages are already installed, installation step is
+skipped; only uninstalled packages are installed.</p>
+<pre><code># List of packages that we need from cran and bioc 
+cran_pkg &lt;- c(&quot;BiocManager&quot;, &quot;dplyr&quot;, &quot;ecodist&quot;, &quot;ggplot2&quot;, &quot;gridExtra&quot;, &quot;knitr&quot;, &quot;vegan&quot;)
+bioc_pkg &lt;- c(&quot;ANCOMBC&quot;, &quot;ape&quot;, &quot;DESeq2&quot;,  &quot;DirichletMultinomial&quot;, &quot;mia&quot;, &quot;miaViz&quot;)
+
+# Gets those packages that are already installed
+cran_pkg_already_installed &lt;- cran_pkg[ cran_pkg %in% installed.packages() ]
+bioc_pkg_already_installed &lt;- bioc_pkg[ bioc_pkg %in% installed.packages() ]
+
+# Gets those packages that need to be installed
+cran_pkg_to_be_installed &lt;- setdiff(cran_pkg, cran_pkg_already_installed)
+bioc_pkg_to_be_installed &lt;- setdiff(bioc_pkg, bioc_pkg_already_installed)
+
+# If there are packages that need to be installed, installs them from CRAN
+if( length(cran_pkg_to_be_installed) ) {
+   install.packages(cran_pkg_to_be_installed)
+}
+
+# If there are packages that need to be installed, installs them from Bioconductor
+if( length(bioc_pkg_to_be_installed) ) {
+   BiocManager::install(bioc_pkg_to_be_installed, ask = F)
+}
+</code></pre><p>Now all required packages are installed, so let&#x2019;s load them into the
+session. Some function names occur in multiple packages. That is why
+miaverse&#x2019;s packages mia and miaViz are prioritized. Packages that are
+loaded first have higher priority.</p>
+<pre><code># Reorders bioc packages, so that mia and miaViz are first
+bioc_pkg &lt;- c(bioc_pkg[ bioc_pkg %in% c(&quot;mia&quot;, &quot;miaViz&quot;) ], bioc_pkg[ !bioc_pkg %in% c(&quot;mia&quot;, &quot;miaViz&quot;) ] ) 
+
+# Loading all packages into session. Returns true if package was successfully loaded.
+sapply(c(bioc_pkg, cran_pkg), require, character.only = TRUE)
+
+##                  mia               miaViz              ANCOMBC                  ape               DESeq2 DirichletMultinomial 
+##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
+##          BiocManager                dplyr              ecodist              ggplot2            gridExtra                knitr 
+##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
+##                vegan 
+##                 TRUE
+</code></pre>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="start.html#additional-resources" class="navigation navigation-prev " aria-label="Previous page: Additional resources">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="import.html" class="navigation navigation-next " aria-label="Next page: Import data">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Install and load required R packages","level":"1.3","depth":1,"next":{"title":"Import data","level":"1.4","depth":1,"path":"import.md","ref":"import.md","articles":[{"title":"Data","level":"1.4.1","depth":2,"anchor":"#data","path":"import.md","ref":"import.md#data","articles":[]},{"title":"Investigate the R data object","level":"1.4.2","depth":2,"anchor":"#investigate-the-r-data-object","path":"import.md","ref":"import.md#investigate-the-r-data-object","articles":[]},{"title":"rowData (taxonomic information)","level":"1.4.3","depth":2,"anchor":"#rowdata-taxonomic-information","path":"import.md","ref":"import.md#rowdata-taxonomic-information","articles":[]},{"title":"colData (sample information)","level":"1.4.4","depth":2,"anchor":"#coldata-sample-information","path":"import.md","ref":"import.md#coldata-sample-information","articles":[]},{"title":"Phylogenetic tree information","level":"1.4.5","depth":2,"anchor":"#phylogenetic-tree-information","path":"import.md","ref":"import.md#phylogenetic-tree-information","articles":[]}]},"previous":{"title":"Additional resources","level":"1.2.4","depth":2,"anchor":"#additional-resources","path":"start.md","ref":"start.md#additional-resources","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"install.md","mtime":"2021-06-29T13:10:03.155Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-06-29T13:11:22.982Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
