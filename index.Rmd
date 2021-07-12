@@ -1,6 +1,6 @@
 --- 
 title: "Introduction to microbiome data science"
-author: "`r University of Turku`"
+author: "University of Turku"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
