@@ -37,7 +37,7 @@ and after the intervention. In total there are three factors in this design,
 Time (pre-,post-intervention), Diet (Control, Western diet) and Genotype group 
 (WT, HET, KO). There are about 6-8 mice per group. 
 
-To get access to the data, ask Henrik. 
+Data can be found from Summer School's [Brightspace](https://brightspace.ru.nl/d2l/le/content/249077/Home). 
 
 **Option 3**
 
