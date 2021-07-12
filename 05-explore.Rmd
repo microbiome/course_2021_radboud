@@ -16,10 +16,11 @@ dim(tse)[2]` samples.
 ```{r, echo=FALSE}
 # Read pre-built data objects into the session
 se  <- readRDS(file = "data/se.rds")
-tse <- readRDS(file = "data/tse.rds")
 ```
 
 ```{r}
+tse <- readRDS(file = "tse.rds")
+
 dim(tse)
 ```
 
