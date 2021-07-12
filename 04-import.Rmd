@@ -94,11 +94,12 @@ f1000research.1118447.1) F1000Research 9:1464 (slides).
 
 Example code for import the first data set is available: [import.Rmd](import.Rmd)
 
+
 Here, we just load pre-computed versions for these data sets.
 
 ```{r}
-# Read pre-build data objects into the session
-se <- readRDS(file = "data/se.rds")
+# Read pre-built data objects into the session
+se  <- readRDS(file = "data/se.rds")
 tse <- readRDS(file = "data/tse.rds")
 ```
 
