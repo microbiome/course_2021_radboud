@@ -17,6 +17,9 @@ always_allow_html: true
 
 ```{r, echo=FALSE}
 .gh_url <- file.path('https://github.com', rmarkdown::metadata[['github-repo']])
+
+# This code below builds the Rmd file into a book
+authors <- "Leo Lahti, Tuomas Borman, Henrik Eckermann, Chouaib Benchraka"
 ```
 
 ---

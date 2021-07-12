@@ -3,12 +3,6 @@
 # setHook(packageEvent("knitr", "attach"),
 #         function(...) knitr::opts_chunk$set(echo = FALSE, fig.path="Figures/"))
 
-# This code below builds the Rmd file into a book
-authors <- "Leo Lahti, Tuomas Borman, Henrik Eckermann, Chouaib Benchraka"
-# Read pre-build data objects into the session
-se <- readRDS(file = "data/se.rds")
-tse <- readRDS(file = "data/tse.rds")
-
 library(bookdown)
 # Render html files
 render_book("index.Rmd", "bookdown::gitbook")

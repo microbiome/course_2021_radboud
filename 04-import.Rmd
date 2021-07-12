@@ -25,6 +25,9 @@ Download the data from
   [data](https://github.com/microbiome/course_2021_radboud/tree/main/data)
   subfolder.
 
+
+
+
 **Option 2**
 
 *Western diet intervention study in serotonin transporter modified mouse model*
@@ -44,6 +47,7 @@ To get access to the data, ask Henrik.
 *Open data set of your own choice*, see e.g.: 
 
 -   [Bioconductor microbiomeDataSets](https://bioconductor.org/packages/release/data/experiment/html/microbiomeDataSets.html)
+
 
 ## Importing microbiome data in R
 
@@ -74,7 +78,7 @@ the TSE format through
 **Figure sources:** 
 
 **Original article**
--   Huang R _et al_. (2021) [TreeSummarizedExperiment: a S4 class 
+- Huang R _et al_. (2021) [TreeSummarizedExperiment: a S4 class 
 for data with hierarchical structure](https://doi.org/10.12688/
 f1000research.26669.2). F1000Research 9:1246.
 
@@ -84,6 +88,19 @@ research](https://doi.org/10.7490/
 f1000research.1118447.1) F1000Research 9:1464 (slides).
 
 
+
 ## Example solutions
 
- * Example code for data import: [import.Rmd](import.Rmd)
+
+Example code for import the first data set is available: [import.Rmd](import.Rmd)
+
+Here, we just load pre-computed versions for these data sets.
+
+```{r}
+# Read pre-build data objects into the session
+se <- readRDS(file = "data/se.rds")
+tse <- readRDS(file = "data/tse.rds")
+```
+
+
+
