@@ -54,8 +54,6 @@
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -245,10 +243,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This section demonstrates how to import microbiome profiling data in R.</p>
 <div id="data-access" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> Data access</h2>
-<p><strong>Download the data</strong> from
-<a href="https://github.com/microbiome/course_2021_radboud/tree/main/data">data</a>
-subfolder.</p>
-<p>We use example data from the following publication: Tengeler AC <em>et
+<p><strong>Option 1</strong></p>
+<p><em>ADHD-associated changes in gut microbiota and brain in a mouse model</em></p>
+<p>Tengeler AC <em>et
 al.</em> (2020) <a href="https://doi.org/10.1186/s40168-020-00816-x"><strong>Gut microbiota from persons with
 attention-deficit/hyperactivity disorder affects the brain in
 mice</strong></a>. Microbiome
@@ -258,6 +255,24 @@ with ADHD (attention deficit hyperactivity disorder) and healthy
 participants. The aim of the study was to assess whether the mice
 display ADHD behaviors after being inoculated with ADHD microbiota,
 suggesting a role of the microbiome in ADHD pathology.</p>
+<p>Download the data from
+<a href="https://github.com/microbiome/course_2021_radboud/tree/main/data">data</a>
+subfolder.</p>
+<p><strong>Option 2</strong></p>
+<p><em>Western diet intervention study in serotonin transporter modified mouse model</em></p>
+<p>Mice received three weeks of Western (high fat, high sugar) or Control diet in
+three Genotype groups, a wild-type group and 2 groups with either partial or
+complete knock-out of the serotonin transporter (SERT), leading to an excess of
+serotonin in the gut, brain and blood circulation. Mice were measured before
+and after the intervention. In total there are three factors in this design,
+Time (pre-,post-intervention), Diet (Control, Western diet) and Genotype group
+(WT, HET, KO). There are about 6-8 mice per group.</p>
+<p>To get access to the data, ask Henrik.</p>
+<p><strong>Option 3</strong></p>
+<p><em>Open data set of your own choice</em>, see e.g.:</p>
+<ul>
+<li><a href="https://bioconductor.org/packages/release/data/experiment/html/microbiomeDataSets.html">Bioconductor microbiomeDataSets</a></li>
+</ul>
 </div>
 <div id="importing-microbiome-data-in-r" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> Importing microbiome data in R</h2>
