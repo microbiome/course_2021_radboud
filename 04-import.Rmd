@@ -43,14 +43,11 @@ To get access to the data, ask Henrik.
 
 *Open data set of your own choice*, see e.g.: 
 
--   [Bioconductor curatedMetagenomicData](https://bioconductor.org/
-packages/release/data/experiment/html/curatedMetagenomicData.html)
+-   [Bioconductor curatedMetagenomicData](https://bioconductor.org/packages/release/data/experiment/html/curatedMetagenomicData.html)
 
--   [Bioconductor ExperimentHub](https://bioconductor.org/packages
-/release/bioc/html/ExperimentHub.html)
+-   [Bioconductor ExperimentHub](https://bioconductor.org/packages/release/bioc/html/ExperimentHub.html)
 
--   [Bioconductor microbiomeDataSets](https://bioconductor.org/
-packages/release/data/experiment/html/microbiomeDataSets.html)
+-   [Bioconductor microbiomeDataSets](https://bioconductor.org/packages/release/data/experiment/html/microbiomeDataSets.html)
 
 ## Importing microbiome data in R
 
