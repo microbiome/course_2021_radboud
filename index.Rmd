@@ -85,7 +85,7 @@ data science by utilizing available documentation and R tools.
 ## Acknowledgments
 
 **Citation** "Introduction to microbiome data science (2021). 
-`r paste(authors, sep = ",")` URL: https://microbiome.github.io".
+`r rebook::openingDetails(Copyright='', Source=.gh_url)` URL: https://microbiome.github.io".
 
 We thank Felix Ernst, Sudarshan Shetty, and other members of the
 [miaverse developers](https://microbiome.github.io) who have
