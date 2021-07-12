@@ -5,11 +5,11 @@ This section demonstrates how to import microbiome profiling data in R.
 
 ## Data access
 
-**Download the data** from
-  [data](https://github.com/microbiome/course_2021_radboud/tree/main/data)
-  subfolder.
+**Option 1**
 
-We use example data from the following publication: Tengeler AC _et
+*ADHD-associated changes in gut microbiota and brain in a mouse model*
+
+Tengeler AC _et
 al._ (2020) [**Gut microbiota from persons with
 attention-deficit/hyperactivity disorder affects the brain in
 mice**](https://doi.org/10.1186/s40168-020-00816-x). Microbiome
@@ -21,6 +21,36 @@ participants.  The aim of the study was to assess whether the mice
 display ADHD behaviors after being inoculated with ADHD microbiota,
 suggesting a role of the microbiome in ADHD pathology.
 
+Download the data from
+  [data](https://github.com/microbiome/course_2021_radboud/tree/main/data)
+  subfolder.
+
+**Option 2**
+
+*Western diet intervention study in serotonin transporter modified mouse model*
+
+Mice received three weeks of Western (high fat, high sugar) or Control diet in 
+three Genotype groups, a wild-type group and 2 groups with either partial or 
+complete knock-out of the serotonin transporter (SERT), leading to an excess of 
+serotonin in the gut, brain and blood circulation. Mice were measured before 
+and after the intervention. In total there are three factors in this design, 
+Time (pre-,post-intervention), Diet (Control, Western diet) and Genotype group 
+(WT, HET, KO). There are about 6-8 mice per group. 
+
+To get access to the data, ask Henrik. 
+
+**Option 3**
+
+*Open data set of your own choice*, see e.g.: 
+
+-   [Bioconductor curatedMetagenomicData](https://bioconductor.org/
+packages/release/data/experiment/html/curatedMetagenomicData.html)
+
+-   [Bioconductor ExperimentHub](https://bioconductor.org/packages
+/release/bioc/html/ExperimentHub.html)
+
+-   [Bioconductor microbiomeDataSets](https://bioconductor.org/
+packages/release/data/experiment/html/microbiomeDataSets.html)
 
 ## Importing microbiome data in R
 
