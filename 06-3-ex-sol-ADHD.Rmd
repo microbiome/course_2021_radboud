@@ -1,10 +1,10 @@
 ---
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
  * **Importing and processing data**
- 
+
 ```{r}
 # Defining file paths
 biom_file_path <- "data/Aggregated_humanization2.biom"
@@ -118,15 +118,20 @@ length(unique(rowData(tse)["Phylum"])[,1]) # number of phylum-level groups
 ```{r}
 colData(tse) # samples metadata
 unique(colData(tse)$patient_status) # patient groups
-# sample diversity?!?!?!? [MISSING]
+# Example of sample diversity using Shannon index
+tse <- mia::estimateDiversity(tse, 
+                             abund_values = "counts",
+                             index = "shannon", 
+                             name = "shannon")
+hist(colData(tse)$shannon, xlab = "Shannon index", main = "Histogram of sample diversity")
 ```
 
  * **Subsetting** Pick a subset of the data object including only
      ADHD individuals from Cohort 1. How many there are?
 
 ```{r}
-sub_cohort_1 <- subsetSamples(tse, colData(tse)$cohort=="Cohort_1")
-sub_cohort_1_ADHD <- subsetSamples(sub_cohort_1, colData(sub_cohort_1)$patient_status=="ADHD")
+sub_cohort_1 <- tse[, colData(tse)$cohort=="Cohort_1"]
+sub_cohort_1_ADHD <- sub_cohort_1[, colData(sub_cohort_1)$patient_status=="ADHD"]
 colData(sub_cohort_1_ADHD)
 ```
 
