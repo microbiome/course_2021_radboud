@@ -24,7 +24,7 @@
 <meta name="author" content="Leo Lahti, Tuomas Borman, Henrik Eckermann, Chouaib Benchraka" />
 
 
-<meta name="date" content="2021-07-12" />
+<meta name="date" content="2021-07-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -133,7 +133,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Introduction to miaverse</a></li>
+<li><a href="./">Introduction to microbiome data science</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Overview</a>
@@ -444,7 +444,7 @@ variables are associated with each other.</p>
 <span id="cb39-13"><a href="beta-diversity.html#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Different different cohorts and variance of abundance </span></span>
 <span id="cb39-14"><a href="beta-diversity.html#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="st">              between samples, p-value: &quot;</span>, </span>
 <span id="cb39-15"><a href="beta-diversity.html#cb39-15" aria-hidden="true" tabindex="-1"></a>              <span class="fu">as.data.frame</span>(permanova_cohort<span class="sc">$</span>aov.tab)[<span class="st">&quot;cohort&quot;</span>, <span class="st">&quot;Pr(&gt;F)&quot;</span>]))</span></code></pre></div>
-<pre><code>## [1] &quot;Different different cohorts and variance of abundance \n              between samples, p-value: 0.7391&quot;</code></pre>
+<pre><code>## [1] &quot;Different different cohorts and variance of abundance \n              between samples, p-value: 0.7406&quot;</code></pre>
 <p>The cohort variable is not significantly associated with
 microbiota composition (p-value is over 0.05).</p>
 <p>We can, however, visualize those taxa whose abundances drive the
