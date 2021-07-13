@@ -175,3 +175,4 @@ Add the following in the reproducible summary report.
 
 * See [online book](https://microbiome.github.io/OMA/) for further examples.
 
+* Example [Solutions](07-3-ex-sol-ADHD.html)
