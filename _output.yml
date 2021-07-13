@@ -5,7 +5,11 @@ bookdown::gitbook:
       theme: white
     toc:
       before: |
+<<<<<<< HEAD
         <li><a href="./">Orchestrating Microbiome Analysis</a></li>
+=======
+        <li><a href="./">Introduction to microbiome data science</a></li>
+>>>>>>> 1a6d6a5994cc0709d71047e82c1d7e67d17921b6
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
     download: ["pdf"]
