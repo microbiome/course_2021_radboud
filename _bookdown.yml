@@ -1,19 +1,10 @@
-book_filename: radboud2021_material
-pagetitle: "Radboud 2021 summer school"
+book_filename: "OMA"
+pagetitle: "Microbiome Analysis with Bioconductor"
 delete_merged_file: true
 new_session: true
 language:
   ui:
     chapter_name: "Chapter "
+output_dir: "docs"
 rmd_files: ["index.Rmd",
-            "01-program.Rmd",
-  	    "02-start.Rmd",
-  	    "03-reproduciblereporting.Rmd",
-  	    "04-import.Rmd",
-  	    "05-explore.Rmd",
-  	    "06-alpha.Rmd",
-  	    "07-beta.Rmd",
-  	    "08-abundance.Rmd",
-  	    "09-material.Rmd",
-  	    "10-misc.Rmd"]
-output_dir: docs
+            "01-introduction.Rmd"]
