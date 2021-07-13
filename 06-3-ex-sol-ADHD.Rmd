@@ -5,7 +5,7 @@ output:
 ---
  * **Importing and processing data**
 
-```{r}
+```{r, message=FALSE}
 # Defining file paths
 biom_file_path <- "data/Aggregated_humanization2.biom"
 sample_meta_file_path <- "data/Mapping_file_ADHD_aggregated.csv"
