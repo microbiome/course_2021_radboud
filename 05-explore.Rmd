@@ -261,3 +261,6 @@ import the data and generate the analyses.
  * Experiment with other data manipulation tools from
    [OMA](https://microbiome.github.io/OMA/taxonomic-information.html#functions-to-access-taxonomic-information).
 
+
+ * Example solution: [Solutions](06-3-ex-sol-ADHD.html)
+ 
