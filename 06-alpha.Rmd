@@ -159,7 +159,7 @@ wilcoxon_shannon_ADHD_cohorts
 ```
 
 For more examples, see a dedicated section on alpha diversity in the
-[online book](https://microbiome.github.io/OMA/).
+[online book](https://microbiome.github.io/OMA/microbiome-diversity.html#alpha-diversity).
 
 
 
@@ -173,6 +173,7 @@ Add the following in the reproducible summary report.
 * Compare the results between two or more
   alpha diversity indices (visually and/or statistically).
 
-* See [online book](https://microbiome.github.io/OMA/) for further examples.
+* See [online book](https://microbiome.github.io/OMA/microbiome-diversity.html#alpha-diversity) 
+for further examples.
 
 * Example [Solutions](07-3-ex-sol-ADHD.html)

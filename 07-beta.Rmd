@@ -282,13 +282,13 @@ top_taxa_coeffient_plot
 There are many alternative and complementary methods for analysing
 community composition. For more examples, see a dedicated section on
 beta diversity in the [online
-book](https://microbiome.github.io/OMA/).
+book](https://microbiome.github.io/OMA/microbiome-diversity.html#beta-diversity).
 
 ## Community typing
 
 
 A dedicated section presenting examples on community typing is in the
-[online book](https://microbiome.github.io/OMA/).
+[online book](https://microbiome.github.io/OMA/microbiome-community.html#community-typing).
 
 
 
