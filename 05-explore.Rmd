@@ -262,5 +262,5 @@ import the data and generate the analyses.
    [OMA](https://microbiome.github.io/OMA/taxonomic-information.html#functions-to-access-taxonomic-information).
 
 
- * Example solution: ( [Solutions](https://github.com/microbiome/course_2021_radboud/blob/main/docs/06-3-ex-sol-ADHD.html))
+ * Example solution: [Solutions](06-3-ex-sol-ADHD.html)
  
