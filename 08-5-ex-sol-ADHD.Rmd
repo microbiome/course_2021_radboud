@@ -1,0 +1,166 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+ * **Importing and processing data**
+
+```{r, message=FALSE, warning=FALSE}
+# Defining file paths
+biom_file_path <- "data/Aggregated_humanization2.biom"
+sample_meta_file_path <- "data/Mapping_file_ADHD_aggregated.csv"
+tree_file_path <- "data/Data_humanization_phylo_aggregation.tre"
+library(mia)
+# Imports the data
+se <- loadFromBiom(biom_file_path)
+names(rowData(se)) <- c("Kingdom", "Phylum", "Class", "Order", 
+                        "Family", "Genus")
+# Goes through the whole DataFrame. Removes '.*[kpcofg]__' from strings, where [kpcofg] 
+# is any character from listed ones, and .* any character.
+rowdata_modified <- BiocParallel::bplapply(rowData(se), 
+                                           FUN = stringr::str_remove, 
+                                           pattern = '.*[kpcofg]__')
+# Genus level has additional '\"', so let's delete that also
+rowdata_modified <- BiocParallel::bplapply(rowdata_modified, 
+                                           FUN = stringr::str_remove, 
+                                           pattern = '\"')
+# rowdata_modified is a list, so it is converted back to DataFrame format. 
+rowdata_modified <- DataFrame(rowdata_modified)
+# And then assigned back to the SE object
+rowData(se) <- rowdata_modified
+# We use this to check what type of data it is
+# read.table(sample_meta_file_path)
+# It seems like a comma separated file and it does not include headers
+# Let us read it and then convert from data.frame to DataFrame
+# (required for our purposes)
+sample_meta <- DataFrame(read.table(sample_meta_file_path, sep = ",", header = FALSE))
+# Add sample names to rownames
+rownames(sample_meta) <- sample_meta[,1]
+# Delete column that included sample names
+sample_meta[,1] <- NULL
+# We can add headers
+colnames(sample_meta) <- c("patient_status", "cohort", "patient_status_vs_cohort", "sample_name")
+# Then it can be added to colData
+colData(se) <- sample_meta
+# Convert to tse format
+tse <- as(se, "TreeSummarizedExperiment")
+# Reads the tree file
+tree <- ape::read.tree(tree_file_path)
+# Add tree to rowTree
+rowTree(tse) <- tree
+```
+
+
+ * Visualize community variation with PCoA.
+ 
+```{r, message=FALSE, warning=FALSE}
+# Computing and storing relative abundance
+tse <- transformCounts(tse, method = "relabundance")
+
+# Gets relative bundance table
+relabundance_assay <- assays(tse)$relabundance
+
+# Transposes it to get taxa to columns
+relabundance_assay <- t(relabundance_assay)
+
+# Calculates Euclidean distances between samples.
+euclidean_dist_relA <- vegan::vegdist(relabundance_assay, method = "euclidean")
+
+# Performing PCoA
+euclidean_relA_pcoa <- ecodist::pco(euclidean_dist_relA)
+
+# Creates a data frame from principal coordinates
+euclidean_relA_pcoa_df <- data.frame(pcoa1 = euclidean_relA_pcoa$vectors[,1], 
+                                pcoa2 = euclidean_relA_pcoa$vectors[,2])
+
+# Visualizing
+library(ggplot2)
+euclidean_relA_plot <- ggplot(data = euclidean_relA_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
+  geom_point() +
+  labs(x = "Principal Component 1",
+       y = "Principal Component 2",
+       title = "Euclidean PCoA with Relative Abundance transformation") +
+  theme(title = element_text(size = 12)) # makes titles smaller
+
+euclidean_relA_plot
+```
+
+ * Investigate the influence of the data transformations on
+   statistical analysis: Visualize community variation with PCoA with
+   the following options: 1) Bray-Curtis distances for compositional
+   data; 2) Euclidean distances for CLR-transformed data.
+
+```{r}
+ # Computing Bray-Curtis distances
+bray_dist_relA <- vegan::vegdist(relabundance_assay, method = "bray")
+bray_dist_relA <- t(bray_dist_relA)
+
+# Computing clr data and its euclidean distance
+tse <- transformCounts(tse, method = "clr", pseudocount = 1)
+clr_assay <- assays(tse)$clr
+euclidean_dist_clr <- vegan::vegdist(clr_assay, method = "euclidean")
+euclidean_dist_clr <- t(euclidean_dist_clr)
+
+# Performing PCoA and making the dataframes
+bray_dist_relA_pcoa <- ecodist::pco(bray_dist_relA)
+euclidean_dist_clr_pcoa <- ecodist::pco(euclidean_dist_clr)
+
+bray_dist_relA_pcoa_df <- data.frame(pcoa1 = bray_dist_relA_pcoa$vectors[,1], 
+                                pcoa2 = bray_dist_relA_pcoa$vectors[,2])
+euclidean_dist_clr_pcoa_df <- data.frame(pcoa1 = euclidean_dist_clr_pcoa$vectors[,1], 
+                                pcoa2 = euclidean_dist_clr_pcoa$vectors[,2])
+
+# Visualizing
+ggplot(data = bray_dist_relA_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
+  geom_point() +
+  labs(x = "PC 1",
+       y = "PC 2",
+       title = "Bray-Curtis PCoA with Relative Abundance transformation") +
+  theme(title = element_text(size = 12))
+ 
+ggplot(data = euclidean_dist_clr_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
+  geom_point() +
+  labs(x = "PC 1",
+       y = "PC 2",
+       title = "Euclidean PCoA with clr transformation") +
+  theme(title = element_text(size = 12))
+```
+
+ * Community-level comparisons: Use PERMANOVA to investigate whether
+   the community composition differs between two groups of individuals
+   (e.g. males and females, or some other grouping of your
+   choice). You can also include covariates such as age and gender,
+   and see how this affects the results.
+   
+```{r}
+permanova_cohort <- vegan::adonis(relabundance_assay ~ cohort,
+                                  data = colData(tse),
+                                  permutations = 9999)
+permanova_patient_status <- vegan::adonis(relabundance_assay ~ patient_status,
+                                  data = colData(tse),
+                                  permutations = 9999)
+
+print(paste0("relabundance_assay ~ cohort => p-value: ", 
+              as.data.frame(permanova_cohort$aov.tab)["cohort", "Pr(>F)"]))
+print(paste0("relabundance_assay ~ patient_status => p-value: ", 
+              as.data.frame(permanova_patient_status$aov.tab)["patient_status", "Pr(>F)"]))
+
+
+
+```
+ * EXTRA: Visualizing the earlier plot with the grouping variable
+
+``` {r}
+
+euclidean_relA_pcoa_df <- cbind(euclidean_relA_pcoa_df,
+                             patient_status = colData(tse)$patient_status)
+euclidean_relA_plot <- ggplot(data = euclidean_relA_pcoa_df,
+                              aes(x=pcoa1, y=pcoa2,color=patient_status)) +
+  geom_point() +
+  labs(x = "PC 1",
+       y = "PC 2",
+       title = "Euclidean PCoA with Relative Abundance transformation") +
+  theme(title = element_text(size = 12))
+
+euclidean_relA_plot
+```

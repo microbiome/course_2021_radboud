@@ -307,4 +307,4 @@ A dedicated section presenting examples on community typing is in the
    choice). You can also include covariates such as age and gender,
    and see how this affects the results.
 
-
+ * Example [Solutions](08-5-ex-sol-ADHD.html)
