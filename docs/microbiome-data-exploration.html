@@ -24,7 +24,7 @@
 <meta name="author" content="Leo Lahti, Tuomas Borman, Henrik Eckermann, Chouaib Benchraka" />
 
 
-<meta name="date" content="2021-07-12" />
+<meta name="date" content="2021-07-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -249,7 +249,8 @@ the necessary components.</p>
 <h2><span class="header-section-number">6.1</span> Data structure</h2>
 <p>Let us now investigate how taxonomic profiling data is organized in R.</p>
 <p>Dimensionality tells us how many taxa and samples the data
-contains. As we can see, there are 151 taxa and <code>r dim(tse)[2]</code> samples.</p>
+contains. As we can see, there are 151 taxa and 27
+samples.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="microbiome-data-exploration.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(tse)</span></code></pre></div>
 <pre><code>## [1] 151  27</code></pre>
 <p>The <code>rowData</code> slot contains a taxonomic table. This includes taxonomic
@@ -593,33 +594,10 @@ as we will see later).</p>
 <p>Microbial species can be called at multiple taxonomic resolutions. We
 can easily agglomerate the data based on taxonomic ranks. Here, we
 agglomerate the data at Phylum level.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="microbiome-data-exploration.html#cb13-1" aria-hidden="true" tabindex="-1"></a>tse_phylum <span class="ot">&lt;-</span> <span class="fu">agglomerateByRank</span>(tse, <span class="at">rank =</span> <span class="st">&quot;Phylum&quot;</span>)</span></code></pre></div>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="microbiome-data-exploration.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show dimensionality</span></span>
-<span id="cb38-2"><a href="microbiome-data-exploration.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(tse_phylum)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="microbiome-data-exploration.html#cb13-1" aria-hidden="true" tabindex="-1"></a>tse_phylum <span class="ot">&lt;-</span> <span class="fu">agglomerateByRank</span>(tse, <span class="at">rank =</span> <span class="st">&quot;Phylum&quot;</span>)</span>
+<span id="cb13-2"><a href="microbiome-data-exploration.html#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="microbiome-data-exploration.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Show dimensionality</span></span>
+<span id="cb13-4"><a href="microbiome-data-exploration.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(tse_phylum)</span></code></pre></div>
 <pre><code>## [1]  5 27</code></pre>
 <p>Now there are 5 taxa and 27
 samples, meaning that there are 5 different
@@ -628,10 +606,10 @@ agglomeration shows all Firmicutes are combined together, and all
 lower rank information is lost.</p>
 <p>From the assay we can see that all abundances of taxa that belong to
 Firmicutes are summed up.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="microbiome-data-exploration.html#cb40-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(<span class="fu">rowData</span>(tse_phylum))) <span class="sc">%&gt;%</span> </span>
-<span id="cb40-2"><a href="microbiome-data-exploration.html#cb40-2" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, </span>
-<span id="cb40-3"><a href="microbiome-data-exploration.html#cb40-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">latex_options=</span><span class="st">&quot;scale_down&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb40-4"><a href="microbiome-data-exploration.html#cb40-4" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="microbiome-data-exploration.html#cb15-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(<span class="fu">rowData</span>(tse_phylum))) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="microbiome-data-exploration.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, </span>
+<span id="cb15-3"><a href="microbiome-data-exploration.html#cb15-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">latex_options=</span><span class="st">&quot;scale_down&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-4"><a href="microbiome-data-exploration.html#cb15-4" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -785,36 +763,13 @@ ignore the missing values in summing up the data by setting <code>na.rm = TRUE</
 will be removed. Those taxa that do not have information in specified
 level are agglomerated at lowest possible level that is left after
 agglomeration.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="microbiome-data-exploration.html#cb41-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">rowData</span>(<span class="fu">agglomerateByRank</span>(tse, <span class="at">rank =</span> <span class="st">&quot;Genus&quot;</span>))</span></code></pre></div>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="microbiome-data-exploration.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prints those taxa that do not have information at the Genus level</span></span>
-<span id="cb66-2"><a href="microbiome-data-exploration.html#cb66-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(temp[temp<span class="sc">$</span>Genus <span class="sc">==</span> <span class="st">&quot;&quot;</span>,])) <span class="sc">%&gt;%</span> </span>
-<span id="cb66-3"><a href="microbiome-data-exploration.html#cb66-3" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, </span>
-<span id="cb66-4"><a href="microbiome-data-exploration.html#cb66-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">latex_options=</span><span class="st">&quot;scale_down&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb66-5"><a href="microbiome-data-exploration.html#cb66-5" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="microbiome-data-exploration.html#cb16-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">rowData</span>(<span class="fu">agglomerateByRank</span>(tse, <span class="at">rank =</span> <span class="st">&quot;Genus&quot;</span>))</span>
+<span id="cb16-2"><a href="microbiome-data-exploration.html#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="microbiome-data-exploration.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Prints those taxa that do not have information at the Genus level</span></span>
+<span id="cb16-4"><a href="microbiome-data-exploration.html#cb16-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(temp[temp<span class="sc">$</span>Genus <span class="sc">==</span> <span class="st">&quot;&quot;</span>,])) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-5"><a href="microbiome-data-exploration.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, </span>
+<span id="cb16-6"><a href="microbiome-data-exploration.html#cb16-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">latex_options=</span><span class="st">&quot;scale_down&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-7"><a href="microbiome-data-exploration.html#cb16-7" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -953,50 +908,11 @@ Gastranaerophilales
 </table>
 </div>
 <p>Here agglomeration is done similarly, but na.rm = TRUE</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="microbiome-data-exploration.html#cb67-1" aria-hidden="true" tabindex="-1"></a>temp2 <span class="ot">&lt;-</span> <span class="fu">rowData</span>(<span class="fu">agglomerateByRank</span>(tse, <span class="at">rank =</span> <span class="st">&quot;Genus&quot;</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="microbiome-data-exploration.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Agglomeration with na.rm = FALSE: &quot;</span>, <span class="fu">dim</span>(temp)[<span class="dv">1</span>], <span class="st">&quot; taxa.&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="microbiome-data-exploration.html#cb17-1" aria-hidden="true" tabindex="-1"></a>temp2 <span class="ot">&lt;-</span> <span class="fu">rowData</span>(<span class="fu">agglomerateByRank</span>(tse, <span class="at">rank =</span> <span class="st">&quot;Genus&quot;</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb17-2"><a href="microbiome-data-exploration.html#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="microbiome-data-exploration.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Agglomeration with na.rm = FALSE: &quot;</span>, <span class="fu">dim</span>(temp)[<span class="dv">1</span>], <span class="st">&quot; taxa.&quot;</span>))</span></code></pre></div>
 <pre><code>## [1] &quot;Agglomeration with na.rm = FALSE: 54 taxa.&quot;</code></pre>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="microbiome-data-exploration.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Agglomeration with na.rm = TRUE: &quot;</span>, <span class="fu">dim</span>(temp2)[<span class="dv">1</span>], <span class="st">&quot; taxa.&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="microbiome-data-exploration.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Agglomeration with na.rm = TRUE: &quot;</span>, <span class="fu">dim</span>(temp2)[<span class="dv">1</span>], <span class="st">&quot; taxa.&quot;</span>))</span></code></pre></div>
 <pre><code>## [1] &quot;Agglomeration with na.rm = TRUE: 49 taxa.&quot;</code></pre>
 <p>The <a href="https://microbiome.github.io/mia/reference/index.html">mia
 package</a>
@@ -1008,57 +924,42 @@ options.</p>
 <h2><span class="header-section-number">6.2</span> Visualization</h2>
 <p>The <a href="https://microbiome.github.io/miaViz/">miaViz package</a> facilitates
 data visualization. Let us plot the Phylum level abundances.</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="microbiome-data-exploration.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here we specify &quot;relabundance&quot; to be abundance table that we use for plotting.</span></span>
-<span id="cb112-2"><a href="microbiome-data-exploration.html#cb112-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that we can use agglomerated or non-agglomerated tse as an input, because</span></span>
-<span id="cb112-3"><a href="microbiome-data-exploration.html#cb112-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the function agglomeration is built-in option. </span></span>
-<span id="cb112-4"><a href="microbiome-data-exploration.html#cb112-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb112-5"><a href="microbiome-data-exploration.html#cb112-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Legend does not fit into picture, so its height is reduced.</span></span>
-<span id="cb112-6"><a href="microbiome-data-exploration.html#cb112-6" aria-hidden="true" tabindex="-1"></a>plot_abundance <span class="ot">&lt;-</span> <span class="fu">plotAbundance</span>(tse, <span class="at">abund_values=</span><span class="st">&quot;relabundance&quot;</span>, <span class="at">rank =</span> <span class="st">&quot;Phylum&quot;</span>) <span class="sc">+</span></span>
-<span id="cb112-7"><a href="microbiome-data-exploration.html#cb112-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key.height =</span> <span class="fu">unit</span>(<span class="fl">0.5</span>, <span class="st">&quot;cm&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb112-8"><a href="microbiome-data-exploration.html#cb112-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">label =</span> scales<span class="sc">::</span>percent)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="microbiome-data-exploration.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here we specify &quot;relabundance&quot; to be abundance table that we use for plotting.</span></span>
+<span id="cb21-2"><a href="microbiome-data-exploration.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that we can use agglomerated or non-agglomerated tse as an input, because</span></span>
+<span id="cb21-3"><a href="microbiome-data-exploration.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the function agglomeration is built-in option. </span></span>
+<span id="cb21-4"><a href="microbiome-data-exploration.html#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="microbiome-data-exploration.html#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Legend does not fit into picture, so its height is reduced.</span></span>
+<span id="cb21-6"><a href="microbiome-data-exploration.html#cb21-6" aria-hidden="true" tabindex="-1"></a>plot_abundance <span class="ot">&lt;-</span> <span class="fu">plotAbundance</span>(tse, <span class="at">abund_values=</span><span class="st">&quot;relabundance&quot;</span>, <span class="at">rank =</span> <span class="st">&quot;Phylum&quot;</span>) <span class="sc">+</span></span>
+<span id="cb21-7"><a href="microbiome-data-exploration.html#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key.height =</span> <span class="fu">unit</span>(<span class="fl">0.5</span>, <span class="st">&quot;cm&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb21-8"><a href="microbiome-data-exploration.html#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">label =</span> scales<span class="sc">::</span>percent)</span></code></pre></div>
 <pre><code>## Scale for &#39;y&#39; is already present. Adding another scale for &#39;y&#39;, which will replace the existing scale.</code></pre>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="microbiome-data-exploration.html#cb114-1" aria-hidden="true" tabindex="-1"></a>plot_abundance </span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="microbiome-data-exploration.html#cb23-1" aria-hidden="true" tabindex="-1"></a>plot_abundance </span></code></pre></div>
 <p><img src="radboud2021_material_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p><strong>Density plot</strong> shows the overall abundance distribution for a given
 taxonomic group. Let us check the relative abundance of Firmicutes
 across the sample collection. The density plot is a smoothened
 version of a standard histogram.</p>
 <p>The plot shows peak abundances around 30 %.</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="microbiome-data-exploration.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset data by taking only Firmicutes</span></span>
-<span id="cb115-2"><a href="microbiome-data-exploration.html#cb115-2" aria-hidden="true" tabindex="-1"></a>tse_firmicutes <span class="ot">&lt;-</span> tse_phylum[<span class="st">&quot;Firmicutes&quot;</span>]</span></code></pre></div>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<pre><code>## Found more than one class &quot;phylo&quot; in cache; using the first, from namespace &#39;phyloseq&#39;</code></pre>
-<pre><code>## Also defined by &#39;tidytree&#39;</code></pre>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="microbiome-data-exploration.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gets the abundance table</span></span>
-<span id="cb132-2"><a href="microbiome-data-exploration.html#cb132-2" aria-hidden="true" tabindex="-1"></a>abundance_firmicutes <span class="ot">&lt;-</span> <span class="fu">assay</span>(tse_firmicutes, <span class="st">&quot;relabundance&quot;</span>)</span>
-<span id="cb132-3"><a href="microbiome-data-exploration.html#cb132-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb132-4"><a href="microbiome-data-exploration.html#cb132-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates a data frame object, where first column includes abundances</span></span>
-<span id="cb132-5"><a href="microbiome-data-exploration.html#cb132-5" aria-hidden="true" tabindex="-1"></a>firmicutes_abund_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">t</span>(abundance_firmicutes))</span>
-<span id="cb132-6"><a href="microbiome-data-exploration.html#cb132-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename the first and only column</span></span>
-<span id="cb132-7"><a href="microbiome-data-exploration.html#cb132-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(firmicutes_abund_df) <span class="ot">&lt;-</span> <span class="st">&quot;abund&quot;</span></span>
-<span id="cb132-8"><a href="microbiome-data-exploration.html#cb132-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb132-9"><a href="microbiome-data-exploration.html#cb132-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates a plot. Parameters inside feom_density are optional. With </span></span>
-<span id="cb132-10"><a href="microbiome-data-exploration.html#cb132-10" aria-hidden="true" tabindex="-1"></a><span class="co"># geom_density(bw=1000), it is possible to adjust bandwidth.</span></span>
-<span id="cb132-11"><a href="microbiome-data-exploration.html#cb132-11" aria-hidden="true" tabindex="-1"></a>firmicutes_abund_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(firmicutes_abund_df, <span class="fu">aes</span>(<span class="at">x =</span> abund)) <span class="sc">+</span> </span>
-<span id="cb132-12"><a href="microbiome-data-exploration.html#cb132-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span><span class="st">&quot;darkred&quot;</span>, <span class="at">fill=</span><span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb132-13"><a href="microbiome-data-exploration.html#cb132-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Relative abundance&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Firmicutes&quot;</span>) <span class="sc">+</span></span>
-<span id="cb132-14"><a href="microbiome-data-exploration.html#cb132-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="co"># Changes the background</span></span>
-<span id="cb132-15"><a href="microbiome-data-exploration.html#cb132-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">label =</span> scales<span class="sc">::</span>percent)</span>
-<span id="cb132-16"><a href="microbiome-data-exploration.html#cb132-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb132-17"><a href="microbiome-data-exploration.html#cb132-17" aria-hidden="true" tabindex="-1"></a>firmicutes_abund_plot</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="microbiome-data-exploration.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset data by taking only Firmicutes</span></span>
+<span id="cb24-2"><a href="microbiome-data-exploration.html#cb24-2" aria-hidden="true" tabindex="-1"></a>tse_firmicutes <span class="ot">&lt;-</span> tse_phylum[<span class="st">&quot;Firmicutes&quot;</span>]</span>
+<span id="cb24-3"><a href="microbiome-data-exploration.html#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="microbiome-data-exploration.html#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Gets the abundance table</span></span>
+<span id="cb24-5"><a href="microbiome-data-exploration.html#cb24-5" aria-hidden="true" tabindex="-1"></a>abundance_firmicutes <span class="ot">&lt;-</span> <span class="fu">assay</span>(tse_firmicutes, <span class="st">&quot;relabundance&quot;</span>)</span>
+<span id="cb24-6"><a href="microbiome-data-exploration.html#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="microbiome-data-exploration.html#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates a data frame object, where first column includes abundances</span></span>
+<span id="cb24-8"><a href="microbiome-data-exploration.html#cb24-8" aria-hidden="true" tabindex="-1"></a>firmicutes_abund_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">t</span>(abundance_firmicutes))</span>
+<span id="cb24-9"><a href="microbiome-data-exploration.html#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename the first and only column</span></span>
+<span id="cb24-10"><a href="microbiome-data-exploration.html#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(firmicutes_abund_df) <span class="ot">&lt;-</span> <span class="st">&quot;abund&quot;</span></span>
+<span id="cb24-11"><a href="microbiome-data-exploration.html#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="microbiome-data-exploration.html#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Creates a plot. Parameters inside feom_density are optional. With </span></span>
+<span id="cb24-13"><a href="microbiome-data-exploration.html#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co"># geom_density(bw=1000), it is possible to adjust bandwidth.</span></span>
+<span id="cb24-14"><a href="microbiome-data-exploration.html#cb24-14" aria-hidden="true" tabindex="-1"></a>firmicutes_abund_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(firmicutes_abund_df, <span class="fu">aes</span>(<span class="at">x =</span> abund)) <span class="sc">+</span> </span>
+<span id="cb24-15"><a href="microbiome-data-exploration.html#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color=</span><span class="st">&quot;darkred&quot;</span>, <span class="at">fill=</span><span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb24-16"><a href="microbiome-data-exploration.html#cb24-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Relative abundance&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Firmicutes&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-17"><a href="microbiome-data-exploration.html#cb24-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="co"># Changes the background</span></span>
+<span id="cb24-18"><a href="microbiome-data-exploration.html#cb24-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">label =</span> scales<span class="sc">::</span>percent)</span>
+<span id="cb24-19"><a href="microbiome-data-exploration.html#cb24-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-20"><a href="microbiome-data-exploration.html#cb24-20" aria-hidden="true" tabindex="-1"></a>firmicutes_abund_plot</span></code></pre></div>
 <p><img src="radboud2021_material_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>For more visualization options and examples, see the <a href="https://microbiome.github.io/miaViz/articles/miaViz.html">miaViz vignette</a>.</p>
 </div>
@@ -1108,6 +1009,7 @@ abundances for certain taxonomic groups. Do the same for
 CLR-transformed abundances. Tip: assays, transformCounts</p></li>
 <li><p>Experiment with other data manipulation tools from
 <a href="https://microbiome.github.io/OMA/taxonomic-information.html#functions-to-access-taxonomic-information">OMA</a>.</p></li>
+<li><p>Example solution: <a href="06-3-ex-sol-ADHD.html">Solutions</a></p></li>
 </ul>
 
 </div>
