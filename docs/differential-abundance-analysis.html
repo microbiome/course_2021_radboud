@@ -53,6 +53,8 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -351,6 +353,195 @@ ARCHIVED</a></p>
 <span id="cb62-13"><a href="differential-abundance-analysis.html#cb62-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-14"><a href="differential-abundance-analysis.html#cb62-14" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(df)) <span class="sc">%&gt;%</span> kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb62-15"><a href="differential-abundance-analysis.html#cb62-15" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+baseMean
+</th>
+<th style="text-align:right;">
+log2FoldChange
+</th>
+<th style="text-align:right;">
+lfcSE
+</th>
+<th style="text-align:right;">
+stat
+</th>
+<th style="text-align:right;">
+pvalue
+</th>
+<th style="text-align:right;">
+padj
+</th>
+<th style="text-align:left;">
+taxon
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Genus:Ruminococcaceae_UCG-014
+</td>
+<td style="text-align:right;">
+22.548297
+</td>
+<td style="text-align:right;">
+-24.891268
+</td>
+<td style="text-align:right;">
+2.460684
+</td>
+<td style="text-align:right;">
+-10.115589
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:left;">
+Genus:Ruminococcaceae_UCG-014
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Order:Bacteroidales
+</td>
+<td style="text-align:right;">
+40.353733
+</td>
+<td style="text-align:right;">
+-9.241798
+</td>
+<td style="text-align:right;">
+2.136205
+</td>
+<td style="text-align:right;">
+-4.326270
+</td>
+<td style="text-align:right;">
+0.0000152
+</td>
+<td style="text-align:right;">
+0.0002730
+</td>
+<td style="text-align:left;">
+Order:Bacteroidales
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Genus:Faecalibacterium
+</td>
+<td style="text-align:right;">
+231.079502
+</td>
+<td style="text-align:right;">
+-7.074433
+</td>
+<td style="text-align:right;">
+1.745612
+</td>
+<td style="text-align:right;">
+-4.052694
+</td>
+<td style="text-align:right;">
+0.0000506
+</td>
+<td style="text-align:right;">
+0.0006835
+</td>
+<td style="text-align:left;">
+Genus:Faecalibacterium
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Genus:Catabacter
+</td>
+<td style="text-align:right;">
+18.045614
+</td>
+<td style="text-align:right;">
+-6.615454
+</td>
+<td style="text-align:right;">
+1.716150
+</td>
+<td style="text-align:right;">
+-3.854823
+</td>
+<td style="text-align:right;">
+0.0001158
+</td>
+<td style="text-align:right;">
+0.0012508
+</td>
+<td style="text-align:left;">
+Genus:Catabacter
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Genus:Butyricicoccus
+</td>
+<td style="text-align:right;">
+2.392885
+</td>
+<td style="text-align:right;">
+-5.179608
+</td>
+<td style="text-align:right;">
+2.948055
+</td>
+<td style="text-align:right;">
+-1.756957
+</td>
+<td style="text-align:right;">
+0.0789251
+</td>
+<td style="text-align:right;">
+0.3278426
+</td>
+<td style="text-align:left;">
+Genus:Butyricicoccus
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Order:Gastranaerophilales
+</td>
+<td style="text-align:right;">
+2.067972
+</td>
+<td style="text-align:right;">
+-3.054975
+</td>
+<td style="text-align:right;">
+2.938641
+</td>
+<td style="text-align:right;">
+-1.039588
+</td>
+<td style="text-align:right;">
+0.2985315
+</td>
+<td style="text-align:right;">
+0.7269742
+</td>
+<td style="text-align:left;">
+Order:Gastranaerophilales
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div id="ancom-bc" class="section level2" number="9.3">
 <h2><span class="header-section-number">9.3</span> ANCOM-BC</h2>
@@ -402,6 +593,69 @@ standard errors, p-values and q-values. Conveniently, there is a dataframe <code
 Here, we can find all differentiallt abundant taxa. Below we show the first 6 entries of this dataframe:</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="differential-abundance-analysis.html#cb64-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(res<span class="sc">$</span>diff_abn)) <span class="sc">%&gt;%</span> kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb64-2"><a href="differential-abundance-analysis.html#cb64-2" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+patient_statusControl
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+172647198
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1726478
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+172647201
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+17264798
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+172647195
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1726472
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>In total, this method detects 13 differentially abundant taxa.</p>
 </div>
 <div id="comparison-of-wilcoxon-test-and-deseq2" class="section level2" number="9.4">

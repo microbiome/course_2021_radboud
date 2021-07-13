@@ -53,6 +53,8 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -269,6 +271,90 @@ account.</p>
 <span id="cb25-13"><a href="alpha-diversity.html#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Shows the calculated indices</span></span>
 <span id="cb25-14"><a href="alpha-diversity.html#cb25-14" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(<span class="fu">colData</span>(tse)[names])) <span class="sc">%&gt;%</span> kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb25-15"><a href="alpha-diversity.html#cb25-15" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Shannon_diversity
+</th>
+<th style="text-align:right;">
+Faith_diversity
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A110
+</td>
+<td style="text-align:right;">
+1.765407
+</td>
+<td style="text-align:right;">
+7.39224
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A12
+</td>
+<td style="text-align:right;">
+2.716438
+</td>
+<td style="text-align:right;">
+6.29378
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A15
+</td>
+<td style="text-align:right;">
+3.178103
+</td>
+<td style="text-align:right;">
+6.60608
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A19
+</td>
+<td style="text-align:right;">
+2.891987
+</td>
+<td style="text-align:right;">
+6.79708
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A21
+</td>
+<td style="text-align:right;">
+2.841979
+</td>
+<td style="text-align:right;">
+6.65110
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A23
+</td>
+<td style="text-align:right;">
+2.797942
+</td>
+<td style="text-align:right;">
+5.96246
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>Next we can visualize Shannon index with histogram.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="alpha-diversity.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ggplot needs data.frame format as input.</span></span>
 <span id="cb26-2"><a href="alpha-diversity.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Here, colData is DataFrame, therefore it needs to be converted to data.frame</span></span>
@@ -369,6 +455,7 @@ estimateDiversity</p></li>
 <li><p>Compare the results between two or more
 alpha diversity indices (visually and/or statistically).</p></li>
 <li><p>See <a href="https://microbiome.github.io/OMA/">online book</a> for further examples.</p></li>
+<li><p>Example <a href="07-3-ex-sol-ADHD.html">Solutions</a></p></li>
 </ul>
 
 </div>
