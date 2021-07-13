@@ -50,39 +50,17 @@ tree <- ape::read.tree(tree_file_path)
 rowTree(tse) <- tree
 ```
 
-
- * Visualize community variation with PCoA.
+ * Visualize community variation with different methods (PCA, MDS, t-SNE...) by using the options in the alternative method, plotReducedDim [OMA](https://microbiome.github.io/OMA/microbiome-diversity.html#estimating-beta-diversity). Compare results obtained with different dissimilarities (Euclidean, Bray-Curtis, Unifrac..) and transformations (CLR, compositional..) of your own choice."
  
-```{r, message=FALSE, warning=FALSE}
-# Computing and storing relative abundance
-tse <- transformCounts(tse, method = "relabundance")
-
-# Gets relative bundance table
-relabundance_assay <- assays(tse)$relabundance
-
-# Transposes it to get taxa to columns
-relabundance_assay <- t(relabundance_assay)
-
-# Calculates Euclidean distances between samples.
-euclidean_dist_relA <- vegan::vegdist(relabundance_assay, method = "euclidean")
-
-# Performing PCoA
-euclidean_relA_pcoa <- ecodist::pco(euclidean_dist_relA)
-
-# Creates a data frame from principal coordinates
-euclidean_relA_pcoa_df <- data.frame(pcoa1 = euclidean_relA_pcoa$vectors[,1], 
-                                pcoa2 = euclidean_relA_pcoa$vectors[,2])
-
-# Visualizing
-library(ggplot2)
-euclidean_relA_plot <- ggplot(data = euclidean_relA_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
-  geom_point() +
-  labs(x = "Principal Component 1",
-       y = "Principal Component 2",
-       title = "Euclidean PCoA with Relative Abundance transformation") +
-  theme(title = element_text(size = 12)) # makes titles smaller
-
-euclidean_relA_plot
+``` {r, message=FALSE, warning=FALSE}
+library(scater)
+# Performing MDS ordination using Bray-Curtis dissimilarity
+# Which is stored at the TSE object
+tse <- runMDS(tse, FUN = vegan::vegdist, name = "MDS_BC", exprs_values = "counts")
+tse <- transformCounts(tse, method = "log10", pseudocount = 1)
+tse <- runTSNE(tse, name = "TSNE", exprs_values = "log10")
+plotReducedDim(tse, "MDS_BC", colour_by = "patient_status")
+plotReducedDim(tse, "TSNE", colour_by = "patient_status")
 ```
 
  * Investigate the influence of the data transformations on
@@ -91,13 +69,18 @@ euclidean_relA_plot
    data; 2) Euclidean distances for CLR-transformed data.
 
 ```{r}
- # Computing Bray-Curtis distances
+# Computing relative abundance and its Bray-Curtis dissimilarity
+tse <- transformCounts(tse, method = "relabundance")
+relabundance_assay <- assays(tse)$relabundance
+relabundance_assay <- t(relabundance_assay)
+
 bray_dist_relA <- vegan::vegdist(relabundance_assay, method = "bray")
 bray_dist_relA <- t(bray_dist_relA)
 
 # Computing clr data and its euclidean distance
 tse <- transformCounts(tse, method = "clr", pseudocount = 1)
 clr_assay <- assays(tse)$clr
+clr_assay <- t(clr_assay)
 euclidean_dist_clr <- vegan::vegdist(clr_assay, method = "euclidean")
 euclidean_dist_clr <- t(euclidean_dist_clr)
 
@@ -135,10 +118,10 @@ ggplot(data = euclidean_dist_clr_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
 ```{r}
 permanova_cohort <- vegan::adonis(relabundance_assay ~ cohort,
                                   data = colData(tse),
-                                  permutations = 9999)
+                                  permutations = 99)  # 999 or 9999 is recommended
 permanova_patient_status <- vegan::adonis(relabundance_assay ~ patient_status,
                                   data = colData(tse),
-                                  permutations = 9999)
+                                  permutations = 99)
 
 print(paste0("relabundance_assay ~ cohort => p-value: ", 
               as.data.frame(permanova_cohort$aov.tab)["cohort", "Pr(>F)"]))
@@ -148,19 +131,44 @@ print(paste0("relabundance_assay ~ patient_status => p-value: ",
 
 
 ```
- * EXTRA: Visualizing the earlier plot with the grouping variable
+ * Perform community typing for the data using the DMM method [OMA](https://microbiome.github.io/OMA/microbiome-community.html#community-typing)
 
-``` {r}
+``` {r, message=FALSE, warning=FALSE}
+library(miaViz)
+# We run DMN for different values of k (number of possible communities)
+tse_dmn <- runDMN(tse, name = "DMN", k = 1:7)
 
-euclidean_relA_pcoa_df <- cbind(euclidean_relA_pcoa_df,
-                             patient_status = colData(tse)$patient_status)
-euclidean_relA_plot <- ggplot(data = euclidean_relA_pcoa_df,
-                              aes(x=pcoa1, y=pcoa2,color=patient_status)) +
-  geom_point() +
-  labs(x = "PC 1",
-       y = "PC 2",
-       title = "Euclidean PCoA with Relative Abundance transformation") +
-  theme(title = element_text(size = 12))
+# Observing the fit
+plotDMNFit(tse_dmn, type = "laplace")
+```
 
-euclidean_relA_plot
+```{r}
+# Getting the best model
+getBestDMNFit(tse_dmn, type = "laplace")
+```
+
+```{r}
+# PCoA with Bray-Curtis; with DMM clusters shown with colors
+
+# Calculating the DMN groups using "patient_status" for grouping
+dmn_group <- calculateDMNgroup(tse_dmn, variable = "patient_status",  exprs_values = "counts",
+                               k = 3, seed=.Machine$integer.max)
+
+# Getting the probabilities for which each sample was assigned
+prob <- DirichletMultinomial::mixture(getBestDMNFit(tse_dmn))
+colnames(prob) <- c("comp1", "comp2", "comp3")
+vec <- colnames(prob)[max.col(prob,ties.method = "first")]
+
+# Visualizing
+euclidean_dmm_pcoa_df <- cbind(euclidean_dist_clr_pcoa_df,
+                               dmm_component = vec)
+euclidean_dmm_plot <- ggplot(data = euclidean_dmm_pcoa_df, 
+                             aes(x=pcoa1, y=pcoa2,
+                                 color = dmm_component)) +
+                      geom_point() +
+                      labs(x = "Coordinate 1",
+                           y = "Coordinate 2",
+                           title = "PCoA with Aitchison distances") +  
+                      theme(title = element_text(size = 12))
+euclidean_dmm_plot
 ```

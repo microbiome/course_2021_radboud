@@ -525,7 +525,7 @@ permanova_cohort &lt;- vegan::adonis(rel_abund_assay ~ cohort,
 print(paste0(&quot;Different different cohorts and variance of abundance 
               between samples, p-value: &quot;, 
               as.data.frame(permanova_cohort$aov.tab)[&quot;cohort&quot;, &quot;Pr(&gt;F)&quot;]))</code></pre>
-<pre><code>## [1] &quot;Different different cohorts and variance of abundance \n              between samples, p-value: 0.7447&quot;</code></pre>
+<pre><code>## [1] &quot;Different different cohorts and variance of abundance \n              between samples, p-value: 0.737&quot;</code></pre>
 <p>The cohort variable is not significantly associated with microbiota composition (p-value is over 0.05).</p>
 <p>We can, however, visualize those taxa whose abundances drive the differences between cohorts. We first need to extract the model coefficients of taxa:</p>
 <pre class="r"><code># Gets the coefficients
@@ -563,9 +563,10 @@ top_taxa_coeffient_plot</code></pre>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
 <ul>
-<li><p>Visualize community variation with PCoA.</p></li>
+<li><p>Visualize community variation with different methods (PCA, MDS, t-SNE…) by using the options in the alternative method, plotReducedDim <a href="https://microbiome.github.io/OMA/microbiome-diversity.html#estimating-beta-diversity">OMA</a>. Compare results obtained with different dissimilarities (Euclidean, Bray-Curtis, Unifrac..) and transformations (CLR, compositional..) of your own choice.&quot;</p></li>
 <li><p>Investigate the influence of the data transformations on statistical analysis: Visualize community variation with PCoA with the following options: 1) Bray-Curtis distances for compositional data; 2) Euclidean distances for CLR-transformed data.</p></li>
 <li><p>Community-level comparisons: Use PERMANOVA to investigate whether the community composition differs between two groups of individuals (e.g. males and females, or some other grouping of your choice). You can also include covariates such as age and gender, and see how this affects the results.</p></li>
+<li><p>Perform community typing for the data using the DMM method <a href="https://microbiome.github.io/OMA/microbiome-community.html#community-typing">OMA</a></p></li>
 <li><p>Example <a href="08-5-ex-sol-ADHD.html">Solutions</a></p></li>
 </ul>
 </div>
