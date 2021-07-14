@@ -1,4 +1,4 @@
-book_filename: "OMA"
+book_filename: "radboud2021_material"
 pagetitle: "Microbiome Analysis with Bioconductor"
 delete_merged_file: true
 new_session: true
@@ -7,5 +7,6 @@ language:
     chapter_name: "Chapter "
 output_dir: "docs"
 rmd_files: ["index.Rmd",
-            # Introduction
-            "01-introduction.Rmd"]
+            "01-introduction.Rmd",
+	    "02-start.Rmd"
+	    ]
