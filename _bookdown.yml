@@ -1,5 +1,5 @@
-book_filename: "radboud2021_material"
-pagetitle: "Microbiome Data Science Introduction"
+book_filename: "OMA"
+pagetitle: "Microbiome Analysis with Bioconductor"
 delete_merged_file: true
 new_session: true
 language:
@@ -7,13 +7,19 @@ language:
     chapter_name: "Chapter "
 output_dir: "docs"
 rmd_files: ["index.Rmd",
-            "01-program.Rmd",
-	    "02-start.Rmd",
-	    "03-reproduciblereporting.Rmd",
-	    "04-import.Rmd",
-	    "05-explore.Rmd",
-	    "06-alpha.Rmd",
-	    "07-beta.Rmd",
-	    "08-abundance.Rmd",
-	    "09-material.Rmd",
-	    "10-misc.Rmd"]
+            # Introduction
+            "01-introduction.Rmd",
+            # Focus Topics
+            "10-overview.Rmd",
+            "11-taxonomic-information.Rmd",
+            "12-quality-control.Rmd",
+            "13-microbiome-exploration.Rmd",
+            "14-microbiome-diversity.Rmd",
+            "15-microbiome-community.Rmd",
+            "16-differential-abundance.Rmd",
+            "17-timeseries.Rmd",
+            "18-multitable.Rmd",
+            # Appendix
+            "90-example-data.Rmd",
+            "98-function-reference.Rmd",
+            "99-bibliography.Rmd"]
