@@ -13,7 +13,7 @@ A Wilcoxon test estimates the difference in an outcome between two groups. It is
 non-parametric alternative to a t-test, which means that the Wilcoxon test
 does not make any assumptions about the data.
 
-Let's first agglomerate the data at the Genus level.
+Let's first combine the data for the testing purpose.
 
 ```{r}
 # Agglomerates data to Genus level
@@ -27,14 +27,15 @@ tse_genus <- transformCounts(tse_genus, method = "clr", pseudocount = 1)
 # Does transpose, so samples are in rows, then creates a data frame.
 abundance_analysis_data <- data.frame(t(assay(tse_genus, "clr")))
 # We will analyse whether abundances differ depending on the"patient_status".
-# There two groups "ADHD" and "control". Let's include that to the data frame.
+# There are two groups: "ADHD" and "control". 
+# Let's include that to the data frame.
 abundance_analysis_data <- cbind(
   abundance_analysis_data, 
   patient_status = colData(tse_genus)$patient_status
 )
 ```
 
-Now we start with the Wilcoxon test. We test all the taxa by looping through columns,
+Now we can start with the Wilcoxon test. We test all the taxa by looping through columns,
 and store individual p-values to a vector. Then we create a data frame from collected
 data.
 
@@ -138,7 +139,7 @@ is a recently developed method for differential abundance testing. It is based o
 [earlier published approach](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4450248/). 
 This method could be recommended as part of several approaches:
 A [recent study](https://www.biorxiv.org/content/10.1101/2021.05.10.443486v1.full) 
-compared several mainstream methods and found that among another method, ANCOM-BC produced the most consistent results and is probably a conservative approach. Please note that based on this and other comparisons, no single method can be recommended across all datasets. Rather, it could be recommended to apply several methods and look at the overlap/differences. 
+compared several mainstream methods and found that among another method, ANCOM (the former version of ANCOM-BC) produced the most consistent results and is probably a conservative approach. Please note that based on this and other comparisons, no single method can be recommended across all datasets. Rather, it could be recommended to apply several methods and look at the overlap/differences. 
 
 As the only method, ANCOM-BC incorporates the so called *sampling fraction* into the model. The latter term could be empirically estimated by the ratio of the library size to the microbial load. Variations in this sampling fraction would bias differential abundance analyses if ignored. Furthermore, this method provides p-values, and confidence intervals for each taxon. 
 It also controls the FDR and it is computationally simple to implement. 
