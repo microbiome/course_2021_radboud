@@ -20,7 +20,8 @@ for (column in
   normality_test_p <- c(normality_test_p, result$p.value)
 }
 
-print(paste0("P-values over 0.05: ", sum(normality_test_p>0.05), "/", length(normality_test_p)))
+print(paste0("P-values over 0.05: ", sum(normality_test_p>0.05), "/", 
+             length(normality_test_p)))
 ```
 
 ## Deseq details

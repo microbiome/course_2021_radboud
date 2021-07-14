@@ -72,10 +72,12 @@ mia and miaViz are prioritized. Packages that are loaded first have higher prior
 
 ```{r warning = FALSE, message = FALSE}
 # Reorders bioc packages, so that mia and miaViz are first
-bioc_pkg <- c(bioc_pkg[ bioc_pkg %in% c("mia", "miaViz") ], bioc_pkg[ !bioc_pkg %in% c("mia", "miaViz") ] ) 
+bioc_pkg <- c(bioc_pkg[ bioc_pkg %in% c("mia", "miaViz") ], 
+              bioc_pkg[ !bioc_pkg %in% c("mia", "miaViz") ] ) 
 
 # Loading all packages into session. Returns true if package was successfully loaded.
-sapply(c(bioc_pkg, cran_pkg), require, character.only = TRUE)
+loaded <- sapply(c(bioc_pkg, cran_pkg), require, character.only = TRUE)
+as.data.frame(loaded)
 ```
 
 

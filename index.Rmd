@@ -12,6 +12,10 @@ output:
   bookdown::gitbook
   bookdown::pdf_document2
 always_allow_html: true  
+classoption: oneside
+geometry:
+  - top=30mm
+  - left=15mm
 ---
 
 # Overview 
