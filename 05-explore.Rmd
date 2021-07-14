@@ -75,12 +75,11 @@ tree <- ape::read.tree(tree_file_path)
 
 # Add tree to rowTree
 rowTree(tse) <- tree
-
-
 # saveRDS(se, file = "data/se.rds")
 # saveRDS(tse, file = "data/tse.rds")
 
-
+print("HHOOOOOOOOO_----------------")
+print(tse)
 ```
 
 ```{r}
