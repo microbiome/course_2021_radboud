@@ -59,3 +59,6 @@ tree <- ape::read.tree(tree_file_path)
 rowTree(tse) <- tree
 
 
+# saveRDS(se, file = "data/se.rds")
+# saveRDS(tse, file = "data/tse.rds")
+
