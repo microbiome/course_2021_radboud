@@ -214,7 +214,7 @@ We can also look at the intersection of identified taxa
 
 ```{r}
 # to let R check this for us, we need to make sure,
-# to use the same labels everywhere. 
+# to use the same tax names (I call it labels here) everywhere. 
 
 wilcox_labels <- tibble(
   wilcox_labels_new = rowData(tse_genus)$Genus,
@@ -222,7 +222,7 @@ wilcox_labels <- tibble(
 )
 wilcox_taxa <-wilcoxon_p %>% 
   left_join(wilcox_labels, by = "taxa") %>%
-  filter(, p_adjusted <= 0.05) %>% 
+  filter(p_adjusted <= 0.05) %>% 
   .$wilcox_labels_new 
 deseq2_taxa <- filter(df, padj <= 0.05) %>% 
   .$taxon %>%
