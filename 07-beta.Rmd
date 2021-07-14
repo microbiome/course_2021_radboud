@@ -104,7 +104,7 @@ euclidean_pcoa_df <- data.frame(pcoa1 = euclidean_pcoa$vectors[,1],
 euclidean_plot <- ggplot(data = euclidean_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
   geom_point() +
   labs(x = "PC1",
-       y = "PC22",
+       y = "PC2",
        title = "Euclidean PCoA with CLR transformation") +
   theme(title = element_text(size = 12)) # makes titles smaller
 
