@@ -1,6 +1,9 @@
 
 # Getting started
 
+```{r}
+dim(tse)
+```
 
 ## Checklist (before the course)
 
