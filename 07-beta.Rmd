@@ -232,9 +232,10 @@ permanova_cohort <- vegan::adonis(rel_abund_assay ~ cohort,
                                   permutations = 9999)
 
 # we can obtain a the p value for our predictor:
-cat(paste0("Different different cohorts and variance of abundance
-           between samples, p-value: ", 
-           as.data.frame(permanova_cohort$aov.tab)["cohort", "Pr(>F)"]))
+print(paste0("Different different cohorts and variance of abundance ",
+              "between samples, p-value: ", 
+              as.data.frame(permanova_cohort$aov.tab)["cohort", "Pr(>F)"]))
+
 ```  
 
 The cohort variable is not significantly associated with
@@ -282,19 +283,19 @@ top_taxa_coeffient_plot
 There are many alternative and complementary methods for analysing
 community composition. For more examples, see a dedicated section on
 beta diversity in the [online
-book](https://microbiome.github.io/OMA/).
+book](https://microbiome.github.io/OMA/microbiome-diversity.html#beta-diversity).
 
 ## Community typing
 
 
 A dedicated section presenting examples on community typing is in the
-[online book](https://microbiome.github.io/OMA/).
+[online book](https://microbiome.github.io/OMA/microbiome-community.html#community-typing).
 
 
 
 ## Exercises
 
- * Visualize community variation with PCoA.
+ * Visualize community variation with different methods (PCA, MDS, t-SNE...) by using the options in the alternative method, plotReducedDim [OMA](https://microbiome.github.io/OMA/microbiome-diversity.html#estimating-beta-diversity). Compare results obtained with different dissimilarities (Euclidean, Bray-Curtis, Unifrac..) and transformations (CLR, compositional..) of your own choice."
 
  * Investigate the influence of the data transformations on
    statistical analysis: Visualize community variation with PCoA with
@@ -306,5 +307,8 @@ A dedicated section presenting examples on community typing is in the
    (e.g. males and females, or some other grouping of your
    choice). You can also include covariates such as age and gender,
    and see how this affects the results.
+   
+ * Perform community typing for the data using the DMM method [OMA](https://microbiome.github.io/OMA/microbiome-community.html#community-typing)
 
 
+ * Example [Solutions](08-5-ex-sol-ADHD.html)
