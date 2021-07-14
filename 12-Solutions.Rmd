@@ -1,4 +1,4 @@
-# Exersices Solutions #
+# Exercise Solutions #
 
 
 This section includes exemplary solutions to the exercises presented earlier.
