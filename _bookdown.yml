@@ -12,4 +12,5 @@ rmd_files:
   - 08-abundance.Rmd
   - 09-material.Rmd
   - 10-misc.Rmd
+  - 12-Solutions.Rmd
 output_dir: docs
