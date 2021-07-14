@@ -1,29 +1,6 @@
-# Microbiome Community {#microbiome-community}
+# Community typing
 
-```{r setup, echo=FALSE, results="asis"}
-library(rebook)
-chapterPreamble()
-if(!require(ecodist)){
-    install.packages("ecodist")
-    library(ecodist)
-}
-```
-
-```{r load-pkg-data}
-library(mia)
-data("GlobalPatterns")
-tse <- GlobalPatterns
-```
-
-
-## Community composition
-
-Heatmaps
-
-
-## Community typing
-
-### Dirichlet Multinomial Mixtures (DMM)
+## Dirichlet Multinomial Mixtures (DMM)
 
 This section focus on DMM analysis. 
 
@@ -38,11 +15,9 @@ reflect the probability that a sample belongs to the given cluster.
 Let's cluster the data with DMM clustering. 
 
 ```{r dmm}
-# Runs model and calculates the most likely number of clusters from 1 to 7.
-# Since this is a large dataset it takes long computational time.
-# For this reason we use only a subset of the data; agglomerated by Phylum as a rank.
-tse <- relAbundanceCounts(tse)
-tse <- agglomerateByRank(tse, rank = "Phylum", agglomerateTree=TRUE)
+# Runs model and calculates the most likely number of clusters from 1 to 7. 
+# For this small data, takes about 10 seconds. For larger data, can take much longer
+# because this demands lots of resources. 
 tse_dmn <- runDMN(tse, name = "DMN", k = 1:7)
 ```
 
@@ -67,7 +42,6 @@ getDMN(tse_dmn)
 Show Laplace approximation (model evidence) for each model of the k models.
 
 ```{r}
-library(miaViz)
 plotDMNFit(tse_dmn, type = "laplace")
 ```
 
@@ -76,14 +50,14 @@ Return the model that has the best fit.
 ```{r}
 getBestDMNFit(tse_dmn, type = "laplace")
 ```
-### PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors
+## PCoA for ASV-level data with Bray-Curtis; with DMM clusters shown with colors
 
 Group samples and return DMNGroup object that contains a summary.
 Patient status is used for grouping.
 
 ```{r}
-dmn_group <- calculateDMNgroup(tse_dmn, variable = "SampleType",  exprs_values = "counts",
-                               k = 2, seed=.Machine$integer.max)
+dmn_group <- calculateDMNgroup(tse_dmn, variable = "patient_status", 
+                             exprs_values = "counts", k = 3)
 
 dmn_group
 ```
@@ -108,49 +82,22 @@ Contribution of each taxa to each component
 ```{r}
 head(DirichletMultinomial::fitted(getBestDMNFit(tse_dmn)))
 ```
-Get the assignment probabilities
 
+Get the assignment probabilities
 
 ```{r}
 prob <- DirichletMultinomial::mixture(getBestDMNFit(tse_dmn))
 # Add column names
-colnames(prob) <- c("comp1", "comp2")
+colnames(prob) <- c("comp1", "comp2", "comp3")
 
 # For each row, finds column that has the highest value. Then extract the column 
 # names of highest values.
 vec <- colnames(prob)[max.col(prob,ties.method = "first")]
 
-```
-
-Computing the euclidean PCoA and storing it as a dataframe
-
-```{r}
-# Does clr transformation. Pseudocount is added, because data contains zeros.
-tse <- transformCounts(tse, method = "clr", pseudocount = 1)
-
-# Gets clr table
-clr_assay <- assays(tse)$clr
-
-# Transposes it to get taxa to columns
-clr_assay <- t(clr_assay)
-
-# Calculates Euclidean distances between samples. Because taxa is in columns,
-# it is used to compare different samples.
-euclidean_dist <- vegan::vegdist(clr_assay, method = "euclidean")
-
-# Does principal coordinate analysis
-euclidean_pcoa <- ecodist::pco(euclidean_dist)
-
-# Creates a data frame from principal coordinates
-euclidean_pcoa_df <- data.frame(pcoa1 = euclidean_pcoa$vectors[,1], 
-                                pcoa2 = euclidean_pcoa$vectors[,2])
-
-```
-
-```{r}
 # Creates a data frame that contains principal coordinates and DMM information
 euclidean_dmm_pcoa_df <- cbind(euclidean_pcoa_df,
                                dmm_component = vec)
+
 # Creates a plot
 euclidean_dmm_plot <- ggplot(data = euclidean_dmm_pcoa_df, 
                              aes(x=pcoa1, y=pcoa2,
@@ -162,11 +109,4 @@ euclidean_dmm_plot <- ggplot(data = euclidean_dmm_pcoa_df,
   theme(title = element_text(size = 12)) # makes titles smaller
 
 euclidean_dmm_plot
-```
-
-
-## Session Info {-}
-
-```{r sessionInfo, echo=FALSE, results='asis'}
-prettySessionInfo()
 ```
