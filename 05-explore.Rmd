@@ -1,4 +1,6 @@
 ```{r, echo=FALSE}
+library(mia)
+library(miaViz)
 se <- readRDS("data/se.rds")
 tse <- readRDS("data/tse.rds")
 ```
@@ -82,7 +84,7 @@ as we will see later).
 
 ```{r}
 # Calculates relative abundances, and stores the table to assays
-tse <- transformCounts(tse, method = "relabundance")
+tse <- mia::transformCounts(tse, method = "relabundance")
 ```
 
 A variety of standard transformations for microbiome data are available for `TSE` data objects through [mia R package](https://microbiome.github.io/mia/reference/transformCounts.html).
@@ -95,7 +97,7 @@ can easily agglomerate the data based on taxonomic ranks. Here, we
 agglomerate the data at Phylum level.
 
 ```{r}
-tse_phylum <- agglomerateByRank(tse, rank = "Phylum")
+tse_phylum <- mia::agglomerateByRank(tse, rank = "Phylum")
 
 # Show dimensionality
 dim(tse_phylum)
@@ -159,6 +161,7 @@ The [miaViz package](https://microbiome.github.io/miaViz/) facilitates
 data visualization. Let us plot the Phylum level abundances.
 
 ```{r}
+library(miaViz)
 
 # Here we specify "relabundance" to be abundance table that we use for plotting.
 # Note that we can use agglomerated or non-agglomerated tse as an input, because
