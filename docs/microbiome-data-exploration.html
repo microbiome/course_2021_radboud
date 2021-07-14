@@ -265,8 +265,10 @@ information for each of the 151 entries. With the <code>head()</code>
 command, we can print just the beginning of the table.</p>
 <p>The <code>rowData</code> seems to contain information from 6
 different taxonomy classes.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="microbiome-data-exploration.html#cb8-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(<span class="fu">rowData</span>(tse))) <span class="sc">%&gt;%</span> kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-2"><a href="microbiome-data-exploration.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="microbiome-data-exploration.html#cb8-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(<span class="fu">rowData</span>(tse))) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="microbiome-data-exploration.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, </span>
+<span id="cb8-3"><a href="microbiome-data-exploration.html#cb8-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">latex_options=</span><span class="st">&quot;scale_down&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="microbiome-data-exploration.html#cb8-4" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -438,8 +440,10 @@ Bacteroides
 <p>The colData slot contains sample metadata. It contains information for all 27 samples.
 However, here only the 6 first samples are shown as we use the <code>head()</code> command. There
 are 4 columns, that contain information, e.g., about patients’ status, and cohort.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="microbiome-data-exploration.html#cb9-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(<span class="fu">colData</span>(tse))) <span class="sc">%&gt;%</span> kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-2"><a href="microbiome-data-exploration.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="microbiome-data-exploration.html#cb9-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(<span class="fu">colData</span>(tse))) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="microbiome-data-exploration.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, </span>
+<span id="cb9-3"><a href="microbiome-data-exploration.html#cb9-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">latex_options=</span><span class="st">&quot;scale_down&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-4"><a href="microbiome-data-exploration.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -609,8 +613,10 @@ agglomeration shows all Firmicutes are combined together, and all
 lower rank information is lost.</p>
 <p>From the assay we can see that all abundances of taxa that belong to
 Firmicutes are summed up.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="microbiome-data-exploration.html#cb15-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(<span class="fu">rowData</span>(tse_phylum))) <span class="sc">%&gt;%</span> kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-2"><a href="microbiome-data-exploration.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="microbiome-data-exploration.html#cb15-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(<span class="fu">rowData</span>(tse_phylum))) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="microbiome-data-exploration.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, </span>
+<span id="cb15-3"><a href="microbiome-data-exploration.html#cb15-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">latex_options=</span><span class="st">&quot;scale_down&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-4"><a href="microbiome-data-exploration.html#cb15-4" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -767,8 +773,10 @@ agglomeration.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="microbiome-data-exploration.html#cb16-1" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">rowData</span>(<span class="fu">agglomerateByRank</span>(tse, <span class="at">rank =</span> <span class="st">&quot;Genus&quot;</span>))</span>
 <span id="cb16-2"><a href="microbiome-data-exploration.html#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="microbiome-data-exploration.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Prints those taxa that do not have information at the Genus level</span></span>
-<span id="cb16-4"><a href="microbiome-data-exploration.html#cb16-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(temp[temp<span class="sc">$</span>Genus <span class="sc">==</span> <span class="st">&quot;&quot;</span>,])) <span class="sc">%&gt;%</span> kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-5"><a href="microbiome-data-exploration.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<span id="cb16-4"><a href="microbiome-data-exploration.html#cb16-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(temp[temp<span class="sc">$</span>Genus <span class="sc">==</span> <span class="st">&quot;&quot;</span>,])) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-5"><a href="microbiome-data-exploration.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, </span>
+<span id="cb16-6"><a href="microbiome-data-exploration.html#cb16-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">latex_options=</span><span class="st">&quot;scale_down&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-7"><a href="microbiome-data-exploration.html#cb16-7" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>

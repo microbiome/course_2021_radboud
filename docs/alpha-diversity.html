@@ -276,8 +276,10 @@ account.</p>
 <span id="cb25-11"><a href="alpha-diversity.html#cb25-11" aria-hidden="true" tabindex="-1"></a>tse <span class="ot">&lt;-</span> <span class="fu">estimateDiversity</span>(tse, <span class="at">index =</span> indices, <span class="at">name =</span> names)</span>
 <span id="cb25-12"><a href="alpha-diversity.html#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-13"><a href="alpha-diversity.html#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Shows the calculated indices</span></span>
-<span id="cb25-14"><a href="alpha-diversity.html#cb25-14" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(<span class="fu">colData</span>(tse)[names])) <span class="sc">%&gt;%</span> kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb25-15"><a href="alpha-diversity.html#cb25-15" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<span id="cb25-14"><a href="alpha-diversity.html#cb25-14" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(<span class="fu">colData</span>(tse)[names])) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-15"><a href="alpha-diversity.html#cb25-15" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="st">&quot;striped&quot;</span>, </span>
+<span id="cb25-16"><a href="alpha-diversity.html#cb25-16" aria-hidden="true" tabindex="-1"></a>                            <span class="at">latex_options=</span><span class="st">&quot;scale_down&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-17"><a href="alpha-diversity.html#cb25-17" aria-hidden="true" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>

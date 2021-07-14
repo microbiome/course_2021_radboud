@@ -235,6 +235,7 @@ permanova_cohort <- vegan::adonis(rel_abund_assay ~ cohort,
 print(paste0("Different different cohorts and variance of abundance ",
               "between samples, p-value: ", 
               as.data.frame(permanova_cohort$aov.tab)["cohort", "Pr(>F)"]))
+
 ```  
 
 The cohort variable is not significantly associated with

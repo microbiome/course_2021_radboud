@@ -266,7 +266,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb73-12"><a href="miscellaneous-material.html#cb73-12" aria-hidden="true" tabindex="-1"></a>  normality_test_p <span class="ot">&lt;-</span> <span class="fu">c</span>(normality_test_p, result<span class="sc">$</span>p.value)</span>
 <span id="cb73-13"><a href="miscellaneous-material.html#cb73-13" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb73-14"><a href="miscellaneous-material.html#cb73-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-15"><a href="miscellaneous-material.html#cb73-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;P-values over 0.05: &quot;</span>, <span class="fu">sum</span>(normality_test_p<span class="sc">&gt;</span><span class="fl">0.05</span>), <span class="st">&quot;/&quot;</span>, <span class="fu">length</span>(normality_test_p)))</span></code></pre></div>
+<span id="cb73-15"><a href="miscellaneous-material.html#cb73-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;P-values over 0.05: &quot;</span>, <span class="fu">sum</span>(normality_test_p<span class="sc">&gt;</span><span class="fl">0.05</span>), <span class="st">&quot;/&quot;</span>, </span>
+<span id="cb73-16"><a href="miscellaneous-material.html#cb73-16" aria-hidden="true" tabindex="-1"></a>             <span class="fu">length</span>(normality_test_p)))</span></code></pre></div>
 <pre><code>## [1] &quot;P-values over 0.05: 7/54&quot;</code></pre>
 </div>
 <div id="deseq-details" class="section level2" number="11.2">

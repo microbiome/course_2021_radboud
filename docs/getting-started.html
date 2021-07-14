@@ -301,16 +301,29 @@ the R session. Only uninstalled packages are installed.</p>
 Some function names occur in multiple packages. That is why miaverse’s packages
 mia and miaViz are prioritized. Packages that are loaded first have higher priority.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="getting-started.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reorders bioc packages, so that mia and miaViz are first</span></span>
-<span id="cb4-2"><a href="getting-started.html#cb4-2" aria-hidden="true" tabindex="-1"></a>bioc_pkg <span class="ot">&lt;-</span> <span class="fu">c</span>(bioc_pkg[ bioc_pkg <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;mia&quot;</span>, <span class="st">&quot;miaViz&quot;</span>) ], bioc_pkg[ <span class="sc">!</span>bioc_pkg <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;mia&quot;</span>, <span class="st">&quot;miaViz&quot;</span>) ] ) </span>
-<span id="cb4-3"><a href="getting-started.html#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="getting-started.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading all packages into session. Returns true if package was successfully loaded.</span></span>
-<span id="cb4-5"><a href="getting-started.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">c</span>(bioc_pkg, cran_pkg), require, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>##                  mia               miaViz              ANCOMBC                  ape               DESeq2 DirichletMultinomial 
-##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
-##          BiocManager             bookdown                dplyr              ecodist              ggplot2            gridExtra 
-##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
-##           kableExtra                knitr               scales                vegan 
-##                 TRUE                 TRUE                 TRUE                 TRUE</code></pre>
+<span id="cb4-2"><a href="getting-started.html#cb4-2" aria-hidden="true" tabindex="-1"></a>bioc_pkg <span class="ot">&lt;-</span> <span class="fu">c</span>(bioc_pkg[ bioc_pkg <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;mia&quot;</span>, <span class="st">&quot;miaViz&quot;</span>) ], </span>
+<span id="cb4-3"><a href="getting-started.html#cb4-3" aria-hidden="true" tabindex="-1"></a>              bioc_pkg[ <span class="sc">!</span>bioc_pkg <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;mia&quot;</span>, <span class="st">&quot;miaViz&quot;</span>) ] ) </span>
+<span id="cb4-4"><a href="getting-started.html#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="getting-started.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading all packages into session. Returns true if package was successfully loaded.</span></span>
+<span id="cb4-6"><a href="getting-started.html#cb4-6" aria-hidden="true" tabindex="-1"></a>loaded <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(bioc_pkg, cran_pkg), require, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-7"><a href="getting-started.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(loaded)</span></code></pre></div>
+<pre><code>##                      loaded
+## mia                    TRUE
+## miaViz                 TRUE
+## ANCOMBC                TRUE
+## ape                    TRUE
+## DESeq2                 TRUE
+## DirichletMultinomial   TRUE
+## BiocManager            TRUE
+## bookdown               TRUE
+## dplyr                  TRUE
+## ecodist                TRUE
+## ggplot2                TRUE
+## gridExtra              TRUE
+## kableExtra             TRUE
+## knitr                  TRUE
+## scales                 TRUE
+## vegan                  TRUE</code></pre>
 
 </div>
 </div>
