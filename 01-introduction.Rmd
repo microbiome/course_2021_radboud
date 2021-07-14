@@ -256,6 +256,10 @@ tse <- as(se, "TreeSummarizedExperiment")
 tse
 ```
 
+```{r}
+dim(tse)
+```
+
 Next, let us read the tree data file and add it to the R data object (tse).
 
 ```{r}
