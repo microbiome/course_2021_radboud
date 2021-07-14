@@ -128,7 +128,7 @@
 
 \title{Introduction to microbiome data science}
 \author{Leo Lahti, Tuomas Borman, Henrik Eckermann, Chouaib Benchraka}
-\date{2021-07-13}
+\date{2021-07-14}
 
 \begin{document}
 \maketitle
@@ -1144,7 +1144,7 @@ As we can see, there is statistically significant difference between the cohorts
 \end{verbatim}
 
 For more examples, see a dedicated section on alpha diversity in the
-\href{https://microbiome.github.io/OMA/}{online book}.
+\href{https://microbiome.github.io/OMA/microbiome-diversity.html\#alpha-diversity}{online book}.
 
 \hypertarget{exercises}{%
 \section{Exercises}\label{exercises}}
@@ -1159,7 +1159,8 @@ Add the following in the reproducible summary report.
   Compare the results between two or more
   alpha diversity indices (visually and/or statistically).
 \item
-  See \href{https://microbiome.github.io/OMA/}{online book} for further examples.
+  See \href{https://microbiome.github.io/OMA/microbiome-diversity.html\#alpha-diversity}{online book}
+  for further examples.
 \item
   Example \href{07-3-ex-sol-ADHD.html}{Solutions}
 \end{itemize}
@@ -1414,14 +1415,14 @@ variables are associated with each other.
                                   \AttributeTok{permutations =} \DecValTok{9999}\NormalTok{)}
 
 \CommentTok{\# we can obtain a the p value for our predictor:}
-\FunctionTok{print}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"Different different cohorts and variance of abundance }
-\StringTok{              between samples, p{-}value: "}\NormalTok{, }
+\FunctionTok{print}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"Different different cohorts and variance of abundance "}\NormalTok{,}
+              \StringTok{"between samples, p{-}value: "}\NormalTok{, }
               \FunctionTok{as.data.frame}\NormalTok{(permanova\_cohort}\SpecialCharTok{$}\NormalTok{aov.tab)[}\StringTok{"cohort"}\NormalTok{, }\StringTok{"Pr(\textgreater{}F)"}\NormalTok{]))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Different different cohorts and variance of abundance \n              between samples, p-value: 0.7422"
+## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7386"
 \end{verbatim}
 
 The cohort variable is not significantly associated with
@@ -1474,21 +1475,21 @@ names. We can fetch those from our rowData. Here we use Genus level names:
 
 There are many alternative and complementary methods for analysing
 community composition. For more examples, see a dedicated section on
-beta diversity in the \href{https://microbiome.github.io/OMA/}{online
+beta diversity in the \href{https://microbiome.github.io/OMA/microbiome-diversity.html\#beta-diversity}{online
 book}.
 
 \hypertarget{community-typing}{%
 \section{Community typing}\label{community-typing}}
 
 A dedicated section presenting examples on community typing is in the
-\href{https://microbiome.github.io/OMA/}{online book}.
+\href{https://microbiome.github.io/OMA/microbiome-community.html\#community-typing}{online book}.
 
 \hypertarget{exercises-1}{%
 \section{Exercises}\label{exercises-1}}
 
 \begin{itemize}
 \item
-  Visualize community variation with PCoA.
+  Visualize community variation with different methods (PCA, MDS, t-SNE\ldots) by using the options in the alternative method, plotReducedDim \href{https://microbiome.github.io/OMA/microbiome-diversity.html\#estimating-beta-diversity}{OMA}. Compare results obtained with different dissimilarities (Euclidean, Bray-Curtis, Unifrac..) and transformations (CLR, compositional..) of your own choice."
 \item
   Investigate the influence of the data transformations on
   statistical analysis: Visualize community variation with PCoA with
@@ -1500,6 +1501,10 @@ A dedicated section presenting examples on community typing is in the
   (e.g.~males and females, or some other grouping of your
   choice). You can also include covariates such as age and gender,
   and see how this affects the results.
+\item
+  Perform community typing for the data using the DMM method \href{https://microbiome.github.io/OMA/microbiome-community.html\#community-typing}{OMA}
+\item
+  Example \href{08-5-ex-sol-ADHD.html}{Solutions}
 \end{itemize}
 
 \hypertarget{differential-abundance-analysis}{%
