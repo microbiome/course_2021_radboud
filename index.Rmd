@@ -19,6 +19,7 @@ geometry:
   - left=15mm
 ---
 
+
 # Overview 
 
 **Welcome to [Radboud Summer School, July 2021](https://www.ru.nl/radboudsummerschool/courses/2021/brain-bacteria-behaviour/)**
@@ -28,13 +29,12 @@ geometry:
 <p style="font-size:12px">Figure source: Moreno-Indias _et al_. (2021) [Statistical and Machine Learning Techniques in Human Microbiome Studies: Contemporary Challenges and Solutions](https://doi.org/10.3389/fmicb.2021.635781). Frontiers in Microbiology 12:11.</p>
 
 
-
 ## Introduction
 
 This course is based on [_miaverse_](https://microbiome.github.io) (mia = **MI**crobiome **A**nalysis) is an
 R/Bioconductor framework for microbiome data science. It extends another popular framework, [phyloseq](https://joey711.github.io/phyloseq/).
 
-The miaverse framework consists of an efficient data structure, an
+The miaverse consists of an efficient data structure, an
 associated package ecosystem, demonstration data sets, and open
 documentation. These are explained in more detail in the online book
 [Orchestrating Microbiome Analysis](https://microbiome.github.io/OMA).
