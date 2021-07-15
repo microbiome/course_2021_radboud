@@ -24,7 +24,7 @@
 <meta name="author" content="Leo Lahti, Tuomas Borman, Henrik Eckermann, Chouaib Benchraka" />
 
 
-<meta name="date" content="2021-07-13" />
+<meta name="date" content="2021-07-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -203,7 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.1" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#wilcoxon-test"><i class="fa fa-check"></i><b>9.1</b> Wilcoxon test</a></li>
 <li class="chapter" data-level="9.2" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#deseq2"><i class="fa fa-check"></i><b>9.2</b> DESeq2</a></li>
 <li class="chapter" data-level="9.3" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#ancom-bc"><i class="fa fa-check"></i><b>9.3</b> ANCOM-BC</a></li>
-<li class="chapter" data-level="9.4" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#comparison-of-wilcoxon-test-and-deseq2"><i class="fa fa-check"></i><b>9.4</b> Comparison of Wilcoxon test and DESeq2</a></li>
+<li class="chapter" data-level="9.4" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#comparison-of-the-methods"><i class="fa fa-check"></i><b>9.4</b> Comparison of the methods</a></li>
 <li class="chapter" data-level="9.5" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#comparison-of-abundance"><i class="fa fa-check"></i><b>9.5</b> Comparison of abundance</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="study-material.html"><a href="study-material.html"><i class="fa fa-check"></i><b>10</b> Study material</a>
@@ -219,6 +219,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="11.1" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html#shapiro-wilk-test"><i class="fa fa-check"></i><b>11.1</b> Shapiro-Wilk test</a></li>
 <li class="chapter" data-level="11.2" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html#deseq-details"><i class="fa fa-check"></i><b>11.2</b> Deseq details</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="exercise-solutions.html"><a href="exercise-solutions.html"><i class="fa fa-check"></i><b>12</b> Exercise Solutions</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="exercise-solutions.html"><a href="exercise-solutions.html#section-5"><i class="fa fa-check"></i><b>12.1</b> Section 5</a></li>
+<li class="chapter" data-level="12.2" data-path="exercise-solutions.html"><a href="exercise-solutions.html#section-6"><i class="fa fa-check"></i><b>12.2</b> Section 6</a></li>
+<li class="chapter" data-level="12.3" data-path="exercise-solutions.html"><a href="exercise-solutions.html#section-7"><i class="fa fa-check"></i><b>12.3</b> Section 7</a></li>
+<li class="chapter" data-level="12.4" data-path="exercise-solutions.html"><a href="exercise-solutions.html#section-8"><i class="fa fa-check"></i><b>12.4</b> Section 8</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -330,7 +337,7 @@ Euclidean distances between CLR transformed sample abundance vectors.</p>
 <span id="cb35-22"><a href="beta-diversity.html#cb35-22" aria-hidden="true" tabindex="-1"></a>euclidean_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> euclidean_pcoa_df, <span class="fu">aes</span>(<span class="at">x=</span>pcoa1, <span class="at">y=</span>pcoa2)) <span class="sc">+</span></span>
 <span id="cb35-23"><a href="beta-diversity.html#cb35-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb35-24"><a href="beta-diversity.html#cb35-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;PC1&quot;</span>,</span>
-<span id="cb35-25"><a href="beta-diversity.html#cb35-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;PC22&quot;</span>,</span>
+<span id="cb35-25"><a href="beta-diversity.html#cb35-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;PC2&quot;</span>,</span>
 <span id="cb35-26"><a href="beta-diversity.html#cb35-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Euclidean PCoA with CLR transformation&quot;</span>) <span class="sc">+</span></span>
 <span id="cb35-27"><a href="beta-diversity.html#cb35-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)) <span class="co"># makes titles smaller</span></span>
 <span id="cb35-28"><a href="beta-diversity.html#cb35-28" aria-hidden="true" tabindex="-1"></a></span>
@@ -443,10 +450,10 @@ variables are associated with each other.</p>
 <span id="cb39-10"><a href="beta-diversity.html#cb39-10" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">permutations =</span> <span class="dv">9999</span>)</span>
 <span id="cb39-11"><a href="beta-diversity.html#cb39-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-12"><a href="beta-diversity.html#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="co"># we can obtain a the p value for our predictor:</span></span>
-<span id="cb39-13"><a href="beta-diversity.html#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Different different cohorts and variance of abundance </span></span>
-<span id="cb39-14"><a href="beta-diversity.html#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="st">              between samples, p-value: &quot;</span>, </span>
+<span id="cb39-13"><a href="beta-diversity.html#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Different different cohorts and variance of abundance &quot;</span>,</span>
+<span id="cb39-14"><a href="beta-diversity.html#cb39-14" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;between samples, p-value: &quot;</span>, </span>
 <span id="cb39-15"><a href="beta-diversity.html#cb39-15" aria-hidden="true" tabindex="-1"></a>              <span class="fu">as.data.frame</span>(permanova_cohort<span class="sc">$</span>aov.tab)[<span class="st">&quot;cohort&quot;</span>, <span class="st">&quot;Pr(&gt;F)&quot;</span>]))</span></code></pre></div>
-<pre><code>## [1] &quot;Different different cohorts and variance of abundance \n              between samples, p-value: 0.7459&quot;</code></pre>
+<pre><code>## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7487&quot;</code></pre>
 <p>The cohort variable is not significantly associated with
 microbiota composition (p-value is over 0.05).</p>
 <p>We can, however, visualize those taxa whose abundances drive the
@@ -482,18 +489,18 @@ names. We can fetch those from our rowData. Here we use Genus level names:</p>
 <p><img src="radboud2021_material_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>There are many alternative and complementary methods for analysing
 community composition. For more examples, see a dedicated section on
-beta diversity in the <a href="https://microbiome.github.io/OMA/">online
+beta diversity in the <a href="https://microbiome.github.io/OMA/microbiome-diversity.html#beta-diversity">online
 book</a>.</p>
 </div>
 <div id="community-typing" class="section level2" number="8.4">
 <h2><span class="header-section-number">8.4</span> Community typing</h2>
 <p>A dedicated section presenting examples on community typing is in the
-<a href="https://microbiome.github.io/OMA/">online book</a>.</p>
+<a href="https://microbiome.github.io/OMA/microbiome-community.html#community-typing">online book</a>.</p>
 </div>
 <div id="exercises-1" class="section level2" number="8.5">
 <h2><span class="header-section-number">8.5</span> Exercises</h2>
 <ul>
-<li><p>Visualize community variation with PCoA.</p></li>
+<li><p>Visualize community variation with different methods (PCA, MDS, t-SNE…) by using the options in the alternative method, plotReducedDim <a href="https://microbiome.github.io/OMA/microbiome-diversity.html#estimating-beta-diversity">OMA</a>. Compare results obtained with different dissimilarities (Euclidean, Bray-Curtis, Unifrac..) and transformations (CLR, compositional..) of your own choice."</p></li>
 <li><p>Investigate the influence of the data transformations on
 statistical analysis: Visualize community variation with PCoA with
 the following options: 1) Bray-Curtis distances for compositional
@@ -503,6 +510,8 @@ the community composition differs between two groups of individuals
 (e.g. males and females, or some other grouping of your
 choice). You can also include covariates such as age and gender,
 and see how this affects the results.</p></li>
+<li><p>Perform community typing for the data using the DMM method <a href="https://microbiome.github.io/OMA/microbiome-community.html#community-typing">OMA</a></p></li>
+<li><p>Example <a href="08-5-ex-sol-ADHD.html">Solutions</a></p></li>
 </ul>
 
 </div>

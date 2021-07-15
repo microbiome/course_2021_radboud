@@ -3,7 +3,7 @@
 \PassOptionsToPackage{hyphens}{url}
 %
 \documentclass[
-]{book}
+  oneside]{book}
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{ifxetex,ifluatex}
@@ -41,6 +41,7 @@
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
+\usepackage[top=30mm,left=15mm]{geometry}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -128,7 +129,7 @@
 
 \title{Introduction to microbiome data science}
 \author{Leo Lahti, Tuomas Borman, Henrik Eckermann, Chouaib Benchraka}
-\date{2021-07-13}
+\date{2021-07-15}
 
 \begin{document}
 \maketitle
@@ -424,20 +425,33 @@ mia and miaViz are prioritized. Packages that are loaded first have higher prior
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Reorders bioc packages, so that mia and miaViz are first}
-\NormalTok{bioc\_pkg }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(bioc\_pkg[ bioc\_pkg }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"mia"}\NormalTok{, }\StringTok{"miaViz"}\NormalTok{) ], bioc\_pkg[ }\SpecialCharTok{!}\NormalTok{bioc\_pkg }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"mia"}\NormalTok{, }\StringTok{"miaViz"}\NormalTok{) ] ) }
+\NormalTok{bioc\_pkg }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(bioc\_pkg[ bioc\_pkg }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"mia"}\NormalTok{, }\StringTok{"miaViz"}\NormalTok{) ], }
+\NormalTok{              bioc\_pkg[ }\SpecialCharTok{!}\NormalTok{bioc\_pkg }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"mia"}\NormalTok{, }\StringTok{"miaViz"}\NormalTok{) ] ) }
 
 \CommentTok{\# Loading all packages into session. Returns true if package was successfully loaded.}
-\FunctionTok{sapply}\NormalTok{(}\FunctionTok{c}\NormalTok{(bioc\_pkg, cran\_pkg), require, }\AttributeTok{character.only =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{loaded }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(}\FunctionTok{c}\NormalTok{(bioc\_pkg, cran\_pkg), require, }\AttributeTok{character.only =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{as.data.frame}\NormalTok{(loaded)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##                  mia               miaViz              ANCOMBC                  ape               DESeq2 DirichletMultinomial 
-##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
-##          BiocManager             bookdown                dplyr              ecodist              ggplot2            gridExtra 
-##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
-##           kableExtra                knitr               scales                vegan 
-##                 TRUE                 TRUE                 TRUE                 TRUE
+##                      loaded
+## mia                    TRUE
+## miaViz                 TRUE
+## ANCOMBC                TRUE
+## ape                    TRUE
+## DESeq2                 TRUE
+## DirichletMultinomial   TRUE
+## BiocManager            TRUE
+## bookdown               TRUE
+## dplyr                  TRUE
+## ecodist                TRUE
+## ggplot2                TRUE
+## gridExtra              TRUE
+## kableExtra             TRUE
+## knitr                  TRUE
+## scales                 TRUE
+## vegan                  TRUE
 \end{verbatim}
 
 \hypertarget{reproducible-reporting-with-rmarkdown}{%
@@ -593,13 +607,16 @@ different taxonomy classes.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(}\FunctionTok{rowData}\NormalTok{(tse))) }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ kableExtra}\SpecialCharTok{::}\FunctionTok{kable\_styling}\NormalTok{(}\StringTok{"striped"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(}\FunctionTok{rowData}\NormalTok{(tse))) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  kableExtra}\SpecialCharTok{::}\FunctionTok{kable\_styling}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }
+                            \AttributeTok{latex\_options=}\StringTok{"scale\_down"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
 \NormalTok{  kableExtra}\SpecialCharTok{::}\FunctionTok{scroll\_box}\NormalTok{(}\AttributeTok{width =} \StringTok{"100\%"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{table}
 \centering
+\resizebox{\linewidth}{!}{
 \begin{tabular}{l|l|l|l|l|l|l}
 \hline
   & Kingdom & Phylum & Class & Order & Family & Genus\\
@@ -616,7 +633,7 @@ different taxonomy classes.
 \hline
 17264724 & Bacteria & Bacteroidetes & Bacteroidia & Bacteroidales & Bacteroidaceae & Bacteroides\\
 \hline
-\end{tabular}
+\end{tabular}}
 \end{table}
 
 The colData slot contains sample metadata. It contains information for all 27 samples.
@@ -625,13 +642,16 @@ are 4 columns, that contain information, e.g., about patients' status, and cohor
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(}\FunctionTok{colData}\NormalTok{(tse))) }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ kableExtra}\SpecialCharTok{::}\FunctionTok{kable\_styling}\NormalTok{(}\StringTok{"striped"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(}\FunctionTok{colData}\NormalTok{(tse))) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  kableExtra}\SpecialCharTok{::}\FunctionTok{kable\_styling}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }
+                            \AttributeTok{latex\_options=}\StringTok{"scale\_down"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
 \NormalTok{  kableExtra}\SpecialCharTok{::}\FunctionTok{scroll\_box}\NormalTok{(}\AttributeTok{width =} \StringTok{"100\%"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{table}
 \centering
+\resizebox{\linewidth}{!}{
 \begin{tabular}{l|l|l|l|l}
 \hline
   & patient\_status & cohort & patient\_status\_vs\_cohort & sample\_name\\
@@ -648,7 +668,7 @@ A21 & ADHD & Cohort\_2 & ADHD\_Cohort\_2 & A21\\
 \hline
 A23 & ADHD & Cohort\_2 & ADHD\_Cohort\_2 & A23\\
 \hline
-\end{tabular}
+\end{tabular}}
 \end{table}
 
 From here, we can draw summaries of the sample (column) data, for
@@ -727,13 +747,16 @@ Firmicutes are summed up.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(}\FunctionTok{rowData}\NormalTok{(tse\_phylum))) }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ kableExtra}\SpecialCharTok{::}\FunctionTok{kable\_styling}\NormalTok{(}\StringTok{"striped"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(}\FunctionTok{rowData}\NormalTok{(tse\_phylum))) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  kableExtra}\SpecialCharTok{::}\FunctionTok{kable\_styling}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }
+                            \AttributeTok{latex\_options=}\StringTok{"scale\_down"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
 \NormalTok{  kableExtra}\SpecialCharTok{::}\FunctionTok{scroll\_box}\NormalTok{(}\AttributeTok{width =} \StringTok{"100\%"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{table}
 \centering
+\resizebox{\linewidth}{!}{
 \begin{tabular}{l|l|l|l|l|l|l}
 \hline
   & Kingdom & Phylum & Class & Order & Family & Genus\\
@@ -748,7 +771,7 @@ Firmicutes & Bacteria & Firmicutes & NA & NA & NA & NA\\
 \hline
 Cyanobacteria & Bacteria & Cyanobacteria & NA & NA & NA & NA\\
 \hline
-\end{tabular}
+\end{tabular}}
 \end{table}
 
 If you are sharp, you have by now noticed that all the aggregated
@@ -765,13 +788,16 @@ agglomeration.
 \NormalTok{temp }\OtherTok{\textless{}{-}} \FunctionTok{rowData}\NormalTok{(}\FunctionTok{agglomerateByRank}\NormalTok{(tse, }\AttributeTok{rank =} \StringTok{"Genus"}\NormalTok{))}
 
 \CommentTok{\# Prints those taxa that do not have information at the Genus level}
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(temp[temp}\SpecialCharTok{$}\NormalTok{Genus }\SpecialCharTok{==} \StringTok{""}\NormalTok{,])) }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ kableExtra}\SpecialCharTok{::}\FunctionTok{kable\_styling}\NormalTok{(}\StringTok{"striped"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(temp[temp}\SpecialCharTok{$}\NormalTok{Genus }\SpecialCharTok{==} \StringTok{""}\NormalTok{,])) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  kableExtra}\SpecialCharTok{::}\FunctionTok{kable\_styling}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }
+                            \AttributeTok{latex\_options=}\StringTok{"scale\_down"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
 \NormalTok{  kableExtra}\SpecialCharTok{::}\FunctionTok{scroll\_box}\NormalTok{(}\AttributeTok{width =} \StringTok{"100\%"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{table}
 \centering
+\resizebox{\linewidth}{!}{
 \begin{tabular}{l|l|l|l|l|l|l}
 \hline
   & Kingdom & Phylum & Class & Order & Family & Genus\\
@@ -786,7 +812,7 @@ Family:Enterobacteriaceae & Bacteria & Proteobacteria & Gammaproteobacteria & En
 \hline
 Order:Gastranaerophilales & Bacteria & Cyanobacteria & Melainabacteria & Gastranaerophilales &  & \\
 \hline
-\end{tabular}
+\end{tabular}}
 \end{table}
 
 Here agglomeration is done similarly, but na.rm = TRUE
@@ -982,13 +1008,16 @@ account.
 \NormalTok{tse }\OtherTok{\textless{}{-}} \FunctionTok{estimateDiversity}\NormalTok{(tse, }\AttributeTok{index =}\NormalTok{ indices, }\AttributeTok{name =}\NormalTok{ names)}
 
 \CommentTok{\# Shows the calculated indices}
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(}\FunctionTok{colData}\NormalTok{(tse)[names])) }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ kableExtra}\SpecialCharTok{::}\FunctionTok{kable\_styling}\NormalTok{(}\StringTok{"striped"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(}\FunctionTok{colData}\NormalTok{(tse)[names])) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  kableExtra}\SpecialCharTok{::}\FunctionTok{kable\_styling}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }
+                            \AttributeTok{latex\_options=}\StringTok{"scale\_down"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
 \NormalTok{  kableExtra}\SpecialCharTok{::}\FunctionTok{scroll\_box}\NormalTok{(}\AttributeTok{width =} \StringTok{"100\%"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{table}
 \centering
+\resizebox{\linewidth}{!}{
 \begin{tabular}{l|r|r}
 \hline
   & Shannon\_diversity & Faith\_diversity\\
@@ -1005,7 +1034,7 @@ A21 & 2.841979 & 6.65110\\
 \hline
 A23 & 2.797942 & 5.96246\\
 \hline
-\end{tabular}
+\end{tabular}}
 \end{table}
 
 Next we can visualize Shannon index with histogram.
@@ -1144,7 +1173,7 @@ As we can see, there is statistically significant difference between the cohorts
 \end{verbatim}
 
 For more examples, see a dedicated section on alpha diversity in the
-\href{https://microbiome.github.io/OMA/}{online book}.
+\href{https://microbiome.github.io/OMA/microbiome-diversity.html\#alpha-diversity}{online book}.
 
 \hypertarget{exercises}{%
 \section{Exercises}\label{exercises}}
@@ -1159,7 +1188,8 @@ Add the following in the reproducible summary report.
   Compare the results between two or more
   alpha diversity indices (visually and/or statistically).
 \item
-  See \href{https://microbiome.github.io/OMA/}{online book} for further examples.
+  See \href{https://microbiome.github.io/OMA/microbiome-diversity.html\#alpha-diversity}{online book}
+  for further examples.
 \item
   Example \href{07-3-ex-sol-ADHD.html}{Solutions}
 \end{itemize}
@@ -1273,7 +1303,7 @@ Euclidean distances between CLR transformed sample abundance vectors.
 \NormalTok{euclidean\_plot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ euclidean\_pcoa\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{pcoa1, }\AttributeTok{y=}\NormalTok{pcoa2)) }\SpecialCharTok{+}
   \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"PC1"}\NormalTok{,}
-       \AttributeTok{y =} \StringTok{"PC22"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"PC2"}\NormalTok{,}
        \AttributeTok{title =} \StringTok{"Euclidean PCoA with CLR transformation"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{theme}\NormalTok{(}\AttributeTok{title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{12}\NormalTok{)) }\CommentTok{\# makes titles smaller}
 
@@ -1414,14 +1444,14 @@ variables are associated with each other.
                                   \AttributeTok{permutations =} \DecValTok{9999}\NormalTok{)}
 
 \CommentTok{\# we can obtain a the p value for our predictor:}
-\FunctionTok{print}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"Different different cohorts and variance of abundance }
-\StringTok{              between samples, p{-}value: "}\NormalTok{, }
+\FunctionTok{print}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"Different different cohorts and variance of abundance "}\NormalTok{,}
+              \StringTok{"between samples, p{-}value: "}\NormalTok{, }
               \FunctionTok{as.data.frame}\NormalTok{(permanova\_cohort}\SpecialCharTok{$}\NormalTok{aov.tab)[}\StringTok{"cohort"}\NormalTok{, }\StringTok{"Pr(\textgreater{}F)"}\NormalTok{]))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Different different cohorts and variance of abundance \n              between samples, p-value: 0.7422"
+## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7398"
 \end{verbatim}
 
 The cohort variable is not significantly associated with
@@ -1474,21 +1504,21 @@ names. We can fetch those from our rowData. Here we use Genus level names:
 
 There are many alternative and complementary methods for analysing
 community composition. For more examples, see a dedicated section on
-beta diversity in the \href{https://microbiome.github.io/OMA/}{online
+beta diversity in the \href{https://microbiome.github.io/OMA/microbiome-diversity.html\#beta-diversity}{online
 book}.
 
 \hypertarget{community-typing}{%
 \section{Community typing}\label{community-typing}}
 
 A dedicated section presenting examples on community typing is in the
-\href{https://microbiome.github.io/OMA/}{online book}.
+\href{https://microbiome.github.io/OMA/microbiome-community.html\#community-typing}{online book}.
 
 \hypertarget{exercises-1}{%
 \section{Exercises}\label{exercises-1}}
 
 \begin{itemize}
 \item
-  Visualize community variation with PCoA.
+  Visualize community variation with different methods (PCA, MDS, t-SNE\ldots) by using the options in the alternative method, plotReducedDim \href{https://microbiome.github.io/OMA/microbiome-diversity.html\#estimating-beta-diversity}{OMA}. Compare results obtained with different dissimilarities (Euclidean, Bray-Curtis, Unifrac..) and transformations (CLR, compositional..) of your own choice."
 \item
   Investigate the influence of the data transformations on
   statistical analysis: Visualize community variation with PCoA with
@@ -1500,57 +1530,67 @@ A dedicated section presenting examples on community typing is in the
   (e.g.~males and females, or some other grouping of your
   choice). You can also include covariates such as age and gender,
   and see how this affects the results.
+\item
+  Perform community typing for the data using the DMM method \href{https://microbiome.github.io/OMA/microbiome-community.html\#community-typing}{OMA}
+\item
+  Example \href{08-5-ex-sol-ADHD.html}{Solutions}
 \end{itemize}
 
 \hypertarget{differential-abundance-analysis}{%
 \chapter{Differential abundance analysis}\label{differential-abundance-analysis}}
 
-Here, we analyse abundances with three different methods: \textbf{Wilcoxon test}, \textbf{DESeq2},
+Here, we analyse abundances with three different methods: \textbf{Wilcoxon test} (CLR), \textbf{DESeq2},
 and \textbf{ANCOM-BC}. All of these test statistical differences between groups.
-We analyse Genus level abundances.
+We will analyse Genus level abundances.
+
+We might want to first perform prevalence filtering to reduce the amount of multiple tests. In this particular dataset, all genera pass a prevalence threshold of 10\%, therefore, we do not perform filtering.
 
 \hypertarget{wilcoxon-test}{%
 \section{Wilcoxon test}\label{wilcoxon-test}}
 
-A Wilcoxon test estimates difference between two groups. It is a
+A Wilcoxon test estimates the difference in an outcome between two groups. It is a
 non-parametric alternative to a t-test, which means that the Wilcoxon test
-does not require normally distributed data.
+does not make any assumptions about the data.
 
-Let's first collect the data for the testing purpose.
+Let's first combine the data for the testing purpose.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Agglomerates data to Genus level}
 \NormalTok{tse\_genus }\OtherTok{\textless{}{-}} \FunctionTok{agglomerateByRank}\NormalTok{(tse, }\AttributeTok{rank =} \StringTok{"Genus"}\NormalTok{)}
 
-\CommentTok{\# Does clr transformation. Pseudocount is added, because data contains zeros, and}
-\CommentTok{\# clr transformation includes log transformation.}
+\CommentTok{\# Perform clr transformation. A Pseudocount of 1 needs to be added, }
+\CommentTok{\# because the data contains zeros and the clr transformation includes a }
+\CommentTok{\# log transformation.}
 \NormalTok{tse\_genus }\OtherTok{\textless{}{-}} \FunctionTok{transformCounts}\NormalTok{(tse\_genus, }\AttributeTok{method =} \StringTok{"clr"}\NormalTok{, }\AttributeTok{pseudocount =} \DecValTok{1}\NormalTok{)}
 
 \CommentTok{\# Does transpose, so samples are in rows, then creates a data frame.}
 \NormalTok{abundance\_analysis\_data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{t}\NormalTok{(}\FunctionTok{assay}\NormalTok{(tse\_genus, }\StringTok{"clr"}\NormalTok{)))}
-
-\CommentTok{\# Then we need variable for grouping samples. "patient\_status" column includes information}
-\CommentTok{\# about patients\textquotesingle{} status. There two groups "ADHD" and "control". Let\textquotesingle{}s include that to the data frame.}
-\NormalTok{abundance\_analysis\_data }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(abundance\_analysis\_data, }\AttributeTok{patient\_status =} \FunctionTok{colData}\NormalTok{(tse\_genus)}\SpecialCharTok{$}\NormalTok{patient\_status)}
+\CommentTok{\# We will analyse whether abundances differ depending on the"patient\_status".}
+\CommentTok{\# There are two groups: "ADHD" and "control". }
+\CommentTok{\# Let\textquotesingle{}s include that to the data frame.}
+\NormalTok{abundance\_analysis\_data }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(}
+\NormalTok{  abundance\_analysis\_data, }
+  \AttributeTok{patient\_status =} \FunctionTok{colData}\NormalTok{(tse\_genus)}\SpecialCharTok{$}\NormalTok{patient\_status}
+\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-Now we can do the Wilcoxon test. We test all the taxa by looping through columns,
+Now we can start with the Wilcoxon test. We test all the taxa by looping through columns,
 and store individual p-values to a vector. Then we create a data frame from collected
 data.
 
-Code below does the Wilcoxon test only for columns that contain abundances,
-not for column that contain patient status.
+The code below does the Wilcoxon test only for columns that contain abundances,
+not for columns that contain patient status.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{colnames }\OtherTok{\textless{}{-}} \FunctionTok{names}\NormalTok{(abundance\_analysis\_data[, }\SpecialCharTok{!}\FunctionTok{names}\NormalTok{(abundance\_analysis\_data) }\SpecialCharTok{\%in\%} \StringTok{"patient\_status"}\NormalTok{])}
+\NormalTok{genera }\OtherTok{\textless{}{-}} \FunctionTok{names}\NormalTok{(abundance\_analysis\_data[, }\SpecialCharTok{!}\FunctionTok{names}\NormalTok{(abundance\_analysis\_data) }\SpecialCharTok{\%in\%} \StringTok{"patient\_status"}\NormalTok{])}
 
 \NormalTok{wilcoxon\_p }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{() }\CommentTok{\# Initialize empty vector for p{-}values}
 
-\CommentTok{\# Do for loop over selected column names}
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in}\NormalTok{ colnames) \{}
+\CommentTok{\# Do "for loop" over selected column names}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in}\NormalTok{ genera) \{}
 
 \NormalTok{  result }\OtherTok{\textless{}{-}} \FunctionTok{wilcox.test}\NormalTok{(abundance\_analysis\_data[, i] }\SpecialCharTok{\textasciitilde{}}\NormalTok{ patient\_status,}
                         \AttributeTok{data =}\NormalTok{ abundance\_analysis\_data)}
@@ -1581,11 +1621,13 @@ are several other methods as well.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# prepare a dataframe to plot p values}
 \NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x =} \FunctionTok{c}\NormalTok{(wilcoxon\_p}\SpecialCharTok{$}\NormalTok{p\_raw, wilcoxon\_p}\SpecialCharTok{$}\NormalTok{p\_adjusted), }
                 \AttributeTok{type=}\FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"raw"}\NormalTok{, }\StringTok{"holm"}\NormalTok{),}
         \FunctionTok{c}\NormalTok{(}\FunctionTok{length}\NormalTok{(wilcoxon\_p}\SpecialCharTok{$}\NormalTok{p\_raw),}
           \FunctionTok{length}\NormalTok{(wilcoxon\_p}\SpecialCharTok{$}\NormalTok{p\_adjusted))))}
 
+\CommentTok{\# make a histrogram of p values and adjusted p values}
 \NormalTok{wilcoxon\_plot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(df) }\SpecialCharTok{+}
   \FunctionTok{geom\_histogram}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x, }\AttributeTok{fill=}\NormalTok{type)) }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"p{-}value"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Frequency"}\NormalTok{) }
@@ -1603,11 +1645,11 @@ are several other methods as well.
 \hypertarget{deseq2}{%
 \section{DESeq2}\label{deseq2}}
 
-Our second analysis method is DESeq2. This performs the data
+Our second analysis method is \href{https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8}{DESeq2}. This method performs the data
 normalization automatically. It also takes care of the p-value
 adjustment, so we don't have to worry about that.
 
-DESeq2 uses negative binomial distribution to detect differences in
+DESeq2 utilizes a negative binomial distribution to detect differences in
 read counts between groups. Its normalization takes care of the
 differences between library sizes and compositions. DESeq2 analysis
 includes multiple steps, but they are done automatically. More
@@ -1692,11 +1734,12 @@ Now let us show how to do this. First, run the DESeq2 analysis.
 \CommentTok{\# Adds taxon column that includes names of taxa}
 \NormalTok{df}\SpecialCharTok{$}\NormalTok{taxon }\OtherTok{\textless{}{-}} \FunctionTok{rownames}\NormalTok{(df)}
 
-\CommentTok{\# Orders the rows of data frame in increasing order firstly based on column "log2FoldChange" }
-\CommentTok{\# and secondly based on "padj" column}
+\CommentTok{\# Orders the rows of data frame in increasing order firstly based on column}
+\CommentTok{\# "log2FoldChange" and secondly based on "padj" column}
 \NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{arrange}\NormalTok{(log2FoldChange, padj)}
 
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(df)) }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ kableExtra}\SpecialCharTok{::}\FunctionTok{kable\_styling}\NormalTok{(}\StringTok{"striped"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(df)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  kableExtra}\SpecialCharTok{::}\FunctionTok{kable\_styling}\NormalTok{(}\StringTok{"striped"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
 \NormalTok{  kableExtra}\SpecialCharTok{::}\FunctionTok{scroll\_box}\NormalTok{(}\AttributeTok{width =} \StringTok{"100\%"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -1728,29 +1771,22 @@ Order:Gastranaerophilales & 2.067972 & -3.054975 & 2.938641 & -1.039588 & 0.2985
 \href{https://www.nature.com/articles/s41467-020-17041-7}{The analysis of composition of microbiomes with bias correction (ANCOM-BC)}
 is a recently developed method for differential abundance testing. It is based on an
 \href{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4450248/}{earlier published approach}.
-This method could be recommended as part of several approaches:
+The former version of this method could be recommended as part of several approaches:
 A \href{https://www.biorxiv.org/content/10.1101/2021.05.10.443486v1.full}{recent study}
-compared several mainstream methods and found that among another method, ANCOM-BC produced
-the most consistent results and is probably a conservative approach. Please note that
-based on this and other comparisons, no single method can be recommended across all datasets.
-Rather, it could be recommended to apply several methods and look at the overlap/differences.
+compared several mainstream methods and found that among another method, ANCOM produced the most consistent results and is probably a conservative approach. Please note that based on this and other comparisons, no single method can be recommended across all datasets. Rather, it could be recommended to apply several methods and look at the overlap/differences.
 
-As the only method, ANCOM-BC incorporates the so called \emph{sampling fraction} into the model.
-The latter term could be empirically estimated by the ratio of the library size to the microbial load.
-Variations in this sampling fraction would bias differential abundance analyses if ignored.
-Furthermore, this method provides p-values, and confidence intervals for each taxon.
+As the only method, ANCOM-BC incorporates the so called \emph{sampling fraction} into the model. The latter term could be empirically estimated by the ratio of the library size to the microbial load. Variations in this sampling fraction would bias differential abundance analyses if ignored. Furthermore, this method provides p-values, and confidence intervals for each taxon.
 It also controls the FDR and it is computationally simple to implement.
 
 As we will see below, to obtain results, all that is needed is to pass
 a phyloseq object to the \texttt{ancombc()} function. Therefore, below we first convert
-our \texttt{tse} object to a \texttt{phyloseq} object. Then, we specify the formula. In this formula,
-other covariates could potentially be included to adjust for confounding.
+our \texttt{tse} object to a \texttt{phyloseq} object. Then, we specify the formula. In this formula, other covariates could potentially be included to adjust for confounding.
 Please check the \href{https://rdrr.io/github/FrederickHuangLin/ANCOMBC/man/ancombc.html}{function documentation}
-to learn about the additional arguments that we specify below.
+to learn about the additional arguments that we specify below. Also, see \href{https://www.bioconductor.org/packages/release/bioc/vignettes/ANCOMBC/inst/doc/ANCOMBC.html}{here} for another example for more than 1 group comparison.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# currently, ancombc requires the phyloseq format, but we can easily convert:}
+\CommentTok{\# currently, ancombc requires the phyloseq format, but we can convert this easily}
 \NormalTok{pseq }\OtherTok{\textless{}{-}} \FunctionTok{makePhyloseqFromTreeSummarizedExperiment}\NormalTok{(tse)}
 \NormalTok{pseq\_genus }\OtherTok{\textless{}{-}}\NormalTok{ phyloseq}\SpecialCharTok{::}\FunctionTok{tax\_glom}\NormalTok{(pseq, }\AttributeTok{taxrank =} \StringTok{"Genus"}\NormalTok{)}
 
@@ -1758,7 +1794,7 @@ to learn about the additional arguments that we specify below.
   \AttributeTok{phyloseq =}\NormalTok{ pseq\_genus, }
   \AttributeTok{formula =} \StringTok{"patient\_status"}\NormalTok{, }
   \AttributeTok{p\_adj\_method =} \StringTok{"holm"}\NormalTok{, }
-  \AttributeTok{zero\_cut =} \FloatTok{0.90}\NormalTok{, }
+  \AttributeTok{zero\_cut =} \FloatTok{0.90}\NormalTok{, }\CommentTok{\# by default prevalence filter of 10\% is applied}
   \AttributeTok{lib\_cut =} \DecValTok{0}\NormalTok{, }
   \AttributeTok{group =} \StringTok{"patient\_status"}\NormalTok{, }
   \AttributeTok{struc\_zero =} \ConstantTok{TRUE}\NormalTok{, }
@@ -1778,7 +1814,7 @@ The object \texttt{out} contains all relevant information. Again, see the
 under \textbf{Value} for an explanation of all the output objects. Our question can be answered
 by looking at the \texttt{res} object, which now contains dataframes with the coefficients,
 standard errors, p-values and q-values. Conveniently, there is a dataframe \texttt{diff\_abn}.
-Here, we can find all differentiallt abundant taxa. Below we show the first 6 entries of this dataframe:
+Here, we can find all differentially abundant taxa. Below we show the first 6 entries of this dataframe:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1810,10 +1846,10 @@ Here, we can find all differentiallt abundant taxa. Below we show the first 6 en
 
 In total, this method detects 13 differentially abundant taxa.
 
-\hypertarget{comparison-of-wilcoxon-test-and-deseq2}{%
-\section{Comparison of Wilcoxon test and DESeq2}\label{comparison-of-wilcoxon-test-and-deseq2}}
+\hypertarget{comparison-of-the-methods}{%
+\section{Comparison of the methods}\label{comparison-of-the-methods}}
 
-Let's compare results that we got from the Wilcoxon test and DESeq2.
+Let's compare results that we got from the methods.
 As we can see from the scatter plot, DESeq2 gives lower p-values than Wilcoxon test.
 
 \begin{Shaded}
@@ -1834,6 +1870,16 @@ Prints number of p-values under 0.05
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"Wilcoxon test p{-}values under 0.05: "}\NormalTok{, }\FunctionTok{sum}\NormalTok{(wilcoxon\_p}\SpecialCharTok{$}\NormalTok{p\_adjusted}\SpecialCharTok{\textless{}}\FloatTok{0.05}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }\StringTok{"/"}\NormalTok{, }\FunctionTok{length}\NormalTok{(wilcoxon\_p}\SpecialCharTok{$}\NormalTok{p\_adjusted)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Wilcoxon test p-values under 0.05: 2/54"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \FunctionTok{print}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"DESeq2 p{-}values under 0.05: "}\NormalTok{, }\FunctionTok{sum}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{padj}\SpecialCharTok{\textless{}}\FloatTok{0.05}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }\StringTok{"/"}\NormalTok{, }\FunctionTok{length}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{padj)))}
 \end{Highlighting}
 \end{Shaded}
@@ -1844,12 +1890,50 @@ Prints number of p-values under 0.05
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{print}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"Wilcoxon test p{-}values under 0.05: "}\NormalTok{, }\FunctionTok{sum}\NormalTok{(wilcoxon\_p}\SpecialCharTok{$}\NormalTok{p\_adjusted}\SpecialCharTok{\textless{}}\FloatTok{0.05}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{), }\StringTok{"/"}\NormalTok{, }\FunctionTok{length}\NormalTok{(wilcoxon\_p}\SpecialCharTok{$}\NormalTok{p\_adjusted)))}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"ANCOM p{-}values under 0.05: "}\NormalTok{, }\FunctionTok{sum}\NormalTok{(out}\SpecialCharTok{$}\NormalTok{res}\SpecialCharTok{$}\NormalTok{diff\_abn}\SpecialCharTok{$}\NormalTok{patient\_statusControl), }\StringTok{"/"}\NormalTok{, }\FunctionTok{length}\NormalTok{(out}\SpecialCharTok{$}\NormalTok{res}\SpecialCharTok{$}\NormalTok{diff\_abn}\SpecialCharTok{$}\NormalTok{patient\_statusControl)))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Wilcoxon test p-values under 0.05: 2/54"
+## [1] "ANCOM p-values under 0.05: 13/49"
+\end{verbatim}
+
+We can also look at the intersection of identified taxa
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# to let R check this for us, we need to make sure,}
+\CommentTok{\# to use the same tax names (I call it labels here) everywhere. }
+
+\NormalTok{wilcox\_labels }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+  \AttributeTok{wilcox\_labels\_new =} \FunctionTok{rowData}\NormalTok{(tse\_genus)}\SpecialCharTok{$}\NormalTok{Genus,}
+  \AttributeTok{taxa =} \FunctionTok{colnames}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(}\FunctionTok{t}\NormalTok{(}\FunctionTok{assay}\NormalTok{(tse\_genus, }\StringTok{"clr"}\NormalTok{))))}
+\NormalTok{)}
+\NormalTok{wilcox\_taxa }\OtherTok{\textless{}{-}}\NormalTok{wilcoxon\_p }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{left\_join}\NormalTok{(wilcox\_labels, }\AttributeTok{by =} \StringTok{"taxa"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(p\_adjusted }\SpecialCharTok{\textless{}=} \FloatTok{0.05}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  .}\SpecialCharTok{$}\NormalTok{wilcox\_labels\_new }
+\NormalTok{deseq2\_taxa }\OtherTok{\textless{}{-}} \FunctionTok{filter}\NormalTok{(df, padj }\SpecialCharTok{\textless{}=} \FloatTok{0.05}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  .}\SpecialCharTok{$}\NormalTok{taxon }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  stringr}\SpecialCharTok{::}\FunctionTok{str\_remove}\NormalTok{(}\StringTok{"Genus:"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  stringr}\SpecialCharTok{::}\FunctionTok{str\_remove}\NormalTok{(}\StringTok{"Order:"}\NormalTok{)}
+\CommentTok{\# for ancom we need to assign genus names to ids}
+\NormalTok{taxid\_df }\OtherTok{\textless{}{-}}\NormalTok{ tibble}\SpecialCharTok{::}\FunctionTok{rownames\_to\_column}\NormalTok{(}
+  \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{rowData}\NormalTok{(tse)), }
+  \StringTok{"taxid"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(taxid, Genus)}
+\NormalTok{ancom\_taxa }\OtherTok{\textless{}{-}}\NormalTok{ tibble}\SpecialCharTok{::}\FunctionTok{rownames\_to\_column}\NormalTok{(out}\SpecialCharTok{$}\NormalTok{res}\SpecialCharTok{$}\NormalTok{diff\_abn, }\StringTok{"taxid"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{left\_join}\NormalTok{(taxid\_df, }\AttributeTok{by =} \StringTok{"taxid"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(patient\_statusControl) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  .}\SpecialCharTok{$}\NormalTok{Genus}
+
+\CommentTok{\# all methods identified in common:}
+\FunctionTok{Reduce}\NormalTok{(intersect, }\FunctionTok{list}\NormalTok{(deseq2\_taxa, wilcox\_taxa, ancom\_taxa))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Faecalibacterium"                "[Ruminococcus]_gauvreauii_group"
 \end{verbatim}
 
 \hypertarget{comparison-of-abundance}{%
@@ -1870,7 +1954,7 @@ Let's first gather data about taxa that have highest p-values.
 \CommentTok{\# Subset is taken, only those rows are included that do not include the pattern.}
 \NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ df[ }\SpecialCharTok{!}\NormalTok{stringr}\SpecialCharTok{::}\FunctionTok{str\_detect}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{taxon, }\StringTok{"Genus:uncultured"}\NormalTok{), ]}
 
-\CommentTok{\# Sorts p{-}values in decreasing order. Takes 3rd first ones. Takes those rows that match}
+\CommentTok{\# Sorts p{-}values in decreasing order. Takes 3 first ones. Takes those rows that match}
 \CommentTok{\# with p{-}values. Takes taxa. }
 \NormalTok{highest3 }\OtherTok{\textless{}{-}}\NormalTok{ df[df}\SpecialCharTok{$}\NormalTok{padj }\SpecialCharTok{\%in\%} \FunctionTok{sort}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{padj, }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{], ]}\SpecialCharTok{$}\NormalTok{taxon}
 
@@ -2000,7 +2084,22 @@ Then we can plot these six different taxa. Let's arrange them into the same pict
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{radboud2021_material_files/figure-latex/unnamed-chunk-37-1.pdf}
+\includegraphics{radboud2021_material_files/figure-latex/unnamed-chunk-38-1.pdf}
+
+We plotted those taxa that have the highest and lowest p values according to DESeq2. Can you create a plot that shows the difference in abundance in "{[}Ruminococcus{]}\_gauvreauii\_group", which is the other taxon that was identified by all tools. Try for yourself! Below you find one way how to do it.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{select}\NormalTok{(}
+\NormalTok{  abundance\_analysis\_data, }
+\NormalTok{  patient\_status, }
+  \AttributeTok{Ruminococcus\_gauvreauii\_group =} \FunctionTok{contains}\NormalTok{(}\StringTok{"gauvreauii\_group"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(patient\_status, Ruminococcus\_gauvreauii\_group)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{radboud2021_material_files/figure-latex/unnamed-chunk-39-1.pdf}
 
 \hypertarget{study-material}{%
 \chapter{Study material}\label{study-material}}
@@ -2138,7 +2237,8 @@ If necessary, it is possible to assess normality of the data with Shapiro-Wilk t
 \NormalTok{  normality\_test\_p }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(normality\_test\_p, result}\SpecialCharTok{$}\NormalTok{p.value)}
 \NormalTok{\}}
 
-\FunctionTok{print}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"P{-}values over 0.05: "}\NormalTok{, }\FunctionTok{sum}\NormalTok{(normality\_test\_p}\SpecialCharTok{\textgreater{}}\FloatTok{0.05}\NormalTok{), }\StringTok{"/"}\NormalTok{, }\FunctionTok{length}\NormalTok{(normality\_test\_p)))}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{"P{-}values over 0.05: "}\NormalTok{, }\FunctionTok{sum}\NormalTok{(normality\_test\_p}\SpecialCharTok{\textgreater{}}\FloatTok{0.05}\NormalTok{), }\StringTok{"/"}\NormalTok{, }
+             \FunctionTok{length}\NormalTok{(normality\_test\_p)))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2166,5 +2266,57 @@ If necessary, it is possible to assess normality of the data with Shapiro-Wilk t
 \item
   Variance estimates are used to compare different groups. We receive a result that shows whether the variance is explained by groups.
 \end{enumerate}
+
+\hypertarget{exercise-solutions}{%
+\chapter{Exercise Solutions}\label{exercise-solutions}}
+
+This section includes exemplary solutions to the exercises presented earlier.
+
+\hypertarget{section-5}{%
+\section{Section 5}\label{section-5}}
+
+Link:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{import.Rmd}{Rmd}
+\end{itemize}
+
+\hypertarget{section-6}{%
+\section{Section 6}\label{section-6}}
+
+Links:
+
+\begin{itemize}
+\item
+  \href{06-3-ex-sol-ADHD.Rmd}{Rmd}
+\item
+  \href{06-3-ex-sol-ADHD.html}{HTML}
+\end{itemize}
+
+\hypertarget{section-7}{%
+\section{Section 7}\label{section-7}}
+
+Links:
+
+\begin{itemize}
+\item
+  \href{07-3-ex-sol-ADHD.Rmd}{Rmd}
+\item
+  \href{07-3-ex-sol-ADHD.html}{HTML}
+\end{itemize}
+
+\hypertarget{section-8}{%
+\section{Section 8}\label{section-8}}
+
+Links:
+
+\begin{itemize}
+\item
+  \href{08-5-ex-sol-ADHD.Rmd}{Rmd}
+\item
+  \href{08-5-ex-sol-ADHD.html}{HTML}
+\end{itemize}
 
 \end{document}

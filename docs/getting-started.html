@@ -24,7 +24,7 @@
 <meta name="author" content="Leo Lahti, Tuomas Borman, Henrik Eckermann, Chouaib Benchraka" />
 
 
-<meta name="date" content="2021-07-13" />
+<meta name="date" content="2021-07-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -203,7 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.1" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#wilcoxon-test"><i class="fa fa-check"></i><b>9.1</b> Wilcoxon test</a></li>
 <li class="chapter" data-level="9.2" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#deseq2"><i class="fa fa-check"></i><b>9.2</b> DESeq2</a></li>
 <li class="chapter" data-level="9.3" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#ancom-bc"><i class="fa fa-check"></i><b>9.3</b> ANCOM-BC</a></li>
-<li class="chapter" data-level="9.4" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#comparison-of-wilcoxon-test-and-deseq2"><i class="fa fa-check"></i><b>9.4</b> Comparison of Wilcoxon test and DESeq2</a></li>
+<li class="chapter" data-level="9.4" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#comparison-of-the-methods"><i class="fa fa-check"></i><b>9.4</b> Comparison of the methods</a></li>
 <li class="chapter" data-level="9.5" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#comparison-of-abundance"><i class="fa fa-check"></i><b>9.5</b> Comparison of abundance</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="study-material.html"><a href="study-material.html"><i class="fa fa-check"></i><b>10</b> Study material</a>
@@ -219,6 +219,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="11.1" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html#shapiro-wilk-test"><i class="fa fa-check"></i><b>11.1</b> Shapiro-Wilk test</a></li>
 <li class="chapter" data-level="11.2" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html#deseq-details"><i class="fa fa-check"></i><b>11.2</b> Deseq details</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="exercise-solutions.html"><a href="exercise-solutions.html"><i class="fa fa-check"></i><b>12</b> Exercise Solutions</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="exercise-solutions.html"><a href="exercise-solutions.html#section-5"><i class="fa fa-check"></i><b>12.1</b> Section 5</a></li>
+<li class="chapter" data-level="12.2" data-path="exercise-solutions.html"><a href="exercise-solutions.html#section-6"><i class="fa fa-check"></i><b>12.2</b> Section 6</a></li>
+<li class="chapter" data-level="12.3" data-path="exercise-solutions.html"><a href="exercise-solutions.html#section-7"><i class="fa fa-check"></i><b>12.3</b> Section 7</a></li>
+<li class="chapter" data-level="12.4" data-path="exercise-solutions.html"><a href="exercise-solutions.html#section-8"><i class="fa fa-check"></i><b>12.4</b> Section 8</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -294,16 +301,29 @@ the R session. Only uninstalled packages are installed.</p>
 Some function names occur in multiple packages. That is why miaverse’s packages
 mia and miaViz are prioritized. Packages that are loaded first have higher priority.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="getting-started.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reorders bioc packages, so that mia and miaViz are first</span></span>
-<span id="cb4-2"><a href="getting-started.html#cb4-2" aria-hidden="true" tabindex="-1"></a>bioc_pkg <span class="ot">&lt;-</span> <span class="fu">c</span>(bioc_pkg[ bioc_pkg <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;mia&quot;</span>, <span class="st">&quot;miaViz&quot;</span>) ], bioc_pkg[ <span class="sc">!</span>bioc_pkg <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;mia&quot;</span>, <span class="st">&quot;miaViz&quot;</span>) ] ) </span>
-<span id="cb4-3"><a href="getting-started.html#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="getting-started.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading all packages into session. Returns true if package was successfully loaded.</span></span>
-<span id="cb4-5"><a href="getting-started.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">c</span>(bioc_pkg, cran_pkg), require, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>##                  mia               miaViz              ANCOMBC                  ape               DESeq2 DirichletMultinomial 
-##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
-##          BiocManager             bookdown                dplyr              ecodist              ggplot2            gridExtra 
-##                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE                 TRUE 
-##           kableExtra                knitr               scales                vegan 
-##                 TRUE                 TRUE                 TRUE                 TRUE</code></pre>
+<span id="cb4-2"><a href="getting-started.html#cb4-2" aria-hidden="true" tabindex="-1"></a>bioc_pkg <span class="ot">&lt;-</span> <span class="fu">c</span>(bioc_pkg[ bioc_pkg <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;mia&quot;</span>, <span class="st">&quot;miaViz&quot;</span>) ], </span>
+<span id="cb4-3"><a href="getting-started.html#cb4-3" aria-hidden="true" tabindex="-1"></a>              bioc_pkg[ <span class="sc">!</span>bioc_pkg <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;mia&quot;</span>, <span class="st">&quot;miaViz&quot;</span>) ] ) </span>
+<span id="cb4-4"><a href="getting-started.html#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="getting-started.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading all packages into session. Returns true if package was successfully loaded.</span></span>
+<span id="cb4-6"><a href="getting-started.html#cb4-6" aria-hidden="true" tabindex="-1"></a>loaded <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(bioc_pkg, cran_pkg), require, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-7"><a href="getting-started.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">as.data.frame</span>(loaded)</span></code></pre></div>
+<pre><code>##                      loaded
+## mia                    TRUE
+## miaViz                 TRUE
+## ANCOMBC                TRUE
+## ape                    TRUE
+## DESeq2                 TRUE
+## DirichletMultinomial   TRUE
+## BiocManager            TRUE
+## bookdown               TRUE
+## dplyr                  TRUE
+## ecodist                TRUE
+## ggplot2                TRUE
+## gridExtra              TRUE
+## kableExtra             TRUE
+## knitr                  TRUE
+## scales                 TRUE
+## vegan                  TRUE</code></pre>
 
 </div>
 </div>

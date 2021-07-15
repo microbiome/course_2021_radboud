@@ -24,7 +24,7 @@
 <meta name="author" content="Leo Lahti, Tuomas Borman, Henrik Eckermann, Chouaib Benchraka" />
 
 
-<meta name="date" content="2021-07-13" />
+<meta name="date" content="2021-07-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="study-material.html"/>
-
+<link rel="next" href="exercise-solutions.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -203,7 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.1" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#wilcoxon-test"><i class="fa fa-check"></i><b>9.1</b> Wilcoxon test</a></li>
 <li class="chapter" data-level="9.2" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#deseq2"><i class="fa fa-check"></i><b>9.2</b> DESeq2</a></li>
 <li class="chapter" data-level="9.3" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#ancom-bc"><i class="fa fa-check"></i><b>9.3</b> ANCOM-BC</a></li>
-<li class="chapter" data-level="9.4" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#comparison-of-wilcoxon-test-and-deseq2"><i class="fa fa-check"></i><b>9.4</b> Comparison of Wilcoxon test and DESeq2</a></li>
+<li class="chapter" data-level="9.4" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#comparison-of-the-methods"><i class="fa fa-check"></i><b>9.4</b> Comparison of the methods</a></li>
 <li class="chapter" data-level="9.5" data-path="differential-abundance-analysis.html"><a href="differential-abundance-analysis.html#comparison-of-abundance"><i class="fa fa-check"></i><b>9.5</b> Comparison of abundance</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="study-material.html"><a href="study-material.html"><i class="fa fa-check"></i><b>10</b> Study material</a>
@@ -219,6 +219,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="11.1" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html#shapiro-wilk-test"><i class="fa fa-check"></i><b>11.1</b> Shapiro-Wilk test</a></li>
 <li class="chapter" data-level="11.2" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html#deseq-details"><i class="fa fa-check"></i><b>11.2</b> Deseq details</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="exercise-solutions.html"><a href="exercise-solutions.html"><i class="fa fa-check"></i><b>12</b> Exercise Solutions</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="exercise-solutions.html"><a href="exercise-solutions.html#section-5"><i class="fa fa-check"></i><b>12.1</b> Section 5</a></li>
+<li class="chapter" data-level="12.2" data-path="exercise-solutions.html"><a href="exercise-solutions.html#section-6"><i class="fa fa-check"></i><b>12.2</b> Section 6</a></li>
+<li class="chapter" data-level="12.3" data-path="exercise-solutions.html"><a href="exercise-solutions.html#section-7"><i class="fa fa-check"></i><b>12.3</b> Section 7</a></li>
+<li class="chapter" data-level="12.4" data-path="exercise-solutions.html"><a href="exercise-solutions.html#section-8"><i class="fa fa-check"></i><b>12.4</b> Section 8</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -245,21 +252,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="shapiro-wilk-test" class="section level2" number="11.1">
 <h2><span class="header-section-number">11.1</span> Shapiro-Wilk test</h2>
 <p>If necessary, it is possible to assess normality of the data with Shapiro-Wilk test.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="miscellaneous-material.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Does Shapiro-Wilk test. Does it only for columns that contain abundances, not for</span></span>
-<span id="cb73-2"><a href="miscellaneous-material.html#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="co"># column that contain Groups.</span></span>
-<span id="cb73-3"><a href="miscellaneous-material.html#cb73-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-4"><a href="miscellaneous-material.html#cb73-4" aria-hidden="true" tabindex="-1"></a>normality_test_p <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb73-5"><a href="miscellaneous-material.html#cb73-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-6"><a href="miscellaneous-material.html#cb73-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (column <span class="cf">in</span> </span>
-<span id="cb73-7"><a href="miscellaneous-material.html#cb73-7" aria-hidden="true" tabindex="-1"></a>     abundance_analysis_data[, <span class="sc">!</span><span class="fu">names</span>(abundance_analysis_data) <span class="sc">%in%</span> <span class="st">&quot;patient_status&quot;</span>]){</span>
-<span id="cb73-8"><a href="miscellaneous-material.html#cb73-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Does Shapiro-Wilk test</span></span>
-<span id="cb73-9"><a href="miscellaneous-material.html#cb73-9" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="fu">shapiro.test</span>(column)</span>
-<span id="cb73-10"><a href="miscellaneous-material.html#cb73-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb73-11"><a href="miscellaneous-material.html#cb73-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Stores p-value to vector</span></span>
-<span id="cb73-12"><a href="miscellaneous-material.html#cb73-12" aria-hidden="true" tabindex="-1"></a>  normality_test_p <span class="ot">&lt;-</span> <span class="fu">c</span>(normality_test_p, result<span class="sc">$</span>p.value)</span>
-<span id="cb73-13"><a href="miscellaneous-material.html#cb73-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb73-14"><a href="miscellaneous-material.html#cb73-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-15"><a href="miscellaneous-material.html#cb73-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;P-values over 0.05: &quot;</span>, <span class="fu">sum</span>(normality_test_p<span class="sc">&gt;</span><span class="fl">0.05</span>), <span class="st">&quot;/&quot;</span>, <span class="fu">length</span>(normality_test_p)))</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="miscellaneous-material.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Does Shapiro-Wilk test. Does it only for columns that contain abundances, not for</span></span>
+<span id="cb78-2"><a href="miscellaneous-material.html#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="co"># column that contain Groups.</span></span>
+<span id="cb78-3"><a href="miscellaneous-material.html#cb78-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-4"><a href="miscellaneous-material.html#cb78-4" aria-hidden="true" tabindex="-1"></a>normality_test_p <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb78-5"><a href="miscellaneous-material.html#cb78-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-6"><a href="miscellaneous-material.html#cb78-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (column <span class="cf">in</span> </span>
+<span id="cb78-7"><a href="miscellaneous-material.html#cb78-7" aria-hidden="true" tabindex="-1"></a>     abundance_analysis_data[, <span class="sc">!</span><span class="fu">names</span>(abundance_analysis_data) <span class="sc">%in%</span> <span class="st">&quot;patient_status&quot;</span>]){</span>
+<span id="cb78-8"><a href="miscellaneous-material.html#cb78-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Does Shapiro-Wilk test</span></span>
+<span id="cb78-9"><a href="miscellaneous-material.html#cb78-9" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> <span class="fu">shapiro.test</span>(column)</span>
+<span id="cb78-10"><a href="miscellaneous-material.html#cb78-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb78-11"><a href="miscellaneous-material.html#cb78-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Stores p-value to vector</span></span>
+<span id="cb78-12"><a href="miscellaneous-material.html#cb78-12" aria-hidden="true" tabindex="-1"></a>  normality_test_p <span class="ot">&lt;-</span> <span class="fu">c</span>(normality_test_p, result<span class="sc">$</span>p.value)</span>
+<span id="cb78-13"><a href="miscellaneous-material.html#cb78-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb78-14"><a href="miscellaneous-material.html#cb78-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-15"><a href="miscellaneous-material.html#cb78-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;P-values over 0.05: &quot;</span>, <span class="fu">sum</span>(normality_test_p<span class="sc">&gt;</span><span class="fl">0.05</span>), <span class="st">&quot;/&quot;</span>, </span>
+<span id="cb78-16"><a href="miscellaneous-material.html#cb78-16" aria-hidden="true" tabindex="-1"></a>             <span class="fu">length</span>(normality_test_p)))</span></code></pre></div>
 <pre><code>## [1] &quot;P-values over 0.05: 7/54&quot;</code></pre>
 </div>
 <div id="deseq-details" class="section level2" number="11.2">
@@ -285,8 +293,8 @@ false positives.<br />
           </div>
         </div>
       </div>
-<a href="study-material.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="study-material.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exercise-solutions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
