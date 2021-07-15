@@ -125,7 +125,7 @@ euclidean_plot
 We use again the Aitchison distances in this example but this time applied to the phylum level.
 
 ```{r tse_phylum, echo=FALSE}
-extractCached(example, chunk="05explore_agglomerateByRank", object="tse_phylum")
+rebook::extractCached(example, chunk="05explore_agglomerateByRank", object="tse_phylum")
 ```
 
 
