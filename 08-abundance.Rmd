@@ -2,6 +2,7 @@
 library(mia)
 library(miaViz)
 library(dplyr)
+library(ANCOMBC)
 library(DESeq2)
 se <- readRDS("data/se.rds")
 tse <- readRDS("data/tse.rds")
