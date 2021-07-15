@@ -1,3 +1,31 @@
+```{r, echo=FALSE}
+library(mia)
+library(miaViz)
+library(dplyr)
+library(ANCOMBC)
+library(DESeq2)
+se <- readRDS("data/se.rds")
+tse <- readRDS("data/tse.rds")
+tse <- transformCounts(tse, method = "relabundance")
+
+# Agglomerates data to Genus level
+tse_genus <- agglomerateByRank(tse, rank = "Genus")
+
+# Perform clr transformation. A Pseudocount of 1 needs to be added, 
+# because the data contains zeros and the clr transformation includes a 
+# log transformation.
+tse_genus <- transformCounts(tse_genus, method = "clr", pseudocount = 1)
+
+# Does transpose, so samples are in rows, then creates a data frame.
+abundance_analysis_data <- data.frame(t(assay(tse_genus, "clr")))
+# We will analyse whether abundances differ depending on the"patient_status".
+# There are two groups: "ADHD" and "control". 
+# Let's include that to the data frame.
+abundance_analysis_data <- cbind(
+  abundance_analysis_data, 
+  patient_status = colData(tse_genus)$patient_status
+)
+```
 
 # Miscellaneous material
 
