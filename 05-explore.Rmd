@@ -96,7 +96,7 @@ Microbial species can be called at multiple taxonomic resolutions. We
 can easily agglomerate the data based on taxonomic ranks. Here, we
 agglomerate the data at Phylum level.
 
-```{r}
+```{r 05explore_agglomerateByRank}
 tse_phylum <- agglomerateByRank(tse, rank = "Phylum")
 
 # Show dimensionality

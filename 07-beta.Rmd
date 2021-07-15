@@ -124,6 +124,11 @@ euclidean_plot
 
 We use again the Aitchison distances in this example but this time applied to the phylum level.
 
+```{r tse_phylum, echo=FALSE}
+extractCached(example, chunk="05explore_agglomerateByRank", object="tse_phylum")
+```
+
+
 ```{r pcoa_phylum_aitchison}
 # Does clr transformation. Psuedocount is added, because data contains zeros. 
 tse_phylum <- transformCounts(tse_phylum, method = "clr", pseudocount = 1)
