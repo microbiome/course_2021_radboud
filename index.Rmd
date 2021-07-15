@@ -78,8 +78,7 @@ data science by utilizing available documentation and R tools.
 
 ## Acknowledgments
 
-**Citation** "Introduction to microbiome data science (2021). 
-`r paste(authors, sep = ",")` URL: https://microbiome.github.io".
+**Citation** "Introduction to microbiome data science (2021). URL: https://microbiome.github.io".
 
 @radboud2021course
 
