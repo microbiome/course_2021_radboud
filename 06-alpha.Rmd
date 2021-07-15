@@ -1,3 +1,13 @@
+```{r, echo=FALSE}
+library(mia)
+library(miaViz)
+library(dplyr)
+se <- readRDS("data/se.rds")
+tse <- readRDS("data/tse.rds")
+```
+
+
+
 # Alpha diversity
 
 This section demonstrates the analysis of alpha diversity. This

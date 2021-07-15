@@ -1,3 +1,13 @@
+```{r, echo=FALSE}
+library(mia)
+library(miaViz)
+library(dplyr)
+se <- readRDS("data/se.rds")
+tse <- readRDS("data/tse.rds")
+```
+
+
+
 # Microbiome data exploration
 
 Now we have loaded the data set into R. Next, let us walk through some
@@ -86,7 +96,7 @@ Microbial species can be called at multiple taxonomic resolutions. We
 can easily agglomerate the data based on taxonomic ranks. Here, we
 agglomerate the data at Phylum level.
 
-```{r}
+```{r 05explore_agglomerateByRank}
 tse_phylum <- agglomerateByRank(tse, rank = "Phylum")
 
 # Show dimensionality

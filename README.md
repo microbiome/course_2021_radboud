@@ -58,7 +58,7 @@ data science by utilizing available documentation and R tools.
 
 ## Acknowledgments
 
-**Citation** "Introduction to miaverse (2021). Tuomas Borman, Felix Ernst, Sudarshan Shetty, Henrik Eckermann, Leo Lahti. URL: https://microbiome.github.io".
+**Citation** "Introduction to miaverse (2021). Tuomas Borman, Henrik Eckermann, Chouaib Benchraka, Leo Lahti. URL: https://microbiome.github.io".
 
 **Contact**
 - [Leo Lahti](http://datascience.utu.fi), University of Turku

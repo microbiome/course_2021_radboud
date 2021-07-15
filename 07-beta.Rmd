@@ -1,3 +1,24 @@
+```{r, echo=FALSE}
+library(mia)
+library(miaViz)
+se <- readRDS("data/se.rds")
+tse <- readRDS("data/tse.rds")
+tse <- transformCounts(tse, method = "relabundance")
+tse_phylum <- agglomerateByRank(tse, rank = "Phylum")
+
+# Indices to be calculated. 
+# Every index is calculated by default if we don't specify indices.
+indices <- c("shannon")
+
+# Indices are stored in colData (i.e., sample metadata). We can specify the name
+# of column, or we can use the default name which is the name of index 
+# (i.e., "shannon" and "faith"). 
+names <- c("Shannon_diversity")
+
+# Calculates indices
+tse <- estimateDiversity(tse, index = indices, name = names)
+```
+
 
 # Beta diversity
 
@@ -115,6 +136,7 @@ euclidean_plot
 ### PCoA aggregated to Phylum level
 
 We use again the Aitchison distances in this example but this time applied to the phylum level.
+
 
 ```{r pcoa_phylum_aitchison}
 # Does clr transformation. Psuedocount is added, because data contains zeros. 

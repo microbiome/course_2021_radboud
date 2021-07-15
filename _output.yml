@@ -1,7 +1,9 @@
 bookdown::gitbook:
+  css: style.css
   config:
+    fontsettings:
+      theme: white
     toc:
-      collapse: section
       before: |
         <li><a href="./">Introduction to microbiome data science</a></li>
       after: |
@@ -14,4 +16,8 @@ bookdown::gitbook:
       linkedin: yes
 
 bookdown::pdf_book:
-    keep_tex: yes
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  citation_package: natbib
+  keep_tex: yes

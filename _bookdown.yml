@@ -1,5 +1,11 @@
 book_filename: radboud2021_material
+pagetitle: "Microbiome Analysis with R/Bioconductor"
 delete_merged_file: true
+new_session: true
+language:
+  ui:
+    chapter_name: "Chapter "
+output_dir: docs
 rmd_files:
   - index.Rmd
   - 01-program.Rmd
@@ -13,4 +19,3 @@ rmd_files:
   - 09-material.Rmd
   - 10-misc.Rmd
   - 12-Solutions.Rmd
-output_dir: docs

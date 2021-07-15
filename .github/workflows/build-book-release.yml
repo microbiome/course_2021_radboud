@@ -137,6 +137,7 @@ jobs:
 
           BiocManager::install("HDF5Array")
           BiocManager::install("fionarhuang/TreeSummarizedExperiment")
+          library("dplyr")	  
 
           ## Pass #1 at installing dependencies
           message(paste('****', Sys.time(), 'pass number 1 at installing dependencies: local dependencies ****'))

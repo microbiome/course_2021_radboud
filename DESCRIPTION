@@ -1,9 +1,10 @@
 Package: Course
 Title: Microbiome data science course
-Version: 0.9
-Date: 2021-07-12
+Version: 0.92
+Date: 2021-07-15
 Authors@R: 
-    c(person("Leo", "Lahti", role = c("cre"),
+    c(person("Leo", "Lahti", email = "leo.lahti@utu.fi",
+             role = c("aut", "cre"),             
              comment = c(ORCID = "0000-0001-5537-637X")),
       person("Henrik", "Eckermann", 
              role = c("aut")),
