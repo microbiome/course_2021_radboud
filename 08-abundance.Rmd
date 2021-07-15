@@ -1,6 +1,7 @@
 ```{r, echo=FALSE}
 library(mia)
 library(miaViz)
+library(DESeq2)
 se <- readRDS("data/se.rds")
 tse <- readRDS("data/tse.rds")
 tse <- transformCounts(tse, method = "relabundance")
