@@ -4,7 +4,7 @@
 
 ## Lecture slides
 
-See [slides/](slides/).
+See [slides](slides).
 
 
 ## Example solutions
