@@ -1,6 +1,6 @@
 --- 
 title: "Introduction to microbiome data science"
-author: "University of Turku"
+author: "`r authors`"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
@@ -78,7 +78,8 @@ data science by utilizing available documentation and R tools.
 
 ## Acknowledgments
 
-**Citation** "Introduction to microbiome data science (2021). URL: https://microbiome.github.io". @radboud2021course
+**Citation** "Introduction to microbiome data science (2021). 
+`r paste(authors, sep = ",")` URL: https://microbiome.github.io".
 
 We thank Felix Ernst, Sudarshan Shetty, and other members of the
 [miaverse developers](https://microbiome.github.io) who have
