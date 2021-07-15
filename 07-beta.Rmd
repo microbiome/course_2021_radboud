@@ -4,6 +4,7 @@ library(miaViz)
 se <- readRDS("data/se.rds")
 tse <- readRDS("data/tse.rds")
 tse <- transformCounts(tse, method = "relabundance")
+tse_phylum <- agglomerateByRank(tse, rank = "Phylum")
 ```
 
 
@@ -123,10 +124,6 @@ euclidean_plot
 ### PCoA aggregated to Phylum level
 
 We use again the Aitchison distances in this example but this time applied to the phylum level.
-
-```{r tse_phylum, echo=FALSE}
-rebook::extractCached(example, chunk="05explore_agglomerateByRank", object="tse_phylum")
-```
 
 
 ```{r pcoa_phylum_aitchison}
