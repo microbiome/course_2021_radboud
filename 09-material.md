@@ -4,7 +4,7 @@
 
 ## Lecture slides
 
-To be added.
+See [slides/](slides/).
 
 
 ## Example solutions
