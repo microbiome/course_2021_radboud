@@ -1,3 +1,11 @@
+```{r, echo=FALSE}
+library(mia)
+library(miaViz)
+se <- readRDS("data/se.rds")
+tse <- readRDS("data/tse.rds")
+tse <- transformCounts(tse, method = "relabundance")
+```
+
 
 # Beta diversity
 

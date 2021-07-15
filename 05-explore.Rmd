@@ -1,3 +1,12 @@
+```{r, echo=FALSE}
+library(mia)
+library(miaViz)
+se <- readRDS("data/se.rds")
+tse <- readRDS("data/tse.rds")
+```
+
+
+
 # Microbiome data exploration
 
 Now we have loaded the data set into R. Next, let us walk through some
