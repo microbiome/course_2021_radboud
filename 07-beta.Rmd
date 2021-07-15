@@ -3,6 +3,7 @@ library(mia)
 library(miaViz)
 se <- readRDS("data/se.rds")
 tse <- readRDS("data/tse.rds")
+tse <- transformCounts(tse, method = "relabundance")
 ```
 
 # Beta diversity
@@ -56,7 +57,7 @@ rel_abund_assay <- assays(tse)$relabundance
 # Calculates Bray-Curtis distances between samples. Because taxa is in
 # columns, it is used to compare different samples. We transpose the
 # assay to get taxa to columns
-bray_curtis_dist <- vegan::vegdist(t(as.matrix(rel_abund_assay)), method = "bray")
+bray_curtis_dist <- vegan::vegdist(t(rel_abund_assay), method = "bray")
 
 # PCoA
 bray_curtis_pcoa <- ecodist::pco(bray_curtis_dist)
