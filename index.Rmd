@@ -83,10 +83,9 @@ data science by utilizing available documentation and R tools.
 @radboud2021course
 
 
-We thank Felix Ernst, Sudarshan Shetty, and other members of the
-[miaverse developers](https://microbiome.github.io) who have
-contributed open resources that supported the development of the
-training material.
+We thank Felix Ernst, Sudarshan Shetty, and other [miaverse
+developers](https://microbiome.github.io) who have contributed open
+resources that supported the development of the training material.
 
 **Contact** [Leo Lahti](http://datascience.utu.fi), University of Turku, Finland
 
