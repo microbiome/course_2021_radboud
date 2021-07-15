@@ -39,6 +39,7 @@ names <- c("Shannon_diversity", "Faith_diversity")
 tse <- estimateDiversity(tse, index = indices, name = names)
 
 # Shows the calculated indices
+library(dplyr)
 knitr::kable(head(colData(tse)[names])) %>% 
   kableExtra::kable_styling("striped", 
                             latex_options="scale_down") %>% 
