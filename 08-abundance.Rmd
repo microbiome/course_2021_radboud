@@ -87,7 +87,7 @@ wilcoxon_p$p_adjusted <- p.adjust(wilcoxon_p$p_raw, method = "fdr")
 ```{r}
 # prepare a dataframe to plot p values
 df <- data.frame(x = c(wilcoxon_p$p_raw, wilcoxon_p$p_adjusted), 
-                type=rep(c("raw", "holm"),
+                type=rep(c("raw", "fdr"),
 		c(length(wilcoxon_p$p_raw),
 		  length(wilcoxon_p$p_adjusted))))
 
@@ -168,7 +168,7 @@ pseq_genus <- phyloseq::tax_glom(pseq, taxrank = "Genus")
 out = ancombc(
   phyloseq = pseq_genus, 
   formula = "patient_status", 
-  p_adj_method = "holm", 
+  p_adj_method = "fdr", 
   zero_cut = 0.90, # by default prevalence filter of 10% is applied
   lib_cut = 0, 
   group = "patient_status", 
