@@ -1,23 +1,23 @@
-Package: OMA
-Title: Orchestrating Microbiome Analysis
-Version: 0.98.9
-Date: 2021-04-10
+Package: Course
+Title: Microbiome data science course
+Version: 0.91
+Date: 2021-07-15
 Authors@R: 
-    c(person("Leo", "Lahti", role = c("aut"),
+    c(person("Leo", "Lahti", role = c("cre"),
              comment = c(ORCID = "0000-0001-5537-637X")),
-      person("Sudarshan", "Shetty", email = "sudarshanshetty9@gmail.com",
-             role = c("aut"),
-             comment = c(ORCID = "0000-0001-7280-9915")),
-      person("Felix GM", "Ernst", email = "felix.gm.ernst@outlook.com",
-             role = c("aut", "cre"),
-             comment = c(ORCID = "0000-0001-5064-0928")))
+      person("Henrik", "Eckermann", 
+             role = c("aut")),
+      person("Tuomas", "Borman", 
+             role = c("aut")),
+      person("Chouaib", "Benchraka", 
+             role = c("aut")))
 Description:
-    This is a reference cookbook for performing **Microbiome Analysis** with 
-    Bioconductor in R.
+    This is a training course for performing **Microbiome Analysis** with 
+    Bioconductor in R miaverse framework.
 License: CC BY-NC-SA 3.0 US
 Encoding: UTF-8
-URL: https://github.com/microbiome/OMA
-BugReports: https://github.com/microbiome/OMA/issues
+URL: https://github.com/microbiome/course_2021_radboud
+BugReports: https://github.com/microbiome/course_2021_radboud/issues
 LazyData: true
 biocViews:
     Book

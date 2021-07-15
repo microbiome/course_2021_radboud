@@ -1,5 +1,5 @@
 book_filename: radboud2021_material
-pagetitle: "Microbiome Analysis with Bioconductor"
+pagetitle: "Microbiome Analysis with R/Bioconductor"
 delete_merged_file: true
 new_session: true
 language:
