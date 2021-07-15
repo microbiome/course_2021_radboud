@@ -39,7 +39,7 @@ associated package ecosystem, demonstration data sets, and open
 documentation. These are explained in more detail in the online book
 [Orchestrating Microbiome Analysis](https://microbiome.github.io/OMA).
 
-This training material walks you through an example workflow that
+The training material walks you through an example workflow that
 shows the standard steps of taxonomic data analysis covering data
 access, exploration, analysis, visualization and reporoducible
 reporting. **You can run the workflow by simply copy-pasting the

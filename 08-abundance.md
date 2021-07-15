@@ -443,7 +443,7 @@ knitr::kable(head(df)) %>%
   <tr>
    <td style="text-align:left;"> Genus:Ruminococcaceae_UCG-014 </td>
    <td style="text-align:right;"> 22.548297 </td>
-   <td style="text-align:right;"> -24.891267 </td>
+   <td style="text-align:right;"> -24.891268 </td>
    <td style="text-align:right;"> 2.460684 </td>
    <td style="text-align:right;"> -10.115589 </td>
    <td style="text-align:right;"> 0.0000000 </td>
