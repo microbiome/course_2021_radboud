@@ -41,8 +41,7 @@ Suggests:
     tibble,
     TreeSummarizedExperiment,
     uwot,
-    phyloseq,
-    tinytex
+    phyloseq
 Remotes:
     github::microbiome/mia,
     github::microbiome/miaViz
