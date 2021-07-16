@@ -173,12 +173,13 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::gitbook")'
-          
+      
+      - name: Github Action for LaTeX
+        uses: xu-cheng/latex-action@v2
+
       - name: Bookdown pdf
         if: runner.os == 'Linux'
         run: |
-          sudo apt-get install texlive-xetex
-          Y
           Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::pdf_book")'
 
       - name: Bookdown Deploy
