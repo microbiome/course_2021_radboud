@@ -173,15 +173,6 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::gitbook")'
-          
-       - name: Bookdown pdf
-        if: runner.os == 'Linux'
-        run: |
-          Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::pdf_book")'
-        uses: xu-cheng/latex-action@v2
-        with:
-         root_file: preamble.tex
-         latexmk_use_xelatex: true
 
       - name: Bookdown Deploy
         if: github.ref == 'refs/heads/main' && runner.os == 'Linux'
