@@ -176,6 +176,9 @@ jobs:
       
       - name: Github Action for LaTeX
         uses: xu-cheng/latex-action@v2
+        with:
+          root_file: preamble.tex
+          latexmk_use_xelatex: true
 
       - name: Bookdown pdf
         if: runner.os == 'Linux'
