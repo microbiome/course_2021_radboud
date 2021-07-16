@@ -174,7 +174,7 @@ jobs:
         run: |
           Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::gitbook")'
           
-      - name: Bookdown
+      - name: Bookdown pdf
         if: runner.os == 'Linux'
         run: |
           Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::pdf_book")'
