@@ -178,6 +178,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get install texlive-xetex
+          Y
           Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::pdf_book")'
 
       - name: Bookdown Deploy
