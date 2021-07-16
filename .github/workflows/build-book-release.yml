@@ -173,6 +173,12 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::gitbook")'
+      
+      - name: Bookdown pdf
+        if: runner.os == 'Linux'
+        run: |
+          Rscript -e 'tinytex::install_tinytex()'
+          Rscript -e 'bookdown::render_book("index.Rmd", "bookdown::pdf_book")'
 
       - name: Bookdown Deploy
         if: github.ref == 'refs/heads/main' && runner.os == 'Linux'
