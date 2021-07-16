@@ -1,7 +1,7 @@
 --- 
 title: "Introduction to microbiome data science"
 author: "University of Turku"
-date: "2021-07-15"
+date: "2021-07-16"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [packages.bib]
