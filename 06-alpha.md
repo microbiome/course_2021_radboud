@@ -271,47 +271,27 @@ knitr::kable(head(colData(tse)[names])) %>%
   kableExtra::scroll_box(width = "100%")
 ```
 
-<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; "><table class="table table-striped" style="margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> Shannon_diversity </th>
-   <th style="text-align:right;"> Faith_diversity </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> A110 </td>
-   <td style="text-align:right;"> 1.765407 </td>
-   <td style="text-align:right;"> 7.39224 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> A12 </td>
-   <td style="text-align:right;"> 2.716438 </td>
-   <td style="text-align:right;"> 6.29378 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> A15 </td>
-   <td style="text-align:right;"> 3.178103 </td>
-   <td style="text-align:right;"> 6.60608 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> A19 </td>
-   <td style="text-align:right;"> 2.891987 </td>
-   <td style="text-align:right;"> 6.79708 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> A21 </td>
-   <td style="text-align:right;"> 2.841979 </td>
-   <td style="text-align:right;"> 6.65110 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> A23 </td>
-   <td style="text-align:right;"> 2.797942 </td>
-   <td style="text-align:right;"> 5.96246 </td>
-  </tr>
-</tbody>
-</table></div>
+\begin{table}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{l|r|r}
+\hline
+  & Shannon\_diversity & Faith\_diversity\\
+\hline
+A110 & 1.765407 & 7.39224\\
+\hline
+A12 & 2.716438 & 6.29378\\
+\hline
+A15 & 3.178103 & 6.60608\\
+\hline
+A19 & 2.891987 & 6.79708\\
+\hline
+A21 & 2.841979 & 6.65110\\
+\hline
+A23 & 2.797942 & 5.96246\\
+\hline
+\end{tabular}}
+\end{table}
 
 Next we can visualize Shannon index with histogram.
 
@@ -327,7 +307,7 @@ shannon_hist <- ggplot(as.data.frame(colData(tse)),
 shannon_hist
 ```
 
-<img src="06-alpha_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+![](06-alpha_files/figure-latex/unnamed-chunk-3-1.pdf)<!-- --> 
 
 
 
@@ -351,7 +331,7 @@ cross_plot
 ## `geom_smooth()` using formula 'y ~ x'
 ```
 
-<img src="06-alpha_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+![](06-alpha_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
 
 
 
@@ -381,7 +361,7 @@ faith_box <- ggplot(as.data.frame(colData(tse)), aes(x = patient_status,
 gridExtra::grid.arrange(shannon_box, faith_box, nrow = 2)
 ```
 
-<img src="06-alpha_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+![](06-alpha_files/figure-latex/unnamed-chunk-7-1.pdf)<!-- --> 
 
 For an alternative visualization, see examples with [scater::plotColData](https://microbiome.github.io/OMA/microbiome-diversity.html#alpha-diversity).
 

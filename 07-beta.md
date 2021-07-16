@@ -232,7 +232,7 @@ bray_curtis_plot <- ggplot(data = bray_curtis_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
 bray_curtis_plot
 ```
 
-<img src="07-beta_files/figure-html/pcoa_asv_bc-1.png" width="672" />
+![](07-beta_files/figure-latex/pcoa_asv_bc-1.pdf)<!-- --> 
 
 
 
@@ -274,7 +274,7 @@ euclidean_plot <- ggplot(data = euclidean_pcoa_df, aes(x=pcoa1, y=pcoa2)) +
 euclidean_plot
 ```
 
-<img src="07-beta_files/figure-html/pcoa_asv_aitchison-1.png" width="672" />
+![](07-beta_files/figure-latex/pcoa_asv_aitchison-1.pdf)<!-- --> 
 
 
 ### PCoA aggregated to Phylum level
@@ -317,7 +317,7 @@ euclidean_phylum_plot <- ggplot(data = euclidean_phylum_pcoa_df,
 euclidean_phylum_plot
 ```
 
-<img src="07-beta_files/figure-html/pcoa_phylum_aitchison-1.png" width="672" />
+![](07-beta_files/figure-latex/pcoa_phylum_aitchison-1.pdf)<!-- --> 
 
 
 
@@ -349,7 +349,7 @@ euclidean_patient_status_plot <- ggplot(data = euclidean_patient_status_pcoa_df,
 euclidean_patient_status_plot
 ```
 
-<img src="07-beta_files/figure-html/pcoa_genus-1.png" width="672" />
+![](07-beta_files/figure-latex/pcoa_genus-1.pdf)<!-- --> 
 
 
 
@@ -379,7 +379,7 @@ euclidean_shannon_plot <- ggplot(data = euclidean_shannon_pcoa_df,
 euclidean_shannon_plot
 ```
 
-<img src="07-beta_files/figure-html/pcoa_coloring-1.png" width="672" />
+![](07-beta_files/figure-latex/pcoa_coloring-1.pdf)<!-- --> 
 
 ## Estimating associations with an external variable
 
@@ -414,7 +414,7 @@ print(paste0("Different different cohorts and variance of abundance ",
 ```
 
 ```
-## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7416"
+## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7381"
 ```
 
 The cohort variable is not significantly associated with
@@ -445,7 +445,7 @@ top_taxa_coeffient_plot <- ggplot(data.frame(x = top.coef,
 top_taxa_coeffient_plot
 ```
 
-<img src="07-beta_files/figure-html/permanova_coefs-1.png" width="672" />
+![](07-beta_files/figure-latex/permanova_coefs-1.pdf)<!-- --> 
 
 The above plot shows taxa as code names, and it is hard to tell which
 bacterial groups they represent. However, it is easy to add human readable
@@ -462,7 +462,7 @@ top_taxa_coeffient_plot <- top_taxa_coeffient_plot +
 top_taxa_coeffient_plot
 ```
 
-<img src="07-beta_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+![](07-beta_files/figure-latex/unnamed-chunk-2-1.pdf)<!-- --> 
 
 
 There are many alternative and complementary methods for analysing

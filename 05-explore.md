@@ -269,75 +269,27 @@ knitr::kable(head(rowData(tse))) %>%
   kableExtra::scroll_box(width = "100%")
 ```
 
-<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; "><table class="table table-striped" style="margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:left;"> Kingdom </th>
-   <th style="text-align:left;"> Phylum </th>
-   <th style="text-align:left;"> Class </th>
-   <th style="text-align:left;"> Order </th>
-   <th style="text-align:left;"> Family </th>
-   <th style="text-align:left;"> Genus </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> 1726470 </td>
-   <td style="text-align:left;"> Bacteria </td>
-   <td style="text-align:left;"> Bacteroidetes </td>
-   <td style="text-align:left;"> Bacteroidia </td>
-   <td style="text-align:left;"> Bacteroidales </td>
-   <td style="text-align:left;"> Bacteroidaceae </td>
-   <td style="text-align:left;"> Bacteroides </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 1726471 </td>
-   <td style="text-align:left;"> Bacteria </td>
-   <td style="text-align:left;"> Bacteroidetes </td>
-   <td style="text-align:left;"> Bacteroidia </td>
-   <td style="text-align:left;"> Bacteroidales </td>
-   <td style="text-align:left;"> Bacteroidaceae </td>
-   <td style="text-align:left;"> Bacteroides </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 17264731 </td>
-   <td style="text-align:left;"> Bacteria </td>
-   <td style="text-align:left;"> Bacteroidetes </td>
-   <td style="text-align:left;"> Bacteroidia </td>
-   <td style="text-align:left;"> Bacteroidales </td>
-   <td style="text-align:left;"> Porphyromonadaceae </td>
-   <td style="text-align:left;"> Parabacteroides </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 17264726 </td>
-   <td style="text-align:left;"> Bacteria </td>
-   <td style="text-align:left;"> Bacteroidetes </td>
-   <td style="text-align:left;"> Bacteroidia </td>
-   <td style="text-align:left;"> Bacteroidales </td>
-   <td style="text-align:left;"> Bacteroidaceae </td>
-   <td style="text-align:left;"> Bacteroides </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 1726472 </td>
-   <td style="text-align:left;"> Bacteria </td>
-   <td style="text-align:left;"> Verrucomicrobia </td>
-   <td style="text-align:left;"> Verrucomicrobiae </td>
-   <td style="text-align:left;"> Verrucomicrobiales </td>
-   <td style="text-align:left;"> Verrucomicrobiaceae </td>
-   <td style="text-align:left;"> Akkermansia </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 17264724 </td>
-   <td style="text-align:left;"> Bacteria </td>
-   <td style="text-align:left;"> Bacteroidetes </td>
-   <td style="text-align:left;"> Bacteroidia </td>
-   <td style="text-align:left;"> Bacteroidales </td>
-   <td style="text-align:left;"> Bacteroidaceae </td>
-   <td style="text-align:left;"> Bacteroides </td>
-  </tr>
-</tbody>
-</table></div>
+\begin{table}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{l|l|l|l|l|l|l}
+\hline
+  & Kingdom & Phylum & Class & Order & Family & Genus\\
+\hline
+1726470 & Bacteria & Bacteroidetes & Bacteroidia & Bacteroidales & Bacteroidaceae & Bacteroides\\
+\hline
+1726471 & Bacteria & Bacteroidetes & Bacteroidia & Bacteroidales & Bacteroidaceae & Bacteroides\\
+\hline
+17264731 & Bacteria & Bacteroidetes & Bacteroidia & Bacteroidales & Porphyromonadaceae & Parabacteroides\\
+\hline
+17264726 & Bacteria & Bacteroidetes & Bacteroidia & Bacteroidales & Bacteroidaceae & Bacteroides\\
+\hline
+1726472 & Bacteria & Verrucomicrobia & Verrucomicrobiae & Verrucomicrobiales & Verrucomicrobiaceae & Akkermansia\\
+\hline
+17264724 & Bacteria & Bacteroidetes & Bacteroidia & Bacteroidales & Bacteroidaceae & Bacteroides\\
+\hline
+\end{tabular}}
+\end{table}
 
 The colData slot contains sample metadata. It contains information for all 27 samples.
 However, here only the 6 first samples are shown as we use the `head()` command. There
@@ -351,61 +303,27 @@ knitr::kable(head(colData(tse))) %>%
   kableExtra::scroll_box(width = "100%")
 ```
 
-<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; "><table class="table table-striped" style="margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:left;"> patient_status </th>
-   <th style="text-align:left;"> cohort </th>
-   <th style="text-align:left;"> patient_status_vs_cohort </th>
-   <th style="text-align:left;"> sample_name </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> A110 </td>
-   <td style="text-align:left;"> ADHD </td>
-   <td style="text-align:left;"> Cohort_1 </td>
-   <td style="text-align:left;"> ADHD_Cohort_1 </td>
-   <td style="text-align:left;"> A110 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> A12 </td>
-   <td style="text-align:left;"> ADHD </td>
-   <td style="text-align:left;"> Cohort_1 </td>
-   <td style="text-align:left;"> ADHD_Cohort_1 </td>
-   <td style="text-align:left;"> A12 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> A15 </td>
-   <td style="text-align:left;"> ADHD </td>
-   <td style="text-align:left;"> Cohort_1 </td>
-   <td style="text-align:left;"> ADHD_Cohort_1 </td>
-   <td style="text-align:left;"> A15 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> A19 </td>
-   <td style="text-align:left;"> ADHD </td>
-   <td style="text-align:left;"> Cohort_1 </td>
-   <td style="text-align:left;"> ADHD_Cohort_1 </td>
-   <td style="text-align:left;"> A19 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> A21 </td>
-   <td style="text-align:left;"> ADHD </td>
-   <td style="text-align:left;"> Cohort_2 </td>
-   <td style="text-align:left;"> ADHD_Cohort_2 </td>
-   <td style="text-align:left;"> A21 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> A23 </td>
-   <td style="text-align:left;"> ADHD </td>
-   <td style="text-align:left;"> Cohort_2 </td>
-   <td style="text-align:left;"> ADHD_Cohort_2 </td>
-   <td style="text-align:left;"> A23 </td>
-  </tr>
-</tbody>
-</table></div>
+\begin{table}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{l|l|l|l|l}
+\hline
+  & patient\_status & cohort & patient\_status\_vs\_cohort & sample\_name\\
+\hline
+A110 & ADHD & Cohort\_1 & ADHD\_Cohort\_1 & A110\\
+\hline
+A12 & ADHD & Cohort\_1 & ADHD\_Cohort\_1 & A12\\
+\hline
+A15 & ADHD & Cohort\_1 & ADHD\_Cohort\_1 & A15\\
+\hline
+A19 & ADHD & Cohort\_1 & ADHD\_Cohort\_1 & A19\\
+\hline
+A21 & ADHD & Cohort\_2 & ADHD\_Cohort\_2 & A21\\
+\hline
+A23 & ADHD & Cohort\_2 & ADHD\_Cohort\_2 & A23\\
+\hline
+\end{tabular}}
+\end{table}
 
 From here, we can draw summaries of the sample (column) data, for
 instance to see what is the patient status distribution.
@@ -490,66 +408,25 @@ knitr::kable(head(rowData(tse_phylum))) %>%
   kableExtra::scroll_box(width = "100%")
 ```
 
-<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; "><table class="table table-striped" style="margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:left;"> Kingdom </th>
-   <th style="text-align:left;"> Phylum </th>
-   <th style="text-align:left;"> Class </th>
-   <th style="text-align:left;"> Order </th>
-   <th style="text-align:left;"> Family </th>
-   <th style="text-align:left;"> Genus </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Bacteroidetes </td>
-   <td style="text-align:left;"> Bacteria </td>
-   <td style="text-align:left;"> Bacteroidetes </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Verrucomicrobia </td>
-   <td style="text-align:left;"> Bacteria </td>
-   <td style="text-align:left;"> Verrucomicrobia </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Proteobacteria </td>
-   <td style="text-align:left;"> Bacteria </td>
-   <td style="text-align:left;"> Proteobacteria </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Firmicutes </td>
-   <td style="text-align:left;"> Bacteria </td>
-   <td style="text-align:left;"> Firmicutes </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Cyanobacteria </td>
-   <td style="text-align:left;"> Bacteria </td>
-   <td style="text-align:left;"> Cyanobacteria </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> NA </td>
-   <td style="text-align:left;"> NA </td>
-  </tr>
-</tbody>
-</table></div>
+\begin{table}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{l|l|l|l|l|l|l}
+\hline
+  & Kingdom & Phylum & Class & Order & Family & Genus\\
+\hline
+Bacteroidetes & Bacteria & Bacteroidetes & NA & NA & NA & NA\\
+\hline
+Verrucomicrobia & Bacteria & Verrucomicrobia & NA & NA & NA & NA\\
+\hline
+Proteobacteria & Bacteria & Proteobacteria & NA & NA & NA & NA\\
+\hline
+Firmicutes & Bacteria & Firmicutes & NA & NA & NA & NA\\
+\hline
+Cyanobacteria & Bacteria & Cyanobacteria & NA & NA & NA & NA\\
+\hline
+\end{tabular}}
+\end{table}
 
 If you are sharp, you have by now noticed that all the aggregated
 values in the above example are NA's (missing data). This is because
@@ -572,66 +449,25 @@ knitr::kable(head(temp[temp$Genus == "",])) %>%
   kableExtra::scroll_box(width = "100%")
 ```
 
-<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; "><table class="table table-striped" style="margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:left;"> Kingdom </th>
-   <th style="text-align:left;"> Phylum </th>
-   <th style="text-align:left;"> Class </th>
-   <th style="text-align:left;"> Order </th>
-   <th style="text-align:left;"> Family </th>
-   <th style="text-align:left;"> Genus </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Family:Lachnospiraceae </td>
-   <td style="text-align:left;"> Bacteria </td>
-   <td style="text-align:left;"> Firmicutes </td>
-   <td style="text-align:left;"> Clostridia </td>
-   <td style="text-align:left;"> Clostridiales </td>
-   <td style="text-align:left;"> Lachnospiraceae </td>
-   <td style="text-align:left;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Order:Bacteroidales </td>
-   <td style="text-align:left;"> Bacteria </td>
-   <td style="text-align:left;"> Bacteroidetes </td>
-   <td style="text-align:left;"> Bacteroidia </td>
-   <td style="text-align:left;"> Bacteroidales </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Order:Clostridiales </td>
-   <td style="text-align:left;"> Bacteria </td>
-   <td style="text-align:left;"> Firmicutes </td>
-   <td style="text-align:left;"> Clostridia </td>
-   <td style="text-align:left;"> Clostridiales </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Family:Enterobacteriaceae </td>
-   <td style="text-align:left;"> Bacteria </td>
-   <td style="text-align:left;"> Proteobacteria </td>
-   <td style="text-align:left;"> Gammaproteobacteria </td>
-   <td style="text-align:left;"> Enterobacteriales </td>
-   <td style="text-align:left;"> Enterobacteriaceae </td>
-   <td style="text-align:left;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Order:Gastranaerophilales </td>
-   <td style="text-align:left;"> Bacteria </td>
-   <td style="text-align:left;"> Cyanobacteria </td>
-   <td style="text-align:left;"> Melainabacteria </td>
-   <td style="text-align:left;"> Gastranaerophilales </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-  </tr>
-</tbody>
-</table></div>
+\begin{table}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{l|l|l|l|l|l|l}
+\hline
+  & Kingdom & Phylum & Class & Order & Family & Genus\\
+\hline
+Family:Lachnospiraceae & Bacteria & Firmicutes & Clostridia & Clostridiales & Lachnospiraceae & \\
+\hline
+Order:Bacteroidales & Bacteria & Bacteroidetes & Bacteroidia & Bacteroidales &  & \\
+\hline
+Order:Clostridiales & Bacteria & Firmicutes & Clostridia & Clostridiales &  & \\
+\hline
+Family:Enterobacteriaceae & Bacteria & Proteobacteria & Gammaproteobacteria & Enterobacteriales & Enterobacteriaceae & \\
+\hline
+Order:Gastranaerophilales & Bacteria & Cyanobacteria & Melainabacteria & Gastranaerophilales &  & \\
+\hline
+\end{tabular}}
+\end{table}
 
 Here agglomeration is done similarly, but na.rm = TRUE
 
@@ -685,7 +521,7 @@ plot_abundance <- plotAbundance(tse, abund_values="relabundance", rank = "Phylum
 plot_abundance 
 ```
 
-<img src="05-explore_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+![](05-explore_files/figure-latex/unnamed-chunk-10-1.pdf)<!-- --> 
 
 **Density plot** shows the overall abundance distribution for a given
   taxonomic group. Let us check the relative abundance of Firmicutes
@@ -718,7 +554,7 @@ firmicutes_abund_plot <- ggplot(firmicutes_abund_df, aes(x = abund)) +
 firmicutes_abund_plot
 ```
 
-<img src="05-explore_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+![](05-explore_files/figure-latex/unnamed-chunk-11-1.pdf)<!-- --> 
 
 
 

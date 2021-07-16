@@ -326,7 +326,7 @@ wilcoxon_plot
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-<img src="08-abundance_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+![](08-abundance_files/figure-latex/unnamed-chunk-5-1.pdf)<!-- --> 
 
 ## DESeq2
 
@@ -426,82 +426,26 @@ knitr::kable(head(df)) %>%
   kableExtra::scroll_box(width = "100%")
 ```
 
-<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; "><table class="table table-striped" style="margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> baseMean </th>
-   <th style="text-align:right;"> log2FoldChange </th>
-   <th style="text-align:right;"> lfcSE </th>
-   <th style="text-align:right;"> stat </th>
-   <th style="text-align:right;"> pvalue </th>
-   <th style="text-align:right;"> padj </th>
-   <th style="text-align:left;"> taxon </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> Genus:Ruminococcaceae_UCG-014 </td>
-   <td style="text-align:right;"> 22.548297 </td>
-   <td style="text-align:right;"> -24.891267 </td>
-   <td style="text-align:right;"> 2.460684 </td>
-   <td style="text-align:right;"> -10.115589 </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-   <td style="text-align:left;"> Genus:Ruminococcaceae_UCG-014 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Order:Bacteroidales </td>
-   <td style="text-align:right;"> 40.353733 </td>
-   <td style="text-align:right;"> -9.241798 </td>
-   <td style="text-align:right;"> 2.136205 </td>
-   <td style="text-align:right;"> -4.326270 </td>
-   <td style="text-align:right;"> 0.0000152 </td>
-   <td style="text-align:right;"> 0.0002730 </td>
-   <td style="text-align:left;"> Order:Bacteroidales </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Genus:Faecalibacterium </td>
-   <td style="text-align:right;"> 231.079502 </td>
-   <td style="text-align:right;"> -7.074433 </td>
-   <td style="text-align:right;"> 1.745612 </td>
-   <td style="text-align:right;"> -4.052694 </td>
-   <td style="text-align:right;"> 0.0000506 </td>
-   <td style="text-align:right;"> 0.0006835 </td>
-   <td style="text-align:left;"> Genus:Faecalibacterium </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Genus:Catabacter </td>
-   <td style="text-align:right;"> 18.045614 </td>
-   <td style="text-align:right;"> -6.615454 </td>
-   <td style="text-align:right;"> 1.716150 </td>
-   <td style="text-align:right;"> -3.854823 </td>
-   <td style="text-align:right;"> 0.0001158 </td>
-   <td style="text-align:right;"> 0.0012508 </td>
-   <td style="text-align:left;"> Genus:Catabacter </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Genus:Butyricicoccus </td>
-   <td style="text-align:right;"> 2.392885 </td>
-   <td style="text-align:right;"> -5.179608 </td>
-   <td style="text-align:right;"> 2.948055 </td>
-   <td style="text-align:right;"> -1.756957 </td>
-   <td style="text-align:right;"> 0.0789251 </td>
-   <td style="text-align:right;"> 0.3278426 </td>
-   <td style="text-align:left;"> Genus:Butyricicoccus </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Order:Gastranaerophilales </td>
-   <td style="text-align:right;"> 2.067972 </td>
-   <td style="text-align:right;"> -3.054975 </td>
-   <td style="text-align:right;"> 2.938641 </td>
-   <td style="text-align:right;"> -1.039588 </td>
-   <td style="text-align:right;"> 0.2985315 </td>
-   <td style="text-align:right;"> 0.7269742 </td>
-   <td style="text-align:left;"> Order:Gastranaerophilales </td>
-  </tr>
-</tbody>
-</table></div>
+\begin{table}
+\centering
+\begin{tabular}{l|r|r|r|r|r|r|l}
+\hline
+  & baseMean & log2FoldChange & lfcSE & stat & pvalue & padj & taxon\\
+\hline
+Genus:Ruminococcaceae\_UCG-014 & 22.548297 & -24.891268 & 2.460684 & -10.115589 & 0.0000000 & 0.0000000 & Genus:Ruminococcaceae\_UCG-014\\
+\hline
+Order:Bacteroidales & 40.353733 & -9.241798 & 2.136205 & -4.326270 & 0.0000152 & 0.0002730 & Order:Bacteroidales\\
+\hline
+Genus:Faecalibacterium & 231.079502 & -7.074433 & 1.745612 & -4.052694 & 0.0000506 & 0.0006835 & Genus:Faecalibacterium\\
+\hline
+Genus:Catabacter & 18.045614 & -6.615454 & 1.716150 & -3.854823 & 0.0001158 & 0.0012508 & Genus:Catabacter\\
+\hline
+Genus:Butyricicoccus & 2.392885 & -5.179608 & 2.948055 & -1.756957 & 0.0789251 & 0.3278426 & Genus:Butyricicoccus\\
+\hline
+Order:Gastranaerophilales & 2.067972 & -3.054975 & 2.938641 & -1.039588 & 0.2985315 & 0.7269742 & Order:Gastranaerophilales\\
+\hline
+\end{tabular}
+\end{table}
 
 
 
@@ -560,40 +504,26 @@ knitr::kable(head(res$diff_abn)) %>% kableExtra::kable_styling("striped") %>%
   kableExtra::scroll_box(width = "100%")
 ```
 
-<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; "><table class="table table-striped" style="margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:left;"> patient_statusControl </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> 172647198 </td>
-   <td style="text-align:left;"> FALSE </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 1726478 </td>
-   <td style="text-align:left;"> FALSE </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 172647201 </td>
-   <td style="text-align:left;"> FALSE </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 17264798 </td>
-   <td style="text-align:left;"> FALSE </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 172647195 </td>
-   <td style="text-align:left;"> FALSE </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 1726472 </td>
-   <td style="text-align:left;"> FALSE </td>
-  </tr>
-</tbody>
-</table></div>
+\begin{table}
+\centering
+\begin{tabular}{l|l}
+\hline
+  & patient\_statusControl\\
+\hline
+172647198 & FALSE\\
+\hline
+1726478 & FALSE\\
+\hline
+172647201 & FALSE\\
+\hline
+17264798 & FALSE\\
+\hline
+172647195 & FALSE\\
+\hline
+1726472 & FALSE\\
+\hline
+\end{tabular}
+\end{table}
 
 In total, this method detects 13 differentially abundant taxa.
 
@@ -613,7 +543,7 @@ p <- ggplot(mf, aes(x = df$padj, y = wilcoxon_p$p_adjusted)) +
 print(p)
 ```
 
-<img src="08-abundance_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+![](08-abundance_files/figure-latex/unnamed-chunk-9-1.pdf)<!-- --> 
 
 Prints number of p-values under 0.05
 
@@ -825,7 +755,7 @@ gridExtra::grid.arrange(
 )
 ```
 
-<img src="08-abundance_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+![](08-abundance_files/figure-latex/unnamed-chunk-14-1.pdf)<!-- --> 
 
 
 We plotted those taxa that have the highest and lowest p values according to DESeq2. Can you create a plot that shows the difference in abundance in "[Ruminococcus]_gauvreauii_group", which is the other taxon that was identified by all tools. Try for yourself! Below you find one way how to do it.
@@ -840,6 +770,6 @@ select(
   geom_boxplot()
 ```
 
-<img src="08-abundance_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+![](08-abundance_files/figure-latex/unnamed-chunk-15-1.pdf)<!-- --> 
 
 
