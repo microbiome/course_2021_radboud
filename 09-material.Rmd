@@ -4,7 +4,7 @@
 
 ## Lecture slides
 
-See [slides](slides).
+See [slides](https://github.com/microbiome/course_2021_radboud/tree/main/slides).
 
 
 ## Example solutions
