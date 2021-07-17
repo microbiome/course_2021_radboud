@@ -310,7 +310,7 @@ wilcoxon_p$p_adjusted <- p.adjust(wilcoxon_p$p_raw, method = "fdr")
 ```r
 # prepare a dataframe to plot p values
 df <- data.frame(x = c(wilcoxon_p$p_raw, wilcoxon_p$p_adjusted), 
-                type=rep(c("raw", "holm"),
+                type=rep(c("raw", "fdr"),
 		c(length(wilcoxon_p$p_raw),
 		  length(wilcoxon_p$p_adjusted))))
 
@@ -432,7 +432,7 @@ knitr::kable(head(df)) %>%
 \hline
   & baseMean & log2FoldChange & lfcSE & stat & pvalue & padj & taxon\\
 \hline
-Genus:Ruminococcaceae\_UCG-014 & 22.548297 & -24.891268 & 2.460684 & -10.115589 & 0.0000000 & 0.0000000 & Genus:Ruminococcaceae\_UCG-014\\
+Genus:Ruminococcaceae\_UCG-014 & 22.548297 & -24.891267 & 2.460684 & -10.115589 & 0.0000000 & 0.0000000 & Genus:Ruminococcaceae\_UCG-014\\
 \hline
 Order:Bacteroidales & 40.353733 & -9.241798 & 2.136205 & -4.326270 & 0.0000152 & 0.0002730 & Order:Bacteroidales\\
 \hline
@@ -476,7 +476,7 @@ pseq_genus <- phyloseq::tax_glom(pseq, taxrank = "Genus")
 out = ancombc(
   phyloseq = pseq_genus, 
   formula = "patient_status", 
-  p_adj_method = "holm", 
+  p_adj_method = "fdr", 
   zero_cut = 0.90, # by default prevalence filter of 10% is applied
   lib_cut = 0, 
   group = "patient_status", 
@@ -525,7 +525,7 @@ knitr::kable(head(res$diff_abn)) %>% kableExtra::kable_styling("striped") %>%
 \end{tabular}
 \end{table}
 
-In total, this method detects 13 differentially abundant taxa.
+In total, this method detects 14 differentially abundant taxa.
 
 ## Comparison of the methods
 
@@ -569,7 +569,7 @@ print(paste0("ANCOM p-values under 0.05: ", sum(out$res$diff_abn$patient_statusC
 ```
 
 ```
-## [1] "ANCOM p-values under 0.05: 13/49"
+## [1] "ANCOM p-values under 0.05: 14/49"
 ```
 
 We can also look at the intersection of identified taxa

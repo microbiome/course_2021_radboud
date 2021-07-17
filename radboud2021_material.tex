@@ -132,7 +132,7 @@
 
 \title{Introduction to microbiome data science}
 \author{University of Turku}
-\date{2021-07-16}
+\date{2021-07-17}
 
 \begin{document}
 \maketitle
@@ -2071,7 +2071,7 @@ variables are associated with each other.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7323"
+## [1] "Different different cohorts and variance of abundance between samples, p-value: 0.7377"
 \end{verbatim}
 
 The cohort variable is not significantly associated with
@@ -2472,7 +2472,7 @@ are several other methods as well.
 \begin{Highlighting}[]
 \CommentTok{\# prepare a dataframe to plot p values}
 \NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x =} \FunctionTok{c}\NormalTok{(wilcoxon\_p}\SpecialCharTok{$}\NormalTok{p\_raw, wilcoxon\_p}\SpecialCharTok{$}\NormalTok{p\_adjusted), }
-                \AttributeTok{type=}\FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"raw"}\NormalTok{, }\StringTok{"holm"}\NormalTok{),}
+                \AttributeTok{type=}\FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"raw"}\NormalTok{, }\StringTok{"fdr"}\NormalTok{),}
         \FunctionTok{c}\NormalTok{(}\FunctionTok{length}\NormalTok{(wilcoxon\_p}\SpecialCharTok{$}\NormalTok{p\_raw),}
           \FunctionTok{length}\NormalTok{(wilcoxon\_p}\SpecialCharTok{$}\NormalTok{p\_adjusted))))}
 
@@ -2601,7 +2601,7 @@ Now let us show how to do this. First, run the DESeq2 analysis.
 \hline
   & baseMean & log2FoldChange & lfcSE & stat & pvalue & padj & taxon\\
 \hline
-Genus:Ruminococcaceae\_UCG-014 & 22.548297 & -24.891268 & 2.460684 & -10.115589 & 0.0000000 & 0.0000000 & Genus:Ruminococcaceae\_UCG-014\\
+Genus:Ruminococcaceae\_UCG-014 & 22.548297 & -24.891267 & 2.460684 & -10.115589 & 0.0000000 & 0.0000000 & Genus:Ruminococcaceae\_UCG-014\\
 \hline
 Order:Bacteroidales & 40.353733 & -9.241798 & 2.136205 & -4.326270 & 0.0000152 & 0.0002730 & Order:Bacteroidales\\
 \hline
@@ -2644,7 +2644,7 @@ to learn about the additional arguments that we specify below. Also, see \href{h
 \NormalTok{out }\OtherTok{=} \FunctionTok{ancombc}\NormalTok{(}
   \AttributeTok{phyloseq =}\NormalTok{ pseq\_genus, }
   \AttributeTok{formula =} \StringTok{"patient\_status"}\NormalTok{, }
-  \AttributeTok{p\_adj\_method =} \StringTok{"holm"}\NormalTok{, }
+  \AttributeTok{p\_adj\_method =} \StringTok{"fdr"}\NormalTok{, }
   \AttributeTok{zero\_cut =} \FloatTok{0.90}\NormalTok{, }\CommentTok{\# by default prevalence filter of 10\% is applied}
   \AttributeTok{lib\_cut =} \DecValTok{0}\NormalTok{, }
   \AttributeTok{group =} \StringTok{"patient\_status"}\NormalTok{, }
@@ -2695,7 +2695,7 @@ Here, we can find all differentially abundant taxa. Below we show the first 6 en
 \end{tabular}
 \end{table}
 
-In total, this method detects 13 differentially abundant taxa.
+In total, this method detects 14 differentially abundant taxa.
 
 \hypertarget{comparison-of-the-methods}{%
 \section{Comparison of the methods}\label{comparison-of-the-methods}}
@@ -2746,7 +2746,7 @@ Prints number of p-values under 0.05
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "ANCOM p-values under 0.05: 13/49"
+## [1] "ANCOM p-values under 0.05: 14/49"
 \end{verbatim}
 
 We can also look at the intersection of identified taxa
