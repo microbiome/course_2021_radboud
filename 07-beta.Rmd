@@ -229,24 +229,24 @@ tse_data <- sampleMetadata %>%
     returnSamples("relative_abundance")
 
 # Agglomeration
-tse_Genus <- agglomerateByRank(tse_data, rank="Genus")
+tse_genus <- agglomerateByRank(tse_data, rank="Genus")
 ```
 
 Performing PCoA with Bray-Curtis dissimilarity.
 
 ```{r pcoa_coloring}
 library(scater)
-tse_Genus <- runMDS(tse_Genus, FUN = vegan::vegdist,
+tse_genus <- runMDS(tse_genus, FUN = vegan::vegdist,
               name = "PCoA_BC", exprs_values = "relative_abundance")
 
 # Retrieving the explained variance
-e <- attr(reducedDim(tse_Genus, "PCoA_BC"), "eig");
+e <- attr(reducedDim(tse_genus, "PCoA_BC"), "eig");
 var_explained <- e/sum(e[e>0])*100
 
 # Visualization
-plot <-plotReducedDim(tse_Genus,"PCoA_BC", colour_by = "BMI")+
-  labs(x=paste("PC 1 (",round(var_explained[1],1),"%)"),
-       y=paste("PC 2 (",round(var_explained[2],1),"%)"),
+plot <-plotReducedDim(tse_genus,"PCoA_BC", colour_by = "BMI")+
+  labs(x=paste("PC1 (",round(var_explained[1],1),"%)"),
+       y=paste("PC2 (",round(var_explained[2],1),"%)"),
        color="")
 plot
 ```
