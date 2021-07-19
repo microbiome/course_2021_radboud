@@ -223,36 +223,30 @@ library(curatedMetagenomicData)
 library(dplyr)
 library(DT)
 # Querying the data
-TreeSE <- sampleMetadata %>%
-    filter(age >= 18) %>%
-    filter(!is.na(alcohol)) %>%
-    filter(body_site == "stool") %>%
-    select(where(~ !all(is.na(.x)))) %>%
+tse_data <- sampleMetadata %>%
+    filter(age >= 18) %>% # taking only data of age 18 or above
+    filter(!is.na(alcohol)) %>% # excluding missing values
     returnSamples("relative_abundance")
 
 # Agglomeration
-TreeSE_genus <- agglomerateByRank(TreeSE, rank="Genus")
+tse_Genus <- agglomerateByRank(tse_data, rank="Genus")
 ```
 
 Performing PCoA with Bray-Curtis dissimilarity.
 
 ```{r pcoa_coloring}
 library(scater)
-rel_abund_assay <- assays(TreeSE_genus)$relative_abundance
-# Computing Bray-Curtis
-bray_curtis <- vegan::vegdist(t(rel_abund_assay), method = "bray")
+tse_Genus <- runMDS(tse_Genus, FUN = vegan::vegdist,
+              name = "PCoA_BC", exprs_values = "relative_abundance")
 
-# Performing PCoA
-bray_curtis_pcoa <- ecodist::pco(bray_curtis)
-
-# Storing results in the TreeSummarizedExperiment object
-reducedDim(TreeSE_genus, "PCoA" )<- cbind(bray_curtis_pcoa$vectors[,1],
-                                         bray_curtis_pcoa$vectors[,2])
+# Retrieving the explained variance
+e <- attr(reducedDim(tse_Genus, "PCoA_BC"), "eig");
+var_explained <- e/sum(e[e>0])*100
 
 # Visualization
-plot <-plotReducedDim(TreeSE_genus,"PCoA", colour_by = "BMI")+
-  labs(x=paste("PCoA 1 (",round(bray_curtis_pcoa$values[1],1),"%)"),
-       y=paste("PCoA 2 (",round(bray_curtis_pcoa$values[2],1),"%)"),
+plot <-plotReducedDim(tse_Genus,"PCoA_BC", colour_by = "BMI")+
+  labs(x=paste("PC 1 (",round(var_explained[1],1),"%)"),
+       y=paste("PC 2 (",round(var_explained[2],1),"%)"),
        color="")
 plot
 ```
