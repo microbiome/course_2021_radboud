@@ -6,12 +6,6 @@
 
 See [slides](https://github.com/microbiome/course_2021_radboud/tree/main/slides).
 
-
-## Example solutions
-
-To be added.
-
-
 ## R programming resources
 
  * R programming basics: [Base R](https://www.rstudio.com/wp-content/uploads/2016/10/r-cheat-sheet-3.pdf)
