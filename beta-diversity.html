@@ -24,7 +24,7 @@
 <meta name="author" content="University of Turku" />
 
 
-<meta name="date" content="2021-07-17" />
+<meta name="date" content="2021-07-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -232,11 +232,10 @@ div.csl-indent {
 <li class="chapter" data-level="10" data-path="study-material.html"><a href="study-material.html"><i class="fa fa-check"></i><b>10</b> Study material</a>
 <ul>
 <li class="chapter" data-level="10.1" data-path="study-material.html"><a href="study-material.html#lecture-slides"><i class="fa fa-check"></i><b>10.1</b> Lecture slides</a></li>
-<li class="chapter" data-level="10.2" data-path="study-material.html"><a href="study-material.html#example-solutions-1"><i class="fa fa-check"></i><b>10.2</b> Example solutions</a></li>
-<li class="chapter" data-level="10.3" data-path="study-material.html"><a href="study-material.html#r-programming-resources"><i class="fa fa-check"></i><b>10.3</b> R programming resources</a></li>
-<li class="chapter" data-level="10.4" data-path="study-material.html"><a href="study-material.html#resources-for-treesummarizedexperiment"><i class="fa fa-check"></i><b>10.4</b> Resources for TreeSummarizedExperiment</a></li>
-<li class="chapter" data-level="10.5" data-path="study-material.html"><a href="study-material.html#resources-for-phyloseq"><i class="fa fa-check"></i><b>10.5</b> Resources for phyloseq</a></li>
-<li class="chapter" data-level="10.6" data-path="study-material.html"><a href="study-material.html#further-reading"><i class="fa fa-check"></i><b>10.6</b> Further reading</a></li>
+<li class="chapter" data-level="10.2" data-path="study-material.html"><a href="study-material.html#r-programming-resources"><i class="fa fa-check"></i><b>10.2</b> R programming resources</a></li>
+<li class="chapter" data-level="10.3" data-path="study-material.html"><a href="study-material.html#resources-for-treesummarizedexperiment"><i class="fa fa-check"></i><b>10.3</b> Resources for TreeSummarizedExperiment</a></li>
+<li class="chapter" data-level="10.4" data-path="study-material.html"><a href="study-material.html#resources-for-phyloseq"><i class="fa fa-check"></i><b>10.4</b> Resources for phyloseq</a></li>
+<li class="chapter" data-level="10.5" data-path="study-material.html"><a href="study-material.html#further-reading"><i class="fa fa-check"></i><b>10.5</b> Further reading</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="miscellaneous-material.html"><a href="miscellaneous-material.html"><i class="fa fa-check"></i><b>11</b> Miscellaneous material</a>
 <ul>
@@ -476,7 +475,7 @@ variables are associated with each other.</p>
 <span id="cb150-13"><a href="beta-diversity.html#cb150-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Different different cohorts and variance of abundance &quot;</span>,</span>
 <span id="cb150-14"><a href="beta-diversity.html#cb150-14" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;between samples, p-value: &quot;</span>, </span>
 <span id="cb150-15"><a href="beta-diversity.html#cb150-15" aria-hidden="true" tabindex="-1"></a>              <span class="fu">as.data.frame</span>(permanova_cohort<span class="sc">$</span>aov.tab)[<span class="st">&quot;cohort&quot;</span>, <span class="st">&quot;Pr(&gt;F)&quot;</span>]))</span></code></pre></div>
-<pre><code>## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7471&quot;</code></pre>
+<pre><code>## [1] &quot;Different different cohorts and variance of abundance between samples, p-value: 0.7376&quot;</code></pre>
 <p>The cohort variable is not significantly associated with
 microbiota composition (p-value is over 0.05).</p>
 <p>We can, however, visualize those taxa whose abundances drive the

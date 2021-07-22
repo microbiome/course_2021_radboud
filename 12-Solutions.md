@@ -16,21 +16,15 @@ Links:
 
    * [Rmd](06-3-ex-sol-ADHD.Rmd)
    
-   * [HTML](06-3-ex-sol-ADHD.html)
-
 ## Section 7 ##
 
 Links:
 
    * [Rmd](07-3-ex-sol-ADHD.Rmd)
    
-   * [HTML](07-3-ex-sol-ADHD.html)
-   
 ## Section 8 ##
 
 Links:
 
    * [Rmd](08-5-ex-sol-ADHD.Rmd)
-   
-   * [HTML](08-5-ex-sol-ADHD.html)
    

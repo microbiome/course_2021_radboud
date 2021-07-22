@@ -432,7 +432,7 @@ knitr::kable(head(df)) %>%
 \hline
   & baseMean & log2FoldChange & lfcSE & stat & pvalue & padj & taxon\\
 \hline
-Genus:Ruminococcaceae\_UCG-014 & 22.548297 & -24.891267 & 2.460684 & -10.115589 & 0.0000000 & 0.0000000 & Genus:Ruminococcaceae\_UCG-014\\
+Genus:Ruminococcaceae\_UCG-014 & 22.548297 & -24.891268 & 2.460684 & -10.115589 & 0.0000000 & 0.0000000 & Genus:Ruminococcaceae\_UCG-014\\
 \hline
 Order:Bacteroidales & 40.353733 & -9.241798 & 2.136205 & -4.326270 & 0.0000152 & 0.0002730 & Order:Bacteroidales\\
 \hline
